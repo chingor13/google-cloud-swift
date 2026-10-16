@@ -100,10 +100,14 @@ public struct StaticOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.asset, forKey: .asset)
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
     try container.encodeIfPresent(self.resolution, forKey: .resolution)
     try container.encodeIfPresent(self.position, forKey: .position)
-    try container.encode(self.opacity, forKey: .opacity)
+    if self.opacity != 0 {
+      try container.encode(self.opacity, forKey: .opacity)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

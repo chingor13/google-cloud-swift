@@ -191,8 +191,12 @@ public struct LabelPropertiesPattern: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labelMatcherExpr, forKey: .labelMatcherExpr)
-    try container.encode(self.propertyMatcherExpr, forKey: .propertyMatcherExpr)
+    if !self.labelMatcherExpr.isEmpty {
+      try container.encode(self.labelMatcherExpr, forKey: .labelMatcherExpr)
+    }
+    if !self.propertyMatcherExpr.isEmpty {
+      try container.encode(self.propertyMatcherExpr, forKey: .propertyMatcherExpr)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

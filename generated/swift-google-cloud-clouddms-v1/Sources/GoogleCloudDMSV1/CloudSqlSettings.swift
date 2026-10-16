@@ -258,25 +258,55 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.databaseVersion, forKey: .databaseVersion)
-    try container.encode(self.userLabels, forKey: .userLabels)
-    try container.encode(self.tier, forKey: .tier)
+    if self.databaseVersion != CloudSqlSettings.SqlDatabaseVersion() {
+      try container.encode(self.databaseVersion, forKey: .databaseVersion)
+    }
+    if !self.userLabels.isEmpty {
+      try container.encode(self.userLabels, forKey: .userLabels)
+    }
+    if !self.tier.isEmpty {
+      try container.encode(self.tier, forKey: .tier)
+    }
     try container.encodeIfPresent(self.storageAutoResizeLimit, forKey: .storageAutoResizeLimit)
-    try container.encode(self.activationPolicy, forKey: .activationPolicy)
+    if self.activationPolicy != CloudSqlSettings.SqlActivationPolicy() {
+      try container.encode(self.activationPolicy, forKey: .activationPolicy)
+    }
     try container.encodeIfPresent(self.ipConfig, forKey: .ipConfig)
     try container.encodeIfPresent(self.autoStorageIncrease, forKey: .autoStorageIncrease)
-    try container.encode(self.databaseFlags, forKey: .databaseFlags)
-    try container.encode(self.dataDiskType, forKey: .dataDiskType)
+    if !self.databaseFlags.isEmpty {
+      try container.encode(self.databaseFlags, forKey: .databaseFlags)
+    }
+    if self.dataDiskType != CloudSqlSettings.SqlDataDiskType() {
+      try container.encode(self.dataDiskType, forKey: .dataDiskType)
+    }
     try container.encodeIfPresent(self.dataDiskSizeGb, forKey: .dataDiskSizeGb)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.secondaryZone, forKey: .secondaryZone)
-    try container.encode(self.sourceId, forKey: .sourceId)
-    try container.encode(self.rootPassword, forKey: .rootPassword)
-    try container.encode(self.rootPasswordSet, forKey: .rootPasswordSet)
-    try container.encode(self.collation, forKey: .collation)
-    try container.encode(self.cmekKeyName, forKey: .cmekKeyName)
-    try container.encode(self.availabilityType, forKey: .availabilityType)
-    try container.encode(self.edition, forKey: .edition)
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.secondaryZone.isEmpty {
+      try container.encode(self.secondaryZone, forKey: .secondaryZone)
+    }
+    if !self.sourceId.isEmpty {
+      try container.encode(self.sourceId, forKey: .sourceId)
+    }
+    if !self.rootPassword.isEmpty {
+      try container.encode(self.rootPassword, forKey: .rootPassword)
+    }
+    if self.rootPasswordSet {
+      try container.encode(self.rootPasswordSet, forKey: .rootPasswordSet)
+    }
+    if !self.collation.isEmpty {
+      try container.encode(self.collation, forKey: .collation)
+    }
+    if !self.cmekKeyName.isEmpty {
+      try container.encode(self.cmekKeyName, forKey: .cmekKeyName)
+    }
+    if self.availabilityType != CloudSqlSettings.SqlAvailabilityType() {
+      try container.encode(self.availabilityType, forKey: .availabilityType)
+    }
+    if self.edition != CloudSqlSettings.Edition() {
+      try container.encode(self.edition, forKey: .edition)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

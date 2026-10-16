@@ -88,8 +88,12 @@ public struct RawHashes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.prefixSize, forKey: .prefixSize)
-    try container.encode(self.rawHashes, forKey: .rawHashes)
+    if self.prefixSize != 0 {
+      try container.encode(self.prefixSize, forKey: .prefixSize)
+    }
+    if !self.rawHashes.isEmpty {
+      try container.encode(self.rawHashes, forKey: .rawHashes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

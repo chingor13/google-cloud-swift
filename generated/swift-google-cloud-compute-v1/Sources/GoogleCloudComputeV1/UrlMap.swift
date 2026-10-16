@@ -317,20 +317,26 @@
       try container.encodeIfPresent(self.defaultService, forKey: .defaultService)
       try container.encodeIfPresent(self.defaultUrlRedirect, forKey: .defaultUrlRedirect)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.headerAction, forKey: .headerAction)
-      try container.encode(self.hostRules, forKey: .hostRules)
+      if !self.hostRules.isEmpty {
+        try container.encode(self.hostRules, forKey: .hostRules)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.pathMatchers, forKey: .pathMatchers)
+      if !self.pathMatchers.isEmpty {
+        try container.encode(self.pathMatchers, forKey: .pathMatchers)
+      }
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.tests, forKey: .tests)
+      if !self.tests.isEmpty {
+        try container.encode(self.tests, forKey: .tests)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

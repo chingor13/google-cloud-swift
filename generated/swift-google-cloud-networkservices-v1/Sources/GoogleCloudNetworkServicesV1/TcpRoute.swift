@@ -147,15 +147,29 @@ public struct TcpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.selfLink, forKey: .selfLink)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.meshes, forKey: .meshes)
-    try container.encode(self.gateways, forKey: .gateways)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if !self.meshes.isEmpty {
+      try container.encode(self.meshes, forKey: .meshes)
+    }
+    if !self.gateways.isEmpty {
+      try container.encode(self.gateways, forKey: .gateways)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -223,7 +237,9 @@ public struct TcpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matches, forKey: .matches)
+      if !self.matches.isEmpty {
+        try container.encode(self.matches, forKey: .matches)
+      }
       try container.encodeIfPresent(self.action, forKey: .action)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -321,8 +337,12 @@ public struct TcpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.address, forKey: .address)
-      try container.encode(self.port, forKey: .port)
+      if !self.address.isEmpty {
+        try container.encode(self.address, forKey: .address)
+      }
+      if !self.port.isEmpty {
+        try container.encode(self.port, forKey: .port)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -427,8 +447,12 @@ public struct TcpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destinations, forKey: .destinations)
-      try container.encode(self.originalDestination, forKey: .originalDestination)
+      if !self.destinations.isEmpty {
+        try container.encode(self.destinations, forKey: .destinations)
+      }
+      if self.originalDestination {
+        try container.encode(self.originalDestination, forKey: .originalDestination)
+      }
       try container.encodeIfPresent(self.idleTimeout, forKey: .idleTimeout)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -530,8 +554,12 @@ public struct TcpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceName, forKey: .serviceName)
-      try container.encode(self.weight, forKey: .weight)
+      if !self.serviceName.isEmpty {
+        try container.encode(self.serviceName, forKey: .serviceName)
+      }
+      if self.weight != 0 {
+        try container.encode(self.weight, forKey: .weight)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

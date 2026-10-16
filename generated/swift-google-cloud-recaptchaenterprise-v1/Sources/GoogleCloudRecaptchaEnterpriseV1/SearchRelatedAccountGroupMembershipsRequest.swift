@@ -126,11 +126,21 @@ public struct SearchRelatedAccountGroupMembershipsRequest: Codable, Equatable, G
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.accountId, forKey: .accountId)
-    try container.encode(self.hashedAccountId, forKey: .hashedAccountId)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.accountId.isEmpty {
+      try container.encode(self.accountId, forKey: .accountId)
+    }
+    if !self.hashedAccountId.isEmpty {
+      try container.encode(self.hashedAccountId, forKey: .hashedAccountId)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

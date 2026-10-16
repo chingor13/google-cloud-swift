@@ -135,12 +135,24 @@ public struct CloudLocation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.containingCloudLocation, forKey: .containingCloudLocation)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.cloudProvider, forKey: .cloudProvider)
-    try container.encode(self.territoryCode, forKey: .territoryCode)
-    try container.encode(self.cloudLocationType, forKey: .cloudLocationType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.containingCloudLocation.isEmpty {
+      try container.encode(self.containingCloudLocation, forKey: .containingCloudLocation)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.cloudProvider != CloudLocation.CloudProvider() {
+      try container.encode(self.cloudProvider, forKey: .cloudProvider)
+    }
+    if !self.territoryCode.isEmpty {
+      try container.encode(self.territoryCode, forKey: .territoryCode)
+    }
+    if self.cloudLocationType != CloudLocation.CloudLocationType() {
+      try container.encode(self.cloudLocationType, forKey: .cloudLocationType)
+    }
     try container.encodeIfPresent(
       self.carbonFreeEnergyPercentage, forKey: .carbonFreeEnergyPercentage)
     for (key, value) in self._unknownFields.json {

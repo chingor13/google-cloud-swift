@@ -113,11 +113,17 @@ public struct ResponsePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.description, forKey: .description)
-    try container.encode(self.gkeClusters, forKey: .gkeClusters)
+    if !self.gkeClusters.isEmpty {
+      try container.encode(self.gkeClusters, forKey: .gkeClusters)
+    }
     try container.encodeIfPresent(self.id, forKey: .id)
     try container.encodeIfPresent(self.kind, forKey: .kind)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.networks, forKey: .networks)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
     try container.encodeIfPresent(self.responsePolicyName, forKey: .responsePolicyName)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

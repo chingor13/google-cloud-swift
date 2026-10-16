@@ -104,10 +104,16 @@ public struct CreateVodConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.vodConfigId, forKey: .vodConfigId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.vodConfigId.isEmpty {
+      try container.encode(self.vodConfigId, forKey: .vodConfigId)
+    }
     try container.encodeIfPresent(self.vodConfig, forKey: .vodConfig)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

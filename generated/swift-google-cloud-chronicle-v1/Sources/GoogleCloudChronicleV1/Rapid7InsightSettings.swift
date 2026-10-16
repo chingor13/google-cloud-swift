@@ -85,8 +85,12 @@ public struct Rapid7InsightSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.hostname, forKey: .hostname)
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

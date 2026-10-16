@@ -96,10 +96,18 @@ public struct DeployPolicyNotificationEvent: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.deployPolicy, forKey: .deployPolicy)
-    try container.encode(self.deployPolicyUid, forKey: .deployPolicyUid)
-    try container.encode(self.type, forKey: .type)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.deployPolicy.isEmpty {
+      try container.encode(self.deployPolicy, forKey: .deployPolicy)
+    }
+    if !self.deployPolicyUid.isEmpty {
+      try container.encode(self.deployPolicyUid, forKey: .deployPolicyUid)
+    }
+    if self.type != GoogleCloudDeployV1.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

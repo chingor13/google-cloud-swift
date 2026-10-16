@@ -217,20 +217,44 @@ public struct Company: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.externalId, forKey: .externalId)
-    try container.encode(self.size, forKey: .size)
-    try container.encode(self.headquartersAddress, forKey: .headquartersAddress)
-    try container.encode(self.hiringAgency, forKey: .hiringAgency)
-    try container.encode(self.eeoText, forKey: .eeoText)
-    try container.encode(self.websiteUri, forKey: .websiteUri)
-    try container.encode(self.careerSiteUri, forKey: .careerSiteUri)
-    try container.encode(self.imageUri, forKey: .imageUri)
-    try container.encode(
-      self.keywordSearchableJobCustomAttributes, forKey: .keywordSearchableJobCustomAttributes)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.externalId.isEmpty {
+      try container.encode(self.externalId, forKey: .externalId)
+    }
+    if self.size != CompanySize() {
+      try container.encode(self.size, forKey: .size)
+    }
+    if !self.headquartersAddress.isEmpty {
+      try container.encode(self.headquartersAddress, forKey: .headquartersAddress)
+    }
+    if self.hiringAgency {
+      try container.encode(self.hiringAgency, forKey: .hiringAgency)
+    }
+    if !self.eeoText.isEmpty {
+      try container.encode(self.eeoText, forKey: .eeoText)
+    }
+    if !self.websiteUri.isEmpty {
+      try container.encode(self.websiteUri, forKey: .websiteUri)
+    }
+    if !self.careerSiteUri.isEmpty {
+      try container.encode(self.careerSiteUri, forKey: .careerSiteUri)
+    }
+    if !self.imageUri.isEmpty {
+      try container.encode(self.imageUri, forKey: .imageUri)
+    }
+    if !self.keywordSearchableJobCustomAttributes.isEmpty {
+      try container.encode(
+        self.keywordSearchableJobCustomAttributes, forKey: .keywordSearchableJobCustomAttributes)
+    }
     try container.encodeIfPresent(self.derivedInfo, forKey: .derivedInfo)
-    try container.encode(self.suspended, forKey: .suspended)
+    if self.suspended {
+      try container.encode(self.suspended, forKey: .suspended)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

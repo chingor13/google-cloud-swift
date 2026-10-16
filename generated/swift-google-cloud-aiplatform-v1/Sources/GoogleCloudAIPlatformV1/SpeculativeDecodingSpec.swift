@@ -100,7 +100,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.speculativeTokenCount, forKey: .speculativeTokenCount)
+      if self.speculativeTokenCount != 0 {
+        try container.encode(self.speculativeTokenCount, forKey: .speculativeTokenCount)
+      }
 
       if let choice = self.speculation {
         switch choice {
@@ -168,7 +170,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.draftModel, forKey: .draftModel)
+        if !self.draftModel.isEmpty {
+          try container.encode(self.draftModel, forKey: .draftModel)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -254,7 +258,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.ngramSize, forKey: .ngramSize)
+        if self.ngramSize != 0 {
+          try container.encode(self.ngramSize, forKey: .ngramSize)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

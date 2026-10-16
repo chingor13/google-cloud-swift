@@ -146,7 +146,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.availableCpuPlatforms, forKey: .availableCpuPlatforms)
+      if !self.availableCpuPlatforms.isEmpty {
+        try container.encode(self.availableCpuPlatforms, forKey: .availableCpuPlatforms)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.deprecated, forKey: .deprecated)
       try container.encodeIfPresent(self.description, forKey: .description)

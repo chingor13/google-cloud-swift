@@ -204,21 +204,41 @@ public struct Trigger: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.eventFilters, forKey: .eventFilters)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.eventFilters.isEmpty {
+      try container.encode(self.eventFilters, forKey: .eventFilters)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.destination, forKey: .destination)
     try container.encodeIfPresent(self.transport, forKey: .transport)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.channel, forKey: .channel)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.eventDataContentType, forKey: .eventDataContentType)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.channel.isEmpty {
+      try container.encode(self.channel, forKey: .channel)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if !self.eventDataContentType.isEmpty {
+      try container.encode(self.eventDataContentType, forKey: .eventDataContentType)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
     try container.encodeIfPresent(self.retryPolicy, forKey: .retryPolicy)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -279,7 +299,9 @@ public struct Trigger: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxAttempts, forKey: .maxAttempts)
+      if self.maxAttempts != 0 {
+        try container.encode(self.maxAttempts, forKey: .maxAttempts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

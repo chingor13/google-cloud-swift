@@ -91,8 +91,12 @@ public struct CreateIndexRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.indexId, forKey: .indexId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.indexId.isEmpty {
+      try container.encode(self.indexId, forKey: .indexId)
+    }
     try container.encodeIfPresent(self.index, forKey: .index)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

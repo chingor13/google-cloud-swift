@@ -77,8 +77,12 @@ public struct TableDataListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.startRow, forKey: .startRow)
-    try container.encode(self.maxResults, forKey: .maxResults)
+    if self.startRow != 0 {
+      try container.encode(self.startRow, forKey: .startRow)
+    }
+    if self.maxResults != 0 {
+      try container.encode(self.maxResults, forKey: .maxResults)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

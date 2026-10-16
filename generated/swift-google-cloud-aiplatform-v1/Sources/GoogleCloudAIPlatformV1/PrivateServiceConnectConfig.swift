@@ -103,10 +103,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enablePrivateServiceConnect, forKey: .enablePrivateServiceConnect)
-      try container.encode(self.projectAllowlist, forKey: .projectAllowlist)
-      try container.encode(self.pscAutomationConfigs, forKey: .pscAutomationConfigs)
-      try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+      if self.enablePrivateServiceConnect {
+        try container.encode(self.enablePrivateServiceConnect, forKey: .enablePrivateServiceConnect)
+      }
+      if !self.projectAllowlist.isEmpty {
+        try container.encode(self.projectAllowlist, forKey: .projectAllowlist)
+      }
+      if !self.pscAutomationConfigs.isEmpty {
+        try container.encode(self.pscAutomationConfigs, forKey: .pscAutomationConfigs)
+      }
+      if !self.serviceAttachment.isEmpty {
+        try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

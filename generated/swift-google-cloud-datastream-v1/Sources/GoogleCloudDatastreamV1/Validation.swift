@@ -93,10 +93,18 @@ public struct Validation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.code, forKey: .code)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != Validation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.code.isEmpty {
+      try container.encode(self.code, forKey: .code)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

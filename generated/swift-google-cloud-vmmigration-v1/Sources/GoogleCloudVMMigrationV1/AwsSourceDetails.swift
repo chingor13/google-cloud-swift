@@ -150,13 +150,25 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.awsRegion, forKey: .awsRegion)
-    try container.encode(self.state, forKey: .state)
+    if !self.awsRegion.isEmpty {
+      try container.encode(self.awsRegion, forKey: .awsRegion)
+    }
+    if self.state != AwsSourceDetails.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.inventoryTagList, forKey: .inventoryTagList)
-    try container.encode(self.inventorySecurityGroupNames, forKey: .inventorySecurityGroupNames)
-    try container.encode(self.migrationResourcesUserTags, forKey: .migrationResourcesUserTags)
-    try container.encode(self.publicIp, forKey: .publicIp)
+    if !self.inventoryTagList.isEmpty {
+      try container.encode(self.inventoryTagList, forKey: .inventoryTagList)
+    }
+    if !self.inventorySecurityGroupNames.isEmpty {
+      try container.encode(self.inventorySecurityGroupNames, forKey: .inventorySecurityGroupNames)
+    }
+    if !self.migrationResourcesUserTags.isEmpty {
+      try container.encode(self.migrationResourcesUserTags, forKey: .migrationResourcesUserTags)
+    }
+    if !self.publicIp.isEmpty {
+      try container.encode(self.publicIp, forKey: .publicIp)
+    }
 
     if let choice = self.credentialsType {
       switch choice {
@@ -239,9 +251,15 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accessKeyId, forKey: .accessKeyId)
-      try container.encode(self.secretAccessKey, forKey: .secretAccessKey)
-      try container.encode(self.sessionToken, forKey: .sessionToken)
+      if !self.accessKeyId.isEmpty {
+        try container.encode(self.accessKeyId, forKey: .accessKeyId)
+      }
+      if !self.secretAccessKey.isEmpty {
+        try container.encode(self.secretAccessKey, forKey: .secretAccessKey)
+      }
+      if !self.sessionToken.isEmpty {
+        try container.encode(self.sessionToken, forKey: .sessionToken)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -329,8 +347,12 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
-      try container.encode(self.value, forKey: .value)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

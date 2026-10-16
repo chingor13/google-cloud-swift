@@ -108,11 +108,21 @@ public struct TpmAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.quotes, forKey: .quotes)
-    try container.encode(self.tcgEventLog, forKey: .tcgEventLog)
-    try container.encode(self.canonicalEventLog, forKey: .canonicalEventLog)
-    try container.encode(self.akCert, forKey: .akCert)
-    try container.encode(self.certChain, forKey: .certChain)
+    if !self.quotes.isEmpty {
+      try container.encode(self.quotes, forKey: .quotes)
+    }
+    if !self.tcgEventLog.isEmpty {
+      try container.encode(self.tcgEventLog, forKey: .tcgEventLog)
+    }
+    if !self.canonicalEventLog.isEmpty {
+      try container.encode(self.canonicalEventLog, forKey: .canonicalEventLog)
+    }
+    if !self.akCert.isEmpty {
+      try container.encode(self.akCert, forKey: .akCert)
+    }
+    if !self.certChain.isEmpty {
+      try container.encode(self.certChain, forKey: .certChain)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -208,15 +218,21 @@ public struct TpmAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.hashAlgo, forKey: .hashAlgo)
-      do {
+      if self.hashAlgo != 0 {
+        try container.encode(self.hashAlgo, forKey: .hashAlgo)
+      }
+      if !self.pcrValues.isEmpty {
         let stringKeyed = Dictionary(
           uniqueKeysWithValues: self.pcrValues.lazy.map { (Swift.String($0), $1) }
         )
         try container.encode(stringKeyed, forKey: .pcrValues)
       }
-      try container.encode(self.rawQuote, forKey: .rawQuote)
-      try container.encode(self.rawSignature, forKey: .rawSignature)
+      if !self.rawQuote.isEmpty {
+        try container.encode(self.rawQuote, forKey: .rawQuote)
+      }
+      if !self.rawSignature.isEmpty {
+        try container.encode(self.rawSignature, forKey: .rawSignature)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

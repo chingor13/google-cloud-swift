@@ -106,10 +106,16 @@ public struct CreatePolicyBindingRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.policyBindingId, forKey: .policyBindingId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.policyBindingId.isEmpty {
+      try container.encode(self.policyBindingId, forKey: .policyBindingId)
+    }
     try container.encodeIfPresent(self.policyBinding, forKey: .policyBinding)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

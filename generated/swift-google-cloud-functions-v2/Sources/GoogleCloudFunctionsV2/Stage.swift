@@ -109,12 +109,24 @@ public struct Stage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.resourceUri, forKey: .resourceUri)
-    try container.encode(self.stateMessages, forKey: .stateMessages)
+    if self.name != Stage.Name() {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if self.state != Stage.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.resourceUri.isEmpty {
+      try container.encode(self.resourceUri, forKey: .resourceUri)
+    }
+    if !self.stateMessages.isEmpty {
+      try container.encode(self.stateMessages, forKey: .stateMessages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -93,9 +93,15 @@ public struct SentineloneAlertSettings: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.initialStartTime, forKey: .initialStartTime)
-    try container.encode(self.isAlertApiSubscribed, forKey: .isAlertApiSubscribed)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.initialStartTime.isEmpty {
+      try container.encode(self.initialStartTime, forKey: .initialStartTime)
+    }
+    if self.isAlertApiSubscribed {
+      try container.encode(self.isAlertApiSubscribed, forKey: .isAlertApiSubscribed)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

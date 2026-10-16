@@ -315,20 +315,42 @@ public struct JobQuery: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.queryLanguageCode, forKey: .queryLanguageCode)
-    try container.encode(self.companies, forKey: .companies)
-    try container.encode(self.locationFilters, forKey: .locationFilters)
-    try container.encode(self.jobCategories, forKey: .jobCategories)
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.queryLanguageCode.isEmpty {
+      try container.encode(self.queryLanguageCode, forKey: .queryLanguageCode)
+    }
+    if !self.companies.isEmpty {
+      try container.encode(self.companies, forKey: .companies)
+    }
+    if !self.locationFilters.isEmpty {
+      try container.encode(self.locationFilters, forKey: .locationFilters)
+    }
+    if !self.jobCategories.isEmpty {
+      try container.encode(self.jobCategories, forKey: .jobCategories)
+    }
     try container.encodeIfPresent(self.commuteFilter, forKey: .commuteFilter)
-    try container.encode(self.companyDisplayNames, forKey: .companyDisplayNames)
+    if !self.companyDisplayNames.isEmpty {
+      try container.encode(self.companyDisplayNames, forKey: .companyDisplayNames)
+    }
     try container.encodeIfPresent(self.compensationFilter, forKey: .compensationFilter)
-    try container.encode(self.customAttributeFilter, forKey: .customAttributeFilter)
-    try container.encode(self.disableSpellCheck, forKey: .disableSpellCheck)
-    try container.encode(self.employmentTypes, forKey: .employmentTypes)
-    try container.encode(self.languageCodes, forKey: .languageCodes)
+    if !self.customAttributeFilter.isEmpty {
+      try container.encode(self.customAttributeFilter, forKey: .customAttributeFilter)
+    }
+    if self.disableSpellCheck {
+      try container.encode(self.disableSpellCheck, forKey: .disableSpellCheck)
+    }
+    if !self.employmentTypes.isEmpty {
+      try container.encode(self.employmentTypes, forKey: .employmentTypes)
+    }
+    if !self.languageCodes.isEmpty {
+      try container.encode(self.languageCodes, forKey: .languageCodes)
+    }
     try container.encodeIfPresent(self.publishTimeRange, forKey: .publishTimeRange)
-    try container.encode(self.excludedJobs, forKey: .excludedJobs)
+    if !self.excludedJobs.isEmpty {
+      try container.encode(self.excludedJobs, forKey: .excludedJobs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -77,7 +77,9 @@ public struct PhoneAuthenticationEvent: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.phoneNumber, forKey: .phoneNumber)
+    if !self.phoneNumber.isEmpty {
+      try container.encode(self.phoneNumber, forKey: .phoneNumber)
+    }
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -88,9 +88,15 @@ public struct GcsRepositorySnapshotMetadata: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.repositorySnapshotUri, forKey: .repositorySnapshotUri)
-    try container.encode(self.crc32CChecksum, forKey: .crc32CChecksum)
-    try container.encode(self.generation, forKey: .generation)
+    if !self.repositorySnapshotUri.isEmpty {
+      try container.encode(self.repositorySnapshotUri, forKey: .repositorySnapshotUri)
+    }
+    if !self.crc32CChecksum.isEmpty {
+      try container.encode(self.crc32CChecksum, forKey: .crc32CChecksum)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -125,9 +125,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       try container.encodeIfPresent(self.triggerFulfillment, forKey: .triggerFulfillment)
-      try container.encode(self.dataStoreConnections, forKey: .dataStoreConnections)
+      if !self.dataStoreConnections.isEmpty {
+        try container.encode(self.dataStoreConnections, forKey: .dataStoreConnections)
+      }
 
       if let choice = self.target {
         switch choice {

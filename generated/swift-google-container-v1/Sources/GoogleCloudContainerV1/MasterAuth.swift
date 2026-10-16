@@ -139,12 +139,22 @@ public struct MasterAuth: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
     try container.encodeIfPresent(self.clientCertificateConfig, forKey: .clientCertificateConfig)
-    try container.encode(self.clusterCaCertificate, forKey: .clusterCaCertificate)
-    try container.encode(self.clientCertificate, forKey: .clientCertificate)
-    try container.encode(self.clientKey, forKey: .clientKey)
+    if !self.clusterCaCertificate.isEmpty {
+      try container.encode(self.clusterCaCertificate, forKey: .clusterCaCertificate)
+    }
+    if !self.clientCertificate.isEmpty {
+      try container.encode(self.clientCertificate, forKey: .clientCertificate)
+    }
+    if !self.clientKey.isEmpty {
+      try container.encode(self.clientKey, forKey: .clientKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

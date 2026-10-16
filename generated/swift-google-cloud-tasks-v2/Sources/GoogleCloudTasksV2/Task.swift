@@ -246,15 +246,23 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.scheduleTime, forKey: .scheduleTime)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.dispatchDeadline, forKey: .dispatchDeadline)
-    try container.encode(self.dispatchCount, forKey: .dispatchCount)
-    try container.encode(self.responseCount, forKey: .responseCount)
+    if self.dispatchCount != 0 {
+      try container.encode(self.dispatchCount, forKey: .dispatchCount)
+    }
+    if self.responseCount != 0 {
+      try container.encode(self.responseCount, forKey: .responseCount)
+    }
     try container.encodeIfPresent(self.firstAttempt, forKey: .firstAttempt)
     try container.encodeIfPresent(self.lastAttempt, forKey: .lastAttempt)
-    try container.encode(self.view, forKey: .view)
+    if self.view != Task.View() {
+      try container.encode(self.view, forKey: .view)
+    }
     try container.encodeIfPresent(self.retryConfig, forKey: .retryConfig)
 
     if let choice = self.messageType {

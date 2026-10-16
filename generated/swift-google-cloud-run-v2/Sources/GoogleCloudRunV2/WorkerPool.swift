@@ -394,36 +394,80 @@ public struct WorkerPool: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.lastModifier, forKey: .lastModifier)
-    try container.encode(self.client, forKey: .client)
-    try container.encode(self.clientVersion, forKey: .clientVersion)
-    try container.encode(self.launchStage, forKey: .launchStage)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.lastModifier.isEmpty {
+      try container.encode(self.lastModifier, forKey: .lastModifier)
+    }
+    if !self.client.isEmpty {
+      try container.encode(self.client, forKey: .client)
+    }
+    if !self.clientVersion.isEmpty {
+      try container.encode(self.clientVersion, forKey: .clientVersion)
+    }
+    if self.launchStage != GoogleApi.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
     try container.encodeIfPresent(self.binaryAuthorization, forKey: .binaryAuthorization)
     try container.encodeIfPresent(self.template, forKey: .template)
-    try container.encode(self.instanceSplits, forKey: .instanceSplits)
+    if !self.instanceSplits.isEmpty {
+      try container.encode(self.instanceSplits, forKey: .instanceSplits)
+    }
     try container.encodeIfPresent(self.scaling, forKey: .scaling)
-    try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    if self.observedGeneration != 0 {
+      try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    }
     try container.encodeIfPresent(self.terminalCondition, forKey: .terminalCondition)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.latestReadyRevision, forKey: .latestReadyRevision)
-    try container.encode(self.latestCreatedRevision, forKey: .latestCreatedRevision)
-    try container.encode(self.instanceSplitStatuses, forKey: .instanceSplitStatuses)
-    try container.encode(self.threatDetectionEnabled, forKey: .threatDetectionEnabled)
-    try container.encode(self.customAudiences, forKey: .customAudiences)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if !self.latestReadyRevision.isEmpty {
+      try container.encode(self.latestReadyRevision, forKey: .latestReadyRevision)
+    }
+    if !self.latestCreatedRevision.isEmpty {
+      try container.encode(self.latestCreatedRevision, forKey: .latestCreatedRevision)
+    }
+    if !self.instanceSplitStatuses.isEmpty {
+      try container.encode(self.instanceSplitStatuses, forKey: .instanceSplitStatuses)
+    }
+    if self.threatDetectionEnabled {
+      try container.encode(self.threatDetectionEnabled, forKey: .threatDetectionEnabled)
+    }
+    if !self.customAudiences.isEmpty {
+      try container.encode(self.customAudiences, forKey: .customAudiences)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

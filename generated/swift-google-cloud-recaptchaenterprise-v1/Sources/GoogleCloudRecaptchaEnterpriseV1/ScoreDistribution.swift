@@ -83,7 +83,7 @@ public struct ScoreDistribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    do {
+    if !self.scoreBuckets.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.scoreBuckets.lazy.map { (Swift.String($0), $1) }
       )

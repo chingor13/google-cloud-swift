@@ -99,8 +99,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inUseResources, forKey: .inUseResources)
-      try container.encode(self.reservedResources, forKey: .reservedResources)
+      if !self.inUseResources.isEmpty {
+        try container.encode(self.inUseResources, forKey: .inUseResources)
+      }
+      if !self.reservedResources.isEmpty {
+        try container.encode(self.reservedResources, forKey: .reservedResources)
+      }
       try container.encodeIfPresent(self.vmFamily, forKey: .vmFamily)
       try container.encodeIfPresent(self.workloadType, forKey: .workloadType)
       for (key, value) in self._unknownFields.json {

@@ -94,9 +94,15 @@ public struct ApiKeyConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.keyName, forKey: .keyName)
-    try container.encode(self.apiKeySecretVersion, forKey: .apiKeySecretVersion)
-    try container.encode(self.requestLocation, forKey: .requestLocation)
+    if !self.keyName.isEmpty {
+      try container.encode(self.keyName, forKey: .keyName)
+    }
+    if !self.apiKeySecretVersion.isEmpty {
+      try container.encode(self.apiKeySecretVersion, forKey: .apiKeySecretVersion)
+    }
+    if self.requestLocation != ApiKeyConfig.RequestLocation() {
+      try container.encode(self.requestLocation, forKey: .requestLocation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -91,8 +91,12 @@ public struct EvaluationReference: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.operation, forKey: .operation)
-    try container.encode(self.evaluation, forKey: .evaluation)
+    if !self.operation.isEmpty {
+      try container.encode(self.operation, forKey: .operation)
+    }
+    if !self.evaluation.isEmpty {
+      try container.encode(self.evaluation, forKey: .evaluation)
+    }
     try container.encodeIfPresent(self.aggregateMetrics, forKey: .aggregateMetrics)
     try container.encodeIfPresent(self.aggregateMetricsExact, forKey: .aggregateMetricsExact)
     for (key, value) in self._unknownFields.json {

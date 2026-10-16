@@ -99,10 +99,18 @@ public struct UpgradeDistribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpeUri, forKey: .cpeUri)
-    try container.encode(self.classification, forKey: .classification)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.cve, forKey: .cve)
+    if !self.cpeUri.isEmpty {
+      try container.encode(self.cpeUri, forKey: .cpeUri)
+    }
+    if !self.classification.isEmpty {
+      try container.encode(self.classification, forKey: .classification)
+    }
+    if !self.severity.isEmpty {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.cve.isEmpty {
+      try container.encode(self.cve, forKey: .cve)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

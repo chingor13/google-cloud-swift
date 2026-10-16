@@ -99,10 +99,14 @@ public struct RolloutInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
+    if self.state != RolloutInfo.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.message, forKey: .message)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     try container.encodeIfPresent(self.rolloutStrategyInfo, forKey: .rolloutStrategyInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

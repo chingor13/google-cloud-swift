@@ -132,9 +132,15 @@ public struct DataPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dataPolicyType, forKey: .dataPolicyType)
-    try container.encode(self.dataPolicyId, forKey: .dataPolicyId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.dataPolicyType != DataPolicy.DataPolicyType() {
+      try container.encode(self.dataPolicyType, forKey: .dataPolicyType)
+    }
+    if !self.dataPolicyId.isEmpty {
+      try container.encode(self.dataPolicyId, forKey: .dataPolicyId)
+    }
 
     if let choice = self.matchingLabel {
       switch choice {

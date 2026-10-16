@@ -72,7 +72,9 @@ public struct FetchFileGitStatusesResponse: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uncommittedFileChanges, forKey: .uncommittedFileChanges)
+    if !self.uncommittedFileChanges.isEmpty {
+      try container.encode(self.uncommittedFileChanges, forKey: .uncommittedFileChanges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -141,8 +143,12 @@ public struct FetchFileGitStatusesResponse: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.state, forKey: .state)
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if self.state != FetchFileGitStatusesResponse.UncommittedFileChange.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

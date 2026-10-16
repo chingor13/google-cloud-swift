@@ -111,7 +111,9 @@ public struct DataProfileConfigSnapshot: Codable, Equatable, GoogleWKT._AnyPacka
     try container.encodeIfPresent(self.inspectConfig, forKey: .inspectConfig)
     try container.encodeIfPresent(self.dataProfileJob, forKey: .dataProfileJob)
     try container.encodeIfPresent(self.discoveryConfig, forKey: .discoveryConfig)
-    try container.encode(self.inspectTemplateName, forKey: .inspectTemplateName)
+    if !self.inspectTemplateName.isEmpty {
+      try container.encode(self.inspectTemplateName, forKey: .inspectTemplateName)
+    }
     try container.encodeIfPresent(
       self.inspectTemplateModifiedTime, forKey: .inspectTemplateModifiedTime)
     for (key, value) in self._unknownFields.json {

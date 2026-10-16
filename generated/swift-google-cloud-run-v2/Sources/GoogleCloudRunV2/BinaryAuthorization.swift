@@ -98,7 +98,9 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.breakglassJustification, forKey: .breakglassJustification)
+    if !self.breakglassJustification.isEmpty {
+      try container.encode(self.breakglassJustification, forKey: .breakglassJustification)
+    }
 
     if let choice = self.binauthzMethod {
       switch choice {

@@ -156,16 +156,35 @@ public struct KernelRootkit: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.unexpectedCodeModification, forKey: .unexpectedCodeModification)
-    try container.encode(
-      self.unexpectedReadOnlyDataModification, forKey: .unexpectedReadOnlyDataModification)
-    try container.encode(self.unexpectedFtraceHandler, forKey: .unexpectedFtraceHandler)
-    try container.encode(self.unexpectedKprobeHandler, forKey: .unexpectedKprobeHandler)
-    try container.encode(self.unexpectedKernelCodePages, forKey: .unexpectedKernelCodePages)
-    try container.encode(self.unexpectedSystemCallHandler, forKey: .unexpectedSystemCallHandler)
-    try container.encode(self.unexpectedInterruptHandler, forKey: .unexpectedInterruptHandler)
-    try container.encode(self.unexpectedProcessesInRunqueue, forKey: .unexpectedProcessesInRunqueue)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.unexpectedCodeModification {
+      try container.encode(self.unexpectedCodeModification, forKey: .unexpectedCodeModification)
+    }
+    if self.unexpectedReadOnlyDataModification {
+      try container.encode(
+        self.unexpectedReadOnlyDataModification, forKey: .unexpectedReadOnlyDataModification)
+    }
+    if self.unexpectedFtraceHandler {
+      try container.encode(self.unexpectedFtraceHandler, forKey: .unexpectedFtraceHandler)
+    }
+    if self.unexpectedKprobeHandler {
+      try container.encode(self.unexpectedKprobeHandler, forKey: .unexpectedKprobeHandler)
+    }
+    if self.unexpectedKernelCodePages {
+      try container.encode(self.unexpectedKernelCodePages, forKey: .unexpectedKernelCodePages)
+    }
+    if self.unexpectedSystemCallHandler {
+      try container.encode(self.unexpectedSystemCallHandler, forKey: .unexpectedSystemCallHandler)
+    }
+    if self.unexpectedInterruptHandler {
+      try container.encode(self.unexpectedInterruptHandler, forKey: .unexpectedInterruptHandler)
+    }
+    if self.unexpectedProcessesInRunqueue {
+      try container.encode(
+        self.unexpectedProcessesInRunqueue, forKey: .unexpectedProcessesInRunqueue)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

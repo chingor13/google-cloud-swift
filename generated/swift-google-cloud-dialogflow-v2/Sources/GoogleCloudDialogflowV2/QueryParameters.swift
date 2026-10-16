@@ -161,16 +161,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.timeZone, forKey: .timeZone)
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
       try container.encodeIfPresent(self.geoLocation, forKey: .geoLocation)
-      try container.encode(self.contexts, forKey: .contexts)
-      try container.encode(self.resetContexts, forKey: .resetContexts)
-      try container.encode(self.sessionEntityTypes, forKey: .sessionEntityTypes)
+      if !self.contexts.isEmpty {
+        try container.encode(self.contexts, forKey: .contexts)
+      }
+      if self.resetContexts {
+        try container.encode(self.resetContexts, forKey: .resetContexts)
+      }
+      if !self.sessionEntityTypes.isEmpty {
+        try container.encode(self.sessionEntityTypes, forKey: .sessionEntityTypes)
+      }
       try container.encodeIfPresent(self.payload, forKey: .payload)
       try container.encodeIfPresent(
         self.sentimentAnalysisRequestConfig, forKey: .sentimentAnalysisRequestConfig)
-      try container.encode(self.webhookHeaders, forKey: .webhookHeaders)
-      try container.encode(self.platform, forKey: .platform)
+      if !self.webhookHeaders.isEmpty {
+        try container.encode(self.webhookHeaders, forKey: .webhookHeaders)
+      }
+      if !self.platform.isEmpty {
+        try container.encode(self.platform, forKey: .platform)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -84,7 +84,9 @@ public struct RecordTransformation: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.fieldId, forKey: .fieldId)
     try container.encodeIfPresent(self.containerTimestamp, forKey: .containerTimestamp)
-    try container.encode(self.containerVersion, forKey: .containerVersion)
+    if !self.containerVersion.isEmpty {
+      try container.encode(self.containerVersion, forKey: .containerVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

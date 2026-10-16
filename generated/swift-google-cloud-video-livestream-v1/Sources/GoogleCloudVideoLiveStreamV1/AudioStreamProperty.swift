@@ -75,7 +75,9 @@ public struct AudioStreamProperty: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.index, forKey: .index)
+    if self.index != 0 {
+      try container.encode(self.index, forKey: .index)
+    }
     try container.encodeIfPresent(self.audioFormat, forKey: .audioFormat)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

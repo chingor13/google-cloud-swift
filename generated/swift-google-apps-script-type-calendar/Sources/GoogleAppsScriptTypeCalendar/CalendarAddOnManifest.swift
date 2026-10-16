@@ -121,11 +121,17 @@ public struct CalendarAddOnManifest: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.homepageTrigger, forKey: .homepageTrigger)
-    try container.encode(self.conferenceSolution, forKey: .conferenceSolution)
-    try container.encode(self.createSettingsUrlFunction, forKey: .createSettingsUrlFunction)
+    if !self.conferenceSolution.isEmpty {
+      try container.encode(self.conferenceSolution, forKey: .conferenceSolution)
+    }
+    if !self.createSettingsUrlFunction.isEmpty {
+      try container.encode(self.createSettingsUrlFunction, forKey: .createSettingsUrlFunction)
+    }
     try container.encodeIfPresent(self.eventOpenTrigger, forKey: .eventOpenTrigger)
     try container.encodeIfPresent(self.eventUpdateTrigger, forKey: .eventUpdateTrigger)
-    try container.encode(self.currentEventAccess, forKey: .currentEventAccess)
+    if self.currentEventAccess != CalendarAddOnManifest.EventAccess() {
+      try container.encode(self.currentEventAccess, forKey: .currentEventAccess)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

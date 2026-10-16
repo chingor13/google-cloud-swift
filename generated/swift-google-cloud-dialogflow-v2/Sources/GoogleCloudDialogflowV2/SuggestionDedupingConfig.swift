@@ -80,8 +80,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableDeduping, forKey: .enableDeduping)
-      try container.encode(self.similarityThreshold, forKey: .similarityThreshold)
+      if self.enableDeduping {
+        try container.encode(self.enableDeduping, forKey: .enableDeduping)
+      }
+      if self.similarityThreshold != 0 {
+        try container.encode(self.similarityThreshold, forKey: .similarityThreshold)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

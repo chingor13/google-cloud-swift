@@ -77,7 +77,9 @@ public struct CloudWorkspaceSourceContext: Codable, Equatable, GoogleWKT._AnyPac
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.workspaceId, forKey: .workspaceId)
-    try container.encode(self.snapshotId, forKey: .snapshotId)
+    if !self.snapshotId.isEmpty {
+      try container.encode(self.snapshotId, forKey: .snapshotId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

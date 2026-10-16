@@ -78,8 +78,12 @@ public struct PostgresqlSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.schema, forKey: .schema)
-    try container.encode(self.postgresqlTables, forKey: .postgresqlTables)
+    if !self.schema.isEmpty {
+      try container.encode(self.schema, forKey: .schema)
+    }
+    if !self.postgresqlTables.isEmpty {
+      try container.encode(self.postgresqlTables, forKey: .postgresqlTables)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

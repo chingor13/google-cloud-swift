@@ -99,7 +99,9 @@ public struct CreateDocumentResponse: Codable, Equatable, GoogleWKT._AnyPackable
     try container.encodeIfPresent(self.document, forKey: .document)
     try container.encodeIfPresent(self.ruleEngineOutput, forKey: .ruleEngineOutput)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.longRunningOperations, forKey: .longRunningOperations)
+    if !self.longRunningOperations.isEmpty {
+      try container.encode(self.longRunningOperations, forKey: .longRunningOperations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

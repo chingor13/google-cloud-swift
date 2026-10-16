@@ -181,7 +181,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.condition, forKey: .condition)
-      try container.encode(self.members, forKey: .members)
+      if !self.members.isEmpty {
+        try container.encode(self.members, forKey: .members)
+      }
       try container.encodeIfPresent(self.role, forKey: .role)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

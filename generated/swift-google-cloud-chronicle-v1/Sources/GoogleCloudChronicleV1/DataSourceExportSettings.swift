@@ -103,11 +103,19 @@ public struct DataSourceExportSettings: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.retentionDays, forKey: .retentionDays)
-    try container.encode(self.latestExportJobState, forKey: .latestExportJobState)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.retentionDays != 0 {
+      try container.encode(self.retentionDays, forKey: .retentionDays)
+    }
+    if self.latestExportJobState != LatestExportJobState() {
+      try container.encode(self.latestExportJobState, forKey: .latestExportJobState)
+    }
     try container.encodeIfPresent(self.dataFreshnessTime, forKey: .dataFreshnessTime)
-    try container.encode(self.dataVolume, forKey: .dataVolume)
+    if self.dataVolume != 0 {
+      try container.encode(self.dataVolume, forKey: .dataVolume)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

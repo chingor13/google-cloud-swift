@@ -77,7 +77,9 @@ public struct PacketType: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.typeClass, forKey: .typeClass)
+    if !self.typeClass.isEmpty {
+      try container.encode(self.typeClass, forKey: .typeClass)
+    }
     try container.encodeIfPresent(self.typeDescriptor, forKey: .typeDescriptor)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -177,7 +179,9 @@ public struct PacketType: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
 
       if let choice = self.typeDetails {
         switch choice {

@@ -238,12 +238,26 @@ public struct GoldengateKafkaSchemaRegistryConnectionProperties: Codable, Equata
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.url, forKey: .url)
-    try container.encode(self.authenticationType, forKey: .authenticationType)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.trustStoreFile, forKey: .trustStoreFile)
-    try container.encode(self.keyStoreFile, forKey: .keyStoreFile)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.url.isEmpty {
+      try container.encode(self.url, forKey: .url)
+    }
+    if self.authenticationType
+      != GoldengateKafkaSchemaRegistryConnectionProperties.AuthenticationType()
+    {
+      try container.encode(self.authenticationType, forKey: .authenticationType)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.trustStoreFile.isEmpty {
+      try container.encode(self.trustStoreFile, forKey: .trustStoreFile)
+    }
+    if !self.keyStoreFile.isEmpty {
+      try container.encode(self.keyStoreFile, forKey: .keyStoreFile)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

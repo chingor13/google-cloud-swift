@@ -118,13 +118,27 @@ public struct Product: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.productCompany, forKey: .productCompany)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.sku, forKey: .sku)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.productCompany.isEmpty {
+      try container.encode(self.productCompany, forKey: .productCompany)
+    }
+    if self.state != Product.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.sku.isEmpty {
+      try container.encode(self.sku, forKey: .sku)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

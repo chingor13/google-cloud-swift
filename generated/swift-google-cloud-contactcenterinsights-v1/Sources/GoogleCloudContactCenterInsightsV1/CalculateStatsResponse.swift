@@ -148,12 +148,24 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleWKT._AnyPackable
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.averageDuration, forKey: .averageDuration)
-    try container.encode(self.averageTurnCount, forKey: .averageTurnCount)
-    try container.encode(self.conversationCount, forKey: .conversationCount)
-    try container.encode(self.smartHighlighterMatches, forKey: .smartHighlighterMatches)
-    try container.encode(self.customHighlighterMatches, forKey: .customHighlighterMatches)
-    try container.encode(self.issueMatches, forKey: .issueMatches)
-    try container.encode(self.issueMatchesStats, forKey: .issueMatchesStats)
+    if self.averageTurnCount != 0 {
+      try container.encode(self.averageTurnCount, forKey: .averageTurnCount)
+    }
+    if self.conversationCount != 0 {
+      try container.encode(self.conversationCount, forKey: .conversationCount)
+    }
+    if !self.smartHighlighterMatches.isEmpty {
+      try container.encode(self.smartHighlighterMatches, forKey: .smartHighlighterMatches)
+    }
+    if !self.customHighlighterMatches.isEmpty {
+      try container.encode(self.customHighlighterMatches, forKey: .customHighlighterMatches)
+    }
+    if !self.issueMatches.isEmpty {
+      try container.encode(self.issueMatches, forKey: .issueMatches)
+    }
+    if !self.issueMatchesStats.isEmpty {
+      try container.encode(self.issueMatchesStats, forKey: .issueMatchesStats)
+    }
     try container.encodeIfPresent(
       self.conversationCountTimeSeries, forKey: .conversationCountTimeSeries)
     for (key, value) in self._unknownFields.json {
@@ -225,7 +237,9 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleWKT._AnyPackable
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.intervalDuration, forKey: .intervalDuration)
-      try container.encode(self.points, forKey: .points)
+      if !self.points.isEmpty {
+        try container.encode(self.points, forKey: .points)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -291,7 +305,9 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleWKT._AnyPackable
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.startTime, forKey: .startTime)
-        try container.encode(self.conversationCount, forKey: .conversationCount)
+        if self.conversationCount != 0 {
+          try container.encode(self.conversationCount, forKey: .conversationCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

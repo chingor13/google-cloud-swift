@@ -143,13 +143,21 @@ public struct DeploymentEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.runtimeConfig, forKey: .runtimeConfig)
-    try container.encode(self.runtimeDeploymentUri, forKey: .runtimeDeploymentUri)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.artifactDeployments, forKey: .artifactDeployments)
+    if !self.runtimeDeploymentUri.isEmpty {
+      try container.encode(self.runtimeDeploymentUri, forKey: .runtimeDeploymentUri)
+    }
+    if self.state != DeploymentEvent.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.artifactDeployments.isEmpty {
+      try container.encode(self.artifactDeployments, forKey: .artifactDeployments)
+    }
     try container.encodeIfPresent(self.deployTime, forKey: .deployTime)
     try container.encodeIfPresent(self.undeployTime, forKey: .undeployTime)
     for (key, value) in self._unknownFields.json {

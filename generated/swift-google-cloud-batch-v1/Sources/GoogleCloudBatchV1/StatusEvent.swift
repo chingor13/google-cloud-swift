@@ -100,11 +100,17 @@ public struct StatusEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.description, forKey: .description)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
     try container.encodeIfPresent(self.taskExecution, forKey: .taskExecution)
-    try container.encode(self.taskState, forKey: .taskState)
+    if self.taskState != TaskStatus.State() {
+      try container.encode(self.taskState, forKey: .taskState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

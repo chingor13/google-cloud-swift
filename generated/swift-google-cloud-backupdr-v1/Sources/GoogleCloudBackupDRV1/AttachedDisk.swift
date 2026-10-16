@@ -197,9 +197,13 @@ public struct AttachedDisk: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.index, forKey: .index)
     try container.encodeIfPresent(self.boot, forKey: .boot)
     try container.encodeIfPresent(self.autoDelete, forKey: .autoDelete)
-    try container.encode(self.license, forKey: .license)
+    if !self.license.isEmpty {
+      try container.encode(self.license, forKey: .license)
+    }
     try container.encodeIfPresent(self.diskInterface, forKey: .diskInterface)
-    try container.encode(self.guestOsFeature, forKey: .guestOsFeature)
+    if !self.guestOsFeature.isEmpty {
+      try container.encode(self.guestOsFeature, forKey: .guestOsFeature)
+    }
     try container.encodeIfPresent(self.diskEncryptionKey, forKey: .diskEncryptionKey)
     try container.encodeIfPresent(self.diskSizeGb, forKey: .diskSizeGb)
     try container.encodeIfPresent(self.savedState, forKey: .savedState)
@@ -271,7 +275,9 @@ public struct AttachedDisk: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.diskName, forKey: .diskName)
-      try container.encode(self.replicaZones, forKey: .replicaZones)
+      if !self.replicaZones.isEmpty {
+        try container.encode(self.replicaZones, forKey: .replicaZones)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

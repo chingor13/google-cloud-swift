@@ -84,7 +84,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.playbook, forKey: .playbook)
+      if !self.playbook.isEmpty {
+        try container.encode(self.playbook, forKey: .playbook)
+      }
       try container.encodeIfPresent(self.conflictingResources, forKey: .conflictingResources)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -167,9 +169,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.mainPlaybookDisplayName, forKey: .mainPlaybookDisplayName)
-        try container.encode(self.nestedPlaybookDisplayNames, forKey: .nestedPlaybookDisplayNames)
-        try container.encode(self.toolDisplayNames, forKey: .toolDisplayNames)
+        if !self.mainPlaybookDisplayName.isEmpty {
+          try container.encode(self.mainPlaybookDisplayName, forKey: .mainPlaybookDisplayName)
+        }
+        if !self.nestedPlaybookDisplayNames.isEmpty {
+          try container.encode(self.nestedPlaybookDisplayNames, forKey: .nestedPlaybookDisplayNames)
+        }
+        if !self.toolDisplayNames.isEmpty {
+          try container.encode(self.toolDisplayNames, forKey: .toolDisplayNames)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

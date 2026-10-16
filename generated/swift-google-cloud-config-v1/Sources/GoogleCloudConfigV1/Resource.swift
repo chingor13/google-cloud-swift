@@ -108,11 +108,19 @@ public struct Resource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.terraformInfo, forKey: .terraformInfo)
-    try container.encode(self.caiAssets, forKey: .caiAssets)
-    try container.encode(self.intent, forKey: .intent)
-    try container.encode(self.state, forKey: .state)
+    if !self.caiAssets.isEmpty {
+      try container.encode(self.caiAssets, forKey: .caiAssets)
+    }
+    if self.intent != Resource.Intent() {
+      try container.encode(self.intent, forKey: .intent)
+    }
+    if self.state != Resource.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

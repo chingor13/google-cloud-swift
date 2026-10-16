@@ -93,9 +93,15 @@ public struct HumanReviewStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
-    try container.encode(self.humanReviewOperation, forKey: .humanReviewOperation)
+    if self.state != HumanReviewStatus.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
+    if !self.humanReviewOperation.isEmpty {
+      try container.encode(self.humanReviewOperation, forKey: .humanReviewOperation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

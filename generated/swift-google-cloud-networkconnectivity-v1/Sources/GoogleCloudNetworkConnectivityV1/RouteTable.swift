@@ -125,13 +125,23 @@ public struct RouteTable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.state, forKey: .state)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.state != GoogleCloudNetworkConnectivityV1.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

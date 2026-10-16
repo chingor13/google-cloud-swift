@@ -164,15 +164,33 @@ public struct CodeCompilationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.defaultDatabase, forKey: .defaultDatabase)
-    try container.encode(self.defaultSchema, forKey: .defaultSchema)
-    try container.encode(self.defaultLocation, forKey: .defaultLocation)
-    try container.encode(self.assertionSchema, forKey: .assertionSchema)
-    try container.encode(self.vars, forKey: .vars)
-    try container.encode(self.databaseSuffix, forKey: .databaseSuffix)
-    try container.encode(self.schemaSuffix, forKey: .schemaSuffix)
-    try container.encode(self.tablePrefix, forKey: .tablePrefix)
-    try container.encode(self.builtinAssertionNamePrefix, forKey: .builtinAssertionNamePrefix)
+    if !self.defaultDatabase.isEmpty {
+      try container.encode(self.defaultDatabase, forKey: .defaultDatabase)
+    }
+    if !self.defaultSchema.isEmpty {
+      try container.encode(self.defaultSchema, forKey: .defaultSchema)
+    }
+    if !self.defaultLocation.isEmpty {
+      try container.encode(self.defaultLocation, forKey: .defaultLocation)
+    }
+    if !self.assertionSchema.isEmpty {
+      try container.encode(self.assertionSchema, forKey: .assertionSchema)
+    }
+    if !self.vars.isEmpty {
+      try container.encode(self.vars, forKey: .vars)
+    }
+    if !self.databaseSuffix.isEmpty {
+      try container.encode(self.databaseSuffix, forKey: .databaseSuffix)
+    }
+    if !self.schemaSuffix.isEmpty {
+      try container.encode(self.schemaSuffix, forKey: .schemaSuffix)
+    }
+    if !self.tablePrefix.isEmpty {
+      try container.encode(self.tablePrefix, forKey: .tablePrefix)
+    }
+    if !self.builtinAssertionNamePrefix.isEmpty {
+      try container.encode(self.builtinAssertionNamePrefix, forKey: .builtinAssertionNamePrefix)
+    }
     try container.encodeIfPresent(
       self.defaultNotebookRuntimeOptions, forKey: .defaultNotebookRuntimeOptions)
     try container.encodeIfPresent(self.pipelineConfig, forKey: .pipelineConfig)

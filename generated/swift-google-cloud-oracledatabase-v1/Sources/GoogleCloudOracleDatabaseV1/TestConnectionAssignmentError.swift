@@ -93,10 +93,18 @@ public struct TestConnectionAssignmentError: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.code, forKey: .code)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.issue, forKey: .issue)
+    if !self.code.isEmpty {
+      try container.encode(self.code, forKey: .code)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.issue.isEmpty {
+      try container.encode(self.issue, forKey: .issue)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

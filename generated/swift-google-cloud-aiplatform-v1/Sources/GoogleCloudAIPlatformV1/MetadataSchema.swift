@@ -120,12 +120,22 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.schemaVersion, forKey: .schemaVersion)
-      try container.encode(self.schema, forKey: .schema)
-      try container.encode(self.schemaType, forKey: .schemaType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.schemaVersion.isEmpty {
+        try container.encode(self.schemaVersion, forKey: .schemaVersion)
+      }
+      if !self.schema.isEmpty {
+        try container.encode(self.schema, forKey: .schema)
+      }
+      if self.schemaType != MetadataSchema.MetadataSchemaType() {
+        try container.encode(self.schemaType, forKey: .schemaType)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.description, forKey: .description)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

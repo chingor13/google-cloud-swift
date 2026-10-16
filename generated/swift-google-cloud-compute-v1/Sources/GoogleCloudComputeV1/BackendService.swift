@@ -817,7 +817,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.affinityCookieTtlSec, forKey: .affinityCookieTtlSec)
-      try container.encode(self.backends, forKey: .backends)
+      if !self.backends.isEmpty {
+        try container.encode(self.backends, forKey: .backends)
+      }
       try container.encodeIfPresent(self.cdnPolicy, forKey: .cdnPolicy)
       try container.encodeIfPresent(self.circuitBreakers, forKey: .circuitBreakers)
       try container.encodeIfPresent(self.compressionMode, forKey: .compressionMode)
@@ -826,9 +828,15 @@
         self.connectionTrackingPolicy, forKey: .connectionTrackingPolicy)
       try container.encodeIfPresent(self.consistentHash, forKey: .consistentHash)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
-      try container.encode(self.customMetrics, forKey: .customMetrics)
-      try container.encode(self.customRequestHeaders, forKey: .customRequestHeaders)
-      try container.encode(self.customResponseHeaders, forKey: .customResponseHeaders)
+      if !self.customMetrics.isEmpty {
+        try container.encode(self.customMetrics, forKey: .customMetrics)
+      }
+      if !self.customRequestHeaders.isEmpty {
+        try container.encode(self.customRequestHeaders, forKey: .customRequestHeaders)
+      }
+      if !self.customResponseHeaders.isEmpty {
+        try container.encode(self.customResponseHeaders, forKey: .customResponseHeaders)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.edgeSecurityPolicy, forKey: .edgeSecurityPolicy)
       try container.encodeIfPresent(self.enableCdn, forKey: .enableCdn)
@@ -838,24 +846,30 @@
         self.externalManagedMigrationTestingPercentage,
         forKey: .externalManagedMigrationTestingPercentage)
       try container.encodeIfPresent(self.failoverPolicy, forKey: .failoverPolicy)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.haPolicy, forKey: .haPolicy)
-      try container.encode(self.healthChecks, forKey: .healthChecks)
+      if !self.healthChecks.isEmpty {
+        try container.encode(self.healthChecks, forKey: .healthChecks)
+      }
       try container.encodeIfPresent(self.iap, forKey: .iap)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(
         self.ipAddressSelectionPolicy, forKey: .ipAddressSelectionPolicy)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.loadBalancingScheme, forKey: .loadBalancingScheme)
-      try container.encode(self.localityLbPolicies, forKey: .localityLbPolicies)
+      if !self.localityLbPolicies.isEmpty {
+        try container.encode(self.localityLbPolicies, forKey: .localityLbPolicies)
+      }
       try container.encodeIfPresent(self.localityLbPolicy, forKey: .localityLbPolicy)
       try container.encodeIfPresent(self.logConfig, forKey: .logConfig)
       try container.encodeIfPresent(self.maxStreamDuration, forKey: .maxStreamDuration)
-      try container.encode(self.metadatas, forKey: .metadatas)
+      if !self.metadatas.isEmpty {
+        try container.encode(self.metadatas, forKey: .metadatas)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(
@@ -870,7 +884,9 @@
       try container.encodeIfPresent(self.securityPolicy, forKey: .securityPolicy)
       try container.encodeIfPresent(self.securitySettings, forKey: .securitySettings)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.serviceBindings, forKey: .serviceBindings)
+      if !self.serviceBindings.isEmpty {
+        try container.encode(self.serviceBindings, forKey: .serviceBindings)
+      }
       try container.encodeIfPresent(self.serviceLbPolicy, forKey: .serviceLbPolicy)
       try container.encodeIfPresent(self.sessionAffinity, forKey: .sessionAffinity)
       try container.encodeIfPresent(
@@ -878,7 +894,9 @@
       try container.encodeIfPresent(self.subsetting, forKey: .subsetting)
       try container.encodeIfPresent(self.timeoutSec, forKey: .timeoutSec)
       try container.encodeIfPresent(self.tlsSettings, forKey: .tlsSettings)
-      try container.encode(self.usedBy, forKey: .usedBy)
+      if !self.usedBy.isEmpty {
+        try container.encode(self.usedBy, forKey: .usedBy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -123,12 +123,25 @@ public struct CloudIdentityCustomerAccount: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.existing, forKey: .existing)
-    try container.encode(self.owned, forKey: .owned)
-    try container.encode(self.customerName, forKey: .customerName)
-    try container.encode(self.customerCloudIdentityId, forKey: .customerCloudIdentityId)
-    try container.encode(self.customerType, forKey: .customerType)
-    try container.encode(self.channelPartnerCloudIdentityId, forKey: .channelPartnerCloudIdentityId)
+    if self.existing {
+      try container.encode(self.existing, forKey: .existing)
+    }
+    if self.owned {
+      try container.encode(self.owned, forKey: .owned)
+    }
+    if !self.customerName.isEmpty {
+      try container.encode(self.customerName, forKey: .customerName)
+    }
+    if !self.customerCloudIdentityId.isEmpty {
+      try container.encode(self.customerCloudIdentityId, forKey: .customerCloudIdentityId)
+    }
+    if self.customerType != CloudIdentityInfo.CustomerType() {
+      try container.encode(self.customerType, forKey: .customerType)
+    }
+    if !self.channelPartnerCloudIdentityId.isEmpty {
+      try container.encode(
+        self.channelPartnerCloudIdentityId, forKey: .channelPartnerCloudIdentityId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -376,31 +376,65 @@ public struct Object: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.generation, forKey: .generation)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
     try container.encodeIfPresent(self.restoreToken, forKey: .restoreToken)
-    try container.encode(self.metageneration, forKey: .metageneration)
-    try container.encode(self.storageClass, forKey: .storageClass)
-    try container.encode(self.size, forKey: .size)
-    try container.encode(self.contentEncoding, forKey: .contentEncoding)
-    try container.encode(self.contentDisposition, forKey: .contentDisposition)
-    try container.encode(self.cacheControl, forKey: .cacheControl)
-    try container.encode(self.acl, forKey: .acl)
-    try container.encode(self.contentLanguage, forKey: .contentLanguage)
+    if self.metageneration != 0 {
+      try container.encode(self.metageneration, forKey: .metageneration)
+    }
+    if !self.storageClass.isEmpty {
+      try container.encode(self.storageClass, forKey: .storageClass)
+    }
+    if self.size != 0 {
+      try container.encode(self.size, forKey: .size)
+    }
+    if !self.contentEncoding.isEmpty {
+      try container.encode(self.contentEncoding, forKey: .contentEncoding)
+    }
+    if !self.contentDisposition.isEmpty {
+      try container.encode(self.contentDisposition, forKey: .contentDisposition)
+    }
+    if !self.cacheControl.isEmpty {
+      try container.encode(self.cacheControl, forKey: .cacheControl)
+    }
+    if !self.acl.isEmpty {
+      try container.encode(self.acl, forKey: .acl)
+    }
+    if !self.contentLanguage.isEmpty {
+      try container.encode(self.contentLanguage, forKey: .contentLanguage)
+    }
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.finalizeTime, forKey: .finalizeTime)
-    try container.encode(self.contentType, forKey: .contentType)
+    if !self.contentType.isEmpty {
+      try container.encode(self.contentType, forKey: .contentType)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.componentCount, forKey: .componentCount)
+    if self.componentCount != 0 {
+      try container.encode(self.componentCount, forKey: .componentCount)
+    }
     try container.encodeIfPresent(self.checksums, forKey: .checksums)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
     try container.encodeIfPresent(self.updateStorageClassTime, forKey: .updateStorageClassTime)
-    try container.encode(self.temporaryHold, forKey: .temporaryHold)
+    if self.temporaryHold {
+      try container.encode(self.temporaryHold, forKey: .temporaryHold)
+    }
     try container.encodeIfPresent(self.retentionExpireTime, forKey: .retentionExpireTime)
-    try container.encode(self.metadata, forKey: .metadata)
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
     try container.encodeIfPresent(self.contexts, forKey: .contexts)
     try container.encodeIfPresent(self.eventBasedHold, forKey: .eventBasedHold)
     try container.encodeIfPresent(self.owner, forKey: .owner)
@@ -475,7 +509,9 @@ public struct Object: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.mode, forKey: .mode)
+      if self.mode != Object.Retention.Mode() {
+        try container.encode(self.mode, forKey: .mode)
+      }
       try container.encodeIfPresent(self.retainUntilTime, forKey: .retainUntilTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

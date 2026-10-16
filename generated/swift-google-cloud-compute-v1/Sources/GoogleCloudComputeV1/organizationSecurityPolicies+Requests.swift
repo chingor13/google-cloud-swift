@@ -112,7 +112,9 @@
         try container.encodeIfPresent(
           self.replaceExistingAssociation, forKey: .replaceExistingAssociation)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -223,7 +225,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -333,7 +337,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         try container.encodeIfPresent(self.sourceSecurityPolicy, forKey: .sourceSecurityPolicy)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -436,7 +442,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -519,7 +527,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -608,7 +618,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.name, forKey: .name)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -698,7 +710,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.priority, forKey: .priority)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1366,7 +1380,9 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.parentId, forKey: .parentId)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1476,7 +1492,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1594,7 +1612,9 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.priority, forKey: .priority)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1704,7 +1724,9 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.name, forKey: .name)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1813,7 +1835,9 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.priority, forKey: .priority)
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        if !self.securityPolicy.isEmpty {
+          try container.encode(self.securityPolicy, forKey: .securityPolicy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

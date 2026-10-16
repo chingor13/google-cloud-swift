@@ -114,12 +114,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.ipAddress, forKey: .ipAddress)
-      try container.encode(self.forwardingRule, forKey: .forwardingRule)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.ipAddress.isEmpty {
+        try container.encode(self.ipAddress, forKey: .ipAddress)
+      }
+      if !self.forwardingRule.isEmpty {
+        try container.encode(self.forwardingRule, forKey: .forwardingRule)
+      }
+      if self.state != PSCAutomationState() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

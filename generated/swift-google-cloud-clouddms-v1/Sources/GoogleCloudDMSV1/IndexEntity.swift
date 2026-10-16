@@ -102,10 +102,18 @@ public struct IndexEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.tableColumns, forKey: .tableColumns)
-    try container.encode(self.unique, forKey: .unique)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.tableColumns.isEmpty {
+      try container.encode(self.tableColumns, forKey: .tableColumns)
+    }
+    if self.unique {
+      try container.encode(self.unique, forKey: .unique)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

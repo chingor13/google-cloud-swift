@@ -173,8 +173,12 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.caCertificate, forKey: .caCertificate)
-      try container.encode(self.serverCertificateHostname, forKey: .serverCertificateHostname)
+      if !self.caCertificate.isEmpty {
+        try container.encode(self.caCertificate, forKey: .caCertificate)
+      }
+      if !self.serverCertificateHostname.isEmpty {
+        try container.encode(self.serverCertificateHostname, forKey: .serverCertificateHostname)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -293,10 +297,18 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clientCertificate, forKey: .clientCertificate)
-      try container.encode(self.clientKey, forKey: .clientKey)
-      try container.encode(self.caCertificate, forKey: .caCertificate)
-      try container.encode(self.serverCertificateHostname, forKey: .serverCertificateHostname)
+      if !self.clientCertificate.isEmpty {
+        try container.encode(self.clientCertificate, forKey: .clientCertificate)
+      }
+      if !self.clientKey.isEmpty {
+        try container.encode(self.clientKey, forKey: .clientKey)
+      }
+      if !self.caCertificate.isEmpty {
+        try container.encode(self.caCertificate, forKey: .caCertificate)
+      }
+      if !self.serverCertificateHostname.isEmpty {
+        try container.encode(self.serverCertificateHostname, forKey: .serverCertificateHostname)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -310,18 +310,32 @@ public struct LogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.logName, forKey: .logName)
+    if !self.logName.isEmpty {
+      try container.encode(self.logName, forKey: .logName)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
     try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
     try container.encodeIfPresent(self.receiveTimestamp, forKey: .receiveTimestamp)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.insertId, forKey: .insertId)
+    if self.severity != GoogleCloudLoggingType.LogSeverity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.insertId.isEmpty {
+      try container.encode(self.insertId, forKey: .insertId)
+    }
     try container.encodeIfPresent(self.httpRequest, forKey: .httpRequest)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.operation, forKey: .operation)
-    try container.encode(self.trace, forKey: .trace)
-    try container.encode(self.spanId, forKey: .spanId)
-    try container.encode(self.traceSampled, forKey: .traceSampled)
+    if !self.trace.isEmpty {
+      try container.encode(self.trace, forKey: .trace)
+    }
+    if !self.spanId.isEmpty {
+      try container.encode(self.spanId, forKey: .spanId)
+    }
+    if self.traceSampled {
+      try container.encode(self.traceSampled, forKey: .traceSampled)
+    }
     try container.encodeIfPresent(self.sourceLocation, forKey: .sourceLocation)
     try container.encodeIfPresent(self.split, forKey: .split)
 

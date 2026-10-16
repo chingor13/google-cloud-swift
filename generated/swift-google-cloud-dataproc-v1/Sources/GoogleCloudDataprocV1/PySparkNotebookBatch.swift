@@ -113,12 +113,24 @@ public struct PySparkNotebookBatch: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.notebookFileUri, forKey: .notebookFileUri)
-    try container.encode(self.params, forKey: .params)
-    try container.encode(self.pythonFileUris, forKey: .pythonFileUris)
-    try container.encode(self.jarFileUris, forKey: .jarFileUris)
-    try container.encode(self.fileUris, forKey: .fileUris)
-    try container.encode(self.archiveUris, forKey: .archiveUris)
+    if !self.notebookFileUri.isEmpty {
+      try container.encode(self.notebookFileUri, forKey: .notebookFileUri)
+    }
+    if !self.params.isEmpty {
+      try container.encode(self.params, forKey: .params)
+    }
+    if !self.pythonFileUris.isEmpty {
+      try container.encode(self.pythonFileUris, forKey: .pythonFileUris)
+    }
+    if !self.jarFileUris.isEmpty {
+      try container.encode(self.jarFileUris, forKey: .jarFileUris)
+    }
+    if !self.fileUris.isEmpty {
+      try container.encode(self.fileUris, forKey: .fileUris)
+    }
+    if !self.archiveUris.isEmpty {
+      try container.encode(self.archiveUris, forKey: .archiveUris)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

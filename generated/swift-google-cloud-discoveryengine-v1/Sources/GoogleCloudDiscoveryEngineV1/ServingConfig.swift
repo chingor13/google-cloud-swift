@@ -358,23 +358,53 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.solutionType, forKey: .solutionType)
-      try container.encode(self.modelId, forKey: .modelId)
-      try container.encode(self.diversityLevel, forKey: .diversityLevel)
-      try container.encode(self.rankingExpression, forKey: .rankingExpression)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.solutionType != SolutionType() {
+        try container.encode(self.solutionType, forKey: .solutionType)
+      }
+      if !self.modelId.isEmpty {
+        try container.encode(self.modelId, forKey: .modelId)
+      }
+      if !self.diversityLevel.isEmpty {
+        try container.encode(self.diversityLevel, forKey: .diversityLevel)
+      }
+      if !self.rankingExpression.isEmpty {
+        try container.encode(self.rankingExpression, forKey: .rankingExpression)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.filterControlIds, forKey: .filterControlIds)
-      try container.encode(self.boostControlIds, forKey: .boostControlIds)
-      try container.encode(self.redirectControlIds, forKey: .redirectControlIds)
-      try container.encode(self.synonymsControlIds, forKey: .synonymsControlIds)
-      try container.encode(self.onewaySynonymsControlIds, forKey: .onewaySynonymsControlIds)
-      try container.encode(self.dissociateControlIds, forKey: .dissociateControlIds)
-      try container.encode(self.replacementControlIds, forKey: .replacementControlIds)
-      try container.encode(self.ignoreControlIds, forKey: .ignoreControlIds)
-      try container.encode(self.promoteControlIds, forKey: .promoteControlIds)
+      if !self.filterControlIds.isEmpty {
+        try container.encode(self.filterControlIds, forKey: .filterControlIds)
+      }
+      if !self.boostControlIds.isEmpty {
+        try container.encode(self.boostControlIds, forKey: .boostControlIds)
+      }
+      if !self.redirectControlIds.isEmpty {
+        try container.encode(self.redirectControlIds, forKey: .redirectControlIds)
+      }
+      if !self.synonymsControlIds.isEmpty {
+        try container.encode(self.synonymsControlIds, forKey: .synonymsControlIds)
+      }
+      if !self.onewaySynonymsControlIds.isEmpty {
+        try container.encode(self.onewaySynonymsControlIds, forKey: .onewaySynonymsControlIds)
+      }
+      if !self.dissociateControlIds.isEmpty {
+        try container.encode(self.dissociateControlIds, forKey: .dissociateControlIds)
+      }
+      if !self.replacementControlIds.isEmpty {
+        try container.encode(self.replacementControlIds, forKey: .replacementControlIds)
+      }
+      if !self.ignoreControlIds.isEmpty {
+        try container.encode(self.ignoreControlIds, forKey: .ignoreControlIds)
+      }
+      if !self.promoteControlIds.isEmpty {
+        try container.encode(self.promoteControlIds, forKey: .promoteControlIds)
+      }
 
       if let choice = self.verticalConfig {
         switch choice {
@@ -528,10 +558,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.demotionEventType, forKey: .demotionEventType)
-        try container.encode(
-          self.demoteContentWatchedPastDays, forKey: .demoteContentWatchedPastDays)
-        try container.encode(self.contentFreshnessCutoffDays, forKey: .contentFreshnessCutoffDays)
+        if !self.demotionEventType.isEmpty {
+          try container.encode(self.demotionEventType, forKey: .demotionEventType)
+        }
+        if self.demoteContentWatchedPastDays != 0 {
+          try container.encode(
+            self.demoteContentWatchedPastDays, forKey: .demoteContentWatchedPastDays)
+        }
+        if self.contentFreshnessCutoffDays != 0 {
+          try container.encode(self.contentFreshnessCutoffDays, forKey: .contentFreshnessCutoffDays)
+        }
 
         if let choice = self.demoteContentWatched {
           switch choice {

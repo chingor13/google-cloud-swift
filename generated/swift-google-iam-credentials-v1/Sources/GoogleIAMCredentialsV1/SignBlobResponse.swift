@@ -76,8 +76,12 @@ public struct SignBlobResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.keyId, forKey: .keyId)
-    try container.encode(self.signedBlob, forKey: .signedBlob)
+    if !self.keyId.isEmpty {
+      try container.encode(self.keyId, forKey: .keyId)
+    }
+    if !self.signedBlob.isEmpty {
+      try container.encode(self.signedBlob, forKey: .signedBlob)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

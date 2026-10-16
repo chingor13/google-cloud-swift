@@ -89,9 +89,15 @@ public struct JobPlacement: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterName, forKey: .clusterName)
-    try container.encode(self.clusterUuid, forKey: .clusterUuid)
-    try container.encode(self.clusterLabels, forKey: .clusterLabels)
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
+    if !self.clusterUuid.isEmpty {
+      try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    }
+    if !self.clusterLabels.isEmpty {
+      try container.encode(self.clusterLabels, forKey: .clusterLabels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

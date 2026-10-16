@@ -87,9 +87,15 @@ public struct AppHubWorkload: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.workload, forKey: .workload)
-    try container.encode(self.criticality, forKey: .criticality)
-    try container.encode(self.environment, forKey: .environment)
+    if !self.workload.isEmpty {
+      try container.encode(self.workload, forKey: .workload)
+    }
+    if !self.criticality.isEmpty {
+      try container.encode(self.criticality, forKey: .criticality)
+    }
+    if !self.environment.isEmpty {
+      try container.encode(self.environment, forKey: .environment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

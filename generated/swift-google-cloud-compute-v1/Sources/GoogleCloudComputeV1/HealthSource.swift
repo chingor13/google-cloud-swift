@@ -179,7 +179,7 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -192,7 +192,9 @@
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
       try container.encodeIfPresent(self.sourceType, forKey: .sourceType)
-      try container.encode(self.sources, forKey: .sources)
+      if !self.sources.isEmpty {
+        try container.encode(self.sources, forKey: .sources)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

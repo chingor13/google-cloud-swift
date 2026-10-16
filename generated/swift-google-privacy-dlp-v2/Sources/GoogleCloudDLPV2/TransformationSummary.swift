@@ -122,10 +122,16 @@ public struct TransformationSummary: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.infoType, forKey: .infoType)
     try container.encodeIfPresent(self.field, forKey: .field)
     try container.encodeIfPresent(self.transformation, forKey: .transformation)
-    try container.encode(self.fieldTransformations, forKey: .fieldTransformations)
+    if !self.fieldTransformations.isEmpty {
+      try container.encode(self.fieldTransformations, forKey: .fieldTransformations)
+    }
     try container.encodeIfPresent(self.recordSuppress, forKey: .recordSuppress)
-    try container.encode(self.results, forKey: .results)
-    try container.encode(self.transformedBytes, forKey: .transformedBytes)
+    if !self.results.isEmpty {
+      try container.encode(self.results, forKey: .results)
+    }
+    if self.transformedBytes != 0 {
+      try container.encode(self.transformedBytes, forKey: .transformedBytes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -204,9 +210,15 @@ public struct TransformationSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.count, forKey: .count)
-      try container.encode(self.code, forKey: .code)
-      try container.encode(self.details, forKey: .details)
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
+      if self.code != TransformationSummary.TransformationResultCode() {
+        try container.encode(self.code, forKey: .code)
+      }
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

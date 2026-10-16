@@ -197,21 +197,41 @@ public struct Container: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.image, forKey: .image)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.image.isEmpty {
+      try container.encode(self.image, forKey: .image)
+    }
     try container.encodeIfPresent(self.sourceCode, forKey: .sourceCode)
-    try container.encode(self.command, forKey: .command)
-    try container.encode(self.args, forKey: .args)
-    try container.encode(self.env, forKey: .env)
+    if !self.command.isEmpty {
+      try container.encode(self.command, forKey: .command)
+    }
+    if !self.args.isEmpty {
+      try container.encode(self.args, forKey: .args)
+    }
+    if !self.env.isEmpty {
+      try container.encode(self.env, forKey: .env)
+    }
     try container.encodeIfPresent(self.resources, forKey: .resources)
-    try container.encode(self.ports, forKey: .ports)
-    try container.encode(self.volumeMounts, forKey: .volumeMounts)
-    try container.encode(self.workingDir, forKey: .workingDir)
+    if !self.ports.isEmpty {
+      try container.encode(self.ports, forKey: .ports)
+    }
+    if !self.volumeMounts.isEmpty {
+      try container.encode(self.volumeMounts, forKey: .volumeMounts)
+    }
+    if !self.workingDir.isEmpty {
+      try container.encode(self.workingDir, forKey: .workingDir)
+    }
     try container.encodeIfPresent(self.livenessProbe, forKey: .livenessProbe)
     try container.encodeIfPresent(self.startupProbe, forKey: .startupProbe)
     try container.encodeIfPresent(self.readinessProbe, forKey: .readinessProbe)
-    try container.encode(self.dependsOn, forKey: .dependsOn)
-    try container.encode(self.baseImageUri, forKey: .baseImageUri)
+    if !self.dependsOn.isEmpty {
+      try container.encode(self.dependsOn, forKey: .dependsOn)
+    }
+    if !self.baseImageUri.isEmpty {
+      try container.encode(self.baseImageUri, forKey: .baseImageUri)
+    }
     try container.encodeIfPresent(self.buildInfo, forKey: .buildInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

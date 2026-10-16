@@ -118,13 +118,27 @@ public struct DataSourceBackupApplianceApplication: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.applicationName, forKey: .applicationName)
-    try container.encode(self.backupAppliance, forKey: .backupAppliance)
-    try container.encode(self.applianceId, forKey: .applianceId)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.applicationId, forKey: .applicationId)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.hostId, forKey: .hostId)
+    if !self.applicationName.isEmpty {
+      try container.encode(self.applicationName, forKey: .applicationName)
+    }
+    if !self.backupAppliance.isEmpty {
+      try container.encode(self.backupAppliance, forKey: .backupAppliance)
+    }
+    if self.applianceId != 0 {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.applicationId != 0 {
+      try container.encode(self.applicationId, forKey: .applicationId)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.hostId != 0 {
+      try container.encode(self.hostId, forKey: .hostId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

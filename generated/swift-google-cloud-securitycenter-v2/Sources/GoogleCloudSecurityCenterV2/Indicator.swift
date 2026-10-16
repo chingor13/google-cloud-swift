@@ -100,10 +100,18 @@ public struct Indicator: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ipAddresses, forKey: .ipAddresses)
-    try container.encode(self.domains, forKey: .domains)
-    try container.encode(self.signatures, forKey: .signatures)
-    try container.encode(self.uris, forKey: .uris)
+    if !self.ipAddresses.isEmpty {
+      try container.encode(self.ipAddresses, forKey: .ipAddresses)
+    }
+    if !self.domains.isEmpty {
+      try container.encode(self.domains, forKey: .domains)
+    }
+    if !self.signatures.isEmpty {
+      try container.encode(self.signatures, forKey: .signatures)
+    }
+    if !self.uris.isEmpty {
+      try container.encode(self.uris, forKey: .uris)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -193,7 +201,9 @@ public struct Indicator: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.signatureType, forKey: .signatureType)
+      if self.signatureType != Indicator.ProcessSignature.SignatureType() {
+        try container.encode(self.signatureType, forKey: .signatureType)
+      }
 
       if let choice = self.signature {
         switch choice {
@@ -271,8 +281,12 @@ public struct Indicator: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.binaryFamily, forKey: .binaryFamily)
-        try container.encode(self.detections, forKey: .detections)
+        if !self.binaryFamily.isEmpty {
+          try container.encode(self.binaryFamily, forKey: .binaryFamily)
+        }
+        if !self.detections.isEmpty {
+          try container.encode(self.detections, forKey: .detections)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -342,8 +356,12 @@ public struct Indicator: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.binary, forKey: .binary)
-          try container.encode(self.percentPagesMatched, forKey: .percentPagesMatched)
+          if !self.binary.isEmpty {
+            try container.encode(self.binary, forKey: .binary)
+          }
+          if self.percentPagesMatched != 0 {
+            try container.encode(self.percentPagesMatched, forKey: .percentPagesMatched)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -447,7 +465,9 @@ public struct Indicator: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.yaraRule, forKey: .yaraRule)
+        if !self.yaraRule.isEmpty {
+          try container.encode(self.yaraRule, forKey: .yaraRule)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

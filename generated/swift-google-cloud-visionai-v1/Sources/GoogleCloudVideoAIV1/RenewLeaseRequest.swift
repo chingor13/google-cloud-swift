@@ -91,9 +91,15 @@ public struct RenewLeaseRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.series, forKey: .series)
-    try container.encode(self.owner, forKey: .owner)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.series.isEmpty {
+      try container.encode(self.series, forKey: .series)
+    }
+    if !self.owner.isEmpty {
+      try container.encode(self.owner, forKey: .owner)
+    }
     try container.encodeIfPresent(self.term, forKey: .term)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

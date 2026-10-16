@@ -84,8 +84,12 @@ public struct ListFrameworkComplianceSummariesResponse: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.frameworkComplianceSummaries, forKey: .frameworkComplianceSummaries)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.frameworkComplianceSummaries.isEmpty {
+      try container.encode(self.frameworkComplianceSummaries, forKey: .frameworkComplianceSummaries)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

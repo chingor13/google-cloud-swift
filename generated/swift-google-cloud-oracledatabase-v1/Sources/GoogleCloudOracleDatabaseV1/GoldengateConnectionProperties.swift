@@ -411,15 +411,31 @@ public struct GoldengateConnectionProperties: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.connectionType, forKey: .connectionType)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.lifecycleState, forKey: .lifecycleState)
-    try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
+    if self.connectionType != GoldengateConnectionProperties.GoldengateConnectionType() {
+      try container.encode(self.connectionType, forKey: .connectionType)
+    }
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.lifecycleState != GoldengateConnectionProperties.GoldengateConnectionLifecycleState() {
+      try container.encode(self.lifecycleState, forKey: .lifecycleState)
+    }
+    if !self.lifecycleDetails.isEmpty {
+      try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.routingMethod, forKey: .routingMethod)
-    try container.encode(self.ingressIpAddresses, forKey: .ingressIpAddresses)
+    if self.routingMethod != GoldengateConnectionProperties.GoldengateConnectionRoutingMethod() {
+      try container.encode(self.routingMethod, forKey: .routingMethod)
+    }
+    if !self.ingressIpAddresses.isEmpty {
+      try container.encode(self.ingressIpAddresses, forKey: .ingressIpAddresses)
+    }
 
     if let choice = self.connectionDetails {
       switch choice {

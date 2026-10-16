@@ -307,36 +307,76 @@ public struct TableDataProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.dataSourceType, forKey: .dataSourceType)
-    try container.encode(self.projectDataProfile, forKey: .projectDataProfile)
-    try container.encode(self.datasetProjectId, forKey: .datasetProjectId)
-    try container.encode(self.datasetLocation, forKey: .datasetLocation)
-    try container.encode(self.datasetId, forKey: .datasetId)
-    try container.encode(self.tableId, forKey: .tableId)
-    try container.encode(self.fullResource, forKey: .fullResource)
+    if !self.projectDataProfile.isEmpty {
+      try container.encode(self.projectDataProfile, forKey: .projectDataProfile)
+    }
+    if !self.datasetProjectId.isEmpty {
+      try container.encode(self.datasetProjectId, forKey: .datasetProjectId)
+    }
+    if !self.datasetLocation.isEmpty {
+      try container.encode(self.datasetLocation, forKey: .datasetLocation)
+    }
+    if !self.datasetId.isEmpty {
+      try container.encode(self.datasetId, forKey: .datasetId)
+    }
+    if !self.tableId.isEmpty {
+      try container.encode(self.tableId, forKey: .tableId)
+    }
+    if !self.fullResource.isEmpty {
+      try container.encode(self.fullResource, forKey: .fullResource)
+    }
     try container.encodeIfPresent(self.profileStatus, forKey: .profileStatus)
-    try container.encode(self.state, forKey: .state)
+    if self.state != TableDataProfile.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.sensitivityScore, forKey: .sensitivityScore)
     try container.encodeIfPresent(self.dataRiskLevel, forKey: .dataRiskLevel)
-    try container.encode(self.predictedInfoTypes, forKey: .predictedInfoTypes)
-    try container.encode(self.otherInfoTypes, forKey: .otherInfoTypes)
+    if !self.predictedInfoTypes.isEmpty {
+      try container.encode(self.predictedInfoTypes, forKey: .predictedInfoTypes)
+    }
+    if !self.otherInfoTypes.isEmpty {
+      try container.encode(self.otherInfoTypes, forKey: .otherInfoTypes)
+    }
     try container.encodeIfPresent(self.configSnapshot, forKey: .configSnapshot)
     try container.encodeIfPresent(self.lastModifiedTime, forKey: .lastModifiedTime)
     try container.encodeIfPresent(self.expirationTime, forKey: .expirationTime)
-    try container.encode(self.scannedColumnCount, forKey: .scannedColumnCount)
-    try container.encode(self.failedColumnCount, forKey: .failedColumnCount)
-    try container.encode(self.tableSizeBytes, forKey: .tableSizeBytes)
-    try container.encode(self.rowCount, forKey: .rowCount)
-    try container.encode(self.encryptionStatus, forKey: .encryptionStatus)
-    try container.encode(self.resourceVisibility, forKey: .resourceVisibility)
+    if self.scannedColumnCount != 0 {
+      try container.encode(self.scannedColumnCount, forKey: .scannedColumnCount)
+    }
+    if self.failedColumnCount != 0 {
+      try container.encode(self.failedColumnCount, forKey: .failedColumnCount)
+    }
+    if self.tableSizeBytes != 0 {
+      try container.encode(self.tableSizeBytes, forKey: .tableSizeBytes)
+    }
+    if self.rowCount != 0 {
+      try container.encode(self.rowCount, forKey: .rowCount)
+    }
+    if self.encryptionStatus != EncryptionStatus() {
+      try container.encode(self.encryptionStatus, forKey: .encryptionStatus)
+    }
+    if self.resourceVisibility != ResourceVisibility() {
+      try container.encode(self.resourceVisibility, forKey: .resourceVisibility)
+    }
     try container.encodeIfPresent(self.profileLastGenerated, forKey: .profileLastGenerated)
-    try container.encode(self.resourceLabels, forKey: .resourceLabels)
+    if !self.resourceLabels.isEmpty {
+      try container.encode(self.resourceLabels, forKey: .resourceLabels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.sampleFindingsTable, forKey: .sampleFindingsTable)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.relatedResources, forKey: .relatedResources)
-    try container.encode(self.domains, forKey: .domains)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.relatedResources.isEmpty {
+      try container.encode(self.relatedResources, forKey: .relatedResources)
+    }
+    if !self.domains.isEmpty {
+      try container.encode(self.domains, forKey: .domains)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

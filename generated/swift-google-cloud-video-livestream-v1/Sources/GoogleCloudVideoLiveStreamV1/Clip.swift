@@ -163,17 +163,31 @@ public struct Clip: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.outputUri, forKey: .outputUri)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Clip.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.outputUri.isEmpty {
+      try container.encode(self.outputUri, forKey: .outputUri)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.slices, forKey: .slices)
-    try container.encode(self.clipManifests, forKey: .clipManifests)
-    try container.encode(self.outputType, forKey: .outputType)
+    if !self.slices.isEmpty {
+      try container.encode(self.slices, forKey: .slices)
+    }
+    if !self.clipManifests.isEmpty {
+      try container.encode(self.clipManifests, forKey: .clipManifests)
+    }
+    if self.outputType != Clip.OutputType() {
+      try container.encode(self.outputType, forKey: .outputType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -438,8 +452,12 @@ public struct Clip: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.manifestKey, forKey: .manifestKey)
-      try container.encode(self.outputUri, forKey: .outputUri)
+      if !self.manifestKey.isEmpty {
+        try container.encode(self.manifestKey, forKey: .manifestKey)
+      }
+      if !self.outputUri.isEmpty {
+        try container.encode(self.outputUri, forKey: .outputUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

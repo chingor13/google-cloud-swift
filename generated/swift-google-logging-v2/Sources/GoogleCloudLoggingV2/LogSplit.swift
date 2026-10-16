@@ -91,9 +91,15 @@ public struct LogSplit: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.index, forKey: .index)
-    try container.encode(self.totalSplits, forKey: .totalSplits)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.index != 0 {
+      try container.encode(self.index, forKey: .index)
+    }
+    if self.totalSplits != 0 {
+      try container.encode(self.totalSplits, forKey: .totalSplits)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

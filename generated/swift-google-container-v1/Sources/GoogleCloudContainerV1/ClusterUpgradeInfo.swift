@@ -128,9 +128,15 @@ public struct ClusterUpgradeInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.minorTargetVersion, forKey: .minorTargetVersion)
     try container.encodeIfPresent(self.patchTargetVersion, forKey: .patchTargetVersion)
-    try container.encode(self.autoUpgradeStatus, forKey: .autoUpgradeStatus)
-    try container.encode(self.pausedReason, forKey: .pausedReason)
-    try container.encode(self.upgradeDetails, forKey: .upgradeDetails)
+    if !self.autoUpgradeStatus.isEmpty {
+      try container.encode(self.autoUpgradeStatus, forKey: .autoUpgradeStatus)
+    }
+    if !self.pausedReason.isEmpty {
+      try container.encode(self.pausedReason, forKey: .pausedReason)
+    }
+    if !self.upgradeDetails.isEmpty {
+      try container.encode(self.upgradeDetails, forKey: .upgradeDetails)
+    }
     try container.encodeIfPresent(
       self.endOfStandardSupportTimestamp, forKey: .endOfStandardSupportTimestamp)
     try container.encodeIfPresent(

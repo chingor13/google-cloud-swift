@@ -220,8 +220,12 @@ public struct TransferSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.objectConditions, forKey: .objectConditions)
     try container.encodeIfPresent(self.transferOptions, forKey: .transferOptions)
     try container.encodeIfPresent(self.transferManifest, forKey: .transferManifest)
-    try container.encode(self.sourceAgentPoolName, forKey: .sourceAgentPoolName)
-    try container.encode(self.sinkAgentPoolName, forKey: .sinkAgentPoolName)
+    if !self.sourceAgentPoolName.isEmpty {
+      try container.encode(self.sourceAgentPoolName, forKey: .sourceAgentPoolName)
+    }
+    if !self.sinkAgentPoolName.isEmpty {
+      try container.encode(self.sinkAgentPoolName, forKey: .sinkAgentPoolName)
+    }
 
     if let choice = self.dataSink {
       switch choice {

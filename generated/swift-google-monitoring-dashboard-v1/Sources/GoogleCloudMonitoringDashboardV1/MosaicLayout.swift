@@ -80,8 +80,12 @@ public struct MosaicLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.columns, forKey: .columns)
-    try container.encode(self.tiles, forKey: .tiles)
+    if self.columns != 0 {
+      try container.encode(self.columns, forKey: .columns)
+    }
+    if !self.tiles.isEmpty {
+      try container.encode(self.tiles, forKey: .tiles)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -175,10 +179,18 @@ public struct MosaicLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.xPos, forKey: .xPos)
-      try container.encode(self.yPos, forKey: .yPos)
-      try container.encode(self.width, forKey: .width)
-      try container.encode(self.height, forKey: .height)
+      if self.xPos != 0 {
+        try container.encode(self.xPos, forKey: .xPos)
+      }
+      if self.yPos != 0 {
+        try container.encode(self.yPos, forKey: .yPos)
+      }
+      if self.width != 0 {
+        try container.encode(self.width, forKey: .width)
+      }
+      if self.height != 0 {
+        try container.encode(self.height, forKey: .height)
+      }
       try container.encodeIfPresent(self.widget, forKey: .widget)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -110,9 +110,15 @@ public struct StorageLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.locationType, forKey: .locationType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.locationType.isEmpty {
+      try container.encode(self.locationType, forKey: .locationType)
+    }
     try container.encodeIfPresent(self.customPlacementConfig, forKey: .customPlacementConfig)
     try container.encodeIfPresent(self.hierarchicalNamespace, forKey: .hierarchicalNamespace)
     try container.encodeIfPresent(self.rapidCacheInfo, forKey: .rapidCacheInfo)
@@ -175,7 +181,9 @@ public struct StorageLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataLocations, forKey: .dataLocations)
+      if !self.dataLocations.isEmpty {
+        try container.encode(self.dataLocations, forKey: .dataLocations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -255,7 +263,9 @@ public struct StorageLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -336,7 +346,9 @@ public struct StorageLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cacheType, forKey: .cacheType)
+      if !self.cacheType.isEmpty {
+        try container.encode(self.cacheType, forKey: .cacheType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -172,18 +172,41 @@ public struct GoldengateDeploymentEnvironment: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.defaultCpuCoreCount, forKey: .defaultCpuCoreCount)
-    try container.encode(self.environmentType, forKey: .environmentType)
-    try container.encode(self.autoScalingEnabled, forKey: .autoScalingEnabled)
-    try container.encode(self.maxCpuCoreCount, forKey: .maxCpuCoreCount)
-    try container.encode(self.memoryGbPerCpuCore, forKey: .memoryGbPerCpuCore)
-    try container.encode(self.minCpuCoreCount, forKey: .minCpuCoreCount)
-    try container.encode(
-      self.networkBandwidthGbpsPerCpuCore, forKey: .networkBandwidthGbpsPerCpuCore)
-    try container.encode(self.storageUsageLimitGbPerCpuCore, forKey: .storageUsageLimitGbPerCpuCore)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.category != GoldengateDeploymentEnvironment.DeploymentCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.defaultCpuCoreCount != 0 {
+      try container.encode(self.defaultCpuCoreCount, forKey: .defaultCpuCoreCount)
+    }
+    if self.environmentType != GoldengateDeploymentEnvironment.DeploymentEnvironmentType() {
+      try container.encode(self.environmentType, forKey: .environmentType)
+    }
+    if self.autoScalingEnabled {
+      try container.encode(self.autoScalingEnabled, forKey: .autoScalingEnabled)
+    }
+    if self.maxCpuCoreCount != 0 {
+      try container.encode(self.maxCpuCoreCount, forKey: .maxCpuCoreCount)
+    }
+    if self.memoryGbPerCpuCore != 0 {
+      try container.encode(self.memoryGbPerCpuCore, forKey: .memoryGbPerCpuCore)
+    }
+    if self.minCpuCoreCount != 0 {
+      try container.encode(self.minCpuCoreCount, forKey: .minCpuCoreCount)
+    }
+    if self.networkBandwidthGbpsPerCpuCore != 0 {
+      try container.encode(
+        self.networkBandwidthGbpsPerCpuCore, forKey: .networkBandwidthGbpsPerCpuCore)
+    }
+    if self.storageUsageLimitGbPerCpuCore != 0 {
+      try container.encode(
+        self.storageUsageLimitGbPerCpuCore, forKey: .storageUsageLimitGbPerCpuCore)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

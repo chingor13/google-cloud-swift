@@ -182,9 +182,15 @@ public struct NetworkInterface: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.ipv6Address, forKey: .ipv6Address)
     try container.encodeIfPresent(self.internalIpv6PrefixLength, forKey: .internalIpv6PrefixLength)
     try container.encodeIfPresent(self.name, forKey: .name)
-    try container.encode(self.accessConfigs, forKey: .accessConfigs)
-    try container.encode(self.ipv6AccessConfigs, forKey: .ipv6AccessConfigs)
-    try container.encode(self.aliasIpRanges, forKey: .aliasIpRanges)
+    if !self.accessConfigs.isEmpty {
+      try container.encode(self.accessConfigs, forKey: .accessConfigs)
+    }
+    if !self.ipv6AccessConfigs.isEmpty {
+      try container.encode(self.ipv6AccessConfigs, forKey: .ipv6AccessConfigs)
+    }
+    if !self.aliasIpRanges.isEmpty {
+      try container.encode(self.aliasIpRanges, forKey: .aliasIpRanges)
+    }
     try container.encodeIfPresent(self.stackType, forKey: .stackType)
     try container.encodeIfPresent(self.ipv6AccessType, forKey: .ipv6AccessType)
     try container.encodeIfPresent(self.queueCount, forKey: .queueCount)

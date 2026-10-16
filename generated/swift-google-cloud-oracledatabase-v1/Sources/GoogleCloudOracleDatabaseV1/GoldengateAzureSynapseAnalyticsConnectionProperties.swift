@@ -117,9 +117,15 @@ public struct GoldengateAzureSynapseAnalyticsConnectionProperties: Codable, Equa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.connectionString, forKey: .connectionString)
-    try container.encode(self.username, forKey: .username)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.connectionString.isEmpty {
+      try container.encode(self.connectionString, forKey: .connectionString)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

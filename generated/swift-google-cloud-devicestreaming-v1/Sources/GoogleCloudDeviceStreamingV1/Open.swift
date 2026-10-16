@@ -78,8 +78,12 @@ public struct Open: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.streamId, forKey: .streamId)
-    try container.encode(self.service, forKey: .service)
+    if self.streamId != 0 {
+      try container.encode(self.streamId, forKey: .streamId)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

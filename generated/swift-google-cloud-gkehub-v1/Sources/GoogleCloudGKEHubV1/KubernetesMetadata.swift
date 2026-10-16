@@ -118,11 +118,21 @@ public struct KubernetesMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kubernetesApiServerVersion, forKey: .kubernetesApiServerVersion)
-    try container.encode(self.nodeProviderId, forKey: .nodeProviderId)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
-    try container.encode(self.vcpuCount, forKey: .vcpuCount)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
+    if !self.kubernetesApiServerVersion.isEmpty {
+      try container.encode(self.kubernetesApiServerVersion, forKey: .kubernetesApiServerVersion)
+    }
+    if !self.nodeProviderId.isEmpty {
+      try container.encode(self.nodeProviderId, forKey: .nodeProviderId)
+    }
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
+    if self.vcpuCount != 0 {
+      try container.encode(self.vcpuCount, forKey: .vcpuCount)
+    }
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

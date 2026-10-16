@@ -98,9 +98,13 @@ public struct ManagedCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterName, forKey: .clusterName)
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

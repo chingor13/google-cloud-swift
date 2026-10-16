@@ -69,7 +69,9 @@ public struct ImageLocation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.boundingBoxes, forKey: .boundingBoxes)
+    if !self.boundingBoxes.isEmpty {
+      try container.encode(self.boundingBoxes, forKey: .boundingBoxes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

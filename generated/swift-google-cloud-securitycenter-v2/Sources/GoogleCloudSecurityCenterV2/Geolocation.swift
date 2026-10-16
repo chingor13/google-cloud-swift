@@ -69,7 +69,9 @@ public struct Geolocation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.regionCode, forKey: .regionCode)
+    if !self.regionCode.isEmpty {
+      try container.encode(self.regionCode, forKey: .regionCode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

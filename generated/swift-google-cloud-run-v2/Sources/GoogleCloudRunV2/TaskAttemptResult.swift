@@ -94,8 +94,12 @@ public struct TaskAttemptResult: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.exitCode, forKey: .exitCode)
-    try container.encode(self.termSignal, forKey: .termSignal)
+    if self.exitCode != 0 {
+      try container.encode(self.exitCode, forKey: .exitCode)
+    }
+    if self.termSignal != 0 {
+      try container.encode(self.termSignal, forKey: .termSignal)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

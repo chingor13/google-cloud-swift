@@ -212,20 +212,44 @@ public struct Application: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.dispatchRules, forKey: .dispatchRules)
-    try container.encode(self.authDomain, forKey: .authDomain)
-    try container.encode(self.locationId, forKey: .locationId)
-    try container.encode(self.codeBucket, forKey: .codeBucket)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.dispatchRules.isEmpty {
+      try container.encode(self.dispatchRules, forKey: .dispatchRules)
+    }
+    if !self.authDomain.isEmpty {
+      try container.encode(self.authDomain, forKey: .authDomain)
+    }
+    if !self.locationId.isEmpty {
+      try container.encode(self.locationId, forKey: .locationId)
+    }
+    if !self.codeBucket.isEmpty {
+      try container.encode(self.codeBucket, forKey: .codeBucket)
+    }
     try container.encodeIfPresent(self.defaultCookieExpiration, forKey: .defaultCookieExpiration)
-    try container.encode(self.servingStatus, forKey: .servingStatus)
-    try container.encode(self.defaultHostname, forKey: .defaultHostname)
-    try container.encode(self.defaultBucket, forKey: .defaultBucket)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if self.servingStatus != Application.ServingStatus() {
+      try container.encode(self.servingStatus, forKey: .servingStatus)
+    }
+    if !self.defaultHostname.isEmpty {
+      try container.encode(self.defaultHostname, forKey: .defaultHostname)
+    }
+    if !self.defaultBucket.isEmpty {
+      try container.encode(self.defaultBucket, forKey: .defaultBucket)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.iap, forKey: .iap)
-    try container.encode(self.gcrDomain, forKey: .gcrDomain)
-    try container.encode(self.databaseType, forKey: .databaseType)
+    if !self.gcrDomain.isEmpty {
+      try container.encode(self.gcrDomain, forKey: .gcrDomain)
+    }
+    if self.databaseType != Application.DatabaseType() {
+      try container.encode(self.databaseType, forKey: .databaseType)
+    }
     try container.encodeIfPresent(self.featureSettings, forKey: .featureSettings)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -322,10 +346,18 @@ public struct Application: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
-      try container.encode(self.oauth2ClientId, forKey: .oauth2ClientId)
-      try container.encode(self.oauth2ClientSecret, forKey: .oauth2ClientSecret)
-      try container.encode(self.oauth2ClientSecretSha256, forKey: .oauth2ClientSecretSha256)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
+      if !self.oauth2ClientId.isEmpty {
+        try container.encode(self.oauth2ClientId, forKey: .oauth2ClientId)
+      }
+      if !self.oauth2ClientSecret.isEmpty {
+        try container.encode(self.oauth2ClientSecret, forKey: .oauth2ClientSecret)
+      }
+      if !self.oauth2ClientSecretSha256.isEmpty {
+        try container.encode(self.oauth2ClientSecretSha256, forKey: .oauth2ClientSecretSha256)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -422,8 +454,12 @@ public struct Application: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.splitHealthChecks, forKey: .splitHealthChecks)
-      try container.encode(self.useContainerOptimizedOs, forKey: .useContainerOptimizedOs)
+      if self.splitHealthChecks {
+        try container.encode(self.splitHealthChecks, forKey: .splitHealthChecks)
+      }
+      if self.useContainerOptimizedOs {
+        try container.encode(self.useContainerOptimizedOs, forKey: .useContainerOptimizedOs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

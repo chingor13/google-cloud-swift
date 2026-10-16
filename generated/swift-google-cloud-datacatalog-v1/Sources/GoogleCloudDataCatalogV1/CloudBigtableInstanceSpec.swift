@@ -73,7 +73,9 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudBigtableClusterSpecs, forKey: .cloudBigtableClusterSpecs)
+    if !self.cloudBigtableClusterSpecs.isEmpty {
+      try container.encode(self.cloudBigtableClusterSpecs, forKey: .cloudBigtableClusterSpecs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -155,10 +157,18 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.linkedResource, forKey: .linkedResource)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.linkedResource.isEmpty {
+        try container.encode(self.linkedResource, forKey: .linkedResource)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

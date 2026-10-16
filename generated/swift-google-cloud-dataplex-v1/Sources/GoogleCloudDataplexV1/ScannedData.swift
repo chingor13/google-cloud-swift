@@ -164,9 +164,15 @@ public struct ScannedData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.field, forKey: .field)
-      try container.encode(self.start, forKey: .start)
-      try container.encode(self.end, forKey: .end)
+      if !self.field.isEmpty {
+        try container.encode(self.field, forKey: .field)
+      }
+      if !self.start.isEmpty {
+        try container.encode(self.start, forKey: .start)
+      }
+      if !self.end.isEmpty {
+        try container.encode(self.end, forKey: .end)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -100,10 +100,16 @@ public struct CreateMigrationJobRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.migrationJobId, forKey: .migrationJobId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.migrationJobId.isEmpty {
+      try container.encode(self.migrationJobId, forKey: .migrationJobId)
+    }
     try container.encodeIfPresent(self.migrationJob, forKey: .migrationJob)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

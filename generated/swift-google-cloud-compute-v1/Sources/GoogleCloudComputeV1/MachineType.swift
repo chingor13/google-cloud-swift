@@ -186,7 +186,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accelerators, forKey: .accelerators)
+      if !self.accelerators.isEmpty {
+        try container.encode(self.accelerators, forKey: .accelerators)
+      }
       try container.encodeIfPresent(self.architecture, forKey: .architecture)
       try container.encodeIfPresent(self.bundledLocalSsds, forKey: .bundledLocalSsds)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)

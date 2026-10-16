@@ -90,9 +90,15 @@ public struct AptSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.excludes, forKey: .excludes)
-    try container.encode(self.exclusivePackages, forKey: .exclusivePackages)
+    if self.type != AptSettings.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.excludes.isEmpty {
+      try container.encode(self.excludes, forKey: .excludes)
+    }
+    if !self.exclusivePackages.isEmpty {
+      try container.encode(self.exclusivePackages, forKey: .exclusivePackages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

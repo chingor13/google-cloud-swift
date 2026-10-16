@@ -154,17 +154,35 @@ public struct Subnet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.ipv4Cidr, forKey: .ipv4Cidr)
-    try container.encode(self.ipv6Cidr, forKey: .ipv6Cidr)
-    try container.encode(self.vlanId, forKey: .vlanId)
-    try container.encode(self.bondingType, forKey: .bondingType)
-    try container.encode(self.state, forKey: .state)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.ipv4Cidr.isEmpty {
+      try container.encode(self.ipv4Cidr, forKey: .ipv4Cidr)
+    }
+    if !self.ipv6Cidr.isEmpty {
+      try container.encode(self.ipv6Cidr, forKey: .ipv6Cidr)
+    }
+    if self.vlanId != 0 {
+      try container.encode(self.vlanId, forKey: .vlanId)
+    }
+    if self.bondingType != Subnet.BondingType() {
+      try container.encode(self.bondingType, forKey: .bondingType)
+    }
+    if self.state != ResourceState() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

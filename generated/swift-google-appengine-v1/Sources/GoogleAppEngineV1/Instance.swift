@@ -210,23 +210,55 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.appEngineRelease, forKey: .appEngineRelease)
-    try container.encode(self.availability, forKey: .availability)
-    try container.encode(self.vmName, forKey: .vmName)
-    try container.encode(self.vmZoneName, forKey: .vmZoneName)
-    try container.encode(self.vmId, forKey: .vmId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.appEngineRelease.isEmpty {
+      try container.encode(self.appEngineRelease, forKey: .appEngineRelease)
+    }
+    if self.availability != Instance.Availability() {
+      try container.encode(self.availability, forKey: .availability)
+    }
+    if !self.vmName.isEmpty {
+      try container.encode(self.vmName, forKey: .vmName)
+    }
+    if !self.vmZoneName.isEmpty {
+      try container.encode(self.vmZoneName, forKey: .vmZoneName)
+    }
+    if !self.vmId.isEmpty {
+      try container.encode(self.vmId, forKey: .vmId)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
-    try container.encode(self.requests, forKey: .requests)
-    try container.encode(self.errors, forKey: .errors)
-    try container.encode(self.qps, forKey: .qps)
-    try container.encode(self.averageLatency, forKey: .averageLatency)
-    try container.encode(self.memoryUsage, forKey: .memoryUsage)
-    try container.encode(self.vmStatus, forKey: .vmStatus)
-    try container.encode(self.vmDebugEnabled, forKey: .vmDebugEnabled)
-    try container.encode(self.vmIp, forKey: .vmIp)
-    try container.encode(self.vmLiveness, forKey: .vmLiveness)
+    if self.requests != 0 {
+      try container.encode(self.requests, forKey: .requests)
+    }
+    if self.errors != 0 {
+      try container.encode(self.errors, forKey: .errors)
+    }
+    if self.qps != 0 {
+      try container.encode(self.qps, forKey: .qps)
+    }
+    if self.averageLatency != 0 {
+      try container.encode(self.averageLatency, forKey: .averageLatency)
+    }
+    if self.memoryUsage != 0 {
+      try container.encode(self.memoryUsage, forKey: .memoryUsage)
+    }
+    if !self.vmStatus.isEmpty {
+      try container.encode(self.vmStatus, forKey: .vmStatus)
+    }
+    if self.vmDebugEnabled {
+      try container.encode(self.vmDebugEnabled, forKey: .vmDebugEnabled)
+    }
+    if !self.vmIp.isEmpty {
+      try container.encode(self.vmIp, forKey: .vmIp)
+    }
+    if self.vmLiveness != Instance.Liveness.LivenessState() {
+      try container.encode(self.vmLiveness, forKey: .vmLiveness)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

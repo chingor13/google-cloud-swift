@@ -90,7 +90,9 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleWKT
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.segmentStartTime, forKey: .segmentStartTime)
     try container.encodeIfPresent(self.segmentEndTime, forKey: .segmentEndTime)
-    try container.encode(self.objects, forKey: .objects)
+    if !self.objects.isEmpty {
+      try container.encode(self.objects, forKey: .objects)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -174,10 +176,18 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleWKT
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.xMin, forKey: .xMin)
-      try container.encode(self.xMax, forKey: .xMax)
-      try container.encode(self.yMin, forKey: .yMin)
-      try container.encode(self.yMax, forKey: .yMax)
+      if self.xMin != 0 {
+        try container.encode(self.xMin, forKey: .xMin)
+      }
+      if self.xMax != 0 {
+        try container.encode(self.xMax, forKey: .xMax)
+      }
+      if self.yMin != 0 {
+        try container.encode(self.yMin, forKey: .yMin)
+      }
+      if self.yMax != 0 {
+        try container.encode(self.yMax, forKey: .yMax)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -295,11 +305,19 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleWKT
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.boundingBox, forKey: .boundingBox)
-      try container.encode(self.confidence, forKey: .confidence)
-      try container.encode(self.trackId, forKey: .trackId)
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
+      if self.trackId != 0 {
+        try container.encode(self.trackId, forKey: .trackId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

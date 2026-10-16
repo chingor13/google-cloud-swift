@@ -276,7 +276,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.metricResults, forKey: .metricResults)
+      if !self.metricResults.isEmpty {
+        try container.encode(self.metricResults, forKey: .metricResults)
+      }
 
       if let choice = self.evaluationResults {
         switch choice {

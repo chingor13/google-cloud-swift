@@ -164,11 +164,15 @@ public struct RetryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.retryCount, forKey: .retryCount)
+    if self.retryCount != 0 {
+      try container.encode(self.retryCount, forKey: .retryCount)
+    }
     try container.encodeIfPresent(self.maxRetryDuration, forKey: .maxRetryDuration)
     try container.encodeIfPresent(self.minBackoffDuration, forKey: .minBackoffDuration)
     try container.encodeIfPresent(self.maxBackoffDuration, forKey: .maxBackoffDuration)
-    try container.encode(self.maxDoublings, forKey: .maxDoublings)
+    if self.maxDoublings != 0 {
+      try container.encode(self.maxDoublings, forKey: .maxDoublings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

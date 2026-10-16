@@ -486,20 +486,40 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.settingsVersion, forKey: .settingsVersion)
-      try container.encode(self.authorizedGaeApplications, forKey: .authorizedGaeApplications)
-      try container.encode(self.tier, forKey: .tier)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.userLabels, forKey: .userLabels)
-      try container.encode(self.availabilityType, forKey: .availabilityType)
-      try container.encode(self.pricingPlan, forKey: .pricingPlan)
-      try container.encode(self.replicationType, forKey: .replicationType)
+      if !self.authorizedGaeApplications.isEmpty {
+        try container.encode(self.authorizedGaeApplications, forKey: .authorizedGaeApplications)
+      }
+      if !self.tier.isEmpty {
+        try container.encode(self.tier, forKey: .tier)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.userLabels.isEmpty {
+        try container.encode(self.userLabels, forKey: .userLabels)
+      }
+      if self.availabilityType != SqlAvailabilityType() {
+        try container.encode(self.availabilityType, forKey: .availabilityType)
+      }
+      if self.pricingPlan != SqlPricingPlan() {
+        try container.encode(self.pricingPlan, forKey: .pricingPlan)
+      }
+      if self.replicationType != SqlReplicationType() {
+        try container.encode(self.replicationType, forKey: .replicationType)
+      }
       try container.encodeIfPresent(self.storageAutoResizeLimit, forKey: .storageAutoResizeLimit)
-      try container.encode(self.activationPolicy, forKey: .activationPolicy)
+      if self.activationPolicy != Settings.SqlActivationPolicy() {
+        try container.encode(self.activationPolicy, forKey: .activationPolicy)
+      }
       try container.encodeIfPresent(self.ipConfiguration, forKey: .ipConfiguration)
       try container.encodeIfPresent(self.storageAutoResize, forKey: .storageAutoResize)
       try container.encodeIfPresent(self.locationPreference, forKey: .locationPreference)
-      try container.encode(self.databaseFlags, forKey: .databaseFlags)
-      try container.encode(self.dataDiskType, forKey: .dataDiskType)
+      if !self.databaseFlags.isEmpty {
+        try container.encode(self.databaseFlags, forKey: .databaseFlags)
+      }
+      if self.dataDiskType != SqlDataDiskType() {
+        try container.encode(self.dataDiskType, forKey: .dataDiskType)
+      }
       try container.encodeIfPresent(self.maintenanceWindow, forKey: .maintenanceWindow)
       try container.encodeIfPresent(self.backupConfiguration, forKey: .backupConfiguration)
       try container.encodeIfPresent(
@@ -508,17 +528,27 @@
         self.crashSafeReplicationEnabled, forKey: .crashSafeReplicationEnabled)
       try container.encodeIfPresent(self.dataDiskSizeGb, forKey: .dataDiskSizeGb)
       try container.encodeIfPresent(self.activeDirectoryConfig, forKey: .activeDirectoryConfig)
-      try container.encode(self.collation, forKey: .collation)
-      try container.encode(self.denyMaintenancePeriods, forKey: .denyMaintenancePeriods)
+      if !self.collation.isEmpty {
+        try container.encode(self.collation, forKey: .collation)
+      }
+      if !self.denyMaintenancePeriods.isEmpty {
+        try container.encode(self.denyMaintenancePeriods, forKey: .denyMaintenancePeriods)
+      }
       try container.encodeIfPresent(self.insightsConfig, forKey: .insightsConfig)
       try container.encodeIfPresent(
         self.passwordValidationPolicy, forKey: .passwordValidationPolicy)
       try container.encodeIfPresent(self.sqlServerAuditConfig, forKey: .sqlServerAuditConfig)
-      try container.encode(self.edition, forKey: .edition)
-      try container.encode(self.connectorEnforcement, forKey: .connectorEnforcement)
+      if self.edition != Settings.Edition() {
+        try container.encode(self.edition, forKey: .edition)
+      }
+      if self.connectorEnforcement != Settings.ConnectorEnforcement() {
+        try container.encode(self.connectorEnforcement, forKey: .connectorEnforcement)
+      }
       try container.encodeIfPresent(
         self.deletionProtectionEnabled, forKey: .deletionProtectionEnabled)
-      try container.encode(self.timeZone, forKey: .timeZone)
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
       try container.encodeIfPresent(self.advancedMachineFeatures, forKey: .advancedMachineFeatures)
       try container.encodeIfPresent(self.dataCacheConfig, forKey: .dataCacheConfig)
       try container.encodeIfPresent(

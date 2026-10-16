@@ -194,15 +194,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accelerators, forKey: .accelerators)
+      if !self.accelerators.isEmpty {
+        try container.encode(self.accelerators, forKey: .accelerators)
+      }
       try container.encodeIfPresent(self.cpuOvercommitType, forKey: .cpuOvercommitType)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.disks, forKey: .disks)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.nodeAffinityLabels, forKey: .nodeAffinityLabels)
+      if !self.nodeAffinityLabels.isEmpty {
+        try container.encode(self.nodeAffinityLabels, forKey: .nodeAffinityLabels)
+      }
       try container.encodeIfPresent(self.nodeType, forKey: .nodeType)
       try container.encodeIfPresent(self.nodeTypeFlexibility, forKey: .nodeTypeFlexibility)
       try container.encodeIfPresent(self.region, forKey: .region)

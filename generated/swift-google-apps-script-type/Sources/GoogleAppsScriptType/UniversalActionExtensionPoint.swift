@@ -96,7 +96,9 @@ public struct UniversalActionExtensionPoint: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.label, forKey: .label)
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
 
     if let choice = self.actionType {
       switch choice {

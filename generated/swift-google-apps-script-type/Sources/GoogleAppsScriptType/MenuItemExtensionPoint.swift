@@ -90,9 +90,15 @@ public struct MenuItemExtensionPoint: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.runFunction, forKey: .runFunction)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.logoUrl, forKey: .logoUrl)
+    if !self.runFunction.isEmpty {
+      try container.encode(self.runFunction, forKey: .runFunction)
+    }
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if !self.logoUrl.isEmpty {
+      try container.encode(self.logoUrl, forKey: .logoUrl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

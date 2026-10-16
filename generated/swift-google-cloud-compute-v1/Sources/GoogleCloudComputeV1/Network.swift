@@ -270,11 +270,15 @@
         self.networkFirewallPolicyEnforcementOrder, forKey: .networkFirewallPolicyEnforcementOrder)
       try container.encodeIfPresent(self.networkProfile, forKey: .networkProfile)
       try container.encodeIfPresent(self.params, forKey: .params)
-      try container.encode(self.peerings, forKey: .peerings)
+      if !self.peerings.isEmpty {
+        try container.encode(self.peerings, forKey: .peerings)
+      }
       try container.encodeIfPresent(self.routingConfig, forKey: .routingConfig)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
-      try container.encode(self.subnetworks, forKey: .subnetworks)
+      if !self.subnetworks.isEmpty {
+        try container.encode(self.subnetworks, forKey: .subnetworks)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

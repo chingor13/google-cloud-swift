@@ -172,18 +172,38 @@ public struct Domain: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.authorizedNetworks, forKey: .authorizedNetworks)
-    try container.encode(self.reservedIpRange, forKey: .reservedIpRange)
-    try container.encode(self.locations, forKey: .locations)
-    try container.encode(self.admin, forKey: .admin)
-    try container.encode(self.fqdn, forKey: .fqdn)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.authorizedNetworks.isEmpty {
+      try container.encode(self.authorizedNetworks, forKey: .authorizedNetworks)
+    }
+    if !self.reservedIpRange.isEmpty {
+      try container.encode(self.reservedIpRange, forKey: .reservedIpRange)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
+    if !self.admin.isEmpty {
+      try container.encode(self.admin, forKey: .admin)
+    }
+    if !self.fqdn.isEmpty {
+      try container.encode(self.fqdn, forKey: .fqdn)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.trusts, forKey: .trusts)
+    if self.state != Domain.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if !self.trusts.isEmpty {
+      try container.encode(self.trusts, forKey: .trusts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

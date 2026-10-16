@@ -127,10 +127,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.userPrincipal, forKey: .userPrincipal)
-      try container.encode(self.userProfile, forKey: .userProfile)
-      try container.encode(self.licenseAssignmentState, forKey: .licenseAssignmentState)
-      try container.encode(self.licenseConfig, forKey: .licenseConfig)
+      if !self.userPrincipal.isEmpty {
+        try container.encode(self.userPrincipal, forKey: .userPrincipal)
+      }
+      if !self.userProfile.isEmpty {
+        try container.encode(self.userProfile, forKey: .userProfile)
+      }
+      if self.licenseAssignmentState != UserLicense.LicenseAssignmentState() {
+        try container.encode(self.licenseAssignmentState, forKey: .licenseAssignmentState)
+      }
+      if !self.licenseConfig.isEmpty {
+        try container.encode(self.licenseConfig, forKey: .licenseConfig)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.lastLoginTime, forKey: .lastLoginTime)

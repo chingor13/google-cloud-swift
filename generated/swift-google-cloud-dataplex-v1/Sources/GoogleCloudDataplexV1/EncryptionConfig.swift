@@ -132,14 +132,24 @@ public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.key, forKey: .key)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.encryptionState, forKey: .encryptionState)
-    try container.encode(self.etag, forKey: .etag)
+    if self.encryptionState != EncryptionConfig.EncryptionState() {
+      try container.encode(self.encryptionState, forKey: .encryptionState)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.failureDetails, forKey: .failureDetails)
-    try container.encode(self.enableMetastoreEncryption, forKey: .enableMetastoreEncryption)
+    if self.enableMetastoreEncryption {
+      try container.encode(self.enableMetastoreEncryption, forKey: .enableMetastoreEncryption)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -209,8 +219,12 @@ public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.errorCode, forKey: .errorCode)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if self.errorCode != EncryptionConfig.FailureDetails.ErrorCode() {
+        try container.encode(self.errorCode, forKey: .errorCode)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

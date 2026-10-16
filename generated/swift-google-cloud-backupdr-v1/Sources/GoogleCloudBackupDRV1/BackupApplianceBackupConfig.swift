@@ -118,13 +118,27 @@ public struct BackupApplianceBackupConfig: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupApplianceName, forKey: .backupApplianceName)
-    try container.encode(self.backupApplianceId, forKey: .backupApplianceId)
-    try container.encode(self.slaId, forKey: .slaId)
-    try container.encode(self.applicationName, forKey: .applicationName)
-    try container.encode(self.hostName, forKey: .hostName)
-    try container.encode(self.sltName, forKey: .sltName)
-    try container.encode(self.slpName, forKey: .slpName)
+    if !self.backupApplianceName.isEmpty {
+      try container.encode(self.backupApplianceName, forKey: .backupApplianceName)
+    }
+    if self.backupApplianceId != 0 {
+      try container.encode(self.backupApplianceId, forKey: .backupApplianceId)
+    }
+    if self.slaId != 0 {
+      try container.encode(self.slaId, forKey: .slaId)
+    }
+    if !self.applicationName.isEmpty {
+      try container.encode(self.applicationName, forKey: .applicationName)
+    }
+    if !self.hostName.isEmpty {
+      try container.encode(self.hostName, forKey: .hostName)
+    }
+    if !self.sltName.isEmpty {
+      try container.encode(self.sltName, forKey: .sltName)
+    }
+    if !self.slpName.isEmpty {
+      try container.encode(self.slpName, forKey: .slpName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

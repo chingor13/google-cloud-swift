@@ -153,13 +153,27 @@ public struct AccessApprovalSettings: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.notificationEmails, forKey: .notificationEmails)
-    try container.encode(self.enrolledServices, forKey: .enrolledServices)
-    try container.encode(self.enrolledAncestor, forKey: .enrolledAncestor)
-    try container.encode(self.activeKeyVersion, forKey: .activeKeyVersion)
-    try container.encode(self.ancestorHasActiveKeyVersion, forKey: .ancestorHasActiveKeyVersion)
-    try container.encode(self.invalidKeyVersion, forKey: .invalidKeyVersion)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.notificationEmails.isEmpty {
+      try container.encode(self.notificationEmails, forKey: .notificationEmails)
+    }
+    if !self.enrolledServices.isEmpty {
+      try container.encode(self.enrolledServices, forKey: .enrolledServices)
+    }
+    if self.enrolledAncestor {
+      try container.encode(self.enrolledAncestor, forKey: .enrolledAncestor)
+    }
+    if !self.activeKeyVersion.isEmpty {
+      try container.encode(self.activeKeyVersion, forKey: .activeKeyVersion)
+    }
+    if self.ancestorHasActiveKeyVersion {
+      try container.encode(self.ancestorHasActiveKeyVersion, forKey: .ancestorHasActiveKeyVersion)
+    }
+    if self.invalidKeyVersion {
+      try container.encode(self.invalidKeyVersion, forKey: .invalidKeyVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

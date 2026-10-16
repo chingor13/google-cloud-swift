@@ -118,10 +118,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.bestRoutes, forKey: .bestRoutes)
-      try container.encode(self.bestRoutesForRouter, forKey: .bestRoutesForRouter)
-      try container.encode(self.bgpPeerStatus, forKey: .bgpPeerStatus)
-      try container.encode(self.natStatus, forKey: .natStatus)
+      if !self.bestRoutes.isEmpty {
+        try container.encode(self.bestRoutes, forKey: .bestRoutes)
+      }
+      if !self.bestRoutesForRouter.isEmpty {
+        try container.encode(self.bestRoutesForRouter, forKey: .bestRoutesForRouter)
+      }
+      if !self.bgpPeerStatus.isEmpty {
+        try container.encode(self.bgpPeerStatus, forKey: .bgpPeerStatus)
+      }
+      if !self.natStatus.isEmpty {
+        try container.encode(self.natStatus, forKey: .natStatus)
+      }
       try container.encodeIfPresent(self.nccGateway, forKey: .nccGateway)
       try container.encodeIfPresent(self.network, forKey: .network)
       for (key, value) in self._unknownFields.json {

@@ -148,16 +148,32 @@ public struct GoldengateDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.properties, forKey: .properties)
-    try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.odbNetwork, forKey: .odbNetwork)
-    try container.encode(self.odbSubnet, forKey: .odbSubnet)
-    try container.encode(self.entitlementId, forKey: .entitlementId)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.gcpOracleZone.isEmpty {
+      try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.odbNetwork.isEmpty {
+      try container.encode(self.odbNetwork, forKey: .odbNetwork)
+    }
+    if !self.odbSubnet.isEmpty {
+      try container.encode(self.odbSubnet, forKey: .odbSubnet)
+    }
+    if !self.entitlementId.isEmpty {
+      try container.encode(self.entitlementId, forKey: .entitlementId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.ociUrl, forKey: .ociUrl)
+    if !self.ociUrl.isEmpty {
+      try container.encode(self.ociUrl, forKey: .ociUrl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

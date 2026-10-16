@@ -81,8 +81,12 @@ public struct SkuPurchaseGroup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.skus, forKey: .skus)
-    try container.encode(self.billingAccountPurchaseInfos, forKey: .billingAccountPurchaseInfos)
+    if !self.skus.isEmpty {
+      try container.encode(self.skus, forKey: .skus)
+    }
+    if !self.billingAccountPurchaseInfos.isEmpty {
+      try container.encode(self.billingAccountPurchaseInfos, forKey: .billingAccountPurchaseInfos)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

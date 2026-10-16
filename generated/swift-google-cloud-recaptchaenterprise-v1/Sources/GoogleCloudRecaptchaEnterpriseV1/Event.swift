@@ -216,22 +216,50 @@ public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.token, forKey: .token)
-    try container.encode(self.siteKey, forKey: .siteKey)
-    try container.encode(self.userAgent, forKey: .userAgent)
-    try container.encode(self.userIpAddress, forKey: .userIpAddress)
-    try container.encode(self.expectedAction, forKey: .expectedAction)
-    try container.encode(self.hashedAccountId, forKey: .hashedAccountId)
-    try container.encode(self.express, forKey: .express)
-    try container.encode(self.requestedUri, forKey: .requestedUri)
-    try container.encode(self.wafTokenAssessment, forKey: .wafTokenAssessment)
-    try container.encode(self.ja3, forKey: .ja3)
-    try container.encode(self.ja4, forKey: .ja4)
-    try container.encode(self.headers, forKey: .headers)
-    try container.encode(self.firewallPolicyEvaluation, forKey: .firewallPolicyEvaluation)
+    if !self.token.isEmpty {
+      try container.encode(self.token, forKey: .token)
+    }
+    if !self.siteKey.isEmpty {
+      try container.encode(self.siteKey, forKey: .siteKey)
+    }
+    if !self.userAgent.isEmpty {
+      try container.encode(self.userAgent, forKey: .userAgent)
+    }
+    if !self.userIpAddress.isEmpty {
+      try container.encode(self.userIpAddress, forKey: .userIpAddress)
+    }
+    if !self.expectedAction.isEmpty {
+      try container.encode(self.expectedAction, forKey: .expectedAction)
+    }
+    if !self.hashedAccountId.isEmpty {
+      try container.encode(self.hashedAccountId, forKey: .hashedAccountId)
+    }
+    if self.express {
+      try container.encode(self.express, forKey: .express)
+    }
+    if !self.requestedUri.isEmpty {
+      try container.encode(self.requestedUri, forKey: .requestedUri)
+    }
+    if self.wafTokenAssessment {
+      try container.encode(self.wafTokenAssessment, forKey: .wafTokenAssessment)
+    }
+    if !self.ja3.isEmpty {
+      try container.encode(self.ja3, forKey: .ja3)
+    }
+    if !self.ja4.isEmpty {
+      try container.encode(self.ja4, forKey: .ja4)
+    }
+    if !self.headers.isEmpty {
+      try container.encode(self.headers, forKey: .headers)
+    }
+    if self.firewallPolicyEvaluation {
+      try container.encode(self.firewallPolicyEvaluation, forKey: .firewallPolicyEvaluation)
+    }
     try container.encodeIfPresent(self.transactionData, forKey: .transactionData)
     try container.encodeIfPresent(self.userInfo, forKey: .userInfo)
-    try container.encode(self.fraudPrevention, forKey: .fraudPrevention)
+    if self.fraudPrevention != Event.FraudPrevention() {
+      try container.encode(self.fraudPrevention, forKey: .fraudPrevention)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

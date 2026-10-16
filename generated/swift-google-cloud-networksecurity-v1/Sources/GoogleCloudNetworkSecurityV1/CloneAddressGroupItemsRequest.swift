@@ -98,9 +98,15 @@ public struct CloneAddressGroupItemsRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.addressGroup, forKey: .addressGroup)
-    try container.encode(self.sourceAddressGroup, forKey: .sourceAddressGroup)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.addressGroup.isEmpty {
+      try container.encode(self.addressGroup, forKey: .addressGroup)
+    }
+    if !self.sourceAddressGroup.isEmpty {
+      try container.encode(self.sourceAddressGroup, forKey: .sourceAddressGroup)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -117,12 +117,22 @@ public struct QuotaConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.preferredValue, forKey: .preferredValue)
-    try container.encode(self.stateDetail, forKey: .stateDetail)
+    if self.preferredValue != 0 {
+      try container.encode(self.preferredValue, forKey: .preferredValue)
+    }
+    if !self.stateDetail.isEmpty {
+      try container.encode(self.stateDetail, forKey: .stateDetail)
+    }
     try container.encodeIfPresent(self.grantedValue, forKey: .grantedValue)
-    try container.encode(self.traceId, forKey: .traceId)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.requestOrigin, forKey: .requestOrigin)
+    if !self.traceId.isEmpty {
+      try container.encode(self.traceId, forKey: .traceId)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if self.requestOrigin != QuotaConfig.Origin() {
+      try container.encode(self.requestOrigin, forKey: .requestOrigin)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

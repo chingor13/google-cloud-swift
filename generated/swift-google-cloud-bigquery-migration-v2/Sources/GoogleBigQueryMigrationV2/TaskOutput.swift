@@ -99,7 +99,9 @@ public struct TaskOutput: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
+    if self.state != TaskOutput.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.processingError, forKey: .processingError)
 
     if let choice = self.output {

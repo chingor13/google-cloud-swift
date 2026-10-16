@@ -108,10 +108,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.arpCaches, forKey: .arpCaches)
+      if !self.arpCaches.isEmpty {
+        try container.encode(self.arpCaches, forKey: .arpCaches)
+      }
       try container.encodeIfPresent(self.bundleAggregationType, forKey: .bundleAggregationType)
       try container.encodeIfPresent(self.bundleOperationalStatus, forKey: .bundleOperationalStatus)
-      try container.encode(self.links, forKey: .links)
+      if !self.links.isEmpty {
+        try container.encode(self.links, forKey: .links)
+      }
       try container.encodeIfPresent(self.macAddress, forKey: .macAddress)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

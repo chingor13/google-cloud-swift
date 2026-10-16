@@ -122,12 +122,22 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.managementCidr, forKey: .managementCidr)
-    try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
-    try container.encode(self.vmwareEngineNetworkCanonical, forKey: .vmwareEngineNetworkCanonical)
-    try container.encode(
-      self.managementIpAddressLayoutVersion, forKey: .managementIpAddressLayoutVersion)
-    try container.encode(self.dnsServerIp, forKey: .dnsServerIp)
+    if !self.managementCidr.isEmpty {
+      try container.encode(self.managementCidr, forKey: .managementCidr)
+    }
+    if !self.vmwareEngineNetwork.isEmpty {
+      try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
+    }
+    if !self.vmwareEngineNetworkCanonical.isEmpty {
+      try container.encode(self.vmwareEngineNetworkCanonical, forKey: .vmwareEngineNetworkCanonical)
+    }
+    if self.managementIpAddressLayoutVersion != 0 {
+      try container.encode(
+        self.managementIpAddressLayoutVersion, forKey: .managementIpAddressLayoutVersion)
+    }
+    if !self.dnsServerIp.isEmpty {
+      try container.encode(self.dnsServerIp, forKey: .dnsServerIp)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

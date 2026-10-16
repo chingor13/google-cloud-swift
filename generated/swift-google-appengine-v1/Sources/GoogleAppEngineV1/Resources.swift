@@ -102,11 +102,21 @@ public struct Resources: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpu, forKey: .cpu)
-    try container.encode(self.diskGb, forKey: .diskGb)
-    try container.encode(self.memoryGb, forKey: .memoryGb)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.kmsKeyReference, forKey: .kmsKeyReference)
+    if self.cpu != 0 {
+      try container.encode(self.cpu, forKey: .cpu)
+    }
+    if self.diskGb != 0 {
+      try container.encode(self.diskGb, forKey: .diskGb)
+    }
+    if self.memoryGb != 0 {
+      try container.encode(self.memoryGb, forKey: .memoryGb)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if !self.kmsKeyReference.isEmpty {
+      try container.encode(self.kmsKeyReference, forKey: .kmsKeyReference)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

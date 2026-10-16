@@ -130,13 +130,27 @@ public struct AdvancedFilterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.token, forKey: .token)
-    try container.encode(self.`prefix`, forKey: .`prefix`)
-    try container.encode(self.suffix, forKey: .suffix)
-    try container.encode(self.separator, forKey: .separator)
-    try container.encode(self.multipleAllowed, forKey: .multipleAllowed)
-    try container.encode(self.defaultValues, forKey: .defaultValues)
-    try container.encode(self.skipDefaultAffixes, forKey: .skipDefaultAffixes)
+    if !self.token.isEmpty {
+      try container.encode(self.token, forKey: .token)
+    }
+    if !self.`prefix`.isEmpty {
+      try container.encode(self.`prefix`, forKey: .`prefix`)
+    }
+    if !self.suffix.isEmpty {
+      try container.encode(self.suffix, forKey: .suffix)
+    }
+    if !self.separator.isEmpty {
+      try container.encode(self.separator, forKey: .separator)
+    }
+    if self.multipleAllowed {
+      try container.encode(self.multipleAllowed, forKey: .multipleAllowed)
+    }
+    if !self.defaultValues.isEmpty {
+      try container.encode(self.defaultValues, forKey: .defaultValues)
+    }
+    if self.skipDefaultAffixes {
+      try container.encode(self.skipDefaultAffixes, forKey: .skipDefaultAffixes)
+    }
     try container.encodeIfPresent(self.valueSource, forKey: .valueSource)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -314,7 +328,9 @@ public struct AdvancedFilterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.options, forKey: .options)
+      if !self.options.isEmpty {
+        try container.encode(self.options, forKey: .options)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -420,9 +436,15 @@ public struct AdvancedFilterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.query, forKey: .query)
-      try container.encode(self.column, forKey: .column)
-      try container.encode(self.globalTimeFilterEnabled, forKey: .globalTimeFilterEnabled)
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
+      if !self.column.isEmpty {
+        try container.encode(self.column, forKey: .column)
+      }
+      if self.globalTimeFilterEnabled {
+        try container.encode(self.globalTimeFilterEnabled, forKey: .globalTimeFilterEnabled)
+      }
       try container.encodeIfPresent(self.input, forKey: .input)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -104,9 +104,15 @@ public struct UpdateJobRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.jobId, forKey: .jobId)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
     try container.encodeIfPresent(self.job, forKey: .job)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

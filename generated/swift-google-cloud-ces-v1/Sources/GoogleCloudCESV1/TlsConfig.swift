@@ -70,7 +70,9 @@ public struct TlsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.caCerts, forKey: .caCerts)
+    if !self.caCerts.isEmpty {
+      try container.encode(self.caCerts, forKey: .caCerts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -149,8 +151,12 @@ public struct TlsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.cert, forKey: .cert)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.cert.isEmpty {
+        try container.encode(self.cert, forKey: .cert)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

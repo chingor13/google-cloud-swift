@@ -80,8 +80,12 @@ public struct DescribeConversionWorkspaceRevisionsRequest: Codable, Equatable, G
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.conversionWorkspace, forKey: .conversionWorkspace)
-    try container.encode(self.commitId, forKey: .commitId)
+    if !self.conversionWorkspace.isEmpty {
+      try container.encode(self.conversionWorkspace, forKey: .conversionWorkspace)
+    }
+    if !self.commitId.isEmpty {
+      try container.encode(self.commitId, forKey: .commitId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

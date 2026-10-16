@@ -85,8 +85,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.physicalTopology, forKey: .physicalTopology)
-      try container.encode(self.rdmaIpAddresses, forKey: .rdmaIpAddresses)
-      try container.encode(self.runningInstances, forKey: .runningInstances)
+      if !self.rdmaIpAddresses.isEmpty {
+        try container.encode(self.rdmaIpAddresses, forKey: .rdmaIpAddresses)
+      }
+      if !self.runningInstances.isEmpty {
+        try container.encode(self.runningInstances, forKey: .runningInstances)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -87,8 +87,12 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.ipAllocation, forKey: .ipAllocation)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.ipAllocation.isEmpty {
+      try container.encode(self.ipAllocation, forKey: .ipAllocation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

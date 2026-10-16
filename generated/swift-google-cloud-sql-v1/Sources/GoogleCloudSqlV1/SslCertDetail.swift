@@ -78,7 +78,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.certInfo, forKey: .certInfo)
-      try container.encode(self.certPrivateKey, forKey: .certPrivateKey)
+      if !self.certPrivateKey.isEmpty {
+        try container.encode(self.certPrivateKey, forKey: .certPrivateKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

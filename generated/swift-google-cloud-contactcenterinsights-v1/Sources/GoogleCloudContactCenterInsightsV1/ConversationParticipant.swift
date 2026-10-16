@@ -123,9 +123,15 @@ public struct ConversationParticipant: Codable, Equatable, GoogleWKT._AnyPackabl
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dialogflowParticipant, forKey: .dialogflowParticipant)
-    try container.encode(self.obfuscatedExternalUserId, forKey: .obfuscatedExternalUserId)
-    try container.encode(self.role, forKey: .role)
+    if !self.dialogflowParticipant.isEmpty {
+      try container.encode(self.dialogflowParticipant, forKey: .dialogflowParticipant)
+    }
+    if !self.obfuscatedExternalUserId.isEmpty {
+      try container.encode(self.obfuscatedExternalUserId, forKey: .obfuscatedExternalUserId)
+    }
+    if self.role != ConversationParticipant.Role() {
+      try container.encode(self.role, forKey: .role)
+    }
 
     if let choice = self.participant {
       switch choice {

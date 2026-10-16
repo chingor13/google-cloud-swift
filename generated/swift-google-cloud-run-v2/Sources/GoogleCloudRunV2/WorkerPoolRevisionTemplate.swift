@@ -196,16 +196,33 @@ public struct WorkerPoolRevisionTemplate: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.revision, forKey: .revision)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.vpcAccess, forKey: .vpcAccess)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.containers, forKey: .containers)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.containers.isEmpty {
+      try container.encode(self.containers, forKey: .containers)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if !self.encryptionKey.isEmpty {
+      try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    }
     try container.encodeIfPresent(self.serviceMesh, forKey: .serviceMesh)
-    try container.encode(self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    if self.encryptionKeyRevocationAction != EncryptionKeyRevocationAction() {
+      try container.encode(
+        self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    }
     try container.encodeIfPresent(
       self.encryptionKeyShutdownDuration, forKey: .encryptionKeyShutdownDuration)
     try container.encodeIfPresent(self.nodeSelector, forKey: .nodeSelector)

@@ -162,16 +162,36 @@ public struct Framework: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.cloudControlDetails, forKey: .cloudControlDetails)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.supportedCloudProviders, forKey: .supportedCloudProviders)
-    try container.encode(self.supportedTargetResourceTypes, forKey: .supportedTargetResourceTypes)
-    try container.encode(self.supportedEnforcementModes, forKey: .supportedEnforcementModes)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.majorRevisionId != 0 {
+      try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.type != Framework.FrameworkType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.cloudControlDetails.isEmpty {
+      try container.encode(self.cloudControlDetails, forKey: .cloudControlDetails)
+    }
+    if !self.category.isEmpty {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.supportedCloudProviders.isEmpty {
+      try container.encode(self.supportedCloudProviders, forKey: .supportedCloudProviders)
+    }
+    if !self.supportedTargetResourceTypes.isEmpty {
+      try container.encode(self.supportedTargetResourceTypes, forKey: .supportedTargetResourceTypes)
+    }
+    if !self.supportedEnforcementModes.isEmpty {
+      try container.encode(self.supportedEnforcementModes, forKey: .supportedEnforcementModes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

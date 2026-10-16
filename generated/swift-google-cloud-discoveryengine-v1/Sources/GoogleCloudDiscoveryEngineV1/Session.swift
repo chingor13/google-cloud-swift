@@ -137,15 +137,29 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.userPseudoId, forKey: .userPseudoId)
-      try container.encode(self.turns, forKey: .turns)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.state != Session.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.userPseudoId.isEmpty {
+        try container.encode(self.userPseudoId, forKey: .userPseudoId)
+      }
+      if !self.turns.isEmpty {
+        try container.encode(self.turns, forKey: .turns)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
-      try container.encode(self.isPinned, forKey: .isPinned)
+      if self.isPinned {
+        try container.encode(self.isPinned, forKey: .isPinned)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -257,10 +271,14 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.query, forKey: .query)
-        try container.encode(self.answer, forKey: .answer)
+        if !self.answer.isEmpty {
+          try container.encode(self.answer, forKey: .answer)
+        }
         try container.encodeIfPresent(self.detailedAnswer, forKey: .detailedAnswer)
         try container.encodeIfPresent(self.detailedAssistAnswer, forKey: .detailedAssistAnswer)
-        try container.encode(self.queryConfig, forKey: .queryConfig)
+        if !self.queryConfig.isEmpty {
+          try container.encode(self.queryConfig, forKey: .queryConfig)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

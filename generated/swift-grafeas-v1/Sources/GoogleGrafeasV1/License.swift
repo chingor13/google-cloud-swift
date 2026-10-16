@@ -81,8 +81,12 @@ public struct License: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.expression, forKey: .expression)
-    try container.encode(self.comments, forKey: .comments)
+    if !self.expression.isEmpty {
+      try container.encode(self.expression, forKey: .expression)
+    }
+    if !self.comments.isEmpty {
+      try container.encode(self.comments, forKey: .comments)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

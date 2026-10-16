@@ -98,10 +98,16 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.commitMetadata, forKey: .commitMetadata)
-    try container.encode(self.requiredHeadCommitSha, forKey: .requiredHeadCommitSha)
-    try container.encode(self.fileOperations, forKey: .fileOperations)
+    if !self.requiredHeadCommitSha.isEmpty {
+      try container.encode(self.requiredHeadCommitSha, forKey: .requiredHeadCommitSha)
+    }
+    if !self.fileOperations.isEmpty {
+      try container.encode(self.fileOperations, forKey: .fileOperations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -246,7 +252,9 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleWKT._Any
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.contents, forKey: .contents)
+        if !self.contents.isEmpty {
+          try container.encode(self.contents, forKey: .contents)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

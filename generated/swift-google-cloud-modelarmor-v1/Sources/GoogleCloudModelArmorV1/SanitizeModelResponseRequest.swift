@@ -99,9 +99,13 @@ public struct SanitizeModelResponseRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.modelResponseData, forKey: .modelResponseData)
-    try container.encode(self.userPrompt, forKey: .userPrompt)
+    if !self.userPrompt.isEmpty {
+      try container.encode(self.userPrompt, forKey: .userPrompt)
+    }
     try container.encodeIfPresent(
       self.multiLanguageDetectionMetadata, forKey: .multiLanguageDetectionMetadata)
     try container.encodeIfPresent(self.streamingMode, forKey: .streamingMode)

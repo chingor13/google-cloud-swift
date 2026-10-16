@@ -100,7 +100,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.stepCount, forKey: .stepCount)
+      if self.stepCount != 0 {
+        try container.encode(self.stepCount, forKey: .stepCount)
+      }
       try container.encodeIfPresent(self.smoothGradConfig, forKey: .smoothGradConfig)
       try container.encodeIfPresent(self.blurBaselineConfig, forKey: .blurBaselineConfig)
       for (key, value) in self._unknownFields.json {

@@ -306,7 +306,9 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topic, forKey: .topic)
+      if !self.topic.isEmpty {
+        try container.encode(self.topic, forKey: .topic)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -745,7 +747,9 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
       try container.encodeIfPresent(self.transformationConfig, forKey: .transformationConfig)
       try container.encodeIfPresent(
         self.transformationDetailsStorageConfig, forKey: .transformationDetailsStorageConfig)
-      try container.encode(self.fileTypesToTransform, forKey: .fileTypesToTransform)
+      if !self.fileTypesToTransform.isEmpty {
+        try container.encode(self.fileTypesToTransform, forKey: .fileTypesToTransform)
+      }
 
       if let choice = self.output {
         switch choice {

@@ -156,11 +156,21 @@ public struct ProvisioningQuota: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.assetType, forKey: .assetType)
-    try container.encode(self.gcpService, forKey: .gcpService)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.availableCount, forKey: .availableCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.assetType != ProvisioningQuota.AssetType() {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
+    if !self.gcpService.isEmpty {
+      try container.encode(self.gcpService, forKey: .gcpService)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if self.availableCount != 0 {
+      try container.encode(self.availableCount, forKey: .availableCount)
+    }
 
     if let choice = self.quota {
       switch choice {

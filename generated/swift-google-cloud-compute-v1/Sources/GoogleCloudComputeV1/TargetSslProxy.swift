@@ -169,7 +169,9 @@
       try container.encodeIfPresent(self.proxyHeader, forKey: .proxyHeader)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.service, forKey: .service)
-      try container.encode(self.sslCertificates, forKey: .sslCertificates)
+      if !self.sslCertificates.isEmpty {
+        try container.encode(self.sslCertificates, forKey: .sslCertificates)
+      }
       try container.encodeIfPresent(self.sslPolicy, forKey: .sslPolicy)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

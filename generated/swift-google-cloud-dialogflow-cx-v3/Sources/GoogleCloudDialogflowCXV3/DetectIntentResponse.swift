@@ -124,12 +124,20 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.responseId, forKey: .responseId)
+      if !self.responseId.isEmpty {
+        try container.encode(self.responseId, forKey: .responseId)
+      }
       try container.encodeIfPresent(self.queryResult, forKey: .queryResult)
-      try container.encode(self.outputAudio, forKey: .outputAudio)
+      if !self.outputAudio.isEmpty {
+        try container.encode(self.outputAudio, forKey: .outputAudio)
+      }
       try container.encodeIfPresent(self.outputAudioConfig, forKey: .outputAudioConfig)
-      try container.encode(self.responseType, forKey: .responseType)
-      try container.encode(self.allowCancellation, forKey: .allowCancellation)
+      if self.responseType != DetectIntentResponse.ResponseType() {
+        try container.encode(self.responseType, forKey: .responseType)
+      }
+      if self.allowCancellation {
+        try container.encode(self.allowCancellation, forKey: .allowCancellation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -99,10 +99,18 @@ public struct SerializedTaxonomy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.policyTags, forKey: .policyTags)
-    try container.encode(self.activatedPolicyTypes, forKey: .activatedPolicyTypes)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.policyTags.isEmpty {
+      try container.encode(self.policyTags, forKey: .policyTags)
+    }
+    if !self.activatedPolicyTypes.isEmpty {
+      try container.encode(self.activatedPolicyTypes, forKey: .activatedPolicyTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

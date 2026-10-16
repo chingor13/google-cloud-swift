@@ -118,13 +118,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.runTime, forKey: .runTime)
       try container.encodeIfPresent(self.finalStatus, forKey: .finalStatus)
       try container.encodeIfPresent(self.syncSummary, forKey: .syncSummary)
-      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      if self.satisfiesPzs {
+        try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+      }
+      if self.satisfiesPzi {
+        try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -199,8 +205,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.rowSynced, forKey: .rowSynced)
-        try container.encode(self.totalSlot, forKey: .totalSlot)
+        if self.rowSynced != 0 {
+          try container.encode(self.rowSynced, forKey: .rowSynced)
+        }
+        if self.totalSlot != 0 {
+          try container.encode(self.totalSlot, forKey: .totalSlot)
+        }
         try container.encodeIfPresent(self.systemWatermarkTime, forKey: .systemWatermarkTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

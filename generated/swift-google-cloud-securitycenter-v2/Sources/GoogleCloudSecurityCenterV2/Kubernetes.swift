@@ -131,13 +131,27 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pods, forKey: .pods)
-    try container.encode(self.nodes, forKey: .nodes)
-    try container.encode(self.nodePools, forKey: .nodePools)
-    try container.encode(self.roles, forKey: .roles)
-    try container.encode(self.bindings, forKey: .bindings)
-    try container.encode(self.accessReviews, forKey: .accessReviews)
-    try container.encode(self.objects, forKey: .objects)
+    if !self.pods.isEmpty {
+      try container.encode(self.pods, forKey: .pods)
+    }
+    if !self.nodes.isEmpty {
+      try container.encode(self.nodes, forKey: .nodes)
+    }
+    if !self.nodePools.isEmpty {
+      try container.encode(self.nodePools, forKey: .nodePools)
+    }
+    if !self.roles.isEmpty {
+      try container.encode(self.roles, forKey: .roles)
+    }
+    if !self.bindings.isEmpty {
+      try container.encode(self.bindings, forKey: .bindings)
+    }
+    if !self.accessReviews.isEmpty {
+      try container.encode(self.accessReviews, forKey: .accessReviews)
+    }
+    if !self.objects.isEmpty {
+      try container.encode(self.objects, forKey: .objects)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -222,10 +236,18 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ns, forKey: .ns)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.containers, forKey: .containers)
+      if !self.ns.isEmpty {
+        try container.encode(self.ns, forKey: .ns)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.containers.isEmpty {
+        try container.encode(self.containers, forKey: .containers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -306,7 +328,9 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -394,8 +418,12 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.nodes, forKey: .nodes)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.nodes.isEmpty {
+        try container.encode(self.nodes, forKey: .nodes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -491,9 +519,15 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.ns, forKey: .ns)
-      try container.encode(self.name, forKey: .name)
+      if self.kind != Kubernetes.Role.Kind() {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.ns.isEmpty {
+        try container.encode(self.ns, forKey: .ns)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -713,10 +747,16 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ns, forKey: .ns)
-      try container.encode(self.name, forKey: .name)
+      if !self.ns.isEmpty {
+        try container.encode(self.ns, forKey: .ns)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.role, forKey: .role)
-      try container.encode(self.subjects, forKey: .subjects)
+      if !self.subjects.isEmpty {
+        try container.encode(self.subjects, forKey: .subjects)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -813,9 +853,15 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.ns, forKey: .ns)
-      try container.encode(self.name, forKey: .name)
+      if self.kind != Kubernetes.Subject.AuthType() {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.ns.isEmpty {
+        try container.encode(self.ns, forKey: .ns)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1073,13 +1119,27 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.group, forKey: .group)
-      try container.encode(self.ns, forKey: .ns)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.resource, forKey: .resource)
-      try container.encode(self.subresource, forKey: .subresource)
-      try container.encode(self.verb, forKey: .verb)
-      try container.encode(self.version, forKey: .version)
+      if !self.group.isEmpty {
+        try container.encode(self.group, forKey: .group)
+      }
+      if !self.ns.isEmpty {
+        try container.encode(self.ns, forKey: .ns)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.resource.isEmpty {
+        try container.encode(self.resource, forKey: .resource)
+      }
+      if !self.subresource.isEmpty {
+        try container.encode(self.subresource, forKey: .subresource)
+      }
+      if !self.verb.isEmpty {
+        try container.encode(self.verb, forKey: .verb)
+      }
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1196,11 +1256,21 @@ public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.group, forKey: .group)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.ns, forKey: .ns)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.containers, forKey: .containers)
+      if !self.group.isEmpty {
+        try container.encode(self.group, forKey: .group)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.ns.isEmpty {
+        try container.encode(self.ns, forKey: .ns)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.containers.isEmpty {
+        try container.encode(self.containers, forKey: .containers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

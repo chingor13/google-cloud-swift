@@ -71,7 +71,9 @@ public struct SchemaKeySortingStrategy: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.options, forKey: .options)
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -145,8 +147,12 @@ public struct SchemaKeySortingStrategy: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataSchemaKey, forKey: .dataSchemaKey)
-      try container.encode(self.sortDecreasing, forKey: .sortDecreasing)
+      if !self.dataSchemaKey.isEmpty {
+        try container.encode(self.dataSchemaKey, forKey: .dataSchemaKey)
+      }
+      if self.sortDecreasing {
+        try container.encode(self.sortDecreasing, forKey: .sortDecreasing)
+      }
       try container.encodeIfPresent(self.aggregateMethod, forKey: .aggregateMethod)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

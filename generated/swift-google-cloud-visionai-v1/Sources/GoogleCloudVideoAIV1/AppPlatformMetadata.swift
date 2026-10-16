@@ -96,10 +96,18 @@ public struct AppPlatformMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.application, forKey: .application)
-    try container.encode(self.instanceId, forKey: .instanceId)
-    try container.encode(self.node, forKey: .node)
-    try container.encode(self.processor, forKey: .processor)
+    if !self.application.isEmpty {
+      try container.encode(self.application, forKey: .application)
+    }
+    if !self.instanceId.isEmpty {
+      try container.encode(self.instanceId, forKey: .instanceId)
+    }
+    if !self.node.isEmpty {
+      try container.encode(self.node, forKey: .node)
+    }
+    if !self.processor.isEmpty {
+      try container.encode(self.processor, forKey: .processor)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -83,8 +83,12 @@ public struct ConfigData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.availableExternalLbPoolsIpv4, forKey: .availableExternalLbPoolsIpv4)
-    try container.encode(self.availableExternalLbPoolsIpv6, forKey: .availableExternalLbPoolsIpv6)
+    if !self.availableExternalLbPoolsIpv4.isEmpty {
+      try container.encode(self.availableExternalLbPoolsIpv4, forKey: .availableExternalLbPoolsIpv4)
+    }
+    if !self.availableExternalLbPoolsIpv6.isEmpty {
+      try container.encode(self.availableExternalLbPoolsIpv6, forKey: .availableExternalLbPoolsIpv6)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

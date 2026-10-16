@@ -114,10 +114,16 @@ public struct ExportEntitiesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.entityFilter, forKey: .entityFilter)
-    try container.encode(self.outputUrlPrefix, forKey: .outputUrlPrefix)
+    if !self.outputUrlPrefix.isEmpty {
+      try container.encode(self.outputUrlPrefix, forKey: .outputUrlPrefix)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

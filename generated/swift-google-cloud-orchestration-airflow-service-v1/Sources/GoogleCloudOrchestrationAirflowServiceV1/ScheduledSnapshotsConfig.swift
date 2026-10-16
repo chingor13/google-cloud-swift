@@ -99,10 +99,18 @@ public struct ScheduledSnapshotsConfig: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.snapshotLocation, forKey: .snapshotLocation)
-    try container.encode(self.snapshotCreationSchedule, forKey: .snapshotCreationSchedule)
-    try container.encode(self.timeZone, forKey: .timeZone)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if !self.snapshotLocation.isEmpty {
+      try container.encode(self.snapshotLocation, forKey: .snapshotLocation)
+    }
+    if !self.snapshotCreationSchedule.isEmpty {
+      try container.encode(self.snapshotCreationSchedule, forKey: .snapshotCreationSchedule)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -123,13 +123,27 @@ public struct AzureEventHubSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.consumerGroup, forKey: .consumerGroup)
-    try container.encode(self.eventHubConnectionString, forKey: .eventHubConnectionString)
-    try container.encode(self.azureStorageConnectionString, forKey: .azureStorageConnectionString)
-    try container.encode(self.azureStorageContainer, forKey: .azureStorageContainer)
-    try container.encode(self.azureSasToken, forKey: .azureSasToken)
-    try container.encode(self.eventHubNamespace, forKey: .eventHubNamespace)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.consumerGroup.isEmpty {
+      try container.encode(self.consumerGroup, forKey: .consumerGroup)
+    }
+    if !self.eventHubConnectionString.isEmpty {
+      try container.encode(self.eventHubConnectionString, forKey: .eventHubConnectionString)
+    }
+    if !self.azureStorageConnectionString.isEmpty {
+      try container.encode(self.azureStorageConnectionString, forKey: .azureStorageConnectionString)
+    }
+    if !self.azureStorageContainer.isEmpty {
+      try container.encode(self.azureStorageContainer, forKey: .azureStorageContainer)
+    }
+    if !self.azureSasToken.isEmpty {
+      try container.encode(self.azureSasToken, forKey: .azureSasToken)
+    }
+    if !self.eventHubNamespace.isEmpty {
+      try container.encode(self.eventHubNamespace, forKey: .eventHubNamespace)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

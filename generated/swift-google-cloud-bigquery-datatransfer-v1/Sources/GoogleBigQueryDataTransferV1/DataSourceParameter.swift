@@ -188,22 +188,50 @@ public struct DataSourceParameter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.paramId, forKey: .paramId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.`required`, forKey: .`required`)
-    try container.encode(self.repeated, forKey: .repeated)
-    try container.encode(self.validationRegex, forKey: .validationRegex)
-    try container.encode(self.allowedValues, forKey: .allowedValues)
+    if !self.paramId.isEmpty {
+      try container.encode(self.paramId, forKey: .paramId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.type != DataSourceParameter.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.`required` {
+      try container.encode(self.`required`, forKey: .`required`)
+    }
+    if self.repeated {
+      try container.encode(self.repeated, forKey: .repeated)
+    }
+    if !self.validationRegex.isEmpty {
+      try container.encode(self.validationRegex, forKey: .validationRegex)
+    }
+    if !self.allowedValues.isEmpty {
+      try container.encode(self.allowedValues, forKey: .allowedValues)
+    }
     try container.encodeIfPresent(self.minValue, forKey: .minValue)
     try container.encodeIfPresent(self.maxValue, forKey: .maxValue)
-    try container.encode(self.fields, forKey: .fields)
-    try container.encode(self.validationDescription, forKey: .validationDescription)
-    try container.encode(self.validationHelpUrl, forKey: .validationHelpUrl)
-    try container.encode(self.immutable, forKey: .immutable)
-    try container.encode(self.recurse, forKey: .recurse)
-    try container.encode(self.deprecated, forKey: .deprecated)
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
+    if !self.validationDescription.isEmpty {
+      try container.encode(self.validationDescription, forKey: .validationDescription)
+    }
+    if !self.validationHelpUrl.isEmpty {
+      try container.encode(self.validationHelpUrl, forKey: .validationHelpUrl)
+    }
+    if self.immutable {
+      try container.encode(self.immutable, forKey: .immutable)
+    }
+    if self.recurse {
+      try container.encode(self.recurse, forKey: .recurse)
+    }
+    if self.deprecated {
+      try container.encode(self.deprecated, forKey: .deprecated)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

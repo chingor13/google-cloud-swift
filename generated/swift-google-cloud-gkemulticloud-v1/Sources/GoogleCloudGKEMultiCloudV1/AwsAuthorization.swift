@@ -88,8 +88,12 @@ public struct AwsAuthorization: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.adminUsers, forKey: .adminUsers)
-    try container.encode(self.adminGroups, forKey: .adminGroups)
+    if !self.adminUsers.isEmpty {
+      try container.encode(self.adminUsers, forKey: .adminUsers)
+    }
+    if !self.adminGroups.isEmpty {
+      try container.encode(self.adminGroups, forKey: .adminGroups)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

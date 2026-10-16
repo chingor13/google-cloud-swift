@@ -147,11 +147,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.contextReferences, forKey: .contextReferences)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.contextReferences.isEmpty {
+        try container.encode(self.contextReferences, forKey: .contextReferences)
+      }
       try container.encodeIfPresent(self.conversationContext, forKey: .conversationContext)
-      try container.encode(self.triggerEvents, forKey: .triggerEvents)
-      try container.encode(self.securitySettings, forKey: .securitySettings)
+      if !self.triggerEvents.isEmpty {
+        try container.encode(self.triggerEvents, forKey: .triggerEvents)
+      }
+      if !self.securitySettings.isEmpty {
+        try container.encode(self.securitySettings, forKey: .securitySettings)
+      }
 
       if let choice = self.generatorResource {
         switch choice {

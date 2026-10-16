@@ -407,45 +407,100 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.lastModifier, forKey: .lastModifier)
-    try container.encode(self.client, forKey: .client)
-    try container.encode(self.clientVersion, forKey: .clientVersion)
-    try container.encode(self.launchStage, forKey: .launchStage)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.lastModifier.isEmpty {
+      try container.encode(self.lastModifier, forKey: .lastModifier)
+    }
+    if !self.client.isEmpty {
+      try container.encode(self.client, forKey: .client)
+    }
+    if !self.clientVersion.isEmpty {
+      try container.encode(self.clientVersion, forKey: .clientVersion)
+    }
+    if self.launchStage != GoogleApi.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
     try container.encodeIfPresent(self.binaryAuthorization, forKey: .binaryAuthorization)
     try container.encodeIfPresent(self.vpcAccess, forKey: .vpcAccess)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.containers, forKey: .containers)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.encryptionKey, forKey: .encryptionKey)
-    try container.encode(self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.containers.isEmpty {
+      try container.encode(self.containers, forKey: .containers)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if !self.encryptionKey.isEmpty {
+      try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    }
+    if self.encryptionKeyRevocationAction != EncryptionKeyRevocationAction() {
+      try container.encode(
+        self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    }
     try container.encodeIfPresent(
       self.encryptionKeyShutdownDuration, forKey: .encryptionKeyShutdownDuration)
     try container.encodeIfPresent(self.nodeSelector, forKey: .nodeSelector)
     try container.encodeIfPresent(
       self.gpuZonalRedundancyDisabled, forKey: .gpuZonalRedundancyDisabled)
-    try container.encode(self.ingress, forKey: .ingress)
-    try container.encode(self.invokerIamDisabled, forKey: .invokerIamDisabled)
-    try container.encode(self.iapEnabled, forKey: .iapEnabled)
-    try container.encode(self.observedGeneration, forKey: .observedGeneration)
-    try container.encode(self.logUri, forKey: .logUri)
+    if self.ingress != IngressTraffic() {
+      try container.encode(self.ingress, forKey: .ingress)
+    }
+    if self.invokerIamDisabled {
+      try container.encode(self.invokerIamDisabled, forKey: .invokerIamDisabled)
+    }
+    if self.iapEnabled {
+      try container.encode(self.iapEnabled, forKey: .iapEnabled)
+    }
+    if self.observedGeneration != 0 {
+      try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    }
+    if !self.logUri.isEmpty {
+      try container.encode(self.logUri, forKey: .logUri)
+    }
     try container.encodeIfPresent(self.terminalCondition, forKey: .terminalCondition)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.containerStatuses, forKey: .containerStatuses)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.urls, forKey: .urls)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if !self.containerStatuses.isEmpty {
+      try container.encode(self.containerStatuses, forKey: .containerStatuses)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if !self.urls.isEmpty {
+      try container.encode(self.urls, forKey: .urls)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

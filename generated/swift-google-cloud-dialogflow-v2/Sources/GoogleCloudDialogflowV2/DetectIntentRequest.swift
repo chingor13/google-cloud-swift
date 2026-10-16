@@ -140,12 +140,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.session, forKey: .session)
+      if !self.session.isEmpty {
+        try container.encode(self.session, forKey: .session)
+      }
       try container.encodeIfPresent(self.queryParams, forKey: .queryParams)
       try container.encodeIfPresent(self.queryInput, forKey: .queryInput)
       try container.encodeIfPresent(self.outputAudioConfig, forKey: .outputAudioConfig)
       try container.encodeIfPresent(self.outputAudioConfigMask, forKey: .outputAudioConfigMask)
-      try container.encode(self.inputAudio, forKey: .inputAudio)
+      if !self.inputAudio.isEmpty {
+        try container.encode(self.inputAudio, forKey: .inputAudio)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

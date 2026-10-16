@@ -86,8 +86,12 @@ public struct ImageSegmentationPredictionResult: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.categoryMask, forKey: .categoryMask)
-    try container.encode(self.confidenceMask, forKey: .confidenceMask)
+    if !self.categoryMask.isEmpty {
+      try container.encode(self.categoryMask, forKey: .categoryMask)
+    }
+    if !self.confidenceMask.isEmpty {
+      try container.encode(self.confidenceMask, forKey: .confidenceMask)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

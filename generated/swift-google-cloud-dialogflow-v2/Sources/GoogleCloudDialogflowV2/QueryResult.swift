@@ -253,20 +253,42 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryText, forKey: .queryText)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.speechRecognitionConfidence, forKey: .speechRecognitionConfidence)
-      try container.encode(self.action, forKey: .action)
+      if !self.queryText.isEmpty {
+        try container.encode(self.queryText, forKey: .queryText)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if self.speechRecognitionConfidence != 0 {
+        try container.encode(self.speechRecognitionConfidence, forKey: .speechRecognitionConfidence)
+      }
+      if !self.action.isEmpty {
+        try container.encode(self.action, forKey: .action)
+      }
       try container.encodeIfPresent(self.parameters, forKey: .parameters)
-      try container.encode(self.allRequiredParamsPresent, forKey: .allRequiredParamsPresent)
-      try container.encode(self.cancelsSlotFilling, forKey: .cancelsSlotFilling)
-      try container.encode(self.fulfillmentText, forKey: .fulfillmentText)
-      try container.encode(self.fulfillmentMessages, forKey: .fulfillmentMessages)
-      try container.encode(self.webhookSource, forKey: .webhookSource)
+      if self.allRequiredParamsPresent {
+        try container.encode(self.allRequiredParamsPresent, forKey: .allRequiredParamsPresent)
+      }
+      if self.cancelsSlotFilling {
+        try container.encode(self.cancelsSlotFilling, forKey: .cancelsSlotFilling)
+      }
+      if !self.fulfillmentText.isEmpty {
+        try container.encode(self.fulfillmentText, forKey: .fulfillmentText)
+      }
+      if !self.fulfillmentMessages.isEmpty {
+        try container.encode(self.fulfillmentMessages, forKey: .fulfillmentMessages)
+      }
+      if !self.webhookSource.isEmpty {
+        try container.encode(self.webhookSource, forKey: .webhookSource)
+      }
       try container.encodeIfPresent(self.webhookPayload, forKey: .webhookPayload)
-      try container.encode(self.outputContexts, forKey: .outputContexts)
+      if !self.outputContexts.isEmpty {
+        try container.encode(self.outputContexts, forKey: .outputContexts)
+      }
       try container.encodeIfPresent(self.intent, forKey: .intent)
-      try container.encode(self.intentDetectionConfidence, forKey: .intentDetectionConfidence)
+      if self.intentDetectionConfidence != 0 {
+        try container.encode(self.intentDetectionConfidence, forKey: .intentDetectionConfidence)
+      }
       try container.encodeIfPresent(self.diagnosticInfo, forKey: .diagnosticInfo)
       try container.encodeIfPresent(self.sentimentAnalysisResult, forKey: .sentimentAnalysisResult)
       for (key, value) in self._unknownFields.json {

@@ -112,9 +112,15 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.autoscalingPolicies, forKey: .autoscalingPolicies)
-    try container.encode(self.minClusterNodeCount, forKey: .minClusterNodeCount)
-    try container.encode(self.maxClusterNodeCount, forKey: .maxClusterNodeCount)
+    if !self.autoscalingPolicies.isEmpty {
+      try container.encode(self.autoscalingPolicies, forKey: .autoscalingPolicies)
+    }
+    if self.minClusterNodeCount != 0 {
+      try container.encode(self.minClusterNodeCount, forKey: .minClusterNodeCount)
+    }
+    if self.maxClusterNodeCount != 0 {
+      try container.encode(self.maxClusterNodeCount, forKey: .maxClusterNodeCount)
+    }
     try container.encodeIfPresent(self.coolDownPeriod, forKey: .coolDownPeriod)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -182,8 +188,12 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.scaleOut, forKey: .scaleOut)
-      try container.encode(self.scaleIn, forKey: .scaleIn)
+      if self.scaleOut != 0 {
+        try container.encode(self.scaleOut, forKey: .scaleOut)
+      }
+      if self.scaleIn != 0 {
+        try container.encode(self.scaleIn, forKey: .scaleIn)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -309,8 +319,12 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nodeTypeId, forKey: .nodeTypeId)
-      try container.encode(self.scaleOutSize, forKey: .scaleOutSize)
+      if !self.nodeTypeId.isEmpty {
+        try container.encode(self.nodeTypeId, forKey: .nodeTypeId)
+      }
+      if self.scaleOutSize != 0 {
+        try container.encode(self.scaleOutSize, forKey: .scaleOutSize)
+      }
       try container.encodeIfPresent(self.cpuThresholds, forKey: .cpuThresholds)
       try container.encodeIfPresent(self.grantedMemoryThresholds, forKey: .grantedMemoryThresholds)
       try container.encodeIfPresent(

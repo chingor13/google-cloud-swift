@@ -216,12 +216,24 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uuid, forKey: .uuid)
-      try container.encode(self.driverVersion, forKey: .driverVersion)
-      try container.encode(self.vbiosVersion, forKey: .vbiosVersion)
-      try container.encode(self.gpuArchitectureType, forKey: .gpuArchitectureType)
-      try container.encode(self.attestationCertificateChain, forKey: .attestationCertificateChain)
-      try container.encode(self.attestationReport, forKey: .attestationReport)
+      if !self.uuid.isEmpty {
+        try container.encode(self.uuid, forKey: .uuid)
+      }
+      if !self.driverVersion.isEmpty {
+        try container.encode(self.driverVersion, forKey: .driverVersion)
+      }
+      if !self.vbiosVersion.isEmpty {
+        try container.encode(self.vbiosVersion, forKey: .vbiosVersion)
+      }
+      if self.gpuArchitectureType != NvidiaAttestation.GpuArchitectureType() {
+        try container.encode(self.gpuArchitectureType, forKey: .gpuArchitectureType)
+      }
+      if !self.attestationCertificateChain.isEmpty {
+        try container.encode(self.attestationCertificateChain, forKey: .attestationCertificateChain)
+      }
+      if !self.attestationReport.isEmpty {
+        try container.encode(self.attestationReport, forKey: .attestationReport)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -323,9 +335,15 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uuid, forKey: .uuid)
-      try container.encode(self.attestationCertificateChain, forKey: .attestationCertificateChain)
-      try container.encode(self.attestationReport, forKey: .attestationReport)
+      if !self.uuid.isEmpty {
+        try container.encode(self.uuid, forKey: .uuid)
+      }
+      if !self.attestationCertificateChain.isEmpty {
+        try container.encode(self.attestationCertificateChain, forKey: .attestationCertificateChain)
+      }
+      if !self.attestationReport.isEmpty {
+        try container.encode(self.attestationReport, forKey: .attestationReport)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -499,8 +517,12 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.gpuQuotes, forKey: .gpuQuotes)
-      try container.encode(self.switchQuotes, forKey: .switchQuotes)
+      if !self.gpuQuotes.isEmpty {
+        try container.encode(self.gpuQuotes, forKey: .gpuQuotes)
+      }
+      if !self.switchQuotes.isEmpty {
+        try container.encode(self.switchQuotes, forKey: .switchQuotes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -584,7 +606,9 @@ public struct NvidiaAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.gpuQuotes, forKey: .gpuQuotes)
+      if !self.gpuQuotes.isEmpty {
+        try container.encode(self.gpuQuotes, forKey: .gpuQuotes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

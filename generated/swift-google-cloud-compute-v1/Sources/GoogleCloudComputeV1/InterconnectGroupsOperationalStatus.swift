@@ -101,7 +101,9 @@
       try container.encodeIfPresent(self.configured, forKey: .configured)
       try container.encodeIfPresent(self.groupStatus, forKey: .groupStatus)
       try container.encodeIfPresent(self.intent, forKey: .intent)
-      try container.encode(self.interconnectStatuses, forKey: .interconnectStatuses)
+      if !self.interconnectStatuses.isEmpty {
+        try container.encode(self.interconnectStatuses, forKey: .interconnectStatuses)
+      }
       try container.encodeIfPresent(self.operational, forKey: .operational)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

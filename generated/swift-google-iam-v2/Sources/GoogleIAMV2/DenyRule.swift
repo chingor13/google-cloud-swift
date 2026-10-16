@@ -168,10 +168,18 @@ public struct DenyRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deniedPrincipals, forKey: .deniedPrincipals)
-    try container.encode(self.exceptionPrincipals, forKey: .exceptionPrincipals)
-    try container.encode(self.deniedPermissions, forKey: .deniedPermissions)
-    try container.encode(self.exceptionPermissions, forKey: .exceptionPermissions)
+    if !self.deniedPrincipals.isEmpty {
+      try container.encode(self.deniedPrincipals, forKey: .deniedPrincipals)
+    }
+    if !self.exceptionPrincipals.isEmpty {
+      try container.encode(self.exceptionPrincipals, forKey: .exceptionPrincipals)
+    }
+    if !self.deniedPermissions.isEmpty {
+      try container.encode(self.deniedPermissions, forKey: .deniedPermissions)
+    }
+    if !self.exceptionPermissions.isEmpty {
+      try container.encode(self.exceptionPermissions, forKey: .exceptionPermissions)
+    }
     try container.encodeIfPresent(self.denialCondition, forKey: .denialCondition)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

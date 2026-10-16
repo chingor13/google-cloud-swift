@@ -128,12 +128,22 @@ public struct AnnotateVideoRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputUri, forKey: .inputUri)
-    try container.encode(self.inputContent, forKey: .inputContent)
-    try container.encode(self.features, forKey: .features)
+    if !self.inputUri.isEmpty {
+      try container.encode(self.inputUri, forKey: .inputUri)
+    }
+    if !self.inputContent.isEmpty {
+      try container.encode(self.inputContent, forKey: .inputContent)
+    }
+    if !self.features.isEmpty {
+      try container.encode(self.features, forKey: .features)
+    }
     try container.encodeIfPresent(self.videoContext, forKey: .videoContext)
-    try container.encode(self.outputUri, forKey: .outputUri)
-    try container.encode(self.locationId, forKey: .locationId)
+    if !self.outputUri.isEmpty {
+      try container.encode(self.outputUri, forKey: .outputUri)
+    }
+    if !self.locationId.isEmpty {
+      try container.encode(self.locationId, forKey: .locationId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -77,7 +77,9 @@ public struct SustainabilityProjection: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kgCO2E, forKey: .kgCO2E)
+    if self.kgCO2E != 0 {
+      try container.encode(self.kgCO2E, forKey: .kgCO2E)
+    }
     try container.encodeIfPresent(self.duration, forKey: .duration)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

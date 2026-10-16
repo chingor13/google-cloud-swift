@@ -176,19 +176,45 @@ public struct DataQualityScanRuleResult: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.jobId, forKey: .jobId)
-    try container.encode(self.dataSource, forKey: .dataSource)
-    try container.encode(self.column, forKey: .column)
-    try container.encode(self.ruleName, forKey: .ruleName)
-    try container.encode(self.ruleType, forKey: .ruleType)
-    try container.encode(self.evalutionType, forKey: .evalutionType)
-    try container.encode(self.ruleDimension, forKey: .ruleDimension)
-    try container.encode(self.thresholdPercent, forKey: .thresholdPercent)
-    try container.encode(self.result, forKey: .result)
-    try container.encode(self.evaluatedRowCount, forKey: .evaluatedRowCount)
-    try container.encode(self.passedRowCount, forKey: .passedRowCount)
-    try container.encode(self.nullRowCount, forKey: .nullRowCount)
-    try container.encode(self.assertionRowCount, forKey: .assertionRowCount)
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
+    if !self.dataSource.isEmpty {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
+    if !self.ruleName.isEmpty {
+      try container.encode(self.ruleName, forKey: .ruleName)
+    }
+    if self.ruleType != DataQualityScanRuleResult.RuleType() {
+      try container.encode(self.ruleType, forKey: .ruleType)
+    }
+    if self.evalutionType != DataQualityScanRuleResult.EvaluationType() {
+      try container.encode(self.evalutionType, forKey: .evalutionType)
+    }
+    if !self.ruleDimension.isEmpty {
+      try container.encode(self.ruleDimension, forKey: .ruleDimension)
+    }
+    if self.thresholdPercent != 0 {
+      try container.encode(self.thresholdPercent, forKey: .thresholdPercent)
+    }
+    if self.result != DataQualityScanRuleResult.Result() {
+      try container.encode(self.result, forKey: .result)
+    }
+    if self.evaluatedRowCount != 0 {
+      try container.encode(self.evaluatedRowCount, forKey: .evaluatedRowCount)
+    }
+    if self.passedRowCount != 0 {
+      try container.encode(self.passedRowCount, forKey: .passedRowCount)
+    }
+    if self.nullRowCount != 0 {
+      try container.encode(self.nullRowCount, forKey: .nullRowCount)
+    }
+    if self.assertionRowCount != 0 {
+      try container.encode(self.assertionRowCount, forKey: .assertionRowCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

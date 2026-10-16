@@ -86,8 +86,12 @@ public struct TextAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pages, forKey: .pages)
-    try container.encode(self.text, forKey: .text)
+    if !self.pages.isEmpty {
+      try container.encode(self.pages, forKey: .pages)
+    }
+    if !self.text.isEmpty {
+      try container.encode(self.text, forKey: .text)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -155,8 +159,12 @@ public struct TextAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.confidence, forKey: .confidence)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -247,8 +255,12 @@ public struct TextAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.isPrefix, forKey: .isPrefix)
+      if self.type != TextAnnotation.DetectedBreak.BreakType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.isPrefix {
+        try container.encode(self.isPrefix, forKey: .isPrefix)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -476,7 +488,9 @@ public struct TextAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+      if !self.detectedLanguages.isEmpty {
+        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+      }
       try container.encodeIfPresent(self.detectedBreak, forKey: .detectedBreak)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

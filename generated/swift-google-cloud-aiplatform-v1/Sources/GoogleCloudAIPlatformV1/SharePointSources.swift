@@ -72,7 +72,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sharePointSources, forKey: .sharePointSources)
+      if !self.sharePointSources.isEmpty {
+        try container.encode(self.sharePointSources, forKey: .sharePointSources)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -219,11 +221,19 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.clientId, forKey: .clientId)
+        if !self.clientId.isEmpty {
+          try container.encode(self.clientId, forKey: .clientId)
+        }
         try container.encodeIfPresent(self.clientSecret, forKey: .clientSecret)
-        try container.encode(self.tenantId, forKey: .tenantId)
-        try container.encode(self.sharepointSiteName, forKey: .sharepointSiteName)
-        try container.encode(self.fileId, forKey: .fileId)
+        if !self.tenantId.isEmpty {
+          try container.encode(self.tenantId, forKey: .tenantId)
+        }
+        if !self.sharepointSiteName.isEmpty {
+          try container.encode(self.sharepointSiteName, forKey: .sharepointSiteName)
+        }
+        if !self.fileId.isEmpty {
+          try container.encode(self.fileId, forKey: .fileId)
+        }
 
         if let choice = self.folderSource {
           switch choice {

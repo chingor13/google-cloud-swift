@@ -109,11 +109,21 @@ public struct LintResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issues, forKey: .issues)
-    try container.encode(self.summary, forKey: .summary)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.source, forKey: .source)
-    try container.encode(self.linter, forKey: .linter)
+    if !self.issues.isEmpty {
+      try container.encode(self.issues, forKey: .issues)
+    }
+    if !self.summary.isEmpty {
+      try container.encode(self.summary, forKey: .summary)
+    }
+    if self.state != LintState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.source.isEmpty {
+      try container.encode(self.source, forKey: .source)
+    }
+    if self.linter != Linter() {
+      try container.encode(self.linter, forKey: .linter)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -180,8 +190,12 @@ public struct LintResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.severity, forKey: .severity)
-      try container.encode(self.count, forKey: .count)
+      if self.severity != Severity() {
+        try container.encode(self.severity, forKey: .severity)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

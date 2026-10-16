@@ -84,7 +84,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.disks, forKey: .disks)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
       try container.encodeIfPresent(self.machineType, forKey: .machineType)
       try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)
       for (key, value) in self._unknownFields.json {

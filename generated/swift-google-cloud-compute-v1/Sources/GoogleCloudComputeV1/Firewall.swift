@@ -283,11 +283,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowed, forKey: .allowed)
+      if !self.allowed.isEmpty {
+        try container.encode(self.allowed, forKey: .allowed)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
-      try container.encode(self.denied, forKey: .denied)
+      if !self.denied.isEmpty {
+        try container.encode(self.denied, forKey: .denied)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.destinationRanges, forKey: .destinationRanges)
+      if !self.destinationRanges.isEmpty {
+        try container.encode(self.destinationRanges, forKey: .destinationRanges)
+      }
       try container.encodeIfPresent(self.direction, forKey: .direction)
       try container.encodeIfPresent(self.disabled, forKey: .disabled)
       try container.encodeIfPresent(self.id, forKey: .id)
@@ -298,11 +304,21 @@
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.priority, forKey: .priority)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.sourceRanges, forKey: .sourceRanges)
-      try container.encode(self.sourceServiceAccounts, forKey: .sourceServiceAccounts)
-      try container.encode(self.sourceTags, forKey: .sourceTags)
-      try container.encode(self.targetServiceAccounts, forKey: .targetServiceAccounts)
-      try container.encode(self.targetTags, forKey: .targetTags)
+      if !self.sourceRanges.isEmpty {
+        try container.encode(self.sourceRanges, forKey: .sourceRanges)
+      }
+      if !self.sourceServiceAccounts.isEmpty {
+        try container.encode(self.sourceServiceAccounts, forKey: .sourceServiceAccounts)
+      }
+      if !self.sourceTags.isEmpty {
+        try container.encode(self.sourceTags, forKey: .sourceTags)
+      }
+      if !self.targetServiceAccounts.isEmpty {
+        try container.encode(self.targetServiceAccounts, forKey: .targetServiceAccounts)
+      }
+      if !self.targetTags.isEmpty {
+        try container.encode(self.targetTags, forKey: .targetTags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -377,7 +393,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.ipprotocol, forKey: .ipprotocol)
-        try container.encode(self.ports, forKey: .ports)
+        if !self.ports.isEmpty {
+          try container.encode(self.ports, forKey: .ports)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -474,7 +492,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.ipprotocol, forKey: .ipprotocol)
-        try container.encode(self.ports, forKey: .ports)
+        if !self.ports.isEmpty {
+          try container.encode(self.ports, forKey: .ports)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

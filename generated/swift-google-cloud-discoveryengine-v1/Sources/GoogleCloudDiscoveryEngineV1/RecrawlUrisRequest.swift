@@ -99,9 +99,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.siteSearchEngine, forKey: .siteSearchEngine)
-      try container.encode(self.uris, forKey: .uris)
-      try container.encode(self.siteCredential, forKey: .siteCredential)
+      if !self.siteSearchEngine.isEmpty {
+        try container.encode(self.siteSearchEngine, forKey: .siteSearchEngine)
+      }
+      if !self.uris.isEmpty {
+        try container.encode(self.uris, forKey: .uris)
+      }
+      if !self.siteCredential.isEmpty {
+        try container.encode(self.siteCredential, forKey: .siteCredential)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

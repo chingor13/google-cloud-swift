@@ -103,8 +103,12 @@ public struct ImportEntriesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.jobId, forKey: .jobId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
 
     if let choice = self.source {
       switch choice {

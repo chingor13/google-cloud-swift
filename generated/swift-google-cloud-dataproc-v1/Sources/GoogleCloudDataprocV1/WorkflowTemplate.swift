@@ -183,15 +183,27 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.version, forKey: .version)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.version != 0 {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.placement, forKey: .placement)
-    try container.encode(self.jobs, forKey: .jobs)
-    try container.encode(self.parameters, forKey: .parameters)
+    if !self.jobs.isEmpty {
+      try container.encode(self.jobs, forKey: .jobs)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
     try container.encodeIfPresent(self.dagTimeout, forKey: .dagTimeout)
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     for (key, value) in self._unknownFields.json {
@@ -278,7 +290,9 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kmsKey, forKey: .kmsKey)
+      if !self.kmsKey.isEmpty {
+        try container.encode(self.kmsKey, forKey: .kmsKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -122,9 +122,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.importedRagFilesCount, forKey: .importedRagFilesCount)
-      try container.encode(self.failedRagFilesCount, forKey: .failedRagFilesCount)
-      try container.encode(self.skippedRagFilesCount, forKey: .skippedRagFilesCount)
+      if self.importedRagFilesCount != 0 {
+        try container.encode(self.importedRagFilesCount, forKey: .importedRagFilesCount)
+      }
+      if self.failedRagFilesCount != 0 {
+        try container.encode(self.failedRagFilesCount, forKey: .failedRagFilesCount)
+      }
+      if self.skippedRagFilesCount != 0 {
+        try container.encode(self.skippedRagFilesCount, forKey: .skippedRagFilesCount)
+      }
 
       if let choice = self.partialFailureSink {
         switch choice {

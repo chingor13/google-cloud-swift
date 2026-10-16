@@ -98,10 +98,18 @@ public struct LogicalView: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.deletionProtection, forKey: .deletionProtection)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.deletionProtection {
+      try container.encode(self.deletionProtection, forKey: .deletionProtection)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

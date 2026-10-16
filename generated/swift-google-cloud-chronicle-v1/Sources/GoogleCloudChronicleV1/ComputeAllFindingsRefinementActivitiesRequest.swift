@@ -79,7 +79,9 @@ public struct ComputeAllFindingsRefinementActivitiesRequest: Codable, Equatable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instance, forKey: .instance)
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
     try container.encodeIfPresent(self.interval, forKey: .interval)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

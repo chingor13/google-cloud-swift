@@ -92,10 +92,14 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.method, forKey: .method)
+    if !self.method.isEmpty {
+      try container.encode(self.method, forKey: .method)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.target, forKey: .target)
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

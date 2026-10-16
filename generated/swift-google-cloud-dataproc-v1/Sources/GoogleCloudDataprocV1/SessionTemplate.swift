@@ -165,15 +165,25 @@ public struct SessionTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.runtimeConfig, forKey: .runtimeConfig)
     try container.encodeIfPresent(self.environmentConfig, forKey: .environmentConfig)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.uuid, forKey: .uuid)
+    if !self.uuid.isEmpty {
+      try container.encode(self.uuid, forKey: .uuid)
+    }
 
     if let choice = self.sessionConfig {
       switch choice {

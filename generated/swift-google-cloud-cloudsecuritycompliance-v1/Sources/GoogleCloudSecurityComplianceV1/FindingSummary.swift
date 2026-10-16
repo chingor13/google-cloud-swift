@@ -116,13 +116,25 @@ public struct FindingSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.findingCategory, forKey: .findingCategory)
-    try container.encode(self.findingClass, forKey: .findingClass)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.findingCount, forKey: .findingCount)
+    if !self.findingCategory.isEmpty {
+      try container.encode(self.findingCategory, forKey: .findingCategory)
+    }
+    if self.findingClass != FindingClass() {
+      try container.encode(self.findingClass, forKey: .findingClass)
+    }
+    if self.severity != Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if self.findingCount != 0 {
+      try container.encode(self.findingCount, forKey: .findingCount)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.relatedFrameworks, forKey: .relatedFrameworks)
-    try container.encode(self.name, forKey: .name)
+    if !self.relatedFrameworks.isEmpty {
+      try container.encode(self.relatedFrameworks, forKey: .relatedFrameworks)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

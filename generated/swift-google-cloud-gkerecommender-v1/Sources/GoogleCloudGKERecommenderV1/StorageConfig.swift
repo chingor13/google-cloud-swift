@@ -84,8 +84,12 @@ public struct StorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.modelBucketUri, forKey: .modelBucketUri)
-    try container.encode(self.xlaCacheBucketUri, forKey: .xlaCacheBucketUri)
+    if !self.modelBucketUri.isEmpty {
+      try container.encode(self.modelBucketUri, forKey: .modelBucketUri)
+    }
+    if !self.xlaCacheBucketUri.isEmpty {
+      try container.encode(self.xlaCacheBucketUri, forKey: .xlaCacheBucketUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

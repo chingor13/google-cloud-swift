@@ -77,8 +77,12 @@ public struct GoldengatePlacement: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.availabilityDomain, forKey: .availabilityDomain)
-    try container.encode(self.faultDomain, forKey: .faultDomain)
+    if !self.availabilityDomain.isEmpty {
+      try container.encode(self.availabilityDomain, forKey: .availabilityDomain)
+    }
+    if !self.faultDomain.isEmpty {
+      try container.encode(self.faultDomain, forKey: .faultDomain)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

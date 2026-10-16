@@ -132,15 +132,29 @@ public struct ReportGenerationProgress: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureReason, forKey: .failureReason)
-    try container.encode(self.evaluationPercentComplete, forKey: .evaluationPercentComplete)
-    try container.encode(
-      self.reportGenerationPercentComplete, forKey: .reportGenerationPercentComplete)
-    try container.encode(
-      self.reportUploadingPercentComplete, forKey: .reportUploadingPercentComplete)
-    try container.encode(self.destinationGcsBucket, forKey: .destinationGcsBucket)
-    try container.encode(self.auditReport, forKey: .auditReport)
+    if self.state != OperationState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failureReason.isEmpty {
+      try container.encode(self.failureReason, forKey: .failureReason)
+    }
+    if self.evaluationPercentComplete != 0 {
+      try container.encode(self.evaluationPercentComplete, forKey: .evaluationPercentComplete)
+    }
+    if self.reportGenerationPercentComplete != 0 {
+      try container.encode(
+        self.reportGenerationPercentComplete, forKey: .reportGenerationPercentComplete)
+    }
+    if self.reportUploadingPercentComplete != 0 {
+      try container.encode(
+        self.reportUploadingPercentComplete, forKey: .reportUploadingPercentComplete)
+    }
+    if !self.destinationGcsBucket.isEmpty {
+      try container.encode(self.destinationGcsBucket, forKey: .destinationGcsBucket)
+    }
+    if !self.auditReport.isEmpty {
+      try container.encode(self.auditReport, forKey: .auditReport)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

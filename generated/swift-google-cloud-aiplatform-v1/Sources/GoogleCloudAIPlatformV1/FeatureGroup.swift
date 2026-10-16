@@ -143,12 +143,20 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.description, forKey: .description)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
 
       if let choice = self.source {
         switch choice {
@@ -263,10 +271,16 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.bigQuerySource, forKey: .bigQuerySource)
-        try container.encode(self.entityIdColumns, forKey: .entityIdColumns)
-        try container.encode(self.staticDataSource, forKey: .staticDataSource)
+        if !self.entityIdColumns.isEmpty {
+          try container.encode(self.entityIdColumns, forKey: .entityIdColumns)
+        }
+        if self.staticDataSource {
+          try container.encode(self.staticDataSource, forKey: .staticDataSource)
+        }
         try container.encodeIfPresent(self.timeSeries, forKey: .timeSeries)
-        try container.encode(self.dense, forKey: .dense)
+        if self.dense {
+          try container.encode(self.dense, forKey: .dense)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -327,7 +341,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.timestampColumn, forKey: .timestampColumn)
+          if !self.timestampColumn.isEmpty {
+            try container.encode(self.timestampColumn, forKey: .timestampColumn)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

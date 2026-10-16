@@ -100,10 +100,18 @@ public struct GenerateChatTokenRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.deployment, forKey: .deployment)
-    try container.encode(self.recaptchaToken, forKey: .recaptchaToken)
-    try container.encode(self.liveHandoffEnabled, forKey: .liveHandoffEnabled)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.deployment.isEmpty {
+      try container.encode(self.deployment, forKey: .deployment)
+    }
+    if !self.recaptchaToken.isEmpty {
+      try container.encode(self.recaptchaToken, forKey: .recaptchaToken)
+    }
+    if self.liveHandoffEnabled {
+      try container.encode(self.liveHandoffEnabled, forKey: .liveHandoffEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

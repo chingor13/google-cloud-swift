@@ -218,19 +218,33 @@ public struct Feature: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.resourceState, forKey: .resourceState)
     try container.encodeIfPresent(self.spec, forKey: .spec)
-    try container.encode(self.membershipSpecs, forKey: .membershipSpecs)
+    if !self.membershipSpecs.isEmpty {
+      try container.encode(self.membershipSpecs, forKey: .membershipSpecs)
+    }
     try container.encodeIfPresent(self.state, forKey: .state)
-    try container.encode(self.membershipStates, forKey: .membershipStates)
+    if !self.membershipStates.isEmpty {
+      try container.encode(self.membershipStates, forKey: .membershipStates)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.scopeSpecs, forKey: .scopeSpecs)
-    try container.encode(self.scopeStates, forKey: .scopeStates)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.scopeSpecs.isEmpty {
+      try container.encode(self.scopeSpecs, forKey: .scopeSpecs)
+    }
+    if !self.scopeStates.isEmpty {
+      try container.encode(self.scopeStates, forKey: .scopeStates)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

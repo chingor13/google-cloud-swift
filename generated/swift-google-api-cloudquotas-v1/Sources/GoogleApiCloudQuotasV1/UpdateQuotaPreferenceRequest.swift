@@ -110,9 +110,15 @@ public struct UpdateQuotaPreferenceRequest: Codable, Equatable, GoogleWKT._AnyPa
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.quotaPreference, forKey: .quotaPreference)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.ignoreSafetyChecks, forKey: .ignoreSafetyChecks)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.ignoreSafetyChecks.isEmpty {
+      try container.encode(self.ignoreSafetyChecks, forKey: .ignoreSafetyChecks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

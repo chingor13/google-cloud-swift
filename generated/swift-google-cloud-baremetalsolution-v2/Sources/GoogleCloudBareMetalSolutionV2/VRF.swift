@@ -96,10 +96,16 @@ public struct VRF: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != VRF.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.qosPolicy, forKey: .qosPolicy)
-    try container.encode(self.vlanAttachments, forKey: .vlanAttachments)
+    if !self.vlanAttachments.isEmpty {
+      try container.encode(self.vlanAttachments, forKey: .vlanAttachments)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -157,7 +163,9 @@ public struct VRF: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.bandwidthGbps, forKey: .bandwidthGbps)
+      if self.bandwidthGbps != 0 {
+        try container.encode(self.bandwidthGbps, forKey: .bandwidthGbps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -287,13 +295,25 @@ public struct VRF: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.peerVlanId, forKey: .peerVlanId)
-      try container.encode(self.peerIp, forKey: .peerIp)
-      try container.encode(self.routerIp, forKey: .routerIp)
-      try container.encode(self.pairingKey, forKey: .pairingKey)
+      if self.peerVlanId != 0 {
+        try container.encode(self.peerVlanId, forKey: .peerVlanId)
+      }
+      if !self.peerIp.isEmpty {
+        try container.encode(self.peerIp, forKey: .peerIp)
+      }
+      if !self.routerIp.isEmpty {
+        try container.encode(self.routerIp, forKey: .routerIp)
+      }
+      if !self.pairingKey.isEmpty {
+        try container.encode(self.pairingKey, forKey: .pairingKey)
+      }
       try container.encodeIfPresent(self.qosPolicy, forKey: .qosPolicy)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.interconnectAttachment, forKey: .interconnectAttachment)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.interconnectAttachment.isEmpty {
+        try container.encode(self.interconnectAttachment, forKey: .interconnectAttachment)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

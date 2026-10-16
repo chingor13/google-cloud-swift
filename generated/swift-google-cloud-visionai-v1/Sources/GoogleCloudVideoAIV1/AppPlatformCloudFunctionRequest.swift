@@ -83,7 +83,9 @@ public struct AppPlatformCloudFunctionRequest: Codable, Equatable, GoogleWKT._An
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.appPlatformMetadata, forKey: .appPlatformMetadata)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -148,7 +150,9 @@ public struct AppPlatformCloudFunctionRequest: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ingestionTimeMicros, forKey: .ingestionTimeMicros)
+      if self.ingestionTimeMicros != 0 {
+        try container.encode(self.ingestionTimeMicros, forKey: .ingestionTimeMicros)
+      }
       try container.encodeIfPresent(self.annotation, forKey: .annotation)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

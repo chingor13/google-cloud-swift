@@ -154,11 +154,21 @@ public struct GenerateAuditReportRequest: Codable, Equatable, GoogleWKT._AnyPack
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.complianceStandard, forKey: .complianceStandard)
-    try container.encode(self.reportFormat, forKey: .reportFormat)
-    try container.encode(self.complianceFramework, forKey: .complianceFramework)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.complianceStandard.isEmpty {
+      try container.encode(self.complianceStandard, forKey: .complianceStandard)
+    }
+    if self.reportFormat != GenerateAuditReportRequest.AuditReportFormat() {
+      try container.encode(self.reportFormat, forKey: .reportFormat)
+    }
+    if !self.complianceFramework.isEmpty {
+      try container.encode(self.complianceFramework, forKey: .complianceFramework)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
 
     if let choice = self.destination {
       switch choice {

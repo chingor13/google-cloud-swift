@@ -190,21 +190,51 @@ public struct DbSystemShape: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.shape, forKey: .shape)
-    try container.encode(self.minNodeCount, forKey: .minNodeCount)
-    try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
-    try container.encode(self.minStorageCount, forKey: .minStorageCount)
-    try container.encode(self.maxStorageCount, forKey: .maxStorageCount)
-    try container.encode(self.availableCoreCountPerNode, forKey: .availableCoreCountPerNode)
-    try container.encode(self.availableMemoryPerNodeGb, forKey: .availableMemoryPerNodeGb)
-    try container.encode(self.availableDataStorageTb, forKey: .availableDataStorageTb)
-    try container.encode(self.minCoreCountPerNode, forKey: .minCoreCountPerNode)
-    try container.encode(self.minMemoryPerNodeGb, forKey: .minMemoryPerNodeGb)
-    try container.encode(self.minDbNodeStoragePerNodeGb, forKey: .minDbNodeStoragePerNodeGb)
-    try container.encode(self.minimumCoreCount, forKey: .minimumCoreCount)
-    try container.encode(self.availableCoreCount, forKey: .availableCoreCount)
-    try container.encode(self.coreCountIncrement, forKey: .coreCountIncrement)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.shape.isEmpty {
+      try container.encode(self.shape, forKey: .shape)
+    }
+    if self.minNodeCount != 0 {
+      try container.encode(self.minNodeCount, forKey: .minNodeCount)
+    }
+    if self.maxNodeCount != 0 {
+      try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
+    }
+    if self.minStorageCount != 0 {
+      try container.encode(self.minStorageCount, forKey: .minStorageCount)
+    }
+    if self.maxStorageCount != 0 {
+      try container.encode(self.maxStorageCount, forKey: .maxStorageCount)
+    }
+    if self.availableCoreCountPerNode != 0 {
+      try container.encode(self.availableCoreCountPerNode, forKey: .availableCoreCountPerNode)
+    }
+    if self.availableMemoryPerNodeGb != 0 {
+      try container.encode(self.availableMemoryPerNodeGb, forKey: .availableMemoryPerNodeGb)
+    }
+    if self.availableDataStorageTb != 0 {
+      try container.encode(self.availableDataStorageTb, forKey: .availableDataStorageTb)
+    }
+    if self.minCoreCountPerNode != 0 {
+      try container.encode(self.minCoreCountPerNode, forKey: .minCoreCountPerNode)
+    }
+    if self.minMemoryPerNodeGb != 0 {
+      try container.encode(self.minMemoryPerNodeGb, forKey: .minMemoryPerNodeGb)
+    }
+    if self.minDbNodeStoragePerNodeGb != 0 {
+      try container.encode(self.minDbNodeStoragePerNodeGb, forKey: .minDbNodeStoragePerNodeGb)
+    }
+    if self.minimumCoreCount != 0 {
+      try container.encode(self.minimumCoreCount, forKey: .minimumCoreCount)
+    }
+    if self.availableCoreCount != 0 {
+      try container.encode(self.availableCoreCount, forKey: .availableCoreCount)
+    }
+    if self.coreCountIncrement != 0 {
+      try container.encode(self.coreCountIncrement, forKey: .coreCountIncrement)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

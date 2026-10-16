@@ -1752,7 +1752,9 @@ public struct Type_: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fields, forKey: .fields)
+      if !self.fields.isEmpty {
+        try container.encode(self.fields, forKey: .fields)
+      }
       try container.encodeIfPresent(self.encoding, forKey: .encoding)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1819,7 +1821,9 @@ public struct Type_: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.fieldName, forKey: .fieldName)
+        if !self.fieldName.isEmpty {
+          try container.encode(self.fieldName, forKey: .fieldName)
+        }
         try container.encodeIfPresent(self.type, forKey: .type)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2084,7 +2088,9 @@ public struct Type_: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.delimiter, forKey: .delimiter)
+          if !self.delimiter.isEmpty {
+            try container.encode(self.delimiter, forKey: .delimiter)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2340,8 +2346,12 @@ public struct Type_: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.schemaBundleId, forKey: .schemaBundleId)
-      try container.encode(self.messageName, forKey: .messageName)
+      if !self.schemaBundleId.isEmpty {
+        try container.encode(self.schemaBundleId, forKey: .schemaBundleId)
+      }
+      if !self.messageName.isEmpty {
+        try container.encode(self.messageName, forKey: .messageName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2431,8 +2441,12 @@ public struct Type_: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.schemaBundleId, forKey: .schemaBundleId)
-      try container.encode(self.enumName, forKey: .enumName)
+      if !self.schemaBundleId.isEmpty {
+        try container.encode(self.schemaBundleId, forKey: .schemaBundleId)
+      }
+      if !self.enumName.isEmpty {
+        try container.encode(self.enumName, forKey: .enumName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -86,7 +86,9 @@ public struct UpdateSshPublicKeyRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.sshPublicKey, forKey: .sshPublicKey)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

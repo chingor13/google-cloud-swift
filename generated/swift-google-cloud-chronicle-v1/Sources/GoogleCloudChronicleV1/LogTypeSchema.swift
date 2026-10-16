@@ -132,14 +132,28 @@ public struct LogTypeSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.logType, forKey: .logType)
-    try container.encode(self.readOnly, forKey: .readOnly)
-    try container.encode(self.supportingDocumentation, forKey: .supportingDocumentation)
-    try container.encode(self.detailsFieldSchemas, forKey: .detailsFieldSchemas)
-    try container.encode(
-      self.detailsFieldSchemaAlternatives, forKey: .detailsFieldSchemaAlternatives)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.logType.isEmpty {
+      try container.encode(self.logType, forKey: .logType)
+    }
+    if self.readOnly {
+      try container.encode(self.readOnly, forKey: .readOnly)
+    }
+    if !self.supportingDocumentation.isEmpty {
+      try container.encode(self.supportingDocumentation, forKey: .supportingDocumentation)
+    }
+    if !self.detailsFieldSchemas.isEmpty {
+      try container.encode(self.detailsFieldSchemas, forKey: .detailsFieldSchemas)
+    }
+    if !self.detailsFieldSchemaAlternatives.isEmpty {
+      try container.encode(
+        self.detailsFieldSchemaAlternatives, forKey: .detailsFieldSchemaAlternatives)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -200,7 +214,9 @@ public struct LogTypeSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.detailsFieldSchemaSets, forKey: .detailsFieldSchemaSets)
+      if !self.detailsFieldSchemaSets.isEmpty {
+        try container.encode(self.detailsFieldSchemaSets, forKey: .detailsFieldSchemaSets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -299,9 +315,15 @@ public struct LogTypeSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.detailsFieldSchemas, forKey: .detailsFieldSchemas)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.detailsFieldSchemas.isEmpty {
+        try container.encode(self.detailsFieldSchemas, forKey: .detailsFieldSchemas)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -442,14 +464,30 @@ public struct LogTypeSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fieldPath, forKey: .fieldPath)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.enumFieldSchemas, forKey: .enumFieldSchemas)
-      try container.encode(self.`required`, forKey: .`required`)
-      try container.encode(self.exampleInput, forKey: .exampleInput)
-      try container.encode(self.readOnly, forKey: .readOnly)
+      if !self.fieldPath.isEmpty {
+        try container.encode(self.fieldPath, forKey: .fieldPath)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.type != SemanticType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.enumFieldSchemas.isEmpty {
+        try container.encode(self.enumFieldSchemas, forKey: .enumFieldSchemas)
+      }
+      if self.`required` {
+        try container.encode(self.`required`, forKey: .`required`)
+      }
+      if !self.exampleInput.isEmpty {
+        try container.encode(self.exampleInput, forKey: .exampleInput)
+      }
+      if self.readOnly {
+        try container.encode(self.readOnly, forKey: .readOnly)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -546,9 +584,15 @@ public struct LogTypeSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.value, forKey: .value)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

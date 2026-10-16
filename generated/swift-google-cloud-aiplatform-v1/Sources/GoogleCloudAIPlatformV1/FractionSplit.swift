@@ -91,9 +91,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trainingFraction, forKey: .trainingFraction)
-      try container.encode(self.validationFraction, forKey: .validationFraction)
-      try container.encode(self.testFraction, forKey: .testFraction)
+      if self.trainingFraction != 0 {
+        try container.encode(self.trainingFraction, forKey: .trainingFraction)
+      }
+      if self.validationFraction != 0 {
+        try container.encode(self.validationFraction, forKey: .validationFraction)
+      }
+      if self.testFraction != 0 {
+        try container.encode(self.testFraction, forKey: .testFraction)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -79,8 +79,12 @@ public struct GetServiceRolloutRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceName, forKey: .serviceName)
-    try container.encode(self.rolloutId, forKey: .rolloutId)
+    if !self.serviceName.isEmpty {
+      try container.encode(self.serviceName, forKey: .serviceName)
+    }
+    if !self.rolloutId.isEmpty {
+      try container.encode(self.rolloutId, forKey: .rolloutId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

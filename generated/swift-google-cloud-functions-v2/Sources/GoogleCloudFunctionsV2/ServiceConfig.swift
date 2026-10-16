@@ -277,25 +277,64 @@ public struct ServiceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.timeoutSeconds, forKey: .timeoutSeconds)
-    try container.encode(self.availableMemory, forKey: .availableMemory)
-    try container.encode(self.availableCpu, forKey: .availableCpu)
-    try container.encode(self.environmentVariables, forKey: .environmentVariables)
-    try container.encode(self.maxInstanceCount, forKey: .maxInstanceCount)
-    try container.encode(self.minInstanceCount, forKey: .minInstanceCount)
-    try container.encode(self.vpcConnector, forKey: .vpcConnector)
-    try container.encode(self.vpcConnectorEgressSettings, forKey: .vpcConnectorEgressSettings)
-    try container.encode(self.ingressSettings, forKey: .ingressSettings)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
-    try container.encode(self.allTrafficOnLatestRevision, forKey: .allTrafficOnLatestRevision)
-    try container.encode(self.secretEnvironmentVariables, forKey: .secretEnvironmentVariables)
-    try container.encode(self.secretVolumes, forKey: .secretVolumes)
-    try container.encode(self.revision, forKey: .revision)
-    try container.encode(self.maxInstanceRequestConcurrency, forKey: .maxInstanceRequestConcurrency)
-    try container.encode(self.securityLevel, forKey: .securityLevel)
-    try container.encode(self.binaryAuthorizationPolicy, forKey: .binaryAuthorizationPolicy)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if self.timeoutSeconds != 0 {
+      try container.encode(self.timeoutSeconds, forKey: .timeoutSeconds)
+    }
+    if !self.availableMemory.isEmpty {
+      try container.encode(self.availableMemory, forKey: .availableMemory)
+    }
+    if !self.availableCpu.isEmpty {
+      try container.encode(self.availableCpu, forKey: .availableCpu)
+    }
+    if !self.environmentVariables.isEmpty {
+      try container.encode(self.environmentVariables, forKey: .environmentVariables)
+    }
+    if self.maxInstanceCount != 0 {
+      try container.encode(self.maxInstanceCount, forKey: .maxInstanceCount)
+    }
+    if self.minInstanceCount != 0 {
+      try container.encode(self.minInstanceCount, forKey: .minInstanceCount)
+    }
+    if !self.vpcConnector.isEmpty {
+      try container.encode(self.vpcConnector, forKey: .vpcConnector)
+    }
+    if self.vpcConnectorEgressSettings != ServiceConfig.VpcConnectorEgressSettings() {
+      try container.encode(self.vpcConnectorEgressSettings, forKey: .vpcConnectorEgressSettings)
+    }
+    if self.ingressSettings != ServiceConfig.IngressSettings() {
+      try container.encode(self.ingressSettings, forKey: .ingressSettings)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.serviceAccountEmail.isEmpty {
+      try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+    }
+    if self.allTrafficOnLatestRevision {
+      try container.encode(self.allTrafficOnLatestRevision, forKey: .allTrafficOnLatestRevision)
+    }
+    if !self.secretEnvironmentVariables.isEmpty {
+      try container.encode(self.secretEnvironmentVariables, forKey: .secretEnvironmentVariables)
+    }
+    if !self.secretVolumes.isEmpty {
+      try container.encode(self.secretVolumes, forKey: .secretVolumes)
+    }
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
+    if self.maxInstanceRequestConcurrency != 0 {
+      try container.encode(
+        self.maxInstanceRequestConcurrency, forKey: .maxInstanceRequestConcurrency)
+    }
+    if self.securityLevel != ServiceConfig.SecurityLevel() {
+      try container.encode(self.securityLevel, forKey: .securityLevel)
+    }
+    if !self.binaryAuthorizationPolicy.isEmpty {
+      try container.encode(self.binaryAuthorizationPolicy, forKey: .binaryAuthorizationPolicy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

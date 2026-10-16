@@ -84,7 +84,9 @@ extension ResponsePoliciesClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.project, forKey: .project)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -181,8 +183,12 @@ extension ResponsePoliciesClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.responsePolicy.isEmpty {
+        try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -278,8 +284,12 @@ extension ResponsePoliciesClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.responsePolicy.isEmpty {
+        try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -373,7 +383,9 @@ extension ResponsePoliciesClient {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
       try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-      try container.encode(self.project, forKey: .project)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -475,8 +487,12 @@ extension ResponsePoliciesClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.responsePolicy.isEmpty {
+        try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      }
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -579,8 +595,12 @@ extension ResponsePoliciesClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.responsePolicy.isEmpty {
+        try container.encode(self.responsePolicy, forKey: .responsePolicy)
+      }
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -127,13 +127,25 @@ public struct Sku: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.skuId, forKey: .skuId)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.skuId.isEmpty {
+      try container.encode(self.skuId, forKey: .skuId)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.category, forKey: .category)
-    try container.encode(self.serviceRegions, forKey: .serviceRegions)
-    try container.encode(self.pricingInfo, forKey: .pricingInfo)
-    try container.encode(self.serviceProviderName, forKey: .serviceProviderName)
+    if !self.serviceRegions.isEmpty {
+      try container.encode(self.serviceRegions, forKey: .serviceRegions)
+    }
+    if !self.pricingInfo.isEmpty {
+      try container.encode(self.pricingInfo, forKey: .pricingInfo)
+    }
+    if !self.serviceProviderName.isEmpty {
+      try container.encode(self.serviceProviderName, forKey: .serviceProviderName)
+    }
     try container.encodeIfPresent(self.geoTaxonomy, forKey: .geoTaxonomy)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

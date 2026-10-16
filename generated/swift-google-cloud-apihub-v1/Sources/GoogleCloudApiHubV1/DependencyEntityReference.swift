@@ -98,7 +98,9 @@ public struct DependencyEntityReference: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
 
     if let choice = self.identifier {
       switch choice {

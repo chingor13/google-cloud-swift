@@ -141,11 +141,21 @@ public struct CloudEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.source, forKey: .source)
-    try container.encode(self.specVersion, forKey: .specVersion)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.source.isEmpty {
+      try container.encode(self.source, forKey: .source)
+    }
+    if !self.specVersion.isEmpty {
+      try container.encode(self.specVersion, forKey: .specVersion)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
 
     if let choice = self.data {
       switch choice {

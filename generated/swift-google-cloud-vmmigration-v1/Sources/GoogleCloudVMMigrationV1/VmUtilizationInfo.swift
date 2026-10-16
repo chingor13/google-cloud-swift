@@ -97,7 +97,9 @@ public struct VmUtilizationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmId, forKey: .vmId)
+    if !self.vmId.isEmpty {
+      try container.encode(self.vmId, forKey: .vmId)
+    }
     try container.encodeIfPresent(self.utilization, forKey: .utilization)
 
     if let choice = self.vmDetails {

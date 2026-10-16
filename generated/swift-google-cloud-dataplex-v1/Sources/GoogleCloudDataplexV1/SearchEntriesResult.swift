@@ -89,7 +89,9 @@ public struct SearchEntriesResult: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.linkedResource, forKey: .linkedResource)
+    if !self.linkedResource.isEmpty {
+      try container.encode(self.linkedResource, forKey: .linkedResource)
+    }
     try container.encodeIfPresent(self.dataplexEntry, forKey: .dataplexEntry)
     try container.encodeIfPresent(self.snippets, forKey: .snippets)
     for (key, value) in self._unknownFields.json {

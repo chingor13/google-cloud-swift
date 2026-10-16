@@ -94,8 +94,12 @@ public struct SSLClientKeypair: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.encodedPrivateKey, forKey: .encodedPrivateKey)
-    try container.encode(self.sslCertificate, forKey: .sslCertificate)
+    if !self.encodedPrivateKey.isEmpty {
+      try container.encode(self.encodedPrivateKey, forKey: .encodedPrivateKey)
+    }
+    if !self.sslCertificate.isEmpty {
+      try container.encode(self.sslCertificate, forKey: .sslCertificate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

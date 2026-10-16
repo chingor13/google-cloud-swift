@@ -111,10 +111,18 @@ public struct UpdateApplicationInstancesRequest: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.applicationInstances, forKey: .applicationInstances)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.applicationInstances.isEmpty {
+      try container.encode(self.applicationInstances, forKey: .applicationInstances)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -190,7 +198,9 @@ public struct UpdateApplicationInstancesRequest: Codable, Equatable, GoogleWKT._
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
       try container.encodeIfPresent(self.instance, forKey: .instance)
-      try container.encode(self.instanceId, forKey: .instanceId)
+      if !self.instanceId.isEmpty {
+        try container.encode(self.instanceId, forKey: .instanceId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

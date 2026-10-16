@@ -157,18 +157,42 @@ public struct ConnectorVersionReportLog: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.applianceId, forKey: .applianceId)
-    try container.encode(self.hostName, forKey: .hostName)
-    try container.encode(self.hostId, forKey: .hostId)
-    try container.encode(self.hostOsType, forKey: .hostOsType)
-    try container.encode(self.hostIpAddress, forKey: .hostIpAddress)
-    try container.encode(self.dbAuthentication, forKey: .dbAuthentication)
-    try container.encode(self.installedVersion, forKey: .installedVersion)
-    try container.encode(self.availableVersion, forKey: .availableVersion)
-    try container.encode(self.versionCheck, forKey: .versionCheck)
-    try container.encode(self.diskPreference, forKey: .diskPreference)
-    try container.encode(self.transport, forKey: .transport)
+    if !self.applianceName.isEmpty {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.applianceId.isEmpty {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
+    if !self.hostName.isEmpty {
+      try container.encode(self.hostName, forKey: .hostName)
+    }
+    if !self.hostId.isEmpty {
+      try container.encode(self.hostId, forKey: .hostId)
+    }
+    if !self.hostOsType.isEmpty {
+      try container.encode(self.hostOsType, forKey: .hostOsType)
+    }
+    if !self.hostIpAddress.isEmpty {
+      try container.encode(self.hostIpAddress, forKey: .hostIpAddress)
+    }
+    if !self.dbAuthentication.isEmpty {
+      try container.encode(self.dbAuthentication, forKey: .dbAuthentication)
+    }
+    if !self.installedVersion.isEmpty {
+      try container.encode(self.installedVersion, forKey: .installedVersion)
+    }
+    if !self.availableVersion.isEmpty {
+      try container.encode(self.availableVersion, forKey: .availableVersion)
+    }
+    if !self.versionCheck.isEmpty {
+      try container.encode(self.versionCheck, forKey: .versionCheck)
+    }
+    if !self.diskPreference.isEmpty {
+      try container.encode(self.diskPreference, forKey: .diskPreference)
+    }
+    if !self.transport.isEmpty {
+      try container.encode(self.transport, forKey: .transport)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

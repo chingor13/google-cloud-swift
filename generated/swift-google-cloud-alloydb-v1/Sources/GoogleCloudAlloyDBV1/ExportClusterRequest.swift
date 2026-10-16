@@ -130,8 +130,12 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.database, forKey: .database)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
 
     if let choice = self.destination {
       switch choice {
@@ -236,10 +240,18 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.selectQuery, forKey: .selectQuery)
-      try container.encode(self.fieldDelimiter, forKey: .fieldDelimiter)
-      try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
-      try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
+      if !self.selectQuery.isEmpty {
+        try container.encode(self.selectQuery, forKey: .selectQuery)
+      }
+      if !self.fieldDelimiter.isEmpty {
+        try container.encode(self.fieldDelimiter, forKey: .fieldDelimiter)
+      }
+      if !self.quoteCharacter.isEmpty {
+        try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
+      }
+      if !self.escapeCharacter.isEmpty {
+        try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -341,7 +353,9 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tables, forKey: .tables)
+      if !self.tables.isEmpty {
+        try container.encode(self.tables, forKey: .tables)
+      }
       try container.encodeIfPresent(self.schemaOnly, forKey: .schemaOnly)
       try container.encodeIfPresent(self.cleanTargetObjects, forKey: .cleanTargetObjects)
       try container.encodeIfPresent(self.ifExistTargetObjects, forKey: .ifExistTargetObjects)

@@ -101,8 +101,12 @@ public struct GenerateFrameworkAuditScopeReportResponse: Codable, Equatable, Goo
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.complianceFramework, forKey: .complianceFramework)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.complianceFramework.isEmpty {
+      try container.encode(self.complianceFramework, forKey: .complianceFramework)
+    }
 
     if let choice = self.auditReport {
       switch choice {

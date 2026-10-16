@@ -189,15 +189,25 @@ public struct Stream: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.sourceConfig, forKey: .sourceConfig)
     try container.encodeIfPresent(self.destinationConfig, forKey: .destinationConfig)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.errors, forKey: .errors)
+    if self.state != Stream.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     try container.encodeIfPresent(
       self.customerManagedEncryptionKey, forKey: .customerManagedEncryptionKey)
     try container.encodeIfPresent(self.lastRecoveryTime, forKey: .lastRecoveryTime)

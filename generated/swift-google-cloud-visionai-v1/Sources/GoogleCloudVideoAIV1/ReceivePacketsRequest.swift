@@ -217,7 +217,9 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
-      try container.encode(self.receiver, forKey: .receiver)
+      if !self.receiver.isEmpty {
+        try container.encode(self.receiver, forKey: .receiver)
+      }
       try container.encodeIfPresent(self.heartbeatInterval, forKey: .heartbeatInterval)
       try container.encodeIfPresent(self.writesDoneGracePeriod, forKey: .writesDoneGracePeriod)
 

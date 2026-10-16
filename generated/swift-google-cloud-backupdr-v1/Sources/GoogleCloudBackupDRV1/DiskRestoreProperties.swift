@@ -199,8 +199,12 @@ public struct DiskRestoreProperties: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.name, forKey: .name)
     try container.encodeIfPresent(self.description, forKey: .description)
     try container.encodeIfPresent(self.sizeGb, forKey: .sizeGb)
-    try container.encode(self.licenses, forKey: .licenses)
-    try container.encode(self.guestOsFeature, forKey: .guestOsFeature)
+    if !self.licenses.isEmpty {
+      try container.encode(self.licenses, forKey: .licenses)
+    }
+    if !self.guestOsFeature.isEmpty {
+      try container.encode(self.guestOsFeature, forKey: .guestOsFeature)
+    }
     try container.encodeIfPresent(self.diskEncryptionKey, forKey: .diskEncryptionKey)
     try container.encodeIfPresent(self.physicalBlockSizeBytes, forKey: .physicalBlockSizeBytes)
     try container.encodeIfPresent(self.provisionedIops, forKey: .provisionedIops)
@@ -210,10 +214,16 @@ public struct DiskRestoreProperties: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.storagePool, forKey: .storagePool)
     try container.encodeIfPresent(self.accessMode, forKey: .accessMode)
     try container.encodeIfPresent(self.architecture, forKey: .architecture)
-    try container.encode(self.resourcePolicy, forKey: .resourcePolicy)
+    if !self.resourcePolicy.isEmpty {
+      try container.encode(self.resourcePolicy, forKey: .resourcePolicy)
+    }
     try container.encodeIfPresent(self.type, forKey: .type)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.resourceManagerTags.isEmpty {
+      try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

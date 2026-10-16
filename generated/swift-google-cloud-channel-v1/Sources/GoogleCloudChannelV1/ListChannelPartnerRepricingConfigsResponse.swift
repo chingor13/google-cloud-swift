@@ -90,9 +90,13 @@ public struct ListChannelPartnerRepricingConfigsResponse: Codable, Equatable, Go
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.channelPartnerRepricingConfigs, forKey: .channelPartnerRepricingConfigs)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.channelPartnerRepricingConfigs.isEmpty {
+      try container.encode(
+        self.channelPartnerRepricingConfigs, forKey: .channelPartnerRepricingConfigs)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

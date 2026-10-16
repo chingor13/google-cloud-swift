@@ -131,10 +131,18 @@ public struct SparkBatch: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.args, forKey: .args)
-    try container.encode(self.jarFileUris, forKey: .jarFileUris)
-    try container.encode(self.fileUris, forKey: .fileUris)
-    try container.encode(self.archiveUris, forKey: .archiveUris)
+    if !self.args.isEmpty {
+      try container.encode(self.args, forKey: .args)
+    }
+    if !self.jarFileUris.isEmpty {
+      try container.encode(self.jarFileUris, forKey: .jarFileUris)
+    }
+    if !self.fileUris.isEmpty {
+      try container.encode(self.fileUris, forKey: .fileUris)
+    }
+    if !self.archiveUris.isEmpty {
+      try container.encode(self.archiveUris, forKey: .archiveUris)
+    }
 
     if let choice = self.driver {
       switch choice {

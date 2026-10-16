@@ -208,10 +208,18 @@ public struct DataDiscoverySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tableType, forKey: .tableType)
-      try container.encode(self.connection, forKey: .connection)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.project, forKey: .project)
+      if self.tableType != DataDiscoverySpec.BigQueryPublishingConfig.TableType() {
+        try container.encode(self.tableType, forKey: .tableType)
+      }
+      if !self.connection.isEmpty {
+        try container.encode(self.connection, forKey: .connection)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -453,8 +461,12 @@ public struct DataDiscoverySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.includePatterns, forKey: .includePatterns)
-      try container.encode(self.excludePatterns, forKey: .excludePatterns)
+      if !self.includePatterns.isEmpty {
+        try container.encode(self.includePatterns, forKey: .includePatterns)
+      }
+      if !self.excludePatterns.isEmpty {
+        try container.encode(self.excludePatterns, forKey: .excludePatterns)
+      }
       try container.encodeIfPresent(self.csvOptions, forKey: .csvOptions)
       try container.encodeIfPresent(self.jsonOptions, forKey: .jsonOptions)
       try container.encodeIfPresent(self.unstructuredDataOptions, forKey: .unstructuredDataOptions)
@@ -554,11 +566,21 @@ public struct DataDiscoverySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.headerRows, forKey: .headerRows)
-        try container.encode(self.delimiter, forKey: .delimiter)
-        try container.encode(self.encoding, forKey: .encoding)
-        try container.encode(self.typeInferenceDisabled, forKey: .typeInferenceDisabled)
-        try container.encode(self.quote, forKey: .quote)
+        if self.headerRows != 0 {
+          try container.encode(self.headerRows, forKey: .headerRows)
+        }
+        if !self.delimiter.isEmpty {
+          try container.encode(self.delimiter, forKey: .delimiter)
+        }
+        if !self.encoding.isEmpty {
+          try container.encode(self.encoding, forKey: .encoding)
+        }
+        if self.typeInferenceDisabled {
+          try container.encode(self.typeInferenceDisabled, forKey: .typeInferenceDisabled)
+        }
+        if !self.quote.isEmpty {
+          try container.encode(self.quote, forKey: .quote)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -651,8 +673,12 @@ public struct DataDiscoverySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.encoding, forKey: .encoding)
-        try container.encode(self.typeInferenceDisabled, forKey: .typeInferenceDisabled)
+        if !self.encoding.isEmpty {
+          try container.encode(self.encoding, forKey: .encoding)
+        }
+        if self.typeInferenceDisabled {
+          try container.encode(self.typeInferenceDisabled, forKey: .typeInferenceDisabled)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -736,7 +762,9 @@ public struct DataDiscoverySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.semanticInferenceEnabled, forKey: .semanticInferenceEnabled)
+        if self.semanticInferenceEnabled {
+          try container.encode(self.semanticInferenceEnabled, forKey: .semanticInferenceEnabled)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

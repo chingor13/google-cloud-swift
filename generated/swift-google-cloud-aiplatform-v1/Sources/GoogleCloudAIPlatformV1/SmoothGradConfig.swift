@@ -107,7 +107,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.noisySampleCount, forKey: .noisySampleCount)
+      if self.noisySampleCount != 0 {
+        try container.encode(self.noisySampleCount, forKey: .noisySampleCount)
+      }
 
       if let choice = self.gradientNoiseSigma {
         switch choice {

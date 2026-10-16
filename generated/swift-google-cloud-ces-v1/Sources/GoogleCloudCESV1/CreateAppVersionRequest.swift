@@ -88,8 +88,12 @@ public struct CreateAppVersionRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.appVersionId, forKey: .appVersionId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.appVersionId.isEmpty {
+      try container.encode(self.appVersionId, forKey: .appVersionId)
+    }
     try container.encodeIfPresent(self.appVersion, forKey: .appVersion)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

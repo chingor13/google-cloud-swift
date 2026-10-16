@@ -93,7 +93,9 @@ public struct KeyUsage: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.baseKeyUsage, forKey: .baseKeyUsage)
     try container.encodeIfPresent(self.extendedKeyUsage, forKey: .extendedKeyUsage)
-    try container.encode(self.unknownExtendedKeyUsages, forKey: .unknownExtendedKeyUsages)
+    if !self.unknownExtendedKeyUsages.isEmpty {
+      try container.encode(self.unknownExtendedKeyUsages, forKey: .unknownExtendedKeyUsages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -220,15 +222,33 @@ public struct KeyUsage: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.digitalSignature, forKey: .digitalSignature)
-      try container.encode(self.contentCommitment, forKey: .contentCommitment)
-      try container.encode(self.keyEncipherment, forKey: .keyEncipherment)
-      try container.encode(self.dataEncipherment, forKey: .dataEncipherment)
-      try container.encode(self.keyAgreement, forKey: .keyAgreement)
-      try container.encode(self.certSign, forKey: .certSign)
-      try container.encode(self.crlSign, forKey: .crlSign)
-      try container.encode(self.encipherOnly, forKey: .encipherOnly)
-      try container.encode(self.decipherOnly, forKey: .decipherOnly)
+      if self.digitalSignature {
+        try container.encode(self.digitalSignature, forKey: .digitalSignature)
+      }
+      if self.contentCommitment {
+        try container.encode(self.contentCommitment, forKey: .contentCommitment)
+      }
+      if self.keyEncipherment {
+        try container.encode(self.keyEncipherment, forKey: .keyEncipherment)
+      }
+      if self.dataEncipherment {
+        try container.encode(self.dataEncipherment, forKey: .dataEncipherment)
+      }
+      if self.keyAgreement {
+        try container.encode(self.keyAgreement, forKey: .keyAgreement)
+      }
+      if self.certSign {
+        try container.encode(self.certSign, forKey: .certSign)
+      }
+      if self.crlSign {
+        try container.encode(self.crlSign, forKey: .crlSign)
+      }
+      if self.encipherOnly {
+        try container.encode(self.encipherOnly, forKey: .encipherOnly)
+      }
+      if self.decipherOnly {
+        try container.encode(self.decipherOnly, forKey: .decipherOnly)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -358,12 +378,24 @@ public struct KeyUsage: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serverAuth, forKey: .serverAuth)
-      try container.encode(self.clientAuth, forKey: .clientAuth)
-      try container.encode(self.codeSigning, forKey: .codeSigning)
-      try container.encode(self.emailProtection, forKey: .emailProtection)
-      try container.encode(self.timeStamping, forKey: .timeStamping)
-      try container.encode(self.ocspSigning, forKey: .ocspSigning)
+      if self.serverAuth {
+        try container.encode(self.serverAuth, forKey: .serverAuth)
+      }
+      if self.clientAuth {
+        try container.encode(self.clientAuth, forKey: .clientAuth)
+      }
+      if self.codeSigning {
+        try container.encode(self.codeSigning, forKey: .codeSigning)
+      }
+      if self.emailProtection {
+        try container.encode(self.emailProtection, forKey: .emailProtection)
+      }
+      if self.timeStamping {
+        try container.encode(self.timeStamping, forKey: .timeStamping)
+      }
+      if self.ocspSigning {
+        try container.encode(self.ocspSigning, forKey: .ocspSigning)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

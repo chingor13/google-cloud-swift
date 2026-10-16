@@ -133,12 +133,22 @@ public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.enablementState, forKey: .enablementState)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.enablementState != SecurityHealthAnalyticsCustomModule.EnablementState() {
+      try container.encode(self.enablementState, forKey: .enablementState)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.lastEditor, forKey: .lastEditor)
-    try container.encode(self.ancestorModule, forKey: .ancestorModule)
+    if !self.lastEditor.isEmpty {
+      try container.encode(self.lastEditor, forKey: .lastEditor)
+    }
+    if !self.ancestorModule.isEmpty {
+      try container.encode(self.ancestorModule, forKey: .ancestorModule)
+    }
     try container.encodeIfPresent(self.customConfig, forKey: .customConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

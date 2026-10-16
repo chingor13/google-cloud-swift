@@ -101,11 +101,15 @@ public struct Metadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.buildInvocationId, forKey: .buildInvocationId)
+    if !self.buildInvocationId.isEmpty {
+      try container.encode(self.buildInvocationId, forKey: .buildInvocationId)
+    }
     try container.encodeIfPresent(self.buildStartedOn, forKey: .buildStartedOn)
     try container.encodeIfPresent(self.buildFinishedOn, forKey: .buildFinishedOn)
     try container.encodeIfPresent(self.completeness, forKey: .completeness)
-    try container.encode(self.reproducible, forKey: .reproducible)
+    if self.reproducible {
+      try container.encode(self.reproducible, forKey: .reproducible)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

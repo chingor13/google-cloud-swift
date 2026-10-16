@@ -91,8 +91,12 @@ public struct ImportProductSetsResponse: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.referenceImages, forKey: .referenceImages)
-    try container.encode(self.statuses, forKey: .statuses)
+    if !self.referenceImages.isEmpty {
+      try container.encode(self.referenceImages, forKey: .referenceImages)
+    }
+    if !self.statuses.isEmpty {
+      try container.encode(self.statuses, forKey: .statuses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -105,9 +105,15 @@ public struct Edge: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.properties, forKey: .properties)
-    try container.encode(self.sourceNodeName, forKey: .sourceNodeName)
-    try container.encode(self.destinationNodeName, forKey: .destinationNodeName)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.sourceNodeName.isEmpty {
+      try container.encode(self.sourceNodeName, forKey: .sourceNodeName)
+    }
+    if !self.destinationNodeName.isEmpty {
+      try container.encode(self.destinationNodeName, forKey: .destinationNodeName)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.context, forKey: .context)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

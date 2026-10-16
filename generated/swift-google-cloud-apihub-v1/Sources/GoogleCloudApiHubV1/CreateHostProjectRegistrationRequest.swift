@@ -94,8 +94,12 @@ public struct CreateHostProjectRegistrationRequest: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.hostProjectRegistrationId, forKey: .hostProjectRegistrationId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.hostProjectRegistrationId.isEmpty {
+      try container.encode(self.hostProjectRegistrationId, forKey: .hostProjectRegistrationId)
+    }
     try container.encodeIfPresent(self.hostProjectRegistration, forKey: .hostProjectRegistration)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

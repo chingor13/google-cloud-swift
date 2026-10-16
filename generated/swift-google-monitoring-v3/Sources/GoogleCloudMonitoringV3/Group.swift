@@ -138,11 +138,21 @@ public struct Group: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.parentName, forKey: .parentName)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.isCluster, forKey: .isCluster)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.parentName.isEmpty {
+      try container.encode(self.parentName, forKey: .parentName)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if self.isCluster {
+      try container.encode(self.isCluster, forKey: .isCluster)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

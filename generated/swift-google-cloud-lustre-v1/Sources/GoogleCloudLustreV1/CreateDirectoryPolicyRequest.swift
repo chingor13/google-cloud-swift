@@ -86,8 +86,12 @@ public struct CreateDirectoryPolicyRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.directoryPolicyId, forKey: .directoryPolicyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.directoryPolicyId.isEmpty {
+      try container.encode(self.directoryPolicyId, forKey: .directoryPolicyId)
+    }
     try container.encodeIfPresent(self.directoryPolicy, forKey: .directoryPolicy)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -231,22 +231,46 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.authorizedNetwork, forKey: .authorizedNetwork)
-    try container.encode(self.zones, forKey: .zones)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.authorizedNetwork.isEmpty {
+      try container.encode(self.authorizedNetwork, forKey: .authorizedNetwork)
+    }
+    if !self.zones.isEmpty {
+      try container.encode(self.zones, forKey: .zones)
+    }
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
-    try container.encode(self.memcacheVersion, forKey: .memcacheVersion)
+    if self.memcacheVersion != MemcacheVersion() {
+      try container.encode(self.memcacheVersion, forKey: .memcacheVersion)
+    }
     try container.encodeIfPresent(self.parameters, forKey: .parameters)
-    try container.encode(self.memcacheNodes, forKey: .memcacheNodes)
+    if !self.memcacheNodes.isEmpty {
+      try container.encode(self.memcacheNodes, forKey: .memcacheNodes)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.memcacheFullVersion, forKey: .memcacheFullVersion)
-    try container.encode(self.instanceMessages, forKey: .instanceMessages)
-    try container.encode(self.discoveryEndpoint, forKey: .discoveryEndpoint)
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.memcacheFullVersion.isEmpty {
+      try container.encode(self.memcacheFullVersion, forKey: .memcacheFullVersion)
+    }
+    if !self.instanceMessages.isEmpty {
+      try container.encode(self.instanceMessages, forKey: .instanceMessages)
+    }
+    if !self.discoveryEndpoint.isEmpty {
+      try container.encode(self.discoveryEndpoint, forKey: .discoveryEndpoint)
+    }
     try container.encodeIfPresent(self.maintenancePolicy, forKey: .maintenancePolicy)
     try container.encodeIfPresent(self.maintenanceSchedule, forKey: .maintenanceSchedule)
     for (key, value) in self._unknownFields.json {
@@ -314,8 +338,12 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cpuCount, forKey: .cpuCount)
-      try container.encode(self.memorySizeMb, forKey: .memorySizeMb)
+      if self.cpuCount != 0 {
+        try container.encode(self.cpuCount, forKey: .cpuCount)
+      }
+      if self.memorySizeMb != 0 {
+        try container.encode(self.memorySizeMb, forKey: .memorySizeMb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -434,11 +462,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nodeId, forKey: .nodeId)
-      try container.encode(self.zone, forKey: .zone)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.host, forKey: .host)
-      try container.encode(self.port, forKey: .port)
+      if !self.nodeId.isEmpty {
+        try container.encode(self.nodeId, forKey: .nodeId)
+      }
+      if !self.zone.isEmpty {
+        try container.encode(self.zone, forKey: .zone)
+      }
+      if self.state != Instance.Node.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.host.isEmpty {
+        try container.encode(self.host, forKey: .host)
+      }
+      if self.port != 0 {
+        try container.encode(self.port, forKey: .port)
+      }
       try container.encodeIfPresent(self.parameters, forKey: .parameters)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -659,8 +697,12 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.code, forKey: .code)
-      try container.encode(self.message, forKey: .message)
+      if self.code != Instance.InstanceMessage.Code() {
+        try container.encode(self.code, forKey: .code)
+      }
+      if !self.message.isEmpty {
+        try container.encode(self.message, forKey: .message)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -233,7 +233,9 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.minValue, forKey: .minValue)
       try container.encodeIfPresent(self.maxValue, forKey: .maxValue)
-      try container.encode(self.quantileValues, forKey: .quantileValues)
+      if !self.quantileValues.isEmpty {
+        try container.encode(self.quantileValues, forKey: .quantileValues)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -319,8 +321,10 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.valueFrequencyHistogramBuckets, forKey: .valueFrequencyHistogramBuckets)
+      if !self.valueFrequencyHistogramBuckets.isEmpty {
+        try container.encode(
+          self.valueFrequencyHistogramBuckets, forKey: .valueFrequencyHistogramBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -415,11 +419,21 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.valueFrequencyLowerBound, forKey: .valueFrequencyLowerBound)
-        try container.encode(self.valueFrequencyUpperBound, forKey: .valueFrequencyUpperBound)
-        try container.encode(self.bucketSize, forKey: .bucketSize)
-        try container.encode(self.bucketValues, forKey: .bucketValues)
-        try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        if self.valueFrequencyLowerBound != 0 {
+          try container.encode(self.valueFrequencyLowerBound, forKey: .valueFrequencyLowerBound)
+        }
+        if self.valueFrequencyUpperBound != 0 {
+          try container.encode(self.valueFrequencyUpperBound, forKey: .valueFrequencyUpperBound)
+        }
+        if self.bucketSize != 0 {
+          try container.encode(self.bucketSize, forKey: .bucketSize)
+        }
+        if !self.bucketValues.isEmpty {
+          try container.encode(self.bucketValues, forKey: .bucketValues)
+        }
+        if self.bucketValueCount != 0 {
+          try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -528,8 +542,10 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.equivalenceClassHistogramBuckets, forKey: .equivalenceClassHistogramBuckets)
+      if !self.equivalenceClassHistogramBuckets.isEmpty {
+        try container.encode(
+          self.equivalenceClassHistogramBuckets, forKey: .equivalenceClassHistogramBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -600,8 +616,12 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
-        try container.encode(self.equivalenceClassSize, forKey: .equivalenceClassSize)
+        if !self.quasiIdsValues.isEmpty {
+          try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
+        }
+        if self.equivalenceClassSize != 0 {
+          try container.encode(self.equivalenceClassSize, forKey: .equivalenceClassSize)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -725,13 +745,23 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.equivalenceClassSizeLowerBound, forKey: .equivalenceClassSizeLowerBound)
-        try container.encode(
-          self.equivalenceClassSizeUpperBound, forKey: .equivalenceClassSizeUpperBound)
-        try container.encode(self.bucketSize, forKey: .bucketSize)
-        try container.encode(self.bucketValues, forKey: .bucketValues)
-        try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        if self.equivalenceClassSizeLowerBound != 0 {
+          try container.encode(
+            self.equivalenceClassSizeLowerBound, forKey: .equivalenceClassSizeLowerBound)
+        }
+        if self.equivalenceClassSizeUpperBound != 0 {
+          try container.encode(
+            self.equivalenceClassSizeUpperBound, forKey: .equivalenceClassSizeUpperBound)
+        }
+        if self.bucketSize != 0 {
+          try container.encode(self.bucketSize, forKey: .bucketSize)
+        }
+        if !self.bucketValues.isEmpty {
+          try container.encode(self.bucketValues, forKey: .bucketValues)
+        }
+        if self.bucketValueCount != 0 {
+          try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -840,9 +870,11 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.sensitiveValueFrequencyHistogramBuckets,
-        forKey: .sensitiveValueFrequencyHistogramBuckets)
+      if !self.sensitiveValueFrequencyHistogramBuckets.isEmpty {
+        try container.encode(
+          self.sensitiveValueFrequencyHistogramBuckets,
+          forKey: .sensitiveValueFrequencyHistogramBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -932,10 +964,18 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
-        try container.encode(self.equivalenceClassSize, forKey: .equivalenceClassSize)
-        try container.encode(self.numDistinctSensitiveValues, forKey: .numDistinctSensitiveValues)
-        try container.encode(self.topSensitiveValues, forKey: .topSensitiveValues)
+        if !self.quasiIdsValues.isEmpty {
+          try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
+        }
+        if self.equivalenceClassSize != 0 {
+          try container.encode(self.equivalenceClassSize, forKey: .equivalenceClassSize)
+        }
+        if self.numDistinctSensitiveValues != 0 {
+          try container.encode(self.numDistinctSensitiveValues, forKey: .numDistinctSensitiveValues)
+        }
+        if !self.topSensitiveValues.isEmpty {
+          try container.encode(self.topSensitiveValues, forKey: .topSensitiveValues)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1061,13 +1101,23 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.sensitiveValueFrequencyLowerBound, forKey: .sensitiveValueFrequencyLowerBound)
-        try container.encode(
-          self.sensitiveValueFrequencyUpperBound, forKey: .sensitiveValueFrequencyUpperBound)
-        try container.encode(self.bucketSize, forKey: .bucketSize)
-        try container.encode(self.bucketValues, forKey: .bucketValues)
-        try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        if self.sensitiveValueFrequencyLowerBound != 0 {
+          try container.encode(
+            self.sensitiveValueFrequencyLowerBound, forKey: .sensitiveValueFrequencyLowerBound)
+        }
+        if self.sensitiveValueFrequencyUpperBound != 0 {
+          try container.encode(
+            self.sensitiveValueFrequencyUpperBound, forKey: .sensitiveValueFrequencyUpperBound)
+        }
+        if self.bucketSize != 0 {
+          try container.encode(self.bucketSize, forKey: .bucketSize)
+        }
+        if !self.bucketValues.isEmpty {
+          try container.encode(self.bucketValues, forKey: .bucketValues)
+        }
+        if self.bucketValueCount != 0 {
+          try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1183,7 +1233,9 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kMapEstimationHistogram, forKey: .kMapEstimationHistogram)
+      if !self.kMapEstimationHistogram.isEmpty {
+        try container.encode(self.kMapEstimationHistogram, forKey: .kMapEstimationHistogram)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1250,8 +1302,12 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
-        try container.encode(self.estimatedAnonymity, forKey: .estimatedAnonymity)
+        if !self.quasiIdsValues.isEmpty {
+          try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
+        }
+        if self.estimatedAnonymity != 0 {
+          try container.encode(self.estimatedAnonymity, forKey: .estimatedAnonymity)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1376,11 +1432,21 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.minAnonymity, forKey: .minAnonymity)
-        try container.encode(self.maxAnonymity, forKey: .maxAnonymity)
-        try container.encode(self.bucketSize, forKey: .bucketSize)
-        try container.encode(self.bucketValues, forKey: .bucketValues)
-        try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        if self.minAnonymity != 0 {
+          try container.encode(self.minAnonymity, forKey: .minAnonymity)
+        }
+        if self.maxAnonymity != 0 {
+          try container.encode(self.maxAnonymity, forKey: .maxAnonymity)
+        }
+        if self.bucketSize != 0 {
+          try container.encode(self.bucketSize, forKey: .bucketSize)
+        }
+        if !self.bucketValues.isEmpty {
+          try container.encode(self.bucketValues, forKey: .bucketValues)
+        }
+        if self.bucketValueCount != 0 {
+          try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1500,8 +1566,10 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.deltaPresenceEstimationHistogram, forKey: .deltaPresenceEstimationHistogram)
+      if !self.deltaPresenceEstimationHistogram.isEmpty {
+        try container.encode(
+          self.deltaPresenceEstimationHistogram, forKey: .deltaPresenceEstimationHistogram)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1576,8 +1644,12 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
-        try container.encode(self.estimatedProbability, forKey: .estimatedProbability)
+        if !self.quasiIdsValues.isEmpty {
+          try container.encode(self.quasiIdsValues, forKey: .quasiIdsValues)
+        }
+        if self.estimatedProbability != 0 {
+          try container.encode(self.estimatedProbability, forKey: .estimatedProbability)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1707,11 +1779,21 @@ public struct AnalyzeDataSourceRiskDetails: Codable, Equatable, GoogleWKT._AnyPa
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.minProbability, forKey: .minProbability)
-        try container.encode(self.maxProbability, forKey: .maxProbability)
-        try container.encode(self.bucketSize, forKey: .bucketSize)
-        try container.encode(self.bucketValues, forKey: .bucketValues)
-        try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        if self.minProbability != 0 {
+          try container.encode(self.minProbability, forKey: .minProbability)
+        }
+        if self.maxProbability != 0 {
+          try container.encode(self.maxProbability, forKey: .maxProbability)
+        }
+        if self.bucketSize != 0 {
+          try container.encode(self.bucketSize, forKey: .bucketSize)
+        }
+        if !self.bucketValues.isEmpty {
+          try container.encode(self.bucketValues, forKey: .bucketValues)
+        }
+        if self.bucketValueCount != 0 {
+          try container.encode(self.bucketValueCount, forKey: .bucketValueCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

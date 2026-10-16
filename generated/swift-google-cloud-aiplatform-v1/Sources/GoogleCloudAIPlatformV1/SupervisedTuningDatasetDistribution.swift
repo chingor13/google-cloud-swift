@@ -136,15 +136,33 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sum, forKey: .sum)
-      try container.encode(self.billableSum, forKey: .billableSum)
-      try container.encode(self.min, forKey: .min)
-      try container.encode(self.max, forKey: .max)
-      try container.encode(self.mean, forKey: .mean)
-      try container.encode(self.median, forKey: .median)
-      try container.encode(self.p5, forKey: .p5)
-      try container.encode(self.p95, forKey: .p95)
-      try container.encode(self.buckets, forKey: .buckets)
+      if self.sum != 0 {
+        try container.encode(self.sum, forKey: .sum)
+      }
+      if self.billableSum != 0 {
+        try container.encode(self.billableSum, forKey: .billableSum)
+      }
+      if self.min != 0 {
+        try container.encode(self.min, forKey: .min)
+      }
+      if self.max != 0 {
+        try container.encode(self.max, forKey: .max)
+      }
+      if self.mean != 0 {
+        try container.encode(self.mean, forKey: .mean)
+      }
+      if self.median != 0 {
+        try container.encode(self.median, forKey: .median)
+      }
+      if self.p5 != 0 {
+        try container.encode(self.p5, forKey: .p5)
+      }
+      if self.p95 != 0 {
+        try container.encode(self.p95, forKey: .p95)
+      }
+      if !self.buckets.isEmpty {
+        try container.encode(self.buckets, forKey: .buckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -219,9 +237,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.count, forKey: .count)
-        try container.encode(self.`left`, forKey: .`left`)
-        try container.encode(self.`right`, forKey: .`right`)
+        if self.count != 0 {
+          try container.encode(self.count, forKey: .count)
+        }
+        if self.`left` != 0 {
+          try container.encode(self.`left`, forKey: .`left`)
+        }
+        if self.`right` != 0 {
+          try container.encode(self.`right`, forKey: .`right`)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -151,14 +151,26 @@ public struct WorkflowConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.releaseConfig, forKey: .releaseConfig)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.releaseConfig.isEmpty {
+      try container.encode(self.releaseConfig, forKey: .releaseConfig)
+    }
     try container.encodeIfPresent(self.invocationConfig, forKey: .invocationConfig)
-    try container.encode(self.cronSchedule, forKey: .cronSchedule)
-    try container.encode(self.timeZone, forKey: .timeZone)
-    try container.encode(
-      self.recentScheduledExecutionRecords, forKey: .recentScheduledExecutionRecords)
-    try container.encode(self.disabled, forKey: .disabled)
+    if !self.cronSchedule.isEmpty {
+      try container.encode(self.cronSchedule, forKey: .cronSchedule)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
+    if !self.recentScheduledExecutionRecords.isEmpty {
+      try container.encode(
+        self.recentScheduledExecutionRecords, forKey: .recentScheduledExecutionRecords)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)

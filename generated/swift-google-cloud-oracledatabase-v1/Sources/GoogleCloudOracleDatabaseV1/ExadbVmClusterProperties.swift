@@ -237,25 +237,57 @@ public struct ExadbVmClusterProperties: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterName, forKey: .clusterName)
-    try container.encode(self.gridImageId, forKey: .gridImageId)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
-    try container.encode(self.enabledEcpuCountPerNode, forKey: .enabledEcpuCountPerNode)
-    try container.encode(self.additionalEcpuCountPerNode, forKey: .additionalEcpuCountPerNode)
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
+    if !self.gridImageId.isEmpty {
+      try container.encode(self.gridImageId, forKey: .gridImageId)
+    }
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
+    if self.enabledEcpuCountPerNode != 0 {
+      try container.encode(self.enabledEcpuCountPerNode, forKey: .enabledEcpuCountPerNode)
+    }
+    if self.additionalEcpuCountPerNode != 0 {
+      try container.encode(self.additionalEcpuCountPerNode, forKey: .additionalEcpuCountPerNode)
+    }
     try container.encodeIfPresent(self.vmFileSystemStorage, forKey: .vmFileSystemStorage)
-    try container.encode(self.licenseModel, forKey: .licenseModel)
-    try container.encode(self.exascaleDbStorageVault, forKey: .exascaleDbStorageVault)
-    try container.encode(self.hostnamePrefix, forKey: .hostnamePrefix)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.sshPublicKeys, forKey: .sshPublicKeys)
+    if self.licenseModel != ExadbVmClusterProperties.LicenseModel() {
+      try container.encode(self.licenseModel, forKey: .licenseModel)
+    }
+    if !self.exascaleDbStorageVault.isEmpty {
+      try container.encode(self.exascaleDbStorageVault, forKey: .exascaleDbStorageVault)
+    }
+    if !self.hostnamePrefix.isEmpty {
+      try container.encode(self.hostnamePrefix, forKey: .hostnamePrefix)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.sshPublicKeys.isEmpty {
+      try container.encode(self.sshPublicKeys, forKey: .sshPublicKeys)
+    }
     try container.encodeIfPresent(self.dataCollectionOptions, forKey: .dataCollectionOptions)
     try container.encodeIfPresent(self.timeZone, forKey: .timeZone)
-    try container.encode(self.lifecycleState, forKey: .lifecycleState)
-    try container.encode(self.shapeAttribute, forKey: .shapeAttribute)
-    try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
-    try container.encode(self.scanListenerPortTcp, forKey: .scanListenerPortTcp)
-    try container.encode(self.ociUri, forKey: .ociUri)
-    try container.encode(self.giVersion, forKey: .giVersion)
+    if self.lifecycleState != ExadbVmClusterProperties.ExadbVmClusterLifecycleState() {
+      try container.encode(self.lifecycleState, forKey: .lifecycleState)
+    }
+    if self.shapeAttribute != ExadbVmClusterProperties.ShapeAttribute() {
+      try container.encode(self.shapeAttribute, forKey: .shapeAttribute)
+    }
+    if self.memorySizeGb != 0 {
+      try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
+    }
+    if self.scanListenerPortTcp != 0 {
+      try container.encode(self.scanListenerPortTcp, forKey: .scanListenerPortTcp)
+    }
+    if !self.ociUri.isEmpty {
+      try container.encode(self.ociUri, forKey: .ociUri)
+    }
+    if !self.giVersion.isEmpty {
+      try container.encode(self.giVersion, forKey: .giVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

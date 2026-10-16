@@ -97,10 +97,16 @@ public struct CreateDataTaxonomyRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.dataTaxonomyId, forKey: .dataTaxonomyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.dataTaxonomyId.isEmpty {
+      try container.encode(self.dataTaxonomyId, forKey: .dataTaxonomyId)
+    }
     try container.encodeIfPresent(self.dataTaxonomy, forKey: .dataTaxonomy)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

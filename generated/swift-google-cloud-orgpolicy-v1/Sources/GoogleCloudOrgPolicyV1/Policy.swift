@@ -158,9 +158,15 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.constraint, forKey: .constraint)
-    try container.encode(self.etag, forKey: .etag)
+    if self.version != 0 {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.constraint.isEmpty {
+      try container.encode(self.constraint, forKey: .constraint)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
 
     if let choice = self.policyType {
@@ -385,11 +391,21 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedValues, forKey: .allowedValues)
-      try container.encode(self.deniedValues, forKey: .deniedValues)
-      try container.encode(self.allValues, forKey: .allValues)
-      try container.encode(self.suggestedValue, forKey: .suggestedValue)
-      try container.encode(self.inheritFromParent, forKey: .inheritFromParent)
+      if !self.allowedValues.isEmpty {
+        try container.encode(self.allowedValues, forKey: .allowedValues)
+      }
+      if !self.deniedValues.isEmpty {
+        try container.encode(self.deniedValues, forKey: .deniedValues)
+      }
+      if self.allValues != Policy.ListPolicy.AllValues() {
+        try container.encode(self.allValues, forKey: .allValues)
+      }
+      if !self.suggestedValue.isEmpty {
+        try container.encode(self.suggestedValue, forKey: .suggestedValue)
+      }
+      if self.inheritFromParent {
+        try container.encode(self.inheritFromParent, forKey: .inheritFromParent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -638,7 +654,9 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enforced, forKey: .enforced)
+      if self.enforced {
+        try container.encode(self.enforced, forKey: .enforced)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

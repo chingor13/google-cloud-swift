@@ -124,13 +124,27 @@ public struct Node: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.fqdn, forKey: .fqdn)
-    try container.encode(self.internalIp, forKey: .internalIp)
-    try container.encode(self.nodeTypeId, forKey: .nodeTypeId)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.customCoreCount, forKey: .customCoreCount)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.fqdn.isEmpty {
+      try container.encode(self.fqdn, forKey: .fqdn)
+    }
+    if !self.internalIp.isEmpty {
+      try container.encode(self.internalIp, forKey: .internalIp)
+    }
+    if !self.nodeTypeId.isEmpty {
+      try container.encode(self.nodeTypeId, forKey: .nodeTypeId)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.customCoreCount != 0 {
+      try container.encode(self.customCoreCount, forKey: .customCoreCount)
+    }
+    if self.state != Node.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

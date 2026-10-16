@@ -137,10 +137,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.suggestionCount, forKey: .suggestionCount)
-      try container.encode(self.clientId, forKey: .clientId)
-      try container.encode(self.contexts, forKey: .contexts)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if self.suggestionCount != 0 {
+        try container.encode(self.suggestionCount, forKey: .suggestionCount)
+      }
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
+      if !self.contexts.isEmpty {
+        try container.encode(self.contexts, forKey: .contexts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

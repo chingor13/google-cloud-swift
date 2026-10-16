@@ -167,11 +167,21 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.assetType, forKey: .assetType)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.folders, forKey: .folders)
-    try container.encode(self.organization, forKey: .organization)
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.assetType.isEmpty {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.folders.isEmpty {
+      try container.encode(self.folders, forKey: .folders)
+    }
+    if !self.organization.isEmpty {
+      try container.encode(self.organization, forKey: .organization)
+    }
     try container.encodeIfPresent(self.policy, forKey: .policy)
     try container.encodeIfPresent(self.explanation, forKey: .explanation)
     for (key, value) in self._unknownFields.json {
@@ -241,7 +251,9 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matchedPermissions, forKey: .matchedPermissions)
+      if !self.matchedPermissions.isEmpty {
+        try container.encode(self.matchedPermissions, forKey: .matchedPermissions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -299,7 +311,9 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.permissions, forKey: .permissions)
+        if !self.permissions.isEmpty {
+          try container.encode(self.permissions, forKey: .permissions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

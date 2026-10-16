@@ -169,18 +169,32 @@ public struct AuditSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.gcsUri, forKey: .gcsUri)
-    try container.encode(self.complianceFramework, forKey: .complianceFramework)
-    try container.encode(self.reportFormat, forKey: .reportFormat)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.gcsUri.isEmpty {
+      try container.encode(self.gcsUri, forKey: .gcsUri)
+    }
+    if !self.complianceFramework.isEmpty {
+      try container.encode(self.complianceFramework, forKey: .complianceFramework)
+    }
+    if self.reportFormat != AuditSchedule.AuditReportFormat() {
+      try container.encode(self.reportFormat, forKey: .reportFormat)
+    }
     try container.encodeIfPresent(self.scheduleConfig, forKey: .scheduleConfig)
-    try container.encode(self.state, forKey: .state)
+    if self.state != ScheduleState() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.nextRunTime, forKey: .nextRunTime)
     try container.encodeIfPresent(self.lastTriggerTime, forKey: .lastTriggerTime)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

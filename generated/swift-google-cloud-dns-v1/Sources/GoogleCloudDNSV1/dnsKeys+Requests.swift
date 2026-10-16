@@ -101,9 +101,15 @@ extension DnsKeysClient {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
       try container.encodeIfPresent(self.digestType, forKey: .digestType)
-      try container.encode(self.dnsKeyId, forKey: .dnsKeyId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.project, forKey: .project)
+      if !self.dnsKeyId.isEmpty {
+        try container.encode(self.dnsKeyId, forKey: .dnsKeyId)
+      }
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -210,10 +216,14 @@ extension DnsKeysClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.digestType, forKey: .digestType)
-      try container.encode(self.managedZone, forKey: .managedZone)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
       try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
       try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-      try container.encode(self.project, forKey: .project)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

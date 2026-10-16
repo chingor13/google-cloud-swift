@@ -135,15 +135,33 @@ public struct JobRunNotificationEvent: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.jobRun, forKey: .jobRun)
-    try container.encode(self.pipelineUid, forKey: .pipelineUid)
-    try container.encode(self.releaseUid, forKey: .releaseUid)
-    try container.encode(self.release, forKey: .release)
-    try container.encode(self.rolloutUid, forKey: .rolloutUid)
-    try container.encode(self.rollout, forKey: .rollout)
-    try container.encode(self.targetId, forKey: .targetId)
-    try container.encode(self.type, forKey: .type)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.jobRun.isEmpty {
+      try container.encode(self.jobRun, forKey: .jobRun)
+    }
+    if !self.pipelineUid.isEmpty {
+      try container.encode(self.pipelineUid, forKey: .pipelineUid)
+    }
+    if !self.releaseUid.isEmpty {
+      try container.encode(self.releaseUid, forKey: .releaseUid)
+    }
+    if !self.release.isEmpty {
+      try container.encode(self.release, forKey: .release)
+    }
+    if !self.rolloutUid.isEmpty {
+      try container.encode(self.rolloutUid, forKey: .rolloutUid)
+    }
+    if !self.rollout.isEmpty {
+      try container.encode(self.rollout, forKey: .rollout)
+    }
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
+    if self.type != GoogleCloudDeployV1.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

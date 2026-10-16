@@ -99,10 +99,18 @@ public struct FeedFailureDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.errorCode, forKey: .errorCode)
-    try container.encode(self.httpErrorCode, forKey: .httpErrorCode)
-    try container.encode(self.errorCause, forKey: .errorCause)
-    try container.encode(self.errorAction, forKey: .errorAction)
+    if !self.errorCode.isEmpty {
+      try container.encode(self.errorCode, forKey: .errorCode)
+    }
+    if self.httpErrorCode != 0 {
+      try container.encode(self.httpErrorCode, forKey: .httpErrorCode)
+    }
+    if !self.errorCause.isEmpty {
+      try container.encode(self.errorCause, forKey: .errorCause)
+    }
+    if !self.errorAction.isEmpty {
+      try container.encode(self.errorAction, forKey: .errorAction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

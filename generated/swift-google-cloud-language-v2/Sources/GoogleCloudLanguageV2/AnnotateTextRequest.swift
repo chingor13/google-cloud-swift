@@ -85,7 +85,9 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.document, forKey: .document)
     try container.encodeIfPresent(self.features, forKey: .features)
-    try container.encode(self.encodingType, forKey: .encodingType)
+    if self.encodingType != EncodingType() {
+      try container.encode(self.encodingType, forKey: .encodingType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -170,10 +172,18 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.extractEntities, forKey: .extractEntities)
-      try container.encode(self.extractDocumentSentiment, forKey: .extractDocumentSentiment)
-      try container.encode(self.classifyText, forKey: .classifyText)
-      try container.encode(self.moderateText, forKey: .moderateText)
+      if self.extractEntities {
+        try container.encode(self.extractEntities, forKey: .extractEntities)
+      }
+      if self.extractDocumentSentiment {
+        try container.encode(self.extractDocumentSentiment, forKey: .extractDocumentSentiment)
+      }
+      if self.classifyText {
+        try container.encode(self.classifyText, forKey: .classifyText)
+      }
+      if self.moderateText {
+        try container.encode(self.moderateText, forKey: .moderateText)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

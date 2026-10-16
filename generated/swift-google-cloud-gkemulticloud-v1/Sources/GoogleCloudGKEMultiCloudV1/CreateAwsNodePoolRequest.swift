@@ -115,10 +115,16 @@ public struct CreateAwsNodePoolRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.awsNodePool, forKey: .awsNodePool)
-    try container.encode(self.awsNodePoolId, forKey: .awsNodePoolId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.awsNodePoolId.isEmpty {
+      try container.encode(self.awsNodePoolId, forKey: .awsNodePoolId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

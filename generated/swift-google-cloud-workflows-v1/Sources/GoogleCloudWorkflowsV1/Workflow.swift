@@ -290,24 +290,52 @@ public struct Workflow: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.revisionId, forKey: .revisionId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != Workflow.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.cryptoKeyName, forKey: .cryptoKeyName)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.cryptoKeyName.isEmpty {
+      try container.encode(self.cryptoKeyName, forKey: .cryptoKeyName)
+    }
     try container.encodeIfPresent(self.stateError, forKey: .stateError)
-    try container.encode(self.callLogLevel, forKey: .callLogLevel)
-    try container.encode(self.userEnvVars, forKey: .userEnvVars)
-    try container.encode(self.executionHistoryLevel, forKey: .executionHistoryLevel)
-    try container.encode(self.allKmsKeys, forKey: .allKmsKeys)
-    try container.encode(self.allKmsKeysVersions, forKey: .allKmsKeysVersions)
-    try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
-    try container.encode(self.tags, forKey: .tags)
+    if self.callLogLevel != Workflow.CallLogLevel() {
+      try container.encode(self.callLogLevel, forKey: .callLogLevel)
+    }
+    if !self.userEnvVars.isEmpty {
+      try container.encode(self.userEnvVars, forKey: .userEnvVars)
+    }
+    if self.executionHistoryLevel != ExecutionHistoryLevel() {
+      try container.encode(self.executionHistoryLevel, forKey: .executionHistoryLevel)
+    }
+    if !self.allKmsKeys.isEmpty {
+      try container.encode(self.allKmsKeys, forKey: .allKmsKeys)
+    }
+    if !self.allKmsKeysVersions.isEmpty {
+      try container.encode(self.allKmsKeysVersions, forKey: .allKmsKeysVersions)
+    }
+    if !self.cryptoKeyVersion.isEmpty {
+      try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
 
     if let choice = self.sourceCode {
       switch choice {
@@ -380,8 +408,12 @@ public struct Workflow: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
-      try container.encode(self.type, forKey: .type)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
+      if self.type != Workflow.StateError.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

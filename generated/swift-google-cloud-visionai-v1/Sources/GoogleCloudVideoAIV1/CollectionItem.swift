@@ -89,9 +89,15 @@ public struct CollectionItem: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.collection, forKey: .collection)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.itemResource, forKey: .itemResource)
+    if !self.collection.isEmpty {
+      try container.encode(self.collection, forKey: .collection)
+    }
+    if self.type != CollectionItem.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.itemResource.isEmpty {
+      try container.encode(self.itemResource, forKey: .itemResource)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

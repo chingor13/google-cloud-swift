@@ -107,7 +107,9 @@ public struct OutputStorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.outputSchema, forKey: .outputSchema)
+    if self.outputSchema != OutputStorageConfig.OutputSchema() {
+      try container.encode(self.outputSchema, forKey: .outputSchema)
+    }
 
     if let choice = self.type {
       switch choice {

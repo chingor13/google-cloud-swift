@@ -83,7 +83,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.managedInstances, forKey: .managedInstances)
+      if !self.managedInstances.isEmpty {
+        try container.encode(self.managedInstances, forKey: .managedInstances)
+      }
       try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

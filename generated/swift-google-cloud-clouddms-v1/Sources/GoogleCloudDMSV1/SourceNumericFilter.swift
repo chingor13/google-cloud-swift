@@ -112,11 +112,21 @@ public struct SourceNumericFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceMinScaleFilter, forKey: .sourceMinScaleFilter)
-    try container.encode(self.sourceMaxScaleFilter, forKey: .sourceMaxScaleFilter)
-    try container.encode(self.sourceMinPrecisionFilter, forKey: .sourceMinPrecisionFilter)
-    try container.encode(self.sourceMaxPrecisionFilter, forKey: .sourceMaxPrecisionFilter)
-    try container.encode(self.numericFilterOption, forKey: .numericFilterOption)
+    if self.sourceMinScaleFilter != 0 {
+      try container.encode(self.sourceMinScaleFilter, forKey: .sourceMinScaleFilter)
+    }
+    if self.sourceMaxScaleFilter != 0 {
+      try container.encode(self.sourceMaxScaleFilter, forKey: .sourceMaxScaleFilter)
+    }
+    if self.sourceMinPrecisionFilter != 0 {
+      try container.encode(self.sourceMinPrecisionFilter, forKey: .sourceMinPrecisionFilter)
+    }
+    if self.sourceMaxPrecisionFilter != 0 {
+      try container.encode(self.sourceMaxPrecisionFilter, forKey: .sourceMaxPrecisionFilter)
+    }
+    if self.numericFilterOption != NumericFilterOption() {
+      try container.encode(self.numericFilterOption, forKey: .numericFilterOption)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

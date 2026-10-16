@@ -199,11 +199,21 @@ public struct Dependency: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.repository, forKey: .repository)
-      try container.encode(self.revision, forKey: .revision)
-      try container.encode(self.recurseSubmodules, forKey: .recurseSubmodules)
-      try container.encode(self.depth, forKey: .depth)
-      try container.encode(self.destPath, forKey: .destPath)
-      try container.encode(self.fetchTags, forKey: .fetchTags)
+      if !self.revision.isEmpty {
+        try container.encode(self.revision, forKey: .revision)
+      }
+      if self.recurseSubmodules {
+        try container.encode(self.recurseSubmodules, forKey: .recurseSubmodules)
+      }
+      if self.depth != 0 {
+        try container.encode(self.depth, forKey: .depth)
+      }
+      if !self.destPath.isEmpty {
+        try container.encode(self.destPath, forKey: .destPath)
+      }
+      if self.fetchTags {
+        try container.encode(self.fetchTags, forKey: .fetchTags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -157,17 +157,31 @@ public struct BacktestResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.dataset, forKey: .dataset)
-    try container.encode(self.model, forKey: .model)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != BacktestResult.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.backtestPeriods, forKey: .backtestPeriods)
+    if self.backtestPeriods != 0 {
+      try container.encode(self.backtestPeriods, forKey: .backtestPeriods)
+    }
     try container.encodeIfPresent(self.performanceTarget, forKey: .performanceTarget)
-    try container.encode(self.lineOfBusiness, forKey: .lineOfBusiness)
+    if self.lineOfBusiness != LineOfBusiness() {
+      try container.encode(self.lineOfBusiness, forKey: .lineOfBusiness)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -234,8 +248,10 @@ public struct BacktestResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.partyInvestigationsPerPeriodHint, forKey: .partyInvestigationsPerPeriodHint)
+      if self.partyInvestigationsPerPeriodHint != 0 {
+        try container.encode(
+          self.partyInvestigationsPerPeriodHint, forKey: .partyInvestigationsPerPeriodHint)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -130,12 +130,20 @@ public struct PullRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.body, forKey: .body)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.body.isEmpty {
+      try container.encode(self.body, forKey: .body)
+    }
     try container.encodeIfPresent(self.base, forKey: .base)
     try container.encodeIfPresent(self.head, forKey: .head)
-    try container.encode(self.state, forKey: .state)
+    if self.state != PullRequest.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.closeTime, forKey: .closeTime)
@@ -204,8 +212,12 @@ public struct PullRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ref, forKey: .ref)
-      try container.encode(self.sha, forKey: .sha)
+      if !self.ref.isEmpty {
+        try container.encode(self.ref, forKey: .ref)
+      }
+      if !self.sha.isEmpty {
+        try container.encode(self.sha, forKey: .sha)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

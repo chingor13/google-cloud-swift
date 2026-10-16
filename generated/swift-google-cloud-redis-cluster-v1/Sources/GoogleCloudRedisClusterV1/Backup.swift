@@ -181,21 +181,45 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.clusterUid, forKey: .clusterUid)
-    try container.encode(self.totalSizeBytes, forKey: .totalSizeBytes)
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if !self.clusterUid.isEmpty {
+      try container.encode(self.clusterUid, forKey: .clusterUid)
+    }
+    if self.totalSizeBytes != 0 {
+      try container.encode(self.totalSizeBytes, forKey: .totalSizeBytes)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.engineVersion, forKey: .engineVersion)
-    try container.encode(self.backupFiles, forKey: .backupFiles)
-    try container.encode(self.nodeType, forKey: .nodeType)
-    try container.encode(self.replicaCount, forKey: .replicaCount)
-    try container.encode(self.shardCount, forKey: .shardCount)
-    try container.encode(self.backupType, forKey: .backupType)
-    try container.encode(self.state, forKey: .state)
+    if !self.engineVersion.isEmpty {
+      try container.encode(self.engineVersion, forKey: .engineVersion)
+    }
+    if !self.backupFiles.isEmpty {
+      try container.encode(self.backupFiles, forKey: .backupFiles)
+    }
+    if self.nodeType != NodeType() {
+      try container.encode(self.nodeType, forKey: .nodeType)
+    }
+    if self.replicaCount != 0 {
+      try container.encode(self.replicaCount, forKey: .replicaCount)
+    }
+    if self.shardCount != 0 {
+      try container.encode(self.shardCount, forKey: .shardCount)
+    }
+    if self.backupType != Backup.BackupType() {
+      try container.encode(self.backupType, forKey: .backupType)
+    }
+    if self.state != Backup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.encryptionInfo, forKey: .encryptionInfo)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

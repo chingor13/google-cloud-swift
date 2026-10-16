@@ -142,13 +142,27 @@ public struct FullManagementConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnet, forKey: .subnet)
-    try container.encode(self.masterIpv4CidrBlock, forKey: .masterIpv4CidrBlock)
-    try container.encode(self.clusterCidrBlock, forKey: .clusterCidrBlock)
-    try container.encode(self.servicesCidrBlock, forKey: .servicesCidrBlock)
-    try container.encode(self.clusterNamedRange, forKey: .clusterNamedRange)
-    try container.encode(self.servicesNamedRange, forKey: .servicesNamedRange)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnet.isEmpty {
+      try container.encode(self.subnet, forKey: .subnet)
+    }
+    if !self.masterIpv4CidrBlock.isEmpty {
+      try container.encode(self.masterIpv4CidrBlock, forKey: .masterIpv4CidrBlock)
+    }
+    if !self.clusterCidrBlock.isEmpty {
+      try container.encode(self.clusterCidrBlock, forKey: .clusterCidrBlock)
+    }
+    if !self.servicesCidrBlock.isEmpty {
+      try container.encode(self.servicesCidrBlock, forKey: .servicesCidrBlock)
+    }
+    if !self.clusterNamedRange.isEmpty {
+      try container.encode(self.clusterNamedRange, forKey: .clusterNamedRange)
+    }
+    if !self.servicesNamedRange.isEmpty {
+      try container.encode(self.servicesNamedRange, forKey: .servicesNamedRange)
+    }
     try container.encodeIfPresent(
       self.masterAuthorizedNetworksConfig, forKey: .masterAuthorizedNetworksConfig)
     for (key, value) in self._unknownFields.json {

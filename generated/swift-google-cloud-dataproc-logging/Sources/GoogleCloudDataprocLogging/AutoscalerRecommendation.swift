@@ -159,7 +159,9 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clusterMetrics, forKey: .clusterMetrics)
+      if !self.clusterMetrics.isEmpty {
+        try container.encode(self.clusterMetrics, forKey: .clusterMetrics)
+      }
       try container.encodeIfPresent(self.currentClusterSize, forKey: .currentClusterSize)
       try container.encodeIfPresent(self.minWorkerCounts, forKey: .minWorkerCounts)
       try container.encodeIfPresent(self.maxWorkerCounts, forKey: .maxWorkerCounts)
@@ -297,15 +299,25 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.decision, forKey: .decision)
+      if self.decision != ScalingDecisionType() {
+        try container.encode(self.decision, forKey: .decision)
+      }
       try container.encodeIfPresent(self.recommendedClusterSize, forKey: .recommendedClusterSize)
       try container.encodeIfPresent(
         self.gracefulDecommissionTimeout, forKey: .gracefulDecommissionTimeout)
-      try container.encode(self.constraintsReached, forKey: .constraintsReached)
-      try container.encode(
-        self.additionalRecommendationDetails, forKey: .additionalRecommendationDetails)
-      try container.encode(self.recommendationId, forKey: .recommendationId)
-      try container.encode(self.decisionMetric, forKey: .decisionMetric)
+      if !self.constraintsReached.isEmpty {
+        try container.encode(self.constraintsReached, forKey: .constraintsReached)
+      }
+      if !self.additionalRecommendationDetails.isEmpty {
+        try container.encode(
+          self.additionalRecommendationDetails, forKey: .additionalRecommendationDetails)
+      }
+      if !self.recommendationId.isEmpty {
+        try container.encode(self.recommendationId, forKey: .recommendationId)
+      }
+      if self.decisionMetric != MetricType() {
+        try container.encode(self.decisionMetric, forKey: .decisionMetric)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

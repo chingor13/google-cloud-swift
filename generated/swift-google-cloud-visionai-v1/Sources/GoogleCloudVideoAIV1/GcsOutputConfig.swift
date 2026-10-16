@@ -69,7 +69,9 @@ public struct GcsOutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gcsPath, forKey: .gcsPath)
+    if !self.gcsPath.isEmpty {
+      try container.encode(self.gcsPath, forKey: .gcsPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

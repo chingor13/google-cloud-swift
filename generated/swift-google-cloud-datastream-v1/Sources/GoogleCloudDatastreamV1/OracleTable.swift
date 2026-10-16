@@ -79,8 +79,12 @@ public struct OracleTable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.table, forKey: .table)
-    try container.encode(self.oracleColumns, forKey: .oracleColumns)
+    if !self.table.isEmpty {
+      try container.encode(self.table, forKey: .table)
+    }
+    if !self.oracleColumns.isEmpty {
+      try container.encode(self.oracleColumns, forKey: .oracleColumns)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

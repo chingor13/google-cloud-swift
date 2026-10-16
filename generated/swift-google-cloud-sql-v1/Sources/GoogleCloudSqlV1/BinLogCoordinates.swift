@@ -86,9 +86,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.binLogFileName, forKey: .binLogFileName)
-      try container.encode(self.binLogPosition, forKey: .binLogPosition)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.binLogFileName.isEmpty {
+        try container.encode(self.binLogFileName, forKey: .binLogFileName)
+      }
+      if self.binLogPosition != 0 {
+        try container.encode(self.binLogPosition, forKey: .binLogPosition)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

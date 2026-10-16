@@ -85,8 +85,12 @@ public struct LineItemInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.offer, forKey: .offer)
-    try container.encode(self.parameters, forKey: .parameters)
+    if !self.offer.isEmpty {
+      try container.encode(self.offer, forKey: .offer)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
     try container.encodeIfPresent(self.subscription, forKey: .subscription)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

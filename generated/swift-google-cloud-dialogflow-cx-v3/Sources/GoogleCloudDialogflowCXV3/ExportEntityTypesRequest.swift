@@ -144,10 +144,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.entityTypes, forKey: .entityTypes)
-      try container.encode(self.dataFormat, forKey: .dataFormat)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.entityTypes.isEmpty {
+        try container.encode(self.entityTypes, forKey: .entityTypes)
+      }
+      if self.dataFormat != ExportEntityTypesRequest.DataFormat() {
+        try container.encode(self.dataFormat, forKey: .dataFormat)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
 
       if let choice = self.destination {
         switch choice {

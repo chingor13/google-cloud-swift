@@ -102,7 +102,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.adminEnabled, forKey: .adminEnabled)
-      try container.encode(self.endpoints, forKey: .endpoints)
+      if !self.endpoints.isEmpty {
+        try container.encode(self.endpoints, forKey: .endpoints)
+      }
       try container.encodeIfPresent(self.label, forKey: .label)
       try container.encodeIfPresent(self.wireProperties, forKey: .wireProperties)
       for (key, value) in self._unknownFields.json {

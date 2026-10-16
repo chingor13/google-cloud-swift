@@ -146,12 +146,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requestBodiesToExclude, forKey: .requestBodiesToExclude)
-      try container.encode(self.requestCookiesToExclude, forKey: .requestCookiesToExclude)
-      try container.encode(self.requestHeadersToExclude, forKey: .requestHeadersToExclude)
-      try container.encode(self.requestQueryParamsToExclude, forKey: .requestQueryParamsToExclude)
-      try container.encode(self.requestUrisToExclude, forKey: .requestUrisToExclude)
-      try container.encode(self.targetRuleIds, forKey: .targetRuleIds)
+      if !self.requestBodiesToExclude.isEmpty {
+        try container.encode(self.requestBodiesToExclude, forKey: .requestBodiesToExclude)
+      }
+      if !self.requestCookiesToExclude.isEmpty {
+        try container.encode(self.requestCookiesToExclude, forKey: .requestCookiesToExclude)
+      }
+      if !self.requestHeadersToExclude.isEmpty {
+        try container.encode(self.requestHeadersToExclude, forKey: .requestHeadersToExclude)
+      }
+      if !self.requestQueryParamsToExclude.isEmpty {
+        try container.encode(self.requestQueryParamsToExclude, forKey: .requestQueryParamsToExclude)
+      }
+      if !self.requestUrisToExclude.isEmpty {
+        try container.encode(self.requestUrisToExclude, forKey: .requestUrisToExclude)
+      }
+      if !self.targetRuleIds.isEmpty {
+        try container.encode(self.targetRuleIds, forKey: .targetRuleIds)
+      }
       try container.encodeIfPresent(self.targetRuleSet, forKey: .targetRuleSet)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

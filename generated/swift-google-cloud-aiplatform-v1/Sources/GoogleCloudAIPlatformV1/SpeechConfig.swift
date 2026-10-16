@@ -85,7 +85,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.voiceConfig, forKey: .voiceConfig)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       try container.encodeIfPresent(self.multiSpeakerVoiceConfig, forKey: .multiSpeakerVoiceConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

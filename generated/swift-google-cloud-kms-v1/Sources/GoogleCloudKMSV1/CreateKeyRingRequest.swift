@@ -94,8 +94,12 @@ public struct CreateKeyRingRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.keyRingId, forKey: .keyRingId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.keyRingId.isEmpty {
+      try container.encode(self.keyRingId, forKey: .keyRingId)
+    }
     try container.encodeIfPresent(self.keyRing, forKey: .keyRing)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -268,26 +268,60 @@ public struct Gateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.selfLink, forKey: .selfLink)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.addresses, forKey: .addresses)
-    try container.encode(self.ports, forKey: .ports)
-    try container.encode(self.allPorts, forKey: .allPorts)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.serverTlsPolicy, forKey: .serverTlsPolicy)
-    try container.encode(self.certificateUrls, forKey: .certificateUrls)
-    try container.encode(self.gatewaySecurityPolicy, forKey: .gatewaySecurityPolicy)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.ipVersion, forKey: .ipVersion)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.type != Gateway.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.addresses.isEmpty {
+      try container.encode(self.addresses, forKey: .addresses)
+    }
+    if !self.ports.isEmpty {
+      try container.encode(self.ports, forKey: .ports)
+    }
+    if self.allPorts {
+      try container.encode(self.allPorts, forKey: .allPorts)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.serverTlsPolicy.isEmpty {
+      try container.encode(self.serverTlsPolicy, forKey: .serverTlsPolicy)
+    }
+    if !self.certificateUrls.isEmpty {
+      try container.encode(self.certificateUrls, forKey: .certificateUrls)
+    }
+    if !self.gatewaySecurityPolicy.isEmpty {
+      try container.encode(self.gatewaySecurityPolicy, forKey: .gatewaySecurityPolicy)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if self.ipVersion != Gateway.IpVersion() {
+      try container.encode(self.ipVersion, forKey: .ipVersion)
+    }
     try container.encodeIfPresent(self.envoyHeaders, forKey: .envoyHeaders)
-    try container.encode(self.routingMode, forKey: .routingMode)
-    try container.encode(self.allowGlobalAccess, forKey: .allowGlobalAccess)
+    if self.routingMode != Gateway.RoutingMode() {
+      try container.encode(self.routingMode, forKey: .routingMode)
+    }
+    if self.allowGlobalAccess {
+      try container.encode(self.allowGlobalAccess, forKey: .allowGlobalAccess)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -128,10 +128,18 @@ public struct Expr: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.expression, forKey: .expression)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.location, forKey: .location)
+    if !self.expression.isEmpty {
+      try container.encode(self.expression, forKey: .expression)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -113,7 +113,9 @@ public struct AttributeValues: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attribute, forKey: .attribute)
+    if !self.attribute.isEmpty {
+      try container.encode(self.attribute, forKey: .attribute)
+    }
 
     if let choice = self.value {
       switch choice {
@@ -184,7 +186,9 @@ public struct AttributeValues: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.values, forKey: .values)
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -265,7 +269,9 @@ public struct AttributeValues: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.values, forKey: .values)
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

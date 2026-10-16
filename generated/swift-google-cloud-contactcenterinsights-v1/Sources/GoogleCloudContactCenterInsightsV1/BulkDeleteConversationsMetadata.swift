@@ -94,7 +94,9 @@ public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleWKT._An
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.partialErrors, forKey: .partialErrors)
+    if !self.partialErrors.isEmpty {
+      try container.encode(self.partialErrors, forKey: .partialErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

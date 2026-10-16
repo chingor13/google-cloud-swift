@@ -115,10 +115,18 @@ public struct MigrationWorkflow: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.tasks, forKey: .tasks)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.tasks.isEmpty {
+      try container.encode(self.tasks, forKey: .tasks)
+    }
+    if self.state != MigrationWorkflow.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
     for (key, value) in self._unknownFields.json {

@@ -84,8 +84,12 @@ public struct SdpFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.infoType, forKey: .infoType)
-    try container.encode(self.likelihood, forKey: .likelihood)
+    if !self.infoType.isEmpty {
+      try container.encode(self.infoType, forKey: .infoType)
+    }
+    if self.likelihood != SdpFindingLikelihood() {
+      try container.encode(self.likelihood, forKey: .likelihood)
+    }
     try container.encodeIfPresent(self.location, forKey: .location)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -174,7 +178,9 @@ public struct SdpFinding: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.byteRange, forKey: .byteRange)
       try container.encodeIfPresent(self.codepointRange, forKey: .codepointRange)
-      try container.encode(self.contentLocations, forKey: .contentLocations)
+      if !self.contentLocations.isEmpty {
+        try container.encode(self.contentLocations, forKey: .contentLocations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

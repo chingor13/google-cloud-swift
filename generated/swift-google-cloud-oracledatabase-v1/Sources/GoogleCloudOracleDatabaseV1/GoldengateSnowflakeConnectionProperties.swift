@@ -143,12 +143,24 @@ public struct GoldengateSnowflakeConnectionProperties: Codable, Equatable, Googl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.connectionUrl, forKey: .connectionUrl)
-    try container.encode(self.authenticationType, forKey: .authenticationType)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.privateKeyFile, forKey: .privateKeyFile)
-    try container.encode(self.privateKeyPassphraseSecret, forKey: .privateKeyPassphraseSecret)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.connectionUrl.isEmpty {
+      try container.encode(self.connectionUrl, forKey: .connectionUrl)
+    }
+    if self.authenticationType != GoldengateSnowflakeConnectionProperties.AuthenticationType() {
+      try container.encode(self.authenticationType, forKey: .authenticationType)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.privateKeyFile.isEmpty {
+      try container.encode(self.privateKeyFile, forKey: .privateKeyFile)
+    }
+    if !self.privateKeyPassphraseSecret.isEmpty {
+      try container.encode(self.privateKeyPassphraseSecret, forKey: .privateKeyPassphraseSecret)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

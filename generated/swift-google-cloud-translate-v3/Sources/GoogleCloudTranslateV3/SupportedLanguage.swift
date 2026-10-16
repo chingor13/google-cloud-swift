@@ -98,10 +98,18 @@ public struct SupportedLanguage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.supportSource, forKey: .supportSource)
-    try container.encode(self.supportTarget, forKey: .supportTarget)
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.supportSource {
+      try container.encode(self.supportSource, forKey: .supportSource)
+    }
+    if self.supportTarget {
+      try container.encode(self.supportTarget, forKey: .supportTarget)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

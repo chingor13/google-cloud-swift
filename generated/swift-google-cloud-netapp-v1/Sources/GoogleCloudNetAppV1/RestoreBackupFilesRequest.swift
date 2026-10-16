@@ -98,10 +98,18 @@ public struct RestoreBackupFilesRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.backup, forKey: .backup)
-    try container.encode(self.fileList, forKey: .fileList)
-    try container.encode(self.restoreDestinationPath, forKey: .restoreDestinationPath)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.backup.isEmpty {
+      try container.encode(self.backup, forKey: .backup)
+    }
+    if !self.fileList.isEmpty {
+      try container.encode(self.fileList, forKey: .fileList)
+    }
+    if !self.restoreDestinationPath.isEmpty {
+      try container.encode(self.restoreDestinationPath, forKey: .restoreDestinationPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -163,18 +163,40 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.hostPort, forKey: .hostPort)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.username, forKey: .username)
-      try container.encode(self.password, forKey: .password)
-      try container.encode(self.caCertificate, forKey: .caCertificate)
-      try container.encode(self.clientCertificate, forKey: .clientCertificate)
-      try container.encode(self.clientKey, forKey: .clientKey)
-      try container.encode(self.dumpFilePath, forKey: .dumpFilePath)
+      if !self.hostPort.isEmpty {
+        try container.encode(self.hostPort, forKey: .hostPort)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
+      if !self.caCertificate.isEmpty {
+        try container.encode(self.caCertificate, forKey: .caCertificate)
+      }
+      if !self.clientCertificate.isEmpty {
+        try container.encode(self.clientCertificate, forKey: .clientCertificate)
+      }
+      if !self.clientKey.isEmpty {
+        try container.encode(self.clientKey, forKey: .clientKey)
+      }
+      if !self.dumpFilePath.isEmpty {
+        try container.encode(self.dumpFilePath, forKey: .dumpFilePath)
+      }
       try container.encodeIfPresent(self.sourceInstance, forKey: .sourceInstance)
-      try container.encode(self.selectedObjects, forKey: .selectedObjects)
-      try container.encode(self.sslOption, forKey: .sslOption)
-      try container.encode(self.dmsManaged, forKey: .dmsManaged)
+      if !self.selectedObjects.isEmpty {
+        try container.encode(self.selectedObjects, forKey: .selectedObjects)
+      }
+      if self.sslOption != OnPremisesConfiguration.SslOption() {
+        try container.encode(self.sslOption, forKey: .sslOption)
+      }
+      if self.dmsManaged {
+        try container.encode(self.dmsManaged, forKey: .dmsManaged)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

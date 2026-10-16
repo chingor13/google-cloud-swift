@@ -86,8 +86,12 @@ public struct RenameFolderMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.commonMetadata, forKey: .commonMetadata)
-    try container.encode(self.sourceFolderId, forKey: .sourceFolderId)
-    try container.encode(self.destinationFolderId, forKey: .destinationFolderId)
+    if !self.sourceFolderId.isEmpty {
+      try container.encode(self.sourceFolderId, forKey: .sourceFolderId)
+    }
+    if !self.destinationFolderId.isEmpty {
+      try container.encode(self.destinationFolderId, forKey: .destinationFolderId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

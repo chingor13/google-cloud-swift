@@ -185,16 +185,32 @@ public struct Index: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.distanceMetric, forKey: .distanceMetric)
-    try container.encode(self.indexField, forKey: .indexField)
-    try container.encode(self.filterFields, forKey: .filterFields)
-    try container.encode(self.storeFields, forKey: .storeFields)
+    if self.distanceMetric != DistanceMetric() {
+      try container.encode(self.distanceMetric, forKey: .distanceMetric)
+    }
+    if !self.indexField.isEmpty {
+      try container.encode(self.indexField, forKey: .indexField)
+    }
+    if !self.filterFields.isEmpty {
+      try container.encode(self.filterFields, forKey: .filterFields)
+    }
+    if !self.storeFields.isEmpty {
+      try container.encode(self.storeFields, forKey: .storeFields)
+    }
 
     if let choice = self.infraType {
       switch choice {

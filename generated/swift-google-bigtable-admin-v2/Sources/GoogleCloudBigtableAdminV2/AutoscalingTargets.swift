@@ -88,8 +88,12 @@ public struct AutoscalingTargets: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpuUtilizationPercent, forKey: .cpuUtilizationPercent)
-    try container.encode(self.storageUtilizationGibPerNode, forKey: .storageUtilizationGibPerNode)
+    if self.cpuUtilizationPercent != 0 {
+      try container.encode(self.cpuUtilizationPercent, forKey: .cpuUtilizationPercent)
+    }
+    if self.storageUtilizationGibPerNode != 0 {
+      try container.encode(self.storageUtilizationGibPerNode, forKey: .storageUtilizationGibPerNode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

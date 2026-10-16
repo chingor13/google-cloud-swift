@@ -95,10 +95,16 @@ public struct DataplexSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.asset, forKey: .asset)
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
     try container.encodeIfPresent(self.dataFormat, forKey: .dataFormat)
-    try container.encode(self.compressionFormat, forKey: .compressionFormat)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.compressionFormat.isEmpty {
+      try container.encode(self.compressionFormat, forKey: .compressionFormat)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

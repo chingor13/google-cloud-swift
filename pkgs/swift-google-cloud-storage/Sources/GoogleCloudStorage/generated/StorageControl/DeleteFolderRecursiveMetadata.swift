@@ -78,7 +78,9 @@ public struct DeleteFolderRecursiveMetadata: Codable, Equatable, GoogleWKT._AnyP
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.commonMetadata, forKey: .commonMetadata)
-    try container.encode(self.folderId, forKey: .folderId)
+    if !self.folderId.isEmpty {
+      try container.encode(self.folderId, forKey: .folderId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

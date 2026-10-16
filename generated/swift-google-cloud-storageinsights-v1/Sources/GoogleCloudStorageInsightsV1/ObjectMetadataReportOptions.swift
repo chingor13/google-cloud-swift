@@ -114,7 +114,9 @@ public struct ObjectMetadataReportOptions: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metadataFields, forKey: .metadataFields)
+    if !self.metadataFields.isEmpty {
+      try container.encode(self.metadataFields, forKey: .metadataFields)
+    }
 
     if let choice = self.filter {
       switch choice {

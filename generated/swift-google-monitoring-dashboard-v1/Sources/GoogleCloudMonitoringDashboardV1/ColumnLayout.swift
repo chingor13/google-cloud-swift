@@ -70,7 +70,9 @@ public struct ColumnLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.columns, forKey: .columns)
+    if !self.columns.isEmpty {
+      try container.encode(self.columns, forKey: .columns)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -139,8 +141,12 @@ public struct ColumnLayout: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.weight, forKey: .weight)
-      try container.encode(self.widgets, forKey: .widgets)
+      if self.weight != 0 {
+        try container.encode(self.weight, forKey: .weight)
+      }
+      if !self.widgets.isEmpty {
+        try container.encode(self.widgets, forKey: .widgets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

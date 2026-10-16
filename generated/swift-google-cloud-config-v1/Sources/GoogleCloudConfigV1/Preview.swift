@@ -269,25 +269,51 @@ public struct Preview: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.deployment, forKey: .deployment)
-    try container.encode(self.previewMode, forKey: .previewMode)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Preview.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.deployment.isEmpty {
+      try container.encode(self.deployment, forKey: .deployment)
+    }
+    if self.previewMode != Preview.PreviewMode() {
+      try container.encode(self.previewMode, forKey: .previewMode)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.artifactsGcsBucket, forKey: .artifactsGcsBucket)
     try container.encodeIfPresent(self.workerPool, forKey: .workerPool)
-    try container.encode(self.errorCode, forKey: .errorCode)
+    if self.errorCode != Preview.ErrorCode() {
+      try container.encode(self.errorCode, forKey: .errorCode)
+    }
     try container.encodeIfPresent(self.errorStatus, forKey: .errorStatus)
-    try container.encode(self.build, forKey: .build)
-    try container.encode(self.tfErrors, forKey: .tfErrors)
-    try container.encode(self.errorLogs, forKey: .errorLogs)
+    if !self.build.isEmpty {
+      try container.encode(self.build, forKey: .build)
+    }
+    if !self.tfErrors.isEmpty {
+      try container.encode(self.tfErrors, forKey: .tfErrors)
+    }
+    if !self.errorLogs.isEmpty {
+      try container.encode(self.errorLogs, forKey: .errorLogs)
+    }
     try container.encodeIfPresent(self.previewArtifacts, forKey: .previewArtifacts)
-    try container.encode(self.logs, forKey: .logs)
-    try container.encode(self.tfVersion, forKey: .tfVersion)
+    if !self.logs.isEmpty {
+      try container.encode(self.logs, forKey: .logs)
+    }
+    if !self.tfVersion.isEmpty {
+      try container.encode(self.tfVersion, forKey: .tfVersion)
+    }
     try container.encodeIfPresent(self.tfVersionConstraint, forKey: .tfVersionConstraint)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.providerConfig, forKey: .providerConfig)
 
     if let choice = self.blueprint {

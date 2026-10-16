@@ -184,16 +184,34 @@ public struct ColumnSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.column, forKey: .column)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.defaultValue, forKey: .defaultValue)
-    try container.encode(self.ordinalPosition, forKey: .ordinalPosition)
-    try container.encode(self.highestIndexingType, forKey: .highestIndexingType)
-    try container.encode(self.subcolumns, forKey: .subcolumns)
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.mode.isEmpty {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if !self.defaultValue.isEmpty {
+      try container.encode(self.defaultValue, forKey: .defaultValue)
+    }
+    if self.ordinalPosition != 0 {
+      try container.encode(self.ordinalPosition, forKey: .ordinalPosition)
+    }
+    if self.highestIndexingType != ColumnSchema.IndexingType() {
+      try container.encode(self.highestIndexingType, forKey: .highestIndexingType)
+    }
+    if !self.subcolumns.isEmpty {
+      try container.encode(self.subcolumns, forKey: .subcolumns)
+    }
     try container.encodeIfPresent(self.rangeElementType, forKey: .rangeElementType)
-    try container.encode(self.gcRule, forKey: .gcRule)
+    if !self.gcRule.isEmpty {
+      try container.encode(self.gcRule, forKey: .gcRule)
+    }
 
     if let choice = self.systemSpec {
       switch choice {
@@ -261,7 +279,9 @@ public struct ColumnSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
+      if self.type != ColumnSchema.LookerColumnSpec.LookerColumnType() {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -482,7 +502,9 @@ public struct ColumnSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

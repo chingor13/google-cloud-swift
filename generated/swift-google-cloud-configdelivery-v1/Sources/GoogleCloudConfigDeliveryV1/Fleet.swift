@@ -77,7 +77,9 @@ public struct Fleet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.project, forKey: .project)
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
     try container.encodeIfPresent(self.selector, forKey: .selector)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -141,7 +143,9 @@ public struct Fleet: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matchLabels, forKey: .matchLabels)
+      if !self.matchLabels.isEmpty {
+        try container.encode(self.matchLabels, forKey: .matchLabels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

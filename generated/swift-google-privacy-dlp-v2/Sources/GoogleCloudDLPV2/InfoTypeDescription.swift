@@ -155,17 +155,35 @@ public struct InfoTypeDescription: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.supportedBy, forKey: .supportedBy)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.supportedBy.isEmpty {
+      try container.encode(self.supportedBy, forKey: .supportedBy)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.locationSupport, forKey: .locationSupport)
-    try container.encode(self.example, forKey: .example)
-    try container.encode(self.versions, forKey: .versions)
-    try container.encode(self.categories, forKey: .categories)
+    if !self.example.isEmpty {
+      try container.encode(self.example, forKey: .example)
+    }
+    if !self.versions.isEmpty {
+      try container.encode(self.versions, forKey: .versions)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
     try container.encodeIfPresent(self.sensitivityScore, forKey: .sensitivityScore)
-    try container.encode(self.specificInfoTypes, forKey: .specificInfoTypes)
-    try container.encode(self.launchStatus, forKey: .launchStatus)
+    if !self.specificInfoTypes.isEmpty {
+      try container.encode(self.specificInfoTypes, forKey: .specificInfoTypes)
+    }
+    if self.launchStatus != InfoTypeDescription.InfoTypeLaunchStatus() {
+      try container.encode(self.launchStatus, forKey: .launchStatus)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -113,11 +113,19 @@ public struct CreateDeployPolicyRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.deployPolicyId, forKey: .deployPolicyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.deployPolicyId.isEmpty {
+      try container.encode(self.deployPolicyId, forKey: .deployPolicyId)
+    }
     try container.encodeIfPresent(self.deployPolicy, forKey: .deployPolicy)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

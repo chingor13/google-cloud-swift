@@ -95,8 +95,12 @@ public struct GstreamerBufferDescriptor: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.capsString, forKey: .capsString)
-    try container.encode(self.isKeyFrame, forKey: .isKeyFrame)
+    if !self.capsString.isEmpty {
+      try container.encode(self.capsString, forKey: .capsString)
+    }
+    if self.isKeyFrame {
+      try container.encode(self.isKeyFrame, forKey: .isKeyFrame)
+    }
     try container.encodeIfPresent(self.ptsTime, forKey: .ptsTime)
     try container.encodeIfPresent(self.dtsTime, forKey: .dtsTime)
     try container.encodeIfPresent(self.duration, forKey: .duration)

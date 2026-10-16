@@ -166,16 +166,34 @@ public struct Report: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.status, forKey: .status)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.priority != Report.Priority() {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if self.type != Report.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.status != Report.ReportStatus() {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.firstReportTime, forKey: .firstReportTime)
-    try container.encode(self.causeCode, forKey: .causeCode)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.reportDocumentationUri, forKey: .reportDocumentationUri)
-    try container.encode(self.reportGroups, forKey: .reportGroups)
+    if self.causeCode != ReportCauseCode() {
+      try container.encode(self.causeCode, forKey: .causeCode)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.reportDocumentationUri.isEmpty {
+      try container.encode(self.reportDocumentationUri, forKey: .reportDocumentationUri)
+    }
+    if !self.reportGroups.isEmpty {
+      try container.encode(self.reportGroups, forKey: .reportGroups)
+    }
 
     if let choice = self.content {
       switch choice {

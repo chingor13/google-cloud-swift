@@ -112,10 +112,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.candidates, forKey: .candidates)
-      try container.encode(self.modelVersion, forKey: .modelVersion)
+      if !self.candidates.isEmpty {
+        try container.encode(self.candidates, forKey: .candidates)
+      }
+      if !self.modelVersion.isEmpty {
+        try container.encode(self.modelVersion, forKey: .modelVersion)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.responseId, forKey: .responseId)
+      if !self.responseId.isEmpty {
+        try container.encode(self.responseId, forKey: .responseId)
+      }
       try container.encodeIfPresent(self.promptFeedback, forKey: .promptFeedback)
       try container.encodeIfPresent(self.usageMetadata, forKey: .usageMetadata)
       for (key, value) in self._unknownFields.json {
@@ -195,9 +201,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.blockReason, forKey: .blockReason)
-        try container.encode(self.safetyRatings, forKey: .safetyRatings)
-        try container.encode(self.blockReasonMessage, forKey: .blockReasonMessage)
+        if self.blockReason != GenerateContentResponse.PromptFeedback.BlockedReason() {
+          try container.encode(self.blockReason, forKey: .blockReason)
+        }
+        if !self.safetyRatings.isEmpty {
+          try container.encode(self.safetyRatings, forKey: .safetyRatings)
+        }
+        if !self.blockReasonMessage.isEmpty {
+          try container.encode(self.blockReasonMessage, forKey: .blockReasonMessage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -519,16 +531,36 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.promptTokenCount, forKey: .promptTokenCount)
-        try container.encode(self.candidatesTokenCount, forKey: .candidatesTokenCount)
-        try container.encode(self.thoughtsTokenCount, forKey: .thoughtsTokenCount)
-        try container.encode(self.totalTokenCount, forKey: .totalTokenCount)
-        try container.encode(self.cachedContentTokenCount, forKey: .cachedContentTokenCount)
-        try container.encode(self.promptTokensDetails, forKey: .promptTokensDetails)
-        try container.encode(self.cacheTokensDetails, forKey: .cacheTokensDetails)
-        try container.encode(self.candidatesTokensDetails, forKey: .candidatesTokensDetails)
-        try container.encode(self.toolUsePromptTokensDetails, forKey: .toolUsePromptTokensDetails)
-        try container.encode(self.trafficType, forKey: .trafficType)
+        if self.promptTokenCount != 0 {
+          try container.encode(self.promptTokenCount, forKey: .promptTokenCount)
+        }
+        if self.candidatesTokenCount != 0 {
+          try container.encode(self.candidatesTokenCount, forKey: .candidatesTokenCount)
+        }
+        if self.thoughtsTokenCount != 0 {
+          try container.encode(self.thoughtsTokenCount, forKey: .thoughtsTokenCount)
+        }
+        if self.totalTokenCount != 0 {
+          try container.encode(self.totalTokenCount, forKey: .totalTokenCount)
+        }
+        if self.cachedContentTokenCount != 0 {
+          try container.encode(self.cachedContentTokenCount, forKey: .cachedContentTokenCount)
+        }
+        if !self.promptTokensDetails.isEmpty {
+          try container.encode(self.promptTokensDetails, forKey: .promptTokensDetails)
+        }
+        if !self.cacheTokensDetails.isEmpty {
+          try container.encode(self.cacheTokensDetails, forKey: .cacheTokensDetails)
+        }
+        if !self.candidatesTokensDetails.isEmpty {
+          try container.encode(self.candidatesTokensDetails, forKey: .candidatesTokensDetails)
+        }
+        if !self.toolUsePromptTokensDetails.isEmpty {
+          try container.encode(self.toolUsePromptTokensDetails, forKey: .toolUsePromptTokensDetails)
+        }
+        if self.trafficType != GenerateContentResponse.UsageMetadata.TrafficType() {
+          try container.encode(self.trafficType, forKey: .trafficType)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

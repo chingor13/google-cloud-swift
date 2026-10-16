@@ -79,8 +79,12 @@ public struct ListVodStitchDetailsResponse: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vodStitchDetails, forKey: .vodStitchDetails)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.vodStitchDetails.isEmpty {
+      try container.encode(self.vodStitchDetails, forKey: .vodStitchDetails)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

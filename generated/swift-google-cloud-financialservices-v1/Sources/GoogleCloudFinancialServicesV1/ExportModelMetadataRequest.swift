@@ -77,7 +77,9 @@ public struct ExportModelMetadataRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.model, forKey: .model)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
     try container.encodeIfPresent(
       self.structuredMetadataDestination, forKey: .structuredMetadataDestination)
     for (key, value) in self._unknownFields.json {

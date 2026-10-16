@@ -95,10 +95,18 @@ public struct DeliveryPipelineNotificationEvent: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.pipelineUid, forKey: .pipelineUid)
-    try container.encode(self.deliveryPipeline, forKey: .deliveryPipeline)
-    try container.encode(self.type, forKey: .type)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.pipelineUid.isEmpty {
+      try container.encode(self.pipelineUid, forKey: .pipelineUid)
+    }
+    if !self.deliveryPipeline.isEmpty {
+      try container.encode(self.deliveryPipeline, forKey: .deliveryPipeline)
+    }
+    if self.type != GoogleCloudDeployV1.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

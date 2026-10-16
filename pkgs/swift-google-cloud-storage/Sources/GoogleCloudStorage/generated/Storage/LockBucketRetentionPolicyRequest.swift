@@ -81,8 +81,12 @@ public struct LockBucketRetentionPolicyRequest: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if self.ifMetagenerationMatch != 0 {
+      try container.encode(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

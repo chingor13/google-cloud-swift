@@ -87,9 +87,15 @@ public struct DeidentifyDataSourceStats: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.transformedBytes, forKey: .transformedBytes)
-    try container.encode(self.transformationCount, forKey: .transformationCount)
-    try container.encode(self.transformationErrorCount, forKey: .transformationErrorCount)
+    if self.transformedBytes != 0 {
+      try container.encode(self.transformedBytes, forKey: .transformedBytes)
+    }
+    if self.transformationCount != 0 {
+      try container.encode(self.transformationCount, forKey: .transformationCount)
+    }
+    if self.transformationErrorCount != 0 {
+      try container.encode(self.transformationErrorCount, forKey: .transformationErrorCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

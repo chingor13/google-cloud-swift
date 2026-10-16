@@ -123,10 +123,16 @@ public struct GmailAddOnManifest: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.homepageTrigger, forKey: .homepageTrigger)
-    try container.encode(self.contextualTriggers, forKey: .contextualTriggers)
-    try container.encode(self.universalActions, forKey: .universalActions)
+    if !self.contextualTriggers.isEmpty {
+      try container.encode(self.contextualTriggers, forKey: .contextualTriggers)
+    }
+    if !self.universalActions.isEmpty {
+      try container.encode(self.universalActions, forKey: .universalActions)
+    }
     try container.encodeIfPresent(self.composeTrigger, forKey: .composeTrigger)
-    try container.encode(self.authorizationCheckFunction, forKey: .authorizationCheckFunction)
+    if !self.authorizationCheckFunction.isEmpty {
+      try container.encode(self.authorizationCheckFunction, forKey: .authorizationCheckFunction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

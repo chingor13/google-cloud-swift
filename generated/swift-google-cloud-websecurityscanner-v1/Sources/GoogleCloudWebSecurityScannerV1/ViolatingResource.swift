@@ -78,8 +78,12 @@ public struct ViolatingResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.contentType, forKey: .contentType)
-    try container.encode(self.resourceUrl, forKey: .resourceUrl)
+    if !self.contentType.isEmpty {
+      try container.encode(self.contentType, forKey: .contentType)
+    }
+    if !self.resourceUrl.isEmpty {
+      try container.encode(self.resourceUrl, forKey: .resourceUrl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

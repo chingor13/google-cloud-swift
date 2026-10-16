@@ -84,10 +84,14 @@ public struct ListMulticloudDataTransferSupportedServicesResponse: Codable, Equa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.multicloudDataTransferSupportedServices, forKey: .multicloudDataTransferSupportedServices
-    )
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.multicloudDataTransferSupportedServices.isEmpty {
+      try container.encode(
+        self.multicloudDataTransferSupportedServices,
+        forKey: .multicloudDataTransferSupportedServices)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

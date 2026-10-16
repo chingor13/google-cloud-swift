@@ -101,7 +101,9 @@ public struct ReportResultsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.report, forKey: .report)
-    try container.encode(self.rowCount, forKey: .rowCount)
+    if self.rowCount != 0 {
+      try container.encode(self.rowCount, forKey: .rowCount)
+    }
     try container.encodeIfPresent(self.dateRange, forKey: .dateRange)
     try container.encodeIfPresent(self.precedingDateRange, forKey: .precedingDateRange)
     for (key, value) in self._unknownFields.json {

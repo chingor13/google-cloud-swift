@@ -139,8 +139,12 @@ public struct Binding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.role, forKey: .role)
-    try container.encode(self.members, forKey: .members)
+    if !self.role.isEmpty {
+      try container.encode(self.role, forKey: .role)
+    }
+    if !self.members.isEmpty {
+      try container.encode(self.members, forKey: .members)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

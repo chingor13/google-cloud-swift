@@ -175,7 +175,9 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asset, forKey: .asset)
+      if !self.asset.isEmpty {
+        try container.encode(self.asset, forKey: .asset)
+      }
 
       if let choice = self.dataType {
         switch choice {
@@ -243,7 +245,9 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.containerFormat, forKey: .containerFormat)
+        if self.containerFormat != IngestAssetRequest.Config.VideoType.ContainerFormat() {
+          try container.encode(self.containerFormat, forKey: .containerFormat)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -467,7 +471,9 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.data, forKey: .data)
+      if !self.data.isEmpty {
+        try container.encode(self.data, forKey: .data)
+      }
       try container.encodeIfPresent(self.temporalPartition, forKey: .temporalPartition)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -77,8 +77,12 @@ public struct Point: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.line, forKey: .line)
-    try container.encode(self.character, forKey: .character)
+    if self.line != 0 {
+      try container.encode(self.line, forKey: .line)
+    }
+    if self.character != 0 {
+      try container.encode(self.character, forKey: .character)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

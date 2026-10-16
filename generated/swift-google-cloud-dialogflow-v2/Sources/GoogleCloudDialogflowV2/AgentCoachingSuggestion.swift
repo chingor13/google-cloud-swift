@@ -92,9 +92,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.applicableInstructions, forKey: .applicableInstructions)
-      try container.encode(self.agentActionSuggestions, forKey: .agentActionSuggestions)
-      try container.encode(self.sampleResponses, forKey: .sampleResponses)
+      if !self.applicableInstructions.isEmpty {
+        try container.encode(self.applicableInstructions, forKey: .applicableInstructions)
+      }
+      if !self.agentActionSuggestions.isEmpty {
+        try container.encode(self.agentActionSuggestions, forKey: .agentActionSuggestions)
+      }
+      if !self.sampleResponses.isEmpty {
+        try container.encode(self.sampleResponses, forKey: .sampleResponses)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -155,7 +161,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instructionIndexes, forKey: .instructionIndexes)
+        if !self.instructionIndexes.isEmpty {
+          try container.encode(self.instructionIndexes, forKey: .instructionIndexes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -239,7 +247,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.duplicateSuggestions, forKey: .duplicateSuggestions)
+        if !self.duplicateSuggestions.isEmpty {
+          try container.encode(self.duplicateSuggestions, forKey: .duplicateSuggestions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -324,10 +334,16 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.answerRecord, forKey: .answerRecord)
+          if !self.answerRecord.isEmpty {
+            try container.encode(self.answerRecord, forKey: .answerRecord)
+          }
           try container.encodeIfPresent(self.sources, forKey: .sources)
-          try container.encode(self.suggestionIndex, forKey: .suggestionIndex)
-          try container.encode(self.similarityScore, forKey: .similarityScore)
+          if self.suggestionIndex != 0 {
+            try container.encode(self.suggestionIndex, forKey: .suggestionIndex)
+          }
+          if self.similarityScore != 0 {
+            try container.encode(self.similarityScore, forKey: .similarityScore)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -445,7 +461,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.agentAction, forKey: .agentAction)
+        if !self.agentAction.isEmpty {
+          try container.encode(self.agentAction, forKey: .agentAction)
+        }
         try container.encodeIfPresent(self.sources, forKey: .sources)
         try container.encodeIfPresent(self.duplicateCheckResult, forKey: .duplicateCheckResult)
         for (key, value) in self._unknownFields.json {
@@ -543,7 +561,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.responseText, forKey: .responseText)
+        if !self.responseText.isEmpty {
+          try container.encode(self.responseText, forKey: .responseText)
+        }
         try container.encodeIfPresent(self.sources, forKey: .sources)
         try container.encodeIfPresent(self.duplicateCheckResult, forKey: .duplicateCheckResult)
         for (key, value) in self._unknownFields.json {

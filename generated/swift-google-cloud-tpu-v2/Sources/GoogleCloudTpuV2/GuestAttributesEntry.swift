@@ -85,9 +85,15 @@ public struct GuestAttributesEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.namespace, forKey: .namespace)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.value, forKey: .value)
+    if !self.namespace.isEmpty {
+      try container.encode(self.namespace, forKey: .namespace)
+    }
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.value.isEmpty {
+      try container.encode(self.value, forKey: .value)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

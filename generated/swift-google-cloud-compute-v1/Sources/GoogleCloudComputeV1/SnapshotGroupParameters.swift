@@ -92,7 +92,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.replicaZones, forKey: .replicaZones)
+      if !self.replicaZones.isEmpty {
+        try container.encode(self.replicaZones, forKey: .replicaZones)
+      }
       try container.encodeIfPresent(self.sourceSnapshotGroup, forKey: .sourceSnapshotGroup)
       try container.encodeIfPresent(self.type, forKey: .type)
       for (key, value) in self._unknownFields.json {

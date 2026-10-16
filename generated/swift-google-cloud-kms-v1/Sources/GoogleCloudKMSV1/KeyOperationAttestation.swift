@@ -90,8 +90,12 @@ public struct KeyOperationAttestation: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.format, forKey: .format)
-    try container.encode(self.content, forKey: .content)
+    if self.format != KeyOperationAttestation.AttestationFormat() {
+      try container.encode(self.format, forKey: .format)
+    }
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
     try container.encodeIfPresent(self.certChains, forKey: .certChains)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -170,9 +174,15 @@ public struct KeyOperationAttestation: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.caviumCerts, forKey: .caviumCerts)
-      try container.encode(self.googleCardCerts, forKey: .googleCardCerts)
-      try container.encode(self.googlePartitionCerts, forKey: .googlePartitionCerts)
+      if !self.caviumCerts.isEmpty {
+        try container.encode(self.caviumCerts, forKey: .caviumCerts)
+      }
+      if !self.googleCardCerts.isEmpty {
+        try container.encode(self.googleCardCerts, forKey: .googleCardCerts)
+      }
+      if !self.googlePartitionCerts.isEmpty {
+        try container.encode(self.googlePartitionCerts, forKey: .googlePartitionCerts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

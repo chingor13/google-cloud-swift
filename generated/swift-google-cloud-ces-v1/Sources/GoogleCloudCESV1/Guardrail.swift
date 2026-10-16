@@ -174,14 +174,24 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.enabled, forKey: .enabled)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
     try container.encodeIfPresent(self.action, forKey: .action)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
 
     if let choice = self.guardrailType {
       switch choice {
@@ -294,12 +304,22 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.bannedContents, forKey: .bannedContents)
-      try container.encode(self.bannedContentsInUserInput, forKey: .bannedContentsInUserInput)
-      try container.encode(
-        self.bannedContentsInAgentResponse, forKey: .bannedContentsInAgentResponse)
-      try container.encode(self.matchType, forKey: .matchType)
-      try container.encode(self.disregardDiacritics, forKey: .disregardDiacritics)
+      if !self.bannedContents.isEmpty {
+        try container.encode(self.bannedContents, forKey: .bannedContents)
+      }
+      if !self.bannedContentsInUserInput.isEmpty {
+        try container.encode(self.bannedContentsInUserInput, forKey: .bannedContentsInUserInput)
+      }
+      if !self.bannedContentsInAgentResponse.isEmpty {
+        try container.encode(
+          self.bannedContentsInAgentResponse, forKey: .bannedContentsInAgentResponse)
+      }
+      if self.matchType != Guardrail.ContentFilter.MatchType() {
+        try container.encode(self.matchType, forKey: .matchType)
+      }
+      if self.disregardDiacritics {
+        try container.encode(self.disregardDiacritics, forKey: .disregardDiacritics)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -542,7 +562,9 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.failOpen, forKey: .failOpen)
+      if self.failOpen {
+        try container.encode(self.failOpen, forKey: .failOpen)
+      }
 
       if let choice = self.securityConfig {
         switch choice {
@@ -613,7 +635,9 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.defaultPromptTemplate, forKey: .defaultPromptTemplate)
+        if !self.defaultPromptTemplate.isEmpty {
+          try container.encode(self.defaultPromptTemplate, forKey: .defaultPromptTemplate)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -779,12 +803,22 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxConversationMessages, forKey: .maxConversationMessages)
+      if self.maxConversationMessages != 0 {
+        try container.encode(self.maxConversationMessages, forKey: .maxConversationMessages)
+      }
       try container.encodeIfPresent(self.modelSettings, forKey: .modelSettings)
-      try container.encode(self.prompt, forKey: .prompt)
-      try container.encode(self.policyScope, forKey: .policyScope)
-      try container.encode(self.failOpen, forKey: .failOpen)
-      try container.encode(self.allowShortUtterance, forKey: .allowShortUtterance)
+      if !self.prompt.isEmpty {
+        try container.encode(self.prompt, forKey: .prompt)
+      }
+      if self.policyScope != Guardrail.LlmPolicy.PolicyScope() {
+        try container.encode(self.policyScope, forKey: .policyScope)
+      }
+      if self.failOpen {
+        try container.encode(self.failOpen, forKey: .failOpen)
+      }
+      if self.allowShortUtterance {
+        try container.encode(self.allowShortUtterance, forKey: .allowShortUtterance)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -996,7 +1030,9 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.safetySettings, forKey: .safetySettings)
+      if !self.safetySettings.isEmpty {
+        try container.encode(self.safetySettings, forKey: .safetySettings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1067,8 +1103,12 @@ public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.category, forKey: .category)
-        try container.encode(self.threshold, forKey: .threshold)
+        if self.category != Guardrail.ModelSafety.HarmCategory() {
+          try container.encode(self.category, forKey: .category)
+        }
+        if self.threshold != Guardrail.ModelSafety.HarmBlockThreshold() {
+          try container.encode(self.threshold, forKey: .threshold)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

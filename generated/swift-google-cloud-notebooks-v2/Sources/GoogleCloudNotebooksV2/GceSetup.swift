@@ -199,17 +199,35 @@ public struct GceSetup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.acceleratorConfigs, forKey: .acceleratorConfigs)
-    try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.acceleratorConfigs.isEmpty {
+      try container.encode(self.acceleratorConfigs, forKey: .acceleratorConfigs)
+    }
+    if !self.serviceAccounts.isEmpty {
+      try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+    }
     try container.encodeIfPresent(self.bootDisk, forKey: .bootDisk)
-    try container.encode(self.dataDisks, forKey: .dataDisks)
+    if !self.dataDisks.isEmpty {
+      try container.encode(self.dataDisks, forKey: .dataDisks)
+    }
     try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
-    try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
-    try container.encode(self.disablePublicIp, forKey: .disablePublicIp)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.enableIpForwarding, forKey: .enableIpForwarding)
+    if !self.networkInterfaces.isEmpty {
+      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    }
+    if self.disablePublicIp {
+      try container.encode(self.disablePublicIp, forKey: .disablePublicIp)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if self.enableIpForwarding {
+      try container.encode(self.enableIpForwarding, forKey: .enableIpForwarding)
+    }
     try container.encodeIfPresent(self.gpuDriverConfig, forKey: .gpuDriverConfig)
 
     if let choice = self.image {

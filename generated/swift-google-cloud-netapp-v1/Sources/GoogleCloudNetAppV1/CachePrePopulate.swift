@@ -86,8 +86,12 @@ public struct CachePrePopulate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pathList, forKey: .pathList)
-    try container.encode(self.excludePathList, forKey: .excludePathList)
+    if !self.pathList.isEmpty {
+      try container.encode(self.pathList, forKey: .pathList)
+    }
+    if !self.excludePathList.isEmpty {
+      try container.encode(self.excludePathList, forKey: .excludePathList)
+    }
     try container.encodeIfPresent(self.recursion, forKey: .recursion)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

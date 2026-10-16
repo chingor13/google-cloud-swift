@@ -300,20 +300,36 @@ public struct Secret: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.replication, forKey: .replication)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.topics, forKey: .topics)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.topics.isEmpty {
+      try container.encode(self.topics, forKey: .topics)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.rotation, forKey: .rotation)
-    try container.encode(self.versionAliases, forKey: .versionAliases)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.versionAliases.isEmpty {
+      try container.encode(self.versionAliases, forKey: .versionAliases)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.versionDestroyTtl, forKey: .versionDestroyTtl)
     try container.encodeIfPresent(
       self.customerManagedEncryption, forKey: .customerManagedEncryption)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.secretType, forKey: .secretType)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.secretType != Secret.SecretType() {
+      try container.encode(self.secretType, forKey: .secretType)
+    }
     try container.encodeIfPresent(self.policyMember, forKey: .policyMember)
 
     if let choice = self.expiration {

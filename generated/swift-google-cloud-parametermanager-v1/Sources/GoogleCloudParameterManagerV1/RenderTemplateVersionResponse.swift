@@ -104,11 +104,19 @@ public struct RenderTemplateVersionResponse: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.templateVersion, forKey: .templateVersion)
+    if !self.templateVersion.isEmpty {
+      try container.encode(self.templateVersion, forKey: .templateVersion)
+    }
     try container.encodeIfPresent(self.payload, forKey: .payload)
-    try container.encode(self.renderedPayload, forKey: .renderedPayload)
-    try container.encode(self.templateFormat, forKey: .templateFormat)
-    try container.encode(self.parameterVersion, forKey: .parameterVersion)
+    if !self.renderedPayload.isEmpty {
+      try container.encode(self.renderedPayload, forKey: .renderedPayload)
+    }
+    if self.templateFormat != TemplateFormat() {
+      try container.encode(self.templateFormat, forKey: .templateFormat)
+    }
+    if !self.parameterVersion.isEmpty {
+      try container.encode(self.parameterVersion, forKey: .parameterVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

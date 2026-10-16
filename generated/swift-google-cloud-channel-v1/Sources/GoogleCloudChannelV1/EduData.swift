@@ -87,9 +87,15 @@ public struct EduData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instituteType, forKey: .instituteType)
-    try container.encode(self.instituteSize, forKey: .instituteSize)
-    try container.encode(self.website, forKey: .website)
+    if self.instituteType != EduData.InstituteType() {
+      try container.encode(self.instituteType, forKey: .instituteType)
+    }
+    if self.instituteSize != EduData.InstituteSize() {
+      try container.encode(self.instituteSize, forKey: .instituteSize)
+    }
+    if !self.website.isEmpty {
+      try container.encode(self.website, forKey: .website)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

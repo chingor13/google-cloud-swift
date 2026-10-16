@@ -227,22 +227,42 @@ public struct Version: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
-    try container.encode(self.specs, forKey: .specs)
-    try container.encode(self.apiOperations, forKey: .apiOperations)
-    try container.encode(self.definitions, forKey: .definitions)
-    try container.encode(self.deployments, forKey: .deployments)
+    if !self.specs.isEmpty {
+      try container.encode(self.specs, forKey: .specs)
+    }
+    if !self.apiOperations.isEmpty {
+      try container.encode(self.apiOperations, forKey: .apiOperations)
+    }
+    if !self.definitions.isEmpty {
+      try container.encode(self.definitions, forKey: .definitions)
+    }
+    if !self.deployments.isEmpty {
+      try container.encode(self.deployments, forKey: .deployments)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.lifecycle, forKey: .lifecycle)
     try container.encodeIfPresent(self.compliance, forKey: .compliance)
     try container.encodeIfPresent(self.accreditation, forKey: .accreditation)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.selectedDeployment, forKey: .selectedDeployment)
-    try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.selectedDeployment.isEmpty {
+      try container.encode(self.selectedDeployment, forKey: .selectedDeployment)
+    }
+    if !self.sourceMetadata.isEmpty {
+      try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

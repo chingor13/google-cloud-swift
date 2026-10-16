@@ -508,25 +508,31 @@
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.deletionProtection, forKey: .deletionProtection)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.disks, forKey: .disks)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
       try container.encodeIfPresent(self.displayDevice, forKey: .displayDevice)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
-      try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+      if !self.guestAccelerators.isEmpty {
+        try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+      }
       try container.encodeIfPresent(self.hostname, forKey: .hostname)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.instanceEncryptionKey, forKey: .instanceEncryptionKey)
       try container.encodeIfPresent(self.keyRevocationActionType, forKey: .keyRevocationActionType)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.lastStartTimestamp, forKey: .lastStartTimestamp)
       try container.encodeIfPresent(self.lastStopTimestamp, forKey: .lastStopTimestamp)
       try container.encodeIfPresent(self.lastSuspendedTimestamp, forKey: .lastSuspendedTimestamp)
@@ -535,19 +541,25 @@
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
       try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+      if !self.networkInterfaces.isEmpty {
+        try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+      }
       try container.encodeIfPresent(
         self.networkPerformanceConfig, forKey: .networkPerformanceConfig)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
       try container.encodeIfPresent(self.reservationAffinity, forKey: .reservationAffinity)
-      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      if !self.resourcePolicies.isEmpty {
+        try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      }
       try container.encodeIfPresent(self.resourceStatus, forKey: .resourceStatus)
       try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
       try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+      if !self.serviceAccounts.isEmpty {
+        try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+      }
       try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
       try container.encodeIfPresent(
         self.shieldedInstanceIntegrityPolicy, forKey: .shieldedInstanceIntegrityPolicy)

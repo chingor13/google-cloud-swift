@@ -566,44 +566,93 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.databaseVersion, forKey: .databaseVersion)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.state != DatabaseInstance.SqlInstanceState() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if self.databaseVersion != SqlDatabaseVersion() {
+        try container.encode(self.databaseVersion, forKey: .databaseVersion)
+      }
       try container.encodeIfPresent(self.settings, forKey: .settings)
-      try container.encode(self.etag, forKey: .etag)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
       try container.encodeIfPresent(self.failoverReplica, forKey: .failoverReplica)
-      try container.encode(self.masterInstanceName, forKey: .masterInstanceName)
-      try container.encode(self.replicaNames, forKey: .replicaNames)
+      if !self.masterInstanceName.isEmpty {
+        try container.encode(self.masterInstanceName, forKey: .masterInstanceName)
+      }
+      if !self.replicaNames.isEmpty {
+        try container.encode(self.replicaNames, forKey: .replicaNames)
+      }
       try container.encodeIfPresent(self.maxDiskSize, forKey: .maxDiskSize)
       try container.encodeIfPresent(self.currentDiskSize, forKey: .currentDiskSize)
-      try container.encode(self.ipAddresses, forKey: .ipAddresses)
+      if !self.ipAddresses.isEmpty {
+        try container.encode(self.ipAddresses, forKey: .ipAddresses)
+      }
       try container.encodeIfPresent(self.serverCaCert, forKey: .serverCaCert)
-      try container.encode(self.instanceType, forKey: .instanceType)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.ipv6Address, forKey: .ipv6Address)
-      try container.encode(self.serviceAccountEmailAddress, forKey: .serviceAccountEmailAddress)
+      if self.instanceType != SqlInstanceType() {
+        try container.encode(self.instanceType, forKey: .instanceType)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.ipv6Address.isEmpty {
+        try container.encode(self.ipv6Address, forKey: .ipv6Address)
+      }
+      if !self.serviceAccountEmailAddress.isEmpty {
+        try container.encode(self.serviceAccountEmailAddress, forKey: .serviceAccountEmailAddress)
+      }
       try container.encodeIfPresent(self.onPremisesConfiguration, forKey: .onPremisesConfiguration)
       try container.encodeIfPresent(self.replicaConfiguration, forKey: .replicaConfiguration)
-      try container.encode(self.backendType, forKey: .backendType)
-      try container.encode(self.selfLink, forKey: .selfLink)
-      try container.encode(self.suspensionReason, forKey: .suspensionReason)
-      try container.encode(self.connectionName, forKey: .connectionName)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.region, forKey: .region)
-      try container.encode(self.gceZone, forKey: .gceZone)
-      try container.encode(self.secondaryGceZone, forKey: .secondaryGceZone)
+      if self.backendType != SqlBackendType() {
+        try container.encode(self.backendType, forKey: .backendType)
+      }
+      if !self.selfLink.isEmpty {
+        try container.encode(self.selfLink, forKey: .selfLink)
+      }
+      if !self.suspensionReason.isEmpty {
+        try container.encode(self.suspensionReason, forKey: .suspensionReason)
+      }
+      if !self.connectionName.isEmpty {
+        try container.encode(self.connectionName, forKey: .connectionName)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.region.isEmpty {
+        try container.encode(self.region, forKey: .region)
+      }
+      if !self.gceZone.isEmpty {
+        try container.encode(self.gceZone, forKey: .gceZone)
+      }
+      if !self.secondaryGceZone.isEmpty {
+        try container.encode(self.secondaryGceZone, forKey: .secondaryGceZone)
+      }
       try container.encodeIfPresent(
         self.diskEncryptionConfiguration, forKey: .diskEncryptionConfiguration)
       try container.encodeIfPresent(self.diskEncryptionStatus, forKey: .diskEncryptionStatus)
-      try container.encode(self.rootPassword, forKey: .rootPassword)
+      if !self.rootPassword.isEmpty {
+        try container.encode(self.rootPassword, forKey: .rootPassword)
+      }
       try container.encodeIfPresent(self.scheduledMaintenance, forKey: .scheduledMaintenance)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.databaseInstalledVersion, forKey: .databaseInstalledVersion)
+      if !self.databaseInstalledVersion.isEmpty {
+        try container.encode(self.databaseInstalledVersion, forKey: .databaseInstalledVersion)
+      }
       try container.encodeIfPresent(self.outOfDiskReport, forKey: .outOfDiskReport)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.availableMaintenanceVersions, forKey: .availableMaintenanceVersions)
-      try container.encode(self.maintenanceVersion, forKey: .maintenanceVersion)
-      try container.encode(self.upgradableDatabaseVersions, forKey: .upgradableDatabaseVersions)
+      if !self.availableMaintenanceVersions.isEmpty {
+        try container.encode(
+          self.availableMaintenanceVersions, forKey: .availableMaintenanceVersions)
+      }
+      if !self.maintenanceVersion.isEmpty {
+        try container.encode(self.maintenanceVersion, forKey: .maintenanceVersion)
+      }
+      if !self.upgradableDatabaseVersions.isEmpty {
+        try container.encode(self.upgradableDatabaseVersions, forKey: .upgradableDatabaseVersions)
+      }
       try container.encodeIfPresent(self.sqlNetworkArchitecture, forKey: .sqlNetworkArchitecture)
       try container.encodeIfPresent(
         self.pscServiceAttachmentLink, forKey: .pscServiceAttachmentLink)
@@ -619,10 +668,16 @@
       try container.encodeIfPresent(
         self.includeReplicasForMajorVersionUpgrade, forKey: .includeReplicasForMajorVersionUpgrade)
       try container.encodeIfPresent(self.skipPrecheck, forKey: .skipPrecheck)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       try container.encodeIfPresent(self.nodeCount, forKey: .nodeCount)
-      try container.encode(self.nodes, forKey: .nodes)
-      try container.encode(self.dnsNames, forKey: .dnsNames)
+      if !self.nodes.isEmpty {
+        try container.encode(self.nodes, forKey: .nodes)
+      }
+      if !self.dnsNames.isEmpty {
+        try container.encode(self.dnsNames, forKey: .dnsNames)
+      }
       try container.encodeIfPresent(self.deploymentInfo, forKey: .deploymentInfo)
       try container.encodeIfPresent(
         self.databaseCenterIntegrationEnabled, forKey: .databaseCenterIntegrationEnabled)
@@ -695,7 +750,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         try container.encodeIfPresent(self.available, forKey: .available)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -805,8 +862,12 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.startTime, forKey: .startTime)
-        try container.encode(self.canDefer, forKey: .canDefer)
-        try container.encode(self.canReschedule, forKey: .canReschedule)
+        if self.canDefer {
+          try container.encode(self.canDefer, forKey: .canDefer)
+        }
+        if self.canReschedule {
+          try container.encode(self.canReschedule, forKey: .canReschedule)
+        }
         try container.encodeIfPresent(self.scheduleDeadlineTime, forKey: .scheduleDeadlineTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1160,13 +1221,19 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.name, forKey: .name)
         try container.encodeIfPresent(self.gceZone, forKey: .gceZone)
-        try container.encode(self.ipAddresses, forKey: .ipAddresses)
+        if !self.ipAddresses.isEmpty {
+          try container.encode(self.ipAddresses, forKey: .ipAddresses)
+        }
         try container.encodeIfPresent(self.dnsName, forKey: .dnsName)
         try container.encodeIfPresent(self.state, forKey: .state)
-        try container.encode(self.dnsNames, forKey: .dnsNames)
+        if !self.dnsNames.isEmpty {
+          try container.encode(self.dnsNames, forKey: .dnsNames)
+        }
         try container.encodeIfPresent(
           self.pscServiceAttachmentLink, forKey: .pscServiceAttachmentLink)
-        try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
+        if !self.pscAutoConnections.isEmpty {
+          try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

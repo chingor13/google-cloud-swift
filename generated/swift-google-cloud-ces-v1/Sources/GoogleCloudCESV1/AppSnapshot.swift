@@ -108,11 +108,21 @@ public struct AppSnapshot: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.app, forKey: .app)
-    try container.encode(self.agents, forKey: .agents)
-    try container.encode(self.tools, forKey: .tools)
-    try container.encode(self.examples, forKey: .examples)
-    try container.encode(self.guardrails, forKey: .guardrails)
-    try container.encode(self.toolsets, forKey: .toolsets)
+    if !self.agents.isEmpty {
+      try container.encode(self.agents, forKey: .agents)
+    }
+    if !self.tools.isEmpty {
+      try container.encode(self.tools, forKey: .tools)
+    }
+    if !self.examples.isEmpty {
+      try container.encode(self.examples, forKey: .examples)
+    }
+    if !self.guardrails.isEmpty {
+      try container.encode(self.guardrails, forKey: .guardrails)
+    }
+    if !self.toolsets.isEmpty {
+      try container.encode(self.toolsets, forKey: .toolsets)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

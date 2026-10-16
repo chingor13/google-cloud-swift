@@ -396,17 +396,37 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.imageUri, forKey: .imageUri)
-      try container.encode(self.command, forKey: .command)
-      try container.encode(self.args, forKey: .args)
-      try container.encode(self.env, forKey: .env)
-      try container.encode(self.ports, forKey: .ports)
-      try container.encode(self.predictRoute, forKey: .predictRoute)
-      try container.encode(self.healthRoute, forKey: .healthRoute)
-      try container.encode(self.invokeRoutePrefix, forKey: .invokeRoutePrefix)
-      try container.encode(self.grpcPorts, forKey: .grpcPorts)
+      if !self.imageUri.isEmpty {
+        try container.encode(self.imageUri, forKey: .imageUri)
+      }
+      if !self.command.isEmpty {
+        try container.encode(self.command, forKey: .command)
+      }
+      if !self.args.isEmpty {
+        try container.encode(self.args, forKey: .args)
+      }
+      if !self.env.isEmpty {
+        try container.encode(self.env, forKey: .env)
+      }
+      if !self.ports.isEmpty {
+        try container.encode(self.ports, forKey: .ports)
+      }
+      if !self.predictRoute.isEmpty {
+        try container.encode(self.predictRoute, forKey: .predictRoute)
+      }
+      if !self.healthRoute.isEmpty {
+        try container.encode(self.healthRoute, forKey: .healthRoute)
+      }
+      if !self.invokeRoutePrefix.isEmpty {
+        try container.encode(self.invokeRoutePrefix, forKey: .invokeRoutePrefix)
+      }
+      if !self.grpcPorts.isEmpty {
+        try container.encode(self.grpcPorts, forKey: .grpcPorts)
+      }
       try container.encodeIfPresent(self.deploymentTimeout, forKey: .deploymentTimeout)
-      try container.encode(self.sharedMemorySizeMb, forKey: .sharedMemorySizeMb)
+      if self.sharedMemorySizeMb != 0 {
+        try container.encode(self.sharedMemorySizeMb, forKey: .sharedMemorySizeMb)
+      }
       try container.encodeIfPresent(self.startupProbe, forKey: .startupProbe)
       try container.encodeIfPresent(self.healthProbe, forKey: .healthProbe)
       try container.encodeIfPresent(self.livenessProbe, forKey: .livenessProbe)

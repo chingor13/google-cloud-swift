@@ -98,9 +98,13 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.genericMetadata, forKey: .genericMetadata)
-      try container.encode(self.ragCorpusId, forKey: .ragCorpusId)
+      if self.ragCorpusId != 0 {
+        try container.encode(self.ragCorpusId, forKey: .ragCorpusId)
+      }
       try container.encodeIfPresent(self.importRagFilesConfig, forKey: .importRagFilesConfig)
-      try container.encode(self.progressPercentage, forKey: .progressPercentage)
+      if self.progressPercentage != 0 {
+        try container.encode(self.progressPercentage, forKey: .progressPercentage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

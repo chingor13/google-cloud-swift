@@ -677,7 +677,9 @@
       try container.encodeIfPresent(self.allPorts, forKey: .allPorts)
       try container.encodeIfPresent(self.allowGlobalAccess, forKey: .allowGlobalAccess)
       try container.encodeIfPresent(self.allowPscGlobalAccess, forKey: .allowPscGlobalAccess)
-      try container.encode(self.attachedExtensions, forKey: .attachedExtensions)
+      if !self.attachedExtensions.isEmpty {
+        try container.encode(self.attachedExtensions, forKey: .attachedExtensions)
+      }
       try container.encodeIfPresent(self.backendService, forKey: .backendService)
       try container.encodeIfPresent(self.baseForwardingRule, forKey: .baseForwardingRule)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
@@ -688,7 +690,7 @@
       try container.encodeIfPresent(
         self.externalManagedBackendBucketMigrationTestingPercentage,
         forKey: .externalManagedBackendBucketMigrationTestingPercentage)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -698,30 +700,40 @@
       try container.encodeIfPresent(self.ipVersion, forKey: .ipVersion)
       try container.encodeIfPresent(self.isMirroringCollector, forKey: .isMirroringCollector)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.loadBalancingScheme, forKey: .loadBalancingScheme)
-      try container.encode(self.metadataFilters, forKey: .metadataFilters)
+      if !self.metadataFilters.isEmpty {
+        try container.encode(self.metadataFilters, forKey: .metadataFilters)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(self.networkTier, forKey: .networkTier)
       try container.encodeIfPresent(self.noAutomateDnsZone, forKey: .noAutomateDnsZone)
       try container.encodeIfPresent(self.portRange, forKey: .portRange)
-      try container.encode(self.ports, forKey: .ports)
+      if !self.ports.isEmpty {
+        try container.encode(self.ports, forKey: .ports)
+      }
       try container.encodeIfPresent(self.pscConnectionId, forKey: .pscConnectionId)
       try container.encodeIfPresent(self.pscConnectionStatus, forKey: .pscConnectionStatus)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
-      try container.encode(
-        self.serviceDirectoryRegistrations, forKey: .serviceDirectoryRegistrations)
+      if !self.serviceDirectoryRegistrations.isEmpty {
+        try container.encode(
+          self.serviceDirectoryRegistrations, forKey: .serviceDirectoryRegistrations)
+      }
       try container.encodeIfPresent(self.serviceLabel, forKey: .serviceLabel)
       try container.encodeIfPresent(self.serviceName, forKey: .serviceName)
-      try container.encode(self.sourceIpRanges, forKey: .sourceIpRanges)
+      if !self.sourceIpRanges.isEmpty {
+        try container.encode(self.sourceIpRanges, forKey: .sourceIpRanges)
+      }
       try container.encodeIfPresent(self.subnetwork, forKey: .subnetwork)
       try container.encodeIfPresent(self.target, forKey: .target)
       for (key, value) in self._unknownFields.json {

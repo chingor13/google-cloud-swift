@@ -155,15 +155,31 @@ public struct EntityAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mid, forKey: .mid)
-    try container.encode(self.locale, forKey: .locale)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.score, forKey: .score)
-    try container.encode(self.confidence, forKey: .confidence)
-    try container.encode(self.topicality, forKey: .topicality)
+    if !self.mid.isEmpty {
+      try container.encode(self.mid, forKey: .mid)
+    }
+    if !self.locale.isEmpty {
+      try container.encode(self.locale, forKey: .locale)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.score != 0 {
+      try container.encode(self.score, forKey: .score)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
+    if self.topicality != 0 {
+      try container.encode(self.topicality, forKey: .topicality)
+    }
     try container.encodeIfPresent(self.boundingPoly, forKey: .boundingPoly)
-    try container.encode(self.locations, forKey: .locations)
-    try container.encode(self.properties, forKey: .properties)
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
+    if !self.properties.isEmpty {
+      try container.encode(self.properties, forKey: .properties)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

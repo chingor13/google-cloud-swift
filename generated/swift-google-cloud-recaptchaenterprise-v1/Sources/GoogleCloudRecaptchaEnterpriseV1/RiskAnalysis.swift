@@ -122,12 +122,24 @@ public struct RiskAnalysis: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.score, forKey: .score)
-    try container.encode(self.reasons, forKey: .reasons)
-    try container.encode(self.extendedVerdictReasons, forKey: .extendedVerdictReasons)
-    try container.encode(self.lastChallengeType, forKey: .lastChallengeType)
-    try container.encode(self.challenge, forKey: .challenge)
-    try container.encode(self.verifiedBots, forKey: .verifiedBots)
+    if self.score != 0 {
+      try container.encode(self.score, forKey: .score)
+    }
+    if !self.reasons.isEmpty {
+      try container.encode(self.reasons, forKey: .reasons)
+    }
+    if !self.extendedVerdictReasons.isEmpty {
+      try container.encode(self.extendedVerdictReasons, forKey: .extendedVerdictReasons)
+    }
+    if self.lastChallengeType != ChallengeType() {
+      try container.encode(self.lastChallengeType, forKey: .lastChallengeType)
+    }
+    if self.challenge != RiskAnalysis.Challenge() {
+      try container.encode(self.challenge, forKey: .challenge)
+    }
+    if !self.verifiedBots.isEmpty {
+      try container.encode(self.verifiedBots, forKey: .verifiedBots)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

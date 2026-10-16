@@ -88,7 +88,9 @@ public struct AsyncAnnotateFileRequest: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
-    try container.encode(self.features, forKey: .features)
+    if !self.features.isEmpty {
+      try container.encode(self.features, forKey: .features)
+    }
     try container.encodeIfPresent(self.imageContext, forKey: .imageContext)
     try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
     for (key, value) in self._unknownFields.json {

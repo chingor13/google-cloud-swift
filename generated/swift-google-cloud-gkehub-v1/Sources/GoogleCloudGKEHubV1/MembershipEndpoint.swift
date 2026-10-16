@@ -101,7 +101,9 @@ public struct MembershipEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.gkeCluster, forKey: .gkeCluster)
     try container.encodeIfPresent(self.kubernetesMetadata, forKey: .kubernetesMetadata)
     try container.encodeIfPresent(self.kubernetesResource, forKey: .kubernetesResource)
-    try container.encode(self.googleManaged, forKey: .googleManaged)
+    if self.googleManaged {
+      try container.encode(self.googleManaged, forKey: .googleManaged)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

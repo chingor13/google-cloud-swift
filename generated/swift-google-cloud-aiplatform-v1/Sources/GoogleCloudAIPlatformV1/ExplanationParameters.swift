@@ -135,7 +135,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topK, forKey: .topK)
+      if self.topK != 0 {
+        try container.encode(self.topK, forKey: .topK)
+      }
       try container.encodeIfPresent(self.outputIndices, forKey: .outputIndices)
 
       if let choice = self.method {

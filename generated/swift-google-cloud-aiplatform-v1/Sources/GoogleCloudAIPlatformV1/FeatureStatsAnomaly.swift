@@ -160,11 +160,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.score, forKey: .score)
-      try container.encode(self.statsUri, forKey: .statsUri)
-      try container.encode(self.anomalyUri, forKey: .anomalyUri)
-      try container.encode(self.distributionDeviation, forKey: .distributionDeviation)
-      try container.encode(self.anomalyDetectionThreshold, forKey: .anomalyDetectionThreshold)
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
+      if !self.statsUri.isEmpty {
+        try container.encode(self.statsUri, forKey: .statsUri)
+      }
+      if !self.anomalyUri.isEmpty {
+        try container.encode(self.anomalyUri, forKey: .anomalyUri)
+      }
+      if self.distributionDeviation != 0 {
+        try container.encode(self.distributionDeviation, forKey: .distributionDeviation)
+      }
+      if self.anomalyDetectionThreshold != 0 {
+        try container.encode(self.anomalyDetectionThreshold, forKey: .anomalyDetectionThreshold)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       for (key, value) in self._unknownFields.json {

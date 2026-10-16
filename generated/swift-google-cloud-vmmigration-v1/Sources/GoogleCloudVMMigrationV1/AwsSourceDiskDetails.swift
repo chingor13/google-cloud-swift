@@ -94,10 +94,18 @@ public struct AwsSourceDiskDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.volumeId, forKey: .volumeId)
-    try container.encode(self.sizeGib, forKey: .sizeGib)
-    try container.encode(self.diskType, forKey: .diskType)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.volumeId.isEmpty {
+      try container.encode(self.volumeId, forKey: .volumeId)
+    }
+    if self.sizeGib != 0 {
+      try container.encode(self.sizeGib, forKey: .sizeGib)
+    }
+    if self.diskType != AwsSourceDiskDetails.Type_() {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

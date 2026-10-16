@@ -117,12 +117,24 @@ public struct ListUtilizationReportsRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.view, forKey: .view)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.orderBy, forKey: .orderBy)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if self.view != UtilizationReportView() {
+      try container.encode(self.view, forKey: .view)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if !self.orderBy.isEmpty {
+      try container.encode(self.orderBy, forKey: .orderBy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

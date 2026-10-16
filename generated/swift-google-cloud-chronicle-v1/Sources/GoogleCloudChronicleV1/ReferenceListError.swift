@@ -78,8 +78,12 @@ public struct ReferenceListError: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.lineNumber, forKey: .lineNumber)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
+    if self.lineNumber != 0 {
+      try container.encode(self.lineNumber, forKey: .lineNumber)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

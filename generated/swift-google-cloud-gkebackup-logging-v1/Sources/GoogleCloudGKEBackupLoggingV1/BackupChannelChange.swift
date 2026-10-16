@@ -104,8 +104,12 @@ public struct BackupChannelChange: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupChannel, forKey: .backupChannel)
-    try container.encode(self.changeType, forKey: .changeType)
+    if !self.backupChannel.isEmpty {
+      try container.encode(self.backupChannel, forKey: .backupChannel)
+    }
+    if self.changeType != ChangeType() {
+      try container.encode(self.changeType, forKey: .changeType)
+    }
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.inputBackupChannel, forKey: .inputBackupChannel)
     try container.encodeIfPresent(self.error, forKey: .error)

@@ -259,16 +259,34 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.column, forKey: .column)
-    try container.encode(self.ignoreNull, forKey: .ignoreNull)
-    try container.encode(self.dimension, forKey: .dimension)
-    try container.encode(self.threshold, forKey: .threshold)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.suspended, forKey: .suspended)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
+    if self.ignoreNull {
+      try container.encode(self.ignoreNull, forKey: .ignoreNull)
+    }
+    if !self.dimension.isEmpty {
+      try container.encode(self.dimension, forKey: .dimension)
+    }
+    if self.threshold != 0 {
+      try container.encode(self.threshold, forKey: .threshold)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.suspended {
+      try container.encode(self.suspended, forKey: .suspended)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     try container.encodeIfPresent(self.ruleSource, forKey: .ruleSource)
-    try container.encode(self.debugQueries, forKey: .debugQueries)
+    if !self.debugQueries.isEmpty {
+      try container.encode(self.debugQueries, forKey: .debugQueries)
+    }
 
     if let choice = self.ruleType {
       switch choice {
@@ -385,10 +403,18 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.minValue, forKey: .minValue)
-      try container.encode(self.maxValue, forKey: .maxValue)
-      try container.encode(self.strictMinEnabled, forKey: .strictMinEnabled)
-      try container.encode(self.strictMaxEnabled, forKey: .strictMaxEnabled)
+      if !self.minValue.isEmpty {
+        try container.encode(self.minValue, forKey: .minValue)
+      }
+      if !self.maxValue.isEmpty {
+        try container.encode(self.maxValue, forKey: .maxValue)
+      }
+      if self.strictMinEnabled {
+        try container.encode(self.strictMinEnabled, forKey: .strictMinEnabled)
+      }
+      if self.strictMaxEnabled {
+        try container.encode(self.strictMaxEnabled, forKey: .strictMaxEnabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -537,7 +563,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.values, forKey: .values)
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -617,7 +645,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.regex, forKey: .regex)
+      if !self.regex.isEmpty {
+        try container.encode(self.regex, forKey: .regex)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -814,11 +844,21 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.statistic, forKey: .statistic)
-      try container.encode(self.minValue, forKey: .minValue)
-      try container.encode(self.maxValue, forKey: .maxValue)
-      try container.encode(self.strictMinEnabled, forKey: .strictMinEnabled)
-      try container.encode(self.strictMaxEnabled, forKey: .strictMaxEnabled)
+      if self.statistic != DataQualityRule.StatisticRangeExpectation.ColumnStatistic() {
+        try container.encode(self.statistic, forKey: .statistic)
+      }
+      if !self.minValue.isEmpty {
+        try container.encode(self.minValue, forKey: .minValue)
+      }
+      if !self.maxValue.isEmpty {
+        try container.encode(self.maxValue, forKey: .maxValue)
+      }
+      if self.strictMinEnabled {
+        try container.encode(self.strictMinEnabled, forKey: .strictMinEnabled)
+      }
+      if self.strictMaxEnabled {
+        try container.encode(self.strictMaxEnabled, forKey: .strictMaxEnabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1029,7 +1069,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sqlExpression, forKey: .sqlExpression)
+      if !self.sqlExpression.isEmpty {
+        try container.encode(self.sqlExpression, forKey: .sqlExpression)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1115,7 +1157,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sqlExpression, forKey: .sqlExpression)
+      if !self.sqlExpression.isEmpty {
+        try container.encode(self.sqlExpression, forKey: .sqlExpression)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1209,7 +1253,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sqlStatement, forKey: .sqlStatement)
+      if !self.sqlStatement.isEmpty {
+        try container.encode(self.sqlStatement, forKey: .sqlStatement)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1324,9 +1370,15 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.values, forKey: .values)
-      try container.encode(self.resolvedSql, forKey: .resolvedSql)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
+      if !self.resolvedSql.isEmpty {
+        try container.encode(self.resolvedSql, forKey: .resolvedSql)
+      }
       try container.encodeIfPresent(self.ruleTemplate, forKey: .ruleTemplate)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1385,7 +1437,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.value, forKey: .value)
+        if !self.value.isEmpty {
+          try container.encode(self.value, forKey: .value)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1492,7 +1546,9 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rulePathElements, forKey: .rulePathElements)
+      if !self.rulePathElements.isEmpty {
+        try container.encode(self.rulePathElements, forKey: .rulePathElements)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1660,9 +1716,15 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.entryType, forKey: .entryType)
-          try container.encode(self.entry, forKey: .entry)
-          try container.encode(self.displayName, forKey: .displayName)
+          if !self.entryType.isEmpty {
+            try container.encode(self.entryType, forKey: .entryType)
+          }
+          if !self.entry.isEmpty {
+            try container.encode(self.entry, forKey: .entry)
+          }
+          if !self.displayName.isEmpty {
+            try container.encode(self.displayName, forKey: .displayName)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1755,8 +1817,12 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.entryLinkType, forKey: .entryLinkType)
-          try container.encode(self.entryLink, forKey: .entryLink)
+          if !self.entryLinkType.isEmpty {
+            try container.encode(self.entryLinkType, forKey: .entryLinkType)
+          }
+          if !self.entryLink.isEmpty {
+            try container.encode(self.entryLink, forKey: .entryLink)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1921,8 +1987,12 @@ public struct DataQualityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.sqlStatement, forKey: .sqlStatement)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.sqlStatement.isEmpty {
+        try container.encode(self.sqlStatement, forKey: .sqlStatement)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

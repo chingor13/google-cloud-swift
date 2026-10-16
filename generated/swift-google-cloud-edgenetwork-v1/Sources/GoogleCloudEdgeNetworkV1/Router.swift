@@ -151,17 +151,33 @@ public struct Router: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.interface, forKey: .interface)
-    try container.encode(self.bgpPeer, forKey: .bgpPeer)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.interface.isEmpty {
+      try container.encode(self.interface, forKey: .interface)
+    }
+    if !self.bgpPeer.isEmpty {
+      try container.encode(self.bgpPeer, forKey: .bgpPeer)
+    }
     try container.encodeIfPresent(self.bgp, forKey: .bgp)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.routeAdvertisements, forKey: .routeAdvertisements)
+    if self.state != ResourceState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.routeAdvertisements.isEmpty {
+      try container.encode(self.routeAdvertisements, forKey: .routeAdvertisements)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -267,12 +283,25 @@ public struct Router: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.ipv4Cidr, forKey: .ipv4Cidr)
-      try container.encode(self.ipv6Cidr, forKey: .ipv6Cidr)
-      try container.encode(self.linkedInterconnectAttachment, forKey: .linkedInterconnectAttachment)
-      try container.encode(self.subnetwork, forKey: .subnetwork)
-      try container.encode(self.loopbackIpAddresses, forKey: .loopbackIpAddresses)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.ipv4Cidr.isEmpty {
+        try container.encode(self.ipv4Cidr, forKey: .ipv4Cidr)
+      }
+      if !self.ipv6Cidr.isEmpty {
+        try container.encode(self.ipv6Cidr, forKey: .ipv6Cidr)
+      }
+      if !self.linkedInterconnectAttachment.isEmpty {
+        try container.encode(
+          self.linkedInterconnectAttachment, forKey: .linkedInterconnectAttachment)
+      }
+      if !self.subnetwork.isEmpty {
+        try container.encode(self.subnetwork, forKey: .subnetwork)
+      }
+      if !self.loopbackIpAddresses.isEmpty {
+        try container.encode(self.loopbackIpAddresses, forKey: .loopbackIpAddresses)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -412,14 +441,30 @@ public struct Router: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.interface, forKey: .interface)
-      try container.encode(self.interfaceIpv4Cidr, forKey: .interfaceIpv4Cidr)
-      try container.encode(self.interfaceIpv6Cidr, forKey: .interfaceIpv6Cidr)
-      try container.encode(self.peerIpv4Cidr, forKey: .peerIpv4Cidr)
-      try container.encode(self.peerIpv6Cidr, forKey: .peerIpv6Cidr)
-      try container.encode(self.peerAsn, forKey: .peerAsn)
-      try container.encode(self.localAsn, forKey: .localAsn)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.interface.isEmpty {
+        try container.encode(self.interface, forKey: .interface)
+      }
+      if !self.interfaceIpv4Cidr.isEmpty {
+        try container.encode(self.interfaceIpv4Cidr, forKey: .interfaceIpv4Cidr)
+      }
+      if !self.interfaceIpv6Cidr.isEmpty {
+        try container.encode(self.interfaceIpv6Cidr, forKey: .interfaceIpv6Cidr)
+      }
+      if !self.peerIpv4Cidr.isEmpty {
+        try container.encode(self.peerIpv4Cidr, forKey: .peerIpv4Cidr)
+      }
+      if !self.peerIpv6Cidr.isEmpty {
+        try container.encode(self.peerIpv6Cidr, forKey: .peerIpv6Cidr)
+      }
+      if self.peerAsn != 0 {
+        try container.encode(self.peerAsn, forKey: .peerAsn)
+      }
+      if self.localAsn != 0 {
+        try container.encode(self.localAsn, forKey: .localAsn)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -510,8 +555,12 @@ public struct Router: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asn, forKey: .asn)
-      try container.encode(self.keepaliveIntervalInSeconds, forKey: .keepaliveIntervalInSeconds)
+      if self.asn != 0 {
+        try container.encode(self.asn, forKey: .asn)
+      }
+      if self.keepaliveIntervalInSeconds != 0 {
+        try container.encode(self.keepaliveIntervalInSeconds, forKey: .keepaliveIntervalInSeconds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -85,8 +85,12 @@ public struct PullGitCommitsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.remoteBranch, forKey: .remoteBranch)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.remoteBranch.isEmpty {
+      try container.encode(self.remoteBranch, forKey: .remoteBranch)
+    }
     try container.encodeIfPresent(self.author, forKey: .author)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

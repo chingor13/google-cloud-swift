@@ -92,9 +92,15 @@ public struct QueryAccountRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.accountId, forKey: .accountId)
-    try container.encode(self.roundId, forKey: .roundId)
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.accountId.isEmpty {
+      try container.encode(self.accountId, forKey: .accountId)
+    }
+    if self.roundId != 0 {
+      try container.encode(self.roundId, forKey: .roundId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

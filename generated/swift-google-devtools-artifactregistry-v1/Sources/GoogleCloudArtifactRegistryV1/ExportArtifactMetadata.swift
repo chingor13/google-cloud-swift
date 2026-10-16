@@ -71,7 +71,9 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.exportedFiles, forKey: .exportedFiles)
+    if !self.exportedFiles.isEmpty {
+      try container.encode(self.exportedFiles, forKey: .exportedFiles)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -160,8 +162,12 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.hashes, forKey: .hashes)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.hashes.isEmpty {
+        try container.encode(self.hashes, forKey: .hashes)
+      }
 
       if let choice = self.destination {
         switch choice {

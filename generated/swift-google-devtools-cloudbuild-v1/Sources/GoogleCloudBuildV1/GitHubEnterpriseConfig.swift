@@ -144,15 +144,29 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.hostUrl, forKey: .hostUrl)
-    try container.encode(self.appId, forKey: .appId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.hostUrl.isEmpty {
+      try container.encode(self.hostUrl, forKey: .hostUrl)
+    }
+    if self.appId != 0 {
+      try container.encode(self.appId, forKey: .appId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.webhookKey, forKey: .webhookKey)
-    try container.encode(self.peeredNetwork, forKey: .peeredNetwork)
+    if !self.webhookKey.isEmpty {
+      try container.encode(self.webhookKey, forKey: .webhookKey)
+    }
+    if !self.peeredNetwork.isEmpty {
+      try container.encode(self.peeredNetwork, forKey: .peeredNetwork)
+    }
     try container.encodeIfPresent(self.secrets, forKey: .secrets)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.sslCa, forKey: .sslCa)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.sslCa.isEmpty {
+      try container.encode(self.sslCa, forKey: .sslCa)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

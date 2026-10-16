@@ -162,7 +162,9 @@ public struct OutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.outputUriPrefix, forKey: .outputUriPrefix)
+      if !self.outputUriPrefix.isEmpty {
+        try container.encode(self.outputUriPrefix, forKey: .outputUriPrefix)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -261,9 +263,15 @@ public struct OutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datasetId, forKey: .datasetId)
-      try container.encode(self.tableIdPrefix, forKey: .tableIdPrefix)
-      try container.encode(self.tableType, forKey: .tableType)
+      if !self.datasetId.isEmpty {
+        try container.encode(self.datasetId, forKey: .datasetId)
+      }
+      if !self.tableIdPrefix.isEmpty {
+        try container.encode(self.tableIdPrefix, forKey: .tableIdPrefix)
+      }
+      if !self.tableType.isEmpty {
+        try container.encode(self.tableType, forKey: .tableType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

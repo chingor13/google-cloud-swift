@@ -89,9 +89,15 @@ public struct ProvisionedService: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.provisioningId, forKey: .provisioningId)
-    try container.encode(self.productId, forKey: .productId)
-    try container.encode(self.skuId, forKey: .skuId)
+    if !self.provisioningId.isEmpty {
+      try container.encode(self.provisioningId, forKey: .provisioningId)
+    }
+    if !self.productId.isEmpty {
+      try container.encode(self.productId, forKey: .productId)
+    }
+    if !self.skuId.isEmpty {
+      try container.encode(self.skuId, forKey: .skuId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

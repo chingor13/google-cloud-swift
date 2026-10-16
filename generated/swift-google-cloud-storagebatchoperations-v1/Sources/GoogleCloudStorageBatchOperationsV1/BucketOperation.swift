@@ -190,14 +190,22 @@ public struct BucketOperation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.bucketName, forKey: .bucketName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.bucketName.isEmpty {
+      try container.encode(self.bucketName, forKey: .bucketName)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
     try container.encodeIfPresent(self.counters, forKey: .counters)
-    try container.encode(self.errorSummaries, forKey: .errorSummaries)
-    try container.encode(self.state, forKey: .state)
+    if !self.errorSummaries.isEmpty {
+      try container.encode(self.errorSummaries, forKey: .errorSummaries)
+    }
+    if self.state != BucketOperation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
 
     if let choice = self.objectConfiguration {
       switch choice {

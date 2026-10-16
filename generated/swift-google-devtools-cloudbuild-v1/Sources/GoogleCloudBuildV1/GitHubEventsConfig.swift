@@ -123,9 +123,15 @@ public struct GitHubEventsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.installationId, forKey: .installationId)
-    try container.encode(self.owner, forKey: .owner)
-    try container.encode(self.name, forKey: .name)
+    if self.installationId != 0 {
+      try container.encode(self.installationId, forKey: .installationId)
+    }
+    if !self.owner.isEmpty {
+      try container.encode(self.owner, forKey: .owner)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
 
     if let choice = self.event {
       switch choice {

@@ -100,10 +100,16 @@ public struct ProcessWithDocAiPipeline: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.documents, forKey: .documents)
-    try container.encode(self.exportFolderPath, forKey: .exportFolderPath)
+    if !self.documents.isEmpty {
+      try container.encode(self.documents, forKey: .documents)
+    }
+    if !self.exportFolderPath.isEmpty {
+      try container.encode(self.exportFolderPath, forKey: .exportFolderPath)
+    }
     try container.encodeIfPresent(self.processorInfo, forKey: .processorInfo)
-    try container.encode(self.processorResultsFolderPath, forKey: .processorResultsFolderPath)
+    if !self.processorResultsFolderPath.isEmpty {
+      try container.encode(self.processorResultsFolderPath, forKey: .processorResultsFolderPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -69,7 +69,9 @@ public struct FetchFileDiffResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.formattedDiff, forKey: .formattedDiff)
+    if !self.formattedDiff.isEmpty {
+      try container.encode(self.formattedDiff, forKey: .formattedDiff)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

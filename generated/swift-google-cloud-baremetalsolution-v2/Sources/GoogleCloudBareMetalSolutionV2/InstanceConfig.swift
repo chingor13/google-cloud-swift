@@ -185,19 +185,41 @@ public struct InstanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.instanceType, forKey: .instanceType)
-    try container.encode(self.hyperthreading, forKey: .hyperthreading)
-    try container.encode(self.osImage, forKey: .osImage)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.instanceType.isEmpty {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
+    if self.hyperthreading {
+      try container.encode(self.hyperthreading, forKey: .hyperthreading)
+    }
+    if !self.osImage.isEmpty {
+      try container.encode(self.osImage, forKey: .osImage)
+    }
     try container.encodeIfPresent(self.clientNetwork, forKey: .clientNetwork)
     try container.encodeIfPresent(self.privateNetwork, forKey: .privateNetwork)
-    try container.encode(self.userNote, forKey: .userNote)
-    try container.encode(self.accountNetworksEnabled, forKey: .accountNetworksEnabled)
-    try container.encode(self.networkConfig, forKey: .networkConfig)
-    try container.encode(self.networkTemplate, forKey: .networkTemplate)
-    try container.encode(self.logicalInterfaces, forKey: .logicalInterfaces)
-    try container.encode(self.sshKeyNames, forKey: .sshKeyNames)
+    if !self.userNote.isEmpty {
+      try container.encode(self.userNote, forKey: .userNote)
+    }
+    if self.accountNetworksEnabled {
+      try container.encode(self.accountNetworksEnabled, forKey: .accountNetworksEnabled)
+    }
+    if self.networkConfig != InstanceConfig.NetworkConfig() {
+      try container.encode(self.networkConfig, forKey: .networkConfig)
+    }
+    if !self.networkTemplate.isEmpty {
+      try container.encode(self.networkTemplate, forKey: .networkTemplate)
+    }
+    if !self.logicalInterfaces.isEmpty {
+      try container.encode(self.logicalInterfaces, forKey: .logicalInterfaces)
+    }
+    if !self.sshKeyNames.isEmpty {
+      try container.encode(self.sshKeyNames, forKey: .sshKeyNames)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -271,9 +293,15 @@ public struct InstanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkId, forKey: .networkId)
-      try container.encode(self.address, forKey: .address)
-      try container.encode(self.existingNetworkId, forKey: .existingNetworkId)
+      if !self.networkId.isEmpty {
+        try container.encode(self.networkId, forKey: .networkId)
+      }
+      if !self.address.isEmpty {
+        try container.encode(self.address, forKey: .address)
+      }
+      if !self.existingNetworkId.isEmpty {
+        try container.encode(self.existingNetworkId, forKey: .existingNetworkId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

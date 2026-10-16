@@ -109,10 +109,18 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.followGaeApplication, forKey: .followGaeApplication)
-      try container.encode(self.zone, forKey: .zone)
-      try container.encode(self.secondaryZone, forKey: .secondaryZone)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.followGaeApplication.isEmpty {
+        try container.encode(self.followGaeApplication, forKey: .followGaeApplication)
+      }
+      if !self.zone.isEmpty {
+        try container.encode(self.zone, forKey: .zone)
+      }
+      if !self.secondaryZone.isEmpty {
+        try container.encode(self.secondaryZone, forKey: .secondaryZone)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

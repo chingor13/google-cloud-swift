@@ -87,9 +87,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rougeType, forKey: .rougeType)
-      try container.encode(self.useStemmer, forKey: .useStemmer)
-      try container.encode(self.splitSummaries, forKey: .splitSummaries)
+      if !self.rougeType.isEmpty {
+        try container.encode(self.rougeType, forKey: .rougeType)
+      }
+      if self.useStemmer {
+        try container.encode(self.useStemmer, forKey: .useStemmer)
+      }
+      if self.splitSummaries {
+        try container.encode(self.splitSummaries, forKey: .splitSummaries)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

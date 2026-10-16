@@ -124,11 +124,17 @@ public struct DataProfileJobConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.location, forKey: .location)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
     try container.encodeIfPresent(
       self.otherCloudStartingLocation, forKey: .otherCloudStartingLocation)
-    try container.encode(self.inspectTemplates, forKey: .inspectTemplates)
-    try container.encode(self.dataProfileActions, forKey: .dataProfileActions)
+    if !self.inspectTemplates.isEmpty {
+      try container.encode(self.inspectTemplates, forKey: .inspectTemplates)
+    }
+    if !self.dataProfileActions.isEmpty {
+      try container.encode(self.dataProfileActions, forKey: .dataProfileActions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

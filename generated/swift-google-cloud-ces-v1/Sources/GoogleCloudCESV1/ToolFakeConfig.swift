@@ -89,7 +89,9 @@ public struct ToolFakeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enableFakeMode, forKey: .enableFakeMode)
+    if self.enableFakeMode {
+      try container.encode(self.enableFakeMode, forKey: .enableFakeMode)
+    }
 
     if let choice = self.toolResponse {
       switch choice {

@@ -117,9 +117,15 @@ public struct UpdateUserRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.user, forKey: .user)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

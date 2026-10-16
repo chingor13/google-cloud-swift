@@ -137,12 +137,24 @@ public struct BillingAccount: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.`open`, forKey: .`open`)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.masterBillingAccount, forKey: .masterBillingAccount)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.currencyCode, forKey: .currencyCode)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.`open` {
+      try container.encode(self.`open`, forKey: .`open`)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.masterBillingAccount.isEmpty {
+      try container.encode(self.masterBillingAccount, forKey: .masterBillingAccount)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.currencyCode.isEmpty {
+      try container.encode(self.currencyCode, forKey: .currencyCode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

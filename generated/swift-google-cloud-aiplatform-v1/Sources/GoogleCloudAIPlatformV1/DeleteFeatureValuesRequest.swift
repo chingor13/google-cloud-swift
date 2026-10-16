@@ -106,7 +106,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entityType, forKey: .entityType)
+      if !self.entityType.isEmpty {
+        try container.encode(self.entityType, forKey: .entityType)
+      }
 
       if let choice = self.deleteOption {
         switch choice {
@@ -282,7 +284,9 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.timeRange, forKey: .timeRange)
         try container.encodeIfPresent(self.featureSelector, forKey: .featureSelector)
-        try container.encode(self.skipOnlineStorageDelete, forKey: .skipOnlineStorageDelete)
+        if self.skipOnlineStorageDelete {
+          try container.encode(self.skipOnlineStorageDelete, forKey: .skipOnlineStorageDelete)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

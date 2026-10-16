@@ -92,8 +92,12 @@ public struct ProtectedEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.action, forKey: .action)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

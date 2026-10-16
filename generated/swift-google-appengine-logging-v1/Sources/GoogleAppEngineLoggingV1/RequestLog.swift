@@ -338,39 +338,97 @@ public struct RequestLog: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.appId, forKey: .appId)
-    try container.encode(self.moduleId, forKey: .moduleId)
-    try container.encode(self.versionId, forKey: .versionId)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.ip, forKey: .ip)
+    if !self.appId.isEmpty {
+      try container.encode(self.appId, forKey: .appId)
+    }
+    if !self.moduleId.isEmpty {
+      try container.encode(self.moduleId, forKey: .moduleId)
+    }
+    if !self.versionId.isEmpty {
+      try container.encode(self.versionId, forKey: .versionId)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if !self.ip.isEmpty {
+      try container.encode(self.ip, forKey: .ip)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.latency, forKey: .latency)
-    try container.encode(self.megaCycles, forKey: .megaCycles)
-    try container.encode(self.method, forKey: .method)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.httpVersion, forKey: .httpVersion)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.responseSize, forKey: .responseSize)
-    try container.encode(self.referrer, forKey: .referrer)
-    try container.encode(self.userAgent, forKey: .userAgent)
-    try container.encode(self.nickname, forKey: .nickname)
-    try container.encode(self.urlMapEntry, forKey: .urlMapEntry)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.cost, forKey: .cost)
-    try container.encode(self.taskQueueName, forKey: .taskQueueName)
-    try container.encode(self.taskName, forKey: .taskName)
-    try container.encode(self.wasLoadingRequest, forKey: .wasLoadingRequest)
+    if self.megaCycles != 0 {
+      try container.encode(self.megaCycles, forKey: .megaCycles)
+    }
+    if !self.method.isEmpty {
+      try container.encode(self.method, forKey: .method)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.httpVersion.isEmpty {
+      try container.encode(self.httpVersion, forKey: .httpVersion)
+    }
+    if self.status != 0 {
+      try container.encode(self.status, forKey: .status)
+    }
+    if self.responseSize != 0 {
+      try container.encode(self.responseSize, forKey: .responseSize)
+    }
+    if !self.referrer.isEmpty {
+      try container.encode(self.referrer, forKey: .referrer)
+    }
+    if !self.userAgent.isEmpty {
+      try container.encode(self.userAgent, forKey: .userAgent)
+    }
+    if !self.nickname.isEmpty {
+      try container.encode(self.nickname, forKey: .nickname)
+    }
+    if !self.urlMapEntry.isEmpty {
+      try container.encode(self.urlMapEntry, forKey: .urlMapEntry)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.cost != 0 {
+      try container.encode(self.cost, forKey: .cost)
+    }
+    if !self.taskQueueName.isEmpty {
+      try container.encode(self.taskQueueName, forKey: .taskQueueName)
+    }
+    if !self.taskName.isEmpty {
+      try container.encode(self.taskName, forKey: .taskName)
+    }
+    if self.wasLoadingRequest {
+      try container.encode(self.wasLoadingRequest, forKey: .wasLoadingRequest)
+    }
     try container.encodeIfPresent(self.pendingTime, forKey: .pendingTime)
-    try container.encode(self.instanceIndex, forKey: .instanceIndex)
-    try container.encode(self.finished, forKey: .finished)
-    try container.encode(self.first, forKey: .first)
-    try container.encode(self.instanceId, forKey: .instanceId)
-    try container.encode(self.line, forKey: .line)
-    try container.encode(self.appEngineRelease, forKey: .appEngineRelease)
-    try container.encode(self.traceId, forKey: .traceId)
-    try container.encode(self.traceSampled, forKey: .traceSampled)
-    try container.encode(self.sourceReference, forKey: .sourceReference)
+    if self.instanceIndex != 0 {
+      try container.encode(self.instanceIndex, forKey: .instanceIndex)
+    }
+    if self.finished {
+      try container.encode(self.finished, forKey: .finished)
+    }
+    if self.first {
+      try container.encode(self.first, forKey: .first)
+    }
+    if !self.instanceId.isEmpty {
+      try container.encode(self.instanceId, forKey: .instanceId)
+    }
+    if !self.line.isEmpty {
+      try container.encode(self.line, forKey: .line)
+    }
+    if !self.appEngineRelease.isEmpty {
+      try container.encode(self.appEngineRelease, forKey: .appEngineRelease)
+    }
+    if !self.traceId.isEmpty {
+      try container.encode(self.traceId, forKey: .traceId)
+    }
+    if self.traceSampled {
+      try container.encode(self.traceSampled, forKey: .traceSampled)
+    }
+    if !self.sourceReference.isEmpty {
+      try container.encode(self.sourceReference, forKey: .sourceReference)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -111,7 +111,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.location, forKey: .location)
-      try container.encode(self.otherLocations, forKey: .otherLocations)
+      if !self.otherLocations.isEmpty {
+        try container.encode(self.otherLocations, forKey: .otherLocations)
+      }
       try container.encodeIfPresent(self.recommendationId, forKey: .recommendationId)
       try container.encodeIfPresent(self.recommendationType, forKey: .recommendationType)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)

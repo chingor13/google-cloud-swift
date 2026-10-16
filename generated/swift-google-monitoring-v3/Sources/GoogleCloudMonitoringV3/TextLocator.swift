@@ -131,11 +131,15 @@ public struct TextLocator: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.source, forKey: .source)
+    if !self.source.isEmpty {
+      try container.encode(self.source, forKey: .source)
+    }
     try container.encodeIfPresent(self.startPosition, forKey: .startPosition)
     try container.encodeIfPresent(self.endPosition, forKey: .endPosition)
     try container.encodeIfPresent(self.nestedLocator, forKey: .nestedLocator)
-    try container.encode(self.nestingReason, forKey: .nestingReason)
+    if !self.nestingReason.isEmpty {
+      try container.encode(self.nestingReason, forKey: .nestingReason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -202,8 +206,12 @@ public struct TextLocator: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.line, forKey: .line)
-      try container.encode(self.column, forKey: .column)
+      if self.line != 0 {
+        try container.encode(self.line, forKey: .line)
+      }
+      if self.column != 0 {
+        try container.encode(self.column, forKey: .column)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

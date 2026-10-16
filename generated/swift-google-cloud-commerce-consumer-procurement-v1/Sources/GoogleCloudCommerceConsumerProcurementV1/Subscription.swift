@@ -85,7 +85,9 @@ public struct Subscription: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.autoRenewalEnabled, forKey: .autoRenewalEnabled)
+    if self.autoRenewalEnabled {
+      try container.encode(self.autoRenewalEnabled, forKey: .autoRenewalEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -102,12 +102,18 @@ public struct CompensationFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.units, forKey: .units)
+    if self.type != CompensationFilter.FilterType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.units.isEmpty {
+      try container.encode(self.units, forKey: .units)
+    }
     try container.encodeIfPresent(self.range, forKey: .range)
-    try container.encode(
-      self.includeJobsWithUnspecifiedCompensationRange,
-      forKey: .includeJobsWithUnspecifiedCompensationRange)
+    if self.includeJobsWithUnspecifiedCompensationRange {
+      try container.encode(
+        self.includeJobsWithUnspecifiedCompensationRange,
+        forKey: .includeJobsWithUnspecifiedCompensationRange)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

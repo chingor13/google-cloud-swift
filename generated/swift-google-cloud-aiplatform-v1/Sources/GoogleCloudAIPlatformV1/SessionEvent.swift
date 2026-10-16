@@ -135,14 +135,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.author, forKey: .author)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.author.isEmpty {
+        try container.encode(self.author, forKey: .author)
+      }
       try container.encodeIfPresent(self.content, forKey: .content)
-      try container.encode(self.invocationId, forKey: .invocationId)
+      if !self.invocationId.isEmpty {
+        try container.encode(self.invocationId, forKey: .invocationId)
+      }
       try container.encodeIfPresent(self.actions, forKey: .actions)
       try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
-      try container.encode(self.errorCode, forKey: .errorCode)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if !self.errorCode.isEmpty {
+        try container.encode(self.errorCode, forKey: .errorCode)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       try container.encodeIfPresent(self.eventMetadata, forKey: .eventMetadata)
       try container.encodeIfPresent(self.rawEvent, forKey: .rawEvent)
       for (key, value) in self._unknownFields.json {

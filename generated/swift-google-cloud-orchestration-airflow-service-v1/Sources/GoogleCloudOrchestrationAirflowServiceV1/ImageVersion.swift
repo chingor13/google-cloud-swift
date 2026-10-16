@@ -113,12 +113,22 @@ public struct ImageVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.imageVersionId, forKey: .imageVersionId)
-    try container.encode(self.isDefault, forKey: .isDefault)
-    try container.encode(self.supportedPythonVersions, forKey: .supportedPythonVersions)
+    if !self.imageVersionId.isEmpty {
+      try container.encode(self.imageVersionId, forKey: .imageVersionId)
+    }
+    if self.isDefault {
+      try container.encode(self.isDefault, forKey: .isDefault)
+    }
+    if !self.supportedPythonVersions.isEmpty {
+      try container.encode(self.supportedPythonVersions, forKey: .supportedPythonVersions)
+    }
     try container.encodeIfPresent(self.releaseDate, forKey: .releaseDate)
-    try container.encode(self.creationDisabled, forKey: .creationDisabled)
-    try container.encode(self.upgradeDisabled, forKey: .upgradeDisabled)
+    if self.creationDisabled {
+      try container.encode(self.creationDisabled, forKey: .creationDisabled)
+    }
+    if self.upgradeDisabled {
+      try container.encode(self.upgradeDisabled, forKey: .upgradeDisabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

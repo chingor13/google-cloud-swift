@@ -155,16 +155,30 @@ public struct MigrationSubtask: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.taskId, forKey: .taskId)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.taskId.isEmpty {
+      try container.encode(self.taskId, forKey: .taskId)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.state != MigrationSubtask.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.processingError, forKey: .processingError)
-    try container.encode(self.resourceErrorDetails, forKey: .resourceErrorDetails)
-    try container.encode(self.resourceErrorCount, forKey: .resourceErrorCount)
+    if !self.resourceErrorDetails.isEmpty {
+      try container.encode(self.resourceErrorDetails, forKey: .resourceErrorDetails)
+    }
+    if self.resourceErrorCount != 0 {
+      try container.encode(self.resourceErrorCount, forKey: .resourceErrorCount)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
-    try container.encode(self.metrics, forKey: .metrics)
+    if !self.metrics.isEmpty {
+      try container.encode(self.metrics, forKey: .metrics)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

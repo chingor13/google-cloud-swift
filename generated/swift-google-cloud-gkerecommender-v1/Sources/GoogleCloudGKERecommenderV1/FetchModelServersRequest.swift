@@ -104,7 +104,9 @@ public struct FetchModelServersRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.model, forKey: .model)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
     try container.encodeIfPresent(self.pageSize, forKey: .pageSize)
     try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
     for (key, value) in self._unknownFields.json {

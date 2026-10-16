@@ -162,15 +162,33 @@ public struct EventTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.trigger, forKey: .trigger)
-    try container.encode(self.triggerRegion, forKey: .triggerRegion)
-    try container.encode(self.eventType, forKey: .eventType)
-    try container.encode(self.eventFilters, forKey: .eventFilters)
-    try container.encode(self.pubsubTopic, forKey: .pubsubTopic)
-    try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
-    try container.encode(self.retryPolicy, forKey: .retryPolicy)
-    try container.encode(self.channel, forKey: .channel)
-    try container.encode(self.service, forKey: .service)
+    if !self.trigger.isEmpty {
+      try container.encode(self.trigger, forKey: .trigger)
+    }
+    if !self.triggerRegion.isEmpty {
+      try container.encode(self.triggerRegion, forKey: .triggerRegion)
+    }
+    if !self.eventType.isEmpty {
+      try container.encode(self.eventType, forKey: .eventType)
+    }
+    if !self.eventFilters.isEmpty {
+      try container.encode(self.eventFilters, forKey: .eventFilters)
+    }
+    if !self.pubsubTopic.isEmpty {
+      try container.encode(self.pubsubTopic, forKey: .pubsubTopic)
+    }
+    if !self.serviceAccountEmail.isEmpty {
+      try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+    }
+    if self.retryPolicy != EventTrigger.RetryPolicy() {
+      try container.encode(self.retryPolicy, forKey: .retryPolicy)
+    }
+    if !self.channel.isEmpty {
+      try container.encode(self.channel, forKey: .channel)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

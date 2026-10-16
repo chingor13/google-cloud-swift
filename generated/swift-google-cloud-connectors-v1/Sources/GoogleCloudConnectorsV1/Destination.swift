@@ -94,7 +94,9 @@ public struct Destination: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.port, forKey: .port)
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
 
     if let choice = self.destination {
       switch choice {

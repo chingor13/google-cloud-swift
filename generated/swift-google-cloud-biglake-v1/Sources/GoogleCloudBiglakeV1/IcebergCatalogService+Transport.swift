@@ -418,10 +418,8 @@ extension Clients {
     public func createIcebergTable(
       request: CreateIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
-      let (path, query, configure, omitted) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void, [Swift.String]
-        ) in
+      let (path, query, configure) = try {
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
             let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
@@ -440,7 +438,7 @@ extension Clients {
           ]
           return (path, query)
         }() {
-          return (candidate.0, candidate.1, { $0.setMethod(.POST) }, ["parent"])
+          return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
         var paths: [GoogleGax.PathMismatch] = []
         do {
@@ -462,7 +460,9 @@ extension Clients {
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
       req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
-      try req.setBody(json: request, omitting: omitted)
+      if let body = request.httpBody {
+        try req.setBody(json: body)
+      }
       return try await req.rpc(
         GoogleApi.HttpBody.self, timeout: options.attemptTimeout
       ).get()
@@ -633,10 +633,8 @@ extension Clients {
     public func updateIcebergTable(
       request: UpdateIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
-      let (path, query, configure, omitted) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void, [Swift.String]
-        ) in
+      let (path, query, configure) = try {
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
             let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
@@ -655,7 +653,7 @@ extension Clients {
           ]
           return (path, query)
         }() {
-          return (candidate.0, candidate.1, { $0.setMethod(.POST) }, ["name"])
+          return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
         var paths: [GoogleGax.PathMismatch] = []
         do {
@@ -677,7 +675,9 @@ extension Clients {
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
       req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
-      try req.setBody(json: request, omitting: omitted)
+      if let body = request.httpBody {
+        try req.setBody(json: body)
+      }
       return try await req.rpc(
         GoogleApi.HttpBody.self, timeout: options.attemptTimeout
       ).get()
@@ -741,10 +741,8 @@ extension Clients {
     public func reportIcebergTableMetrics(
       request: ReportIcebergTableMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      let (path, query, configure, omitted) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void, [Swift.String]
-        ) in
+      let (path, query, configure) = try {
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
             let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
@@ -763,7 +761,7 @@ extension Clients {
           ]
           return (path, query)
         }() {
-          return (candidate.0, candidate.1, { $0.setMethod(.POST) }, ["name"])
+          return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
         var paths: [GoogleGax.PathMismatch] = []
         do {
@@ -785,7 +783,9 @@ extension Clients {
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
       req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
-      try req.setBody(json: request, omitting: omitted)
+      if let body = request.httpBody {
+        try req.setBody(json: body)
+      }
       _ = try await req.rpc(
         GoogleWKT.WKTEmpty.self, timeout: options.attemptTimeout
       ).get()

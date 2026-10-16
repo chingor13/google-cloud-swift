@@ -97,9 +97,15 @@ public struct MssoAuthentication: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.apiEndpoint, forKey: .apiEndpoint)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.apiEndpoint.isEmpty {
+      try container.encode(self.apiEndpoint, forKey: .apiEndpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

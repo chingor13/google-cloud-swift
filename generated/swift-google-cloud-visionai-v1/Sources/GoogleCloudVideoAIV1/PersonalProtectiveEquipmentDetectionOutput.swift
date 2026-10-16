@@ -80,7 +80,9 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.currentTime, forKey: .currentTime)
-    try container.encode(self.detectedPersons, forKey: .detectedPersons)
+    if !self.detectedPersons.isEmpty {
+      try container.encode(self.detectedPersons, forKey: .detectedPersons)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -138,7 +140,9 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.personEntityId, forKey: .personEntityId)
+      if self.personEntityId != 0 {
+        try container.encode(self.personEntityId, forKey: .personEntityId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -247,10 +251,18 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ppeLabelId, forKey: .ppeLabelId)
-      try container.encode(self.ppeLabelString, forKey: .ppeLabelString)
-      try container.encode(self.ppeSupercategoryLabelString, forKey: .ppeSupercategoryLabelString)
-      try container.encode(self.ppeEntityId, forKey: .ppeEntityId)
+      if self.ppeLabelId != 0 {
+        try container.encode(self.ppeLabelId, forKey: .ppeLabelId)
+      }
+      if !self.ppeLabelString.isEmpty {
+        try container.encode(self.ppeLabelString, forKey: .ppeLabelString)
+      }
+      if !self.ppeSupercategoryLabelString.isEmpty {
+        try container.encode(self.ppeSupercategoryLabelString, forKey: .ppeSupercategoryLabelString)
+      }
+      if self.ppeEntityId != 0 {
+        try container.encode(self.ppeEntityId, forKey: .ppeEntityId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -355,10 +367,18 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.xmin, forKey: .xmin)
-      try container.encode(self.ymin, forKey: .ymin)
-      try container.encode(self.width, forKey: .width)
-      try container.encode(self.height, forKey: .height)
+      if self.xmin != 0 {
+        try container.encode(self.xmin, forKey: .xmin)
+      }
+      if self.ymin != 0 {
+        try container.encode(self.ymin, forKey: .ymin)
+      }
+      if self.width != 0 {
+        try container.encode(self.width, forKey: .width)
+      }
+      if self.height != 0 {
+        try container.encode(self.height, forKey: .height)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -464,9 +484,13 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.boxId, forKey: .boxId)
+      if self.boxId != 0 {
+        try container.encode(self.boxId, forKey: .boxId)
+      }
       try container.encodeIfPresent(self.normalizedBoundingBox, forKey: .normalizedBoundingBox)
-      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+      if self.confidenceScore != 0 {
+        try container.encode(self.confidenceScore, forKey: .confidenceScore)
+      }
       try container.encodeIfPresent(self.personEntity, forKey: .personEntity)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -572,9 +596,13 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.boxId, forKey: .boxId)
+      if self.boxId != 0 {
+        try container.encode(self.boxId, forKey: .boxId)
+      }
       try container.encodeIfPresent(self.normalizedBoundingBox, forKey: .normalizedBoundingBox)
-      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+      if self.confidenceScore != 0 {
+        try container.encode(self.confidenceScore, forKey: .confidenceScore)
+      }
       try container.encodeIfPresent(self.ppeEntity, forKey: .ppeEntity)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -722,10 +750,14 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.personId, forKey: .personId)
+      if self.personId != 0 {
+        try container.encode(self.personId, forKey: .personId)
+      }
       try container.encodeIfPresent(
         self.detectedPersonIdentifiedBox, forKey: .detectedPersonIdentifiedBox)
-      try container.encode(self.detectedPpeIdentifiedBoxes, forKey: .detectedPpeIdentifiedBoxes)
+      if !self.detectedPpeIdentifiedBoxes.isEmpty {
+        try container.encode(self.detectedPpeIdentifiedBoxes, forKey: .detectedPpeIdentifiedBoxes)
+      }
       try container.encodeIfPresent(self.faceCoverageScore, forKey: .faceCoverageScore)
       try container.encodeIfPresent(self.eyesCoverageScore, forKey: .eyesCoverageScore)
       try container.encodeIfPresent(self.headCoverageScore, forKey: .headCoverageScore)

@@ -77,7 +77,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.monthlyUsageData, forKey: .monthlyUsageData)
+      if !self.monthlyUsageData.isEmpty {
+        try container.encode(self.monthlyUsageData, forKey: .monthlyUsageData)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -143,8 +145,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.viewCount, forKey: .viewCount)
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if self.viewCount != 0 {
+          try container.encode(self.viewCount, forKey: .viewCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -227,7 +233,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.userUsageData, forKey: .userUsageData)
+        if !self.userUsageData.isEmpty {
+          try container.encode(self.userUsageData, forKey: .userUsageData)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

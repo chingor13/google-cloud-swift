@@ -80,8 +80,12 @@ public struct ListDatabaseCharacterSetsResponse: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.databaseCharacterSets, forKey: .databaseCharacterSets)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.databaseCharacterSets.isEmpty {
+      try container.encode(self.databaseCharacterSets, forKey: .databaseCharacterSets)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

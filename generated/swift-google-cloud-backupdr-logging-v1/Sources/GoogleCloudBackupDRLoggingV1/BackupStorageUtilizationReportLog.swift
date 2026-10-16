@@ -119,13 +119,27 @@ public struct BackupStorageUtilizationReportLog: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.storageType, forKey: .storageType)
-    try container.encode(self.poolName, forKey: .poolName)
-    try container.encode(self.totalCapacityInGib, forKey: .totalCapacityInGib)
-    try container.encode(self.usedCapacityInGib, forKey: .usedCapacityInGib)
-    try container.encode(self.utilizationPercentage, forKey: .utilizationPercentage)
-    try container.encode(self.applianceId, forKey: .applianceId)
+    if !self.applianceName.isEmpty {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.storageType.isEmpty {
+      try container.encode(self.storageType, forKey: .storageType)
+    }
+    if !self.poolName.isEmpty {
+      try container.encode(self.poolName, forKey: .poolName)
+    }
+    if self.totalCapacityInGib != 0 {
+      try container.encode(self.totalCapacityInGib, forKey: .totalCapacityInGib)
+    }
+    if self.usedCapacityInGib != 0 {
+      try container.encode(self.usedCapacityInGib, forKey: .usedCapacityInGib)
+    }
+    if self.utilizationPercentage != 0 {
+      try container.encode(self.utilizationPercentage, forKey: .utilizationPercentage)
+    }
+    if !self.applianceId.isEmpty {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -104,9 +104,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.psaWriteEndpoint, forKey: .psaWriteEndpoint)
-      try container.encode(self.failoverDrReplicaName, forKey: .failoverDrReplicaName)
-      try container.encode(self.drReplica, forKey: .drReplica)
+      if !self.psaWriteEndpoint.isEmpty {
+        try container.encode(self.psaWriteEndpoint, forKey: .psaWriteEndpoint)
+      }
+      if !self.failoverDrReplicaName.isEmpty {
+        try container.encode(self.failoverDrReplicaName, forKey: .failoverDrReplicaName)
+      }
+      if self.drReplica {
+        try container.encode(self.drReplica, forKey: .drReplica)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

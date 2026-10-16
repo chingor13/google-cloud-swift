@@ -117,11 +117,21 @@ public struct AwsVolumeTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sizeGib, forKey: .sizeGib)
-    try container.encode(self.volumeType, forKey: .volumeType)
-    try container.encode(self.iops, forKey: .iops)
-    try container.encode(self.throughput, forKey: .throughput)
-    try container.encode(self.kmsKeyArn, forKey: .kmsKeyArn)
+    if self.sizeGib != 0 {
+      try container.encode(self.sizeGib, forKey: .sizeGib)
+    }
+    if self.volumeType != AwsVolumeTemplate.VolumeType() {
+      try container.encode(self.volumeType, forKey: .volumeType)
+    }
+    if self.iops != 0 {
+      try container.encode(self.iops, forKey: .iops)
+    }
+    if self.throughput != 0 {
+      try container.encode(self.throughput, forKey: .throughput)
+    }
+    if !self.kmsKeyArn.isEmpty {
+      try container.encode(self.kmsKeyArn, forKey: .kmsKeyArn)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -86,9 +86,15 @@ public struct PieChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataSets, forKey: .dataSets)
-    try container.encode(self.chartType, forKey: .chartType)
-    try container.encode(self.showLabels, forKey: .showLabels)
+    if !self.dataSets.isEmpty {
+      try container.encode(self.dataSets, forKey: .dataSets)
+    }
+    if self.chartType != PieChart.PieChartType() {
+      try container.encode(self.chartType, forKey: .chartType)
+    }
+    if self.showLabels {
+      try container.encode(self.showLabels, forKey: .showLabels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -171,7 +177,9 @@ public struct PieChart: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.timeSeriesQuery, forKey: .timeSeriesQuery)
-      try container.encode(self.sliceNameTemplate, forKey: .sliceNameTemplate)
+      if !self.sliceNameTemplate.isEmpty {
+        try container.encode(self.sliceNameTemplate, forKey: .sliceNameTemplate)
+      }
       try container.encodeIfPresent(self.minAlignmentPeriod, forKey: .minAlignmentPeriod)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

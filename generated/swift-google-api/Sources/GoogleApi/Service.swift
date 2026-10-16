@@ -310,13 +310,27 @@ public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.producerProjectId, forKey: .producerProjectId)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.apis, forKey: .apis)
-    try container.encode(self.types, forKey: .types)
-    try container.encode(self.enums, forKey: .enums)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.producerProjectId.isEmpty {
+      try container.encode(self.producerProjectId, forKey: .producerProjectId)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.apis.isEmpty {
+      try container.encode(self.apis, forKey: .apis)
+    }
+    if !self.types.isEmpty {
+      try container.encode(self.types, forKey: .types)
+    }
+    if !self.enums.isEmpty {
+      try container.encode(self.enums, forKey: .enums)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
     try container.encodeIfPresent(self.backend, forKey: .backend)
     try container.encodeIfPresent(self.http, forKey: .http)
@@ -324,11 +338,19 @@ public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
     try container.encodeIfPresent(self.context, forKey: .context)
     try container.encodeIfPresent(self.usage, forKey: .usage)
-    try container.encode(self.endpoints, forKey: .endpoints)
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
     try container.encodeIfPresent(self.control, forKey: .control)
-    try container.encode(self.logs, forKey: .logs)
-    try container.encode(self.metrics, forKey: .metrics)
-    try container.encode(self.monitoredResources, forKey: .monitoredResources)
+    if !self.logs.isEmpty {
+      try container.encode(self.logs, forKey: .logs)
+    }
+    if !self.metrics.isEmpty {
+      try container.encode(self.metrics, forKey: .metrics)
+    }
+    if !self.monitoredResources.isEmpty {
+      try container.encode(self.monitoredResources, forKey: .monitoredResources)
+    }
     try container.encodeIfPresent(self.billing, forKey: .billing)
     try container.encodeIfPresent(self.logging, forKey: .logging)
     try container.encodeIfPresent(self.monitoring, forKey: .monitoring)

@@ -89,10 +89,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dh, forKey: .dh)
-      try container.encode(self.encryption, forKey: .encryption)
-      try container.encode(self.integrity, forKey: .integrity)
-      try container.encode(self.prf, forKey: .prf)
+      if !self.dh.isEmpty {
+        try container.encode(self.dh, forKey: .dh)
+      }
+      if !self.encryption.isEmpty {
+        try container.encode(self.encryption, forKey: .encryption)
+      }
+      if !self.integrity.isEmpty {
+        try container.encode(self.integrity, forKey: .integrity)
+      }
+      if !self.prf.isEmpty {
+        try container.encode(self.prf, forKey: .prf)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

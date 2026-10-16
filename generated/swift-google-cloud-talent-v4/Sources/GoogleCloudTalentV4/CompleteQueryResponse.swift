@@ -78,7 +78,9 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.completionResults, forKey: .completionResults)
+    if !self.completionResults.isEmpty {
+      try container.encode(self.completionResults, forKey: .completionResults)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -158,9 +160,15 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.suggestion, forKey: .suggestion)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.imageUri, forKey: .imageUri)
+      if !self.suggestion.isEmpty {
+        try container.encode(self.suggestion, forKey: .suggestion)
+      }
+      if self.type != CompleteQueryRequest.CompletionType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.imageUri.isEmpty {
+        try container.encode(self.imageUri, forKey: .imageUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

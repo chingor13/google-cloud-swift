@@ -101,9 +101,15 @@ public struct CreateRecognizerRequest: Codable, Equatable, GoogleWKT._AnyPackabl
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.recognizer, forKey: .recognizer)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.recognizerId, forKey: .recognizerId)
-    try container.encode(self.parent, forKey: .parent)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.recognizerId.isEmpty {
+      try container.encode(self.recognizerId, forKey: .recognizerId)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

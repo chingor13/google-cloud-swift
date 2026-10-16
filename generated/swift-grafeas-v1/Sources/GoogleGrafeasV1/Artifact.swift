@@ -91,9 +91,15 @@ public struct Artifact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.checksum, forKey: .checksum)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.names, forKey: .names)
+    if !self.checksum.isEmpty {
+      try container.encode(self.checksum, forKey: .checksum)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.names.isEmpty {
+      try container.encode(self.names, forKey: .names)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

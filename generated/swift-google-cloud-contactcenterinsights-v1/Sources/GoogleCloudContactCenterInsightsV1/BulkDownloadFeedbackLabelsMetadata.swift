@@ -101,7 +101,9 @@ public struct BulkDownloadFeedbackLabelsMetadata: Codable, Equatable, GoogleWKT.
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.partialErrors, forKey: .partialErrors)
+    if !self.partialErrors.isEmpty {
+      try container.encode(self.partialErrors, forKey: .partialErrors)
+    }
     try container.encodeIfPresent(self.downloadStats, forKey: .downloadStats)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -189,10 +191,18 @@ public struct BulkDownloadFeedbackLabelsMetadata: Codable, Equatable, GoogleWKT.
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.processedObjectCount, forKey: .processedObjectCount)
-      try container.encode(self.successfulDownloadCount, forKey: .successfulDownloadCount)
-      try container.encode(self.totalFilesWritten, forKey: .totalFilesWritten)
-      try container.encode(self.fileNames, forKey: .fileNames)
+      if self.processedObjectCount != 0 {
+        try container.encode(self.processedObjectCount, forKey: .processedObjectCount)
+      }
+      if self.successfulDownloadCount != 0 {
+        try container.encode(self.successfulDownloadCount, forKey: .successfulDownloadCount)
+      }
+      if self.totalFilesWritten != 0 {
+        try container.encode(self.totalFilesWritten, forKey: .totalFilesWritten)
+      }
+      if !self.fileNames.isEmpty {
+        try container.encode(self.fileNames, forKey: .fileNames)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -110,11 +110,21 @@ public struct InstanceQuota: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.instanceType, forKey: .instanceType)
-    try container.encode(self.gcpService, forKey: .gcpService)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.availableMachineCount, forKey: .availableMachineCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.instanceType.isEmpty {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
+    if !self.gcpService.isEmpty {
+      try container.encode(self.gcpService, forKey: .gcpService)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if self.availableMachineCount != 0 {
+      try container.encode(self.availableMachineCount, forKey: .availableMachineCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

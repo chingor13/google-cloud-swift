@@ -287,7 +287,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.balancingMode, forKey: .balancingMode)
       try container.encodeIfPresent(self.capacityScaler, forKey: .capacityScaler)
-      try container.encode(self.customMetrics, forKey: .customMetrics)
+      if !self.customMetrics.isEmpty {
+        try container.encode(self.customMetrics, forKey: .customMetrics)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.failover, forKey: .failover)
       try container.encodeIfPresent(self.group, forKey: .group)

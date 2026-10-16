@@ -104,9 +104,15 @@ public struct AttestationOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serializedPayload, forKey: .serializedPayload)
-    try container.encode(self.signatures, forKey: .signatures)
-    try container.encode(self.jwts, forKey: .jwts)
+    if !self.serializedPayload.isEmpty {
+      try container.encode(self.serializedPayload, forKey: .serializedPayload)
+    }
+    if !self.signatures.isEmpty {
+      try container.encode(self.signatures, forKey: .signatures)
+    }
+    if !self.jwts.isEmpty {
+      try container.encode(self.jwts, forKey: .jwts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

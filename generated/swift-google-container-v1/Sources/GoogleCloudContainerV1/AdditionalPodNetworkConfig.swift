@@ -86,8 +86,12 @@ public struct AdditionalPodNetworkConfig: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.secondaryPodRange, forKey: .secondaryPodRange)
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if !self.secondaryPodRange.isEmpty {
+      try container.encode(self.secondaryPodRange, forKey: .secondaryPodRange)
+    }
     try container.encodeIfPresent(self.maxPodsPerNode, forKey: .maxPodsPerNode)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

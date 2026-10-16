@@ -125,9 +125,15 @@ public struct InitializeServiceRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
 
     if let choice = self.initializationConfig {
       switch choice {

@@ -83,9 +83,13 @@ public struct Connection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.endpoint, forKey: .endpoint)
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
     try container.encodeIfPresent(self.cluster, forKey: .cluster)
-    try container.encode(self.streamCount, forKey: .streamCount)
+    if self.streamCount != 0 {
+      try container.encode(self.streamCount, forKey: .streamCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

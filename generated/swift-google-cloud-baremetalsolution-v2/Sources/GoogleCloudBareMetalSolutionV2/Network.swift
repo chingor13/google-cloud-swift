@@ -196,22 +196,52 @@ public struct Network: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.macAddress, forKey: .macAddress)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.vlanId, forKey: .vlanId)
-    try container.encode(self.cidr, forKey: .cidr)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.type != Network.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.macAddress.isEmpty {
+      try container.encode(self.macAddress, forKey: .macAddress)
+    }
+    if self.state != Network.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.vlanId.isEmpty {
+      try container.encode(self.vlanId, forKey: .vlanId)
+    }
+    if !self.cidr.isEmpty {
+      try container.encode(self.cidr, forKey: .cidr)
+    }
     try container.encodeIfPresent(self.vrf, forKey: .vrf)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.servicesCidr, forKey: .servicesCidr)
-    try container.encode(self.reservations, forKey: .reservations)
-    try container.encode(self.pod, forKey: .pod)
-    try container.encode(self.mountPoints, forKey: .mountPoints)
-    try container.encode(self.jumboFramesEnabled, forKey: .jumboFramesEnabled)
-    try container.encode(self.gatewayIp, forKey: .gatewayIp)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.servicesCidr.isEmpty {
+      try container.encode(self.servicesCidr, forKey: .servicesCidr)
+    }
+    if !self.reservations.isEmpty {
+      try container.encode(self.reservations, forKey: .reservations)
+    }
+    if !self.pod.isEmpty {
+      try container.encode(self.pod, forKey: .pod)
+    }
+    if !self.mountPoints.isEmpty {
+      try container.encode(self.mountPoints, forKey: .mountPoints)
+    }
+    if self.jumboFramesEnabled {
+      try container.encode(self.jumboFramesEnabled, forKey: .jumboFramesEnabled)
+    }
+    if !self.gatewayIp.isEmpty {
+      try container.encode(self.gatewayIp, forKey: .gatewayIp)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

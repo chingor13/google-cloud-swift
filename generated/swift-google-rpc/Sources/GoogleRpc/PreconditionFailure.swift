@@ -75,7 +75,9 @@ public struct PreconditionFailure: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.violations, forKey: .violations)
+    if !self.violations.isEmpty {
+      try container.encode(self.violations, forKey: .violations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -156,9 +158,15 @@ public struct PreconditionFailure: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.subject, forKey: .subject)
-      try container.encode(self.description, forKey: .description)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.subject.isEmpty {
+        try container.encode(self.subject, forKey: .subject)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

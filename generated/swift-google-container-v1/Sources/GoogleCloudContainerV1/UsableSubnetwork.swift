@@ -109,11 +109,21 @@ public struct UsableSubnetwork: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
-    try container.encode(self.secondaryIpRanges, forKey: .secondaryIpRanges)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.ipCidrRange.isEmpty {
+      try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
+    }
+    if !self.secondaryIpRanges.isEmpty {
+      try container.encode(self.secondaryIpRanges, forKey: .secondaryIpRanges)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

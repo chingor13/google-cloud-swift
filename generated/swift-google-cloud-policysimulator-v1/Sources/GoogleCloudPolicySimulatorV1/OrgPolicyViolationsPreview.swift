@@ -143,12 +143,20 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != PreviewState() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.overlay, forKey: .overlay)
-    try container.encode(self.violationsCount, forKey: .violationsCount)
+    if self.violationsCount != 0 {
+      try container.encode(self.violationsCount, forKey: .violationsCount)
+    }
     try container.encodeIfPresent(self.resourceCounts, forKey: .resourceCounts)
-    try container.encode(self.customConstraints, forKey: .customConstraints)
+    if !self.customConstraints.isEmpty {
+      try container.encode(self.customConstraints, forKey: .customConstraints)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -243,11 +251,21 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.scanned, forKey: .scanned)
-      try container.encode(self.noncompliant, forKey: .noncompliant)
-      try container.encode(self.compliant, forKey: .compliant)
-      try container.encode(self.unenforced, forKey: .unenforced)
-      try container.encode(self.errors, forKey: .errors)
+      if self.scanned != 0 {
+        try container.encode(self.scanned, forKey: .scanned)
+      }
+      if self.noncompliant != 0 {
+        try container.encode(self.noncompliant, forKey: .noncompliant)
+      }
+      if self.compliant != 0 {
+        try container.encode(self.compliant, forKey: .compliant)
+      }
+      if self.unenforced != 0 {
+        try container.encode(self.unenforced, forKey: .unenforced)
+      }
+      if self.errors != 0 {
+        try container.encode(self.errors, forKey: .errors)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

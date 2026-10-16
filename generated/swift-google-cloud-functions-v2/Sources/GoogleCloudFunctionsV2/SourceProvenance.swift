@@ -89,7 +89,9 @@ public struct SourceProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.resolvedStorageSource, forKey: .resolvedStorageSource)
     try container.encodeIfPresent(self.resolvedRepoSource, forKey: .resolvedRepoSource)
-    try container.encode(self.gitUri, forKey: .gitUri)
+    if !self.gitUri.isEmpty {
+      try container.encode(self.gitUri, forKey: .gitUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

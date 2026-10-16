@@ -85,9 +85,13 @@ public struct CreateWorkspaceRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.workspace, forKey: .workspace)
-    try container.encode(self.workspaceId, forKey: .workspaceId)
+    if !self.workspaceId.isEmpty {
+      try container.encode(self.workspaceId, forKey: .workspaceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -196,22 +196,28 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.forwardingRules, forKey: .forwardingRules)
+      if !self.forwardingRules.isEmpty {
+        try container.encode(self.forwardingRules, forKey: .forwardingRules)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.tunnels, forKey: .tunnels)
+      if !self.tunnels.isEmpty {
+        try container.encode(self.tunnels, forKey: .tunnels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

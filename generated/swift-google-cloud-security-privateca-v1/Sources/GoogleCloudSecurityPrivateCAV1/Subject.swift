@@ -138,15 +138,33 @@ public struct Subject: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.commonName, forKey: .commonName)
-    try container.encode(self.countryCode, forKey: .countryCode)
-    try container.encode(self.organization, forKey: .organization)
-    try container.encode(self.organizationalUnit, forKey: .organizationalUnit)
-    try container.encode(self.locality, forKey: .locality)
-    try container.encode(self.province, forKey: .province)
-    try container.encode(self.streetAddress, forKey: .streetAddress)
-    try container.encode(self.postalCode, forKey: .postalCode)
-    try container.encode(self.rdnSequence, forKey: .rdnSequence)
+    if !self.commonName.isEmpty {
+      try container.encode(self.commonName, forKey: .commonName)
+    }
+    if !self.countryCode.isEmpty {
+      try container.encode(self.countryCode, forKey: .countryCode)
+    }
+    if !self.organization.isEmpty {
+      try container.encode(self.organization, forKey: .organization)
+    }
+    if !self.organizationalUnit.isEmpty {
+      try container.encode(self.organizationalUnit, forKey: .organizationalUnit)
+    }
+    if !self.locality.isEmpty {
+      try container.encode(self.locality, forKey: .locality)
+    }
+    if !self.province.isEmpty {
+      try container.encode(self.province, forKey: .province)
+    }
+    if !self.streetAddress.isEmpty {
+      try container.encode(self.streetAddress, forKey: .streetAddress)
+    }
+    if !self.postalCode.isEmpty {
+      try container.encode(self.postalCode, forKey: .postalCode)
+    }
+    if !self.rdnSequence.isEmpty {
+      try container.encode(self.rdnSequence, forKey: .rdnSequence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

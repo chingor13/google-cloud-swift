@@ -78,8 +78,12 @@ public struct GenerateCredentialsResponse: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kubeconfig, forKey: .kubeconfig)
-    try container.encode(self.endpoint, forKey: .endpoint)
+    if !self.kubeconfig.isEmpty {
+      try container.encode(self.kubeconfig, forKey: .kubeconfig)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

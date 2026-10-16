@@ -84,7 +84,9 @@ public struct CompliancePostureConfig: Codable, Equatable, GoogleWKT._AnyPackabl
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.mode, forKey: .mode)
-    try container.encode(self.complianceStandards, forKey: .complianceStandards)
+    if !self.complianceStandards.isEmpty {
+      try container.encode(self.complianceStandards, forKey: .complianceStandards)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

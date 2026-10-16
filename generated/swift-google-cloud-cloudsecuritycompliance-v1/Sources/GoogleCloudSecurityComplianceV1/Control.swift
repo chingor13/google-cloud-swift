@@ -192,24 +192,48 @@ public struct Control: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.family, forKey: .family)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.family != Control.Family() {
+      try container.encode(self.family, forKey: .family)
+    }
     try container.encodeIfPresent(self.controlFamily, forKey: .controlFamily)
-    try container.encode(self.responsibilityType, forKey: .responsibilityType)
-    try container.encode(
-      self.googleResponsibilityDescription, forKey: .googleResponsibilityDescription)
-    try container.encode(
-      self.googleResponsibilityImplementation, forKey: .googleResponsibilityImplementation)
-    try container.encode(
-      self.customerResponsibilityDescription, forKey: .customerResponsibilityDescription)
-    try container.encode(
-      self.customerResponsibilityImplementation, forKey: .customerResponsibilityImplementation)
-    try container.encode(
-      self.sharedResponsibilityDescription, forKey: .sharedResponsibilityDescription)
-    try container.encode(self.additionalContentUri, forKey: .additionalContentUri)
-    try container.encode(self.relatedFrameworks, forKey: .relatedFrameworks)
+    if self.responsibilityType != RegulatoryControlResponsibilityType() {
+      try container.encode(self.responsibilityType, forKey: .responsibilityType)
+    }
+    if !self.googleResponsibilityDescription.isEmpty {
+      try container.encode(
+        self.googleResponsibilityDescription, forKey: .googleResponsibilityDescription)
+    }
+    if !self.googleResponsibilityImplementation.isEmpty {
+      try container.encode(
+        self.googleResponsibilityImplementation, forKey: .googleResponsibilityImplementation)
+    }
+    if !self.customerResponsibilityDescription.isEmpty {
+      try container.encode(
+        self.customerResponsibilityDescription, forKey: .customerResponsibilityDescription)
+    }
+    if !self.customerResponsibilityImplementation.isEmpty {
+      try container.encode(
+        self.customerResponsibilityImplementation, forKey: .customerResponsibilityImplementation)
+    }
+    if !self.sharedResponsibilityDescription.isEmpty {
+      try container.encode(
+        self.sharedResponsibilityDescription, forKey: .sharedResponsibilityDescription)
+    }
+    if !self.additionalContentUri.isEmpty {
+      try container.encode(self.additionalContentUri, forKey: .additionalContentUri)
+    }
+    if !self.relatedFrameworks.isEmpty {
+      try container.encode(self.relatedFrameworks, forKey: .relatedFrameworks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

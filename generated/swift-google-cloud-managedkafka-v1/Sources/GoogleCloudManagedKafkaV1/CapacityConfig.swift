@@ -79,8 +79,12 @@ public struct CapacityConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vcpuCount, forKey: .vcpuCount)
-    try container.encode(self.memoryBytes, forKey: .memoryBytes)
+    if self.vcpuCount != 0 {
+      try container.encode(self.vcpuCount, forKey: .vcpuCount)
+    }
+    if self.memoryBytes != 0 {
+      try container.encode(self.memoryBytes, forKey: .memoryBytes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

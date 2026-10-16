@@ -79,8 +79,12 @@ public struct BoundingPoly: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vertices, forKey: .vertices)
-    try container.encode(self.normalizedVertices, forKey: .normalizedVertices)
+    if !self.vertices.isEmpty {
+      try container.encode(self.vertices, forKey: .vertices)
+    }
+    if !self.normalizedVertices.isEmpty {
+      try container.encode(self.normalizedVertices, forKey: .normalizedVertices)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

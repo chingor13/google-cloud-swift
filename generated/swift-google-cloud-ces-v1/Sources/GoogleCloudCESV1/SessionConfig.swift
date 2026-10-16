@@ -168,17 +168,31 @@ public struct SessionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.session, forKey: .session)
+    if !self.session.isEmpty {
+      try container.encode(self.session, forKey: .session)
+    }
     try container.encodeIfPresent(self.inputAudioConfig, forKey: .inputAudioConfig)
     try container.encodeIfPresent(self.outputAudioConfig, forKey: .outputAudioConfig)
-    try container.encode(self.historicalContexts, forKey: .historicalContexts)
-    try container.encode(self.entryAgent, forKey: .entryAgent)
-    try container.encode(self.deployment, forKey: .deployment)
-    try container.encode(self.timeZone, forKey: .timeZone)
-    try container.encode(self.useToolFakes, forKey: .useToolFakes)
+    if !self.historicalContexts.isEmpty {
+      try container.encode(self.historicalContexts, forKey: .historicalContexts)
+    }
+    if !self.entryAgent.isEmpty {
+      try container.encode(self.entryAgent, forKey: .entryAgent)
+    }
+    if !self.deployment.isEmpty {
+      try container.encode(self.deployment, forKey: .deployment)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
+    if self.useToolFakes {
+      try container.encode(self.useToolFakes, forKey: .useToolFakes)
+    }
     try container.encodeIfPresent(
       self.remoteDialogflowQueryParameters, forKey: .remoteDialogflowQueryParameters)
-    try container.encode(self.enableTextStreaming, forKey: .enableTextStreaming)
+    if self.enableTextStreaming {
+      try container.encode(self.enableTextStreaming, forKey: .enableTextStreaming)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -257,7 +271,9 @@ public struct SessionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.webhookHeaders, forKey: .webhookHeaders)
+      if !self.webhookHeaders.isEmpty {
+        try container.encode(self.webhookHeaders, forKey: .webhookHeaders)
+      }
       try container.encodeIfPresent(self.payload, forKey: .payload)
       try container.encodeIfPresent(self.endUserMetadata, forKey: .endUserMetadata)
       for (key, value) in self._unknownFields.json {

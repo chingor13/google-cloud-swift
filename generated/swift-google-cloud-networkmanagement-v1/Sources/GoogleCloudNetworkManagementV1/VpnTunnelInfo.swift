@@ -135,15 +135,33 @@ public struct VpnTunnelInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.sourceGateway, forKey: .sourceGateway)
-    try container.encode(self.remoteGateway, forKey: .remoteGateway)
-    try container.encode(self.remoteGatewayIp, forKey: .remoteGatewayIp)
-    try container.encode(self.sourceGatewayIp, forKey: .sourceGatewayIp)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.routingType, forKey: .routingType)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.sourceGateway.isEmpty {
+      try container.encode(self.sourceGateway, forKey: .sourceGateway)
+    }
+    if !self.remoteGateway.isEmpty {
+      try container.encode(self.remoteGateway, forKey: .remoteGateway)
+    }
+    if !self.remoteGatewayIp.isEmpty {
+      try container.encode(self.remoteGatewayIp, forKey: .remoteGatewayIp)
+    }
+    if !self.sourceGatewayIp.isEmpty {
+      try container.encode(self.sourceGatewayIp, forKey: .sourceGatewayIp)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if self.routingType != VpnTunnelInfo.RoutingType() {
+      try container.encode(self.routingType, forKey: .routingType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

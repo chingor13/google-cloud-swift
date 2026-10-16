@@ -73,7 +73,9 @@ public struct RomanizeTextResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.romanizations, forKey: .romanizations)
+    if !self.romanizations.isEmpty {
+      try container.encode(self.romanizations, forKey: .romanizations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

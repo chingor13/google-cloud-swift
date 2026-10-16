@@ -103,11 +103,17 @@ public struct TlsCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serialNumber, forKey: .serialNumber)
-    try container.encode(self.cert, forKey: .cert)
+    if !self.serialNumber.isEmpty {
+      try container.encode(self.serialNumber, forKey: .serialNumber)
+    }
+    if !self.cert.isEmpty {
+      try container.encode(self.cert, forKey: .cert)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.sha1Fingerprint, forKey: .sha1Fingerprint)
+    if !self.sha1Fingerprint.isEmpty {
+      try container.encode(self.sha1Fingerprint, forKey: .sha1Fingerprint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

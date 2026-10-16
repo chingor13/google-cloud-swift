@@ -77,8 +77,12 @@ public struct GeoCoordinate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.latitude, forKey: .latitude)
-    try container.encode(self.longitude, forKey: .longitude)
+    if self.latitude != 0 {
+      try container.encode(self.latitude, forKey: .latitude)
+    }
+    if self.longitude != 0 {
+      try container.encode(self.longitude, forKey: .longitude)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

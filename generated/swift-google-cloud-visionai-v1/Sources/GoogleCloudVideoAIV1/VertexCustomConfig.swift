@@ -135,10 +135,16 @@ public struct VertexCustomConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maxPredictionFps, forKey: .maxPredictionFps)
+    if self.maxPredictionFps != 0 {
+      try container.encode(self.maxPredictionFps, forKey: .maxPredictionFps)
+    }
     try container.encodeIfPresent(self.dedicatedResources, forKey: .dedicatedResources)
-    try container.encode(self.postProcessingCloudFunction, forKey: .postProcessingCloudFunction)
-    try container.encode(self.attachApplicationMetadata, forKey: .attachApplicationMetadata)
+    if !self.postProcessingCloudFunction.isEmpty {
+      try container.encode(self.postProcessingCloudFunction, forKey: .postProcessingCloudFunction)
+    }
+    if self.attachApplicationMetadata {
+      try container.encode(self.attachApplicationMetadata, forKey: .attachApplicationMetadata)
+    }
     try container.encodeIfPresent(self.dynamicConfigInputTopic, forKey: .dynamicConfigInputTopic)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

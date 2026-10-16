@@ -103,11 +103,21 @@ public struct TreeEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.sha, forKey: .sha)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.size, forKey: .size)
+    if self.type != TreeEntry.ObjectType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.sha.isEmpty {
+      try container.encode(self.sha, forKey: .sha)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.mode.isEmpty {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if self.size != 0 {
+      try container.encode(self.size, forKey: .size)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

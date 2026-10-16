@@ -86,8 +86,12 @@ public struct TargetsPresentCondition: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.missingTargets, forKey: .missingTargets)
+    if self.status {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.missingTargets.isEmpty {
+      try container.encode(self.missingTargets, forKey: .missingTargets)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

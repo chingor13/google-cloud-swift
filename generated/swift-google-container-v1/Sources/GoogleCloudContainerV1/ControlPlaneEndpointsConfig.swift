@@ -162,7 +162,9 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.endpoint, forKey: .endpoint)
+      if !self.endpoint.isEmpty {
+        try container.encode(self.endpoint, forKey: .endpoint)
+      }
       try container.encodeIfPresent(self.allowExternalTraffic, forKey: .allowExternalTraffic)
       try container.encodeIfPresent(self.enableK8STokensViaDns, forKey: .enableK8STokensViaDns)
       try container.encodeIfPresent(self.enableK8SCertsViaDns, forKey: .enableK8SCertsViaDns)
@@ -313,9 +315,15 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleWKT._AnyPac
       try container.encodeIfPresent(self.globalAccess, forKey: .globalAccess)
       try container.encodeIfPresent(
         self.authorizedNetworksConfig, forKey: .authorizedNetworksConfig)
-      try container.encode(self.publicEndpoint, forKey: .publicEndpoint)
-      try container.encode(self.privateEndpoint, forKey: .privateEndpoint)
-      try container.encode(self.privateEndpointSubnetwork, forKey: .privateEndpointSubnetwork)
+      if !self.publicEndpoint.isEmpty {
+        try container.encode(self.publicEndpoint, forKey: .publicEndpoint)
+      }
+      if !self.privateEndpoint.isEmpty {
+        try container.encode(self.privateEndpoint, forKey: .privateEndpoint)
+      }
+      if !self.privateEndpointSubnetwork.isEmpty {
+        try container.encode(self.privateEndpointSubnetwork, forKey: .privateEndpointSubnetwork)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

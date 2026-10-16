@@ -178,16 +178,32 @@ public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.destinationsCount, forKey: .destinationsCount)
-    try container.encode(self.destinationsActiveCount, forKey: .destinationsActiveCount)
-    try container.encode(self.services, forKey: .services)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.destinationsCount != 0 {
+      try container.encode(self.destinationsCount, forKey: .destinationsCount)
+    }
+    if self.destinationsActiveCount != 0 {
+      try container.encode(self.destinationsActiveCount, forKey: .destinationsActiveCount)
+    }
+    if !self.services.isEmpty {
+      try container.encode(self.services, forKey: .services)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

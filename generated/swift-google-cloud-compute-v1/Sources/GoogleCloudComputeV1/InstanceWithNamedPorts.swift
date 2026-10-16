@@ -83,7 +83,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.instance, forKey: .instance)
-      try container.encode(self.namedPorts, forKey: .namedPorts)
+      if !self.namedPorts.isEmpty {
+        try container.encode(self.namedPorts, forKey: .namedPorts)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

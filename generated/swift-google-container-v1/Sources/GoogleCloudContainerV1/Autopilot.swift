@@ -92,7 +92,9 @@ public struct Autopilot: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
     try container.encodeIfPresent(self.workloadPolicyConfig, forKey: .workloadPolicyConfig)
     try container.encodeIfPresent(
       self.privilegedAdmissionConfig, forKey: .privilegedAdmissionConfig)

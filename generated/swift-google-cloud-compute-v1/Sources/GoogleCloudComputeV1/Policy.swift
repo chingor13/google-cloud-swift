@@ -211,9 +211,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.auditConfigs, forKey: .auditConfigs)
-      try container.encode(self.bindings, forKey: .bindings)
-      if let v = etag {
+      if !self.auditConfigs.isEmpty {
+        try container.encode(self.auditConfigs, forKey: .auditConfigs)
+      }
+      if !self.bindings.isEmpty {
+        try container.encode(self.bindings, forKey: .bindings)
+      }
+      if let v = self.etag {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .etag
         )

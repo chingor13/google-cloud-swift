@@ -215,7 +215,9 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.threshold, forKey: .threshold)
+      if self.threshold != 0 {
+        try container.encode(self.threshold, forKey: .threshold)
+      }
 
       if let choice = self.type {
         switch choice {
@@ -324,7 +326,9 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.timeSeries, forKey: .timeSeries)
+      if !self.timeSeries.isEmpty {
+        try container.encode(self.timeSeries, forKey: .timeSeries)
+      }
       try container.encodeIfPresent(self.range, forKey: .range)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

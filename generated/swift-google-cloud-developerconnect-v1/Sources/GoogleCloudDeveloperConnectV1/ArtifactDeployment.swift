@@ -122,13 +122,23 @@ public struct ArtifactDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.artifactReference, forKey: .artifactReference)
-    try container.encode(self.artifactAlias, forKey: .artifactAlias)
-    try container.encode(self.sourceCommitUris, forKey: .sourceCommitUris)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.artifactReference.isEmpty {
+      try container.encode(self.artifactReference, forKey: .artifactReference)
+    }
+    if !self.artifactAlias.isEmpty {
+      try container.encode(self.artifactAlias, forKey: .artifactAlias)
+    }
+    if !self.sourceCommitUris.isEmpty {
+      try container.encode(self.sourceCommitUris, forKey: .sourceCommitUris)
+    }
     try container.encodeIfPresent(self.deployTime, forKey: .deployTime)
     try container.encodeIfPresent(self.undeployTime, forKey: .undeployTime)
-    try container.encode(self.containerStatusSummary, forKey: .containerStatusSummary)
+    if !self.containerStatusSummary.isEmpty {
+      try container.encode(self.containerStatusSummary, forKey: .containerStatusSummary)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

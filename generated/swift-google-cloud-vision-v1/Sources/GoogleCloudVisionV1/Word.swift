@@ -107,8 +107,12 @@ public struct Word: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.property, forKey: .property)
     try container.encodeIfPresent(self.boundingBox, forKey: .boundingBox)
-    try container.encode(self.symbols, forKey: .symbols)
-    try container.encode(self.confidence, forKey: .confidence)
+    if !self.symbols.isEmpty {
+      try container.encode(self.symbols, forKey: .symbols)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

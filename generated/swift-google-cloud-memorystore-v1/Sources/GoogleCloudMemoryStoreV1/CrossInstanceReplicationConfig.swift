@@ -119,9 +119,13 @@ public struct CrossInstanceReplicationConfig: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceRole, forKey: .instanceRole)
+    if self.instanceRole != CrossInstanceReplicationConfig.InstanceRole() {
+      try container.encode(self.instanceRole, forKey: .instanceRole)
+    }
     try container.encodeIfPresent(self.primaryInstance, forKey: .primaryInstance)
-    try container.encode(self.secondaryInstances, forKey: .secondaryInstances)
+    if !self.secondaryInstances.isEmpty {
+      try container.encode(self.secondaryInstances, forKey: .secondaryInstances)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.membership, forKey: .membership)
     for (key, value) in self._unknownFields.json {
@@ -191,8 +195,12 @@ public struct CrossInstanceReplicationConfig: Codable, Equatable, GoogleWKT._Any
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.uid, forKey: .uid)
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.uid.isEmpty {
+        try container.encode(self.uid, forKey: .uid)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -286,7 +294,9 @@ public struct CrossInstanceReplicationConfig: Codable, Equatable, GoogleWKT._Any
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.primaryInstance, forKey: .primaryInstance)
-      try container.encode(self.secondaryInstances, forKey: .secondaryInstances)
+      if !self.secondaryInstances.isEmpty {
+        try container.encode(self.secondaryInstances, forKey: .secondaryInstances)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

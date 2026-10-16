@@ -278,23 +278,45 @@ public struct BuildTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     try container.encodeIfPresent(self.triggerTemplate, forKey: .triggerTemplate)
     try container.encodeIfPresent(self.github, forKey: .github)
     try container.encodeIfPresent(self.pubsubConfig, forKey: .pubsubConfig)
     try container.encodeIfPresent(self.webhookConfig, forKey: .webhookConfig)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.disabled, forKey: .disabled)
-    try container.encode(self.substitutions, forKey: .substitutions)
-    try container.encode(self.ignoredFiles, forKey: .ignoredFiles)
-    try container.encode(self.includedFiles, forKey: .includedFiles)
-    try container.encode(self.filter, forKey: .filter)
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
+    if !self.substitutions.isEmpty {
+      try container.encode(self.substitutions, forKey: .substitutions)
+    }
+    if !self.ignoredFiles.isEmpty {
+      try container.encode(self.ignoredFiles, forKey: .ignoredFiles)
+    }
+    if !self.includedFiles.isEmpty {
+      try container.encode(self.includedFiles, forKey: .includedFiles)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     try container.encodeIfPresent(self.sourceToBuild, forKey: .sourceToBuild)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.repositoryEventConfig, forKey: .repositoryEventConfig)
 
     if let choice = self.buildTemplate {

@@ -72,7 +72,9 @@ public struct BatchCreateDataObjectsResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataObjects, forKey: .dataObjects)
+    if !self.dataObjects.isEmpty {
+      try container.encode(self.dataObjects, forKey: .dataObjects)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

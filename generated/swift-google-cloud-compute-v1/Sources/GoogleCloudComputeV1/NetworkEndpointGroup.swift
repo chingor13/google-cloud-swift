@@ -230,7 +230,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.annotations, forKey: .annotations)
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
       try container.encodeIfPresent(self.appEngine, forKey: .appEngine)
       try container.encodeIfPresent(self.cloudFunction, forKey: .cloudFunction)
       try container.encodeIfPresent(self.cloudRun, forKey: .cloudRun)

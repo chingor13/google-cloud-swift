@@ -213,17 +213,23 @@ public struct VpcFlowLogsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.description, forKey: .description)
     try container.encodeIfPresent(self.state, forKey: .state)
     try container.encodeIfPresent(self.aggregationInterval, forKey: .aggregationInterval)
     try container.encodeIfPresent(self.flowSampling, forKey: .flowSampling)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.metadataFields, forKey: .metadataFields)
+    if !self.metadataFields.isEmpty {
+      try container.encode(self.metadataFields, forKey: .metadataFields)
+    }
     try container.encodeIfPresent(self.filterExpr, forKey: .filterExpr)
     try container.encodeIfPresent(self.crossProjectMetadata, forKey: .crossProjectMetadata)
     try container.encodeIfPresent(self.targetResourceState, forKey: .targetResourceState)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
 

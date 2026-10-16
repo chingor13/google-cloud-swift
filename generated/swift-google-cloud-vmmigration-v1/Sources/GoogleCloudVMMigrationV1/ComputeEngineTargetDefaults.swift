@@ -292,31 +292,75 @@ public struct ComputeEngineTargetDefaults: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmName, forKey: .vmName)
-    try container.encode(self.targetProject, forKey: .targetProject)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.machineTypeSeries, forKey: .machineTypeSeries)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.networkTags, forKey: .networkTags)
-    try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.diskType, forKey: .diskType)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.licenseType, forKey: .licenseType)
+    if !self.vmName.isEmpty {
+      try container.encode(self.vmName, forKey: .vmName)
+    }
+    if !self.targetProject.isEmpty {
+      try container.encode(self.targetProject, forKey: .targetProject)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.machineTypeSeries.isEmpty {
+      try container.encode(self.machineTypeSeries, forKey: .machineTypeSeries)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.networkTags.isEmpty {
+      try container.encode(self.networkTags, forKey: .networkTags)
+    }
+    if !self.networkInterfaces.isEmpty {
+      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if self.diskType != ComputeEngineDiskType() {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.licenseType != ComputeEngineLicenseType() {
+      try container.encode(self.licenseType, forKey: .licenseType)
+    }
     try container.encodeIfPresent(self.appliedLicense, forKey: .appliedLicense)
     try container.encodeIfPresent(self.computeScheduling, forKey: .computeScheduling)
-    try container.encode(self.secureBoot, forKey: .secureBoot)
-    try container.encode(self.enableVtpm, forKey: .enableVtpm)
-    try container.encode(self.enableIntegrityMonitoring, forKey: .enableIntegrityMonitoring)
-    try container.encode(self.bootOption, forKey: .bootOption)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
-    try container.encode(self.hostname, forKey: .hostname)
+    if self.secureBoot {
+      try container.encode(self.secureBoot, forKey: .secureBoot)
+    }
+    if self.enableVtpm {
+      try container.encode(self.enableVtpm, forKey: .enableVtpm)
+    }
+    if self.enableIntegrityMonitoring {
+      try container.encode(self.enableIntegrityMonitoring, forKey: .enableIntegrityMonitoring)
+    }
+    if self.bootOption != ComputeEngineBootOption() {
+      try container.encode(self.bootOption, forKey: .bootOption)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.additionalLicenses.isEmpty {
+      try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
-    try container.encode(self.bootConversion, forKey: .bootConversion)
-    try container.encode(self.adaptationModifiers, forKey: .adaptationModifiers)
-    try container.encode(self.diskReplicaZones, forKey: .diskReplicaZones)
-    try container.encode(self.storagePool, forKey: .storagePool)
+    if self.bootConversion != BootConversion() {
+      try container.encode(self.bootConversion, forKey: .bootConversion)
+    }
+    if !self.adaptationModifiers.isEmpty {
+      try container.encode(self.adaptationModifiers, forKey: .adaptationModifiers)
+    }
+    if !self.diskReplicaZones.isEmpty {
+      try container.encode(self.diskReplicaZones, forKey: .diskReplicaZones)
+    }
+    if !self.storagePool.isEmpty {
+      try container.encode(self.storagePool, forKey: .storagePool)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

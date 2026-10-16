@@ -619,8 +619,12 @@
         self.candidateCustomerRouterIpAddress, forKey: .candidateCustomerRouterIpAddress)
       try container.encodeIfPresent(
         self.candidateCustomerRouterIpv6Address, forKey: .candidateCustomerRouterIpv6Address)
-      try container.encode(self.candidateIpv6Subnets, forKey: .candidateIpv6Subnets)
-      try container.encode(self.candidateSubnets, forKey: .candidateSubnets)
+      if !self.candidateIpv6Subnets.isEmpty {
+        try container.encode(self.candidateIpv6Subnets, forKey: .candidateIpv6Subnets)
+      }
+      if !self.candidateSubnets.isEmpty {
+        try container.encode(self.candidateSubnets, forKey: .candidateSubnets)
+      }
       try container.encodeIfPresent(self.cloudRouterIpAddress, forKey: .cloudRouterIpAddress)
       try container.encodeIfPresent(self.cloudRouterIpv6Address, forKey: .cloudRouterIpv6Address)
       try container.encodeIfPresent(
@@ -640,15 +644,19 @@
       try container.encodeIfPresent(self.googleReferenceId, forKey: .googleReferenceId)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.interconnect, forKey: .interconnect)
-      try container.encode(self.ipsecInternalAddresses, forKey: .ipsecInternalAddresses)
+      if !self.ipsecInternalAddresses.isEmpty {
+        try container.encode(self.ipsecInternalAddresses, forKey: .ipsecInternalAddresses)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.l2Forwarding, forKey: .l2Forwarding)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.mtu, forKey: .mtu)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.operationalStatus, forKey: .operationalStatus)

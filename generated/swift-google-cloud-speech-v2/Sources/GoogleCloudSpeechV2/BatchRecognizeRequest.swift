@@ -140,12 +140,18 @@ public struct BatchRecognizeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.recognizer, forKey: .recognizer)
+    if !self.recognizer.isEmpty {
+      try container.encode(self.recognizer, forKey: .recognizer)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
     try container.encodeIfPresent(self.configMask, forKey: .configMask)
-    try container.encode(self.files, forKey: .files)
+    if !self.files.isEmpty {
+      try container.encode(self.files, forKey: .files)
+    }
     try container.encodeIfPresent(self.recognitionOutputConfig, forKey: .recognitionOutputConfig)
-    try container.encode(self.processingStrategy, forKey: .processingStrategy)
+    if self.processingStrategy != BatchRecognizeRequest.ProcessingStrategy() {
+      try container.encode(self.processingStrategy, forKey: .processingStrategy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

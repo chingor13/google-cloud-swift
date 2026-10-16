@@ -77,8 +77,12 @@ public struct MimecastV2OAuthClientCredentials: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

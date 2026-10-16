@@ -78,8 +78,12 @@ public struct OntapVolumeTarget: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.volumeUuid, forKey: .volumeUuid)
-    try container.encode(self.restoreDestinationPath, forKey: .restoreDestinationPath)
+    if !self.volumeUuid.isEmpty {
+      try container.encode(self.volumeUuid, forKey: .volumeUuid)
+    }
+    if !self.restoreDestinationPath.isEmpty {
+      try container.encode(self.restoreDestinationPath, forKey: .restoreDestinationPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

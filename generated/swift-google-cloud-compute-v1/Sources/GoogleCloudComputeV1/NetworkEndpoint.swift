@@ -134,7 +134,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.annotations, forKey: .annotations)
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
       try container.encodeIfPresent(self.clientDestinationPort, forKey: .clientDestinationPort)
       try container.encodeIfPresent(self.fqdn, forKey: .fqdn)
       try container.encodeIfPresent(self.instance, forKey: .instance)

@@ -119,11 +119,19 @@ public struct CopyLogEntriesMetadata: Codable, Equatable, GoogleWKT._AnyPackable
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.cancellationRequested, forKey: .cancellationRequested)
+    if self.state != OperationState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.cancellationRequested {
+      try container.encode(self.cancellationRequested, forKey: .cancellationRequested)
+    }
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.progress, forKey: .progress)
-    try container.encode(self.writerIdentity, forKey: .writerIdentity)
+    if self.progress != 0 {
+      try container.encode(self.progress, forKey: .progress)
+    }
+    if !self.writerIdentity.isEmpty {
+      try container.encode(self.writerIdentity, forKey: .writerIdentity)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

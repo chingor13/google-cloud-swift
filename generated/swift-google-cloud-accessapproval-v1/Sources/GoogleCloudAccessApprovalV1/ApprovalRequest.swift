@@ -146,8 +146,12 @@ public struct ApprovalRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.requestedResourceName, forKey: .requestedResourceName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.requestedResourceName.isEmpty {
+      try container.encode(self.requestedResourceName, forKey: .requestedResourceName)
+    }
     try container.encodeIfPresent(
       self.requestedResourceProperties, forKey: .requestedResourceProperties)
     try container.encodeIfPresent(self.requestedReason, forKey: .requestedReason)

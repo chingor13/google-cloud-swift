@@ -92,9 +92,15 @@ public struct MachineNetworkDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primaryIpAddress, forKey: .primaryIpAddress)
-    try container.encode(self.publicIpAddress, forKey: .publicIpAddress)
-    try container.encode(self.primaryMacAddress, forKey: .primaryMacAddress)
+    if !self.primaryIpAddress.isEmpty {
+      try container.encode(self.primaryIpAddress, forKey: .primaryIpAddress)
+    }
+    if !self.publicIpAddress.isEmpty {
+      try container.encode(self.publicIpAddress, forKey: .publicIpAddress)
+    }
+    if !self.primaryMacAddress.isEmpty {
+      try container.encode(self.primaryMacAddress, forKey: .primaryMacAddress)
+    }
     try container.encodeIfPresent(self.adapters, forKey: .adapters)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

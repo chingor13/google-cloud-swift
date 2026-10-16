@@ -106,10 +106,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requestHeadersToAdd, forKey: .requestHeadersToAdd)
-      try container.encode(self.requestHeadersToRemove, forKey: .requestHeadersToRemove)
-      try container.encode(self.responseHeadersToAdd, forKey: .responseHeadersToAdd)
-      try container.encode(self.responseHeadersToRemove, forKey: .responseHeadersToRemove)
+      if !self.requestHeadersToAdd.isEmpty {
+        try container.encode(self.requestHeadersToAdd, forKey: .requestHeadersToAdd)
+      }
+      if !self.requestHeadersToRemove.isEmpty {
+        try container.encode(self.requestHeadersToRemove, forKey: .requestHeadersToRemove)
+      }
+      if !self.responseHeadersToAdd.isEmpty {
+        try container.encode(self.responseHeadersToAdd, forKey: .responseHeadersToAdd)
+      }
+      if !self.responseHeadersToRemove.isEmpty {
+        try container.encode(self.responseHeadersToRemove, forKey: .responseHeadersToRemove)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

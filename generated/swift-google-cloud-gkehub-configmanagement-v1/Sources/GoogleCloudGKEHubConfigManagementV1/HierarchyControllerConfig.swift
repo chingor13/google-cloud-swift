@@ -88,10 +88,16 @@ public struct HierarchyControllerConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.enablePodTreeLabels, forKey: .enablePodTreeLabels)
-    try container.encode(
-      self.enableHierarchicalResourceQuota, forKey: .enableHierarchicalResourceQuota)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.enablePodTreeLabels {
+      try container.encode(self.enablePodTreeLabels, forKey: .enablePodTreeLabels)
+    }
+    if self.enableHierarchicalResourceQuota {
+      try container.encode(
+        self.enableHierarchicalResourceQuota, forKey: .enableHierarchicalResourceQuota)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

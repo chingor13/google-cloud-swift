@@ -128,10 +128,18 @@ public struct ListPurchasableOffersRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.customer, forKey: .customer)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.languageCode, forKey: .languageCode)
+    if !self.customer.isEmpty {
+      try container.encode(self.customer, forKey: .customer)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
 
     if let choice = self.purchaseOption {
       switch choice {
@@ -208,8 +216,12 @@ public struct ListPurchasableOffersRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sku, forKey: .sku)
-      try container.encode(self.billingAccount, forKey: .billingAccount)
+      if !self.sku.isEmpty {
+        try container.encode(self.sku, forKey: .sku)
+      }
+      if !self.billingAccount.isEmpty {
+        try container.encode(self.billingAccount, forKey: .billingAccount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -315,9 +327,15 @@ public struct ListPurchasableOffersRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entitlement, forKey: .entitlement)
-      try container.encode(self.newSku, forKey: .newSku)
-      try container.encode(self.billingAccount, forKey: .billingAccount)
+      if !self.entitlement.isEmpty {
+        try container.encode(self.entitlement, forKey: .entitlement)
+      }
+      if !self.newSku.isEmpty {
+        try container.encode(self.newSku, forKey: .newSku)
+      }
+      if !self.billingAccount.isEmpty {
+        try container.encode(self.billingAccount, forKey: .billingAccount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

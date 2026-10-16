@@ -78,8 +78,12 @@ public struct AutonomousDatabaseApex: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.apexVersion, forKey: .apexVersion)
-    try container.encode(self.ordsVersion, forKey: .ordsVersion)
+    if !self.apexVersion.isEmpty {
+      try container.encode(self.apexVersion, forKey: .apexVersion)
+    }
+    if !self.ordsVersion.isEmpty {
+      try container.encode(self.ordsVersion, forKey: .ordsVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

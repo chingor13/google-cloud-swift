@@ -115,9 +115,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryInsightsEnabled, forKey: .queryInsightsEnabled)
-      try container.encode(self.recordClientAddress, forKey: .recordClientAddress)
-      try container.encode(self.recordApplicationTags, forKey: .recordApplicationTags)
+      if self.queryInsightsEnabled {
+        try container.encode(self.queryInsightsEnabled, forKey: .queryInsightsEnabled)
+      }
+      if self.recordClientAddress {
+        try container.encode(self.recordClientAddress, forKey: .recordClientAddress)
+      }
+      if self.recordApplicationTags {
+        try container.encode(self.recordApplicationTags, forKey: .recordApplicationTags)
+      }
       try container.encodeIfPresent(self.queryStringLength, forKey: .queryStringLength)
       try container.encodeIfPresent(self.queryPlansPerMinute, forKey: .queryPlansPerMinute)
       try container.encodeIfPresent(

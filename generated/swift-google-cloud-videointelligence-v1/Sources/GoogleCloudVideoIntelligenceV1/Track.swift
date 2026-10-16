@@ -94,9 +94,15 @@ public struct Track: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.segment, forKey: .segment)
-    try container.encode(self.timestampedObjects, forKey: .timestampedObjects)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.confidence, forKey: .confidence)
+    if !self.timestampedObjects.isEmpty {
+      try container.encode(self.timestampedObjects, forKey: .timestampedObjects)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

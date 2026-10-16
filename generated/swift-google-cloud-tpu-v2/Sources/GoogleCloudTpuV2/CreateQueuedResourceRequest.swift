@@ -96,10 +96,16 @@ public struct CreateQueuedResourceRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.queuedResourceId, forKey: .queuedResourceId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.queuedResourceId.isEmpty {
+      try container.encode(self.queuedResourceId, forKey: .queuedResourceId)
+    }
     try container.encodeIfPresent(self.queuedResource, forKey: .queuedResource)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

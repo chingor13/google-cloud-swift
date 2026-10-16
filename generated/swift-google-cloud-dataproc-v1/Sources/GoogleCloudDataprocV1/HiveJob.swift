@@ -132,10 +132,18 @@ public struct HiveJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.continueOnFailure, forKey: .continueOnFailure)
-    try container.encode(self.scriptVariables, forKey: .scriptVariables)
-    try container.encode(self.properties, forKey: .properties)
-    try container.encode(self.jarFileUris, forKey: .jarFileUris)
+    if self.continueOnFailure {
+      try container.encode(self.continueOnFailure, forKey: .continueOnFailure)
+    }
+    if !self.scriptVariables.isEmpty {
+      try container.encode(self.scriptVariables, forKey: .scriptVariables)
+    }
+    if !self.properties.isEmpty {
+      try container.encode(self.properties, forKey: .properties)
+    }
+    if !self.jarFileUris.isEmpty {
+      try container.encode(self.jarFileUris, forKey: .jarFileUris)
+    }
 
     if let choice = self.queries {
       switch choice {

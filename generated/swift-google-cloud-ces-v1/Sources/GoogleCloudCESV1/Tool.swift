@@ -231,14 +231,24 @@ public struct Tool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.executionType, forKey: .executionType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.executionType != ExecutionType() {
+      try container.encode(self.executionType, forKey: .executionType)
+    }
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.generatedSummary, forKey: .generatedSummary)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.generatedSummary.isEmpty {
+      try container.encode(self.generatedSummary, forKey: .generatedSummary)
+    }
     try container.encodeIfPresent(self.toolFakeConfig, forKey: .toolFakeConfig)
 
     if let choice = self.toolType {

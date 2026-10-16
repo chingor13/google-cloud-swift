@@ -83,8 +83,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.diskType, forKey: .diskType)
-      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+      if !self.diskType.isEmpty {
+        try container.encode(self.diskType, forKey: .diskType)
+      }
+      if self.diskSizeGb != 0 {
+        try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -77,8 +77,12 @@ public struct DestinationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.destinations, forKey: .destinations)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.destinations.isEmpty {
+      try container.encode(self.destinations, forKey: .destinations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

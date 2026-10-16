@@ -150,14 +150,30 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.charset, forKey: .charset)
-      try container.encode(self.collation, forKey: .collation)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.selfLink, forKey: .selfLink)
-      try container.encode(self.project, forKey: .project)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.charset.isEmpty {
+        try container.encode(self.charset, forKey: .charset)
+      }
+      if !self.collation.isEmpty {
+        try container.encode(self.collation, forKey: .collation)
+      }
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.selfLink.isEmpty {
+        try container.encode(self.selfLink, forKey: .selfLink)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
 
       if let choice = self.databaseDetails {
         switch choice {

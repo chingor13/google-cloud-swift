@@ -293,19 +293,41 @@ public struct ChangeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.justification, forKey: .justification)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.author, forKey: .author)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.changeType, forKey: .changeType)
-    try container.encode(self.rejectionComment, forKey: .rejectionComment)
-    try container.encode(self.approver, forKey: .approver)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.justification.isEmpty {
+      try container.encode(self.justification, forKey: .justification)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.author.isEmpty {
+      try container.encode(self.author, forKey: .author)
+    }
+    if self.state != ChangeRequest.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if self.changeType != ChangeRequest.ChangeType() {
+      try container.encode(self.changeType, forKey: .changeType)
+    }
+    if !self.rejectionComment.isEmpty {
+      try container.encode(self.rejectionComment, forKey: .rejectionComment)
+    }
+    if !self.approver.isEmpty {
+      try container.encode(self.approver, forKey: .approver)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
 
     if let choice = self.changePayload {
       switch choice {

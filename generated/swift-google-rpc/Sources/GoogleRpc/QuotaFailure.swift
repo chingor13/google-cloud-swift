@@ -80,7 +80,9 @@ public struct QuotaFailure: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.violations, forKey: .violations)
+    if !self.violations.isEmpty {
+      try container.encode(self.violations, forKey: .violations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -251,13 +253,27 @@ public struct QuotaFailure: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.subject, forKey: .subject)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.apiService, forKey: .apiService)
-      try container.encode(self.quotaMetric, forKey: .quotaMetric)
-      try container.encode(self.quotaId, forKey: .quotaId)
-      try container.encode(self.quotaDimensions, forKey: .quotaDimensions)
-      try container.encode(self.quotaValue, forKey: .quotaValue)
+      if !self.subject.isEmpty {
+        try container.encode(self.subject, forKey: .subject)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.apiService.isEmpty {
+        try container.encode(self.apiService, forKey: .apiService)
+      }
+      if !self.quotaMetric.isEmpty {
+        try container.encode(self.quotaMetric, forKey: .quotaMetric)
+      }
+      if !self.quotaId.isEmpty {
+        try container.encode(self.quotaId, forKey: .quotaId)
+      }
+      if !self.quotaDimensions.isEmpty {
+        try container.encode(self.quotaDimensions, forKey: .quotaDimensions)
+      }
+      if self.quotaValue != 0 {
+        try container.encode(self.quotaValue, forKey: .quotaValue)
+      }
       try container.encodeIfPresent(self.futureQuotaValue, forKey: .futureQuotaValue)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

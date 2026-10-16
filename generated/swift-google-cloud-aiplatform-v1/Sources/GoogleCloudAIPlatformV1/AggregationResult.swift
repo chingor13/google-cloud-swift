@@ -123,7 +123,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.aggregationMetric, forKey: .aggregationMetric)
+      if self.aggregationMetric != GoogleCloudAIPlatformV1.Metric.AggregationMetric() {
+        try container.encode(self.aggregationMetric, forKey: .aggregationMetric)
+      }
 
       if let choice = self.aggregationResult {
         switch choice {

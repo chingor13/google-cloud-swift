@@ -110,11 +110,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.startIndex, forKey: .startIndex)
-      try container.encode(self.endIndex, forKey: .endIndex)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.license, forKey: .license)
+      if self.startIndex != 0 {
+        try container.encode(self.startIndex, forKey: .startIndex)
+      }
+      if self.endIndex != 0 {
+        try container.encode(self.endIndex, forKey: .endIndex)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.license.isEmpty {
+        try container.encode(self.license, forKey: .license)
+      }
       try container.encodeIfPresent(self.publicationDate, forKey: .publicationDate)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

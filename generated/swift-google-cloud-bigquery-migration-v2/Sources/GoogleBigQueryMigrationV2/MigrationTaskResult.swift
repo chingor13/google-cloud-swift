@@ -93,7 +93,9 @@ public struct MigrationTaskResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.taskOutputs, forKey: .taskOutputs)
+    if !self.taskOutputs.isEmpty {
+      try container.encode(self.taskOutputs, forKey: .taskOutputs)
+    }
 
     if let choice = self.details {
       switch choice {

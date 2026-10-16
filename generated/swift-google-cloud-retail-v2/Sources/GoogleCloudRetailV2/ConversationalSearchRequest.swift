@@ -211,18 +211,34 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.placement, forKey: .placement)
-    try container.encode(self.branch, forKey: .branch)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.pageCategories, forKey: .pageCategories)
-    try container.encode(self.conversationId, forKey: .conversationId)
+    if !self.placement.isEmpty {
+      try container.encode(self.placement, forKey: .placement)
+    }
+    if !self.branch.isEmpty {
+      try container.encode(self.branch, forKey: .branch)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.pageCategories.isEmpty {
+      try container.encode(self.pageCategories, forKey: .pageCategories)
+    }
+    if !self.conversationId.isEmpty {
+      try container.encode(self.conversationId, forKey: .conversationId)
+    }
     try container.encodeIfPresent(self.searchParams, forKey: .searchParams)
-    try container.encode(self.visitorId, forKey: .visitorId)
+    if !self.visitorId.isEmpty {
+      try container.encode(self.visitorId, forKey: .visitorId)
+    }
     try container.encodeIfPresent(self.userInfo, forKey: .userInfo)
     try container.encodeIfPresent(
       self.conversationalFilteringSpec, forKey: .conversationalFilteringSpec)
-    try container.encode(self.userLabels, forKey: .userLabels)
-    try container.encode(self.safetySettings, forKey: .safetySettings)
+    if !self.userLabels.isEmpty {
+      try container.encode(self.userLabels, forKey: .userLabels)
+    }
+    if !self.safetySettings.isEmpty {
+      try container.encode(self.safetySettings, forKey: .safetySettings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -321,9 +337,15 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.filter, forKey: .filter)
-      try container.encode(self.canonicalFilter, forKey: .canonicalFilter)
-      try container.encode(self.sortBy, forKey: .sortBy)
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
+      if !self.canonicalFilter.isEmpty {
+        try container.encode(self.canonicalFilter, forKey: .canonicalFilter)
+      }
+      if !self.sortBy.isEmpty {
+        try container.encode(self.sortBy, forKey: .sortBy)
+      }
       try container.encodeIfPresent(self.boostSpec, forKey: .boostSpec)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -649,10 +671,16 @@ public struct ConversationalSearchRequest: Codable, Equatable, GoogleWKT._AnyPac
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.enableConversationalFiltering, forKey: .enableConversationalFiltering)
+      if self.enableConversationalFiltering {
+        try container.encode(
+          self.enableConversationalFiltering, forKey: .enableConversationalFiltering)
+      }
       try container.encodeIfPresent(self.userAnswer, forKey: .userAnswer)
-      try container.encode(self.conversationalFilteringMode, forKey: .conversationalFilteringMode)
+      if self.conversationalFilteringMode
+        != ConversationalSearchRequest.ConversationalFilteringSpec.Mode()
+      {
+        try container.encode(self.conversationalFilteringMode, forKey: .conversationalFilteringMode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

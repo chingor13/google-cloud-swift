@@ -130,12 +130,24 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.verb, forKey: .verb)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
-    try container.encode(self.apiVersion, forKey: .apiVersion)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.verb.isEmpty {
+      try container.encode(self.verb, forKey: .verb)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if self.requestedCancellation {
+      try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
+    }
+    if !self.apiVersion.isEmpty {
+      try container.encode(self.apiVersion, forKey: .apiVersion)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

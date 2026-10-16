@@ -89,7 +89,9 @@ public struct MongodbSourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.includeObjects, forKey: .includeObjects)
     try container.encodeIfPresent(self.excludeObjects, forKey: .excludeObjects)
-    try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    if self.maxConcurrentBackfillTasks != 0 {
+      try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

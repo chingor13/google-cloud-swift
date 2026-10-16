@@ -96,10 +96,18 @@ public struct CheckInstanceUpgradabilityResponse: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.upgradeable, forKey: .upgradeable)
-    try container.encode(self.upgradeVersion, forKey: .upgradeVersion)
-    try container.encode(self.upgradeInfo, forKey: .upgradeInfo)
-    try container.encode(self.upgradeImage, forKey: .upgradeImage)
+    if self.upgradeable {
+      try container.encode(self.upgradeable, forKey: .upgradeable)
+    }
+    if !self.upgradeVersion.isEmpty {
+      try container.encode(self.upgradeVersion, forKey: .upgradeVersion)
+    }
+    if !self.upgradeInfo.isEmpty {
+      try container.encode(self.upgradeInfo, forKey: .upgradeInfo)
+    }
+    if !self.upgradeImage.isEmpty {
+      try container.encode(self.upgradeImage, forKey: .upgradeImage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

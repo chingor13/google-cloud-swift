@@ -109,10 +109,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.indexEndpoint, forKey: .indexEndpoint)
-      try container.encode(self.deployedIndexId, forKey: .deployedIndexId)
-      try container.encode(self.queries, forKey: .queries)
-      try container.encode(self.returnFullDatapoint, forKey: .returnFullDatapoint)
+      if !self.indexEndpoint.isEmpty {
+        try container.encode(self.indexEndpoint, forKey: .indexEndpoint)
+      }
+      if !self.deployedIndexId.isEmpty {
+        try container.encode(self.deployedIndexId, forKey: .deployedIndexId)
+      }
+      if !self.queries.isEmpty {
+        try container.encode(self.queries, forKey: .queries)
+      }
+      if self.returnFullDatapoint {
+        try container.encode(self.returnFullDatapoint, forKey: .returnFullDatapoint)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -245,12 +253,20 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.datapoint, forKey: .datapoint)
-        try container.encode(self.neighborCount, forKey: .neighborCount)
-        try container.encode(
-          self.perCrowdingAttributeNeighborCount, forKey: .perCrowdingAttributeNeighborCount)
-        try container.encode(self.approximateNeighborCount, forKey: .approximateNeighborCount)
-        try container.encode(
-          self.fractionLeafNodesToSearchOverride, forKey: .fractionLeafNodesToSearchOverride)
+        if self.neighborCount != 0 {
+          try container.encode(self.neighborCount, forKey: .neighborCount)
+        }
+        if self.perCrowdingAttributeNeighborCount != 0 {
+          try container.encode(
+            self.perCrowdingAttributeNeighborCount, forKey: .perCrowdingAttributeNeighborCount)
+        }
+        if self.approximateNeighborCount != 0 {
+          try container.encode(self.approximateNeighborCount, forKey: .approximateNeighborCount)
+        }
+        if self.fractionLeafNodesToSearchOverride != 0 {
+          try container.encode(
+            self.fractionLeafNodesToSearchOverride, forKey: .fractionLeafNodesToSearchOverride)
+        }
 
         if let choice = self.ranking {
           switch choice {
@@ -317,7 +333,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.alpha, forKey: .alpha)
+          if self.alpha != 0 {
+            try container.encode(self.alpha, forKey: .alpha)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

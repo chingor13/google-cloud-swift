@@ -131,11 +131,19 @@ public struct PolicySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.inheritFromParent, forKey: .inheritFromParent)
-    try container.encode(self.reset, forKey: .reset)
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if self.inheritFromParent {
+      try container.encode(self.inheritFromParent, forKey: .inheritFromParent)
+    }
+    if self.reset {
+      try container.encode(self.reset, forKey: .reset)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -347,8 +355,12 @@ public struct PolicySpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.allowedValues, forKey: .allowedValues)
-        try container.encode(self.deniedValues, forKey: .deniedValues)
+        if !self.allowedValues.isEmpty {
+          try container.encode(self.allowedValues, forKey: .allowedValues)
+        }
+        if !self.deniedValues.isEmpty {
+          try container.encode(self.deniedValues, forKey: .deniedValues)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

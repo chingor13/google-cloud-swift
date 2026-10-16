@@ -93,7 +93,9 @@ public struct AppConnectorInstanceConfig: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
+    if self.sequenceNumber != 0 {
+      try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
+    }
     try container.encodeIfPresent(self.instanceConfig, forKey: .instanceConfig)
     try container.encodeIfPresent(self.notificationConfig, forKey: .notificationConfig)
     try container.encodeIfPresent(self.imageConfig, forKey: .imageConfig)

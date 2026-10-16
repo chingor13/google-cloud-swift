@@ -198,20 +198,36 @@ public struct Plugin: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.type, forKey: .type)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.ownershipType, forKey: .ownershipType)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != Plugin.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.ownershipType != Plugin.OwnershipType() {
+      try container.encode(self.ownershipType, forKey: .ownershipType)
+    }
     try container.encodeIfPresent(self.hostingService, forKey: .hostingService)
-    try container.encode(self.actionsConfig, forKey: .actionsConfig)
+    if !self.actionsConfig.isEmpty {
+      try container.encode(self.actionsConfig, forKey: .actionsConfig)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
-    try container.encode(self.pluginCategory, forKey: .pluginCategory)
+    if self.pluginCategory != PluginCategory() {
+      try container.encode(self.pluginCategory, forKey: .pluginCategory)
+    }
     try container.encodeIfPresent(self.configTemplate, forKey: .configTemplate)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.gatewayType, forKey: .gatewayType)
+    if self.gatewayType != GatewayType() {
+      try container.encode(self.gatewayType, forKey: .gatewayType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -272,7 +288,9 @@ public struct Plugin: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceUri, forKey: .serviceUri)
+      if !self.serviceUri.isEmpty {
+        try container.encode(self.serviceUri, forKey: .serviceUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -363,7 +381,9 @@ public struct Plugin: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.authConfigTemplate, forKey: .authConfigTemplate)
-      try container.encode(self.additionalConfigTemplate, forKey: .additionalConfigTemplate)
+      if !self.additionalConfigTemplate.isEmpty {
+        try container.encode(self.additionalConfigTemplate, forKey: .additionalConfigTemplate)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -439,7 +459,9 @@ public struct Plugin: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.supportedAuthTypes, forKey: .supportedAuthTypes)
+        if !self.supportedAuthTypes.isEmpty {
+          try container.encode(self.supportedAuthTypes, forKey: .supportedAuthTypes)
+        }
         try container.encodeIfPresent(self.serviceAccount, forKey: .serviceAccount)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -86,8 +86,12 @@ public struct ExternalServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.allowedCidrBlocks, forKey: .allowedCidrBlocks)
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.allowedCidrBlocks.isEmpty {
+      try container.encode(self.allowedCidrBlocks, forKey: .allowedCidrBlocks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

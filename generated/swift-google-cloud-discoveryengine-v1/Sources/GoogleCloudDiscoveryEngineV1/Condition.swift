@@ -105,9 +105,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryTerms, forKey: .queryTerms)
-      try container.encode(self.activeTimeRange, forKey: .activeTimeRange)
-      try container.encode(self.queryRegex, forKey: .queryRegex)
+      if !self.queryTerms.isEmpty {
+        try container.encode(self.queryTerms, forKey: .queryTerms)
+      }
+      if !self.activeTimeRange.isEmpty {
+        try container.encode(self.activeTimeRange, forKey: .activeTimeRange)
+      }
+      if !self.queryRegex.isEmpty {
+        try container.encode(self.queryRegex, forKey: .queryRegex)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -178,8 +184,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.value, forKey: .value)
-        try container.encode(self.fullMatch, forKey: .fullMatch)
+        if !self.value.isEmpty {
+          try container.encode(self.value, forKey: .value)
+        }
+        if self.fullMatch {
+          try container.encode(self.fullMatch, forKey: .fullMatch)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

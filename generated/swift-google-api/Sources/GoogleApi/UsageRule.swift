@@ -99,9 +99,15 @@ public struct UsageRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
-    try container.encode(self.allowUnregisteredCalls, forKey: .allowUnregisteredCalls)
-    try container.encode(self.skipServiceControl, forKey: .skipServiceControl)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
+    if self.allowUnregisteredCalls {
+      try container.encode(self.allowUnregisteredCalls, forKey: .allowUnregisteredCalls)
+    }
+    if self.skipServiceControl {
+      try container.encode(self.skipServiceControl, forKey: .skipServiceControl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

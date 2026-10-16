@@ -167,9 +167,15 @@
       try container.encodeIfPresent(self.serviceAccount, forKey: .serviceAccount)
       try container.encodeIfPresent(self.packageSpec, forKey: .packageSpec)
       try container.encodeIfPresent(self.deploymentSpec, forKey: .deploymentSpec)
-      try container.encode(self.classMethods, forKey: .classMethods)
-      try container.encode(self.agentFramework, forKey: .agentFramework)
-      try container.encode(self.identityType, forKey: .identityType)
+      if !self.classMethods.isEmpty {
+        try container.encode(self.classMethods, forKey: .classMethods)
+      }
+      if !self.agentFramework.isEmpty {
+        try container.encode(self.agentFramework, forKey: .agentFramework)
+      }
+      if self.identityType != ReasoningEngineSpec.IdentityType() {
+        try container.encode(self.identityType, forKey: .identityType)
+      }
       try container.encodeIfPresent(self.buildSpec, forKey: .buildSpec)
 
       if let choice = self.deploymentSource {
@@ -268,10 +274,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.pickleObjectGcsUri, forKey: .pickleObjectGcsUri)
-        try container.encode(self.dependencyFilesGcsUri, forKey: .dependencyFilesGcsUri)
-        try container.encode(self.requirementsGcsUri, forKey: .requirementsGcsUri)
-        try container.encode(self.pythonVersion, forKey: .pythonVersion)
+        if !self.pickleObjectGcsUri.isEmpty {
+          try container.encode(self.pickleObjectGcsUri, forKey: .pickleObjectGcsUri)
+        }
+        if !self.dependencyFilesGcsUri.isEmpty {
+          try container.encode(self.dependencyFilesGcsUri, forKey: .dependencyFilesGcsUri)
+        }
+        if !self.requirementsGcsUri.isEmpty {
+          try container.encode(self.requirementsGcsUri, forKey: .requirementsGcsUri)
+        }
+        if !self.pythonVersion.isEmpty {
+          try container.encode(self.pythonVersion, forKey: .pythonVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -414,12 +428,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.env, forKey: .env)
-        try container.encode(self.secretEnv, forKey: .secretEnv)
+        if !self.env.isEmpty {
+          try container.encode(self.env, forKey: .env)
+        }
+        if !self.secretEnv.isEmpty {
+          try container.encode(self.secretEnv, forKey: .secretEnv)
+        }
         try container.encodeIfPresent(self.pscInterfaceConfig, forKey: .pscInterfaceConfig)
         try container.encodeIfPresent(self.minInstances, forKey: .minInstances)
         try container.encodeIfPresent(self.maxInstances, forKey: .maxInstances)
-        try container.encode(self.resourceLimits, forKey: .resourceLimits)
+        if !self.resourceLimits.isEmpty {
+          try container.encode(self.resourceLimits, forKey: .resourceLimits)
+        }
         try container.encodeIfPresent(self.containerConcurrency, forKey: .containerConcurrency)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -629,7 +649,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.sourceArchive, forKey: .sourceArchive)
+          if !self.sourceArchive.isEmpty {
+            try container.encode(self.sourceArchive, forKey: .sourceArchive)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -714,7 +736,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.buildArgs, forKey: .buildArgs)
+          if !self.buildArgs.isEmpty {
+            try container.encode(self.buildArgs, forKey: .buildArgs)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -818,9 +842,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.gitRepositoryLink, forKey: .gitRepositoryLink)
-          try container.encode(self.dir, forKey: .dir)
-          try container.encode(self.revision, forKey: .revision)
+          if !self.gitRepositoryLink.isEmpty {
+            try container.encode(self.gitRepositoryLink, forKey: .gitRepositoryLink)
+          }
+          if !self.dir.isEmpty {
+            try container.encode(self.dir, forKey: .dir)
+          }
+          if !self.revision.isEmpty {
+            try container.encode(self.revision, forKey: .revision)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1021,10 +1051,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.version, forKey: .version)
-          try container.encode(self.entrypointModule, forKey: .entrypointModule)
-          try container.encode(self.entrypointObject, forKey: .entrypointObject)
-          try container.encode(self.requirementsFile, forKey: .requirementsFile)
+          if !self.version.isEmpty {
+            try container.encode(self.version, forKey: .version)
+          }
+          if !self.entrypointModule.isEmpty {
+            try container.encode(self.entrypointModule, forKey: .entrypointModule)
+          }
+          if !self.entrypointObject.isEmpty {
+            try container.encode(self.entrypointObject, forKey: .entrypointObject)
+          }
+          if !self.requirementsFile.isEmpty {
+            try container.encode(self.requirementsFile, forKey: .requirementsFile)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1147,7 +1185,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.imageUri, forKey: .imageUri)
+        if !self.imageUri.isEmpty {
+          try container.encode(self.imageUri, forKey: .imageUri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1245,8 +1285,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.workerPool, forKey: .workerPool)
-        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+        if !self.workerPool.isEmpty {
+          try container.encode(self.workerPool, forKey: .workerPool)
+        }
+        if !self.serviceAccount.isEmpty {
+          try container.encode(self.serviceAccount, forKey: .serviceAccount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

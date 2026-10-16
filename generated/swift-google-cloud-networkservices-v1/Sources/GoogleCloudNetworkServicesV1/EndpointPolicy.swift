@@ -178,17 +178,31 @@ public struct EndpointPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.authorizationPolicy, forKey: .authorizationPolicy)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.type != EndpointPolicy.EndpointPolicyType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.authorizationPolicy.isEmpty {
+      try container.encode(self.authorizationPolicy, forKey: .authorizationPolicy)
+    }
     try container.encodeIfPresent(self.endpointMatcher, forKey: .endpointMatcher)
     try container.encodeIfPresent(self.trafficPortSelector, forKey: .trafficPortSelector)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.serverTlsPolicy, forKey: .serverTlsPolicy)
-    try container.encode(self.clientTlsPolicy, forKey: .clientTlsPolicy)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.serverTlsPolicy.isEmpty {
+      try container.encode(self.serverTlsPolicy, forKey: .serverTlsPolicy)
+    }
+    if !self.clientTlsPolicy.isEmpty {
+      try container.encode(self.clientTlsPolicy, forKey: .clientTlsPolicy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

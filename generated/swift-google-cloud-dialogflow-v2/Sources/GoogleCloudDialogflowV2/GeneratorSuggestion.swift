@@ -108,7 +108,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.toolCallInfo, forKey: .toolCallInfo)
+      if !self.toolCallInfo.isEmpty {
+        try container.encode(self.toolCallInfo, forKey: .toolCallInfo)
+      }
 
       if let choice = self.suggestion {
         switch choice {

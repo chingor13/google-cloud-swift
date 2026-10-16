@@ -81,7 +81,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.genericMetadata, forKey: .genericMetadata)
-      try container.encode(self.deployedIndexId, forKey: .deployedIndexId)
+      if !self.deployedIndexId.isEmpty {
+        try container.encode(self.deployedIndexId, forKey: .deployedIndexId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

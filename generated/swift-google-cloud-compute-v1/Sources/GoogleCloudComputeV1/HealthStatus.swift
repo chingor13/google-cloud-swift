@@ -137,7 +137,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.annotations, forKey: .annotations)
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
       try container.encodeIfPresent(self.forwardingRule, forKey: .forwardingRule)
       try container.encodeIfPresent(self.forwardingRuleIp, forKey: .forwardingRuleIp)
       try container.encodeIfPresent(self.healthState, forKey: .healthState)

@@ -119,12 +119,18 @@ public struct ClusterInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.membership, forKey: .membership)
+    if !self.membership.isEmpty {
+      try container.encode(self.membership, forKey: .membership)
+    }
     try container.encodeIfPresent(self.desired, forKey: .desired)
     try container.encodeIfPresent(self.initial, forKey: .initial)
     try container.encodeIfPresent(self.current, forKey: .current)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.messages, forKey: .messages)
+    if self.state != ClusterInfo.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.messages.isEmpty {
+      try container.encode(self.messages, forKey: .messages)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     for (key, value) in self._unknownFields.json {

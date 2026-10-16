@@ -102,11 +102,17 @@ public struct BackupInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backup, forKey: .backup)
+    if !self.backup.isEmpty {
+      try container.encode(self.backup, forKey: .backup)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.sourceTable, forKey: .sourceTable)
-    try container.encode(self.sourceBackup, forKey: .sourceBackup)
+    if !self.sourceTable.isEmpty {
+      try container.encode(self.sourceTable, forKey: .sourceTable)
+    }
+    if !self.sourceBackup.isEmpty {
+      try container.encode(self.sourceBackup, forKey: .sourceBackup)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

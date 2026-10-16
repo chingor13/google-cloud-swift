@@ -212,24 +212,54 @@ public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.jobId, forKey: .jobId)
-    try container.encode(self.jobCategory, forKey: .jobCategory)
-    try container.encode(self.jobStatus, forKey: .jobStatus)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.backupPlanName, forKey: .backupPlanName)
-    try container.encode(self.previousBackupPlanRevisionId, forKey: .previousBackupPlanRevisionId)
-    try container.encode(
-      self.previousBackupPlanRevisionName, forKey: .previousBackupPlanRevisionName)
-    try container.encode(self.newBackupPlanRevisionId, forKey: .newBackupPlanRevisionId)
-    try container.encode(self.newBackupPlanRevisionName, forKey: .newBackupPlanRevisionName)
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
+    if !self.jobCategory.isEmpty {
+      try container.encode(self.jobCategory, forKey: .jobCategory)
+    }
+    if !self.jobStatus.isEmpty {
+      try container.encode(self.jobStatus, forKey: .jobStatus)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.backupPlanName.isEmpty {
+      try container.encode(self.backupPlanName, forKey: .backupPlanName)
+    }
+    if !self.previousBackupPlanRevisionId.isEmpty {
+      try container.encode(self.previousBackupPlanRevisionId, forKey: .previousBackupPlanRevisionId)
+    }
+    if !self.previousBackupPlanRevisionName.isEmpty {
+      try container.encode(
+        self.previousBackupPlanRevisionName, forKey: .previousBackupPlanRevisionName)
+    }
+    if !self.newBackupPlanRevisionId.isEmpty {
+      try container.encode(self.newBackupPlanRevisionId, forKey: .newBackupPlanRevisionId)
+    }
+    if !self.newBackupPlanRevisionName.isEmpty {
+      try container.encode(self.newBackupPlanRevisionName, forKey: .newBackupPlanRevisionName)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.workloadsAffectedCount, forKey: .workloadsAffectedCount)
-    try container.encode(self.previousBackupRules, forKey: .previousBackupRules)
-    try container.encode(self.revisedBackupRules, forKey: .revisedBackupRules)
-    try container.encode(self.errorCode, forKey: .errorCode)
-    try container.encode(self.errorType, forKey: .errorType)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
+    if self.workloadsAffectedCount != 0 {
+      try container.encode(self.workloadsAffectedCount, forKey: .workloadsAffectedCount)
+    }
+    if !self.previousBackupRules.isEmpty {
+      try container.encode(self.previousBackupRules, forKey: .previousBackupRules)
+    }
+    if !self.revisedBackupRules.isEmpty {
+      try container.encode(self.revisedBackupRules, forKey: .revisedBackupRules)
+    }
+    if self.errorCode != 0 {
+      try container.encode(self.errorCode, forKey: .errorCode)
+    }
+    if !self.errorType.isEmpty {
+      try container.encode(self.errorType, forKey: .errorType)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

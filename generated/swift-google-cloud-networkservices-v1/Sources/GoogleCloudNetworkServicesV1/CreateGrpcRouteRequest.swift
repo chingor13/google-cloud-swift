@@ -84,8 +84,12 @@ public struct CreateGrpcRouteRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.grpcRouteId, forKey: .grpcRouteId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.grpcRouteId.isEmpty {
+      try container.encode(self.grpcRouteId, forKey: .grpcRouteId)
+    }
     try container.encodeIfPresent(self.grpcRoute, forKey: .grpcRoute)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

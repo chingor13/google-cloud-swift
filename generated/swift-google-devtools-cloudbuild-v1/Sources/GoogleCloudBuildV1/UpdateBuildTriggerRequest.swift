@@ -92,8 +92,12 @@ public struct UpdateBuildTriggerRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.triggerId, forKey: .triggerId)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.triggerId.isEmpty {
+      try container.encode(self.triggerId, forKey: .triggerId)
+    }
     try container.encodeIfPresent(self.trigger, forKey: .trigger)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

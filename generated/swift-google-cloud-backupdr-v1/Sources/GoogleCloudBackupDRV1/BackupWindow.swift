@@ -85,8 +85,12 @@ public struct BackupWindow: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.startHourOfDay, forKey: .startHourOfDay)
-    try container.encode(self.endHourOfDay, forKey: .endHourOfDay)
+    if self.startHourOfDay != 0 {
+      try container.encode(self.startHourOfDay, forKey: .startHourOfDay)
+    }
+    if self.endHourOfDay != 0 {
+      try container.encode(self.endHourOfDay, forKey: .endHourOfDay)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

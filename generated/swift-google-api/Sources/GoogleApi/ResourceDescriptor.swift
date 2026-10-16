@@ -222,13 +222,27 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.pattern, forKey: .pattern)
-    try container.encode(self.nameField, forKey: .nameField)
-    try container.encode(self.history, forKey: .history)
-    try container.encode(self.plural, forKey: .plural)
-    try container.encode(self.singular, forKey: .singular)
-    try container.encode(self.style, forKey: .style)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.pattern.isEmpty {
+      try container.encode(self.pattern, forKey: .pattern)
+    }
+    if !self.nameField.isEmpty {
+      try container.encode(self.nameField, forKey: .nameField)
+    }
+    if self.history != ResourceDescriptor.History() {
+      try container.encode(self.history, forKey: .history)
+    }
+    if !self.plural.isEmpty {
+      try container.encode(self.plural, forKey: .plural)
+    }
+    if !self.singular.isEmpty {
+      try container.encode(self.singular, forKey: .singular)
+    }
+    if !self.style.isEmpty {
+      try container.encode(self.style, forKey: .style)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

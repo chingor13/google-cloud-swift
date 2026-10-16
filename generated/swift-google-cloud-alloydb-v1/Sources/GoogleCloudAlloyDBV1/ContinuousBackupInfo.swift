@@ -105,7 +105,9 @@ public struct ContinuousBackupInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.encryptionInfo, forKey: .encryptionInfo)
     try container.encodeIfPresent(self.enabledTime, forKey: .enabledTime)
-    try container.encode(self.schedule, forKey: .schedule)
+    if !self.schedule.isEmpty {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
     try container.encodeIfPresent(self.earliestRestorableTime, forKey: .earliestRestorableTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

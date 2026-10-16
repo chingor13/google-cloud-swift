@@ -100,10 +100,16 @@ public struct DomainMapping: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     try container.encodeIfPresent(self.sslSettings, forKey: .sslSettings)
-    try container.encode(self.resourceRecords, forKey: .resourceRecords)
+    if !self.resourceRecords.isEmpty {
+      try container.encode(self.resourceRecords, forKey: .resourceRecords)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

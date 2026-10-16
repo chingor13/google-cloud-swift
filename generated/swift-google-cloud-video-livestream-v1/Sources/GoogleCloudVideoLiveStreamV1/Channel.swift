@@ -262,27 +262,53 @@ public struct Channel: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.inputAttachments, forKey: .inputAttachments)
-    try container.encode(self.activeInput, forKey: .activeInput)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.inputAttachments.isEmpty {
+      try container.encode(self.inputAttachments, forKey: .inputAttachments)
+    }
+    if !self.activeInput.isEmpty {
+      try container.encode(self.activeInput, forKey: .activeInput)
+    }
     try container.encodeIfPresent(self.output, forKey: .output)
-    try container.encode(self.elementaryStreams, forKey: .elementaryStreams)
-    try container.encode(self.muxStreams, forKey: .muxStreams)
-    try container.encode(self.manifests, forKey: .manifests)
-    try container.encode(self.distributionStreams, forKey: .distributionStreams)
-    try container.encode(self.distributions, forKey: .distributions)
-    try container.encode(self.spriteSheets, forKey: .spriteSheets)
-    try container.encode(self.streamingState, forKey: .streamingState)
+    if !self.elementaryStreams.isEmpty {
+      try container.encode(self.elementaryStreams, forKey: .elementaryStreams)
+    }
+    if !self.muxStreams.isEmpty {
+      try container.encode(self.muxStreams, forKey: .muxStreams)
+    }
+    if !self.manifests.isEmpty {
+      try container.encode(self.manifests, forKey: .manifests)
+    }
+    if !self.distributionStreams.isEmpty {
+      try container.encode(self.distributionStreams, forKey: .distributionStreams)
+    }
+    if !self.distributions.isEmpty {
+      try container.encode(self.distributions, forKey: .distributions)
+    }
+    if !self.spriteSheets.isEmpty {
+      try container.encode(self.spriteSheets, forKey: .spriteSheets)
+    }
+    if self.streamingState != Channel.StreamingState() {
+      try container.encode(self.streamingState, forKey: .streamingState)
+    }
     try container.encodeIfPresent(self.streamingError, forKey: .streamingError)
     try container.encodeIfPresent(self.logConfig, forKey: .logConfig)
     try container.encodeIfPresent(self.timecodeConfig, forKey: .timecodeConfig)
-    try container.encode(self.encryptions, forKey: .encryptions)
+    if !self.encryptions.isEmpty {
+      try container.encode(self.encryptions, forKey: .encryptions)
+    }
     try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
     try container.encodeIfPresent(self.retentionConfig, forKey: .retentionConfig)
-    try container.encode(self.staticOverlays, forKey: .staticOverlays)
+    if !self.staticOverlays.isEmpty {
+      try container.encode(self.staticOverlays, forKey: .staticOverlays)
+    }
     try container.encodeIfPresent(self.autoTranscriptionConfig, forKey: .autoTranscriptionConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -341,7 +367,9 @@ public struct Channel: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

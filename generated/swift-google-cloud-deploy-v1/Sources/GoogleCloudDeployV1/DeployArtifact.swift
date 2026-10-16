@@ -79,8 +79,12 @@ public struct DeployArtifact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.artifactUri, forKey: .artifactUri)
-    try container.encode(self.manifestPaths, forKey: .manifestPaths)
+    if !self.artifactUri.isEmpty {
+      try container.encode(self.artifactUri, forKey: .artifactUri)
+    }
+    if !self.manifestPaths.isEmpty {
+      try container.encode(self.manifestPaths, forKey: .manifestPaths)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

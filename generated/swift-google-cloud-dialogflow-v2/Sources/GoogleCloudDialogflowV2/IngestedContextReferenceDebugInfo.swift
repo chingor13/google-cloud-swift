@@ -95,9 +95,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectNotAllowlisted, forKey: .projectNotAllowlisted)
-      try container.encode(self.contextReferenceRetrieved, forKey: .contextReferenceRetrieved)
-      try container.encode(self.ingestedParametersDebugInfo, forKey: .ingestedParametersDebugInfo)
+      if self.projectNotAllowlisted {
+        try container.encode(self.projectNotAllowlisted, forKey: .projectNotAllowlisted)
+      }
+      if self.contextReferenceRetrieved {
+        try container.encode(self.contextReferenceRetrieved, forKey: .contextReferenceRetrieved)
+      }
+      if !self.ingestedParametersDebugInfo.isEmpty {
+        try container.encode(self.ingestedParametersDebugInfo, forKey: .ingestedParametersDebugInfo)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -168,8 +174,14 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.parameter, forKey: .parameter)
-        try container.encode(self.ingestionStatus, forKey: .ingestionStatus)
+        if !self.parameter.isEmpty {
+          try container.encode(self.parameter, forKey: .parameter)
+        }
+        if self.ingestionStatus
+          != IngestedContextReferenceDebugInfo.IngestedParameterDebugInfo.IngestionStatus()
+        {
+          try container.encode(self.ingestionStatus, forKey: .ingestionStatus)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

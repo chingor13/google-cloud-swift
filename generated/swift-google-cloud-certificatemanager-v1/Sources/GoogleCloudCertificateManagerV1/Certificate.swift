@@ -163,15 +163,27 @@ public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.sanDnsnames, forKey: .sanDnsnames)
-    try container.encode(self.pemCertificate, forKey: .pemCertificate)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.sanDnsnames.isEmpty {
+      try container.encode(self.sanDnsnames, forKey: .sanDnsnames)
+    }
+    if !self.pemCertificate.isEmpty {
+      try container.encode(self.pemCertificate, forKey: .pemCertificate)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.scope, forKey: .scope)
+    if self.scope != Certificate.Scope() {
+      try container.encode(self.scope, forKey: .scope)
+    }
 
     if let choice = self.type {
       switch choice {
@@ -249,8 +261,12 @@ public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pemCertificate, forKey: .pemCertificate)
-      try container.encode(self.pemPrivateKey, forKey: .pemPrivateKey)
+      if !self.pemCertificate.isEmpty {
+        try container.encode(self.pemCertificate, forKey: .pemCertificate)
+      }
+      if !self.pemPrivateKey.isEmpty {
+        try container.encode(self.pemPrivateKey, forKey: .pemPrivateKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -392,12 +408,22 @@ public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.domains, forKey: .domains)
-      try container.encode(self.dnsAuthorizations, forKey: .dnsAuthorizations)
-      try container.encode(self.issuanceConfig, forKey: .issuanceConfig)
-      try container.encode(self.state, forKey: .state)
+      if !self.domains.isEmpty {
+        try container.encode(self.domains, forKey: .domains)
+      }
+      if !self.dnsAuthorizations.isEmpty {
+        try container.encode(self.dnsAuthorizations, forKey: .dnsAuthorizations)
+      }
+      if !self.issuanceConfig.isEmpty {
+        try container.encode(self.issuanceConfig, forKey: .issuanceConfig)
+      }
+      if self.state != Certificate.ManagedCertificate.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.provisioningIssue, forKey: .provisioningIssue)
-      try container.encode(self.authorizationAttemptInfo, forKey: .authorizationAttemptInfo)
+      if !self.authorizationAttemptInfo.isEmpty {
+        try container.encode(self.authorizationAttemptInfo, forKey: .authorizationAttemptInfo)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -468,8 +494,12 @@ public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.reason, forKey: .reason)
-        try container.encode(self.details, forKey: .details)
+        if self.reason != Certificate.ManagedCertificate.ProvisioningIssue.Reason() {
+          try container.encode(self.reason, forKey: .reason)
+        }
+        if !self.details.isEmpty {
+          try container.encode(self.details, forKey: .details)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -707,10 +737,20 @@ public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.domain, forKey: .domain)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.failureReason, forKey: .failureReason)
-        try container.encode(self.details, forKey: .details)
+        if !self.domain.isEmpty {
+          try container.encode(self.domain, forKey: .domain)
+        }
+        if self.state != Certificate.ManagedCertificate.AuthorizationAttemptInfo.State() {
+          try container.encode(self.state, forKey: .state)
+        }
+        if self.failureReason
+          != Certificate.ManagedCertificate.AuthorizationAttemptInfo.FailureReason()
+        {
+          try container.encode(self.failureReason, forKey: .failureReason)
+        }
+        if !self.details.isEmpty {
+          try container.encode(self.details, forKey: .details)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

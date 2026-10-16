@@ -98,9 +98,15 @@ public struct ResourceRequirements: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.limits, forKey: .limits)
-    try container.encode(self.cpuIdle, forKey: .cpuIdle)
-    try container.encode(self.startupCpuBoost, forKey: .startupCpuBoost)
+    if !self.limits.isEmpty {
+      try container.encode(self.limits, forKey: .limits)
+    }
+    if self.cpuIdle {
+      try container.encode(self.cpuIdle, forKey: .cpuIdle)
+    }
+    if self.startupCpuBoost {
+      try container.encode(self.startupCpuBoost, forKey: .startupCpuBoost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -104,11 +104,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.tunedModelRef, forKey: .tunedModelRef)
       try container.encodeIfPresent(self.tuningJob, forKey: .tuningJob)
       try container.encodeIfPresent(self.artifactDestination, forKey: .artifactDestination)
-      try container.encode(self.deployToSameEndpoint, forKey: .deployToSameEndpoint)
+      if self.deployToSameEndpoint {
+        try container.encode(self.deployToSameEndpoint, forKey: .deployToSameEndpoint)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

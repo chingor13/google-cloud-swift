@@ -83,7 +83,9 @@ public struct PoliciesListResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.policies, forKey: .policies)
+    if !self.policies.isEmpty {
+      try container.encode(self.policies, forKey: .policies)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

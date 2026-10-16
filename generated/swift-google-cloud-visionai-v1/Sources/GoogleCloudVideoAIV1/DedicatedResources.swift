@@ -143,9 +143,15 @@ public struct DedicatedResources: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.machineSpec, forKey: .machineSpec)
-    try container.encode(self.minReplicaCount, forKey: .minReplicaCount)
-    try container.encode(self.maxReplicaCount, forKey: .maxReplicaCount)
-    try container.encode(self.autoscalingMetricSpecs, forKey: .autoscalingMetricSpecs)
+    if self.minReplicaCount != 0 {
+      try container.encode(self.minReplicaCount, forKey: .minReplicaCount)
+    }
+    if self.maxReplicaCount != 0 {
+      try container.encode(self.maxReplicaCount, forKey: .maxReplicaCount)
+    }
+    if !self.autoscalingMetricSpecs.isEmpty {
+      try container.encode(self.autoscalingMetricSpecs, forKey: .autoscalingMetricSpecs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

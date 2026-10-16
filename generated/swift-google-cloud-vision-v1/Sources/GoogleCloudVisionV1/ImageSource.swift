@@ -98,8 +98,12 @@ public struct ImageSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gcsImageUri, forKey: .gcsImageUri)
-    try container.encode(self.imageUri, forKey: .imageUri)
+    if !self.gcsImageUri.isEmpty {
+      try container.encode(self.gcsImageUri, forKey: .gcsImageUri)
+    }
+    if !self.imageUri.isEmpty {
+      try container.encode(self.imageUri, forKey: .imageUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

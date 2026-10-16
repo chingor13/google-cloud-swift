@@ -118,7 +118,9 @@ public struct PullRequestComment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
 
@@ -208,9 +210,15 @@ public struct PullRequestComment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.actionType, forKey: .actionType)
-      try container.encode(self.body, forKey: .body)
-      try container.encode(self.effectiveCommitSha, forKey: .effectiveCommitSha)
+      if self.actionType != PullRequestComment.Review.ActionType() {
+        try container.encode(self.actionType, forKey: .actionType)
+      }
+      if !self.body.isEmpty {
+        try container.encode(self.body, forKey: .body)
+      }
+      if !self.effectiveCommitSha.isEmpty {
+        try container.encode(self.effectiveCommitSha, forKey: .effectiveCommitSha)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -414,7 +422,9 @@ public struct PullRequestComment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.body, forKey: .body)
+      if !self.body.isEmpty {
+        try container.encode(self.body, forKey: .body)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -536,12 +546,22 @@ public struct PullRequestComment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.body, forKey: .body)
-      try container.encode(self.reply, forKey: .reply)
+      if !self.body.isEmpty {
+        try container.encode(self.body, forKey: .body)
+      }
+      if !self.reply.isEmpty {
+        try container.encode(self.reply, forKey: .reply)
+      }
       try container.encodeIfPresent(self.position, forKey: .position)
-      try container.encode(self.effectiveRootComment, forKey: .effectiveRootComment)
-      try container.encode(self.resolved, forKey: .resolved)
-      try container.encode(self.effectiveCommitSha, forKey: .effectiveCommitSha)
+      if !self.effectiveRootComment.isEmpty {
+        try container.encode(self.effectiveRootComment, forKey: .effectiveRootComment)
+      }
+      if self.resolved {
+        try container.encode(self.resolved, forKey: .resolved)
+      }
+      if !self.effectiveCommitSha.isEmpty {
+        try container.encode(self.effectiveCommitSha, forKey: .effectiveCommitSha)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -630,8 +650,12 @@ public struct PullRequestComment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.line, forKey: .line)
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if self.line != 0 {
+        try container.encode(self.line, forKey: .line)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

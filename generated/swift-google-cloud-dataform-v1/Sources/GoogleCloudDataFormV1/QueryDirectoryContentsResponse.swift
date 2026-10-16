@@ -79,8 +79,12 @@ public struct QueryDirectoryContentsResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.directoryEntries, forKey: .directoryEntries)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.directoryEntries.isEmpty {
+      try container.encode(self.directoryEntries, forKey: .directoryEntries)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

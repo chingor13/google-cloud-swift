@@ -113,7 +113,9 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.authType, forKey: .authType)
+    if self.authType != AuthType() {
+      try container.encode(self.authType, forKey: .authType)
+    }
 
     if let choice = self.config {
       switch choice {
@@ -192,7 +194,9 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.username, forKey: .username)
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
       try container.encodeIfPresent(self.password, forKey: .password)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -282,7 +286,9 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clientId, forKey: .clientId)
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
       try container.encodeIfPresent(self.clientSecret, forKey: .clientSecret)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -387,9 +393,13 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.apiKey, forKey: .apiKey)
-      try container.encode(self.httpElementLocation, forKey: .httpElementLocation)
+      if self.httpElementLocation != AuthConfig.ApiKeyConfig.HttpElementLocation() {
+        try container.encode(self.httpElementLocation, forKey: .httpElementLocation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

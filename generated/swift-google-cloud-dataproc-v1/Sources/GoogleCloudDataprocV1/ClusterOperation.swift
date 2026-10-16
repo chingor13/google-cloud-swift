@@ -85,9 +85,15 @@ public struct ClusterOperation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.operationId, forKey: .operationId)
-    try container.encode(self.error, forKey: .error)
-    try container.encode(self.done, forKey: .done)
+    if !self.operationId.isEmpty {
+      try container.encode(self.operationId, forKey: .operationId)
+    }
+    if !self.error.isEmpty {
+      try container.encode(self.error, forKey: .error)
+    }
+    if self.done {
+      try container.encode(self.done, forKey: .done)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

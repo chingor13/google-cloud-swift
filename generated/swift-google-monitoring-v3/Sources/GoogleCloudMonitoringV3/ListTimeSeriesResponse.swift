@@ -104,10 +104,18 @@ public struct ListTimeSeriesResponse: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.timeSeries, forKey: .timeSeries)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.executionErrors, forKey: .executionErrors)
-    try container.encode(self.unit, forKey: .unit)
+    if !self.timeSeries.isEmpty {
+      try container.encode(self.timeSeries, forKey: .timeSeries)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.executionErrors.isEmpty {
+      try container.encode(self.executionErrors, forKey: .executionErrors)
+    }
+    if !self.unit.isEmpty {
+      try container.encode(self.unit, forKey: .unit)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

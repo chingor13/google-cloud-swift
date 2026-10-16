@@ -100,8 +100,12 @@ public struct OrganizationImpact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.events, forKey: .events)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.events.isEmpty {
+      try container.encode(self.events, forKey: .events)
+    }
     try container.encodeIfPresent(self.asset, forKey: .asset)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

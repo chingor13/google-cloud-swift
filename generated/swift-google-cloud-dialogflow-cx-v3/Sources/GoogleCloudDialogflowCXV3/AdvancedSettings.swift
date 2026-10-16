@@ -216,10 +216,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.endpointerSensitivity, forKey: .endpointerSensitivity)
+        if self.endpointerSensitivity != 0 {
+          try container.encode(self.endpointerSensitivity, forKey: .endpointerSensitivity)
+        }
         try container.encodeIfPresent(self.noSpeechTimeout, forKey: .noSpeechTimeout)
-        try container.encode(self.useTimeoutBasedEndpointing, forKey: .useTimeoutBasedEndpointing)
-        try container.encode(self.models, forKey: .models)
+        if self.useTimeoutBasedEndpointing {
+          try container.encode(self.useTimeoutBasedEndpointing, forKey: .useTimeoutBasedEndpointing)
+        }
+        if !self.models.isEmpty {
+          try container.encode(self.models, forKey: .models)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -335,9 +341,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enabled, forKey: .enabled)
-        try container.encode(self.maxDigits, forKey: .maxDigits)
-        try container.encode(self.finishDigit, forKey: .finishDigit)
+        if self.enabled {
+          try container.encode(self.enabled, forKey: .enabled)
+        }
+        if self.maxDigits != 0 {
+          try container.encode(self.maxDigits, forKey: .maxDigits)
+        }
+        if !self.finishDigit.isEmpty {
+          try container.encode(self.finishDigit, forKey: .finishDigit)
+        }
         try container.encodeIfPresent(
           self.interdigitTimeoutDuration, forKey: .interdigitTimeoutDuration)
         try container.encodeIfPresent(
@@ -446,9 +458,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableStackdriverLogging, forKey: .enableStackdriverLogging)
-        try container.encode(self.enableInteractionLogging, forKey: .enableInteractionLogging)
-        try container.encode(self.enableConsentBasedRedaction, forKey: .enableConsentBasedRedaction)
+        if self.enableStackdriverLogging {
+          try container.encode(self.enableStackdriverLogging, forKey: .enableStackdriverLogging)
+        }
+        if self.enableInteractionLogging {
+          try container.encode(self.enableInteractionLogging, forKey: .enableInteractionLogging)
+        }
+        if self.enableConsentBasedRedaction {
+          try container.encode(
+            self.enableConsentBasedRedaction, forKey: .enableConsentBasedRedaction)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

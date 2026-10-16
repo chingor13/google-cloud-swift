@@ -118,12 +118,22 @@ public struct TimedPromoteReleaseRule: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.destinationTargetId, forKey: .destinationTargetId)
-    try container.encode(self.schedule, forKey: .schedule)
-    try container.encode(self.timeZone, forKey: .timeZone)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.destinationTargetId.isEmpty {
+      try container.encode(self.destinationTargetId, forKey: .destinationTargetId)
+    }
+    if !self.schedule.isEmpty {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
-    try container.encode(self.destinationPhase, forKey: .destinationPhase)
+    if !self.destinationPhase.isEmpty {
+      try container.encode(self.destinationPhase, forKey: .destinationPhase)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

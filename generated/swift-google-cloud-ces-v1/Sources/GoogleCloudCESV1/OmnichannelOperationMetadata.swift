@@ -93,8 +93,12 @@ public struct OmnichannelOperationMetadata: Codable, Equatable, GoogleWKT._AnyPa
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if self.requestedCancellation {
+      try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -141,11 +141,19 @@ public struct ImportAppRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.appId, forKey: .appId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.appId.isEmpty {
+      try container.encode(self.appId, forKey: .appId)
+    }
     try container.encodeIfPresent(self.importOptions, forKey: .importOptions)
-    try container.encode(self.ignoreAppLock, forKey: .ignoreAppLock)
+    if self.ignoreAppLock {
+      try container.encode(self.ignoreAppLock, forKey: .ignoreAppLock)
+    }
 
     if let choice = self.app {
       switch choice {
@@ -219,7 +227,11 @@ public struct ImportAppRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conflictResolutionStrategy, forKey: .conflictResolutionStrategy)
+      if self.conflictResolutionStrategy
+        != ImportAppRequest.ImportOptions.ConflictResolutionStrategy()
+      {
+        try container.encode(self.conflictResolutionStrategy, forKey: .conflictResolutionStrategy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

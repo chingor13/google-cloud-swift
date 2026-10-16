@@ -100,10 +100,18 @@ public struct DiskUtilization: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.targetWriteBytesPerSecond, forKey: .targetWriteBytesPerSecond)
-    try container.encode(self.targetWriteOpsPerSecond, forKey: .targetWriteOpsPerSecond)
-    try container.encode(self.targetReadBytesPerSecond, forKey: .targetReadBytesPerSecond)
-    try container.encode(self.targetReadOpsPerSecond, forKey: .targetReadOpsPerSecond)
+    if self.targetWriteBytesPerSecond != 0 {
+      try container.encode(self.targetWriteBytesPerSecond, forKey: .targetWriteBytesPerSecond)
+    }
+    if self.targetWriteOpsPerSecond != 0 {
+      try container.encode(self.targetWriteOpsPerSecond, forKey: .targetWriteOpsPerSecond)
+    }
+    if self.targetReadBytesPerSecond != 0 {
+      try container.encode(self.targetReadBytesPerSecond, forKey: .targetReadBytesPerSecond)
+    }
+    if self.targetReadOpsPerSecond != 0 {
+      try container.encode(self.targetReadOpsPerSecond, forKey: .targetReadOpsPerSecond)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

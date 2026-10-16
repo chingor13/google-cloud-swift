@@ -95,7 +95,9 @@ public struct MonitoredResourceMetadata: Codable, Equatable, GoogleWKT._AnyPacka
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.systemLabels, forKey: .systemLabels)
-    try container.encode(self.userLabels, forKey: .userLabels)
+    if !self.userLabels.isEmpty {
+      try container.encode(self.userLabels, forKey: .userLabels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -96,9 +96,15 @@ public struct TerraformError: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceAddress, forKey: .resourceAddress)
-    try container.encode(self.httpResponseCode, forKey: .httpResponseCode)
-    try container.encode(self.errorDescription, forKey: .errorDescription)
+    if !self.resourceAddress.isEmpty {
+      try container.encode(self.resourceAddress, forKey: .resourceAddress)
+    }
+    if self.httpResponseCode != 0 {
+      try container.encode(self.httpResponseCode, forKey: .httpResponseCode)
+    }
+    if !self.errorDescription.isEmpty {
+      try container.encode(self.errorDescription, forKey: .errorDescription)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

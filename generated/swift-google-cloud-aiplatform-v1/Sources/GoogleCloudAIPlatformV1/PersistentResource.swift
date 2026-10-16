@@ -214,21 +214,35 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.resourcePools, forKey: .resourcePools)
-      try container.encode(self.state, forKey: .state)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.resourcePools.isEmpty {
+        try container.encode(self.resourcePools, forKey: .resourcePools)
+      }
+      if self.state != PersistentResource.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.network, forKey: .network)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
       try container.encodeIfPresent(self.pscInterfaceConfig, forKey: .pscInterfaceConfig)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
       try container.encodeIfPresent(self.resourceRuntimeSpec, forKey: .resourceRuntimeSpec)
       try container.encodeIfPresent(self.resourceRuntime, forKey: .resourceRuntime)
-      try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      if !self.reservedIpRanges.isEmpty {
+        try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

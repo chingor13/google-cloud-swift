@@ -256,16 +256,32 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.period, forKey: .period)
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.contentMatchers, forKey: .contentMatchers)
-    try container.encode(self.checkerType, forKey: .checkerType)
-    try container.encode(self.selectedRegions, forKey: .selectedRegions)
-    try container.encode(self.isInternal, forKey: .isInternal)
-    try container.encode(self.internalCheckers, forKey: .internalCheckers)
-    try container.encode(self.userLabels, forKey: .userLabels)
+    if !self.contentMatchers.isEmpty {
+      try container.encode(self.contentMatchers, forKey: .contentMatchers)
+    }
+    if self.checkerType != UptimeCheckConfig.CheckerType() {
+      try container.encode(self.checkerType, forKey: .checkerType)
+    }
+    if !self.selectedRegions.isEmpty {
+      try container.encode(self.selectedRegions, forKey: .selectedRegions)
+    }
+    if self.isInternal {
+      try container.encode(self.isInternal, forKey: .isInternal)
+    }
+    if !self.internalCheckers.isEmpty {
+      try container.encode(self.internalCheckers, forKey: .internalCheckers)
+    }
+    if !self.userLabels.isEmpty {
+      try container.encode(self.userLabels, forKey: .userLabels)
+    }
 
     if let choice = self.resource {
       switch choice {
@@ -354,8 +370,12 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.groupId, forKey: .groupId)
-      try container.encode(self.resourceType, forKey: .resourceType)
+      if !self.groupId.isEmpty {
+        try container.encode(self.groupId, forKey: .groupId)
+      }
+      if self.resourceType != GroupResourceType() {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -437,7 +457,9 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pingsCount, forKey: .pingsCount)
+      if self.pingsCount != 0 {
+        try container.encode(self.pingsCount, forKey: .pingsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -694,18 +716,40 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requestMethod, forKey: .requestMethod)
-      try container.encode(self.useSsl, forKey: .useSsl)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.port, forKey: .port)
+      if self.requestMethod != UptimeCheckConfig.HttpCheck.RequestMethod() {
+        try container.encode(self.requestMethod, forKey: .requestMethod)
+      }
+      if self.useSsl {
+        try container.encode(self.useSsl, forKey: .useSsl)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if self.port != 0 {
+        try container.encode(self.port, forKey: .port)
+      }
       try container.encodeIfPresent(self.authInfo, forKey: .authInfo)
-      try container.encode(self.maskHeaders, forKey: .maskHeaders)
-      try container.encode(self.headers, forKey: .headers)
-      try container.encode(self.contentType, forKey: .contentType)
-      try container.encode(self.customContentType, forKey: .customContentType)
-      try container.encode(self.validateSsl, forKey: .validateSsl)
-      try container.encode(self.body, forKey: .body)
-      try container.encode(self.acceptedResponseStatusCodes, forKey: .acceptedResponseStatusCodes)
+      if self.maskHeaders {
+        try container.encode(self.maskHeaders, forKey: .maskHeaders)
+      }
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
+      if self.contentType != UptimeCheckConfig.HttpCheck.ContentType() {
+        try container.encode(self.contentType, forKey: .contentType)
+      }
+      if !self.customContentType.isEmpty {
+        try container.encode(self.customContentType, forKey: .customContentType)
+      }
+      if self.validateSsl {
+        try container.encode(self.validateSsl, forKey: .validateSsl)
+      }
+      if !self.body.isEmpty {
+        try container.encode(self.body, forKey: .body)
+      }
+      if !self.acceptedResponseStatusCodes.isEmpty {
+        try container.encode(self.acceptedResponseStatusCodes, forKey: .acceptedResponseStatusCodes)
+      }
       try container.encodeIfPresent(self.pingConfig, forKey: .pingConfig)
 
       if let choice = self.authMethod {
@@ -782,8 +826,12 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.password, forKey: .password)
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if !self.password.isEmpty {
+          try container.encode(self.password, forKey: .password)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1136,7 +1184,11 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.type, forKey: .type)
+        if self.type
+          != UptimeCheckConfig.HttpCheck.ServiceAgentAuthentication.ServiceAgentAuthenticationType()
+        {
+          try container.encode(self.type, forKey: .type)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1607,7 +1659,9 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.port, forKey: .port)
+      if self.port != 0 {
+        try container.encode(self.port, forKey: .port)
+      }
       try container.encodeIfPresent(self.pingConfig, forKey: .pingConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1729,8 +1783,12 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.content, forKey: .content)
-      try container.encode(self.matcher, forKey: .matcher)
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
+      if self.matcher != UptimeCheckConfig.ContentMatcher.ContentMatcherOption() {
+        try container.encode(self.matcher, forKey: .matcher)
+      }
 
       if let choice = self.additionalMatcherInfo {
         switch choice {
@@ -1812,8 +1870,14 @@ public struct UptimeCheckConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.jsonPath, forKey: .jsonPath)
-        try container.encode(self.jsonMatcher, forKey: .jsonMatcher)
+        if !self.jsonPath.isEmpty {
+          try container.encode(self.jsonPath, forKey: .jsonPath)
+        }
+        if self.jsonMatcher
+          != UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption()
+        {
+          try container.encode(self.jsonMatcher, forKey: .jsonMatcher)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -334,7 +334,9 @@
       try container.encodeIfPresent(self.targetId, forKey: .targetId)
       try container.encodeIfPresent(self.targetLink, forKey: .targetLink)
       try container.encodeIfPresent(self.user, forKey: .user)
-      try container.encode(self.warnings, forKey: .warnings)
+      if !self.warnings.isEmpty {
+        try container.encode(self.warnings, forKey: .warnings)
+      }
       try container.encodeIfPresent(self.zone, forKey: .zone)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -397,7 +399,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.errors, forKey: .errors)
+        if !self.errors.isEmpty {
+          try container.encode(self.errors, forKey: .errors)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -483,7 +487,9 @@
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.code, forKey: .code)
-          try container.encode(self.errorDetails, forKey: .errorDetails)
+          if !self.errorDetails.isEmpty {
+            try container.encode(self.errorDetails, forKey: .errorDetails)
+          }
           try container.encodeIfPresent(self.location, forKey: .location)
           try container.encodeIfPresent(self.message, forKey: .message)
           for (key, value) in self._unknownFields.json {
@@ -715,7 +721,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.code, forKey: .code)
-        try container.encode(self.data, forKey: .data)
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         try container.encodeIfPresent(self.message, forKey: .message)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

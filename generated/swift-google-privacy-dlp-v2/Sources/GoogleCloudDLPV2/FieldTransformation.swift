@@ -115,7 +115,9 @@ public struct FieldTransformation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fields, forKey: .fields)
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
 
     if let choice = self.transformation {

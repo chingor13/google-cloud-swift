@@ -81,8 +81,12 @@ public struct OAuthCredential: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.oauthTokenSecretVersion, forKey: .oauthTokenSecretVersion)
-    try container.encode(self.username, forKey: .username)
+    if !self.oauthTokenSecretVersion.isEmpty {
+      try container.encode(self.oauthTokenSecretVersion, forKey: .oauthTokenSecretVersion)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

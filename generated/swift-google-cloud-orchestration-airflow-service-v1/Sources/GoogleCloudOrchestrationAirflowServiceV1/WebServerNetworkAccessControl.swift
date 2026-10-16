@@ -71,7 +71,9 @@ public struct WebServerNetworkAccessControl: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.allowedIpRanges, forKey: .allowedIpRanges)
+    if !self.allowedIpRanges.isEmpty {
+      try container.encode(self.allowedIpRanges, forKey: .allowedIpRanges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -145,8 +147,12 @@ public struct WebServerNetworkAccessControl: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.value, forKey: .value)
-      try container.encode(self.description, forKey: .description)
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

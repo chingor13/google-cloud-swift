@@ -83,8 +83,12 @@ public struct SecretManagerCredential: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.passwordSecretVersionName, forKey: .passwordSecretVersionName)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.passwordSecretVersionName.isEmpty {
+      try container.encode(self.passwordSecretVersionName, forKey: .passwordSecretVersionName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

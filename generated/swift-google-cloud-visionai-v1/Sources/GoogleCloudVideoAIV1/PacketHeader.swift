@@ -128,8 +128,12 @@ public struct PacketHeader: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     try container.encodeIfPresent(self.serverMetadata, forKey: .serverMetadata)
     try container.encodeIfPresent(self.seriesMetadata, forKey: .seriesMetadata)
-    try container.encode(self.flags, forKey: .flags)
-    try container.encode(self.traceContext, forKey: .traceContext)
+    if self.flags != 0 {
+      try container.encode(self.flags, forKey: .flags)
+    }
+    if !self.traceContext.isEmpty {
+      try container.encode(self.traceContext, forKey: .traceContext)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

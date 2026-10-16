@@ -94,7 +94,9 @@ public struct SparkProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAccountId, forKey: .serviceAccountId)
+    if !self.serviceAccountId.isEmpty {
+      try container.encode(self.serviceAccountId, forKey: .serviceAccountId)
+    }
     try container.encodeIfPresent(self.metastoreServiceConfig, forKey: .metastoreServiceConfig)
     try container.encodeIfPresent(self.sparkHistoryServerConfig, forKey: .sparkHistoryServerConfig)
     for (key, value) in self._unknownFields.json {

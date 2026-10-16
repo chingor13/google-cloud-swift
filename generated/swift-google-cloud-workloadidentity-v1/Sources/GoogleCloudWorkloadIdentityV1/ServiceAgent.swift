@@ -116,12 +116,24 @@ public struct ServiceAgent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.container, forKey: .container)
-    try container.encode(self.serviceProducer, forKey: .serviceProducer)
-    try container.encode(self.principal, forKey: .principal)
-    try container.encode(self.role, forKey: .role)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.container.isEmpty {
+      try container.encode(self.container, forKey: .container)
+    }
+    if !self.serviceProducer.isEmpty {
+      try container.encode(self.serviceProducer, forKey: .serviceProducer)
+    }
+    if !self.principal.isEmpty {
+      try container.encode(self.principal, forKey: .principal)
+    }
+    if !self.role.isEmpty {
+      try container.encode(self.role, forKey: .role)
+    }
+    if self.state != ServiceAgent.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

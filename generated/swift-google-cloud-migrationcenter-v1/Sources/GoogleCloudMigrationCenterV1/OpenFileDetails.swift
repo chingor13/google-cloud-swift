@@ -93,10 +93,18 @@ public struct OpenFileDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.command, forKey: .command)
-    try container.encode(self.user, forKey: .user)
-    try container.encode(self.fileType, forKey: .fileType)
-    try container.encode(self.filePath, forKey: .filePath)
+    if !self.command.isEmpty {
+      try container.encode(self.command, forKey: .command)
+    }
+    if !self.user.isEmpty {
+      try container.encode(self.user, forKey: .user)
+    }
+    if !self.fileType.isEmpty {
+      try container.encode(self.fileType, forKey: .fileType)
+    }
+    if !self.filePath.isEmpty {
+      try container.encode(self.filePath, forKey: .filePath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

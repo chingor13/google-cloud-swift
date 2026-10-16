@@ -104,11 +104,21 @@ public struct BackupCollection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.clusterUid, forKey: .clusterUid)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.clusterUid.isEmpty {
+      try container.encode(self.clusterUid, forKey: .clusterUid)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

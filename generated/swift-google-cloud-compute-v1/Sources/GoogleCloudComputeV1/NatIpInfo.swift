@@ -78,7 +78,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.natIpInfoMappings, forKey: .natIpInfoMappings)
+      if !self.natIpInfoMappings.isEmpty {
+        try container.encode(self.natIpInfoMappings, forKey: .natIpInfoMappings)
+      }
       try container.encodeIfPresent(self.natName, forKey: .natName)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

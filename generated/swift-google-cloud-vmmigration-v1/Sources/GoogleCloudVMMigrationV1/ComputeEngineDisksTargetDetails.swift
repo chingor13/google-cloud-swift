@@ -99,7 +99,9 @@ public struct ComputeEngineDisksTargetDetails: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.disks, forKey: .disks)
+    if !self.disks.isEmpty {
+      try container.encode(self.disks, forKey: .disks)
+    }
 
     if let choice = self.vmTarget {
       switch choice {

@@ -235,18 +235,38 @@ public struct InstanceGroupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.numInstances, forKey: .numInstances)
-    try container.encode(self.instanceNames, forKey: .instanceNames)
-    try container.encode(self.instanceReferences, forKey: .instanceReferences)
-    try container.encode(self.imageUri, forKey: .imageUri)
-    try container.encode(self.machineTypeUri, forKey: .machineTypeUri)
+    if self.numInstances != 0 {
+      try container.encode(self.numInstances, forKey: .numInstances)
+    }
+    if !self.instanceNames.isEmpty {
+      try container.encode(self.instanceNames, forKey: .instanceNames)
+    }
+    if !self.instanceReferences.isEmpty {
+      try container.encode(self.instanceReferences, forKey: .instanceReferences)
+    }
+    if !self.imageUri.isEmpty {
+      try container.encode(self.imageUri, forKey: .imageUri)
+    }
+    if !self.machineTypeUri.isEmpty {
+      try container.encode(self.machineTypeUri, forKey: .machineTypeUri)
+    }
     try container.encodeIfPresent(self.diskConfig, forKey: .diskConfig)
-    try container.encode(self.isPreemptible, forKey: .isPreemptible)
-    try container.encode(self.preemptibility, forKey: .preemptibility)
+    if self.isPreemptible {
+      try container.encode(self.isPreemptible, forKey: .isPreemptible)
+    }
+    if self.preemptibility != InstanceGroupConfig.Preemptibility() {
+      try container.encode(self.preemptibility, forKey: .preemptibility)
+    }
     try container.encodeIfPresent(self.managedGroupConfig, forKey: .managedGroupConfig)
-    try container.encode(self.accelerators, forKey: .accelerators)
-    try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
-    try container.encode(self.minNumInstances, forKey: .minNumInstances)
+    if !self.accelerators.isEmpty {
+      try container.encode(self.accelerators, forKey: .accelerators)
+    }
+    if !self.minCpuPlatform.isEmpty {
+      try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
+    }
+    if self.minNumInstances != 0 {
+      try container.encode(self.minNumInstances, forKey: .minNumInstances)
+    }
     try container.encodeIfPresent(
       self.instanceFlexibilityPolicy, forKey: .instanceFlexibilityPolicy)
     try container.encodeIfPresent(self.startupConfig, forKey: .startupConfig)

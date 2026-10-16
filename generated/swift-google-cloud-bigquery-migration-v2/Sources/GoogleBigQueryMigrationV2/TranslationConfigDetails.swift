@@ -167,8 +167,12 @@ public struct TranslationConfigDetails: Codable, Equatable, GoogleWKT._AnyPackab
     try container.encodeIfPresent(self.sourceDialect, forKey: .sourceDialect)
     try container.encodeIfPresent(self.targetDialect, forKey: .targetDialect)
     try container.encodeIfPresent(self.sourceEnv, forKey: .sourceEnv)
-    try container.encode(self.requestSource, forKey: .requestSource)
-    try container.encode(self.targetTypes, forKey: .targetTypes)
+    if !self.requestSource.isEmpty {
+      try container.encode(self.requestSource, forKey: .requestSource)
+    }
+    if !self.targetTypes.isEmpty {
+      try container.encode(self.targetTypes, forKey: .targetTypes)
+    }
 
     if let choice = self.sourceLocation {
       switch choice {

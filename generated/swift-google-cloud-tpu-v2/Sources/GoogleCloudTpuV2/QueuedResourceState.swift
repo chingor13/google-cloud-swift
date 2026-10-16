@@ -154,8 +154,12 @@ public struct QueuedResourceState: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateInitiator, forKey: .stateInitiator)
+    if self.state != QueuedResourceState.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.stateInitiator != QueuedResourceState.StateInitiator() {
+      try container.encode(self.stateInitiator, forKey: .stateInitiator)
+    }
 
     if let choice = self.stateData {
       switch choice {

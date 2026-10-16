@@ -114,11 +114,19 @@ public struct CreateInstanceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.instanceId, forKey: .instanceId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.instanceId.isEmpty {
+      try container.encode(self.instanceId, forKey: .instanceId)
+    }
     try container.encodeIfPresent(self.instance, forKey: .instance)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

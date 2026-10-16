@@ -94,9 +94,15 @@ public struct RetrieveToolsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.toolset, forKey: .toolset)
-    try container.encode(self.toolIds, forKey: .toolIds)
-    try container.encode(self.bypassPersistenceConfig, forKey: .bypassPersistenceConfig)
+    if !self.toolset.isEmpty {
+      try container.encode(self.toolset, forKey: .toolset)
+    }
+    if !self.toolIds.isEmpty {
+      try container.encode(self.toolIds, forKey: .toolIds)
+    }
+    if self.bypassPersistenceConfig {
+      try container.encode(self.bypassPersistenceConfig, forKey: .bypassPersistenceConfig)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

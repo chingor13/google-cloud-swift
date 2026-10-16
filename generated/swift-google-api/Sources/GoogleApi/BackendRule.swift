@@ -241,15 +241,33 @@ public struct BackendRule: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
-    try container.encode(self.address, forKey: .address)
-    try container.encode(self.deadline, forKey: .deadline)
-    try container.encode(self.minDeadline, forKey: .minDeadline)
-    try container.encode(self.operationDeadline, forKey: .operationDeadline)
-    try container.encode(self.pathTranslation, forKey: .pathTranslation)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.overridesByRequestProtocol, forKey: .overridesByRequestProtocol)
-    try container.encode(self.loadBalancingPolicy, forKey: .loadBalancingPolicy)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
+    if !self.address.isEmpty {
+      try container.encode(self.address, forKey: .address)
+    }
+    if self.deadline != 0 {
+      try container.encode(self.deadline, forKey: .deadline)
+    }
+    if self.minDeadline != 0 {
+      try container.encode(self.minDeadline, forKey: .minDeadline)
+    }
+    if self.operationDeadline != 0 {
+      try container.encode(self.operationDeadline, forKey: .operationDeadline)
+    }
+    if self.pathTranslation != BackendRule.PathTranslation() {
+      try container.encode(self.pathTranslation, forKey: .pathTranslation)
+    }
+    if !self.`protocol`.isEmpty {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if !self.overridesByRequestProtocol.isEmpty {
+      try container.encode(self.overridesByRequestProtocol, forKey: .overridesByRequestProtocol)
+    }
+    if !self.loadBalancingPolicy.isEmpty {
+      try container.encode(self.loadBalancingPolicy, forKey: .loadBalancingPolicy)
+    }
 
     if let choice = self.authentication {
       switch choice {

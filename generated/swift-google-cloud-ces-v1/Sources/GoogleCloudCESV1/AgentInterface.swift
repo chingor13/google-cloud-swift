@@ -101,10 +101,18 @@ public struct AgentInterface: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.url, forKey: .url)
-    try container.encode(self.protocolBinding, forKey: .protocolBinding)
-    try container.encode(self.tenant, forKey: .tenant)
-    try container.encode(self.protocolVersion, forKey: .protocolVersion)
+    if !self.url.isEmpty {
+      try container.encode(self.url, forKey: .url)
+    }
+    if !self.protocolBinding.isEmpty {
+      try container.encode(self.protocolBinding, forKey: .protocolBinding)
+    }
+    if !self.tenant.isEmpty {
+      try container.encode(self.tenant, forKey: .tenant)
+    }
+    if !self.protocolVersion.isEmpty {
+      try container.encode(self.protocolVersion, forKey: .protocolVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

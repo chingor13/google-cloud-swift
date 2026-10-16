@@ -79,8 +79,12 @@ public struct Progress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.workCompleted, forKey: .workCompleted)
-    try container.encode(self.workEstimated, forKey: .workEstimated)
+    if self.workCompleted != 0 {
+      try container.encode(self.workCompleted, forKey: .workCompleted)
+    }
+    if self.workEstimated != 0 {
+      try container.encode(self.workEstimated, forKey: .workEstimated)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -275,23 +275,43 @@ public struct PubSubSubscription: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.pushConfig, forKey: .pushConfig)
     try container.encodeIfPresent(self.bigqueryConfig, forKey: .bigqueryConfig)
     try container.encodeIfPresent(self.cloudStorageConfig, forKey: .cloudStorageConfig)
-    try container.encode(self.ackDeadlineSeconds, forKey: .ackDeadlineSeconds)
-    try container.encode(self.retainAckedMessages, forKey: .retainAckedMessages)
+    if self.ackDeadlineSeconds != 0 {
+      try container.encode(self.ackDeadlineSeconds, forKey: .ackDeadlineSeconds)
+    }
+    if self.retainAckedMessages {
+      try container.encode(self.retainAckedMessages, forKey: .retainAckedMessages)
+    }
     try container.encodeIfPresent(self.messageRetentionDuration, forKey: .messageRetentionDuration)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.enableMessageOrdering, forKey: .enableMessageOrdering)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.enableMessageOrdering {
+      try container.encode(self.enableMessageOrdering, forKey: .enableMessageOrdering)
+    }
     try container.encodeIfPresent(self.expirationPolicy, forKey: .expirationPolicy)
-    try container.encode(self.filter, forKey: .filter)
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     try container.encodeIfPresent(self.deadLetterPolicy, forKey: .deadLetterPolicy)
     try container.encodeIfPresent(self.retryPolicy, forKey: .retryPolicy)
-    try container.encode(self.detached, forKey: .detached)
-    try container.encode(self.enableExactlyOnceDelivery, forKey: .enableExactlyOnceDelivery)
-    try container.encode(self.messageTransforms, forKey: .messageTransforms)
-    try container.encode(self.tags, forKey: .tags)
+    if self.detached {
+      try container.encode(self.detached, forKey: .detached)
+    }
+    if self.enableExactlyOnceDelivery {
+      try container.encode(self.enableExactlyOnceDelivery, forKey: .enableExactlyOnceDelivery)
+    }
+    if !self.messageTransforms.isEmpty {
+      try container.encode(self.messageTransforms, forKey: .messageTransforms)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

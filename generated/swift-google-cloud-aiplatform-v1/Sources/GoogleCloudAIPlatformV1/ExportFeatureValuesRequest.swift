@@ -128,10 +128,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entityType, forKey: .entityType)
+      if !self.entityType.isEmpty {
+        try container.encode(self.entityType, forKey: .entityType)
+      }
       try container.encodeIfPresent(self.destination, forKey: .destination)
       try container.encodeIfPresent(self.featureSelector, forKey: .featureSelector)
-      try container.encode(self.settings, forKey: .settings)
+      if !self.settings.isEmpty {
+        try container.encode(self.settings, forKey: .settings)
+      }
 
       if let choice = self.mode {
         switch choice {

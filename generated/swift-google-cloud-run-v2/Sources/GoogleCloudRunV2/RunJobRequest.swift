@@ -96,9 +96,15 @@ public struct RunJobRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.overrides, forKey: .overrides)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -176,8 +182,12 @@ public struct RunJobRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.containerOverrides, forKey: .containerOverrides)
-      try container.encode(self.taskCount, forKey: .taskCount)
+      if !self.containerOverrides.isEmpty {
+        try container.encode(self.containerOverrides, forKey: .containerOverrides)
+      }
+      if self.taskCount != 0 {
+        try container.encode(self.taskCount, forKey: .taskCount)
+      }
       try container.encodeIfPresent(self.timeout, forKey: .timeout)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -262,10 +272,18 @@ public struct RunJobRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.args, forKey: .args)
-        try container.encode(self.env, forKey: .env)
-        try container.encode(self.clearArgs, forKey: .clearArgs)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.args.isEmpty {
+          try container.encode(self.args, forKey: .args)
+        }
+        if !self.env.isEmpty {
+          try container.encode(self.env, forKey: .env)
+        }
+        if self.clearArgs {
+          try container.encode(self.clearArgs, forKey: .clearArgs)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

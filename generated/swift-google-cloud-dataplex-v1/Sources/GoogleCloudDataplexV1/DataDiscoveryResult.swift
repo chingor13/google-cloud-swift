@@ -142,8 +142,12 @@ public struct DataDiscoveryResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataset, forKey: .dataset)
-      try container.encode(self.location, forKey: .location)
+      if !self.dataset.isEmpty {
+        try container.encode(self.dataset, forKey: .dataset)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -287,15 +291,33 @@ public struct DataDiscoveryResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.scannedFileCount, forKey: .scannedFileCount)
-      try container.encode(self.dataProcessedBytes, forKey: .dataProcessedBytes)
-      try container.encode(self.filesExcluded, forKey: .filesExcluded)
-      try container.encode(self.tablesCreated, forKey: .tablesCreated)
-      try container.encode(self.tablesDeleted, forKey: .tablesDeleted)
-      try container.encode(self.tablesUpdated, forKey: .tablesUpdated)
-      try container.encode(self.filesetsCreated, forKey: .filesetsCreated)
-      try container.encode(self.filesetsDeleted, forKey: .filesetsDeleted)
-      try container.encode(self.filesetsUpdated, forKey: .filesetsUpdated)
+      if self.scannedFileCount != 0 {
+        try container.encode(self.scannedFileCount, forKey: .scannedFileCount)
+      }
+      if self.dataProcessedBytes != 0 {
+        try container.encode(self.dataProcessedBytes, forKey: .dataProcessedBytes)
+      }
+      if self.filesExcluded != 0 {
+        try container.encode(self.filesExcluded, forKey: .filesExcluded)
+      }
+      if self.tablesCreated != 0 {
+        try container.encode(self.tablesCreated, forKey: .tablesCreated)
+      }
+      if self.tablesDeleted != 0 {
+        try container.encode(self.tablesDeleted, forKey: .tablesDeleted)
+      }
+      if self.tablesUpdated != 0 {
+        try container.encode(self.tablesUpdated, forKey: .tablesUpdated)
+      }
+      if self.filesetsCreated != 0 {
+        try container.encode(self.filesetsCreated, forKey: .filesetsCreated)
+      }
+      if self.filesetsDeleted != 0 {
+        try container.encode(self.filesetsDeleted, forKey: .filesetsDeleted)
+      }
+      if self.filesetsUpdated != 0 {
+        try container.encode(self.filesetsUpdated, forKey: .filesetsUpdated)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

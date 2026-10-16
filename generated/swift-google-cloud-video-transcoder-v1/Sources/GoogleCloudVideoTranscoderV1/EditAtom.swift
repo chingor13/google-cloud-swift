@@ -99,8 +99,12 @@ public struct EditAtom: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.inputs, forKey: .inputs)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.inputs.isEmpty {
+      try container.encode(self.inputs, forKey: .inputs)
+    }
     try container.encodeIfPresent(self.endTimeOffset, forKey: .endTimeOffset)
     try container.encodeIfPresent(self.startTimeOffset, forKey: .startTimeOffset)
     for (key, value) in self._unknownFields.json {

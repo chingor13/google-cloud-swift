@@ -149,13 +149,23 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.index, forKey: .index)
+      if self.index != 0 {
+        try container.encode(self.index, forKey: .index)
+      }
       try container.encodeIfPresent(self.content, forKey: .content)
-      try container.encode(self.score, forKey: .score)
-      try container.encode(self.avgLogprobs, forKey: .avgLogprobs)
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
+      if self.avgLogprobs != 0 {
+        try container.encode(self.avgLogprobs, forKey: .avgLogprobs)
+      }
       try container.encodeIfPresent(self.logprobsResult, forKey: .logprobsResult)
-      try container.encode(self.finishReason, forKey: .finishReason)
-      try container.encode(self.safetyRatings, forKey: .safetyRatings)
+      if self.finishReason != GoogleCloudAIPlatformV1.Candidate.FinishReason() {
+        try container.encode(self.finishReason, forKey: .finishReason)
+      }
+      if !self.safetyRatings.isEmpty {
+        try container.encode(self.safetyRatings, forKey: .safetyRatings)
+      }
       try container.encodeIfPresent(self.finishMessage, forKey: .finishMessage)
       try container.encodeIfPresent(self.citationMetadata, forKey: .citationMetadata)
       try container.encodeIfPresent(self.groundingMetadata, forKey: .groundingMetadata)

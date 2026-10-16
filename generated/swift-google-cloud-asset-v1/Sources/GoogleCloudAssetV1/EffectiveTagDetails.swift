@@ -93,7 +93,9 @@ public struct EffectiveTagDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.attachedResource, forKey: .attachedResource)
-    try container.encode(self.effectiveTags, forKey: .effectiveTags)
+    if !self.effectiveTags.isEmpty {
+      try container.encode(self.effectiveTags, forKey: .effectiveTags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

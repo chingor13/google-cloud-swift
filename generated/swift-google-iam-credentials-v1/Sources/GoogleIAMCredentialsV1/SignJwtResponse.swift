@@ -76,8 +76,12 @@ public struct SignJwtResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.keyId, forKey: .keyId)
-    try container.encode(self.signedJwt, forKey: .signedJwt)
+    if !self.keyId.isEmpty {
+      try container.encode(self.keyId, forKey: .keyId)
+    }
+    if !self.signedJwt.isEmpty {
+      try container.encode(self.signedJwt, forKey: .signedJwt)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

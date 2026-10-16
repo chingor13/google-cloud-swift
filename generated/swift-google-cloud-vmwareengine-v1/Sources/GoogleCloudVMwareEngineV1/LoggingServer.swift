@@ -131,14 +131,26 @@ public struct LoggingServer: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.sourceType, forKey: .sourceType)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if self.`protocol` != LoggingServer.Protocol_() {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if self.sourceType != LoggingServer.SourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

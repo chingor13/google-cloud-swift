@@ -150,17 +150,33 @@ public struct FeaturedContentMetadata: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.author, forKey: .author)
-    try container.encode(self.certified, forKey: .certified)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.version, forKey: .version)
+    if !self.author.isEmpty {
+      try container.encode(self.author, forKey: .author)
+    }
+    if self.certified {
+      try container.encode(self.certified, forKey: .certified)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.verified, forKey: .verified)
-    try container.encode(self.sourceType, forKey: .sourceType)
+    if self.sourceType != FeaturedContentMetadata.ContentSourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -424,36 +424,60 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.modelVersionId, forKey: .modelVersionId)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.modelVersionId.isEmpty {
+        try container.encode(self.modelVersionId, forKey: .modelVersionId)
+      }
       try container.encodeIfPresent(self.unmanagedContainerModel, forKey: .unmanagedContainerModel)
       try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
       try container.encodeIfPresent(self.instanceConfig, forKey: .instanceConfig)
       try container.encodeIfPresent(self.modelParameters, forKey: .modelParameters)
       try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
       try container.encodeIfPresent(self.dedicatedResources, forKey: .dedicatedResources)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
       try container.encodeIfPresent(
         self.manualBatchTuningParameters, forKey: .manualBatchTuningParameters)
-      try container.encode(self.generateExplanation, forKey: .generateExplanation)
+      if self.generateExplanation {
+        try container.encode(self.generateExplanation, forKey: .generateExplanation)
+      }
       try container.encodeIfPresent(self.explanationSpec, forKey: .explanationSpec)
       try container.encodeIfPresent(self.outputInfo, forKey: .outputInfo)
-      try container.encode(self.state, forKey: .state)
+      if self.state != JobState() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.partialFailures, forKey: .partialFailures)
+      if !self.partialFailures.isEmpty {
+        try container.encode(self.partialFailures, forKey: .partialFailures)
+      }
       try container.encodeIfPresent(self.resourcesConsumed, forKey: .resourcesConsumed)
       try container.encodeIfPresent(self.completionStats, forKey: .completionStats)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.disableContainerLogging, forKey: .disableContainerLogging)
-      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      if self.disableContainerLogging {
+        try container.encode(self.disableContainerLogging, forKey: .disableContainerLogging)
+      }
+      if self.satisfiesPzs {
+        try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+      }
+      if self.satisfiesPzi {
+        try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -558,7 +582,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instancesFormat, forKey: .instancesFormat)
+        if !self.instancesFormat.isEmpty {
+          try container.encode(self.instancesFormat, forKey: .instancesFormat)
+        }
 
         if let choice = self.source {
           switch choice {
@@ -782,10 +808,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instanceType, forKey: .instanceType)
-        try container.encode(self.keyField, forKey: .keyField)
-        try container.encode(self.includedFields, forKey: .includedFields)
-        try container.encode(self.excludedFields, forKey: .excludedFields)
+        if !self.instanceType.isEmpty {
+          try container.encode(self.instanceType, forKey: .instanceType)
+        }
+        if !self.keyField.isEmpty {
+          try container.encode(self.keyField, forKey: .keyField)
+        }
+        if !self.includedFields.isEmpty {
+          try container.encode(self.includedFields, forKey: .includedFields)
+        }
+        if !self.excludedFields.isEmpty {
+          try container.encode(self.excludedFields, forKey: .excludedFields)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -916,7 +950,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.predictionsFormat, forKey: .predictionsFormat)
+        if !self.predictionsFormat.isEmpty {
+          try container.encode(self.predictionsFormat, forKey: .predictionsFormat)
+        }
 
         if let choice = self.destination {
           switch choice {
@@ -1113,7 +1149,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.bigqueryOutputTable, forKey: .bigqueryOutputTable)
+        if !self.bigqueryOutputTable.isEmpty {
+          try container.encode(self.bigqueryOutputTable, forKey: .bigqueryOutputTable)
+        }
 
         if let choice = self.outputLocation {
           switch choice {

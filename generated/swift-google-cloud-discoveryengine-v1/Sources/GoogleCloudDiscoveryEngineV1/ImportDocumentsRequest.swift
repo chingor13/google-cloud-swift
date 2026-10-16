@@ -285,13 +285,23 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.errorConfig, forKey: .errorConfig)
-      try container.encode(self.reconciliationMode, forKey: .reconciliationMode)
+      if self.reconciliationMode != ImportDocumentsRequest.ReconciliationMode() {
+        try container.encode(self.reconciliationMode, forKey: .reconciliationMode)
+      }
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-      try container.encode(self.autoGenerateIds, forKey: .autoGenerateIds)
-      try container.encode(self.idField, forKey: .idField)
-      try container.encode(self.forceRefreshContent, forKey: .forceRefreshContent)
+      if self.autoGenerateIds {
+        try container.encode(self.autoGenerateIds, forKey: .autoGenerateIds)
+      }
+      if !self.idField.isEmpty {
+        try container.encode(self.idField, forKey: .idField)
+      }
+      if self.forceRefreshContent {
+        try container.encode(self.forceRefreshContent, forKey: .forceRefreshContent)
+      }
 
       if let choice = self.source {
         switch choice {
@@ -376,7 +386,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.documents, forKey: .documents)
+        if !self.documents.isEmpty {
+          try container.encode(self.documents, forKey: .documents)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

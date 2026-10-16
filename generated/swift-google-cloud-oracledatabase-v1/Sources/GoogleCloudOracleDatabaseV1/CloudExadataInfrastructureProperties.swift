@@ -330,37 +330,91 @@ public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.computeCount, forKey: .computeCount)
-    try container.encode(self.storageCount, forKey: .storageCount)
-    try container.encode(self.totalStorageSizeGb, forKey: .totalStorageSizeGb)
-    try container.encode(self.availableStorageSizeGb, forKey: .availableStorageSizeGb)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.computeCount != 0 {
+      try container.encode(self.computeCount, forKey: .computeCount)
+    }
+    if self.storageCount != 0 {
+      try container.encode(self.storageCount, forKey: .storageCount)
+    }
+    if self.totalStorageSizeGb != 0 {
+      try container.encode(self.totalStorageSizeGb, forKey: .totalStorageSizeGb)
+    }
+    if self.availableStorageSizeGb != 0 {
+      try container.encode(self.availableStorageSizeGb, forKey: .availableStorageSizeGb)
+    }
     try container.encodeIfPresent(self.maintenanceWindow, forKey: .maintenanceWindow)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.shape, forKey: .shape)
-    try container.encode(self.ociUrl, forKey: .ociUrl)
-    try container.encode(self.cpuCount, forKey: .cpuCount)
-    try container.encode(self.maxCpuCount, forKey: .maxCpuCount)
-    try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
-    try container.encode(self.maxMemoryGb, forKey: .maxMemoryGb)
-    try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
-    try container.encode(self.maxDbNodeStorageSizeGb, forKey: .maxDbNodeStorageSizeGb)
-    try container.encode(self.dataStorageSizeTb, forKey: .dataStorageSizeTb)
-    try container.encode(self.maxDataStorageTb, forKey: .maxDataStorageTb)
-    try container.encode(self.activatedStorageCount, forKey: .activatedStorageCount)
-    try container.encode(self.additionalStorageCount, forKey: .additionalStorageCount)
-    try container.encode(self.dbServerVersion, forKey: .dbServerVersion)
-    try container.encode(self.storageServerVersion, forKey: .storageServerVersion)
-    try container.encode(self.nextMaintenanceRunId, forKey: .nextMaintenanceRunId)
+    if self.state != CloudExadataInfrastructureProperties.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.shape.isEmpty {
+      try container.encode(self.shape, forKey: .shape)
+    }
+    if !self.ociUrl.isEmpty {
+      try container.encode(self.ociUrl, forKey: .ociUrl)
+    }
+    if self.cpuCount != 0 {
+      try container.encode(self.cpuCount, forKey: .cpuCount)
+    }
+    if self.maxCpuCount != 0 {
+      try container.encode(self.maxCpuCount, forKey: .maxCpuCount)
+    }
+    if self.memorySizeGb != 0 {
+      try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
+    }
+    if self.maxMemoryGb != 0 {
+      try container.encode(self.maxMemoryGb, forKey: .maxMemoryGb)
+    }
+    if self.dbNodeStorageSizeGb != 0 {
+      try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
+    }
+    if self.maxDbNodeStorageSizeGb != 0 {
+      try container.encode(self.maxDbNodeStorageSizeGb, forKey: .maxDbNodeStorageSizeGb)
+    }
+    if self.dataStorageSizeTb != 0 {
+      try container.encode(self.dataStorageSizeTb, forKey: .dataStorageSizeTb)
+    }
+    if self.maxDataStorageTb != 0 {
+      try container.encode(self.maxDataStorageTb, forKey: .maxDataStorageTb)
+    }
+    if self.activatedStorageCount != 0 {
+      try container.encode(self.activatedStorageCount, forKey: .activatedStorageCount)
+    }
+    if self.additionalStorageCount != 0 {
+      try container.encode(self.additionalStorageCount, forKey: .additionalStorageCount)
+    }
+    if !self.dbServerVersion.isEmpty {
+      try container.encode(self.dbServerVersion, forKey: .dbServerVersion)
+    }
+    if !self.storageServerVersion.isEmpty {
+      try container.encode(self.storageServerVersion, forKey: .storageServerVersion)
+    }
+    if !self.nextMaintenanceRunId.isEmpty {
+      try container.encode(self.nextMaintenanceRunId, forKey: .nextMaintenanceRunId)
+    }
     try container.encodeIfPresent(self.nextMaintenanceRunTime, forKey: .nextMaintenanceRunTime)
     try container.encodeIfPresent(
       self.nextSecurityMaintenanceRunTime, forKey: .nextSecurityMaintenanceRunTime)
-    try container.encode(self.customerContacts, forKey: .customerContacts)
-    try container.encode(self.monthlyStorageServerVersion, forKey: .monthlyStorageServerVersion)
-    try container.encode(self.monthlyDbServerVersion, forKey: .monthlyDbServerVersion)
-    try container.encode(self.computeModel, forKey: .computeModel)
-    try container.encode(self.databaseServerType, forKey: .databaseServerType)
-    try container.encode(self.storageServerType, forKey: .storageServerType)
+    if !self.customerContacts.isEmpty {
+      try container.encode(self.customerContacts, forKey: .customerContacts)
+    }
+    if !self.monthlyStorageServerVersion.isEmpty {
+      try container.encode(self.monthlyStorageServerVersion, forKey: .monthlyStorageServerVersion)
+    }
+    if !self.monthlyDbServerVersion.isEmpty {
+      try container.encode(self.monthlyDbServerVersion, forKey: .monthlyDbServerVersion)
+    }
+    if self.computeModel != GoogleCloudOracleDatabaseV1.ComputeModel() {
+      try container.encode(self.computeModel, forKey: .computeModel)
+    }
+    if !self.databaseServerType.isEmpty {
+      try container.encode(self.databaseServerType, forKey: .databaseServerType)
+    }
+    if !self.storageServerType.isEmpty {
+      try container.encode(self.storageServerType, forKey: .storageServerType)
+    }
     try container.encodeIfPresent(self.exascaleConfig, forKey: .exascaleConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

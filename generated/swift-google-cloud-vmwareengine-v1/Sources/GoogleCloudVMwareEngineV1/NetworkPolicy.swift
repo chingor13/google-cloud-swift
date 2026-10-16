@@ -158,16 +158,28 @@ public struct NetworkPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.internetAccess, forKey: .internetAccess)
     try container.encodeIfPresent(self.externalIp, forKey: .externalIp)
-    try container.encode(self.edgeServicesCidr, forKey: .edgeServicesCidr)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.vmwareEngineNetworkCanonical, forKey: .vmwareEngineNetworkCanonical)
+    if !self.edgeServicesCidr.isEmpty {
+      try container.encode(self.edgeServicesCidr, forKey: .edgeServicesCidr)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.vmwareEngineNetwork.isEmpty {
+      try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.vmwareEngineNetworkCanonical.isEmpty {
+      try container.encode(self.vmwareEngineNetworkCanonical, forKey: .vmwareEngineNetworkCanonical)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -240,8 +252,12 @@ public struct NetworkPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
-      try container.encode(self.state, forKey: .state)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
+      if self.state != NetworkPolicy.NetworkService.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

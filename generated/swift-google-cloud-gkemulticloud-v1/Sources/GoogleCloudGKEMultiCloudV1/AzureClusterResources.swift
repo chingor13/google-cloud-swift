@@ -84,9 +84,14 @@ public struct AzureClusterResources: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.networkSecurityGroupId, forKey: .networkSecurityGroupId)
-    try container.encode(
-      self.controlPlaneApplicationSecurityGroupId, forKey: .controlPlaneApplicationSecurityGroupId)
+    if !self.networkSecurityGroupId.isEmpty {
+      try container.encode(self.networkSecurityGroupId, forKey: .networkSecurityGroupId)
+    }
+    if !self.controlPlaneApplicationSecurityGroupId.isEmpty {
+      try container.encode(
+        self.controlPlaneApplicationSecurityGroupId, forKey: .controlPlaneApplicationSecurityGroupId
+      )
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

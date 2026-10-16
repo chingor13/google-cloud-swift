@@ -84,9 +84,13 @@ public struct SecretStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.status, forKey: .status)
+    if self.status != SecretStatus.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.message, forKey: .message)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

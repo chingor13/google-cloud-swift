@@ -165,14 +165,26 @@ public struct StandardSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.recurrenceType, forKey: .recurrenceType)
-    try container.encode(self.hourlyFrequency, forKey: .hourlyFrequency)
-    try container.encode(self.daysOfWeek, forKey: .daysOfWeek)
-    try container.encode(self.daysOfMonth, forKey: .daysOfMonth)
+    if self.recurrenceType != StandardSchedule.RecurrenceType() {
+      try container.encode(self.recurrenceType, forKey: .recurrenceType)
+    }
+    if self.hourlyFrequency != 0 {
+      try container.encode(self.hourlyFrequency, forKey: .hourlyFrequency)
+    }
+    if !self.daysOfWeek.isEmpty {
+      try container.encode(self.daysOfWeek, forKey: .daysOfWeek)
+    }
+    if !self.daysOfMonth.isEmpty {
+      try container.encode(self.daysOfMonth, forKey: .daysOfMonth)
+    }
     try container.encodeIfPresent(self.weekDayOfMonth, forKey: .weekDayOfMonth)
-    try container.encode(self.months, forKey: .months)
+    if !self.months.isEmpty {
+      try container.encode(self.months, forKey: .months)
+    }
     try container.encodeIfPresent(self.backupWindow, forKey: .backupWindow)
-    try container.encode(self.timeZone, forKey: .timeZone)
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

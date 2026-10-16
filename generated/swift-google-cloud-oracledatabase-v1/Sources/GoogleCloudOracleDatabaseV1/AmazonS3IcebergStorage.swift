@@ -112,12 +112,24 @@ public struct AmazonS3IcebergStorage: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.schemeType, forKey: .schemeType)
-    try container.encode(self.accessKeyId, forKey: .accessKeyId)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.secretAccessKeySecret, forKey: .secretAccessKeySecret)
+    if self.schemeType != AmazonS3IcebergStorage.SchemeType() {
+      try container.encode(self.schemeType, forKey: .schemeType)
+    }
+    if !self.accessKeyId.isEmpty {
+      try container.encode(self.accessKeyId, forKey: .accessKeyId)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.secretAccessKeySecret.isEmpty {
+      try container.encode(self.secretAccessKeySecret, forKey: .secretAccessKeySecret)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -138,14 +138,30 @@ public struct Permission: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.onlyInPredefinedRoles, forKey: .onlyInPredefinedRoles)
-    try container.encode(self.stage, forKey: .stage)
-    try container.encode(self.customRolesSupportLevel, forKey: .customRolesSupportLevel)
-    try container.encode(self.apiDisabled, forKey: .apiDisabled)
-    try container.encode(self.primaryPermission, forKey: .primaryPermission)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.onlyInPredefinedRoles {
+      try container.encode(self.onlyInPredefinedRoles, forKey: .onlyInPredefinedRoles)
+    }
+    if self.stage != Permission.PermissionLaunchStage() {
+      try container.encode(self.stage, forKey: .stage)
+    }
+    if self.customRolesSupportLevel != Permission.CustomRolesSupportLevel() {
+      try container.encode(self.customRolesSupportLevel, forKey: .customRolesSupportLevel)
+    }
+    if self.apiDisabled {
+      try container.encode(self.apiDisabled, forKey: .apiDisabled)
+    }
+    if !self.primaryPermission.isEmpty {
+      try container.encode(self.primaryPermission, forKey: .primaryPermission)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

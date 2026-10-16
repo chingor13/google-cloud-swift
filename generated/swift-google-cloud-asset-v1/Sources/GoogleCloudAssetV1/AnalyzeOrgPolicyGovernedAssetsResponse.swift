@@ -94,9 +94,13 @@ public struct AnalyzeOrgPolicyGovernedAssetsResponse: Codable, Equatable, Google
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.governedAssets, forKey: .governedAssets)
+    if !self.governedAssets.isEmpty {
+      try container.encode(self.governedAssets, forKey: .governedAssets)
+    }
     try container.encodeIfPresent(self.constraint, forKey: .constraint)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -228,13 +232,27 @@ public struct AnalyzeOrgPolicyGovernedAssetsResponse: Codable, Equatable, Google
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fullResourceName, forKey: .fullResourceName)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.folders, forKey: .folders)
-      try container.encode(self.organization, forKey: .organization)
-      try container.encode(self.assetType, forKey: .assetType)
-      try container.encode(self.effectiveTags, forKey: .effectiveTags)
+      if !self.fullResourceName.isEmpty {
+        try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      }
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.folders.isEmpty {
+        try container.encode(self.folders, forKey: .folders)
+      }
+      if !self.organization.isEmpty {
+        try container.encode(self.organization, forKey: .organization)
+      }
+      if !self.assetType.isEmpty {
+        try container.encode(self.assetType, forKey: .assetType)
+      }
+      if !self.effectiveTags.isEmpty {
+        try container.encode(self.effectiveTags, forKey: .effectiveTags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -375,12 +393,22 @@ public struct AnalyzeOrgPolicyGovernedAssetsResponse: Codable, Equatable, Google
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attachedResource, forKey: .attachedResource)
+      if !self.attachedResource.isEmpty {
+        try container.encode(self.attachedResource, forKey: .attachedResource)
+      }
       try container.encodeIfPresent(self.policy, forKey: .policy)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.folders, forKey: .folders)
-      try container.encode(self.organization, forKey: .organization)
-      try container.encode(self.assetType, forKey: .assetType)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.folders.isEmpty {
+        try container.encode(self.folders, forKey: .folders)
+      }
+      if !self.organization.isEmpty {
+        try container.encode(self.organization, forKey: .organization)
+      }
+      if !self.assetType.isEmpty {
+        try container.encode(self.assetType, forKey: .assetType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -515,7 +543,9 @@ public struct AnalyzeOrgPolicyGovernedAssetsResponse: Codable, Equatable, Google
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.consolidatedPolicy, forKey: .consolidatedPolicy)
-      try container.encode(self.policyBundle, forKey: .policyBundle)
+      if !self.policyBundle.isEmpty {
+        try container.encode(self.policyBundle, forKey: .policyBundle)
+      }
 
       if let choice = self.governedAsset {
         switch choice {

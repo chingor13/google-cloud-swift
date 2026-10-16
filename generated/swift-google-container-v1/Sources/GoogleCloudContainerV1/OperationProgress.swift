@@ -101,10 +101,18 @@ public struct OperationProgress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.metrics, forKey: .metrics)
-    try container.encode(self.stages, forKey: .stages)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.status != Operation.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.metrics.isEmpty {
+      try container.encode(self.metrics, forKey: .metrics)
+    }
+    if !self.stages.isEmpty {
+      try container.encode(self.stages, forKey: .stages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -192,7 +200,9 @@ public struct OperationProgress: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
 
       if let choice = self.value {
         switch choice {

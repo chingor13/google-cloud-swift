@@ -110,11 +110,21 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dimension, forKey: .dimension)
-    try container.encode(self.sqlCollection, forKey: .sqlCollection)
-    try container.encode(self.inputParameters, forKey: .inputParameters)
-    try container.encode(self.capabilities, forKey: .capabilities)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.dimension.isEmpty {
+      try container.encode(self.dimension, forKey: .dimension)
+    }
+    if !self.sqlCollection.isEmpty {
+      try container.encode(self.sqlCollection, forKey: .sqlCollection)
+    }
+    if !self.inputParameters.isEmpty {
+      try container.encode(self.inputParameters, forKey: .inputParameters)
+    }
+    if !self.capabilities.isEmpty {
+      try container.encode(self.capabilities, forKey: .capabilities)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -173,7 +183,9 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.query, forKey: .query)
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -266,8 +278,12 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.defaultValue, forKey: .defaultValue)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.defaultValue.isEmpty {
+        try container.encode(self.defaultValue, forKey: .defaultValue)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

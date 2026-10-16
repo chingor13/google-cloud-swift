@@ -119,7 +119,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.neighborCount, forKey: .neighborCount)
+      if self.neighborCount != 0 {
+        try container.encode(self.neighborCount, forKey: .neighborCount)
+      }
 
       if let choice = self.source {
         switch choice {
@@ -203,7 +205,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataFormat, forKey: .dataFormat)
+        if self.dataFormat != Examples.ExampleGcsSource.DataFormat() {
+          try container.encode(self.dataFormat, forKey: .dataFormat)
+        }
         try container.encodeIfPresent(self.gcsSource, forKey: .gcsSource)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

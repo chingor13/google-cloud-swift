@@ -100,10 +100,18 @@ public struct ImportRowError: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rowNumber, forKey: .rowNumber)
-    try container.encode(self.vmName, forKey: .vmName)
-    try container.encode(self.vmUuid, forKey: .vmUuid)
-    try container.encode(self.errors, forKey: .errors)
+    if self.rowNumber != 0 {
+      try container.encode(self.rowNumber, forKey: .rowNumber)
+    }
+    if !self.vmName.isEmpty {
+      try container.encode(self.vmName, forKey: .vmName)
+    }
+    if !self.vmUuid.isEmpty {
+      try container.encode(self.vmUuid, forKey: .vmUuid)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -165,17 +165,25 @@ public struct FleetPackage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.resourceBundleSelector, forKey: .resourceBundleSelector)
     try container.encodeIfPresent(self.target, forKey: .target)
     try container.encodeIfPresent(self.rolloutStrategy, forKey: .rolloutStrategy)
     try container.encodeIfPresent(self.variantSelector, forKey: .variantSelector)
     try container.encodeIfPresent(self.info, forKey: .info)
-    try container.encode(self.deletionPropagationPolicy, forKey: .deletionPropagationPolicy)
-    try container.encode(self.state, forKey: .state)
+    if self.deletionPropagationPolicy != DeletionPropagationPolicy() {
+      try container.encode(self.deletionPropagationPolicy, forKey: .deletionPropagationPolicy)
+    }
+    if self.state != FleetPackage.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -364,8 +372,12 @@ public struct FleetPackage: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.tag, forKey: .tag)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.tag.isEmpty {
+        try container.encode(self.tag, forKey: .tag)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -498,10 +510,18 @@ public struct FleetPackage: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.tag, forKey: .tag)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.tag.isEmpty {
+        try container.encode(self.tag, forKey: .tag)
+      }
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
 
       if let choice = self.variants {
         switch choice {

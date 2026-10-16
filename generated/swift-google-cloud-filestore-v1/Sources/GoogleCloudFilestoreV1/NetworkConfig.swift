@@ -127,11 +127,21 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.modes, forKey: .modes)
-    try container.encode(self.reservedIpRange, forKey: .reservedIpRange)
-    try container.encode(self.ipAddresses, forKey: .ipAddresses)
-    try container.encode(self.connectMode, forKey: .connectMode)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.modes.isEmpty {
+      try container.encode(self.modes, forKey: .modes)
+    }
+    if !self.reservedIpRange.isEmpty {
+      try container.encode(self.reservedIpRange, forKey: .reservedIpRange)
+    }
+    if !self.ipAddresses.isEmpty {
+      try container.encode(self.ipAddresses, forKey: .ipAddresses)
+    }
+    if self.connectMode != NetworkConfig.ConnectMode() {
+      try container.encode(self.connectMode, forKey: .connectMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

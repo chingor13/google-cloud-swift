@@ -88,8 +88,12 @@ public struct CreateToolRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.toolId, forKey: .toolId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.toolId.isEmpty {
+      try container.encode(self.toolId, forKey: .toolId)
+    }
     try container.encodeIfPresent(self.tool, forKey: .tool)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

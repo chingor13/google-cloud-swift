@@ -295,37 +295,67 @@ public struct App: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.pinned, forKey: .pinned)
-    try container.encode(self.rootAgent, forKey: .rootAgent)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.pinned {
+      try container.encode(self.pinned, forKey: .pinned)
+    }
+    if !self.rootAgent.isEmpty {
+      try container.encode(self.rootAgent, forKey: .rootAgent)
+    }
     try container.encodeIfPresent(self.languageSettings, forKey: .languageSettings)
     try container.encodeIfPresent(self.timeZoneSettings, forKey: .timeZoneSettings)
     try container.encodeIfPresent(self.audioProcessingConfig, forKey: .audioProcessingConfig)
     try container.encodeIfPresent(self.loggingSettings, forKey: .loggingSettings)
     try container.encodeIfPresent(self.errorHandlingSettings, forKey: .errorHandlingSettings)
     try container.encodeIfPresent(self.modelSettings, forKey: .modelSettings)
-    try container.encode(self.toolExecutionMode, forKey: .toolExecutionMode)
+    if self.toolExecutionMode != App.ToolExecutionMode() {
+      try container.encode(self.toolExecutionMode, forKey: .toolExecutionMode)
+    }
     try container.encodeIfPresent(
       self.evaluationMetricsThresholds, forKey: .evaluationMetricsThresholds)
-    try container.encode(self.variableDeclarations, forKey: .variableDeclarations)
-    try container.encode(
-      self.predefinedVariableDeclarations, forKey: .predefinedVariableDeclarations)
-    try container.encode(self.globalInstruction, forKey: .globalInstruction)
-    try container.encode(self.guardrails, forKey: .guardrails)
+    if !self.variableDeclarations.isEmpty {
+      try container.encode(self.variableDeclarations, forKey: .variableDeclarations)
+    }
+    if !self.predefinedVariableDeclarations.isEmpty {
+      try container.encode(
+        self.predefinedVariableDeclarations, forKey: .predefinedVariableDeclarations)
+    }
+    if !self.globalInstruction.isEmpty {
+      try container.encode(self.globalInstruction, forKey: .globalInstruction)
+    }
+    if !self.guardrails.isEmpty {
+      try container.encode(self.guardrails, forKey: .guardrails)
+    }
     try container.encodeIfPresent(self.dataStoreSettings, forKey: .dataStoreSettings)
     try container.encodeIfPresent(self.defaultChannelProfile, forKey: .defaultChannelProfile)
-    try container.encode(self.metadata, forKey: .metadata)
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.deploymentCount, forKey: .deploymentCount)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.deploymentCount != 0 {
+      try container.encode(self.deploymentCount, forKey: .deploymentCount)
+    }
     try container.encodeIfPresent(
       self.clientCertificateSettings, forKey: .clientCertificateSettings)
     try container.encodeIfPresent(self.vpcScSettings, forKey: .vpcScSettings)
-    try container.encode(self.locked, forKey: .locked)
-    try container.encode(self.validationErrors, forKey: .validationErrors)
+    if self.locked {
+      try container.encode(self.locked, forKey: .locked)
+    }
+    if !self.validationErrors.isEmpty {
+      try container.encode(self.validationErrors, forKey: .validationErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -398,8 +428,12 @@ public struct App: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.description, forKey: .description)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.schema, forKey: .schema)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

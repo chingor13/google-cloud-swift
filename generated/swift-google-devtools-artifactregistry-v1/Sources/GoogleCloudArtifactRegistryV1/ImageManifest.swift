@@ -126,13 +126,27 @@ public struct ImageManifest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.architecture, forKey: .architecture)
-    try container.encode(self.os, forKey: .os)
-    try container.encode(self.digest, forKey: .digest)
-    try container.encode(self.mediaType, forKey: .mediaType)
-    try container.encode(self.osVersion, forKey: .osVersion)
-    try container.encode(self.osFeatures, forKey: .osFeatures)
-    try container.encode(self.variant, forKey: .variant)
+    if !self.architecture.isEmpty {
+      try container.encode(self.architecture, forKey: .architecture)
+    }
+    if !self.os.isEmpty {
+      try container.encode(self.os, forKey: .os)
+    }
+    if !self.digest.isEmpty {
+      try container.encode(self.digest, forKey: .digest)
+    }
+    if !self.mediaType.isEmpty {
+      try container.encode(self.mediaType, forKey: .mediaType)
+    }
+    if !self.osVersion.isEmpty {
+      try container.encode(self.osVersion, forKey: .osVersion)
+    }
+    if !self.osFeatures.isEmpty {
+      try container.encode(self.osFeatures, forKey: .osFeatures)
+    }
+    if !self.variant.isEmpty {
+      try container.encode(self.variant, forKey: .variant)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -130,7 +130,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.numRetries, forKey: .numRetries)
       try container.encodeIfPresent(self.perTryTimeout, forKey: .perTryTimeout)
-      try container.encode(self.retryConditions, forKey: .retryConditions)
+      if !self.retryConditions.isEmpty {
+        try container.encode(self.retryConditions, forKey: .retryConditions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -196,7 +196,9 @@
         try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
         try container.encodeIfPresent(self.orderBy, forKey: .orderBy)
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-        try container.encode(self.project, forKey: .project)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
         try container.encodeIfPresent(self.serviceProjectNumber, forKey: .serviceProjectNumber)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -313,10 +315,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -439,10 +447,16 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.namedSet, forKey: .namedSet)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -565,10 +579,16 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.policy, forKey: .policy)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -666,9 +686,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -774,9 +800,15 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.namedSet, forKey: .namedSet)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -884,9 +916,15 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.natName, forKey: .natName)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1095,9 +1133,15 @@
         try container.encodeIfPresent(self.natName, forKey: .natName)
         try container.encodeIfPresent(self.orderBy, forKey: .orderBy)
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1203,9 +1247,15 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.policy, forKey: .policy)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1303,9 +1353,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1421,8 +1477,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
@@ -1615,8 +1675,12 @@
         try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
         try container.encodeIfPresent(self.orderBy, forKey: .orderBy)
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1856,10 +1920,16 @@
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
         try container.encodeIfPresent(self.peer, forKey: .peer)
         try container.encodeIfPresent(self.policyApplied, forKey: .policyApplied)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.routeType, forKey: .routeType)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2183,9 +2253,15 @@
         try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
         try container.encodeIfPresent(self.orderBy, forKey: .orderBy)
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2385,9 +2461,15 @@
         try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
         try container.encodeIfPresent(self.orderBy, forKey: .orderBy)
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2511,10 +2593,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2639,10 +2727,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2767,10 +2861,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2877,9 +2977,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
-        try container.encode(self.router, forKey: .router)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -3004,10 +3110,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -3132,10 +3244,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -3260,10 +3378,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.region, forKey: .region)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.region.isEmpty {
+          try container.encode(self.region, forKey: .region)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.router, forKey: .router)
+        if !self.router.isEmpty {
+          try container.encode(self.router, forKey: .router)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

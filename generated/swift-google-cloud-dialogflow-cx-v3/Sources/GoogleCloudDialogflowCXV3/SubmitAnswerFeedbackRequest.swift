@@ -94,8 +94,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.session, forKey: .session)
-      try container.encode(self.responseId, forKey: .responseId)
+      if !self.session.isEmpty {
+        try container.encode(self.session, forKey: .session)
+      }
+      if !self.responseId.isEmpty {
+        try container.encode(self.responseId, forKey: .responseId)
+      }
       try container.encodeIfPresent(self.answerFeedback, forKey: .answerFeedback)
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
       for (key, value) in self._unknownFields.json {

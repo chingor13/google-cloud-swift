@@ -148,10 +148,16 @@ public struct SessionOutput: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.turnIndex, forKey: .turnIndex)
-    try container.encode(self.turnCompleted, forKey: .turnCompleted)
+    if self.turnIndex != 0 {
+      try container.encode(self.turnIndex, forKey: .turnIndex)
+    }
+    if self.turnCompleted {
+      try container.encode(self.turnCompleted, forKey: .turnCompleted)
+    }
     try container.encodeIfPresent(self.diagnosticInfo, forKey: .diagnosticInfo)
-    try container.encode(self.context, forKey: .context)
+    if !self.context.isEmpty {
+      try container.encode(self.context, forKey: .context)
+    }
 
     if let choice = self.outputType {
       switch choice {
@@ -235,7 +241,9 @@ public struct SessionOutput: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.messages, forKey: .messages)
+      if !self.messages.isEmpty {
+        try container.encode(self.messages, forKey: .messages)
+      }
       try container.encodeIfPresent(self.rootSpan, forKey: .rootSpan)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -90,9 +90,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.includedFolders, forKey: .includedFolders)
-      try container.encode(self.includedOrganizations, forKey: .includedOrganizations)
-      try container.encode(self.includedProjects, forKey: .includedProjects)
+      if !self.includedFolders.isEmpty {
+        try container.encode(self.includedFolders, forKey: .includedFolders)
+      }
+      if !self.includedOrganizations.isEmpty {
+        try container.encode(self.includedOrganizations, forKey: .includedOrganizations)
+      }
+      if !self.includedProjects.isEmpty {
+        try container.encode(self.includedProjects, forKey: .includedProjects)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -111,8 +111,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.mergeOption, forKey: .mergeOption)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if self.mergeOption != ImportIntentsRequest.MergeOption() {
+        try container.encode(self.mergeOption, forKey: .mergeOption)
+      }
 
       if let choice = self.intents {
         switch choice {

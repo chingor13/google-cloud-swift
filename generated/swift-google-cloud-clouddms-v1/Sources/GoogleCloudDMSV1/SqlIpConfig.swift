@@ -111,10 +111,16 @@ public struct SqlIpConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.enableIpv4, forKey: .enableIpv4)
-    try container.encode(self.privateNetwork, forKey: .privateNetwork)
-    try container.encode(self.allocatedIpRange, forKey: .allocatedIpRange)
+    if !self.privateNetwork.isEmpty {
+      try container.encode(self.privateNetwork, forKey: .privateNetwork)
+    }
+    if !self.allocatedIpRange.isEmpty {
+      try container.encode(self.allocatedIpRange, forKey: .allocatedIpRange)
+    }
     try container.encodeIfPresent(self.requireSsl, forKey: .requireSsl)
-    try container.encode(self.authorizedNetworks, forKey: .authorizedNetworks)
+    if !self.authorizedNetworks.isEmpty {
+      try container.encode(self.authorizedNetworks, forKey: .authorizedNetworks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -166,11 +166,17 @@ public struct WorkflowInvocation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.invocationConfig, forKey: .invocationConfig)
-    try container.encode(self.state, forKey: .state)
+    if self.state != WorkflowInvocation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.invocationTiming, forKey: .invocationTiming)
-    try container.encode(self.resolvedCompilationResult, forKey: .resolvedCompilationResult)
+    if !self.resolvedCompilationResult.isEmpty {
+      try container.encode(self.resolvedCompilationResult, forKey: .resolvedCompilationResult)
+    }
     try container.encodeIfPresent(self.dataEncryptionState, forKey: .dataEncryptionState)
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)
     try container.encodeIfPresent(self.privateResourceMetadata, forKey: .privateResourceMetadata)

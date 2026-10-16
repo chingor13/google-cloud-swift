@@ -96,9 +96,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.tensorboardExperiment, forKey: .tensorboardExperiment)
-      try container.encode(self.tensorboardExperimentId, forKey: .tensorboardExperimentId)
+      if !self.tensorboardExperimentId.isEmpty {
+        try container.encode(self.tensorboardExperimentId, forKey: .tensorboardExperimentId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

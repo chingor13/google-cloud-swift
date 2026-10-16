@@ -91,7 +91,9 @@ public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleWKT._An
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.conversation, forKey: .conversation)
+    if !self.conversation.isEmpty {
+      try container.encode(self.conversation, forKey: .conversation)
+    }
     try container.encodeIfPresent(self.annotatorSelector, forKey: .annotatorSelector)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -92,9 +92,15 @@ public struct SearchHypernym: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.hypernym, forKey: .hypernym)
-    try container.encode(self.hyponyms, forKey: .hyponyms)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.hypernym.isEmpty {
+      try container.encode(self.hypernym, forKey: .hypernym)
+    }
+    if !self.hyponyms.isEmpty {
+      try container.encode(self.hyponyms, forKey: .hyponyms)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -135,12 +135,20 @@ public struct VoiceSelectionParams: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.ssmlGender, forKey: .ssmlGender)
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.ssmlGender != SsmlVoiceGender() {
+      try container.encode(self.ssmlGender, forKey: .ssmlGender)
+    }
     try container.encodeIfPresent(self.customVoice, forKey: .customVoice)
     try container.encodeIfPresent(self.voiceClone, forKey: .voiceClone)
-    try container.encode(self.modelName, forKey: .modelName)
+    if !self.modelName.isEmpty {
+      try container.encode(self.modelName, forKey: .modelName)
+    }
     try container.encodeIfPresent(self.multiSpeakerVoiceConfig, forKey: .multiSpeakerVoiceConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

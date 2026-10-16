@@ -104,8 +104,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cesApp, forKey: .cesApp)
-      try container.encode(self.confirmationRequirement, forKey: .confirmationRequirement)
+      if !self.cesApp.isEmpty {
+        try container.encode(self.cesApp, forKey: .cesApp)
+      }
+      if self.confirmationRequirement != Tool.ConfirmationRequirement() {
+        try container.encode(self.confirmationRequirement, forKey: .confirmationRequirement)
+      }
       try container.encodeIfPresent(self.proactiveEnabled, forKey: .proactiveEnabled)
       try container.encodeIfPresent(self.reactiveEnabled, forKey: .reactiveEnabled)
       for (key, value) in self._unknownFields.json {

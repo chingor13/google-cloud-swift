@@ -99,7 +99,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attachmentStatuses, forKey: .attachmentStatuses)
+      if !self.attachmentStatuses.isEmpty {
+        try container.encode(self.attachmentStatuses, forKey: .attachmentStatuses)
+      }
       try container.encodeIfPresent(self.configured, forKey: .configured)
       try container.encodeIfPresent(self.groupStatus, forKey: .groupStatus)
       try container.encodeIfPresent(self.intent, forKey: .intent)

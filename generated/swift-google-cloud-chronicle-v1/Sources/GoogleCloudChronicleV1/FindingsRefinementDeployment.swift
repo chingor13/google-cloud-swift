@@ -124,9 +124,15 @@ public struct FindingsRefinementDeployment: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.archived, forKey: .archived)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.archived {
+      try container.encode(self.archived, forKey: .archived)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
 
     if let choice = self.findingsRefinementApplication {

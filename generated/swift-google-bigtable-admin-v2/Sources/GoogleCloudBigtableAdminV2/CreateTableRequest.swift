@@ -114,10 +114,16 @@ public struct CreateTableRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.tableId, forKey: .tableId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.tableId.isEmpty {
+      try container.encode(self.tableId, forKey: .tableId)
+    }
     try container.encodeIfPresent(self.table, forKey: .table)
-    try container.encode(self.initialSplits, forKey: .initialSplits)
+    if !self.initialSplits.isEmpty {
+      try container.encode(self.initialSplits, forKey: .initialSplits)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -175,7 +181,9 @@ public struct CreateTableRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

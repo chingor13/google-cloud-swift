@@ -178,19 +178,45 @@ public struct DeployPolicyEvaluationEvent: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.ruleType, forKey: .ruleType)
-    try container.encode(self.rule, forKey: .rule)
-    try container.encode(self.pipelineUid, forKey: .pipelineUid)
-    try container.encode(self.deliveryPipeline, forKey: .deliveryPipeline)
-    try container.encode(self.targetUid, forKey: .targetUid)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.invoker, forKey: .invoker)
-    try container.encode(self.deployPolicy, forKey: .deployPolicy)
-    try container.encode(self.deployPolicyUid, forKey: .deployPolicyUid)
-    try container.encode(self.allowed, forKey: .allowed)
-    try container.encode(self.verdict, forKey: .verdict)
-    try container.encode(self.overrides, forKey: .overrides)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.ruleType.isEmpty {
+      try container.encode(self.ruleType, forKey: .ruleType)
+    }
+    if !self.rule.isEmpty {
+      try container.encode(self.rule, forKey: .rule)
+    }
+    if !self.pipelineUid.isEmpty {
+      try container.encode(self.pipelineUid, forKey: .pipelineUid)
+    }
+    if !self.deliveryPipeline.isEmpty {
+      try container.encode(self.deliveryPipeline, forKey: .deliveryPipeline)
+    }
+    if !self.targetUid.isEmpty {
+      try container.encode(self.targetUid, forKey: .targetUid)
+    }
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if self.invoker != DeployPolicy.Invoker() {
+      try container.encode(self.invoker, forKey: .invoker)
+    }
+    if !self.deployPolicy.isEmpty {
+      try container.encode(self.deployPolicy, forKey: .deployPolicy)
+    }
+    if !self.deployPolicyUid.isEmpty {
+      try container.encode(self.deployPolicyUid, forKey: .deployPolicyUid)
+    }
+    if self.allowed {
+      try container.encode(self.allowed, forKey: .allowed)
+    }
+    if self.verdict != DeployPolicyEvaluationEvent.PolicyVerdict() {
+      try container.encode(self.verdict, forKey: .verdict)
+    }
+    if !self.overrides.isEmpty {
+      try container.encode(self.overrides, forKey: .overrides)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

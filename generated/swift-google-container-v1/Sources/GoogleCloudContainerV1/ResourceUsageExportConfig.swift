@@ -87,7 +87,9 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleWKT._AnyPacka
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.bigqueryDestination, forKey: .bigqueryDestination)
-    try container.encode(self.enableNetworkEgressMetering, forKey: .enableNetworkEgressMetering)
+    if self.enableNetworkEgressMetering {
+      try container.encode(self.enableNetworkEgressMetering, forKey: .enableNetworkEgressMetering)
+    }
     try container.encodeIfPresent(
       self.consumptionMeteringConfig, forKey: .consumptionMeteringConfig)
     for (key, value) in self._unknownFields.json {
@@ -147,7 +149,9 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datasetId, forKey: .datasetId)
+      if !self.datasetId.isEmpty {
+        try container.encode(self.datasetId, forKey: .datasetId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -229,7 +233,9 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -87,9 +87,13 @@ public struct CreateActiveDirectoryRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.activeDirectory, forKey: .activeDirectory)
-    try container.encode(self.activeDirectoryId, forKey: .activeDirectoryId)
+    if !self.activeDirectoryId.isEmpty {
+      try container.encode(self.activeDirectoryId, forKey: .activeDirectoryId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

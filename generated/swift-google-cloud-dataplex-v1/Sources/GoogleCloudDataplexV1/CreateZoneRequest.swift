@@ -101,10 +101,16 @@ public struct CreateZoneRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.zoneId, forKey: .zoneId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.zoneId.isEmpty {
+      try container.encode(self.zoneId, forKey: .zoneId)
+    }
     try container.encodeIfPresent(self.zone, forKey: .zone)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

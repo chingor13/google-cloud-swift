@@ -105,11 +105,20 @@ public struct UsageStats: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalCompletions, forKey: .totalCompletions)
-    try container.encode(self.totalFailures, forKey: .totalFailures)
-    try container.encode(self.totalCancellations, forKey: .totalCancellations)
-    try container.encode(
-      self.totalExecutionTimeForCompletionsMillis, forKey: .totalExecutionTimeForCompletionsMillis)
+    if self.totalCompletions != 0 {
+      try container.encode(self.totalCompletions, forKey: .totalCompletions)
+    }
+    if self.totalFailures != 0 {
+      try container.encode(self.totalFailures, forKey: .totalFailures)
+    }
+    if self.totalCancellations != 0 {
+      try container.encode(self.totalCancellations, forKey: .totalCancellations)
+    }
+    if self.totalExecutionTimeForCompletionsMillis != 0 {
+      try container.encode(
+        self.totalExecutionTimeForCompletionsMillis, forKey: .totalExecutionTimeForCompletionsMillis
+      )
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

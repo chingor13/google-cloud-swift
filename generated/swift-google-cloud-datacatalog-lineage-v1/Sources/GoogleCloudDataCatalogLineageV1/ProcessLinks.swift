@@ -83,8 +83,12 @@ public struct ProcessLinks: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.process, forKey: .process)
-    try container.encode(self.links, forKey: .links)
+    if !self.process.isEmpty {
+      try container.encode(self.process, forKey: .process)
+    }
+    if !self.links.isEmpty {
+      try container.encode(self.links, forKey: .links)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

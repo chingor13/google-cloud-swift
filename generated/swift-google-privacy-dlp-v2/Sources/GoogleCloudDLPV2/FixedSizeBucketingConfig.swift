@@ -107,7 +107,9 @@ public struct FixedSizeBucketingConfig: Codable, Equatable, GoogleWKT._AnyPackab
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.lowerBound, forKey: .lowerBound)
     try container.encodeIfPresent(self.upperBound, forKey: .upperBound)
-    try container.encode(self.bucketSize, forKey: .bucketSize)
+    if self.bucketSize != 0 {
+      try container.encode(self.bucketSize, forKey: .bucketSize)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

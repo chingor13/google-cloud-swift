@@ -85,9 +85,15 @@ public struct StateMessage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.message, forKey: .message)
+    if self.severity != StateMessage.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

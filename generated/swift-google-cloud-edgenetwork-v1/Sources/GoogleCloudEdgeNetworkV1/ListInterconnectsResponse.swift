@@ -86,9 +86,15 @@ public struct ListInterconnectsResponse: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.interconnects, forKey: .interconnects)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.interconnects.isEmpty {
+      try container.encode(self.interconnects, forKey: .interconnects)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

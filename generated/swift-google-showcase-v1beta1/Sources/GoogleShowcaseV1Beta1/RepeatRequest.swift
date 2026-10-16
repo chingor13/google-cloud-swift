@@ -126,13 +126,23 @@ public struct RepeatRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.info, forKey: .info)
-    try container.encode(self.serverVerify, forKey: .serverVerify)
+    if self.serverVerify {
+      try container.encode(self.serverVerify, forKey: .serverVerify)
+    }
     try container.encodeIfPresent(self.intendedBindingUri, forKey: .intendedBindingUri)
-    try container.encode(self.fInt32, forKey: .fInt32)
-    try container.encode(self.fInt64, forKey: .fInt64)
-    try container.encode(self.fDouble, forKey: .fDouble)
+    if self.fInt32 != 0 {
+      try container.encode(self.fInt32, forKey: .fInt32)
+    }
+    if self.fInt64 != 0 {
+      try container.encode(self.fInt64, forKey: .fInt64)
+    }
+    if self.fDouble != 0 {
+      try container.encode(self.fDouble, forKey: .fDouble)
+    }
     try container.encodeIfPresent(self.pInt32, forKey: .pInt32)
     try container.encodeIfPresent(self.pInt64, forKey: .pInt64)
     try container.encodeIfPresent(self.pDouble, forKey: .pDouble)

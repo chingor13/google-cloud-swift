@@ -150,17 +150,33 @@ public struct CacheParameters: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
-    try container.encode(self.peerClusterName, forKey: .peerClusterName)
-    try container.encode(self.peerSvmName, forKey: .peerSvmName)
-    try container.encode(self.peerIpAddresses, forKey: .peerIpAddresses)
+    if !self.peerVolumeName.isEmpty {
+      try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
+    }
+    if !self.peerClusterName.isEmpty {
+      try container.encode(self.peerClusterName, forKey: .peerClusterName)
+    }
+    if !self.peerSvmName.isEmpty {
+      try container.encode(self.peerSvmName, forKey: .peerSvmName)
+    }
+    if !self.peerIpAddresses.isEmpty {
+      try container.encode(self.peerIpAddresses, forKey: .peerIpAddresses)
+    }
     try container.encodeIfPresent(self.enableGlobalFileLock, forKey: .enableGlobalFileLock)
     try container.encodeIfPresent(self.cacheConfig, forKey: .cacheConfig)
-    try container.encode(self.cacheState, forKey: .cacheState)
-    try container.encode(self.command, forKey: .command)
+    if self.cacheState != CacheParameters.CacheState() {
+      try container.encode(self.cacheState, forKey: .cacheState)
+    }
+    if !self.command.isEmpty {
+      try container.encode(self.command, forKey: .command)
+    }
     try container.encodeIfPresent(self.peeringCommandExpiryTime, forKey: .peeringCommandExpiryTime)
-    try container.encode(self.passphrase, forKey: .passphrase)
-    try container.encode(self.stateDetails, forKey: .stateDetails)
+    if !self.passphrase.isEmpty {
+      try container.encode(self.passphrase, forKey: .passphrase)
+    }
+    if !self.stateDetails.isEmpty {
+      try container.encode(self.stateDetails, forKey: .stateDetails)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

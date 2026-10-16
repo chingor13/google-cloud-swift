@@ -153,12 +153,22 @@ public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.images, forKey: .images)
+    if !self.images.isEmpty {
+      try container.encode(self.images, forKey: .images)
+    }
     try container.encodeIfPresent(self.objects, forKey: .objects)
-    try container.encode(self.mavenArtifacts, forKey: .mavenArtifacts)
-    try container.encode(self.goModules, forKey: .goModules)
-    try container.encode(self.pythonPackages, forKey: .pythonPackages)
-    try container.encode(self.npmPackages, forKey: .npmPackages)
+    if !self.mavenArtifacts.isEmpty {
+      try container.encode(self.mavenArtifacts, forKey: .mavenArtifacts)
+    }
+    if !self.goModules.isEmpty {
+      try container.encode(self.goModules, forKey: .goModules)
+    }
+    if !self.pythonPackages.isEmpty {
+      try container.encode(self.pythonPackages, forKey: .pythonPackages)
+    }
+    if !self.npmPackages.isEmpty {
+      try container.encode(self.npmPackages, forKey: .npmPackages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -236,8 +246,12 @@ public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.paths, forKey: .paths)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if !self.paths.isEmpty {
+        try container.encode(self.paths, forKey: .paths)
+      }
       try container.encodeIfPresent(self.timing, forKey: .timing)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -363,11 +377,21 @@ public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repository, forKey: .repository)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.artifactId, forKey: .artifactId)
-      try container.encode(self.groupId, forKey: .groupId)
-      try container.encode(self.version, forKey: .version)
+      if !self.repository.isEmpty {
+        try container.encode(self.repository, forKey: .repository)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.artifactId.isEmpty {
+        try container.encode(self.artifactId, forKey: .artifactId)
+      }
+      if !self.groupId.isEmpty {
+        try container.encode(self.groupId, forKey: .groupId)
+      }
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -501,12 +525,24 @@ public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repositoryName, forKey: .repositoryName)
-      try container.encode(self.repositoryLocation, forKey: .repositoryLocation)
-      try container.encode(self.repositoryProjectId, forKey: .repositoryProjectId)
-      try container.encode(self.sourcePath, forKey: .sourcePath)
-      try container.encode(self.modulePath, forKey: .modulePath)
-      try container.encode(self.moduleVersion, forKey: .moduleVersion)
+      if !self.repositoryName.isEmpty {
+        try container.encode(self.repositoryName, forKey: .repositoryName)
+      }
+      if !self.repositoryLocation.isEmpty {
+        try container.encode(self.repositoryLocation, forKey: .repositoryLocation)
+      }
+      if !self.repositoryProjectId.isEmpty {
+        try container.encode(self.repositoryProjectId, forKey: .repositoryProjectId)
+      }
+      if !self.sourcePath.isEmpty {
+        try container.encode(self.sourcePath, forKey: .sourcePath)
+      }
+      if !self.modulePath.isEmpty {
+        try container.encode(self.modulePath, forKey: .modulePath)
+      }
+      if !self.moduleVersion.isEmpty {
+        try container.encode(self.moduleVersion, forKey: .moduleVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -602,8 +638,12 @@ public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repository, forKey: .repository)
-      try container.encode(self.paths, forKey: .paths)
+      if !self.repository.isEmpty {
+        try container.encode(self.repository, forKey: .repository)
+      }
+      if !self.paths.isEmpty {
+        try container.encode(self.paths, forKey: .paths)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -699,8 +739,12 @@ public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repository, forKey: .repository)
-      try container.encode(self.packagePath, forKey: .packagePath)
+      if !self.repository.isEmpty {
+        try container.encode(self.repository, forKey: .repository)
+      }
+      if !self.packagePath.isEmpty {
+        try container.encode(self.packagePath, forKey: .packagePath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

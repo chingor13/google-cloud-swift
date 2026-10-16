@@ -82,8 +82,12 @@ public struct ListSchemaBundlesResponse: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.schemaBundles, forKey: .schemaBundles)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.schemaBundles.isEmpty {
+      try container.encode(self.schemaBundles, forKey: .schemaBundles)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

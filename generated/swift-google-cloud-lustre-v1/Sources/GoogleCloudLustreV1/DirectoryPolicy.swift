@@ -108,11 +108,21 @@ public struct DirectoryPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.directoryPath, forKey: .directoryPath)
-    try container.encode(self.lustreProjectId, forKey: .lustreProjectId)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.directoryPath.isEmpty {
+      try container.encode(self.directoryPath, forKey: .directoryPath)
+    }
+    if self.lustreProjectId != 0 {
+      try container.encode(self.lustreProjectId, forKey: .lustreProjectId)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.state != DirectoryPolicy.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

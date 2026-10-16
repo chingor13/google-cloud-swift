@@ -110,9 +110,15 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.operationName, forKey: .operationName)
-      try container.encode(self.evaluationRun, forKey: .evaluationRun)
-      try container.encode(self.checkpointId, forKey: .checkpointId)
+      if !self.operationName.isEmpty {
+        try container.encode(self.operationName, forKey: .operationName)
+      }
+      if !self.evaluationRun.isEmpty {
+        try container.encode(self.evaluationRun, forKey: .evaluationRun)
+      }
+      if !self.checkpointId.isEmpty {
+        try container.encode(self.checkpointId, forKey: .checkpointId)
+      }
       try container.encodeIfPresent(self.evaluateDatasetResponse, forKey: .evaluateDatasetResponse)
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {

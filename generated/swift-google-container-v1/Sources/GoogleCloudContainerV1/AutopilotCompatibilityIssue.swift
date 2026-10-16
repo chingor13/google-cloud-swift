@@ -113,11 +113,21 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleWKT._AnyPac
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.lastObservation, forKey: .lastObservation)
-    try container.encode(self.constraintType, forKey: .constraintType)
-    try container.encode(self.incompatibilityType, forKey: .incompatibilityType)
-    try container.encode(self.subjects, forKey: .subjects)
-    try container.encode(self.documentationUrl, forKey: .documentationUrl)
-    try container.encode(self.description, forKey: .description)
+    if !self.constraintType.isEmpty {
+      try container.encode(self.constraintType, forKey: .constraintType)
+    }
+    if self.incompatibilityType != AutopilotCompatibilityIssue.IssueType() {
+      try container.encode(self.incompatibilityType, forKey: .incompatibilityType)
+    }
+    if !self.subjects.isEmpty {
+      try container.encode(self.subjects, forKey: .subjects)
+    }
+    if !self.documentationUrl.isEmpty {
+      try container.encode(self.documentationUrl, forKey: .documentationUrl)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

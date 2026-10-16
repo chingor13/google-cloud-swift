@@ -185,20 +185,36 @@ public struct PatchJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != PatchJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.instanceFilter, forKey: .instanceFilter)
     try container.encodeIfPresent(self.patchConfig, forKey: .patchConfig)
     try container.encodeIfPresent(self.duration, forKey: .duration)
     try container.encodeIfPresent(self.instanceDetailsSummary, forKey: .instanceDetailsSummary)
-    try container.encode(self.dryRun, forKey: .dryRun)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
-    try container.encode(self.percentComplete, forKey: .percentComplete)
-    try container.encode(self.patchDeployment, forKey: .patchDeployment)
+    if self.dryRun {
+      try container.encode(self.dryRun, forKey: .dryRun)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
+    if self.percentComplete != 0 {
+      try container.encode(self.percentComplete, forKey: .percentComplete)
+    }
+    if !self.patchDeployment.isEmpty {
+      try container.encode(self.patchDeployment, forKey: .patchDeployment)
+    }
     try container.encodeIfPresent(self.rollout, forKey: .rollout)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -399,23 +415,55 @@ public struct PatchJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pendingInstanceCount, forKey: .pendingInstanceCount)
-      try container.encode(self.inactiveInstanceCount, forKey: .inactiveInstanceCount)
-      try container.encode(self.notifiedInstanceCount, forKey: .notifiedInstanceCount)
-      try container.encode(self.startedInstanceCount, forKey: .startedInstanceCount)
-      try container.encode(
-        self.downloadingPatchesInstanceCount, forKey: .downloadingPatchesInstanceCount)
-      try container.encode(self.applyingPatchesInstanceCount, forKey: .applyingPatchesInstanceCount)
-      try container.encode(self.rebootingInstanceCount, forKey: .rebootingInstanceCount)
-      try container.encode(self.succeededInstanceCount, forKey: .succeededInstanceCount)
-      try container.encode(
-        self.succeededRebootRequiredInstanceCount, forKey: .succeededRebootRequiredInstanceCount)
-      try container.encode(self.failedInstanceCount, forKey: .failedInstanceCount)
-      try container.encode(self.ackedInstanceCount, forKey: .ackedInstanceCount)
-      try container.encode(self.timedOutInstanceCount, forKey: .timedOutInstanceCount)
-      try container.encode(self.prePatchStepInstanceCount, forKey: .prePatchStepInstanceCount)
-      try container.encode(self.postPatchStepInstanceCount, forKey: .postPatchStepInstanceCount)
-      try container.encode(self.noAgentDetectedInstanceCount, forKey: .noAgentDetectedInstanceCount)
+      if self.pendingInstanceCount != 0 {
+        try container.encode(self.pendingInstanceCount, forKey: .pendingInstanceCount)
+      }
+      if self.inactiveInstanceCount != 0 {
+        try container.encode(self.inactiveInstanceCount, forKey: .inactiveInstanceCount)
+      }
+      if self.notifiedInstanceCount != 0 {
+        try container.encode(self.notifiedInstanceCount, forKey: .notifiedInstanceCount)
+      }
+      if self.startedInstanceCount != 0 {
+        try container.encode(self.startedInstanceCount, forKey: .startedInstanceCount)
+      }
+      if self.downloadingPatchesInstanceCount != 0 {
+        try container.encode(
+          self.downloadingPatchesInstanceCount, forKey: .downloadingPatchesInstanceCount)
+      }
+      if self.applyingPatchesInstanceCount != 0 {
+        try container.encode(
+          self.applyingPatchesInstanceCount, forKey: .applyingPatchesInstanceCount)
+      }
+      if self.rebootingInstanceCount != 0 {
+        try container.encode(self.rebootingInstanceCount, forKey: .rebootingInstanceCount)
+      }
+      if self.succeededInstanceCount != 0 {
+        try container.encode(self.succeededInstanceCount, forKey: .succeededInstanceCount)
+      }
+      if self.succeededRebootRequiredInstanceCount != 0 {
+        try container.encode(
+          self.succeededRebootRequiredInstanceCount, forKey: .succeededRebootRequiredInstanceCount)
+      }
+      if self.failedInstanceCount != 0 {
+        try container.encode(self.failedInstanceCount, forKey: .failedInstanceCount)
+      }
+      if self.ackedInstanceCount != 0 {
+        try container.encode(self.ackedInstanceCount, forKey: .ackedInstanceCount)
+      }
+      if self.timedOutInstanceCount != 0 {
+        try container.encode(self.timedOutInstanceCount, forKey: .timedOutInstanceCount)
+      }
+      if self.prePatchStepInstanceCount != 0 {
+        try container.encode(self.prePatchStepInstanceCount, forKey: .prePatchStepInstanceCount)
+      }
+      if self.postPatchStepInstanceCount != 0 {
+        try container.encode(self.postPatchStepInstanceCount, forKey: .postPatchStepInstanceCount)
+      }
+      if self.noAgentDetectedInstanceCount != 0 {
+        try container.encode(
+          self.noAgentDetectedInstanceCount, forKey: .noAgentDetectedInstanceCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

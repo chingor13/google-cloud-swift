@@ -129,12 +129,25 @@ public struct DevicePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.requireScreenlock, forKey: .requireScreenlock)
-    try container.encode(self.allowedEncryptionStatuses, forKey: .allowedEncryptionStatuses)
-    try container.encode(self.osConstraints, forKey: .osConstraints)
-    try container.encode(self.allowedDeviceManagementLevels, forKey: .allowedDeviceManagementLevels)
-    try container.encode(self.requireAdminApproval, forKey: .requireAdminApproval)
-    try container.encode(self.requireCorpOwned, forKey: .requireCorpOwned)
+    if self.requireScreenlock {
+      try container.encode(self.requireScreenlock, forKey: .requireScreenlock)
+    }
+    if !self.allowedEncryptionStatuses.isEmpty {
+      try container.encode(self.allowedEncryptionStatuses, forKey: .allowedEncryptionStatuses)
+    }
+    if !self.osConstraints.isEmpty {
+      try container.encode(self.osConstraints, forKey: .osConstraints)
+    }
+    if !self.allowedDeviceManagementLevels.isEmpty {
+      try container.encode(
+        self.allowedDeviceManagementLevels, forKey: .allowedDeviceManagementLevels)
+    }
+    if self.requireAdminApproval {
+      try container.encode(self.requireAdminApproval, forKey: .requireAdminApproval)
+    }
+    if self.requireCorpOwned {
+      try container.encode(self.requireCorpOwned, forKey: .requireCorpOwned)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

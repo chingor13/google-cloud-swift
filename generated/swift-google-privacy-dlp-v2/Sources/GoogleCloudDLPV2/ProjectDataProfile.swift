@@ -122,14 +122,22 @@ public struct ProjectDataProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
     try container.encodeIfPresent(self.profileLastGenerated, forKey: .profileLastGenerated)
     try container.encodeIfPresent(self.sensitivityScore, forKey: .sensitivityScore)
     try container.encodeIfPresent(self.dataRiskLevel, forKey: .dataRiskLevel)
     try container.encodeIfPresent(self.profileStatus, forKey: .profileStatus)
-    try container.encode(self.tableDataProfileCount, forKey: .tableDataProfileCount)
-    try container.encode(self.fileStoreDataProfileCount, forKey: .fileStoreDataProfileCount)
+    if self.tableDataProfileCount != 0 {
+      try container.encode(self.tableDataProfileCount, forKey: .tableDataProfileCount)
+    }
+    if self.fileStoreDataProfileCount != 0 {
+      try container.encode(self.fileStoreDataProfileCount, forKey: .fileStoreDataProfileCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

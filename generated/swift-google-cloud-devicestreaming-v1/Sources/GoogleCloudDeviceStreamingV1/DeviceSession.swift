@@ -158,10 +158,18 @@ public struct DeviceSession: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateHistories, forKey: .stateHistories)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.state != DeviceSession.SessionState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateHistories.isEmpty {
+      try container.encode(self.stateHistories, forKey: .stateHistories)
+    }
     try container.encodeIfPresent(self.inactivityTimeout, forKey: .inactivityTimeout)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.activeStartTime, forKey: .activeStartTime)
@@ -252,9 +260,13 @@ public struct DeviceSession: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sessionState, forKey: .sessionState)
+      if self.sessionState != DeviceSession.SessionState() {
+        try container.encode(self.sessionState, forKey: .sessionState)
+      }
       try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
-      try container.encode(self.stateMessage, forKey: .stateMessage)
+      if !self.stateMessage.isEmpty {
+        try container.encode(self.stateMessage, forKey: .stateMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

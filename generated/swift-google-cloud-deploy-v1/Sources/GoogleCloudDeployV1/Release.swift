@@ -272,28 +272,62 @@ public struct Release: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.abandoned, forKey: .abandoned)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.abandoned {
+      try container.encode(self.abandoned, forKey: .abandoned)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.renderStartTime, forKey: .renderStartTime)
     try container.encodeIfPresent(self.renderEndTime, forKey: .renderEndTime)
-    try container.encode(self.skaffoldConfigUri, forKey: .skaffoldConfigUri)
-    try container.encode(self.skaffoldConfigPath, forKey: .skaffoldConfigPath)
-    try container.encode(self.buildArtifacts, forKey: .buildArtifacts)
+    if !self.skaffoldConfigUri.isEmpty {
+      try container.encode(self.skaffoldConfigUri, forKey: .skaffoldConfigUri)
+    }
+    if !self.skaffoldConfigPath.isEmpty {
+      try container.encode(self.skaffoldConfigPath, forKey: .skaffoldConfigPath)
+    }
+    if !self.buildArtifacts.isEmpty {
+      try container.encode(self.buildArtifacts, forKey: .buildArtifacts)
+    }
     try container.encodeIfPresent(self.deliveryPipelineSnapshot, forKey: .deliveryPipelineSnapshot)
-    try container.encode(self.targetSnapshots, forKey: .targetSnapshots)
-    try container.encode(self.customTargetTypeSnapshots, forKey: .customTargetTypeSnapshots)
-    try container.encode(self.renderState, forKey: .renderState)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.skaffoldVersion, forKey: .skaffoldVersion)
-    try container.encode(self.targetArtifacts, forKey: .targetArtifacts)
-    try container.encode(self.targetRenders, forKey: .targetRenders)
+    if !self.targetSnapshots.isEmpty {
+      try container.encode(self.targetSnapshots, forKey: .targetSnapshots)
+    }
+    if !self.customTargetTypeSnapshots.isEmpty {
+      try container.encode(self.customTargetTypeSnapshots, forKey: .customTargetTypeSnapshots)
+    }
+    if self.renderState != Release.RenderState() {
+      try container.encode(self.renderState, forKey: .renderState)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.skaffoldVersion.isEmpty {
+      try container.encode(self.skaffoldVersion, forKey: .skaffoldVersion)
+    }
+    if !self.targetArtifacts.isEmpty {
+      try container.encode(self.targetArtifacts, forKey: .targetArtifacts)
+    }
+    if !self.targetRenders.isEmpty {
+      try container.encode(self.targetRenders, forKey: .targetRenders)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
-    try container.encode(self.deployParameters, forKey: .deployParameters)
+    if !self.deployParameters.isEmpty {
+      try container.encode(self.deployParameters, forKey: .deployParameters)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -390,11 +424,19 @@ public struct Release: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.renderingBuild, forKey: .renderingBuild)
-      try container.encode(self.renderingState, forKey: .renderingState)
+      if !self.renderingBuild.isEmpty {
+        try container.encode(self.renderingBuild, forKey: .renderingBuild)
+      }
+      if self.renderingState != Release.TargetRender.TargetRenderState() {
+        try container.encode(self.renderingState, forKey: .renderingState)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
-      try container.encode(self.failureCause, forKey: .failureCause)
-      try container.encode(self.failureMessage, forKey: .failureMessage)
+      if self.failureCause != Release.TargetRender.FailureCause() {
+        try container.encode(self.failureCause, forKey: .failureCause)
+      }
+      if !self.failureMessage.isEmpty {
+        try container.encode(self.failureMessage, forKey: .failureMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -766,7 +808,9 @@ public struct Release: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.status, forKey: .status)
+      if self.status {
+        try container.encode(self.status, forKey: .status)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -873,8 +917,12 @@ public struct Release: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.status, forKey: .status)
-      try container.encode(self.skaffoldSupportState, forKey: .skaffoldSupportState)
+      if self.status {
+        try container.encode(self.status, forKey: .status)
+      }
+      if self.skaffoldSupportState != SkaffoldSupportState() {
+        try container.encode(self.skaffoldSupportState, forKey: .skaffoldSupportState)
+      }
       try container.encodeIfPresent(self.maintenanceModeTime, forKey: .maintenanceModeTime)
       try container.encodeIfPresent(self.supportExpirationTime, forKey: .supportExpirationTime)
       for (key, value) in self._unknownFields.json {

@@ -205,15 +205,33 @@ public struct CompleteQueryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.catalog, forKey: .catalog)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.visitorId, forKey: .visitorId)
-    try container.encode(self.languageCodes, forKey: .languageCodes)
-    try container.encode(self.deviceType, forKey: .deviceType)
-    try container.encode(self.dataset, forKey: .dataset)
-    try container.encode(self.maxSuggestions, forKey: .maxSuggestions)
-    try container.encode(self.enableAttributeSuggestions, forKey: .enableAttributeSuggestions)
-    try container.encode(self.entity, forKey: .entity)
+    if !self.catalog.isEmpty {
+      try container.encode(self.catalog, forKey: .catalog)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.visitorId.isEmpty {
+      try container.encode(self.visitorId, forKey: .visitorId)
+    }
+    if !self.languageCodes.isEmpty {
+      try container.encode(self.languageCodes, forKey: .languageCodes)
+    }
+    if !self.deviceType.isEmpty {
+      try container.encode(self.deviceType, forKey: .deviceType)
+    }
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
+    if self.maxSuggestions != 0 {
+      try container.encode(self.maxSuggestions, forKey: .maxSuggestions)
+    }
+    if self.enableAttributeSuggestions {
+      try container.encode(self.enableAttributeSuggestions, forKey: .enableAttributeSuggestions)
+    }
+    if !self.entity.isEmpty {
+      try container.encode(self.entity, forKey: .entity)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

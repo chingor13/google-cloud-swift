@@ -129,9 +129,15 @@ public struct ListGroupsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
 
     if let choice = self.filter {
       switch choice {

@@ -302,31 +302,73 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.format, forKey: .format)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.nullable, forKey: .nullable)
+      if self.type != GoogleCloudAIPlatformV1.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.format.isEmpty {
+        try container.encode(self.format, forKey: .format)
+      }
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.nullable {
+        try container.encode(self.nullable, forKey: .nullable)
+      }
       try container.encodeIfPresent(self.`default`, forKey: .`default`)
       try container.encodeIfPresent(self.items, forKey: .items)
-      try container.encode(self.minItems, forKey: .minItems)
-      try container.encode(self.maxItems, forKey: .maxItems)
-      try container.encode(self.`enum`, forKey: .`enum`)
-      try container.encode(self.properties, forKey: .properties)
-      try container.encode(self.propertyOrdering, forKey: .propertyOrdering)
-      try container.encode(self.`required`, forKey: .`required`)
-      try container.encode(self.minProperties, forKey: .minProperties)
-      try container.encode(self.maxProperties, forKey: .maxProperties)
-      try container.encode(self.minimum, forKey: .minimum)
-      try container.encode(self.maximum, forKey: .maximum)
-      try container.encode(self.minLength, forKey: .minLength)
-      try container.encode(self.maxLength, forKey: .maxLength)
-      try container.encode(self.pattern, forKey: .pattern)
+      if self.minItems != 0 {
+        try container.encode(self.minItems, forKey: .minItems)
+      }
+      if self.maxItems != 0 {
+        try container.encode(self.maxItems, forKey: .maxItems)
+      }
+      if !self.`enum`.isEmpty {
+        try container.encode(self.`enum`, forKey: .`enum`)
+      }
+      if !self.properties.isEmpty {
+        try container.encode(self.properties, forKey: .properties)
+      }
+      if !self.propertyOrdering.isEmpty {
+        try container.encode(self.propertyOrdering, forKey: .propertyOrdering)
+      }
+      if !self.`required`.isEmpty {
+        try container.encode(self.`required`, forKey: .`required`)
+      }
+      if self.minProperties != 0 {
+        try container.encode(self.minProperties, forKey: .minProperties)
+      }
+      if self.maxProperties != 0 {
+        try container.encode(self.maxProperties, forKey: .maxProperties)
+      }
+      if self.minimum != 0 {
+        try container.encode(self.minimum, forKey: .minimum)
+      }
+      if self.maximum != 0 {
+        try container.encode(self.maximum, forKey: .maximum)
+      }
+      if self.minLength != 0 {
+        try container.encode(self.minLength, forKey: .minLength)
+      }
+      if self.maxLength != 0 {
+        try container.encode(self.maxLength, forKey: .maxLength)
+      }
+      if !self.pattern.isEmpty {
+        try container.encode(self.pattern, forKey: .pattern)
+      }
       try container.encodeIfPresent(self.example, forKey: .example)
-      try container.encode(self.anyOf, forKey: .anyOf)
+      if !self.anyOf.isEmpty {
+        try container.encode(self.anyOf, forKey: .anyOf)
+      }
       try container.encodeIfPresent(self.additionalProperties, forKey: .additionalProperties)
-      try container.encode(self.ref, forKey: .ref)
-      try container.encode(self.defs, forKey: .defs)
+      if !self.ref.isEmpty {
+        try container.encode(self.ref, forKey: .ref)
+      }
+      if !self.defs.isEmpty {
+        try container.encode(self.defs, forKey: .defs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

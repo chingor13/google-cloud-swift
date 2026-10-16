@@ -115,11 +115,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.errorSamples, forKey: .errorSamples)
+      if !self.errorSamples.isEmpty {
+        try container.encode(self.errorSamples, forKey: .errorSamples)
+      }
       try container.encodeIfPresent(self.errorConfig, forKey: .errorConfig)
-      try container.encode(self.modelStatus, forKey: .modelStatus)
-      try container.encode(self.metrics, forKey: .metrics)
-      try container.encode(self.modelName, forKey: .modelName)
+      if !self.modelStatus.isEmpty {
+        try container.encode(self.modelStatus, forKey: .modelStatus)
+      }
+      if !self.metrics.isEmpty {
+        try container.encode(self.metrics, forKey: .metrics)
+      }
+      if !self.modelName.isEmpty {
+        try container.encode(self.modelName, forKey: .modelName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

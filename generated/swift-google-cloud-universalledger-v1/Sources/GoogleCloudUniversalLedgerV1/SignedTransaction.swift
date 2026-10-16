@@ -143,11 +143,21 @@ public struct SignedTransaction: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serializedClientTransaction, forKey: .serializedClientTransaction)
-    try container.encode(self.senderSignature, forKey: .senderSignature)
-    try container.encode(self.senderSigningKeySlot, forKey: .senderSigningKeySlot)
-    try container.encode(self.otherSignatures, forKey: .otherSignatures)
-    try container.encode(self.otherSigningKeySlots, forKey: .otherSigningKeySlots)
+    if !self.serializedClientTransaction.isEmpty {
+      try container.encode(self.serializedClientTransaction, forKey: .serializedClientTransaction)
+    }
+    if !self.senderSignature.isEmpty {
+      try container.encode(self.senderSignature, forKey: .senderSignature)
+    }
+    if self.senderSigningKeySlot != KeySlot() {
+      try container.encode(self.senderSigningKeySlot, forKey: .senderSigningKeySlot)
+    }
+    if !self.otherSignatures.isEmpty {
+      try container.encode(self.otherSignatures, forKey: .otherSignatures)
+    }
+    if !self.otherSigningKeySlots.isEmpty {
+      try container.encode(self.otherSigningKeySlots, forKey: .otherSigningKeySlots)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -81,8 +81,12 @@ public struct SurgeSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maxSurge, forKey: .maxSurge)
-    try container.encode(self.maxUnavailable, forKey: .maxUnavailable)
+    if self.maxSurge != 0 {
+      try container.encode(self.maxSurge, forKey: .maxSurge)
+    }
+    if self.maxUnavailable != 0 {
+      try container.encode(self.maxUnavailable, forKey: .maxUnavailable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

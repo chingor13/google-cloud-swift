@@ -80,7 +80,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.facilities, forKey: .facilities)
+      if !self.facilities.isEmpty {
+        try container.encode(self.facilities, forKey: .facilities)
+      }
       try container.encodeIfPresent(self.metro, forKey: .metro)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

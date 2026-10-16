@@ -93,9 +93,15 @@ public struct ListManagementDnsZoneBindingsResponse: Codable, Equatable, GoogleW
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.managementDnsZoneBindings, forKey: .managementDnsZoneBindings)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.managementDnsZoneBindings.isEmpty {
+      try container.encode(self.managementDnsZoneBindings, forKey: .managementDnsZoneBindings)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

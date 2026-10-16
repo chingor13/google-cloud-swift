@@ -96,10 +96,18 @@ public struct TdxCcelAttestation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ccelAcpiTable, forKey: .ccelAcpiTable)
-    try container.encode(self.ccelData, forKey: .ccelData)
-    try container.encode(self.canonicalEventLog, forKey: .canonicalEventLog)
-    try container.encode(self.tdQuote, forKey: .tdQuote)
+    if !self.ccelAcpiTable.isEmpty {
+      try container.encode(self.ccelAcpiTable, forKey: .ccelAcpiTable)
+    }
+    if !self.ccelData.isEmpty {
+      try container.encode(self.ccelData, forKey: .ccelData)
+    }
+    if !self.canonicalEventLog.isEmpty {
+      try container.encode(self.canonicalEventLog, forKey: .canonicalEventLog)
+    }
+    if !self.tdQuote.isEmpty {
+      try container.encode(self.tdQuote, forKey: .tdQuote)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

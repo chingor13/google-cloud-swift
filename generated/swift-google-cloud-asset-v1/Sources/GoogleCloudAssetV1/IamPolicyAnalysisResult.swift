@@ -123,11 +123,17 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attachedResourceFullName, forKey: .attachedResourceFullName)
+    if !self.attachedResourceFullName.isEmpty {
+      try container.encode(self.attachedResourceFullName, forKey: .attachedResourceFullName)
+    }
     try container.encodeIfPresent(self.iamBinding, forKey: .iamBinding)
-    try container.encode(self.accessControlLists, forKey: .accessControlLists)
+    if !self.accessControlLists.isEmpty {
+      try container.encode(self.accessControlLists, forKey: .accessControlLists)
+    }
     try container.encodeIfPresent(self.identityList, forKey: .identityList)
-    try container.encode(self.fullyExplored, forKey: .fullyExplored)
+    if self.fullyExplored {
+      try container.encode(self.fullyExplored, forKey: .fullyExplored)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -193,7 +199,9 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      if !self.fullResourceName.isEmpty {
+        try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      }
       try container.encodeIfPresent(self.analysisState, forKey: .analysisState)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -410,7 +418,9 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.analysisState, forKey: .analysisState)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -501,8 +511,12 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceNode, forKey: .sourceNode)
-      try container.encode(self.targetNode, forKey: .targetNode)
+      if !self.sourceNode.isEmpty {
+        try container.encode(self.sourceNode, forKey: .sourceNode)
+      }
+      if !self.targetNode.isEmpty {
+        try container.encode(self.targetNode, forKey: .targetNode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -639,9 +653,15 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resources, forKey: .resources)
-      try container.encode(self.accesses, forKey: .accesses)
-      try container.encode(self.resourceEdges, forKey: .resourceEdges)
+      if !self.resources.isEmpty {
+        try container.encode(self.resources, forKey: .resources)
+      }
+      if !self.accesses.isEmpty {
+        try container.encode(self.accesses, forKey: .accesses)
+      }
+      if !self.resourceEdges.isEmpty {
+        try container.encode(self.resourceEdges, forKey: .resourceEdges)
+      }
       try container.encodeIfPresent(self.conditionEvaluation, forKey: .conditionEvaluation)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -750,8 +770,12 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.identities, forKey: .identities)
-      try container.encode(self.groupEdges, forKey: .groupEdges)
+      if !self.identities.isEmpty {
+        try container.encode(self.identities, forKey: .identities)
+      }
+      if !self.groupEdges.isEmpty {
+        try container.encode(self.groupEdges, forKey: .groupEdges)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

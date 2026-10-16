@@ -219,8 +219,12 @@
       try container.encodeIfPresent(
         self.ragFileTransformationConfig, forKey: .ragFileTransformationConfig)
       try container.encodeIfPresent(self.ragFileParsingConfig, forKey: .ragFileParsingConfig)
-      try container.encode(self.maxEmbeddingRequestsPerMin, forKey: .maxEmbeddingRequestsPerMin)
-      try container.encode(self.rebuildAnnIndex, forKey: .rebuildAnnIndex)
+      if self.maxEmbeddingRequestsPerMin != 0 {
+        try container.encode(self.maxEmbeddingRequestsPerMin, forKey: .maxEmbeddingRequestsPerMin)
+      }
+      if self.rebuildAnnIndex {
+        try container.encode(self.rebuildAnnIndex, forKey: .rebuildAnnIndex)
+      }
 
       if let choice = self.importSource {
         switch choice {

@@ -123,11 +123,21 @@ public struct LabelDetectionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labelDetectionMode, forKey: .labelDetectionMode)
-    try container.encode(self.stationaryCamera, forKey: .stationaryCamera)
-    try container.encode(self.model, forKey: .model)
-    try container.encode(self.frameConfidenceThreshold, forKey: .frameConfidenceThreshold)
-    try container.encode(self.videoConfidenceThreshold, forKey: .videoConfidenceThreshold)
+    if self.labelDetectionMode != LabelDetectionMode() {
+      try container.encode(self.labelDetectionMode, forKey: .labelDetectionMode)
+    }
+    if self.stationaryCamera {
+      try container.encode(self.stationaryCamera, forKey: .stationaryCamera)
+    }
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
+    if self.frameConfidenceThreshold != 0 {
+      try container.encode(self.frameConfidenceThreshold, forKey: .frameConfidenceThreshold)
+    }
+    if self.videoConfidenceThreshold != 0 {
+      try container.encode(self.videoConfidenceThreshold, forKey: .videoConfidenceThreshold)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -119,13 +119,27 @@ public struct AiModel: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.domain, forKey: .domain)
-    try container.encode(self.library, forKey: .library)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.publisher, forKey: .publisher)
-    try container.encode(self.deploymentPlatform, forKey: .deploymentPlatform)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
+    if !self.library.isEmpty {
+      try container.encode(self.library, forKey: .library)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.publisher.isEmpty {
+      try container.encode(self.publisher, forKey: .publisher)
+    }
+    if self.deploymentPlatform != AiModel.DeploymentPlatform() {
+      try container.encode(self.deploymentPlatform, forKey: .deploymentPlatform)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

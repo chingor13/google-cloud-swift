@@ -120,9 +120,15 @@ public struct ReviewDocumentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.humanReviewConfig, forKey: .humanReviewConfig)
-    try container.encode(self.enableSchemaValidation, forKey: .enableSchemaValidation)
-    try container.encode(self.priority, forKey: .priority)
+    if !self.humanReviewConfig.isEmpty {
+      try container.encode(self.humanReviewConfig, forKey: .humanReviewConfig)
+    }
+    if self.enableSchemaValidation {
+      try container.encode(self.enableSchemaValidation, forKey: .enableSchemaValidation)
+    }
+    if self.priority != ReviewDocumentRequest.Priority() {
+      try container.encode(self.priority, forKey: .priority)
+    }
     try container.encodeIfPresent(self.documentSchema, forKey: .documentSchema)
 
     if let choice = self.source {

@@ -140,16 +140,26 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(
       self.certificateAuthorityConfig, forKey: .certificateAuthorityConfig)
     try container.encodeIfPresent(self.lifetime, forKey: .lifetime)
-    try container.encode(self.rotationWindowPercentage, forKey: .rotationWindowPercentage)
-    try container.encode(self.keyAlgorithm, forKey: .keyAlgorithm)
+    if self.rotationWindowPercentage != 0 {
+      try container.encode(self.rotationWindowPercentage, forKey: .rotationWindowPercentage)
+    }
+    if self.keyAlgorithm != CertificateIssuanceConfig.KeyAlgorithm() {
+      try container.encode(self.keyAlgorithm, forKey: .keyAlgorithm)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -289,7 +299,9 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.caPool, forKey: .caPool)
+        if !self.caPool.isEmpty {
+          try container.encode(self.caPool, forKey: .caPool)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

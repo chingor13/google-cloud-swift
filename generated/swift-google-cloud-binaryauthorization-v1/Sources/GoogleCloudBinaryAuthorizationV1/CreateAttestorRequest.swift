@@ -98,8 +98,12 @@ public struct CreateAttestorRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.attestorId, forKey: .attestorId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.attestorId.isEmpty {
+      try container.encode(self.attestorId, forKey: .attestorId)
+    }
     try container.encodeIfPresent(self.attestor, forKey: .attestor)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

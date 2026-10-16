@@ -91,9 +91,15 @@ public struct LoginProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.posixAccounts, forKey: .posixAccounts)
-    try container.encode(self.sshPublicKeys, forKey: .sshPublicKeys)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.posixAccounts.isEmpty {
+      try container.encode(self.posixAccounts, forKey: .posixAccounts)
+    }
+    if !self.sshPublicKeys.isEmpty {
+      try container.encode(self.sshPublicKeys, forKey: .sshPublicKeys)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

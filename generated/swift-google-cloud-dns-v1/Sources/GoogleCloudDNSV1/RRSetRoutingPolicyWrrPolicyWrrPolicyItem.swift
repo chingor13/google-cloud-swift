@@ -96,8 +96,12 @@ public struct RRSetRoutingPolicyWrrPolicyWrrPolicyItem: Codable, Equatable, Goog
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.healthCheckedTargets, forKey: .healthCheckedTargets)
     try container.encodeIfPresent(self.kind, forKey: .kind)
-    try container.encode(self.rrdatas, forKey: .rrdatas)
-    try container.encode(self.signatureRrdatas, forKey: .signatureRrdatas)
+    if !self.rrdatas.isEmpty {
+      try container.encode(self.rrdatas, forKey: .rrdatas)
+    }
+    if !self.signatureRrdatas.isEmpty {
+      try container.encode(self.signatureRrdatas, forKey: .signatureRrdatas)
+    }
     try container.encodeIfPresent(self.weight, forKey: .weight)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

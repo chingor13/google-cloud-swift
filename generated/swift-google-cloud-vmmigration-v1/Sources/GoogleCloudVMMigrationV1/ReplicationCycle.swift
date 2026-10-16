@@ -146,16 +146,28 @@ public struct ReplicationCycle: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.cycleNumber, forKey: .cycleNumber)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.cycleNumber != 0 {
+      try container.encode(self.cycleNumber, forKey: .cycleNumber)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.totalPauseDuration, forKey: .totalPauseDuration)
-    try container.encode(self.progressPercent, forKey: .progressPercent)
-    try container.encode(self.steps, forKey: .steps)
-    try container.encode(self.state, forKey: .state)
+    if self.progressPercent != 0 {
+      try container.encode(self.progressPercent, forKey: .progressPercent)
+    }
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
+    if self.state != ReplicationCycle.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.warnings, forKey: .warnings)
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

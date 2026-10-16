@@ -141,11 +141,21 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.groundingMetadata, forKey: .groundingMetadata)
-      try container.encode(self.partial, forKey: .partial)
-      try container.encode(self.turnComplete, forKey: .turnComplete)
-      try container.encode(self.interrupted, forKey: .interrupted)
-      try container.encode(self.longRunningToolIds, forKey: .longRunningToolIds)
-      try container.encode(self.branch, forKey: .branch)
+      if self.partial {
+        try container.encode(self.partial, forKey: .partial)
+      }
+      if self.turnComplete {
+        try container.encode(self.turnComplete, forKey: .turnComplete)
+      }
+      if self.interrupted {
+        try container.encode(self.interrupted, forKey: .interrupted)
+      }
+      if !self.longRunningToolIds.isEmpty {
+        try container.encode(self.longRunningToolIds, forKey: .longRunningToolIds)
+      }
+      if !self.branch.isEmpty {
+        try container.encode(self.branch, forKey: .branch)
+      }
       try container.encodeIfPresent(self.customMetadata, forKey: .customMetadata)
       try container.encodeIfPresent(self.inputTranscription, forKey: .inputTranscription)
       try container.encodeIfPresent(self.outputTranscription, forKey: .outputTranscription)

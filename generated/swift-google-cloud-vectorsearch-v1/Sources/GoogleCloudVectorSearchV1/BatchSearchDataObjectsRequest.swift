@@ -85,8 +85,12 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.searches, forKey: .searches)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.searches.isEmpty {
+      try container.encode(self.searches, forKey: .searches)
+    }
     try container.encodeIfPresent(self.combine, forKey: .combine)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -160,7 +164,9 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyP
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.ranker, forKey: .ranker)
       try container.encodeIfPresent(self.outputFields, forKey: .outputFields)
-      try container.encode(self.topK, forKey: .topK)
+      if self.topK != 0 {
+        try container.encode(self.topK, forKey: .topK)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

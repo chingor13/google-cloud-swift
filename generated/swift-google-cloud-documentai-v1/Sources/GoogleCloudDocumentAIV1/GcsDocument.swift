@@ -77,8 +77,12 @@ public struct GcsDocument: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gcsUri, forKey: .gcsUri)
-    try container.encode(self.mimeType, forKey: .mimeType)
+    if !self.gcsUri.isEmpty {
+      try container.encode(self.gcsUri, forKey: .gcsUri)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

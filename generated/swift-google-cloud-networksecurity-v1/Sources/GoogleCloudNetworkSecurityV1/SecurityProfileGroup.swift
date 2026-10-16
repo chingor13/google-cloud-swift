@@ -163,17 +163,35 @@ public struct SecurityProfileGroup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.dataPathId, forKey: .dataPathId)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.threatPreventionProfile, forKey: .threatPreventionProfile)
-    try container.encode(self.customMirroringProfile, forKey: .customMirroringProfile)
-    try container.encode(self.customInterceptProfile, forKey: .customInterceptProfile)
-    try container.encode(self.urlFilteringProfile, forKey: .urlFilteringProfile)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.dataPathId != 0 {
+      try container.encode(self.dataPathId, forKey: .dataPathId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.threatPreventionProfile.isEmpty {
+      try container.encode(self.threatPreventionProfile, forKey: .threatPreventionProfile)
+    }
+    if !self.customMirroringProfile.isEmpty {
+      try container.encode(self.customMirroringProfile, forKey: .customMirroringProfile)
+    }
+    if !self.customInterceptProfile.isEmpty {
+      try container.encode(self.customInterceptProfile, forKey: .customInterceptProfile)
+    }
+    if !self.urlFilteringProfile.isEmpty {
+      try container.encode(self.urlFilteringProfile, forKey: .urlFilteringProfile)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -214,17 +214,29 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.scheduleTime, forKey: .scheduleTime)
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
     try container.encodeIfPresent(self.counters, forKey: .counters)
-    try container.encode(self.errorSummaries, forKey: .errorSummaries)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.dryRun, forKey: .dryRun)
-    try container.encode(self.isMultiBucketJob, forKey: .isMultiBucketJob)
+    if !self.errorSummaries.isEmpty {
+      try container.encode(self.errorSummaries, forKey: .errorSummaries)
+    }
+    if self.state != Job.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.dryRun {
+      try container.encode(self.dryRun, forKey: .dryRun)
+    }
+    if self.isMultiBucketJob {
+      try container.encode(self.isMultiBucketJob, forKey: .isMultiBucketJob)
+    }
 
     if let choice = self.source {
       switch choice {

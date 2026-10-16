@@ -117,11 +117,21 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.deployedModels, forKey: .deployedModels)
-      try container.encode(self.nextPageToken, forKey: .nextPageToken)
-      try container.encode(self.deployedModelRefs, forKey: .deployedModelRefs)
-      try container.encode(self.totalDeployedModelCount, forKey: .totalDeployedModelCount)
-      try container.encode(self.totalEndpointCount, forKey: .totalEndpointCount)
+      if !self.deployedModels.isEmpty {
+        try container.encode(self.deployedModels, forKey: .deployedModels)
+      }
+      if !self.nextPageToken.isEmpty {
+        try container.encode(self.nextPageToken, forKey: .nextPageToken)
+      }
+      if !self.deployedModelRefs.isEmpty {
+        try container.encode(self.deployedModelRefs, forKey: .deployedModelRefs)
+      }
+      if self.totalDeployedModelCount != 0 {
+        try container.encode(self.totalDeployedModelCount, forKey: .totalDeployedModelCount)
+      }
+      if self.totalEndpointCount != 0 {
+        try container.encode(self.totalEndpointCount, forKey: .totalEndpointCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

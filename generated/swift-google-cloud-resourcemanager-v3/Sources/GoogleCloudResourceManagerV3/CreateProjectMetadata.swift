@@ -89,8 +89,12 @@ public struct CreateProjectMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.gettable, forKey: .gettable)
-    try container.encode(self.ready, forKey: .ready)
+    if self.gettable {
+      try container.encode(self.gettable, forKey: .gettable)
+    }
+    if self.ready {
+      try container.encode(self.ready, forKey: .ready)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

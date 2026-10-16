@@ -74,8 +74,12 @@ public struct EnvelopeSignature: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sig, forKey: .sig)
-    try container.encode(self.keyid, forKey: .keyid)
+    if !self.sig.isEmpty {
+      try container.encode(self.sig, forKey: .sig)
+    }
+    if !self.keyid.isEmpty {
+      try container.encode(self.keyid, forKey: .keyid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

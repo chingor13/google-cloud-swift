@@ -110,11 +110,19 @@ public struct CreateFolderRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.folder, forKey: .folder)
-    try container.encode(self.folderId, forKey: .folderId)
-    try container.encode(self.recursive, forKey: .recursive)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.folderId.isEmpty {
+      try container.encode(self.folderId, forKey: .folderId)
+    }
+    if self.recursive {
+      try container.encode(self.recursive, forKey: .recursive)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

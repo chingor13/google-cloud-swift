@@ -122,14 +122,26 @@ public struct ExecutionResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.violationMessage, forKey: .violationMessage)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.rule, forKey: .rule)
-    try container.encode(self.documentationUrl, forKey: .documentationUrl)
+    if !self.violationMessage.isEmpty {
+      try container.encode(self.violationMessage, forKey: .violationMessage)
+    }
+    if !self.severity.isEmpty {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.rule.isEmpty {
+      try container.encode(self.rule, forKey: .rule)
+    }
+    if !self.documentationUrl.isEmpty {
+      try container.encode(self.documentationUrl, forKey: .documentationUrl)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
     try container.encodeIfPresent(self.violationDetails, forKey: .violationDetails)
-    try container.encode(self.commands, forKey: .commands)
-    try container.encode(self.type, forKey: .type)
+    if !self.commands.isEmpty {
+      try container.encode(self.commands, forKey: .commands)
+    }
+    if self.type != ExecutionResult.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

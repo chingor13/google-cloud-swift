@@ -133,15 +133,33 @@ public struct Jwk: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kty, forKey: .kty)
-    try container.encode(self.alg, forKey: .alg)
-    try container.encode(self.use, forKey: .use)
-    try container.encode(self.kid, forKey: .kid)
-    try container.encode(self.n, forKey: .n)
-    try container.encode(self.e, forKey: .e)
-    try container.encode(self.x, forKey: .x)
-    try container.encode(self.y, forKey: .y)
-    try container.encode(self.crv, forKey: .crv)
+    if !self.kty.isEmpty {
+      try container.encode(self.kty, forKey: .kty)
+    }
+    if !self.alg.isEmpty {
+      try container.encode(self.alg, forKey: .alg)
+    }
+    if !self.use.isEmpty {
+      try container.encode(self.use, forKey: .use)
+    }
+    if !self.kid.isEmpty {
+      try container.encode(self.kid, forKey: .kid)
+    }
+    if !self.n.isEmpty {
+      try container.encode(self.n, forKey: .n)
+    }
+    if !self.e.isEmpty {
+      try container.encode(self.e, forKey: .e)
+    }
+    if !self.x.isEmpty {
+      try container.encode(self.x, forKey: .x)
+    }
+    if !self.y.isEmpty {
+      try container.encode(self.y, forKey: .y)
+    }
+    if !self.crv.isEmpty {
+      try container.encode(self.crv, forKey: .crv)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

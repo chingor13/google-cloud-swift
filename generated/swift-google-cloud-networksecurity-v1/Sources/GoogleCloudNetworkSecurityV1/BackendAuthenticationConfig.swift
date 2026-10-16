@@ -165,15 +165,29 @@ public struct BackendAuthenticationConfig: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.clientCertificate, forKey: .clientCertificate)
-    try container.encode(self.trustConfig, forKey: .trustConfig)
-    try container.encode(self.wellKnownRoots, forKey: .wellKnownRoots)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.clientCertificate.isEmpty {
+      try container.encode(self.clientCertificate, forKey: .clientCertificate)
+    }
+    if !self.trustConfig.isEmpty {
+      try container.encode(self.trustConfig, forKey: .trustConfig)
+    }
+    if self.wellKnownRoots != BackendAuthenticationConfig.WellKnownRoots() {
+      try container.encode(self.wellKnownRoots, forKey: .wellKnownRoots)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

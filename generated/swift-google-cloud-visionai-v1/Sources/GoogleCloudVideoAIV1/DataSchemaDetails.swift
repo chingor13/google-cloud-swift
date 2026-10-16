@@ -168,7 +168,9 @@ public struct DataSchemaDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.typeUri, forKey: .typeUri)
+      if !self.typeUri.isEmpty {
+        try container.encode(self.typeUri, forKey: .typeUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -329,7 +331,9 @@ public struct DataSchemaDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fieldSchemas, forKey: .fieldSchemas)
+      if !self.fieldSchemas.isEmpty {
+        try container.encode(self.fieldSchemas, forKey: .fieldSchemas)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -550,8 +554,12 @@ public struct DataSchemaDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.fieldPath, forKey: .fieldPath)
-        try container.encode(self.threshold, forKey: .threshold)
+        if !self.fieldPath.isEmpty {
+          try container.encode(self.fieldPath, forKey: .fieldPath)
+        }
+        if self.threshold != 0 {
+          try container.encode(self.threshold, forKey: .threshold)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

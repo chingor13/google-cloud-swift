@@ -274,16 +274,26 @@ public struct CryptoKey: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.primary, forKey: .primary)
-    try container.encode(self.purpose, forKey: .purpose)
+    if self.purpose != CryptoKey.CryptoKeyPurpose() {
+      try container.encode(self.purpose, forKey: .purpose)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.nextRotationTime, forKey: .nextRotationTime)
     try container.encodeIfPresent(self.versionTemplate, forKey: .versionTemplate)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.importOnly, forKey: .importOnly)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.importOnly {
+      try container.encode(self.importOnly, forKey: .importOnly)
+    }
     try container.encodeIfPresent(self.destroyScheduledDuration, forKey: .destroyScheduledDuration)
-    try container.encode(self.cryptoKeyBackend, forKey: .cryptoKeyBackend)
+    if !self.cryptoKeyBackend.isEmpty {
+      try container.encode(self.cryptoKeyBackend, forKey: .cryptoKeyBackend)
+    }
     try container.encodeIfPresent(
       self.keyAccessJustificationsPolicy, forKey: .keyAccessJustificationsPolicy)
 

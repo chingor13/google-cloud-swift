@@ -145,14 +145,28 @@ public struct LiveConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sourceUri, forKey: .sourceUri)
-    try container.encode(self.adTagUri, forKey: .adTagUri)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.sourceUri.isEmpty {
+      try container.encode(self.sourceUri, forKey: .sourceUri)
+    }
+    if !self.adTagUri.isEmpty {
+      try container.encode(self.adTagUri, forKey: .adTagUri)
+    }
     try container.encodeIfPresent(self.gamLiveConfig, forKey: .gamLiveConfig)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.adTracking, forKey: .adTracking)
-    try container.encode(self.defaultSlate, forKey: .defaultSlate)
-    try container.encode(self.stitchingPolicy, forKey: .stitchingPolicy)
+    if self.state != LiveConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.adTracking != AdTracking() {
+      try container.encode(self.adTracking, forKey: .adTracking)
+    }
+    if !self.defaultSlate.isEmpty {
+      try container.encode(self.defaultSlate, forKey: .defaultSlate)
+    }
+    if self.stitchingPolicy != LiveConfig.StitchingPolicy() {
+      try container.encode(self.stitchingPolicy, forKey: .stitchingPolicy)
+    }
     try container.encodeIfPresent(self.prefetchConfig, forKey: .prefetchConfig)
     try container.encodeIfPresent(self.sourceFetchOptions, forKey: .sourceFetchOptions)
     for (key, value) in self._unknownFields.json {

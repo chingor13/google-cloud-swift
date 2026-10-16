@@ -164,19 +164,37 @@ public struct BuildProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.commands, forKey: .commands)
-    try container.encode(self.builtArtifacts, forKey: .builtArtifacts)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.commands.isEmpty {
+      try container.encode(self.commands, forKey: .commands)
+    }
+    if !self.builtArtifacts.isEmpty {
+      try container.encode(self.builtArtifacts, forKey: .builtArtifacts)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.logsUri, forKey: .logsUri)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.logsUri.isEmpty {
+      try container.encode(self.logsUri, forKey: .logsUri)
+    }
     try container.encodeIfPresent(self.sourceProvenance, forKey: .sourceProvenance)
-    try container.encode(self.triggerId, forKey: .triggerId)
-    try container.encode(self.buildOptions, forKey: .buildOptions)
-    try container.encode(self.builderVersion, forKey: .builderVersion)
+    if !self.triggerId.isEmpty {
+      try container.encode(self.triggerId, forKey: .triggerId)
+    }
+    if !self.buildOptions.isEmpty {
+      try container.encode(self.buildOptions, forKey: .buildOptions)
+    }
+    if !self.builderVersion.isEmpty {
+      try container.encode(self.builderVersion, forKey: .builderVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

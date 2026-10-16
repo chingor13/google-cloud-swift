@@ -92,9 +92,15 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.channelConfigs, forKey: .channelConfigs)
-    try container.encode(self.subscriberConfigs, forKey: .subscriberConfigs)
-    try container.encode(self.routingConfigs, forKey: .routingConfigs)
+    if !self.channelConfigs.isEmpty {
+      try container.encode(self.channelConfigs, forKey: .channelConfigs)
+    }
+    if !self.subscriberConfigs.isEmpty {
+      try container.encode(self.subscriberConfigs, forKey: .subscriberConfigs)
+    }
+    if !self.routingConfigs.isEmpty {
+      try container.encode(self.routingConfigs, forKey: .routingConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -307,12 +313,24 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.phoneNumberId, forKey: .phoneNumberId)
-      try container.encode(self.phoneNumber, forKey: .phoneNumber)
-      try container.encode(self.whatsappBusinessAccountId, forKey: .whatsappBusinessAccountId)
-      try container.encode(self.webhookVerifyToken, forKey: .webhookVerifyToken)
-      try container.encode(self.whatsappBusinessToken, forKey: .whatsappBusinessToken)
-      try container.encode(self.metaBusinessPortfolioId, forKey: .metaBusinessPortfolioId)
+      if !self.phoneNumberId.isEmpty {
+        try container.encode(self.phoneNumberId, forKey: .phoneNumberId)
+      }
+      if !self.phoneNumber.isEmpty {
+        try container.encode(self.phoneNumber, forKey: .phoneNumber)
+      }
+      if !self.whatsappBusinessAccountId.isEmpty {
+        try container.encode(self.whatsappBusinessAccountId, forKey: .whatsappBusinessAccountId)
+      }
+      if !self.webhookVerifyToken.isEmpty {
+        try container.encode(self.webhookVerifyToken, forKey: .webhookVerifyToken)
+      }
+      if !self.whatsappBusinessToken.isEmpty {
+        try container.encode(self.whatsappBusinessToken, forKey: .whatsappBusinessToken)
+      }
+      if !self.metaBusinessPortfolioId.isEmpty {
+        try container.encode(self.metaBusinessPortfolioId, forKey: .metaBusinessPortfolioId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -499,7 +517,9 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.app, forKey: .app)
+      if !self.app.isEmpty {
+        try container.encode(self.app, forKey: .app)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -579,7 +599,9 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.subscriberKey, forKey: .subscriberKey)
+      if !self.subscriberKey.isEmpty {
+        try container.encode(self.subscriberKey, forKey: .subscriberKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

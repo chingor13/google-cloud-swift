@@ -91,8 +91,12 @@ public struct VodSessionAdBreak: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.progressEvents, forKey: .progressEvents)
-    try container.encode(self.ads, forKey: .ads)
+    if !self.progressEvents.isEmpty {
+      try container.encode(self.progressEvents, forKey: .progressEvents)
+    }
+    if !self.ads.isEmpty {
+      try container.encode(self.ads, forKey: .ads)
+    }
     try container.encodeIfPresent(self.endTimeOffset, forKey: .endTimeOffset)
     try container.encodeIfPresent(self.startTimeOffset, forKey: .startTimeOffset)
     for (key, value) in self._unknownFields.json {

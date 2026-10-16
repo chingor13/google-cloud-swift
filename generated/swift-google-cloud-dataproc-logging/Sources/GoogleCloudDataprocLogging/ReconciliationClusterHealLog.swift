@@ -134,8 +134,12 @@ public struct ReconciliationClusterHealLog: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repairOperationId, forKey: .repairOperationId)
-      try container.encode(self.decisionDetails, forKey: .decisionDetails)
+      if !self.repairOperationId.isEmpty {
+        try container.encode(self.repairOperationId, forKey: .repairOperationId)
+      }
+      if !self.decisionDetails.isEmpty {
+        try container.encode(self.decisionDetails, forKey: .decisionDetails)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

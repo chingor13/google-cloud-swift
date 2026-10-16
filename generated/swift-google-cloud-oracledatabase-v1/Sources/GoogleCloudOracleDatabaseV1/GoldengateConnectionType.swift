@@ -93,9 +93,16 @@ public struct GoldengateConnectionType: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.connectionType, forKey: .connectionType)
-    try container.encode(self.technologyTypes, forKey: .technologyTypes)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.connectionType != GoogleCloudOracleDatabaseV1.GoldengateConnectionType.ConnectionType()
+    {
+      try container.encode(self.connectionType, forKey: .connectionType)
+    }
+    if !self.technologyTypes.isEmpty {
+      try container.encode(self.technologyTypes, forKey: .technologyTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

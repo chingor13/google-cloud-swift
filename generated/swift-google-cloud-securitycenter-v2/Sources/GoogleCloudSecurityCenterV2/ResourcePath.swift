@@ -73,7 +73,9 @@ public struct ResourcePath: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nodes, forKey: .nodes)
+    if !self.nodes.isEmpty {
+      try container.encode(self.nodes, forKey: .nodes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -150,9 +152,15 @@ public struct ResourcePath: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nodeType, forKey: .nodeType)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
+      if self.nodeType != ResourcePath.ResourcePathNodeType() {
+        try container.encode(self.nodeType, forKey: .nodeType)
+      }
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

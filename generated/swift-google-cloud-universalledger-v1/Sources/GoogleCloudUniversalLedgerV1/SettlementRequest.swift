@@ -105,10 +105,16 @@ public struct SettlementRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.payerId, forKey: .payerId)
-    try container.encode(self.beneficiaryId, forKey: .beneficiaryId)
+    if !self.payerId.isEmpty {
+      try container.encode(self.payerId, forKey: .payerId)
+    }
+    if !self.beneficiaryId.isEmpty {
+      try container.encode(self.beneficiaryId, forKey: .beneficiaryId)
+    }
     try container.encodeIfPresent(self.balance, forKey: .balance)
-    try container.encode(self.roundId, forKey: .roundId)
+    if self.roundId != 0 {
+      try container.encode(self.roundId, forKey: .roundId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -79,8 +79,12 @@ public struct DataCollectionOptionsDbSystem: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.isDiagnosticsEventsEnabled, forKey: .isDiagnosticsEventsEnabled)
-    try container.encode(self.isIncidentLogsEnabled, forKey: .isIncidentLogsEnabled)
+    if self.isDiagnosticsEventsEnabled {
+      try container.encode(self.isDiagnosticsEventsEnabled, forKey: .isDiagnosticsEventsEnabled)
+    }
+    if self.isIncidentLogsEnabled {
+      try container.encode(self.isIncidentLogsEnabled, forKey: .isIncidentLogsEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -250,24 +250,44 @@ public struct Deployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
     try container.encodeIfPresent(self.deploymentType, forKey: .deploymentType)
-    try container.encode(self.resourceUri, forKey: .resourceUri)
-    try container.encode(self.endpoints, forKey: .endpoints)
-    try container.encode(self.apiVersions, forKey: .apiVersions)
+    if !self.resourceUri.isEmpty {
+      try container.encode(self.resourceUri, forKey: .resourceUri)
+    }
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
+    if !self.apiVersions.isEmpty {
+      try container.encode(self.apiVersions, forKey: .apiVersions)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.slo, forKey: .slo)
     try container.encodeIfPresent(self.environment, forKey: .environment)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.sourceMetadata.isEmpty {
+      try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    }
     try container.encodeIfPresent(self.managementUrl, forKey: .managementUrl)
     try container.encodeIfPresent(self.sourceUri, forKey: .sourceUri)
-    try container.encode(self.sourceProject, forKey: .sourceProject)
-    try container.encode(self.sourceEnvironment, forKey: .sourceEnvironment)
+    if !self.sourceProject.isEmpty {
+      try container.encode(self.sourceProject, forKey: .sourceProject)
+    }
+    if !self.sourceEnvironment.isEmpty {
+      try container.encode(self.sourceEnvironment, forKey: .sourceEnvironment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

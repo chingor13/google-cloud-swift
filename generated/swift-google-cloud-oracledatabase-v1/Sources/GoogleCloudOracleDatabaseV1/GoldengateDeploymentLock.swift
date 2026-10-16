@@ -102,10 +102,18 @@ public struct GoldengateDeploymentLock: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.compartmentId, forKey: .compartmentId)
-    try container.encode(self.relatedResourceId, forKey: .relatedResourceId)
-    try container.encode(self.message, forKey: .message)
+    if self.type != GoldengateDeploymentLock.LockType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.compartmentId.isEmpty {
+      try container.encode(self.compartmentId, forKey: .compartmentId)
+    }
+    if !self.relatedResourceId.isEmpty {
+      try container.encode(self.relatedResourceId, forKey: .relatedResourceId)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

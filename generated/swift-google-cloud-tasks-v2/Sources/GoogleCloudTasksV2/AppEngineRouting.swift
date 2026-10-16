@@ -184,10 +184,18 @@ public struct AppEngineRouting: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.host, forKey: .host)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

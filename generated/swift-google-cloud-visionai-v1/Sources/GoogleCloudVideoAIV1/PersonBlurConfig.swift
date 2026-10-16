@@ -79,8 +79,12 @@ public struct PersonBlurConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.personBlurType, forKey: .personBlurType)
-    try container.encode(self.facesOnly, forKey: .facesOnly)
+    if self.personBlurType != PersonBlurConfig.PersonBlurType() {
+      try container.encode(self.personBlurType, forKey: .personBlurType)
+    }
+    if self.facesOnly {
+      try container.encode(self.facesOnly, forKey: .facesOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -140,7 +140,9 @@ public struct RecognizeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.recognizer, forKey: .recognizer)
+    if !self.recognizer.isEmpty {
+      try container.encode(self.recognizer, forKey: .recognizer)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
     try container.encodeIfPresent(self.configMask, forKey: .configMask)
 

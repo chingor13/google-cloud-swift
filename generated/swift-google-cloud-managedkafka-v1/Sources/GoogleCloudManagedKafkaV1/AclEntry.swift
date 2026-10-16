@@ -103,10 +103,18 @@ public struct AclEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.principal, forKey: .principal)
-    try container.encode(self.permissionType, forKey: .permissionType)
-    try container.encode(self.operation, forKey: .operation)
-    try container.encode(self.host, forKey: .host)
+    if !self.principal.isEmpty {
+      try container.encode(self.principal, forKey: .principal)
+    }
+    if !self.permissionType.isEmpty {
+      try container.encode(self.permissionType, forKey: .permissionType)
+    }
+    if !self.operation.isEmpty {
+      try container.encode(self.operation, forKey: .operation)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

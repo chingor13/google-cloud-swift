@@ -92,8 +92,12 @@ public struct CloudAccountDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudAccount, forKey: .cloudAccount)
-    try container.encode(self.cloudAccountHomeRegion, forKey: .cloudAccountHomeRegion)
+    if !self.cloudAccount.isEmpty {
+      try container.encode(self.cloudAccount, forKey: .cloudAccount)
+    }
+    if !self.cloudAccountHomeRegion.isEmpty {
+      try container.encode(self.cloudAccountHomeRegion, forKey: .cloudAccountHomeRegion)
+    }
     try container.encodeIfPresent(self.linkExistingAccountUri, forKey: .linkExistingAccountUri)
     try container.encodeIfPresent(self.accountCreationUri, forKey: .accountCreationUri)
     for (key, value) in self._unknownFields.json {

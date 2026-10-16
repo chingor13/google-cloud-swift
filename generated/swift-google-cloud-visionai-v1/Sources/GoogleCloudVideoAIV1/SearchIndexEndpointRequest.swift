@@ -134,11 +134,21 @@ public struct SearchIndexEndpointRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.indexEndpoint, forKey: .indexEndpoint)
-    try container.encode(self.criteria, forKey: .criteria)
-    try container.encode(self.exclusionCriteria, forKey: .exclusionCriteria)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
+    if !self.indexEndpoint.isEmpty {
+      try container.encode(self.indexEndpoint, forKey: .indexEndpoint)
+    }
+    if !self.criteria.isEmpty {
+      try container.encode(self.criteria, forKey: .criteria)
+    }
+    if !self.exclusionCriteria.isEmpty {
+      try container.encode(self.exclusionCriteria, forKey: .exclusionCriteria)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
 
     if let choice = self.query {
       switch choice {

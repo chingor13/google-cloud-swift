@@ -270,24 +270,40 @@ public struct Api: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
     try container.encodeIfPresent(self.owner, forKey: .owner)
-    try container.encode(self.versions, forKey: .versions)
+    if !self.versions.isEmpty {
+      try container.encode(self.versions, forKey: .versions)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.targetUser, forKey: .targetUser)
     try container.encodeIfPresent(self.team, forKey: .team)
     try container.encodeIfPresent(self.businessUnit, forKey: .businessUnit)
     try container.encodeIfPresent(self.maturityLevel, forKey: .maturityLevel)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     try container.encodeIfPresent(self.apiStyle, forKey: .apiStyle)
-    try container.encode(self.selectedVersion, forKey: .selectedVersion)
+    if !self.selectedVersion.isEmpty {
+      try container.encode(self.selectedVersion, forKey: .selectedVersion)
+    }
     try container.encodeIfPresent(self.apiRequirements, forKey: .apiRequirements)
-    try container.encode(self.fingerprint, forKey: .fingerprint)
-    try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    if !self.fingerprint.isEmpty {
+      try container.encode(self.fingerprint, forKey: .fingerprint)
+    }
+    if !self.sourceMetadata.isEmpty {
+      try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    }
     try container.encodeIfPresent(
       self.apiFunctionalRequirements, forKey: .apiFunctionalRequirements)
     try container.encodeIfPresent(self.apiTechnicalRequirements, forKey: .apiTechnicalRequirements)

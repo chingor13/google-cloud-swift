@@ -425,49 +425,117 @@ public struct Volume: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDetails, forKey: .stateDetails)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != Volume.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDetails.isEmpty {
+      try container.encode(self.stateDetails, forKey: .stateDetails)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.shareName, forKey: .shareName)
-    try container.encode(self.psaRange, forKey: .psaRange)
-    try container.encode(self.storagePool, forKey: .storagePool)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.serviceLevel, forKey: .serviceLevel)
-    try container.encode(self.capacityGib, forKey: .capacityGib)
+    if !self.shareName.isEmpty {
+      try container.encode(self.shareName, forKey: .shareName)
+    }
+    if !self.psaRange.isEmpty {
+      try container.encode(self.psaRange, forKey: .psaRange)
+    }
+    if !self.storagePool.isEmpty {
+      try container.encode(self.storagePool, forKey: .storagePool)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if self.serviceLevel != ServiceLevel() {
+      try container.encode(self.serviceLevel, forKey: .serviceLevel)
+    }
+    if self.capacityGib != 0 {
+      try container.encode(self.capacityGib, forKey: .capacityGib)
+    }
     try container.encodeIfPresent(self.exportPolicy, forKey: .exportPolicy)
-    try container.encode(self.protocols, forKey: .protocols)
-    try container.encode(self.smbSettings, forKey: .smbSettings)
-    try container.encode(self.mountOptions, forKey: .mountOptions)
-    try container.encode(self.unixPermissions, forKey: .unixPermissions)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
+    if !self.protocols.isEmpty {
+      try container.encode(self.protocols, forKey: .protocols)
+    }
+    if !self.smbSettings.isEmpty {
+      try container.encode(self.smbSettings, forKey: .smbSettings)
+    }
+    if !self.mountOptions.isEmpty {
+      try container.encode(self.mountOptions, forKey: .mountOptions)
+    }
+    if !self.unixPermissions.isEmpty {
+      try container.encode(self.unixPermissions, forKey: .unixPermissions)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.snapshotPolicy, forKey: .snapshotPolicy)
-    try container.encode(self.snapReserve, forKey: .snapReserve)
-    try container.encode(self.snapshotDirectory, forKey: .snapshotDirectory)
-    try container.encode(self.usedGib, forKey: .usedGib)
-    try container.encode(self.securityStyle, forKey: .securityStyle)
-    try container.encode(self.kerberosEnabled, forKey: .kerberosEnabled)
-    try container.encode(self.ldapEnabled, forKey: .ldapEnabled)
-    try container.encode(self.activeDirectory, forKey: .activeDirectory)
+    if self.snapReserve != 0 {
+      try container.encode(self.snapReserve, forKey: .snapReserve)
+    }
+    if self.snapshotDirectory {
+      try container.encode(self.snapshotDirectory, forKey: .snapshotDirectory)
+    }
+    if self.usedGib != 0 {
+      try container.encode(self.usedGib, forKey: .usedGib)
+    }
+    if self.securityStyle != SecurityStyle() {
+      try container.encode(self.securityStyle, forKey: .securityStyle)
+    }
+    if self.kerberosEnabled {
+      try container.encode(self.kerberosEnabled, forKey: .kerberosEnabled)
+    }
+    if self.ldapEnabled {
+      try container.encode(self.ldapEnabled, forKey: .ldapEnabled)
+    }
+    if !self.activeDirectory.isEmpty {
+      try container.encode(self.activeDirectory, forKey: .activeDirectory)
+    }
     try container.encodeIfPresent(self.restoreParameters, forKey: .restoreParameters)
-    try container.encode(self.kmsConfig, forKey: .kmsConfig)
-    try container.encode(self.encryptionType, forKey: .encryptionType)
-    try container.encode(self.hasReplication, forKey: .hasReplication)
+    if !self.kmsConfig.isEmpty {
+      try container.encode(self.kmsConfig, forKey: .kmsConfig)
+    }
+    if self.encryptionType != EncryptionType() {
+      try container.encode(self.encryptionType, forKey: .encryptionType)
+    }
+    if self.hasReplication {
+      try container.encode(self.hasReplication, forKey: .hasReplication)
+    }
     try container.encodeIfPresent(self.backupConfig, forKey: .backupConfig)
-    try container.encode(self.restrictedActions, forKey: .restrictedActions)
-    try container.encode(self.largeCapacity, forKey: .largeCapacity)
-    try container.encode(self.multipleEndpoints, forKey: .multipleEndpoints)
+    if !self.restrictedActions.isEmpty {
+      try container.encode(self.restrictedActions, forKey: .restrictedActions)
+    }
+    if self.largeCapacity {
+      try container.encode(self.largeCapacity, forKey: .largeCapacity)
+    }
+    if self.multipleEndpoints {
+      try container.encode(self.multipleEndpoints, forKey: .multipleEndpoints)
+    }
     try container.encodeIfPresent(self.tieringPolicy, forKey: .tieringPolicy)
-    try container.encode(self.replicaZone, forKey: .replicaZone)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.coldTierSizeGib, forKey: .coldTierSizeGib)
+    if !self.replicaZone.isEmpty {
+      try container.encode(self.replicaZone, forKey: .replicaZone)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if self.coldTierSizeGib != 0 {
+      try container.encode(self.coldTierSizeGib, forKey: .coldTierSizeGib)
+    }
     try container.encodeIfPresent(
       self.hybridReplicationParameters, forKey: .hybridReplicationParameters)
-    try container.encode(self.throughputMibps, forKey: .throughputMibps)
+    if self.throughputMibps != 0 {
+      try container.encode(self.throughputMibps, forKey: .throughputMibps)
+    }
     try container.encodeIfPresent(self.cacheParameters, forKey: .cacheParameters)
-    try container.encode(self.hotTierSizeUsedGib, forKey: .hotTierSizeUsedGib)
-    try container.encode(self.blockDevices, forKey: .blockDevices)
+    if self.hotTierSizeUsedGib != 0 {
+      try container.encode(self.hotTierSizeUsedGib, forKey: .hotTierSizeUsedGib)
+    }
+    if !self.blockDevices.isEmpty {
+      try container.encode(self.blockDevices, forKey: .blockDevices)
+    }
     try container.encodeIfPresent(self.largeCapacityConfig, forKey: .largeCapacityConfig)
     try container.encodeIfPresent(self.cloneDetails, forKey: .cloneDetails)
     for (key, value) in self._unknownFields.json {
@@ -556,10 +624,18 @@ public struct Volume: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
-      try container.encode(self.sourceVolume, forKey: .sourceVolume)
-      try container.encode(self.sharedSpaceGib, forKey: .sharedSpaceGib)
-      try container.encode(self.splitState, forKey: .splitState)
+      if !self.sourceSnapshot.isEmpty {
+        try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
+      }
+      if !self.sourceVolume.isEmpty {
+        try container.encode(self.sourceVolume, forKey: .sourceVolume)
+      }
+      if self.sharedSpaceGib != 0 {
+        try container.encode(self.sharedSpaceGib, forKey: .sharedSpaceGib)
+      }
+      if self.splitState != SplitState() {
+        try container.encode(self.splitState, forKey: .splitState)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

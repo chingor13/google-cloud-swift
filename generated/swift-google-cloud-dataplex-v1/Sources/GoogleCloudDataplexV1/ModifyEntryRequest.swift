@@ -121,11 +121,17 @@ public struct ModifyEntryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.entry, forKey: .entry)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.deleteMissingAspects, forKey: .deleteMissingAspects)
-    try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    if self.deleteMissingAspects {
+      try container.encode(self.deleteMissingAspects, forKey: .deleteMissingAspects)
+    }
+    if !self.aspectKeys.isEmpty {
+      try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

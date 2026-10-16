@@ -70,7 +70,9 @@ public struct ParallelstoreCsiDriverConfig: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

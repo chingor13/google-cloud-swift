@@ -334,25 +334,47 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.timeZone, forKey: .timeZone)
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
       try container.encodeIfPresent(self.geoLocation, forKey: .geoLocation)
-      try container.encode(self.sessionEntityTypes, forKey: .sessionEntityTypes)
+      if !self.sessionEntityTypes.isEmpty {
+        try container.encode(self.sessionEntityTypes, forKey: .sessionEntityTypes)
+      }
       try container.encodeIfPresent(self.payload, forKey: .payload)
       try container.encodeIfPresent(self.parameters, forKey: .parameters)
-      try container.encode(self.parameterScope, forKey: .parameterScope)
-      try container.encode(self.currentPage, forKey: .currentPage)
-      try container.encode(self.disableWebhook, forKey: .disableWebhook)
-      try container.encode(self.analyzeQueryTextSentiment, forKey: .analyzeQueryTextSentiment)
-      try container.encode(self.webhookHeaders, forKey: .webhookHeaders)
-      try container.encode(self.flowVersions, forKey: .flowVersions)
-      try container.encode(self.currentPlaybook, forKey: .currentPlaybook)
+      if !self.parameterScope.isEmpty {
+        try container.encode(self.parameterScope, forKey: .parameterScope)
+      }
+      if !self.currentPage.isEmpty {
+        try container.encode(self.currentPage, forKey: .currentPage)
+      }
+      if self.disableWebhook {
+        try container.encode(self.disableWebhook, forKey: .disableWebhook)
+      }
+      if self.analyzeQueryTextSentiment {
+        try container.encode(self.analyzeQueryTextSentiment, forKey: .analyzeQueryTextSentiment)
+      }
+      if !self.webhookHeaders.isEmpty {
+        try container.encode(self.webhookHeaders, forKey: .webhookHeaders)
+      }
+      if !self.flowVersions.isEmpty {
+        try container.encode(self.flowVersions, forKey: .flowVersions)
+      }
+      if !self.currentPlaybook.isEmpty {
+        try container.encode(self.currentPlaybook, forKey: .currentPlaybook)
+      }
       try container.encodeIfPresent(self.llmModelSettings, forKey: .llmModelSettings)
-      try container.encode(self.channel, forKey: .channel)
+      if !self.channel.isEmpty {
+        try container.encode(self.channel, forKey: .channel)
+      }
       try container.encodeIfPresent(self.sessionTtl, forKey: .sessionTtl)
       try container.encodeIfPresent(self.endUserMetadata, forKey: .endUserMetadata)
       try container.encodeIfPresent(self.searchConfig, forKey: .searchConfig)
-      try container.encode(
-        self.populateDataStoreConnectionSignals, forKey: .populateDataStoreConnectionSignals)
+      if self.populateDataStoreConnectionSignals {
+        try container.encode(
+          self.populateDataStoreConnectionSignals, forKey: .populateDataStoreConnectionSignals)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

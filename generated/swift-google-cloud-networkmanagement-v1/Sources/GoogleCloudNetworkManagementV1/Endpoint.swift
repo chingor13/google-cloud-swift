@@ -254,27 +254,57 @@ public struct Endpoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.forwardingRule, forKey: .forwardingRule)
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.forwardingRule.isEmpty {
+      try container.encode(self.forwardingRule, forKey: .forwardingRule)
+    }
     try container.encodeIfPresent(self.forwardingRuleTarget, forKey: .forwardingRuleTarget)
     try container.encodeIfPresent(self.loadBalancerId, forKey: .loadBalancerId)
     try container.encodeIfPresent(self.loadBalancerType, forKey: .loadBalancerType)
-    try container.encode(self.gkeMasterCluster, forKey: .gkeMasterCluster)
-    try container.encode(self.fqdn, forKey: .fqdn)
-    try container.encode(self.cloudSqlInstance, forKey: .cloudSqlInstance)
-    try container.encode(self.redisInstance, forKey: .redisInstance)
-    try container.encode(self.redisCluster, forKey: .redisCluster)
-    try container.encode(self.gkePod, forKey: .gkePod)
-    try container.encode(self.dmsPrivateConnection, forKey: .dmsPrivateConnection)
+    if !self.gkeMasterCluster.isEmpty {
+      try container.encode(self.gkeMasterCluster, forKey: .gkeMasterCluster)
+    }
+    if !self.fqdn.isEmpty {
+      try container.encode(self.fqdn, forKey: .fqdn)
+    }
+    if !self.cloudSqlInstance.isEmpty {
+      try container.encode(self.cloudSqlInstance, forKey: .cloudSqlInstance)
+    }
+    if !self.redisInstance.isEmpty {
+      try container.encode(self.redisInstance, forKey: .redisInstance)
+    }
+    if !self.redisCluster.isEmpty {
+      try container.encode(self.redisCluster, forKey: .redisCluster)
+    }
+    if !self.gkePod.isEmpty {
+      try container.encode(self.gkePod, forKey: .gkePod)
+    }
+    if !self.dmsPrivateConnection.isEmpty {
+      try container.encode(self.dmsPrivateConnection, forKey: .dmsPrivateConnection)
+    }
     try container.encodeIfPresent(self.cloudFunction, forKey: .cloudFunction)
     try container.encodeIfPresent(self.appEngineVersion, forKey: .appEngineVersion)
     try container.encodeIfPresent(self.cloudRunRevision, forKey: .cloudRunRevision)
-    try container.encode(self.cloudRunJob, forKey: .cloudRunJob)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.networkType, forKey: .networkType)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.cloudRunJob.isEmpty {
+      try container.encode(self.cloudRunJob, forKey: .cloudRunJob)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if self.networkType != Endpoint.NetworkType() {
+      try container.encode(self.networkType, forKey: .networkType)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -332,7 +362,9 @@ public struct Endpoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -414,7 +446,9 @@ public struct Endpoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -508,8 +542,12 @@ public struct Endpoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.serviceUri, forKey: .serviceUri)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.serviceUri.isEmpty {
+        try container.encode(self.serviceUri, forKey: .serviceUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

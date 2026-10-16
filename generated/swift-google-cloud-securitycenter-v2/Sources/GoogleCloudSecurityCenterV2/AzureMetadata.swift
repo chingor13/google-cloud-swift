@@ -93,7 +93,9 @@ public struct AzureMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.managementGroups, forKey: .managementGroups)
+    if !self.managementGroups.isEmpty {
+      try container.encode(self.managementGroups, forKey: .managementGroups)
+    }
     try container.encodeIfPresent(self.subscription, forKey: .subscription)
     try container.encodeIfPresent(self.resourceGroup, forKey: .resourceGroup)
     try container.encodeIfPresent(self.tenant, forKey: .tenant)
@@ -163,8 +165,12 @@ public struct AzureMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -253,8 +259,12 @@ public struct AzureMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -342,8 +352,12 @@ public struct AzureMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.name, forKey: .name)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -432,8 +446,12 @@ public struct AzureMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

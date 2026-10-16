@@ -110,12 +110,22 @@ public struct OdbSubnet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.cidrRange, forKey: .cidrRange)
-    try container.encode(self.purpose, forKey: .purpose)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.cidrRange.isEmpty {
+      try container.encode(self.cidrRange, forKey: .cidrRange)
+    }
+    if self.purpose != OdbSubnet.Purpose() {
+      try container.encode(self.purpose, forKey: .purpose)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != OdbSubnet.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

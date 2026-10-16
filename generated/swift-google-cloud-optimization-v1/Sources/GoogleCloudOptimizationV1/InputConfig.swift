@@ -90,7 +90,9 @@ public struct InputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataFormat, forKey: .dataFormat)
+    if self.dataFormat != DataFormat() {
+      try container.encode(self.dataFormat, forKey: .dataFormat)
+    }
 
     if let choice = self.source {
       switch choice {

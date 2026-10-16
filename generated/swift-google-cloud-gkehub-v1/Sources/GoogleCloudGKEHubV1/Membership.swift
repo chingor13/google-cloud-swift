@@ -198,16 +198,26 @@ public struct Membership: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.state, forKey: .state)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.externalId, forKey: .externalId)
+    if !self.externalId.isEmpty {
+      try container.encode(self.externalId, forKey: .externalId)
+    }
     try container.encodeIfPresent(self.lastConnectionTime, forKey: .lastConnectionTime)
-    try container.encode(self.uniqueId, forKey: .uniqueId)
+    if !self.uniqueId.isEmpty {
+      try container.encode(self.uniqueId, forKey: .uniqueId)
+    }
     try container.encodeIfPresent(self.authority, forKey: .authority)
     try container.encodeIfPresent(self.monitoringConfig, forKey: .monitoringConfig)
 

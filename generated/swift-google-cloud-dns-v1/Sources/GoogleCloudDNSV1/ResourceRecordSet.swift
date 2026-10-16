@@ -109,8 +109,12 @@ public struct ResourceRecordSet: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.name, forKey: .name)
     try container.encodeIfPresent(self.routingPolicy, forKey: .routingPolicy)
-    try container.encode(self.rrdatas, forKey: .rrdatas)
-    try container.encode(self.signatureRrdatas, forKey: .signatureRrdatas)
+    if !self.rrdatas.isEmpty {
+      try container.encode(self.rrdatas, forKey: .rrdatas)
+    }
+    if !self.signatureRrdatas.isEmpty {
+      try container.encode(self.signatureRrdatas, forKey: .signatureRrdatas)
+    }
     try container.encodeIfPresent(self.ttl, forKey: .ttl)
     try container.encodeIfPresent(self.type, forKey: .type)
     for (key, value) in self._unknownFields.json {

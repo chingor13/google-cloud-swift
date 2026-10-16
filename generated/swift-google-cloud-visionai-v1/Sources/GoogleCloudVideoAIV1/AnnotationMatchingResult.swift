@@ -88,7 +88,9 @@ public struct AnnotationMatchingResult: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.criteria, forKey: .criteria)
-    try container.encode(self.matchedAnnotations, forKey: .matchedAnnotations)
+    if !self.matchedAnnotations.isEmpty {
+      try container.encode(self.matchedAnnotations, forKey: .matchedAnnotations)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -114,10 +114,18 @@ public struct Actor: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.email, forKey: .email)
-    try container.encode(self.googleSupport, forKey: .googleSupport)
-    try container.encode(self.username, forKey: .username)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
+    if self.googleSupport {
+      try container.encode(self.googleSupport, forKey: .googleSupport)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

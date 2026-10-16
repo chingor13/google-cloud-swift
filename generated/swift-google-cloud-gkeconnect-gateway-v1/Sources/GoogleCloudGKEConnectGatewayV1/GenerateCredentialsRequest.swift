@@ -115,11 +115,21 @@ public struct GenerateCredentialsRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.forceUseAgent, forKey: .forceUseAgent)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.kubernetesNamespace, forKey: .kubernetesNamespace)
-    try container.encode(self.operatingSystem, forKey: .operatingSystem)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.forceUseAgent {
+      try container.encode(self.forceUseAgent, forKey: .forceUseAgent)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.kubernetesNamespace.isEmpty {
+      try container.encode(self.kubernetesNamespace, forKey: .kubernetesNamespace)
+    }
+    if self.operatingSystem != GenerateCredentialsRequest.OperatingSystem() {
+      try container.encode(self.operatingSystem, forKey: .operatingSystem)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

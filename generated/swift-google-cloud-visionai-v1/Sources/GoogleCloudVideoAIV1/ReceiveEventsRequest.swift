@@ -204,9 +204,15 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cluster, forKey: .cluster)
-      try container.encode(self.stream, forKey: .stream)
-      try container.encode(self.receiver, forKey: .receiver)
+      if !self.cluster.isEmpty {
+        try container.encode(self.cluster, forKey: .cluster)
+      }
+      if !self.stream.isEmpty {
+        try container.encode(self.stream, forKey: .stream)
+      }
+      if !self.receiver.isEmpty {
+        try container.encode(self.receiver, forKey: .receiver)
+      }
       try container.encodeIfPresent(self.controlledMode, forKey: .controlledMode)
       try container.encodeIfPresent(self.heartbeatInterval, forKey: .heartbeatInterval)
       try container.encodeIfPresent(self.writesDoneGracePeriod, forKey: .writesDoneGracePeriod)

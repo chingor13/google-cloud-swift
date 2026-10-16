@@ -161,8 +161,12 @@ public struct CustomAttribute: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.text, forKey: .text)
-    try container.encode(self.numbers, forKey: .numbers)
+    if !self.text.isEmpty {
+      try container.encode(self.text, forKey: .text)
+    }
+    if !self.numbers.isEmpty {
+      try container.encode(self.numbers, forKey: .numbers)
+    }
     try container.encodeIfPresent(self.searchable, forKey: .searchable)
     try container.encodeIfPresent(self.indexable, forKey: .indexable)
     for (key, value) in self._unknownFields.json {

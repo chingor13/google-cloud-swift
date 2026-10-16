@@ -115,10 +115,14 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.responseType, forKey: .responseType)
+    if self.responseType != ComputeThreatListDiffResponse.ResponseType() {
+      try container.encode(self.responseType, forKey: .responseType)
+    }
     try container.encodeIfPresent(self.additions, forKey: .additions)
     try container.encodeIfPresent(self.removals, forKey: .removals)
-    try container.encode(self.newVersionToken, forKey: .newVersionToken)
+    if !self.newVersionToken.isEmpty {
+      try container.encode(self.newVersionToken, forKey: .newVersionToken)
+    }
     try container.encodeIfPresent(self.checksum, forKey: .checksum)
     try container.encodeIfPresent(self.recommendedNextDiff, forKey: .recommendedNextDiff)
     for (key, value) in self._unknownFields.json {
@@ -179,7 +183,9 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sha256, forKey: .sha256)
+      if !self.sha256.isEmpty {
+        try container.encode(self.sha256, forKey: .sha256)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

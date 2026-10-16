@@ -92,9 +92,15 @@ public struct SourceEnvironment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.defaultDatabase, forKey: .defaultDatabase)
-    try container.encode(self.schemaSearchPath, forKey: .schemaSearchPath)
-    try container.encode(self.metadataStoreDataset, forKey: .metadataStoreDataset)
+    if !self.defaultDatabase.isEmpty {
+      try container.encode(self.defaultDatabase, forKey: .defaultDatabase)
+    }
+    if !self.schemaSearchPath.isEmpty {
+      try container.encode(self.schemaSearchPath, forKey: .schemaSearchPath)
+    }
+    if !self.metadataStoreDataset.isEmpty {
+      try container.encode(self.metadataStoreDataset, forKey: .metadataStoreDataset)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -116,11 +116,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.description, forKey: .description)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.state, forKey: .state)
       try container.encodeIfPresent(self.dataplexConfig, forKey: .dataplexConfig)
       for (key, value) in self._unknownFields.json {
@@ -182,7 +186,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.diskUtilizationBytes, forKey: .diskUtilizationBytes)
+        if self.diskUtilizationBytes != 0 {
+          try container.encode(self.diskUtilizationBytes, forKey: .diskUtilizationBytes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -265,7 +271,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enabledPipelinesLineage, forKey: .enabledPipelinesLineage)
+        if self.enabledPipelinesLineage {
+          try container.encode(self.enabledPipelinesLineage, forKey: .enabledPipelinesLineage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

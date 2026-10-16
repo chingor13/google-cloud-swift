@@ -101,10 +101,18 @@ public struct LinkedVpnTunnels: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uris, forKey: .uris)
-    try container.encode(self.siteToSiteDataTransfer, forKey: .siteToSiteDataTransfer)
-    try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
-    try container.encode(self.includeImportRanges, forKey: .includeImportRanges)
+    if !self.uris.isEmpty {
+      try container.encode(self.uris, forKey: .uris)
+    }
+    if self.siteToSiteDataTransfer {
+      try container.encode(self.siteToSiteDataTransfer, forKey: .siteToSiteDataTransfer)
+    }
+    if !self.vpcNetwork.isEmpty {
+      try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
+    }
+    if !self.includeImportRanges.isEmpty {
+      try container.encode(self.includeImportRanges, forKey: .includeImportRanges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

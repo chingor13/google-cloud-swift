@@ -172,9 +172,13 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.extensionPolicies, forKey: .extensionPolicies)
+      if !self.extensionPolicies.isEmpty {
+        try container.encode(self.extensionPolicies, forKey: .extensionPolicies)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.instanceSelectors, forKey: .instanceSelectors)
+      if !self.instanceSelectors.isEmpty {
+        try container.encode(self.instanceSelectors, forKey: .instanceSelectors)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.priority, forKey: .priority)

@@ -152,11 +152,19 @@ public struct DecapsulateResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sharedSecret, forKey: .sharedSecret)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.sharedSecret.isEmpty {
+      try container.encode(self.sharedSecret, forKey: .sharedSecret)
+    }
     try container.encodeIfPresent(self.sharedSecretCrc32C, forKey: .sharedSecretCrc32C)
-    try container.encode(self.verifiedCiphertextCrc32C, forKey: .verifiedCiphertextCrc32C)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    if self.verifiedCiphertextCrc32C {
+      try container.encode(self.verifiedCiphertextCrc32C, forKey: .verifiedCiphertextCrc32C)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

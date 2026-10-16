@@ -90,7 +90,9 @@ public struct SetIamPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resource, forKey: .resource)
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
     try container.encodeIfPresent(self.policy, forKey: .policy)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

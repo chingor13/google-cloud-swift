@@ -289,16 +289,26 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.participant, forKey: .participant)
+      if !self.participant.isEmpty {
+        try container.encode(self.participant, forKey: .participant)
+      }
       try container.encodeIfPresent(self.replyAudioConfig, forKey: .replyAudioConfig)
       try container.encodeIfPresent(self.queryParams, forKey: .queryParams)
       try container.encodeIfPresent(self.assistQueryParams, forKey: .assistQueryParams)
       try container.encodeIfPresent(self.cxParameters, forKey: .cxParameters)
-      try container.encode(self.enableExtendedStreaming, forKey: .enableExtendedStreaming)
-      try container.encode(
-        self.enablePartialAutomatedAgentReply, forKey: .enablePartialAutomatedAgentReply)
-      try container.encode(self.outputMultipleUtterances, forKey: .outputMultipleUtterances)
-      try container.encode(self.enableDebuggingInfo, forKey: .enableDebuggingInfo)
+      if self.enableExtendedStreaming {
+        try container.encode(self.enableExtendedStreaming, forKey: .enableExtendedStreaming)
+      }
+      if self.enablePartialAutomatedAgentReply {
+        try container.encode(
+          self.enablePartialAutomatedAgentReply, forKey: .enablePartialAutomatedAgentReply)
+      }
+      if self.outputMultipleUtterances {
+        try container.encode(self.outputMultipleUtterances, forKey: .outputMultipleUtterances)
+      }
+      if self.enableDebuggingInfo {
+        try container.encode(self.enableDebuggingInfo, forKey: .enableDebuggingInfo)
+      }
 
       if let choice = self.config {
         switch choice {

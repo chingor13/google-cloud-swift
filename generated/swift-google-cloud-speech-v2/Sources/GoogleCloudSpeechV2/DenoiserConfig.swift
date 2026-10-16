@@ -83,8 +83,12 @@ public struct DenoiserConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.denoiseAudio, forKey: .denoiseAudio)
-    try container.encode(self.snrThreshold, forKey: .snrThreshold)
+    if self.denoiseAudio {
+      try container.encode(self.denoiseAudio, forKey: .denoiseAudio)
+    }
+    if self.snrThreshold != 0 {
+      try container.encode(self.snrThreshold, forKey: .snrThreshold)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

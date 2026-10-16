@@ -95,10 +95,16 @@ public struct ImportSshPublicKeyRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.sshPublicKey, forKey: .sshPublicKey)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.regions, forKey: .regions)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.regions.isEmpty {
+      try container.encode(self.regions, forKey: .regions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -127,11 +127,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.predictions, forKey: .predictions)
-      try container.encode(self.deployedModelId, forKey: .deployedModelId)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.modelVersionId, forKey: .modelVersionId)
-      try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+      if !self.predictions.isEmpty {
+        try container.encode(self.predictions, forKey: .predictions)
+      }
+      if !self.deployedModelId.isEmpty {
+        try container.encode(self.deployedModelId, forKey: .deployedModelId)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.modelVersionId.isEmpty {
+        try container.encode(self.modelVersionId, forKey: .modelVersionId)
+      }
+      if !self.modelDisplayName.isEmpty {
+        try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

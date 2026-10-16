@@ -128,14 +128,28 @@ public struct File: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.size, forKey: .size)
-    try container.encode(self.sha256, forKey: .sha256)
-    try container.encode(self.hashedSize, forKey: .hashedSize)
-    try container.encode(self.partiallyHashed, forKey: .partiallyHashed)
-    try container.encode(self.contents, forKey: .contents)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if self.size != 0 {
+      try container.encode(self.size, forKey: .size)
+    }
+    if !self.sha256.isEmpty {
+      try container.encode(self.sha256, forKey: .sha256)
+    }
+    if self.hashedSize != 0 {
+      try container.encode(self.hashedSize, forKey: .hashedSize)
+    }
+    if self.partiallyHashed {
+      try container.encode(self.partiallyHashed, forKey: .partiallyHashed)
+    }
+    if !self.contents.isEmpty {
+      try container.encode(self.contents, forKey: .contents)
+    }
     try container.encodeIfPresent(self.diskPath, forKey: .diskPath)
-    try container.encode(self.operations, forKey: .operations)
+    if !self.operations.isEmpty {
+      try container.encode(self.operations, forKey: .operations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -203,8 +217,12 @@ public struct File: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.partitionUuid, forKey: .partitionUuid)
-      try container.encode(self.relativePath, forKey: .relativePath)
+      if !self.partitionUuid.isEmpty {
+        try container.encode(self.partitionUuid, forKey: .partitionUuid)
+      }
+      if !self.relativePath.isEmpty {
+        try container.encode(self.relativePath, forKey: .relativePath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -286,7 +304,9 @@ public struct File: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
+      if self.type != File.FileOperation.OperationType() {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -273,17 +273,37 @@ public struct DocumentQuery: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.isNlQuery, forKey: .isNlQuery)
-    try container.encode(self.customPropertyFilter, forKey: .customPropertyFilter)
-    try container.encode(self.timeFilters, forKey: .timeFilters)
-    try container.encode(self.documentSchemaNames, forKey: .documentSchemaNames)
-    try container.encode(self.propertyFilter, forKey: .propertyFilter)
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if self.isNlQuery {
+      try container.encode(self.isNlQuery, forKey: .isNlQuery)
+    }
+    if !self.customPropertyFilter.isEmpty {
+      try container.encode(self.customPropertyFilter, forKey: .customPropertyFilter)
+    }
+    if !self.timeFilters.isEmpty {
+      try container.encode(self.timeFilters, forKey: .timeFilters)
+    }
+    if !self.documentSchemaNames.isEmpty {
+      try container.encode(self.documentSchemaNames, forKey: .documentSchemaNames)
+    }
+    if !self.propertyFilter.isEmpty {
+      try container.encode(self.propertyFilter, forKey: .propertyFilter)
+    }
     try container.encodeIfPresent(self.fileTypeFilter, forKey: .fileTypeFilter)
-    try container.encode(self.folderNameFilter, forKey: .folderNameFilter)
-    try container.encode(self.documentNameFilter, forKey: .documentNameFilter)
-    try container.encode(self.queryContext, forKey: .queryContext)
-    try container.encode(self.documentCreatorFilter, forKey: .documentCreatorFilter)
+    if !self.folderNameFilter.isEmpty {
+      try container.encode(self.folderNameFilter, forKey: .folderNameFilter)
+    }
+    if !self.documentNameFilter.isEmpty {
+      try container.encode(self.documentNameFilter, forKey: .documentNameFilter)
+    }
+    if !self.queryContext.isEmpty {
+      try container.encode(self.queryContext, forKey: .queryContext)
+    }
+    if !self.documentCreatorFilter.isEmpty {
+      try container.encode(self.documentCreatorFilter, forKey: .documentCreatorFilter)
+    }
     try container.encodeIfPresent(self.customWeightsMetadata, forKey: .customWeightsMetadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

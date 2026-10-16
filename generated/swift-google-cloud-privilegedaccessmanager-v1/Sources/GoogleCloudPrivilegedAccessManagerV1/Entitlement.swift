@@ -161,19 +161,27 @@ public struct Entitlement: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.eligibleUsers, forKey: .eligibleUsers)
+    if !self.eligibleUsers.isEmpty {
+      try container.encode(self.eligibleUsers, forKey: .eligibleUsers)
+    }
     try container.encodeIfPresent(self.approvalWorkflow, forKey: .approvalWorkflow)
     try container.encodeIfPresent(self.privilegedAccess, forKey: .privilegedAccess)
     try container.encodeIfPresent(self.maxRequestDuration, forKey: .maxRequestDuration)
-    try container.encode(self.state, forKey: .state)
+    if self.state != Entitlement.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(
       self.requesterJustificationConfig, forKey: .requesterJustificationConfig)
     try container.encodeIfPresent(
       self.additionalNotificationTargets, forKey: .additionalNotificationTargets)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -510,8 +518,12 @@ public struct Entitlement: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.adminEmailRecipients, forKey: .adminEmailRecipients)
-      try container.encode(self.requesterEmailRecipients, forKey: .requesterEmailRecipients)
+      if !self.adminEmailRecipients.isEmpty {
+        try container.encode(self.adminEmailRecipients, forKey: .adminEmailRecipients)
+      }
+      if !self.requesterEmailRecipients.isEmpty {
+        try container.encode(self.requesterEmailRecipients, forKey: .requesterEmailRecipients)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

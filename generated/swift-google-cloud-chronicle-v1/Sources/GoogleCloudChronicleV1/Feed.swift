@@ -144,16 +144,30 @@ public struct Feed: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.details, forKey: .details)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureMsg, forKey: .failureMsg)
-    try container.encode(self.readOnly, forKey: .readOnly)
+    if self.state != Feed.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failureMsg.isEmpty {
+      try container.encode(self.failureMsg, forKey: .failureMsg)
+    }
+    if self.readOnly {
+      try container.encode(self.readOnly, forKey: .readOnly)
+    }
     try container.encodeIfPresent(self.lastFeedInitiationTime, forKey: .lastFeedInitiationTime)
     try container.encodeIfPresent(self.failureDetails, forKey: .failureDetails)
-    try container.encode(self.referenceId, forKey: .referenceId)
+    if !self.referenceId.isEmpty {
+      try container.encode(self.referenceId, forKey: .referenceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

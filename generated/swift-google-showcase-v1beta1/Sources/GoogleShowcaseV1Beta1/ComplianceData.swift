@@ -261,22 +261,54 @@ public struct ComplianceData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fString, forKey: .fString)
-    try container.encode(self.fInt32, forKey: .fInt32)
-    try container.encode(self.fSint32, forKey: .fSint32)
-    try container.encode(self.fSfixed32, forKey: .fSfixed32)
-    try container.encode(self.fUint32, forKey: .fUint32)
-    try container.encode(self.fFixed32, forKey: .fFixed32)
-    try container.encode(self.fInt64, forKey: .fInt64)
-    try container.encode(self.fSint64, forKey: .fSint64)
-    try container.encode(self.fSfixed64, forKey: .fSfixed64)
-    try container.encode(self.fUint64, forKey: .fUint64)
-    try container.encode(self.fFixed64, forKey: .fFixed64)
-    try container.encode(self.fDouble, forKey: .fDouble)
-    try container.encode(self.fFloat, forKey: .fFloat)
-    try container.encode(self.fBool, forKey: .fBool)
-    try container.encode(self.fBytes, forKey: .fBytes)
-    try container.encode(self.fKingdom, forKey: .fKingdom)
+    if !self.fString.isEmpty {
+      try container.encode(self.fString, forKey: .fString)
+    }
+    if self.fInt32 != 0 {
+      try container.encode(self.fInt32, forKey: .fInt32)
+    }
+    if self.fSint32 != 0 {
+      try container.encode(self.fSint32, forKey: .fSint32)
+    }
+    if self.fSfixed32 != 0 {
+      try container.encode(self.fSfixed32, forKey: .fSfixed32)
+    }
+    if self.fUint32 != 0 {
+      try container.encode(self.fUint32, forKey: .fUint32)
+    }
+    if self.fFixed32 != 0 {
+      try container.encode(self.fFixed32, forKey: .fFixed32)
+    }
+    if self.fInt64 != 0 {
+      try container.encode(self.fInt64, forKey: .fInt64)
+    }
+    if self.fSint64 != 0 {
+      try container.encode(self.fSint64, forKey: .fSint64)
+    }
+    if self.fSfixed64 != 0 {
+      try container.encode(self.fSfixed64, forKey: .fSfixed64)
+    }
+    if self.fUint64 != 0 {
+      try container.encode(self.fUint64, forKey: .fUint64)
+    }
+    if self.fFixed64 != 0 {
+      try container.encode(self.fFixed64, forKey: .fFixed64)
+    }
+    if self.fDouble != 0 {
+      try container.encode(self.fDouble, forKey: .fDouble)
+    }
+    if self.fFloat != 0 {
+      try container.encode(self.fFloat, forKey: .fFloat)
+    }
+    if self.fBool {
+      try container.encode(self.fBool, forKey: .fBool)
+    }
+    if !self.fBytes.isEmpty {
+      try container.encode(self.fBytes, forKey: .fBytes)
+    }
+    if self.fKingdom != ComplianceData.LifeKingdom() {
+      try container.encode(self.fKingdom, forKey: .fKingdom)
+    }
     try container.encodeIfPresent(self.fChild, forKey: .fChild)
     try container.encodeIfPresent(self.pString, forKey: .pString)
     try container.encodeIfPresent(self.pInt32, forKey: .pInt32)

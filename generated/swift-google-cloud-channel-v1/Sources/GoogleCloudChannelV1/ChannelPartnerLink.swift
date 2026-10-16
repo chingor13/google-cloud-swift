@@ -128,13 +128,23 @@ public struct ChannelPartnerLink: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.resellerCloudIdentityId, forKey: .resellerCloudIdentityId)
-    try container.encode(self.linkState, forKey: .linkState)
-    try container.encode(self.inviteLinkUri, forKey: .inviteLinkUri)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.resellerCloudIdentityId.isEmpty {
+      try container.encode(self.resellerCloudIdentityId, forKey: .resellerCloudIdentityId)
+    }
+    if self.linkState != ChannelPartnerLinkState() {
+      try container.encode(self.linkState, forKey: .linkState)
+    }
+    if !self.inviteLinkUri.isEmpty {
+      try container.encode(self.inviteLinkUri, forKey: .inviteLinkUri)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.publicId, forKey: .publicId)
+    if !self.publicId.isEmpty {
+      try container.encode(self.publicId, forKey: .publicId)
+    }
     try container.encodeIfPresent(
       self.channelPartnerCloudIdentityInfo, forKey: .channelPartnerCloudIdentityInfo)
     for (key, value) in self._unknownFields.json {

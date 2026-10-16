@@ -102,7 +102,9 @@ public struct TranslateDocumentResponse: Codable, Equatable, GoogleWKT._AnyPacka
     try container.encodeIfPresent(self.documentTranslation, forKey: .documentTranslation)
     try container.encodeIfPresent(
       self.glossaryDocumentTranslation, forKey: .glossaryDocumentTranslation)
-    try container.encode(self.model, forKey: .model)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
     try container.encodeIfPresent(self.glossaryConfig, forKey: .glossaryConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

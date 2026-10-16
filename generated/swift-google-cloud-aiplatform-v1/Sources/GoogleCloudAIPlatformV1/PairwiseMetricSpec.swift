@@ -108,8 +108,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.metricPromptTemplate, forKey: .metricPromptTemplate)
-      try container.encode(self.candidateResponseFieldName, forKey: .candidateResponseFieldName)
-      try container.encode(self.baselineResponseFieldName, forKey: .baselineResponseFieldName)
+      if !self.candidateResponseFieldName.isEmpty {
+        try container.encode(self.candidateResponseFieldName, forKey: .candidateResponseFieldName)
+      }
+      if !self.baselineResponseFieldName.isEmpty {
+        try container.encode(self.baselineResponseFieldName, forKey: .baselineResponseFieldName)
+      }
       try container.encodeIfPresent(self.systemInstruction, forKey: .systemInstruction)
       try container.encodeIfPresent(
         self.customOutputFormatConfig, forKey: .customOutputFormatConfig)

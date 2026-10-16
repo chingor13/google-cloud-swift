@@ -133,10 +133,16 @@ public struct RunPipelineMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalFileCount, forKey: .totalFileCount)
-    try container.encode(self.failedFileCount, forKey: .failedFileCount)
+    if self.totalFileCount != 0 {
+      try container.encode(self.totalFileCount, forKey: .totalFileCount)
+    }
+    if self.failedFileCount != 0 {
+      try container.encode(self.failedFileCount, forKey: .failedFileCount)
+    }
     try container.encodeIfPresent(self.userInfo, forKey: .userInfo)
-    try container.encode(self.individualDocumentStatuses, forKey: .individualDocumentStatuses)
+    if !self.individualDocumentStatuses.isEmpty {
+      try container.encode(self.individualDocumentStatuses, forKey: .individualDocumentStatuses)
+    }
 
     if let choice = self.pipelineMetadata {
       switch choice {
@@ -206,7 +212,9 @@ public struct RunPipelineMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputPath, forKey: .inputPath)
+      if !self.inputPath.isEmpty {
+        try container.encode(self.inputPath, forKey: .inputPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -303,9 +311,15 @@ public struct RunPipelineMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.documents, forKey: .documents)
-      try container.encode(self.docAiDataset, forKey: .docAiDataset)
-      try container.encode(self.outputPath, forKey: .outputPath)
+      if !self.documents.isEmpty {
+        try container.encode(self.documents, forKey: .documents)
+      }
+      if !self.docAiDataset.isEmpty {
+        try container.encode(self.docAiDataset, forKey: .docAiDataset)
+      }
+      if !self.outputPath.isEmpty {
+        try container.encode(self.outputPath, forKey: .outputPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -393,7 +407,9 @@ public struct RunPipelineMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.documents, forKey: .documents)
+      if !self.documents.isEmpty {
+        try container.encode(self.documents, forKey: .documents)
+      }
       try container.encodeIfPresent(self.processorInfo, forKey: .processorInfo)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -481,7 +497,9 @@ public struct RunPipelineMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.documentId, forKey: .documentId)
+      if !self.documentId.isEmpty {
+        try container.encode(self.documentId, forKey: .documentId)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

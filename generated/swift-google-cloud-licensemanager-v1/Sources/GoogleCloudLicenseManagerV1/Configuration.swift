@@ -137,16 +137,28 @@ public struct Configuration: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.product, forKey: .product)
-    try container.encode(self.licenseType, forKey: .licenseType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.product.isEmpty {
+      try container.encode(self.product, forKey: .product)
+    }
+    if self.licenseType != LicenseType() {
+      try container.encode(self.licenseType, forKey: .licenseType)
+    }
     try container.encodeIfPresent(self.currentBillingInfo, forKey: .currentBillingInfo)
     try container.encodeIfPresent(self.nextBillingInfo, forKey: .nextBillingInfo)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Configuration.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

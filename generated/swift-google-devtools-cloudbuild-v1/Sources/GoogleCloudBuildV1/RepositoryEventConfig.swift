@@ -107,8 +107,12 @@ public struct RepositoryEventConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.repository, forKey: .repository)
-    try container.encode(self.repositoryType, forKey: .repositoryType)
+    if !self.repository.isEmpty {
+      try container.encode(self.repository, forKey: .repository)
+    }
+    if self.repositoryType != RepositoryEventConfig.RepositoryType() {
+      try container.encode(self.repositoryType, forKey: .repositoryType)
+    }
 
     if let choice = self.filter {
       switch choice {

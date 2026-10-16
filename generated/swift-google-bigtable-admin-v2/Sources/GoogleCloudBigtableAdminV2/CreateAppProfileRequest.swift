@@ -95,10 +95,16 @@ public struct CreateAppProfileRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.appProfileId, forKey: .appProfileId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.appProfileId.isEmpty {
+      try container.encode(self.appProfileId, forKey: .appProfileId)
+    }
     try container.encodeIfPresent(self.appProfile, forKey: .appProfile)
-    try container.encode(self.ignoreWarnings, forKey: .ignoreWarnings)
+    if self.ignoreWarnings {
+      try container.encode(self.ignoreWarnings, forKey: .ignoreWarnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -152,10 +152,18 @@ public struct AbuseEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.detectionType, forKey: .detectionType)
-    try container.encode(self.reason, forKey: .reason)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.remediationLink, forKey: .remediationLink)
+    if self.detectionType != AbuseEvent.DetectionType() {
+      try container.encode(self.detectionType, forKey: .detectionType)
+    }
+    if !self.reason.isEmpty {
+      try container.encode(self.reason, forKey: .reason)
+    }
+    if self.action != AbuseEvent.ActionType() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.remediationLink.isEmpty {
+      try container.encode(self.remediationLink, forKey: .remediationLink)
+    }
 
     if let choice = self.eventType {
       switch choice {

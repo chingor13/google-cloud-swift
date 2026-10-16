@@ -97,9 +97,13 @@ public struct ExtensionChain: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.matchCondition, forKey: .matchCondition)
-    try container.encode(self.extensions, forKey: .extensions)
+    if !self.extensions.isEmpty {
+      try container.encode(self.extensions, forKey: .extensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -161,7 +165,9 @@ public struct ExtensionChain: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.celExpression, forKey: .celExpression)
+      if !self.celExpression.isEmpty {
+        try container.encode(self.celExpression, forKey: .celExpression)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -462,18 +468,38 @@ public struct ExtensionChain: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.authority, forKey: .authority)
-      try container.encode(self.service, forKey: .service)
-      try container.encode(self.supportedEvents, forKey: .supportedEvents)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.authority.isEmpty {
+        try container.encode(self.authority, forKey: .authority)
+      }
+      if !self.service.isEmpty {
+        try container.encode(self.service, forKey: .service)
+      }
+      if !self.supportedEvents.isEmpty {
+        try container.encode(self.supportedEvents, forKey: .supportedEvents)
+      }
       try container.encodeIfPresent(self.timeout, forKey: .timeout)
-      try container.encode(self.failOpen, forKey: .failOpen)
-      try container.encode(self.forwardHeaders, forKey: .forwardHeaders)
-      try container.encode(self.forwardAttributes, forKey: .forwardAttributes)
+      if self.failOpen {
+        try container.encode(self.failOpen, forKey: .failOpen)
+      }
+      if !self.forwardHeaders.isEmpty {
+        try container.encode(self.forwardHeaders, forKey: .forwardHeaders)
+      }
+      if !self.forwardAttributes.isEmpty {
+        try container.encode(self.forwardAttributes, forKey: .forwardAttributes)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
-      try container.encode(self.requestBodySendMode, forKey: .requestBodySendMode)
-      try container.encode(self.responseBodySendMode, forKey: .responseBodySendMode)
-      try container.encode(self.observabilityMode, forKey: .observabilityMode)
+      if self.requestBodySendMode != BodySendMode() {
+        try container.encode(self.requestBodySendMode, forKey: .requestBodySendMode)
+      }
+      if self.responseBodySendMode != BodySendMode() {
+        try container.encode(self.responseBodySendMode, forKey: .responseBodySendMode)
+      }
+      if self.observabilityMode {
+        try container.encode(self.observabilityMode, forKey: .observabilityMode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -105,8 +105,12 @@ public struct CleanupPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.action, forKey: .action)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.action != CleanupPolicy.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
 
     if let choice = self.conditionType {
       switch choice {

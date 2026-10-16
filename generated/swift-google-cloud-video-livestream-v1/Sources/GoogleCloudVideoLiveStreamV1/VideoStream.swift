@@ -332,19 +332,45 @@ public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.widthPixels, forKey: .widthPixels)
-      try container.encode(self.heightPixels, forKey: .heightPixels)
-      try container.encode(self.frameRate, forKey: .frameRate)
-      try container.encode(self.bitrateBps, forKey: .bitrateBps)
-      try container.encode(self.allowOpenGop, forKey: .allowOpenGop)
-      try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
-      try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
-      try container.encode(self.entropyCoder, forKey: .entropyCoder)
-      try container.encode(self.bPyramid, forKey: .bPyramid)
-      try container.encode(self.bFrameCount, forKey: .bFrameCount)
-      try container.encode(self.aqStrength, forKey: .aqStrength)
-      try container.encode(self.profile, forKey: .profile)
-      try container.encode(self.tune, forKey: .tune)
+      if self.widthPixels != 0 {
+        try container.encode(self.widthPixels, forKey: .widthPixels)
+      }
+      if self.heightPixels != 0 {
+        try container.encode(self.heightPixels, forKey: .heightPixels)
+      }
+      if self.frameRate != 0 {
+        try container.encode(self.frameRate, forKey: .frameRate)
+      }
+      if self.bitrateBps != 0 {
+        try container.encode(self.bitrateBps, forKey: .bitrateBps)
+      }
+      if self.allowOpenGop {
+        try container.encode(self.allowOpenGop, forKey: .allowOpenGop)
+      }
+      if self.vbvSizeBits != 0 {
+        try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
+      }
+      if self.vbvFullnessBits != 0 {
+        try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
+      }
+      if !self.entropyCoder.isEmpty {
+        try container.encode(self.entropyCoder, forKey: .entropyCoder)
+      }
+      if self.bPyramid {
+        try container.encode(self.bPyramid, forKey: .bPyramid)
+      }
+      if self.bFrameCount != 0 {
+        try container.encode(self.bFrameCount, forKey: .bFrameCount)
+      }
+      if self.aqStrength != 0 {
+        try container.encode(self.aqStrength, forKey: .aqStrength)
+      }
+      if !self.profile.isEmpty {
+        try container.encode(self.profile, forKey: .profile)
+      }
+      if !self.tune.isEmpty {
+        try container.encode(self.tune, forKey: .tune)
+      }
 
       if let choice = self.gopMode {
         switch choice {
@@ -579,15 +605,33 @@ public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.widthPixels, forKey: .widthPixels)
-      try container.encode(self.heightPixels, forKey: .heightPixels)
-      try container.encode(self.frameRate, forKey: .frameRate)
-      try container.encode(self.bitrateBps, forKey: .bitrateBps)
-      try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
-      try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
-      try container.encode(self.bPyramid, forKey: .bPyramid)
-      try container.encode(self.bFrameCount, forKey: .bFrameCount)
-      try container.encode(self.aqStrength, forKey: .aqStrength)
+      if self.widthPixels != 0 {
+        try container.encode(self.widthPixels, forKey: .widthPixels)
+      }
+      if self.heightPixels != 0 {
+        try container.encode(self.heightPixels, forKey: .heightPixels)
+      }
+      if self.frameRate != 0 {
+        try container.encode(self.frameRate, forKey: .frameRate)
+      }
+      if self.bitrateBps != 0 {
+        try container.encode(self.bitrateBps, forKey: .bitrateBps)
+      }
+      if self.vbvSizeBits != 0 {
+        try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
+      }
+      if self.vbvFullnessBits != 0 {
+        try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
+      }
+      if self.bPyramid {
+        try container.encode(self.bPyramid, forKey: .bPyramid)
+      }
+      if self.bFrameCount != 0 {
+        try container.encode(self.bFrameCount, forKey: .bFrameCount)
+      }
+      if self.aqStrength != 0 {
+        try container.encode(self.aqStrength, forKey: .aqStrength)
+      }
 
       if let choice = self.gopMode {
         switch choice {

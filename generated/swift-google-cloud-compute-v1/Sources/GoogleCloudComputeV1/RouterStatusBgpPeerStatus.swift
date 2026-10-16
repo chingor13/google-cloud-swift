@@ -201,7 +201,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.advertisedRoutes, forKey: .advertisedRoutes)
+      if !self.advertisedRoutes.isEmpty {
+        try container.encode(self.advertisedRoutes, forKey: .advertisedRoutes)
+      }
       try container.encodeIfPresent(self.bfdStatus, forKey: .bfdStatus)
       try container.encodeIfPresent(self.enableIpv4, forKey: .enableIpv4)
       try container.encodeIfPresent(self.enableIpv6, forKey: .enableIpv6)

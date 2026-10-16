@@ -117,12 +117,20 @@ public struct DnsThreatDetector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.excludedNetworks, forKey: .excludedNetworks)
-    try container.encode(self.provider, forKey: .provider)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.excludedNetworks.isEmpty {
+      try container.encode(self.excludedNetworks, forKey: .excludedNetworks)
+    }
+    if self.provider != DnsThreatDetector.Provider() {
+      try container.encode(self.provider, forKey: .provider)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

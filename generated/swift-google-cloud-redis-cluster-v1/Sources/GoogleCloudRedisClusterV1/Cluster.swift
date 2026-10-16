@@ -351,22 +351,42 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.uid, forKey: .uid)
+    if self.state != Cluster.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.replicaCount, forKey: .replicaCount)
-    try container.encode(self.authorizationMode, forKey: .authorizationMode)
-    try container.encode(self.transitEncryptionMode, forKey: .transitEncryptionMode)
+    if self.authorizationMode != AuthorizationMode() {
+      try container.encode(self.authorizationMode, forKey: .authorizationMode)
+    }
+    if self.transitEncryptionMode != TransitEncryptionMode() {
+      try container.encode(self.transitEncryptionMode, forKey: .transitEncryptionMode)
+    }
     try container.encodeIfPresent(self.sizeGb, forKey: .sizeGb)
     try container.encodeIfPresent(self.shardCount, forKey: .shardCount)
-    try container.encode(self.pscConfigs, forKey: .pscConfigs)
-    try container.encode(self.discoveryEndpoints, forKey: .discoveryEndpoints)
-    try container.encode(self.pscConnections, forKey: .pscConnections)
+    if !self.pscConfigs.isEmpty {
+      try container.encode(self.pscConfigs, forKey: .pscConfigs)
+    }
+    if !self.discoveryEndpoints.isEmpty {
+      try container.encode(self.discoveryEndpoints, forKey: .discoveryEndpoints)
+    }
+    if !self.pscConnections.isEmpty {
+      try container.encode(self.pscConnections, forKey: .pscConnections)
+    }
     try container.encodeIfPresent(self.stateInfo, forKey: .stateInfo)
-    try container.encode(self.nodeType, forKey: .nodeType)
+    if self.nodeType != NodeType() {
+      try container.encode(self.nodeType, forKey: .nodeType)
+    }
     try container.encodeIfPresent(self.persistenceConfig, forKey: .persistenceConfig)
-    try container.encode(self.redisConfigs, forKey: .redisConfigs)
+    if !self.redisConfigs.isEmpty {
+      try container.encode(self.redisConfigs, forKey: .redisConfigs)
+    }
     try container.encodeIfPresent(self.preciseSizeGb, forKey: .preciseSizeGb)
     try container.encodeIfPresent(self.zoneDistributionConfig, forKey: .zoneDistributionConfig)
     try container.encodeIfPresent(
@@ -375,8 +395,12 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
       self.deletionProtectionEnabled, forKey: .deletionProtectionEnabled)
     try container.encodeIfPresent(self.maintenancePolicy, forKey: .maintenancePolicy)
     try container.encodeIfPresent(self.maintenanceSchedule, forKey: .maintenanceSchedule)
-    try container.encode(self.pscServiceAttachments, forKey: .pscServiceAttachments)
-    try container.encode(self.clusterEndpoints, forKey: .clusterEndpoints)
+    if !self.pscServiceAttachments.isEmpty {
+      try container.encode(self.pscServiceAttachments, forKey: .pscServiceAttachments)
+    }
+    if !self.clusterEndpoints.isEmpty {
+      try container.encode(self.clusterEndpoints, forKey: .clusterEndpoints)
+    }
     try container.encodeIfPresent(self.backupCollection, forKey: .backupCollection)
     try container.encodeIfPresent(self.kmsKey, forKey: .kmsKey)
     try container.encodeIfPresent(self.automatedBackupConfig, forKey: .automatedBackupConfig)
@@ -645,7 +669,9 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uris, forKey: .uris)
+      if !self.uris.isEmpty {
+        try container.encode(self.uris, forKey: .uris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -730,7 +756,9 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backup, forKey: .backup)
+      if !self.backup.isEmpty {
+        try container.encode(self.backup, forKey: .backup)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

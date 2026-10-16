@@ -226,19 +226,35 @@ public struct AutomationRun: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.automationSnapshot, forKey: .automationSnapshot)
-    try container.encode(self.targetId, forKey: .targetId)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDescription, forKey: .stateDescription)
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
+    if self.state != AutomationRun.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDescription.isEmpty {
+      try container.encode(self.stateDescription, forKey: .stateDescription)
+    }
     try container.encodeIfPresent(self.policyViolation, forKey: .policyViolation)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.ruleId, forKey: .ruleId)
-    try container.encode(self.automationId, forKey: .automationId)
+    if !self.ruleId.isEmpty {
+      try container.encode(self.ruleId, forKey: .ruleId)
+    }
+    if !self.automationId.isEmpty {
+      try container.encode(self.automationId, forKey: .automationId)
+    }
     try container.encodeIfPresent(self.waitUntilTime, forKey: .waitUntilTime)
 
     if let choice = self.operation {

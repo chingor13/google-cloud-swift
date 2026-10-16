@@ -86,8 +86,12 @@ public struct UnregisterSubscriberRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.account, forKey: .account)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.account.isEmpty {
+      try container.encode(self.account, forKey: .account)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.integrator, forKey: .integrator)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

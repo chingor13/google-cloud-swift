@@ -145,10 +145,18 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.skipMessage, forKey: .skipMessage)
-    try container.encode(self.jobRun, forKey: .jobRun)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.state != Job.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.skipMessage.isEmpty {
+      try container.encode(self.skipMessage, forKey: .skipMessage)
+    }
+    if !self.jobRun.isEmpty {
+      try container.encode(self.jobRun, forKey: .jobRun)
+    }
 
     if let choice = self.jobType {
       switch choice {

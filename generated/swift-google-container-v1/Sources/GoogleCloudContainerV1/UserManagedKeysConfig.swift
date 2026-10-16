@@ -163,17 +163,37 @@ public struct UserManagedKeysConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterCa, forKey: .clusterCa)
-    try container.encode(self.etcdApiCa, forKey: .etcdApiCa)
-    try container.encode(self.etcdPeerCa, forKey: .etcdPeerCa)
-    try container.encode(self.serviceAccountSigningKeys, forKey: .serviceAccountSigningKeys)
-    try container.encode(
-      self.serviceAccountVerificationKeys, forKey: .serviceAccountVerificationKeys)
-    try container.encode(self.aggregationCa, forKey: .aggregationCa)
-    try container.encode(self.controlPlaneDiskEncryptionKey, forKey: .controlPlaneDiskEncryptionKey)
-    try container.encode(
-      self.controlPlaneDiskEncryptionKeyVersions, forKey: .controlPlaneDiskEncryptionKeyVersions)
-    try container.encode(self.gkeopsEtcdBackupEncryptionKey, forKey: .gkeopsEtcdBackupEncryptionKey)
+    if !self.clusterCa.isEmpty {
+      try container.encode(self.clusterCa, forKey: .clusterCa)
+    }
+    if !self.etcdApiCa.isEmpty {
+      try container.encode(self.etcdApiCa, forKey: .etcdApiCa)
+    }
+    if !self.etcdPeerCa.isEmpty {
+      try container.encode(self.etcdPeerCa, forKey: .etcdPeerCa)
+    }
+    if !self.serviceAccountSigningKeys.isEmpty {
+      try container.encode(self.serviceAccountSigningKeys, forKey: .serviceAccountSigningKeys)
+    }
+    if !self.serviceAccountVerificationKeys.isEmpty {
+      try container.encode(
+        self.serviceAccountVerificationKeys, forKey: .serviceAccountVerificationKeys)
+    }
+    if !self.aggregationCa.isEmpty {
+      try container.encode(self.aggregationCa, forKey: .aggregationCa)
+    }
+    if !self.controlPlaneDiskEncryptionKey.isEmpty {
+      try container.encode(
+        self.controlPlaneDiskEncryptionKey, forKey: .controlPlaneDiskEncryptionKey)
+    }
+    if !self.controlPlaneDiskEncryptionKeyVersions.isEmpty {
+      try container.encode(
+        self.controlPlaneDiskEncryptionKeyVersions, forKey: .controlPlaneDiskEncryptionKeyVersions)
+    }
+    if !self.gkeopsEtcdBackupEncryptionKey.isEmpty {
+      try container.encode(
+        self.gkeopsEtcdBackupEncryptionKey, forKey: .gkeopsEtcdBackupEncryptionKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

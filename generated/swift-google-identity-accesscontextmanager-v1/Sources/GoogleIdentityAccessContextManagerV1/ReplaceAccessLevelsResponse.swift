@@ -71,7 +71,9 @@ public struct ReplaceAccessLevelsResponse: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accessLevels, forKey: .accessLevels)
+    if !self.accessLevels.isEmpty {
+      try container.encode(self.accessLevels, forKey: .accessLevels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

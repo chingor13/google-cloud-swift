@@ -130,12 +130,16 @@ public struct VectorSearch: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.searchField, forKey: .searchField)
+    if !self.searchField.isEmpty {
+      try container.encode(self.searchField, forKey: .searchField)
+    }
     try container.encodeIfPresent(self.filter, forKey: .filter)
     try container.encodeIfPresent(self.topK, forKey: .topK)
     try container.encodeIfPresent(self.outputFields, forKey: .outputFields)
     try container.encodeIfPresent(self.searchHint, forKey: .searchHint)
-    try container.encode(self.distanceMetric, forKey: .distanceMetric)
+    if self.distanceMetric != DistanceMetric() {
+      try container.encode(self.distanceMetric, forKey: .distanceMetric)
+    }
 
     if let choice = self.vectorType {
       switch choice {

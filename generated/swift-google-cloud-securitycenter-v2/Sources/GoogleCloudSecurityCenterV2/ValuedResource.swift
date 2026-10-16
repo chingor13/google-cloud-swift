@@ -130,13 +130,27 @@ public struct ValuedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.resourceValue, forKey: .resourceValue)
-    try container.encode(self.exposedScore, forKey: .exposedScore)
-    try container.encode(self.resourceValueConfigsUsed, forKey: .resourceValueConfigsUsed)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.resourceValue != ValuedResource.ResourceValue() {
+      try container.encode(self.resourceValue, forKey: .resourceValue)
+    }
+    if self.exposedScore != 0 {
+      try container.encode(self.exposedScore, forKey: .exposedScore)
+    }
+    if !self.resourceValueConfigsUsed.isEmpty {
+      try container.encode(self.resourceValueConfigsUsed, forKey: .resourceValueConfigsUsed)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

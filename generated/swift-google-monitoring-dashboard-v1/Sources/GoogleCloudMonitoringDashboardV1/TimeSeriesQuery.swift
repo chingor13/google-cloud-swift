@@ -131,8 +131,12 @@ public struct TimeSeriesQuery: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.unitOverride, forKey: .unitOverride)
-    try container.encode(self.outputFullDuration, forKey: .outputFullDuration)
+    if !self.unitOverride.isEmpty {
+      try container.encode(self.unitOverride, forKey: .unitOverride)
+    }
+    if self.outputFullDuration {
+      try container.encode(self.outputFullDuration, forKey: .outputFullDuration)
+    }
 
     if let choice = self.source {
       switch choice {

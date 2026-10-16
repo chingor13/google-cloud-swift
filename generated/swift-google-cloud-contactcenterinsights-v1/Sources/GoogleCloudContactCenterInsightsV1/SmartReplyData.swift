@@ -100,10 +100,18 @@ public struct SmartReplyData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.reply, forKey: .reply)
-    try container.encode(self.confidenceScore, forKey: .confidenceScore)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.queryRecord, forKey: .queryRecord)
+    if !self.reply.isEmpty {
+      try container.encode(self.reply, forKey: .reply)
+    }
+    if self.confidenceScore != 0 {
+      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.queryRecord.isEmpty {
+      try container.encode(self.queryRecord, forKey: .queryRecord)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

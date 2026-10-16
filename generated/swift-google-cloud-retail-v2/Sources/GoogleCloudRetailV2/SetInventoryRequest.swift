@@ -180,7 +180,9 @@ public struct SetInventoryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.inventory, forKey: .inventory)
     try container.encodeIfPresent(self.setMask, forKey: .setMask)
     try container.encodeIfPresent(self.setTime, forKey: .setTime)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

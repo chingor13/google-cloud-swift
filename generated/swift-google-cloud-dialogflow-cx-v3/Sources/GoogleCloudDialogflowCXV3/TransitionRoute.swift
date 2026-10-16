@@ -174,10 +174,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.intent, forKey: .intent)
-      try container.encode(self.condition, forKey: .condition)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.intent.isEmpty {
+        try container.encode(self.intent, forKey: .intent)
+      }
+      if !self.condition.isEmpty {
+        try container.encode(self.condition, forKey: .condition)
+      }
       try container.encodeIfPresent(self.triggerFulfillment, forKey: .triggerFulfillment)
 
       if let choice = self.target {

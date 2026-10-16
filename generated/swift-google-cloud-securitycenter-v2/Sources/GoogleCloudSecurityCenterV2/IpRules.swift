@@ -126,10 +126,18 @@ public struct IpRules: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.direction, forKey: .direction)
-    try container.encode(self.sourceIpRanges, forKey: .sourceIpRanges)
-    try container.encode(self.destinationIpRanges, forKey: .destinationIpRanges)
-    try container.encode(self.exposedServices, forKey: .exposedServices)
+    if self.direction != IpRules.Direction() {
+      try container.encode(self.direction, forKey: .direction)
+    }
+    if !self.sourceIpRanges.isEmpty {
+      try container.encode(self.sourceIpRanges, forKey: .sourceIpRanges)
+    }
+    if !self.destinationIpRanges.isEmpty {
+      try container.encode(self.destinationIpRanges, forKey: .destinationIpRanges)
+    }
+    if !self.exposedServices.isEmpty {
+      try container.encode(self.exposedServices, forKey: .exposedServices)
+    }
 
     if let choice = self.rules {
       switch choice {

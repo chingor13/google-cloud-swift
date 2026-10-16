@@ -79,8 +79,12 @@ public struct AddControlRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.servingConfig, forKey: .servingConfig)
-    try container.encode(self.controlId, forKey: .controlId)
+    if !self.servingConfig.isEmpty {
+      try container.encode(self.servingConfig, forKey: .servingConfig)
+    }
+    if !self.controlId.isEmpty {
+      try container.encode(self.controlId, forKey: .controlId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

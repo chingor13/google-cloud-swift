@@ -109,9 +109,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.userId, forKey: .userId)
-      try container.encode(self.userAgent, forKey: .userAgent)
-      try container.encode(self.timeZone, forKey: .timeZone)
+      if !self.userId.isEmpty {
+        try container.encode(self.userId, forKey: .userId)
+      }
+      if !self.userAgent.isEmpty {
+        try container.encode(self.userAgent, forKey: .userAgent)
+      }
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

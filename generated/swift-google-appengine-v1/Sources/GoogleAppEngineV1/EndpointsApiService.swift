@@ -116,10 +116,18 @@ public struct EndpointsApiService: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.configId, forKey: .configId)
-    try container.encode(self.rolloutStrategy, forKey: .rolloutStrategy)
-    try container.encode(self.disableTraceSampling, forKey: .disableTraceSampling)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.configId.isEmpty {
+      try container.encode(self.configId, forKey: .configId)
+    }
+    if self.rolloutStrategy != EndpointsApiService.RolloutStrategy() {
+      try container.encode(self.rolloutStrategy, forKey: .rolloutStrategy)
+    }
+    if self.disableTraceSampling {
+      try container.encode(self.disableTraceSampling, forKey: .disableTraceSampling)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

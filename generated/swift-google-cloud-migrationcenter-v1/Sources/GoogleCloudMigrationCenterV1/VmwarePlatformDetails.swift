@@ -110,12 +110,24 @@ public struct VmwarePlatformDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vcenterVersion, forKey: .vcenterVersion)
-    try container.encode(self.esxVersion, forKey: .esxVersion)
-    try container.encode(self.osid, forKey: .osid)
-    try container.encode(self.vcenterFolder, forKey: .vcenterFolder)
-    try container.encode(self.vcenterUri, forKey: .vcenterUri)
-    try container.encode(self.vcenterVmId, forKey: .vcenterVmId)
+    if !self.vcenterVersion.isEmpty {
+      try container.encode(self.vcenterVersion, forKey: .vcenterVersion)
+    }
+    if !self.esxVersion.isEmpty {
+      try container.encode(self.esxVersion, forKey: .esxVersion)
+    }
+    if !self.osid.isEmpty {
+      try container.encode(self.osid, forKey: .osid)
+    }
+    if !self.vcenterFolder.isEmpty {
+      try container.encode(self.vcenterFolder, forKey: .vcenterFolder)
+    }
+    if !self.vcenterUri.isEmpty {
+      try container.encode(self.vcenterUri, forKey: .vcenterUri)
+    }
+    if !self.vcenterVmId.isEmpty {
+      try container.encode(self.vcenterVmId, forKey: .vcenterVmId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

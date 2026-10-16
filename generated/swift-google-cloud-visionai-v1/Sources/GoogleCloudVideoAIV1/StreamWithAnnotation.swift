@@ -97,9 +97,15 @@ public struct StreamWithAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.stream, forKey: .stream)
-    try container.encode(self.applicationAnnotations, forKey: .applicationAnnotations)
-    try container.encode(self.nodeAnnotations, forKey: .nodeAnnotations)
+    if !self.stream.isEmpty {
+      try container.encode(self.stream, forKey: .stream)
+    }
+    if !self.applicationAnnotations.isEmpty {
+      try container.encode(self.applicationAnnotations, forKey: .applicationAnnotations)
+    }
+    if !self.nodeAnnotations.isEmpty {
+      try container.encode(self.nodeAnnotations, forKey: .nodeAnnotations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -165,8 +171,12 @@ public struct StreamWithAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.node, forKey: .node)
-      try container.encode(self.annotations, forKey: .annotations)
+      if !self.node.isEmpty {
+        try container.encode(self.node, forKey: .node)
+      }
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

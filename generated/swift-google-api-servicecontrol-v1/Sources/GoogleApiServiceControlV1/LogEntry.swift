@@ -175,13 +175,23 @@ public struct LogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
-    try container.encode(self.severity, forKey: .severity)
+    if self.severity != GoogleCloudLoggingType.LogSeverity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
     try container.encodeIfPresent(self.httpRequest, forKey: .httpRequest)
-    try container.encode(self.trace, forKey: .trace)
-    try container.encode(self.insertId, forKey: .insertId)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.trace.isEmpty {
+      try container.encode(self.trace, forKey: .trace)
+    }
+    if !self.insertId.isEmpty {
+      try container.encode(self.insertId, forKey: .insertId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.operation, forKey: .operation)
     try container.encodeIfPresent(self.sourceLocation, forKey: .sourceLocation)
 

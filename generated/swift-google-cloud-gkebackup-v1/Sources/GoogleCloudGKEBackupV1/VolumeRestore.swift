@@ -166,18 +166,34 @@ public struct VolumeRestore: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.volumeBackup, forKey: .volumeBackup)
+    if !self.volumeBackup.isEmpty {
+      try container.encode(self.volumeBackup, forKey: .volumeBackup)
+    }
     try container.encodeIfPresent(self.targetPvc, forKey: .targetPvc)
-    try container.encode(self.volumeHandle, forKey: .volumeHandle)
-    try container.encode(self.volumeType, forKey: .volumeType)
+    if !self.volumeHandle.isEmpty {
+      try container.encode(self.volumeHandle, forKey: .volumeHandle)
+    }
+    if self.volumeType != VolumeRestore.VolumeType() {
+      try container.encode(self.volumeType, forKey: .volumeType)
+    }
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
-    try container.encode(self.etag, forKey: .etag)
+    if self.state != VolumeRestore.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

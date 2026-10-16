@@ -158,7 +158,9 @@ public struct RecordCondition: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.field, forKey: .field)
-      try container.encode(self.`operator`, forKey: .`operator`)
+      if self.`operator` != RelationalOperator() {
+        try container.encode(self.`operator`, forKey: .`operator`)
+      }
       try container.encodeIfPresent(self.value, forKey: .value)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -241,7 +243,9 @@ public struct RecordCondition: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conditions, forKey: .conditions)
+      if !self.conditions.isEmpty {
+        try container.encode(self.conditions, forKey: .conditions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -347,7 +351,9 @@ public struct RecordCondition: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.logicalOperator, forKey: .logicalOperator)
+      if self.logicalOperator != RecordCondition.Expressions.LogicalOperator() {
+        try container.encode(self.logicalOperator, forKey: .logicalOperator)
+      }
 
       if let choice = self.type {
         switch choice {

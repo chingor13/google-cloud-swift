@@ -277,31 +277,75 @@ public struct Volume: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.storageType, forKey: .storageType)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.requestedSizeGib, forKey: .requestedSizeGib)
-    try container.encode(self.originallyRequestedSizeGib, forKey: .originallyRequestedSizeGib)
-    try container.encode(self.currentSizeGib, forKey: .currentSizeGib)
-    try container.encode(self.emergencySizeGib, forKey: .emergencySizeGib)
-    try container.encode(self.maxSizeGib, forKey: .maxSizeGib)
-    try container.encode(self.autoGrownSizeGib, forKey: .autoGrownSizeGib)
-    try container.encode(self.remainingSpaceGib, forKey: .remainingSpaceGib)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.storageType != Volume.StorageType() {
+      try container.encode(self.storageType, forKey: .storageType)
+    }
+    if self.state != Volume.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.requestedSizeGib != 0 {
+      try container.encode(self.requestedSizeGib, forKey: .requestedSizeGib)
+    }
+    if self.originallyRequestedSizeGib != 0 {
+      try container.encode(self.originallyRequestedSizeGib, forKey: .originallyRequestedSizeGib)
+    }
+    if self.currentSizeGib != 0 {
+      try container.encode(self.currentSizeGib, forKey: .currentSizeGib)
+    }
+    if self.emergencySizeGib != 0 {
+      try container.encode(self.emergencySizeGib, forKey: .emergencySizeGib)
+    }
+    if self.maxSizeGib != 0 {
+      try container.encode(self.maxSizeGib, forKey: .maxSizeGib)
+    }
+    if self.autoGrownSizeGib != 0 {
+      try container.encode(self.autoGrownSizeGib, forKey: .autoGrownSizeGib)
+    }
+    if self.remainingSpaceGib != 0 {
+      try container.encode(self.remainingSpaceGib, forKey: .remainingSpaceGib)
+    }
     try container.encodeIfPresent(
       self.snapshotReservationDetail, forKey: .snapshotReservationDetail)
-    try container.encode(self.snapshotAutoDeleteBehavior, forKey: .snapshotAutoDeleteBehavior)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.snapshotEnabled, forKey: .snapshotEnabled)
-    try container.encode(self.pod, forKey: .pod)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.bootVolume, forKey: .bootVolume)
-    try container.encode(self.performanceTier, forKey: .performanceTier)
-    try container.encode(self.notes, forKey: .notes)
-    try container.encode(self.workloadProfile, forKey: .workloadProfile)
+    if self.snapshotAutoDeleteBehavior != Volume.SnapshotAutoDeleteBehavior() {
+      try container.encode(self.snapshotAutoDeleteBehavior, forKey: .snapshotAutoDeleteBehavior)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.snapshotEnabled {
+      try container.encode(self.snapshotEnabled, forKey: .snapshotEnabled)
+    }
+    if !self.pod.isEmpty {
+      try container.encode(self.pod, forKey: .pod)
+    }
+    if self.`protocol` != Volume.Protocol_() {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if self.bootVolume {
+      try container.encode(self.bootVolume, forKey: .bootVolume)
+    }
+    if self.performanceTier != VolumePerformanceTier() {
+      try container.encode(self.performanceTier, forKey: .performanceTier)
+    }
+    if !self.notes.isEmpty {
+      try container.encode(self.notes, forKey: .notes)
+    }
+    if self.workloadProfile != Volume.WorkloadProfile() {
+      try container.encode(self.workloadProfile, forKey: .workloadProfile)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.instances, forKey: .instances)
-    try container.encode(self.attached, forKey: .attached)
+    if !self.instances.isEmpty {
+      try container.encode(self.instances, forKey: .instances)
+    }
+    if self.attached {
+      try container.encode(self.attached, forKey: .attached)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -396,10 +440,18 @@ public struct Volume: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.reservedSpaceGib, forKey: .reservedSpaceGib)
-      try container.encode(self.reservedSpaceUsedPercent, forKey: .reservedSpaceUsedPercent)
-      try container.encode(self.reservedSpaceRemainingGib, forKey: .reservedSpaceRemainingGib)
-      try container.encode(self.reservedSpacePercent, forKey: .reservedSpacePercent)
+      if self.reservedSpaceGib != 0 {
+        try container.encode(self.reservedSpaceGib, forKey: .reservedSpaceGib)
+      }
+      if self.reservedSpaceUsedPercent != 0 {
+        try container.encode(self.reservedSpaceUsedPercent, forKey: .reservedSpaceUsedPercent)
+      }
+      if self.reservedSpaceRemainingGib != 0 {
+        try container.encode(self.reservedSpaceRemainingGib, forKey: .reservedSpaceRemainingGib)
+      }
+      if self.reservedSpacePercent != 0 {
+        try container.encode(self.reservedSpacePercent, forKey: .reservedSpacePercent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

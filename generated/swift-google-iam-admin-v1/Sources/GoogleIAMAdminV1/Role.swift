@@ -128,13 +128,27 @@ public struct Role: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.includedPermissions, forKey: .includedPermissions)
-    try container.encode(self.stage, forKey: .stage)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.deleted, forKey: .deleted)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.includedPermissions.isEmpty {
+      try container.encode(self.includedPermissions, forKey: .includedPermissions)
+    }
+    if self.stage != Role.RoleLaunchStage() {
+      try container.encode(self.stage, forKey: .stage)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.deleted {
+      try container.encode(self.deleted, forKey: .deleted)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -95,7 +95,9 @@ public struct UpgradeOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`package`, forKey: .`package`)
+    if !self.`package`.isEmpty {
+      try container.encode(self.`package`, forKey: .`package`)
+    }
     try container.encodeIfPresent(self.parsedVersion, forKey: .parsedVersion)
     try container.encodeIfPresent(self.distribution, forKey: .distribution)
     try container.encodeIfPresent(self.windowsUpdate, forKey: .windowsUpdate)

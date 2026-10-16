@@ -190,20 +190,42 @@ public struct Blueprint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.sourceBlueprint, forKey: .sourceBlueprint)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.sourceBlueprint.isEmpty {
+      try container.encode(self.sourceBlueprint, forKey: .sourceBlueprint)
+    }
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
-    try container.encode(self.approvalState, forKey: .approvalState)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.repository, forKey: .repository)
-    try container.encode(self.files, forKey: .files)
-    try container.encode(self.labels, forKey: .labels)
+    if self.approvalState != Blueprint.ApprovalState() {
+      try container.encode(self.approvalState, forKey: .approvalState)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.repository.isEmpty {
+      try container.encode(self.repository, forKey: .repository)
+    }
+    if !self.files.isEmpty {
+      try container.encode(self.files, forKey: .files)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.sourceProvider, forKey: .sourceProvider)
-    try container.encode(self.deploymentLevel, forKey: .deploymentLevel)
-    try container.encode(self.rollbackSupport, forKey: .rollbackSupport)
+    if !self.sourceProvider.isEmpty {
+      try container.encode(self.sourceProvider, forKey: .sourceProvider)
+    }
+    if self.deploymentLevel != DeploymentLevel() {
+      try container.encode(self.deploymentLevel, forKey: .deploymentLevel)
+    }
+    if self.rollbackSupport {
+      try container.encode(self.rollbackSupport, forKey: .rollbackSupport)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

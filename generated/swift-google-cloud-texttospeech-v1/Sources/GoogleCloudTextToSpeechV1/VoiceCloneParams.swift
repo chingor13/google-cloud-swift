@@ -69,7 +69,9 @@ public struct VoiceCloneParams: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.voiceCloningKey, forKey: .voiceCloningKey)
+    if !self.voiceCloningKey.isEmpty {
+      try container.encode(self.voiceCloningKey, forKey: .voiceCloningKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

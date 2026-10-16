@@ -127,14 +127,24 @@ public struct ApiHubInstance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
+    if self.state != ApiHubInstance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -227,10 +237,18 @@ public struct ApiHubInstance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cmekKeyName, forKey: .cmekKeyName)
-      try container.encode(self.disableSearch, forKey: .disableSearch)
-      try container.encode(self.vertexLocation, forKey: .vertexLocation)
-      try container.encode(self.encryptionType, forKey: .encryptionType)
+      if !self.cmekKeyName.isEmpty {
+        try container.encode(self.cmekKeyName, forKey: .cmekKeyName)
+      }
+      if self.disableSearch {
+        try container.encode(self.disableSearch, forKey: .disableSearch)
+      }
+      if !self.vertexLocation.isEmpty {
+        try container.encode(self.vertexLocation, forKey: .vertexLocation)
+      }
+      if self.encryptionType != ApiHubInstance.Config.EncryptionType() {
+        try container.encode(self.encryptionType, forKey: .encryptionType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

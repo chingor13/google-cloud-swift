@@ -195,19 +195,35 @@ public struct FrameworkDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.targetResourceConfig, forKey: .targetResourceConfig)
-    try container.encode(self.computedTargetResource, forKey: .computedTargetResource)
+    if !self.computedTargetResource.isEmpty {
+      try container.encode(self.computedTargetResource, forKey: .computedTargetResource)
+    }
     try container.encodeIfPresent(self.framework, forKey: .framework)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.cloudControlMetadata, forKey: .cloudControlMetadata)
-    try container.encode(self.deploymentState, forKey: .deploymentState)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.cloudControlMetadata.isEmpty {
+      try container.encode(self.cloudControlMetadata, forKey: .cloudControlMetadata)
+    }
+    if self.deploymentState != DeploymentState() {
+      try container.encode(self.deploymentState, forKey: .deploymentState)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.targetResourceDisplayName, forKey: .targetResourceDisplayName)
-    try container.encode(
-      self.cloudControlDeploymentReferences, forKey: .cloudControlDeploymentReferences)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.targetResourceDisplayName.isEmpty {
+      try container.encode(self.targetResourceDisplayName, forKey: .targetResourceDisplayName)
+    }
+    if !self.cloudControlDeploymentReferences.isEmpty {
+      try container.encode(
+        self.cloudControlDeploymentReferences, forKey: .cloudControlDeploymentReferences)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

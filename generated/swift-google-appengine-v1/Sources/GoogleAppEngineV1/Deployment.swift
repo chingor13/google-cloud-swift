@@ -95,7 +95,9 @@ public struct Deployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.files, forKey: .files)
+    if !self.files.isEmpty {
+      try container.encode(self.files, forKey: .files)
+    }
     try container.encodeIfPresent(self.container, forKey: .container)
     try container.encodeIfPresent(self.zip, forKey: .zip)
     try container.encodeIfPresent(self.cloudBuildOptions, forKey: .cloudBuildOptions)

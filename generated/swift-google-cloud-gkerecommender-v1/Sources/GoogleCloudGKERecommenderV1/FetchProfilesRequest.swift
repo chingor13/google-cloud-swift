@@ -140,9 +140,15 @@ public struct FetchProfilesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.model, forKey: .model)
-    try container.encode(self.modelServer, forKey: .modelServer)
-    try container.encode(self.modelServerVersion, forKey: .modelServerVersion)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
+    if !self.modelServer.isEmpty {
+      try container.encode(self.modelServer, forKey: .modelServer)
+    }
+    if !self.modelServerVersion.isEmpty {
+      try container.encode(self.modelServerVersion, forKey: .modelServerVersion)
+    }
     try container.encodeIfPresent(self.performanceRequirements, forKey: .performanceRequirements)
     try container.encodeIfPresent(self.pageSize, forKey: .pageSize)
     try container.encodeIfPresent(self.pageToken, forKey: .pageToken)

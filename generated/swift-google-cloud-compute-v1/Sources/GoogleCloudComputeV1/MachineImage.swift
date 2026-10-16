@@ -268,26 +268,34 @@
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.instanceProperties, forKey: .instanceProperties)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(
         self.machineImageEncryptionKey, forKey: .machineImageEncryptionKey)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.savedDisks, forKey: .savedDisks)
+      if !self.savedDisks.isEmpty {
+        try container.encode(self.savedDisks, forKey: .savedDisks)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.sourceDiskEncryptionKeys, forKey: .sourceDiskEncryptionKeys)
+      if !self.sourceDiskEncryptionKeys.isEmpty {
+        try container.encode(self.sourceDiskEncryptionKeys, forKey: .sourceDiskEncryptionKeys)
+      }
       try container.encodeIfPresent(self.sourceInstance, forKey: .sourceInstance)
       try container.encodeIfPresent(
         self.sourceInstanceProperties, forKey: .sourceInstanceProperties)
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.storageLocations, forKey: .storageLocations)
+      if !self.storageLocations.isEmpty {
+        try container.encode(self.storageLocations, forKey: .storageLocations)
+      }
       try container.encodeIfPresent(self.totalStorageBytes, forKey: .totalStorageBytes)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

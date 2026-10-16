@@ -102,7 +102,9 @@ public struct Waypoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sideOfRoad, forKey: .sideOfRoad)
+    if self.sideOfRoad {
+      try container.encode(self.sideOfRoad, forKey: .sideOfRoad)
+    }
 
     if let choice = self.locationType {
       switch choice {

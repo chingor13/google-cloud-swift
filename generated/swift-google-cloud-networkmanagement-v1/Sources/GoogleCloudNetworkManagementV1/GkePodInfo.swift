@@ -91,9 +91,15 @@ public struct GkePodInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.podUri, forKey: .podUri)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.networkUri, forKey: .networkUri)
+    if !self.podUri.isEmpty {
+      try container.encode(self.podUri, forKey: .podUri)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

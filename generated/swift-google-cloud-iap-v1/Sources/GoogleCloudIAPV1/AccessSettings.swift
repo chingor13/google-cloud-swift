@@ -120,7 +120,9 @@ public struct AccessSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.allowedDomainsSettings, forKey: .allowedDomainsSettings)
     try container.encodeIfPresent(
       self.workforceIdentitySettings, forKey: .workforceIdentitySettings)
-    try container.encode(self.identitySources, forKey: .identitySources)
+    if !self.identitySources.isEmpty {
+      try container.encode(self.identitySources, forKey: .identitySources)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

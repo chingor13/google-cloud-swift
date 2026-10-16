@@ -151,17 +151,29 @@ public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.serviceReference, forKey: .serviceReference)
     try container.encodeIfPresent(self.serviceProperties, forKey: .serviceProperties)
     try container.encodeIfPresent(self.attributes, forKey: .attributes)
-    try container.encode(self.discoveredService, forKey: .discoveredService)
+    if !self.discoveredService.isEmpty {
+      try container.encode(self.discoveredService, forKey: .discoveredService)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.state, forKey: .state)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.state != Service.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -193,7 +193,9 @@
       try container.encodeIfPresent(self.retryPolicy, forKey: .retryPolicy)
       try container.encodeIfPresent(self.timeout, forKey: .timeout)
       try container.encodeIfPresent(self.urlRewrite, forKey: .urlRewrite)
-      try container.encode(self.weightedBackendServices, forKey: .weightedBackendServices)
+      if !self.weightedBackendServices.isEmpty {
+        try container.encode(self.weightedBackendServices, forKey: .weightedBackendServices)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

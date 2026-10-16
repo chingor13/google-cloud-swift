@@ -246,7 +246,9 @@ public struct AuditData: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.jobCompletedEvent, forKey: .jobCompletedEvent)
-    try container.encode(self.tableDataReadEvents, forKey: .tableDataReadEvents)
+    if !self.tableDataReadEvents.isEmpty {
+      try container.encode(self.tableDataReadEvents, forKey: .tableDataReadEvents)
+    }
 
     if let choice = self.request {
       switch choice {

@@ -101,9 +101,15 @@ public struct CreatePhraseSetRequest: Codable, Equatable, GoogleWKT._AnyPackable
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.phraseSet, forKey: .phraseSet)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.phraseSetId, forKey: .phraseSetId)
-    try container.encode(self.parent, forKey: .parent)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.phraseSetId.isEmpty {
+      try container.encode(self.phraseSetId, forKey: .phraseSetId)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

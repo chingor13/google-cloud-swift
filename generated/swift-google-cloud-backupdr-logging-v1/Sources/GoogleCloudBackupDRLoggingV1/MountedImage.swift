@@ -255,30 +255,78 @@ public struct MountedImage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceResourceName, forKey: .sourceResourceName)
-    try container.encode(self.sourceResourceId, forKey: .sourceResourceId)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.applianceId, forKey: .applianceId)
-    try container.encode(self.mountedImageName, forKey: .mountedImageName)
-    try container.encode(self.sourceImageName, forKey: .sourceImageName)
-    try container.encode(self.sourceImageType, forKey: .sourceImageType)
-    try container.encode(self.recoveryPointDate, forKey: .recoveryPointDate)
-    try container.encode(self.lastMountDate, forKey: .lastMountDate)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.sourceHostName, forKey: .sourceHostName)
-    try container.encode(self.sourceHostId, forKey: .sourceHostId)
-    try container.encode(self.mountedHostName, forKey: .mountedHostName)
-    try container.encode(self.mountedHostId, forKey: .mountedHostId)
-    try container.encode(self.mountedResourceName, forKey: .mountedResourceName)
-    try container.encode(self.resourceVirtualSizeInGib, forKey: .resourceVirtualSizeInGib)
-    try container.encode(self.storageConsumedInGib, forKey: .storageConsumedInGib)
-    try container.encode(self.mountedResourceLabel, forKey: .mountedResourceLabel)
-    try container.encode(self.restorableObject, forKey: .restorableObject)
-    try container.encode(self.mountedImageAgeInDays, forKey: .mountedImageAgeInDays)
-    try container.encode(self.userName, forKey: .userName)
-    try container.encode(self.readMode, forKey: .readMode)
-    try container.encode(self.resourceSizeInGib, forKey: .resourceSizeInGib)
-    try container.encode(self.imageExpirationDate, forKey: .imageExpirationDate)
+    if !self.sourceResourceName.isEmpty {
+      try container.encode(self.sourceResourceName, forKey: .sourceResourceName)
+    }
+    if !self.sourceResourceId.isEmpty {
+      try container.encode(self.sourceResourceId, forKey: .sourceResourceId)
+    }
+    if !self.applianceName.isEmpty {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.applianceId.isEmpty {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
+    if !self.mountedImageName.isEmpty {
+      try container.encode(self.mountedImageName, forKey: .mountedImageName)
+    }
+    if !self.sourceImageName.isEmpty {
+      try container.encode(self.sourceImageName, forKey: .sourceImageName)
+    }
+    if !self.sourceImageType.isEmpty {
+      try container.encode(self.sourceImageType, forKey: .sourceImageType)
+    }
+    if !self.recoveryPointDate.isEmpty {
+      try container.encode(self.recoveryPointDate, forKey: .recoveryPointDate)
+    }
+    if !self.lastMountDate.isEmpty {
+      try container.encode(self.lastMountDate, forKey: .lastMountDate)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.sourceHostName.isEmpty {
+      try container.encode(self.sourceHostName, forKey: .sourceHostName)
+    }
+    if !self.sourceHostId.isEmpty {
+      try container.encode(self.sourceHostId, forKey: .sourceHostId)
+    }
+    if !self.mountedHostName.isEmpty {
+      try container.encode(self.mountedHostName, forKey: .mountedHostName)
+    }
+    if !self.mountedHostId.isEmpty {
+      try container.encode(self.mountedHostId, forKey: .mountedHostId)
+    }
+    if !self.mountedResourceName.isEmpty {
+      try container.encode(self.mountedResourceName, forKey: .mountedResourceName)
+    }
+    if self.resourceVirtualSizeInGib != 0 {
+      try container.encode(self.resourceVirtualSizeInGib, forKey: .resourceVirtualSizeInGib)
+    }
+    if self.storageConsumedInGib != 0 {
+      try container.encode(self.storageConsumedInGib, forKey: .storageConsumedInGib)
+    }
+    if !self.mountedResourceLabel.isEmpty {
+      try container.encode(self.mountedResourceLabel, forKey: .mountedResourceLabel)
+    }
+    if !self.restorableObject.isEmpty {
+      try container.encode(self.restorableObject, forKey: .restorableObject)
+    }
+    if self.mountedImageAgeInDays != 0 {
+      try container.encode(self.mountedImageAgeInDays, forKey: .mountedImageAgeInDays)
+    }
+    if !self.userName.isEmpty {
+      try container.encode(self.userName, forKey: .userName)
+    }
+    if !self.readMode.isEmpty {
+      try container.encode(self.readMode, forKey: .readMode)
+    }
+    if self.resourceSizeInGib != 0 {
+      try container.encode(self.resourceSizeInGib, forKey: .resourceSizeInGib)
+    }
+    if !self.imageExpirationDate.isEmpty {
+      try container.encode(self.imageExpirationDate, forKey: .imageExpirationDate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

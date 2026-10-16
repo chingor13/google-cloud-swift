@@ -105,11 +105,21 @@ public struct PatchJobInstanceDetails: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.instanceSystemId, forKey: .instanceSystemId)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureReason, forKey: .failureReason)
-    try container.encode(self.attemptCount, forKey: .attemptCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.instanceSystemId.isEmpty {
+      try container.encode(self.instanceSystemId, forKey: .instanceSystemId)
+    }
+    if self.state != Instance.PatchState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failureReason.isEmpty {
+      try container.encode(self.failureReason, forKey: .failureReason)
+    }
+    if self.attemptCount != 0 {
+      try container.encode(self.attemptCount, forKey: .attemptCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

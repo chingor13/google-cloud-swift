@@ -130,10 +130,18 @@ public struct RepoSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.repoName, forKey: .repoName)
-    try container.encode(self.dir, forKey: .dir)
-    try container.encode(self.invertRegex, forKey: .invertRegex)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.repoName.isEmpty {
+      try container.encode(self.repoName, forKey: .repoName)
+    }
+    if !self.dir.isEmpty {
+      try container.encode(self.dir, forKey: .dir)
+    }
+    if self.invertRegex {
+      try container.encode(self.invertRegex, forKey: .invertRegex)
+    }
 
     if let choice = self.revision {
       switch choice {

@@ -115,7 +115,9 @@ public struct IamPolicyAnalysisQuery: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scope, forKey: .scope)
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
     try container.encodeIfPresent(self.resourceSelector, forKey: .resourceSelector)
     try container.encodeIfPresent(self.identitySelector, forKey: .identitySelector)
     try container.encodeIfPresent(self.accessSelector, forKey: .accessSelector)
@@ -183,7 +185,9 @@ public struct IamPolicyAnalysisQuery: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      if !self.fullResourceName.isEmpty {
+        try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -276,7 +280,9 @@ public struct IamPolicyAnalysisQuery: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.identity, forKey: .identity)
+      if !self.identity.isEmpty {
+        try container.encode(self.identity, forKey: .identity)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -368,8 +374,12 @@ public struct IamPolicyAnalysisQuery: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.roles, forKey: .roles)
-      try container.encode(self.permissions, forKey: .permissions)
+      if !self.roles.isEmpty {
+        try container.encode(self.roles, forKey: .roles)
+      }
+      if !self.permissions.isEmpty {
+        try container.encode(self.permissions, forKey: .permissions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -583,13 +593,25 @@ public struct IamPolicyAnalysisQuery: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.expandGroups, forKey: .expandGroups)
-      try container.encode(self.expandRoles, forKey: .expandRoles)
-      try container.encode(self.expandResources, forKey: .expandResources)
-      try container.encode(self.outputResourceEdges, forKey: .outputResourceEdges)
-      try container.encode(self.outputGroupEdges, forKey: .outputGroupEdges)
-      try container.encode(
-        self.analyzeServiceAccountImpersonation, forKey: .analyzeServiceAccountImpersonation)
+      if self.expandGroups {
+        try container.encode(self.expandGroups, forKey: .expandGroups)
+      }
+      if self.expandRoles {
+        try container.encode(self.expandRoles, forKey: .expandRoles)
+      }
+      if self.expandResources {
+        try container.encode(self.expandResources, forKey: .expandResources)
+      }
+      if self.outputResourceEdges {
+        try container.encode(self.outputResourceEdges, forKey: .outputResourceEdges)
+      }
+      if self.outputGroupEdges {
+        try container.encode(self.outputGroupEdges, forKey: .outputGroupEdges)
+      }
+      if self.analyzeServiceAccountImpersonation {
+        try container.encode(
+          self.analyzeServiceAccountImpersonation, forKey: .analyzeServiceAccountImpersonation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

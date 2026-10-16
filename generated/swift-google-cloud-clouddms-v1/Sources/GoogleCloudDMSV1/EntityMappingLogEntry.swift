@@ -85,9 +85,15 @@ public struct EntityMappingLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ruleId, forKey: .ruleId)
-    try container.encode(self.ruleRevisionId, forKey: .ruleRevisionId)
-    try container.encode(self.mappingComment, forKey: .mappingComment)
+    if !self.ruleId.isEmpty {
+      try container.encode(self.ruleId, forKey: .ruleId)
+    }
+    if !self.ruleRevisionId.isEmpty {
+      try container.encode(self.ruleRevisionId, forKey: .ruleRevisionId)
+    }
+    if !self.mappingComment.isEmpty {
+      try container.encode(self.mappingComment, forKey: .mappingComment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

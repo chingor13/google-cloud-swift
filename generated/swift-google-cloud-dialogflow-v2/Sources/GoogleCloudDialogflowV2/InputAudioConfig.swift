@@ -265,22 +265,50 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.audioEncoding, forKey: .audioEncoding)
-      try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.enableWordInfo, forKey: .enableWordInfo)
-      try container.encode(self.phraseHints, forKey: .phraseHints)
-      try container.encode(self.speechContexts, forKey: .speechContexts)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.modelVariant, forKey: .modelVariant)
-      try container.encode(self.singleUtterance, forKey: .singleUtterance)
-      try container.encode(self.enableVoiceActivityEvents, forKey: .enableVoiceActivityEvents)
-      try container.encode(
-        self.disableNoSpeechRecognizedEvent, forKey: .disableNoSpeechRecognizedEvent)
-      try container.encode(self.enableAutomaticPunctuation, forKey: .enableAutomaticPunctuation)
-      try container.encode(self.phraseSets, forKey: .phraseSets)
-      try container.encode(
-        self.optOutConformerModelMigration, forKey: .optOutConformerModelMigration)
+      if self.audioEncoding != AudioEncoding() {
+        try container.encode(self.audioEncoding, forKey: .audioEncoding)
+      }
+      if self.sampleRateHertz != 0 {
+        try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if self.enableWordInfo {
+        try container.encode(self.enableWordInfo, forKey: .enableWordInfo)
+      }
+      if !self.phraseHints.isEmpty {
+        try container.encode(self.phraseHints, forKey: .phraseHints)
+      }
+      if !self.speechContexts.isEmpty {
+        try container.encode(self.speechContexts, forKey: .speechContexts)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if self.modelVariant != SpeechModelVariant() {
+        try container.encode(self.modelVariant, forKey: .modelVariant)
+      }
+      if self.singleUtterance {
+        try container.encode(self.singleUtterance, forKey: .singleUtterance)
+      }
+      if self.enableVoiceActivityEvents {
+        try container.encode(self.enableVoiceActivityEvents, forKey: .enableVoiceActivityEvents)
+      }
+      if self.disableNoSpeechRecognizedEvent {
+        try container.encode(
+          self.disableNoSpeechRecognizedEvent, forKey: .disableNoSpeechRecognizedEvent)
+      }
+      if self.enableAutomaticPunctuation {
+        try container.encode(self.enableAutomaticPunctuation, forKey: .enableAutomaticPunctuation)
+      }
+      if !self.phraseSets.isEmpty {
+        try container.encode(self.phraseSets, forKey: .phraseSets)
+      }
+      if self.optOutConformerModelMigration {
+        try container.encode(
+          self.optOutConformerModelMigration, forKey: .optOutConformerModelMigration)
+      }
       try container.encodeIfPresent(self.geminiAsrConfig, forKey: .geminiAsrConfig)
       try container.encodeIfPresent(self.useGeminiAsr, forKey: .useGeminiAsr)
       for (key, value) in self._unknownFields.json {

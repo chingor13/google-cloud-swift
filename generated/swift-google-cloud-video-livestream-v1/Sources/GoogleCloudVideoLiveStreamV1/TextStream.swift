@@ -118,11 +118,21 @@ public struct TextStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.codec, forKey: .codec)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.outputCeaChannel, forKey: .outputCeaChannel)
-    try container.encode(self.mapping, forKey: .mapping)
+    if !self.codec.isEmpty {
+      try container.encode(self.codec, forKey: .codec)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.outputCeaChannel.isEmpty {
+      try container.encode(self.outputCeaChannel, forKey: .outputCeaChannel)
+    }
+    if !self.mapping.isEmpty {
+      try container.encode(self.mapping, forKey: .mapping)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -218,10 +228,18 @@ public struct TextStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputKey, forKey: .inputKey)
-      try container.encode(self.inputTrack, forKey: .inputTrack)
-      try container.encode(self.inputCeaChannel, forKey: .inputCeaChannel)
-      try container.encode(self.fromLanguageCode, forKey: .fromLanguageCode)
+      if !self.inputKey.isEmpty {
+        try container.encode(self.inputKey, forKey: .inputKey)
+      }
+      if self.inputTrack != 0 {
+        try container.encode(self.inputTrack, forKey: .inputTrack)
+      }
+      if !self.inputCeaChannel.isEmpty {
+        try container.encode(self.inputCeaChannel, forKey: .inputCeaChannel)
+      }
+      if !self.fromLanguageCode.isEmpty {
+        try container.encode(self.fromLanguageCode, forKey: .fromLanguageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

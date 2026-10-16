@@ -260,9 +260,15 @@ public struct EnvironmentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gkeCluster, forKey: .gkeCluster)
-    try container.encode(self.dagGcsPrefix, forKey: .dagGcsPrefix)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
+    if !self.gkeCluster.isEmpty {
+      try container.encode(self.gkeCluster, forKey: .gkeCluster)
+    }
+    if !self.dagGcsPrefix.isEmpty {
+      try container.encode(self.dagGcsPrefix, forKey: .dagGcsPrefix)
+    }
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
     try container.encodeIfPresent(self.softwareConfig, forKey: .softwareConfig)
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
     try container.encodeIfPresent(self.privateEnvironmentConfig, forKey: .privateEnvironmentConfig)
@@ -273,13 +279,21 @@ public struct EnvironmentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     try container.encodeIfPresent(self.maintenanceWindow, forKey: .maintenanceWindow)
     try container.encodeIfPresent(self.workloadsConfig, forKey: .workloadsConfig)
-    try container.encode(self.environmentSize, forKey: .environmentSize)
-    try container.encode(self.airflowUri, forKey: .airflowUri)
-    try container.encode(self.airflowByoidUri, forKey: .airflowByoidUri)
+    if self.environmentSize != EnvironmentConfig.EnvironmentSize() {
+      try container.encode(self.environmentSize, forKey: .environmentSize)
+    }
+    if !self.airflowUri.isEmpty {
+      try container.encode(self.airflowUri, forKey: .airflowUri)
+    }
+    if !self.airflowByoidUri.isEmpty {
+      try container.encode(self.airflowByoidUri, forKey: .airflowByoidUri)
+    }
     try container.encodeIfPresent(
       self.masterAuthorizedNetworksConfig, forKey: .masterAuthorizedNetworksConfig)
     try container.encodeIfPresent(self.recoveryConfig, forKey: .recoveryConfig)
-    try container.encode(self.resilienceMode, forKey: .resilienceMode)
+    if self.resilienceMode != EnvironmentConfig.ResilienceMode() {
+      try container.encode(self.resilienceMode, forKey: .resilienceMode)
+    }
     try container.encodeIfPresent(self.dataRetentionConfig, forKey: .dataRetentionConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

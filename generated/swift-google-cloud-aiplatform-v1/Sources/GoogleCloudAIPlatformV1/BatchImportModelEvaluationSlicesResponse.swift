@@ -80,8 +80,10 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.importedModelEvaluationSlices, forKey: .importedModelEvaluationSlices)
+      if !self.importedModelEvaluationSlices.isEmpty {
+        try container.encode(
+          self.importedModelEvaluationSlices, forKey: .importedModelEvaluationSlices)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

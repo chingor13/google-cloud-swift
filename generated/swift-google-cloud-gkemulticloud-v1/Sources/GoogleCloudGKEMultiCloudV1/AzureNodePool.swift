@@ -209,21 +209,41 @@ public struct AzureNodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.version, forKey: .version)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.subnetId, forKey: .subnetId)
+    if !self.subnetId.isEmpty {
+      try container.encode(self.subnetId, forKey: .subnetId)
+    }
     try container.encodeIfPresent(self.autoscaling, forKey: .autoscaling)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.reconciling, forKey: .reconciling)
+    if self.state != AzureNodePool.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.maxPodsConstraint, forKey: .maxPodsConstraint)
-    try container.encode(self.azureAvailabilityZone, forKey: .azureAvailabilityZone)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.azureAvailabilityZone.isEmpty {
+      try container.encode(self.azureAvailabilityZone, forKey: .azureAvailabilityZone)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     try container.encodeIfPresent(self.management, forKey: .management)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -81,8 +81,12 @@ public struct ListConnectionsResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.connections, forKey: .connections)
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.connections.isEmpty {
+      try container.encode(self.connections, forKey: .connections)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

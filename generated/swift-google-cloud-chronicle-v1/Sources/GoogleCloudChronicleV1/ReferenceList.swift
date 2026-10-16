@@ -145,14 +145,28 @@ public struct ReferenceList: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.entries, forKey: .entries)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.syntaxType, forKey: .syntaxType)
-    try container.encode(self.ruleAssociationsCount, forKey: .ruleAssociationsCount)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.entries.isEmpty {
+      try container.encode(self.entries, forKey: .entries)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if self.syntaxType != ReferenceListSyntaxType() {
+      try container.encode(self.syntaxType, forKey: .syntaxType)
+    }
+    if self.ruleAssociationsCount != 0 {
+      try container.encode(self.ruleAssociationsCount, forKey: .ruleAssociationsCount)
+    }
     try container.encodeIfPresent(self.scopeInfo, forKey: .scopeInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

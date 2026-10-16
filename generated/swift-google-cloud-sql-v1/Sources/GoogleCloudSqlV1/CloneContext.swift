@@ -174,13 +174,23 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.pitrTimestampMs, forKey: .pitrTimestampMs)
-      try container.encode(self.destinationInstanceName, forKey: .destinationInstanceName)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.pitrTimestampMs != 0 {
+        try container.encode(self.pitrTimestampMs, forKey: .pitrTimestampMs)
+      }
+      if !self.destinationInstanceName.isEmpty {
+        try container.encode(self.destinationInstanceName, forKey: .destinationInstanceName)
+      }
       try container.encodeIfPresent(self.binLogCoordinates, forKey: .binLogCoordinates)
       try container.encodeIfPresent(self.pointInTime, forKey: .pointInTime)
-      try container.encode(self.allocatedIpRange, forKey: .allocatedIpRange)
-      try container.encode(self.databaseNames, forKey: .databaseNames)
+      if !self.allocatedIpRange.isEmpty {
+        try container.encode(self.allocatedIpRange, forKey: .allocatedIpRange)
+      }
+      if !self.databaseNames.isEmpty {
+        try container.encode(self.databaseNames, forKey: .databaseNames)
+      }
       try container.encodeIfPresent(self.preferredZone, forKey: .preferredZone)
       try container.encodeIfPresent(self.preferredSecondaryZone, forKey: .preferredSecondaryZone)
       try container.encodeIfPresent(

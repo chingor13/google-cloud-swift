@@ -169,17 +169,33 @@ public struct AuditReport: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.reportSummary, forKey: .reportSummary)
-    try container.encode(self.operationId, forKey: .operationId)
+    if !self.operationId.isEmpty {
+      try container.encode(self.operationId, forKey: .operationId)
+    }
     try container.encodeIfPresent(self.destinationDetails, forKey: .destinationDetails)
-    try container.encode(self.complianceStandard, forKey: .complianceStandard)
-    try container.encode(self.scope, forKey: .scope)
+    if !self.complianceStandard.isEmpty {
+      try container.encode(self.complianceStandard, forKey: .complianceStandard)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.controlDetails, forKey: .controlDetails)
-    try container.encode(self.reportGenerationState, forKey: .reportGenerationState)
-    try container.encode(self.complianceFramework, forKey: .complianceFramework)
-    try container.encode(self.scopeId, forKey: .scopeId)
+    if !self.controlDetails.isEmpty {
+      try container.encode(self.controlDetails, forKey: .controlDetails)
+    }
+    if self.reportGenerationState != AuditReport.ReportGenerationState() {
+      try container.encode(self.reportGenerationState, forKey: .reportGenerationState)
+    }
+    if !self.complianceFramework.isEmpty {
+      try container.encode(self.complianceFramework, forKey: .complianceFramework)
+    }
+    if !self.scopeId.isEmpty {
+      try container.encode(self.scopeId, forKey: .scopeId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

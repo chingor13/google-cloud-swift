@@ -171,13 +171,19 @@ public struct VerifyAttestationRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.challenge, forKey: .challenge)
+    if !self.challenge.isEmpty {
+      try container.encode(self.challenge, forKey: .challenge)
+    }
     try container.encodeIfPresent(self.gcpCredentials, forKey: .gcpCredentials)
     try container.encodeIfPresent(self.tpmAttestation, forKey: .tpmAttestation)
     try container.encodeIfPresent(self.confidentialSpaceInfo, forKey: .confidentialSpaceInfo)
     try container.encodeIfPresent(self.tokenOptions, forKey: .tokenOptions)
-    try container.encode(self.attester, forKey: .attester)
-    try container.encode(self.instance, forKey: .instance)
+    if !self.attester.isEmpty {
+      try container.encode(self.attester, forKey: .attester)
+    }
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
 
     if let choice = self.teeAttestation {
       switch choice {

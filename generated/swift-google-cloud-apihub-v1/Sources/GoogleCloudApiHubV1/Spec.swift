@@ -176,19 +176,31 @@ public struct Spec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.specType, forKey: .specType)
     try container.encodeIfPresent(self.contents, forKey: .contents)
     try container.encodeIfPresent(self.details, forKey: .details)
-    try container.encode(self.sourceUri, forKey: .sourceUri)
+    if !self.sourceUri.isEmpty {
+      try container.encode(self.sourceUri, forKey: .sourceUri)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.lintResponse, forKey: .lintResponse)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
-    try container.encode(self.parsingMode, forKey: .parsingMode)
-    try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    if self.parsingMode != Spec.ParsingMode() {
+      try container.encode(self.parsingMode, forKey: .parsingMode)
+    }
+    if !self.sourceMetadata.isEmpty {
+      try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

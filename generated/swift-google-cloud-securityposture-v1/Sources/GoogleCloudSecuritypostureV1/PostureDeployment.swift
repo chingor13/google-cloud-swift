@@ -201,20 +201,44 @@ public struct PostureDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.targetResource, forKey: .targetResource)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.postureId, forKey: .postureId)
-    try container.encode(self.postureRevisionId, forKey: .postureRevisionId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.targetResource.isEmpty {
+      try container.encode(self.targetResource, forKey: .targetResource)
+    }
+    if self.state != PostureDeployment.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.postureId.isEmpty {
+      try container.encode(self.postureId, forKey: .postureId)
+    }
+    if !self.postureRevisionId.isEmpty {
+      try container.encode(self.postureRevisionId, forKey: .postureRevisionId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.desiredPostureId, forKey: .desiredPostureId)
-    try container.encode(self.desiredPostureRevisionId, forKey: .desiredPostureRevisionId)
-    try container.encode(self.failureMessage, forKey: .failureMessage)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.desiredPostureId.isEmpty {
+      try container.encode(self.desiredPostureId, forKey: .desiredPostureId)
+    }
+    if !self.desiredPostureRevisionId.isEmpty {
+      try container.encode(self.desiredPostureRevisionId, forKey: .desiredPostureRevisionId)
+    }
+    if !self.failureMessage.isEmpty {
+      try container.encode(self.failureMessage, forKey: .failureMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -120,8 +120,12 @@ public struct Impact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.service, forKey: .service)
+    if self.category != Impact.Category() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
 
     if let choice = self.projection {
       switch choice {

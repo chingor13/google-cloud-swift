@@ -92,8 +92,12 @@ extension ChangesClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.project, forKey: .project)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -197,10 +201,16 @@ extension ChangesClient {
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.changeId, forKey: .changeId)
+      if !self.changeId.isEmpty {
+        try container.encode(self.changeId, forKey: .changeId)
+      }
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.project, forKey: .project)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -313,10 +323,14 @@ extension ChangesClient {
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.managedZone, forKey: .managedZone)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
       try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
       try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-      try container.encode(self.project, forKey: .project)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.sortBy, forKey: .sortBy)
       try container.encodeIfPresent(self.sortOrder, forKey: .sortOrder)
       for (key, value) in self._unknownFields.json {

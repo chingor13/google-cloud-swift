@@ -110,10 +110,18 @@ public struct GcsIngestPipeline: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputPath, forKey: .inputPath)
-    try container.encode(self.schemaName, forKey: .schemaName)
-    try container.encode(self.processorType, forKey: .processorType)
-    try container.encode(self.skipIngestedDocuments, forKey: .skipIngestedDocuments)
+    if !self.inputPath.isEmpty {
+      try container.encode(self.inputPath, forKey: .inputPath)
+    }
+    if !self.schemaName.isEmpty {
+      try container.encode(self.schemaName, forKey: .schemaName)
+    }
+    if !self.processorType.isEmpty {
+      try container.encode(self.processorType, forKey: .processorType)
+    }
+    if self.skipIngestedDocuments {
+      try container.encode(self.skipIngestedDocuments, forKey: .skipIngestedDocuments)
+    }
     try container.encodeIfPresent(self.pipelineConfig, forKey: .pipelineConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

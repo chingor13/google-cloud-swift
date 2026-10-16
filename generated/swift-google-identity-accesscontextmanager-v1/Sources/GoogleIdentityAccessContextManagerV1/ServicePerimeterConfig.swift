@@ -138,12 +138,22 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resources, forKey: .resources)
-    try container.encode(self.accessLevels, forKey: .accessLevels)
-    try container.encode(self.restrictedServices, forKey: .restrictedServices)
+    if !self.resources.isEmpty {
+      try container.encode(self.resources, forKey: .resources)
+    }
+    if !self.accessLevels.isEmpty {
+      try container.encode(self.accessLevels, forKey: .accessLevels)
+    }
+    if !self.restrictedServices.isEmpty {
+      try container.encode(self.restrictedServices, forKey: .restrictedServices)
+    }
     try container.encodeIfPresent(self.vpcAccessibleServices, forKey: .vpcAccessibleServices)
-    try container.encode(self.ingressPolicies, forKey: .ingressPolicies)
-    try container.encode(self.egressPolicies, forKey: .egressPolicies)
+    if !self.ingressPolicies.isEmpty {
+      try container.encode(self.ingressPolicies, forKey: .ingressPolicies)
+    }
+    if !self.egressPolicies.isEmpty {
+      try container.encode(self.egressPolicies, forKey: .egressPolicies)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -214,8 +224,12 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableRestriction, forKey: .enableRestriction)
-      try container.encode(self.allowedServices, forKey: .allowedServices)
+      if self.enableRestriction {
+        try container.encode(self.enableRestriction, forKey: .enableRestriction)
+      }
+      if !self.allowedServices.isEmpty {
+        try container.encode(self.allowedServices, forKey: .allowedServices)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -438,8 +452,12 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceName, forKey: .serviceName)
-      try container.encode(self.methodSelectors, forKey: .methodSelectors)
+      if !self.serviceName.isEmpty {
+        try container.encode(self.serviceName, forKey: .serviceName)
+      }
+      if !self.methodSelectors.isEmpty {
+        try container.encode(self.methodSelectors, forKey: .methodSelectors)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -694,9 +712,15 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sources, forKey: .sources)
-      try container.encode(self.identities, forKey: .identities)
-      try container.encode(self.identityType, forKey: .identityType)
+      if !self.sources.isEmpty {
+        try container.encode(self.sources, forKey: .sources)
+      }
+      if !self.identities.isEmpty {
+        try container.encode(self.identities, forKey: .identities)
+      }
+      if self.identityType != ServicePerimeterConfig.IdentityType() {
+        try container.encode(self.identityType, forKey: .identityType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -807,8 +831,12 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.operations, forKey: .operations)
-      try container.encode(self.resources, forKey: .resources)
+      if !self.operations.isEmpty {
+        try container.encode(self.operations, forKey: .operations)
+      }
+      if !self.resources.isEmpty {
+        try container.encode(self.resources, forKey: .resources)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1028,8 +1056,12 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.identities, forKey: .identities)
-      try container.encode(self.identityType, forKey: .identityType)
+      if !self.identities.isEmpty {
+        try container.encode(self.identities, forKey: .identities)
+      }
+      if self.identityType != ServicePerimeterConfig.IdentityType() {
+        try container.encode(self.identityType, forKey: .identityType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1160,9 +1192,15 @@ public struct ServicePerimeterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resources, forKey: .resources)
-      try container.encode(self.operations, forKey: .operations)
-      try container.encode(self.externalResources, forKey: .externalResources)
+      if !self.resources.isEmpty {
+        try container.encode(self.resources, forKey: .resources)
+      }
+      if !self.operations.isEmpty {
+        try container.encode(self.operations, forKey: .operations)
+      }
+      if !self.externalResources.isEmpty {
+        try container.encode(self.externalResources, forKey: .externalResources)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

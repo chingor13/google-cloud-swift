@@ -103,11 +103,21 @@ public struct GoldengateMicrosoftFabricConnectionProperties: Codable, Equatable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.tenantId, forKey: .tenantId)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
-    try container.encode(self.endpoint, forKey: .endpoint)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.tenantId.isEmpty {
+      try container.encode(self.tenantId, forKey: .tenantId)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -104,10 +104,18 @@ public struct RewriteResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalBytesRewritten, forKey: .totalBytesRewritten)
-    try container.encode(self.objectSize, forKey: .objectSize)
-    try container.encode(self.done, forKey: .done)
-    try container.encode(self.rewriteToken, forKey: .rewriteToken)
+    if self.totalBytesRewritten != 0 {
+      try container.encode(self.totalBytesRewritten, forKey: .totalBytesRewritten)
+    }
+    if self.objectSize != 0 {
+      try container.encode(self.objectSize, forKey: .objectSize)
+    }
+    if self.done {
+      try container.encode(self.done, forKey: .done)
+    }
+    if !self.rewriteToken.isEmpty {
+      try container.encode(self.rewriteToken, forKey: .rewriteToken)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

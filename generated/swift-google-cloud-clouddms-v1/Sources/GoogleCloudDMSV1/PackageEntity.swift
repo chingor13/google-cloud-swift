@@ -85,8 +85,12 @@ public struct PackageEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.packageSqlCode, forKey: .packageSqlCode)
-    try container.encode(self.packageBody, forKey: .packageBody)
+    if !self.packageSqlCode.isEmpty {
+      try container.encode(self.packageSqlCode, forKey: .packageSqlCode)
+    }
+    if !self.packageBody.isEmpty {
+      try container.encode(self.packageBody, forKey: .packageBody)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

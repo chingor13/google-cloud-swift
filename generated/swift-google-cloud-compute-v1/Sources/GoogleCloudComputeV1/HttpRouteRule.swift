@@ -208,7 +208,9 @@
         self.customErrorResponsePolicy, forKey: .customErrorResponsePolicy)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.headerAction, forKey: .headerAction)
-      try container.encode(self.matchRules, forKey: .matchRules)
+      if !self.matchRules.isEmpty {
+        try container.encode(self.matchRules, forKey: .matchRules)
+      }
       try container.encodeIfPresent(self.priority, forKey: .priority)
       try container.encodeIfPresent(self.routeAction, forKey: .routeAction)
       try container.encodeIfPresent(self.service, forKey: .service)

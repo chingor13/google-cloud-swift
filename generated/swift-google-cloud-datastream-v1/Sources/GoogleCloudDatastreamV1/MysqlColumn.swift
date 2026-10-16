@@ -134,15 +134,33 @@ public struct MysqlColumn: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.column, forKey: .column)
-    try container.encode(self.dataType, forKey: .dataType)
-    try container.encode(self.length, forKey: .length)
-    try container.encode(self.collation, forKey: .collation)
-    try container.encode(self.primaryKey, forKey: .primaryKey)
-    try container.encode(self.nullable, forKey: .nullable)
-    try container.encode(self.ordinalPosition, forKey: .ordinalPosition)
-    try container.encode(self.precision, forKey: .precision)
-    try container.encode(self.scale, forKey: .scale)
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
+    if !self.dataType.isEmpty {
+      try container.encode(self.dataType, forKey: .dataType)
+    }
+    if self.length != 0 {
+      try container.encode(self.length, forKey: .length)
+    }
+    if !self.collation.isEmpty {
+      try container.encode(self.collation, forKey: .collation)
+    }
+    if self.primaryKey {
+      try container.encode(self.primaryKey, forKey: .primaryKey)
+    }
+    if self.nullable {
+      try container.encode(self.nullable, forKey: .nullable)
+    }
+    if self.ordinalPosition != 0 {
+      try container.encode(self.ordinalPosition, forKey: .ordinalPosition)
+    }
+    if self.precision != 0 {
+      try container.encode(self.precision, forKey: .precision)
+    }
+    if self.scale != 0 {
+      try container.encode(self.scale, forKey: .scale)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

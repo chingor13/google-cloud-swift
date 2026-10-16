@@ -78,8 +78,12 @@ public struct Usage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.limaInstance, forKey: .limaInstance)
-    try container.encode(self.users, forKey: .users)
+    if !self.limaInstance.isEmpty {
+      try container.encode(self.limaInstance, forKey: .limaInstance)
+    }
+    if self.users != 0 {
+      try container.encode(self.users, forKey: .users)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -93,9 +93,15 @@ public struct SkippedShipment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.index, forKey: .index)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.reasons, forKey: .reasons)
+    if self.index != 0 {
+      try container.encode(self.index, forKey: .index)
+    }
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if !self.reasons.isEmpty {
+      try container.encode(self.reasons, forKey: .reasons)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -199,9 +205,13 @@ public struct SkippedShipment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.code, forKey: .code)
+      if self.code != SkippedShipment.Reason.Code() {
+        try container.encode(self.code, forKey: .code)
+      }
       try container.encodeIfPresent(self.exampleVehicleIndex, forKey: .exampleVehicleIndex)
-      try container.encode(self.exampleExceededCapacityType, forKey: .exampleExceededCapacityType)
+      if !self.exampleExceededCapacityType.isEmpty {
+        try container.encode(self.exampleExceededCapacityType, forKey: .exampleExceededCapacityType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

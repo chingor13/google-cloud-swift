@@ -328,25 +328,51 @@ public struct Reservation: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.slotCapacity, forKey: .slotCapacity)
-    try container.encode(self.ignoreIdleSlots, forKey: .ignoreIdleSlots)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.slotCapacity != 0 {
+      try container.encode(self.slotCapacity, forKey: .slotCapacity)
+    }
+    if self.ignoreIdleSlots {
+      try container.encode(self.ignoreIdleSlots, forKey: .ignoreIdleSlots)
+    }
     try container.encodeIfPresent(self.autoscale, forKey: .autoscale)
-    try container.encode(self.concurrency, forKey: .concurrency)
+    if self.concurrency != 0 {
+      try container.encode(self.concurrency, forKey: .concurrency)
+    }
     try container.encodeIfPresent(self.creationTime, forKey: .creationTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.multiRegionAuxiliary, forKey: .multiRegionAuxiliary)
-    try container.encode(self.edition, forKey: .edition)
-    try container.encode(self.primaryLocation, forKey: .primaryLocation)
-    try container.encode(self.secondaryLocation, forKey: .secondaryLocation)
-    try container.encode(self.originalPrimaryLocation, forKey: .originalPrimaryLocation)
+    if self.multiRegionAuxiliary {
+      try container.encode(self.multiRegionAuxiliary, forKey: .multiRegionAuxiliary)
+    }
+    if self.edition != Edition() {
+      try container.encode(self.edition, forKey: .edition)
+    }
+    if !self.primaryLocation.isEmpty {
+      try container.encode(self.primaryLocation, forKey: .primaryLocation)
+    }
+    if !self.secondaryLocation.isEmpty {
+      try container.encode(self.secondaryLocation, forKey: .secondaryLocation)
+    }
+    if !self.originalPrimaryLocation.isEmpty {
+      try container.encode(self.originalPrimaryLocation, forKey: .originalPrimaryLocation)
+    }
     try container.encodeIfPresent(self.maxSlots, forKey: .maxSlots)
-    try container.encode(self.scalingMode, forKey: .scalingMode)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.reservationGroup, forKey: .reservationGroup)
+    if self.scalingMode != Reservation.ScalingMode() {
+      try container.encode(self.scalingMode, forKey: .scalingMode)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.reservationGroup.isEmpty {
+      try container.encode(self.reservationGroup, forKey: .reservationGroup)
+    }
     try container.encodeIfPresent(self.replicationStatus, forKey: .replicationStatus)
     try container.encodeIfPresent(self.schedulingPolicy, forKey: .schedulingPolicy)
-    try container.encode(self.reservationGroupPath, forKey: .reservationGroupPath)
+    if !self.reservationGroupPath.isEmpty {
+      try container.encode(self.reservationGroupPath, forKey: .reservationGroupPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -416,8 +442,12 @@ public struct Reservation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.currentSlots, forKey: .currentSlots)
-      try container.encode(self.maxSlots, forKey: .maxSlots)
+      if self.currentSlots != 0 {
+        try container.encode(self.currentSlots, forKey: .currentSlots)
+      }
+      if self.maxSlots != 0 {
+        try container.encode(self.maxSlots, forKey: .maxSlots)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

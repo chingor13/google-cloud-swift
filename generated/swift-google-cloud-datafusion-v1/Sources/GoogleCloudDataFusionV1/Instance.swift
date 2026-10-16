@@ -311,34 +311,82 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.enableStackdriverLogging, forKey: .enableStackdriverLogging)
-    try container.encode(self.enableStackdriverMonitoring, forKey: .enableStackdriverMonitoring)
-    try container.encode(self.privateInstance, forKey: .privateInstance)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.type != Instance.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.enableStackdriverLogging {
+      try container.encode(self.enableStackdriverLogging, forKey: .enableStackdriverLogging)
+    }
+    if self.enableStackdriverMonitoring {
+      try container.encode(self.enableStackdriverMonitoring, forKey: .enableStackdriverMonitoring)
+    }
+    if self.privateInstance {
+      try container.encode(self.privateInstance, forKey: .privateInstance)
+    }
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.options, forKey: .options)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
-    try container.encode(self.serviceEndpoint, forKey: .serviceEndpoint)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.availableVersion, forKey: .availableVersion)
-    try container.encode(self.apiEndpoint, forKey: .apiEndpoint)
-    try container.encode(self.gcsBucket, forKey: .gcsBucket)
-    try container.encode(self.accelerators, forKey: .accelerators)
-    try container.encode(self.p4ServiceAccount, forKey: .p4ServiceAccount)
-    try container.encode(self.tenantProjectId, forKey: .tenantProjectId)
-    try container.encode(self.dataprocServiceAccount, forKey: .dataprocServiceAccount)
-    try container.encode(self.enableRbac, forKey: .enableRbac)
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
+    if !self.serviceEndpoint.isEmpty {
+      try container.encode(self.serviceEndpoint, forKey: .serviceEndpoint)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.availableVersion.isEmpty {
+      try container.encode(self.availableVersion, forKey: .availableVersion)
+    }
+    if !self.apiEndpoint.isEmpty {
+      try container.encode(self.apiEndpoint, forKey: .apiEndpoint)
+    }
+    if !self.gcsBucket.isEmpty {
+      try container.encode(self.gcsBucket, forKey: .gcsBucket)
+    }
+    if !self.accelerators.isEmpty {
+      try container.encode(self.accelerators, forKey: .accelerators)
+    }
+    if !self.p4ServiceAccount.isEmpty {
+      try container.encode(self.p4ServiceAccount, forKey: .p4ServiceAccount)
+    }
+    if !self.tenantProjectId.isEmpty {
+      try container.encode(self.tenantProjectId, forKey: .tenantProjectId)
+    }
+    if !self.dataprocServiceAccount.isEmpty {
+      try container.encode(self.dataprocServiceAccount, forKey: .dataprocServiceAccount)
+    }
+    if self.enableRbac {
+      try container.encode(self.enableRbac, forKey: .enableRbac)
+    }
     try container.encodeIfPresent(self.cryptoKeyConfig, forKey: .cryptoKeyConfig)
-    try container.encode(self.disabledReason, forKey: .disabledReason)
+    if !self.disabledReason.isEmpty {
+      try container.encode(self.disabledReason, forKey: .disabledReason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

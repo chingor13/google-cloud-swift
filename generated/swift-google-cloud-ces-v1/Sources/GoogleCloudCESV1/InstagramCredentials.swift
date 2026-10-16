@@ -78,8 +78,12 @@ public struct InstagramCredentials: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.authCode, forKey: .authCode)
-    try container.encode(self.conversationProfileId, forKey: .conversationProfileId)
+    if !self.authCode.isEmpty {
+      try container.encode(self.authCode, forKey: .authCode)
+    }
+    if !self.conversationProfileId.isEmpty {
+      try container.encode(self.conversationProfileId, forKey: .conversationProfileId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

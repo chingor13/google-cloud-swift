@@ -80,7 +80,9 @@ public struct TimedPromoteReleaseCondition: Codable, Equatable, GoogleWKT._AnyPa
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.nextPromotionTime, forKey: .nextPromotionTime)
-    try container.encode(self.targetsList, forKey: .targetsList)
+    if !self.targetsList.isEmpty {
+      try container.encode(self.targetsList, forKey: .targetsList)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -147,8 +149,12 @@ public struct TimedPromoteReleaseCondition: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceTargetId, forKey: .sourceTargetId)
-      try container.encode(self.destinationTargetId, forKey: .destinationTargetId)
+      if !self.sourceTargetId.isEmpty {
+        try container.encode(self.sourceTargetId, forKey: .sourceTargetId)
+      }
+      if !self.destinationTargetId.isEmpty {
+        try container.encode(self.destinationTargetId, forKey: .destinationTargetId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

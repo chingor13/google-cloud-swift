@@ -142,8 +142,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.advertiseMode, forKey: .advertiseMode)
-      try container.encode(self.advertisedGroups, forKey: .advertisedGroups)
-      try container.encode(self.advertisedIpRanges, forKey: .advertisedIpRanges)
+      if !self.advertisedGroups.isEmpty {
+        try container.encode(self.advertisedGroups, forKey: .advertisedGroups)
+      }
+      if !self.advertisedIpRanges.isEmpty {
+        try container.encode(self.advertisedIpRanges, forKey: .advertisedIpRanges)
+      }
       try container.encodeIfPresent(self.asn, forKey: .asn)
       try container.encodeIfPresent(self.identifierRange, forKey: .identifierRange)
       try container.encodeIfPresent(self.keepaliveInterval, forKey: .keepaliveInterval)

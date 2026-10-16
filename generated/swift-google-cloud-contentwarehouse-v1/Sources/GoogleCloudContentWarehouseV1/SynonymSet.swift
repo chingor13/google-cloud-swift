@@ -95,9 +95,15 @@ public struct SynonymSet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.context, forKey: .context)
-    try container.encode(self.synonyms, forKey: .synonyms)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.context.isEmpty {
+      try container.encode(self.context, forKey: .context)
+    }
+    if !self.synonyms.isEmpty {
+      try container.encode(self.synonyms, forKey: .synonyms)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -156,7 +162,9 @@ public struct SynonymSet: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.words, forKey: .words)
+      if !self.words.isEmpty {
+        try container.encode(self.words, forKey: .words)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

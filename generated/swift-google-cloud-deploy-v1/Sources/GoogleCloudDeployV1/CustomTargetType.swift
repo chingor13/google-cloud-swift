@@ -179,15 +179,29 @@ public struct CustomTargetType: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.customTargetTypeId, forKey: .customTargetTypeId)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.customTargetTypeId.isEmpty {
+      try container.encode(self.customTargetTypeId, forKey: .customTargetTypeId)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
 
     if let choice = self.definition {
       switch choice {

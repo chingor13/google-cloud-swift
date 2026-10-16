@@ -123,9 +123,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.artifact, forKey: .artifact)
-      try container.encode(self.maxHops, forKey: .maxHops)
-      try container.encode(self.filter, forKey: .filter)
+      if !self.artifact.isEmpty {
+        try container.encode(self.artifact, forKey: .artifact)
+      }
+      if self.maxHops != 0 {
+        try container.encode(self.maxHops, forKey: .maxHops)
+      }
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

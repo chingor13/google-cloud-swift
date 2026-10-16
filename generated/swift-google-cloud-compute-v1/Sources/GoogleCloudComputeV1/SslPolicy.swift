@@ -200,10 +200,14 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
-      try container.encode(self.customFeatures, forKey: .customFeatures)
+      if !self.customFeatures.isEmpty {
+        try container.encode(self.customFeatures, forKey: .customFeatures)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.enabledFeatures, forKey: .enabledFeatures)
-      if let v = fingerprint {
+      if !self.enabledFeatures.isEmpty {
+        try container.encode(self.enabledFeatures, forKey: .enabledFeatures)
+      }
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -216,7 +220,9 @@
       try container.encodeIfPresent(self.profile, forKey: .profile)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.warnings, forKey: .warnings)
+      if !self.warnings.isEmpty {
+        try container.encode(self.warnings, forKey: .warnings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -299,7 +305,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.code, forKey: .code)
-        try container.encode(self.data, forKey: .data)
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         try container.encodeIfPresent(self.message, forKey: .message)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

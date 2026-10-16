@@ -154,11 +154,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.periodSeconds, forKey: .periodSeconds)
-      try container.encode(self.timeoutSeconds, forKey: .timeoutSeconds)
-      try container.encode(self.failureThreshold, forKey: .failureThreshold)
-      try container.encode(self.successThreshold, forKey: .successThreshold)
-      try container.encode(self.initialDelaySeconds, forKey: .initialDelaySeconds)
+      if self.periodSeconds != 0 {
+        try container.encode(self.periodSeconds, forKey: .periodSeconds)
+      }
+      if self.timeoutSeconds != 0 {
+        try container.encode(self.timeoutSeconds, forKey: .timeoutSeconds)
+      }
+      if self.failureThreshold != 0 {
+        try container.encode(self.failureThreshold, forKey: .failureThreshold)
+      }
+      if self.successThreshold != 0 {
+        try container.encode(self.successThreshold, forKey: .successThreshold)
+      }
+      if self.initialDelaySeconds != 0 {
+        try container.encode(self.initialDelaySeconds, forKey: .initialDelaySeconds)
+      }
 
       if let choice = self.probeType {
         switch choice {
@@ -234,7 +244,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.command, forKey: .command)
+        if !self.command.isEmpty {
+          try container.encode(self.command, forKey: .command)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -350,11 +362,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.path, forKey: .path)
-        try container.encode(self.port, forKey: .port)
-        try container.encode(self.host, forKey: .host)
-        try container.encode(self.scheme, forKey: .scheme)
-        try container.encode(self.httpHeaders, forKey: .httpHeaders)
+        if !self.path.isEmpty {
+          try container.encode(self.path, forKey: .path)
+        }
+        if self.port != 0 {
+          try container.encode(self.port, forKey: .port)
+        }
+        if !self.host.isEmpty {
+          try container.encode(self.host, forKey: .host)
+        }
+        if !self.scheme.isEmpty {
+          try container.encode(self.scheme, forKey: .scheme)
+        }
+        if !self.httpHeaders.isEmpty {
+          try container.encode(self.httpHeaders, forKey: .httpHeaders)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -446,8 +468,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.port, forKey: .port)
-        try container.encode(self.service, forKey: .service)
+        if self.port != 0 {
+          try container.encode(self.port, forKey: .port)
+        }
+        if !self.service.isEmpty {
+          try container.encode(self.service, forKey: .service)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -538,8 +564,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.port, forKey: .port)
-        try container.encode(self.host, forKey: .host)
+        if self.port != 0 {
+          try container.encode(self.port, forKey: .port)
+        }
+        if !self.host.isEmpty {
+          try container.encode(self.host, forKey: .host)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -629,8 +659,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.value, forKey: .value)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.value.isEmpty {
+          try container.encode(self.value, forKey: .value)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

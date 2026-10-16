@@ -124,9 +124,15 @@ public struct GenerateAttachedClusterInstallManifestRequest: Codable, Equatable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.attachedClusterId, forKey: .attachedClusterId)
-    try container.encode(self.platformVersion, forKey: .platformVersion)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.attachedClusterId.isEmpty {
+      try container.encode(self.attachedClusterId, forKey: .attachedClusterId)
+    }
+    if !self.platformVersion.isEmpty {
+      try container.encode(self.platformVersion, forKey: .platformVersion)
+    }
     try container.encodeIfPresent(self.proxyConfig, forKey: .proxyConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

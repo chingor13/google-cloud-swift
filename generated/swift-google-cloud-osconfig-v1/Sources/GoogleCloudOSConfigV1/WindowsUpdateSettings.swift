@@ -90,9 +90,15 @@ public struct WindowsUpdateSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.classifications, forKey: .classifications)
-    try container.encode(self.excludes, forKey: .excludes)
-    try container.encode(self.exclusivePatches, forKey: .exclusivePatches)
+    if !self.classifications.isEmpty {
+      try container.encode(self.classifications, forKey: .classifications)
+    }
+    if !self.excludes.isEmpty {
+      try container.encode(self.excludes, forKey: .excludes)
+    }
+    if !self.exclusivePatches.isEmpty {
+      try container.encode(self.exclusivePatches, forKey: .exclusivePatches)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

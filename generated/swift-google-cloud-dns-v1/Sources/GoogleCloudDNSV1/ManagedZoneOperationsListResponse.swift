@@ -83,7 +83,9 @@ public struct ManagedZoneOperationsListResponse: Codable, Equatable, GoogleWKT._
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.operations, forKey: .operations)
+    if !self.operations.isEmpty {
+      try container.encode(self.operations, forKey: .operations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

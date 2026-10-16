@@ -81,8 +81,12 @@ public struct AwsServicesAuthentication: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.roleArn, forKey: .roleArn)
-    try container.encode(self.roleSessionName, forKey: .roleSessionName)
+    if !self.roleArn.isEmpty {
+      try container.encode(self.roleArn, forKey: .roleArn)
+    }
+    if !self.roleSessionName.isEmpty {
+      try container.encode(self.roleSessionName, forKey: .roleSessionName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

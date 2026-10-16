@@ -206,10 +206,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.annotationsFilter, forKey: .annotationsFilter)
-      try container.encode(self.savedQueryId, forKey: .savedQueryId)
-      try container.encode(self.annotationSchemaUri, forKey: .annotationSchemaUri)
-      try container.encode(self.exportUse, forKey: .exportUse)
+      if !self.annotationsFilter.isEmpty {
+        try container.encode(self.annotationsFilter, forKey: .annotationsFilter)
+      }
+      if !self.savedQueryId.isEmpty {
+        try container.encode(self.savedQueryId, forKey: .savedQueryId)
+      }
+      if !self.annotationSchemaUri.isEmpty {
+        try container.encode(self.annotationSchemaUri, forKey: .annotationSchemaUri)
+      }
+      if self.exportUse != ExportDataConfig.ExportUse() {
+        try container.encode(self.exportUse, forKey: .exportUse)
+      }
 
       if let choice = self.destination {
         switch choice {

@@ -101,8 +101,12 @@ public struct APIMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.api, forKey: .api)
-    try container.encode(self.versions, forKey: .versions)
-    try container.encode(self.originalId, forKey: .originalId)
+    if !self.versions.isEmpty {
+      try container.encode(self.versions, forKey: .versions)
+    }
+    if !self.originalId.isEmpty {
+      try container.encode(self.originalId, forKey: .originalId)
+    }
     try container.encodeIfPresent(self.originalCreateTime, forKey: .originalCreateTime)
     try container.encodeIfPresent(self.originalUpdateTime, forKey: .originalUpdateTime)
     for (key, value) in self._unknownFields.json {

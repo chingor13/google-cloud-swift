@@ -88,8 +88,12 @@ public struct GkeClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gkeClusterTarget, forKey: .gkeClusterTarget)
-    try container.encode(self.nodePoolTarget, forKey: .nodePoolTarget)
+    if !self.gkeClusterTarget.isEmpty {
+      try container.encode(self.gkeClusterTarget, forKey: .gkeClusterTarget)
+    }
+    if !self.nodePoolTarget.isEmpty {
+      try container.encode(self.nodePoolTarget, forKey: .nodePoolTarget)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

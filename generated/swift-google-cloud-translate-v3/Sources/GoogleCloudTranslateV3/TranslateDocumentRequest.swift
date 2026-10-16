@@ -214,18 +214,36 @@ public struct TranslateDocumentRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
-    try container.encode(self.targetLanguageCode, forKey: .targetLanguageCode)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.sourceLanguageCode.isEmpty {
+      try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
+    }
+    if !self.targetLanguageCode.isEmpty {
+      try container.encode(self.targetLanguageCode, forKey: .targetLanguageCode)
+    }
     try container.encodeIfPresent(self.documentInputConfig, forKey: .documentInputConfig)
     try container.encodeIfPresent(self.documentOutputConfig, forKey: .documentOutputConfig)
-    try container.encode(self.model, forKey: .model)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
     try container.encodeIfPresent(self.glossaryConfig, forKey: .glossaryConfig)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.customizedAttribution, forKey: .customizedAttribution)
-    try container.encode(self.isTranslateNativePdfOnly, forKey: .isTranslateNativePdfOnly)
-    try container.encode(self.enableShadowRemovalNativePdf, forKey: .enableShadowRemovalNativePdf)
-    try container.encode(self.enableRotationCorrection, forKey: .enableRotationCorrection)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.customizedAttribution.isEmpty {
+      try container.encode(self.customizedAttribution, forKey: .customizedAttribution)
+    }
+    if self.isTranslateNativePdfOnly {
+      try container.encode(self.isTranslateNativePdfOnly, forKey: .isTranslateNativePdfOnly)
+    }
+    if self.enableShadowRemovalNativePdf {
+      try container.encode(self.enableShadowRemovalNativePdf, forKey: .enableShadowRemovalNativePdf)
+    }
+    if self.enableRotationCorrection {
+      try container.encode(self.enableRotationCorrection, forKey: .enableRotationCorrection)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

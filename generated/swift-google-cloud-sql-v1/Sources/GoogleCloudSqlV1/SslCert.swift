@@ -136,15 +136,29 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.certSerialNumber, forKey: .certSerialNumber)
-      try container.encode(self.cert, forKey: .cert)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.certSerialNumber.isEmpty {
+        try container.encode(self.certSerialNumber, forKey: .certSerialNumber)
+      }
+      if !self.cert.isEmpty {
+        try container.encode(self.cert, forKey: .cert)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.commonName, forKey: .commonName)
+      if !self.commonName.isEmpty {
+        try container.encode(self.commonName, forKey: .commonName)
+      }
       try container.encodeIfPresent(self.expirationTime, forKey: .expirationTime)
-      try container.encode(self.sha1Fingerprint, forKey: .sha1Fingerprint)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.selfLink, forKey: .selfLink)
+      if !self.sha1Fingerprint.isEmpty {
+        try container.encode(self.sha1Fingerprint, forKey: .sha1Fingerprint)
+      }
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.selfLink.isEmpty {
+        try container.encode(self.selfLink, forKey: .selfLink)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

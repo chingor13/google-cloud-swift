@@ -136,15 +136,29 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.elementCountThreshold, forKey: .elementCountThreshold)
-    try container.encode(self.requestByteThreshold, forKey: .requestByteThreshold)
+    if self.elementCountThreshold != 0 {
+      try container.encode(self.elementCountThreshold, forKey: .elementCountThreshold)
+    }
+    if self.requestByteThreshold != 0 {
+      try container.encode(self.requestByteThreshold, forKey: .requestByteThreshold)
+    }
     try container.encodeIfPresent(self.delayThreshold, forKey: .delayThreshold)
-    try container.encode(self.elementCountLimit, forKey: .elementCountLimit)
-    try container.encode(self.requestByteLimit, forKey: .requestByteLimit)
-    try container.encode(self.flowControlElementLimit, forKey: .flowControlElementLimit)
-    try container.encode(self.flowControlByteLimit, forKey: .flowControlByteLimit)
-    try container.encode(
-      self.flowControlLimitExceededBehavior, forKey: .flowControlLimitExceededBehavior)
+    if self.elementCountLimit != 0 {
+      try container.encode(self.elementCountLimit, forKey: .elementCountLimit)
+    }
+    if self.requestByteLimit != 0 {
+      try container.encode(self.requestByteLimit, forKey: .requestByteLimit)
+    }
+    if self.flowControlElementLimit != 0 {
+      try container.encode(self.flowControlElementLimit, forKey: .flowControlElementLimit)
+    }
+    if self.flowControlByteLimit != 0 {
+      try container.encode(self.flowControlByteLimit, forKey: .flowControlByteLimit)
+    }
+    if self.flowControlLimitExceededBehavior != FlowControlLimitExceededBehaviorProto() {
+      try container.encode(
+        self.flowControlLimitExceededBehavior, forKey: .flowControlLimitExceededBehavior)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -95,7 +95,9 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
 
     if let choice = self.config {
       switch choice {
@@ -180,9 +182,15 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.contentsUri, forKey: .contentsUri)
-      try container.encode(self.errorUri, forKey: .errorUri)
-      try container.encode(self.outputUri, forKey: .outputUri)
+      if !self.contentsUri.isEmpty {
+        try container.encode(self.contentsUri, forKey: .contentsUri)
+      }
+      if !self.errorUri.isEmpty {
+        try container.encode(self.errorUri, forKey: .errorUri)
+      }
+      if !self.outputUri.isEmpty {
+        try container.encode(self.outputUri, forKey: .outputUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

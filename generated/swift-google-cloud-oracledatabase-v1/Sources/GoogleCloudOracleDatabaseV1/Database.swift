@@ -231,25 +231,57 @@ public struct Database: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dbName, forKey: .dbName)
-    try container.encode(self.dbUniqueName, forKey: .dbUniqueName)
-    try container.encode(self.adminPassword, forKey: .adminPassword)
-    try container.encode(self.adminPasswordSecretVersion, forKey: .adminPasswordSecretVersion)
-    try container.encode(self.tdeWalletPassword, forKey: .tdeWalletPassword)
-    try container.encode(
-      self.tdeWalletPasswordSecretVersion, forKey: .tdeWalletPasswordSecretVersion)
-    try container.encode(self.characterSet, forKey: .characterSet)
-    try container.encode(self.ncharacterSet, forKey: .ncharacterSet)
-    try container.encode(self.ociUrl, forKey: .ociUrl)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.dbName.isEmpty {
+      try container.encode(self.dbName, forKey: .dbName)
+    }
+    if !self.dbUniqueName.isEmpty {
+      try container.encode(self.dbUniqueName, forKey: .dbUniqueName)
+    }
+    if !self.adminPassword.isEmpty {
+      try container.encode(self.adminPassword, forKey: .adminPassword)
+    }
+    if !self.adminPasswordSecretVersion.isEmpty {
+      try container.encode(self.adminPasswordSecretVersion, forKey: .adminPasswordSecretVersion)
+    }
+    if !self.tdeWalletPassword.isEmpty {
+      try container.encode(self.tdeWalletPassword, forKey: .tdeWalletPassword)
+    }
+    if !self.tdeWalletPasswordSecretVersion.isEmpty {
+      try container.encode(
+        self.tdeWalletPasswordSecretVersion, forKey: .tdeWalletPasswordSecretVersion)
+    }
+    if !self.characterSet.isEmpty {
+      try container.encode(self.characterSet, forKey: .characterSet)
+    }
+    if !self.ncharacterSet.isEmpty {
+      try container.encode(self.ncharacterSet, forKey: .ncharacterSet)
+    }
+    if !self.ociUrl.isEmpty {
+      try container.encode(self.ociUrl, forKey: .ociUrl)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.properties, forKey: .properties)
-    try container.encode(self.databaseId, forKey: .databaseId)
-    try container.encode(self.dbHomeName, forKey: .dbHomeName)
-    try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
-    try container.encode(self.opsInsightsStatus, forKey: .opsInsightsStatus)
-    try container.encode(self.pluggableDatabaseId, forKey: .pluggableDatabaseId)
-    try container.encode(self.pluggableDatabaseName, forKey: .pluggableDatabaseName)
+    if !self.databaseId.isEmpty {
+      try container.encode(self.databaseId, forKey: .databaseId)
+    }
+    if !self.dbHomeName.isEmpty {
+      try container.encode(self.dbHomeName, forKey: .dbHomeName)
+    }
+    if !self.gcpOracleZone.isEmpty {
+      try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
+    }
+    if self.opsInsightsStatus != Database.OperationsInsightsStatus() {
+      try container.encode(self.opsInsightsStatus, forKey: .opsInsightsStatus)
+    }
+    if !self.pluggableDatabaseId.isEmpty {
+      try container.encode(self.pluggableDatabaseId, forKey: .pluggableDatabaseId)
+    }
+    if !self.pluggableDatabaseName.isEmpty {
+      try container.encode(self.pluggableDatabaseName, forKey: .pluggableDatabaseName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

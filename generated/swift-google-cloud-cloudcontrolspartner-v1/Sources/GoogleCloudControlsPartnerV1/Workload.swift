@@ -135,15 +135,29 @@ public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.folderId, forKey: .folderId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.folderId != 0 {
+      try container.encode(self.folderId, forKey: .folderId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.folder, forKey: .folder)
+    if !self.folder.isEmpty {
+      try container.encode(self.folder, forKey: .folder)
+    }
     try container.encodeIfPresent(self.workloadOnboardingState, forKey: .workloadOnboardingState)
-    try container.encode(self.isOnboarded, forKey: .isOnboarded)
-    try container.encode(self.keyManagementProjectId, forKey: .keyManagementProjectId)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.partner, forKey: .partner)
+    if self.isOnboarded {
+      try container.encode(self.isOnboarded, forKey: .isOnboarded)
+    }
+    if !self.keyManagementProjectId.isEmpty {
+      try container.encode(self.keyManagementProjectId, forKey: .keyManagementProjectId)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if self.partner != Workload.Partner() {
+      try container.encode(self.partner, forKey: .partner)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

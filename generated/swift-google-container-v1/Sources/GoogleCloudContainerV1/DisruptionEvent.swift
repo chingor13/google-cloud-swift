@@ -102,9 +102,15 @@ public struct DisruptionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.disruptionType, forKey: .disruptionType)
-    try container.encode(self.pdbBlockedNode, forKey: .pdbBlockedNode)
-    try container.encode(self.pdbBlockedPod, forKey: .pdbBlockedPod)
+    if self.disruptionType != DisruptionEvent.DisruptionType() {
+      try container.encode(self.disruptionType, forKey: .disruptionType)
+    }
+    if !self.pdbBlockedNode.isEmpty {
+      try container.encode(self.pdbBlockedNode, forKey: .pdbBlockedNode)
+    }
+    if !self.pdbBlockedPod.isEmpty {
+      try container.encode(self.pdbBlockedPod, forKey: .pdbBlockedPod)
+    }
     try container.encodeIfPresent(self.pdbViolationTimeout, forKey: .pdbViolationTimeout)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -171,8 +177,12 @@ public struct DisruptionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.namespace, forKey: .namespace)
-      try container.encode(self.name, forKey: .name)
+      if !self.namespace.isEmpty {
+        try container.encode(self.namespace, forKey: .namespace)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

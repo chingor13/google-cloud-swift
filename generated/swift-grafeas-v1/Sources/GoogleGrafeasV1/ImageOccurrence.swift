@@ -98,9 +98,15 @@ public struct ImageOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.fingerprint, forKey: .fingerprint)
-    try container.encode(self.distance, forKey: .distance)
-    try container.encode(self.layerInfo, forKey: .layerInfo)
-    try container.encode(self.baseResourceUrl, forKey: .baseResourceUrl)
+    if self.distance != 0 {
+      try container.encode(self.distance, forKey: .distance)
+    }
+    if !self.layerInfo.isEmpty {
+      try container.encode(self.layerInfo, forKey: .layerInfo)
+    }
+    if !self.baseResourceUrl.isEmpty {
+      try container.encode(self.baseResourceUrl, forKey: .baseResourceUrl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

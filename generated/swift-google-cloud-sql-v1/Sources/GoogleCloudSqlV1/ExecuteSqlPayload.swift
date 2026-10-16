@@ -148,12 +148,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.user, forKey: .user)
-      try container.encode(self.sqlStatement, forKey: .sqlStatement)
-      try container.encode(self.database, forKey: .database)
-      try container.encode(self.rowLimit, forKey: .rowLimit)
-      try container.encode(self.partialResultMode, forKey: .partialResultMode)
-      try container.encode(self.application, forKey: .application)
+      if !self.user.isEmpty {
+        try container.encode(self.user, forKey: .user)
+      }
+      if !self.sqlStatement.isEmpty {
+        try container.encode(self.sqlStatement, forKey: .sqlStatement)
+      }
+      if !self.database.isEmpty {
+        try container.encode(self.database, forKey: .database)
+      }
+      if self.rowLimit != 0 {
+        try container.encode(self.rowLimit, forKey: .rowLimit)
+      }
+      if self.partialResultMode != ExecuteSqlPayload.PartialResultMode() {
+        try container.encode(self.partialResultMode, forKey: .partialResultMode)
+      }
+      if !self.application.isEmpty {
+        try container.encode(self.application, forKey: .application)
+      }
 
       if let choice = self.userPassword {
         switch choice {

@@ -176,19 +176,42 @@ public struct ScanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.maxQps, forKey: .maxQps)
-    try container.encode(self.startingUrls, forKey: .startingUrls)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.maxQps != 0 {
+      try container.encode(self.maxQps, forKey: .maxQps)
+    }
+    if !self.startingUrls.isEmpty {
+      try container.encode(self.startingUrls, forKey: .startingUrls)
+    }
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.userAgent, forKey: .userAgent)
-    try container.encode(self.blacklistPatterns, forKey: .blacklistPatterns)
+    if self.userAgent != ScanConfig.UserAgent() {
+      try container.encode(self.userAgent, forKey: .userAgent)
+    }
+    if !self.blacklistPatterns.isEmpty {
+      try container.encode(self.blacklistPatterns, forKey: .blacklistPatterns)
+    }
     try container.encodeIfPresent(self.schedule, forKey: .schedule)
-    try container.encode(self.exportToSecurityCommandCenter, forKey: .exportToSecurityCommandCenter)
-    try container.encode(self.riskLevel, forKey: .riskLevel)
-    try container.encode(self.managedScan, forKey: .managedScan)
-    try container.encode(self.staticIpScan, forKey: .staticIpScan)
-    try container.encode(self.ignoreHttpStatusErrors, forKey: .ignoreHttpStatusErrors)
+    if self.exportToSecurityCommandCenter != ScanConfig.ExportToSecurityCommandCenter() {
+      try container.encode(
+        self.exportToSecurityCommandCenter, forKey: .exportToSecurityCommandCenter)
+    }
+    if self.riskLevel != ScanConfig.RiskLevel() {
+      try container.encode(self.riskLevel, forKey: .riskLevel)
+    }
+    if self.managedScan {
+      try container.encode(self.managedScan, forKey: .managedScan)
+    }
+    if self.staticIpScan {
+      try container.encode(self.staticIpScan, forKey: .staticIpScan)
+    }
+    if self.ignoreHttpStatusErrors {
+      try container.encode(self.ignoreHttpStatusErrors, forKey: .ignoreHttpStatusErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -359,8 +382,12 @@ public struct ScanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.password, forKey: .password)
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if !self.password.isEmpty {
+          try container.encode(self.password, forKey: .password)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -458,9 +485,15 @@ public struct ScanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.password, forKey: .password)
-        try container.encode(self.loginUrl, forKey: .loginUrl)
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if !self.password.isEmpty {
+          try container.encode(self.password, forKey: .password)
+        }
+        if !self.loginUrl.isEmpty {
+          try container.encode(self.loginUrl, forKey: .loginUrl)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -624,7 +657,9 @@ public struct ScanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.targetAudienceClientId, forKey: .targetAudienceClientId)
+          if !self.targetAudienceClientId.isEmpty {
+            try container.encode(self.targetAudienceClientId, forKey: .targetAudienceClientId)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -782,7 +817,9 @@ public struct ScanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.scheduleTime, forKey: .scheduleTime)
-      try container.encode(self.intervalDurationDays, forKey: .intervalDurationDays)
+      if self.intervalDurationDays != 0 {
+        try container.encode(self.intervalDurationDays, forKey: .intervalDurationDays)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

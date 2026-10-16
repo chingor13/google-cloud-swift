@@ -128,11 +128,19 @@ public struct DataSourceReference: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dataSource, forKey: .dataSource)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.dataSource.isEmpty {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.dataSourceBackupConfigState, forKey: .dataSourceBackupConfigState)
-    try container.encode(self.dataSourceBackupCount, forKey: .dataSourceBackupCount)
+    if self.dataSourceBackupConfigState != BackupConfigState() {
+      try container.encode(self.dataSourceBackupConfigState, forKey: .dataSourceBackupConfigState)
+    }
+    if self.dataSourceBackupCount != 0 {
+      try container.encode(self.dataSourceBackupCount, forKey: .dataSourceBackupCount)
+    }
     try container.encodeIfPresent(
       self.dataSourceBackupConfigInfo, forKey: .dataSourceBackupConfigInfo)
     try container.encodeIfPresent(

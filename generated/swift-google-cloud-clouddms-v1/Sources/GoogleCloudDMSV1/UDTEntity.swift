@@ -84,8 +84,12 @@ public struct UDTEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.udtSqlCode, forKey: .udtSqlCode)
-    try container.encode(self.udtBody, forKey: .udtBody)
+    if !self.udtSqlCode.isEmpty {
+      try container.encode(self.udtSqlCode, forKey: .udtSqlCode)
+    }
+    if !self.udtBody.isEmpty {
+      try container.encode(self.udtBody, forKey: .udtBody)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

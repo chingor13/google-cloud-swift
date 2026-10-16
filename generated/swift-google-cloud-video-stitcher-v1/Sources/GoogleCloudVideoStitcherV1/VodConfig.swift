@@ -107,11 +107,19 @@ public struct VodConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sourceUri, forKey: .sourceUri)
-    try container.encode(self.adTagUri, forKey: .adTagUri)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.sourceUri.isEmpty {
+      try container.encode(self.sourceUri, forKey: .sourceUri)
+    }
+    if !self.adTagUri.isEmpty {
+      try container.encode(self.adTagUri, forKey: .adTagUri)
+    }
     try container.encodeIfPresent(self.gamVodConfig, forKey: .gamVodConfig)
-    try container.encode(self.state, forKey: .state)
+    if self.state != VodConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.sourceFetchOptions, forKey: .sourceFetchOptions)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -101,11 +101,21 @@ public struct PolarisIcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.polarisCatalog, forKey: .polarisCatalog)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.principalRole, forKey: .principalRole)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.polarisCatalog.isEmpty {
+      try container.encode(self.polarisCatalog, forKey: .polarisCatalog)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.principalRole.isEmpty {
+      try container.encode(self.principalRole, forKey: .principalRole)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

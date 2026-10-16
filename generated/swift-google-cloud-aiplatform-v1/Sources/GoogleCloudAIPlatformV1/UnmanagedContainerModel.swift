@@ -87,7 +87,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.artifactUri, forKey: .artifactUri)
+      if !self.artifactUri.isEmpty {
+        try container.encode(self.artifactUri, forKey: .artifactUri)
+      }
       try container.encodeIfPresent(self.predictSchemata, forKey: .predictSchemata)
       try container.encodeIfPresent(self.containerSpec, forKey: .containerSpec)
       for (key, value) in self._unknownFields.json {

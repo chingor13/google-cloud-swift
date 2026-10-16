@@ -88,9 +88,15 @@ public struct DashboardDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.filters, forKey: .filters)
-    try container.encode(self.fingerprint, forKey: .fingerprint)
-    try container.encode(self.charts, forKey: .charts)
+    if !self.filters.isEmpty {
+      try container.encode(self.filters, forKey: .filters)
+    }
+    if !self.fingerprint.isEmpty {
+      try container.encode(self.fingerprint, forKey: .fingerprint)
+    }
+    if !self.charts.isEmpty {
+      try container.encode(self.charts, forKey: .charts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -161,9 +167,13 @@ public struct DashboardDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dashboardChart, forKey: .dashboardChart)
+      if !self.dashboardChart.isEmpty {
+        try container.encode(self.dashboardChart, forKey: .dashboardChart)
+      }
       try container.encodeIfPresent(self.chartLayout, forKey: .chartLayout)
-      try container.encode(self.filtersIds, forKey: .filtersIds)
+      if !self.filtersIds.isEmpty {
+        try container.encode(self.filtersIds, forKey: .filtersIds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -238,9 +248,13 @@ public struct DashboardDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.startX, forKey: .startX)
-        try container.encode(self.spanX, forKey: .spanX)
+        if self.spanX != 0 {
+          try container.encode(self.spanX, forKey: .spanX)
+        }
         try container.encodeIfPresent(self.startY, forKey: .startY)
-        try container.encode(self.spanY, forKey: .spanY)
+        if self.spanY != 0 {
+          try container.encode(self.spanY, forKey: .spanY)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

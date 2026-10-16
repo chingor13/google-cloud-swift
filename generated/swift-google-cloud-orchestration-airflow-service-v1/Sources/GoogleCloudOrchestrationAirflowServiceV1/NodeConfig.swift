@@ -256,18 +256,41 @@ public struct NodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
-    try container.encode(self.oauthScopes, forKey: .oauthScopes)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
+    if !self.oauthScopes.isEmpty {
+      try container.encode(self.oauthScopes, forKey: .oauthScopes)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     try container.encodeIfPresent(self.ipAllocationPolicy, forKey: .ipAllocationPolicy)
-    try container.encode(self.enableIpMasqAgent, forKey: .enableIpMasqAgent)
-    try container.encode(self.composerNetworkAttachment, forKey: .composerNetworkAttachment)
-    try container.encode(self.composerInternalIpv4CidrBlock, forKey: .composerInternalIpv4CidrBlock)
+    if self.enableIpMasqAgent {
+      try container.encode(self.enableIpMasqAgent, forKey: .enableIpMasqAgent)
+    }
+    if !self.composerNetworkAttachment.isEmpty {
+      try container.encode(self.composerNetworkAttachment, forKey: .composerNetworkAttachment)
+    }
+    if !self.composerInternalIpv4CidrBlock.isEmpty {
+      try container.encode(
+        self.composerInternalIpv4CidrBlock, forKey: .composerInternalIpv4CidrBlock)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

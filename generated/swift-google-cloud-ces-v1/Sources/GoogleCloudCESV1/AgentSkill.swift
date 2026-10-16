@@ -119,13 +119,27 @@ public struct AgentSkill: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.examples, forKey: .examples)
-    try container.encode(self.inputModes, forKey: .inputModes)
-    try container.encode(self.outputModes, forKey: .outputModes)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.examples.isEmpty {
+      try container.encode(self.examples, forKey: .examples)
+    }
+    if !self.inputModes.isEmpty {
+      try container.encode(self.inputModes, forKey: .inputModes)
+    }
+    if !self.outputModes.isEmpty {
+      try container.encode(self.outputModes, forKey: .outputModes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

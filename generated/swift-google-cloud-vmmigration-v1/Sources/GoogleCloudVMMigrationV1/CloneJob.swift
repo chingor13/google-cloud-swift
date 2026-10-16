@@ -157,11 +157,17 @@ public struct CloneJob: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != CloneJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.stateTime, forKey: .stateTime)
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.steps, forKey: .steps)
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
 
     if let choice = self.targetVmDetails {
       switch choice {

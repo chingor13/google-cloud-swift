@@ -160,7 +160,9 @@
       try container.encodeIfPresent(self.locationPolicy, forKey: .locationPolicy)
       try container.encodeIfPresent(self.minCount, forKey: .minCount)
       try container.encodeIfPresent(self.namePattern, forKey: .namePattern)
-      try container.encode(self.perInstanceProperties, forKey: .perInstanceProperties)
+      if !self.perInstanceProperties.isEmpty {
+        try container.encode(self.perInstanceProperties, forKey: .perInstanceProperties)
+      }
       try container.encodeIfPresent(self.sourceInstanceTemplate, forKey: .sourceInstanceTemplate)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

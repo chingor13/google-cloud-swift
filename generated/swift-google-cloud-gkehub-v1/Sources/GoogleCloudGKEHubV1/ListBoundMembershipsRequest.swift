@@ -102,10 +102,18 @@ public struct ListBoundMembershipsRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scopeName, forKey: .scopeName)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
+    if !self.scopeName.isEmpty {
+      try container.encode(self.scopeName, forKey: .scopeName)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

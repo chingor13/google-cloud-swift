@@ -84,9 +84,13 @@ public struct ViewEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sqlCode, forKey: .sqlCode)
+    if !self.sqlCode.isEmpty {
+      try container.encode(self.sqlCode, forKey: .sqlCode)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
-    try container.encode(self.constraints, forKey: .constraints)
+    if !self.constraints.isEmpty {
+      try container.encode(self.constraints, forKey: .constraints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

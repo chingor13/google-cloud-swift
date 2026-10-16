@@ -100,8 +100,12 @@ public struct TaggedEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.presentTags, forKey: .presentTags)
-    try container.encode(self.absentTags, forKey: .absentTags)
+    if !self.presentTags.isEmpty {
+      try container.encode(self.presentTags, forKey: .presentTags)
+    }
+    if !self.absentTags.isEmpty {
+      try container.encode(self.absentTags, forKey: .absentTags)
+    }
 
     if let choice = self.entry {
       switch choice {

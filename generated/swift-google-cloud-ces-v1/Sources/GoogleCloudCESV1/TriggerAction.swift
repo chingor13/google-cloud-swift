@@ -174,8 +174,12 @@ public struct TriggerAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.text, forKey: .text)
-      try container.encode(self.disabled, forKey: .disabled)
+      if !self.text.isEmpty {
+        try container.encode(self.text, forKey: .text)
+      }
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -258,7 +262,9 @@ public struct TriggerAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.responses, forKey: .responses)
+      if !self.responses.isEmpty {
+        try container.encode(self.responses, forKey: .responses)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -338,7 +344,9 @@ public struct TriggerAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.prompt, forKey: .prompt)
+      if !self.prompt.isEmpty {
+        try container.encode(self.prompt, forKey: .prompt)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -420,7 +428,9 @@ public struct TriggerAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.agent, forKey: .agent)
+      if !self.agent.isEmpty {
+        try container.encode(self.agent, forKey: .agent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -116,10 +116,18 @@ public struct DeleteDeploymentGroupRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.force, forKey: .force)
-    try container.encode(self.deploymentReferencePolicy, forKey: .deploymentReferencePolicy)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.force {
+      try container.encode(self.force, forKey: .force)
+    }
+    if self.deploymentReferencePolicy != DeleteDeploymentGroupRequest.DeploymentReferencePolicy() {
+      try container.encode(self.deploymentReferencePolicy, forKey: .deploymentReferencePolicy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

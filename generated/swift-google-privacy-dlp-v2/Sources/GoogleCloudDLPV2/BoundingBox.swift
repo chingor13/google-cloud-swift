@@ -94,10 +94,18 @@ public struct BoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.top, forKey: .top)
-    try container.encode(self.`left`, forKey: .`left`)
-    try container.encode(self.width, forKey: .width)
-    try container.encode(self.height, forKey: .height)
+    if self.top != 0 {
+      try container.encode(self.top, forKey: .top)
+    }
+    if self.`left` != 0 {
+      try container.encode(self.`left`, forKey: .`left`)
+    }
+    if self.width != 0 {
+      try container.encode(self.width, forKey: .width)
+    }
+    if self.height != 0 {
+      try container.encode(self.height, forKey: .height)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

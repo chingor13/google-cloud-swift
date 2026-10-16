@@ -119,10 +119,18 @@ public struct CreateCurrencyOperator: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.publicKey, forKey: .publicKey)
-    try container.encode(self.keyFormat, forKey: .keyFormat)
-    try container.encode(self.accountComment, forKey: .accountComment)
-    try container.encode(self.currencyCode, forKey: .currencyCode)
+    if !self.publicKey.isEmpty {
+      try container.encode(self.publicKey, forKey: .publicKey)
+    }
+    if self.keyFormat != KeyFormat() {
+      try container.encode(self.keyFormat, forKey: .keyFormat)
+    }
+    if !self.accountComment.isEmpty {
+      try container.encode(self.accountComment, forKey: .accountComment)
+    }
+    if !self.currencyCode.isEmpty {
+      try container.encode(self.currencyCode, forKey: .currencyCode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

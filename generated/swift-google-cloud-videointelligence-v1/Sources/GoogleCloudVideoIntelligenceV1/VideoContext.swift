@@ -128,7 +128,9 @@ public struct VideoContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.segments, forKey: .segments)
+    if !self.segments.isEmpty {
+      try container.encode(self.segments, forKey: .segments)
+    }
     try container.encodeIfPresent(self.labelDetectionConfig, forKey: .labelDetectionConfig)
     try container.encodeIfPresent(
       self.shotChangeDetectionConfig, forKey: .shotChangeDetectionConfig)

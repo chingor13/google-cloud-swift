@@ -94,9 +94,15 @@ public struct ListBackupPlanBindingsResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupPlanBindings, forKey: .backupPlanBindings)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.backupPlanBindings.isEmpty {
+      try container.encode(self.backupPlanBindings, forKey: .backupPlanBindings)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

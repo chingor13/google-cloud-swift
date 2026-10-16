@@ -91,9 +91,13 @@ public struct FetchAclRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resource, forKey: .resource)
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
     try container.encodeIfPresent(self.requestMetadata, forKey: .requestMetadata)
-    try container.encode(self.projectOwner, forKey: .projectOwner)
+    if self.projectOwner {
+      try container.encode(self.projectOwner, forKey: .projectOwner)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -100,10 +100,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.webSearchQueries, forKey: .webSearchQueries)
+      if !self.webSearchQueries.isEmpty {
+        try container.encode(self.webSearchQueries, forKey: .webSearchQueries)
+      }
       try container.encodeIfPresent(self.searchEntryPoint, forKey: .searchEntryPoint)
-      try container.encode(self.groundingChunks, forKey: .groundingChunks)
-      try container.encode(self.groundingSupports, forKey: .groundingSupports)
+      if !self.groundingChunks.isEmpty {
+        try container.encode(self.groundingChunks, forKey: .groundingChunks)
+      }
+      if !self.groundingSupports.isEmpty {
+        try container.encode(self.groundingSupports, forKey: .groundingSupports)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

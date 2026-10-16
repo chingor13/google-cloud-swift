@@ -159,17 +159,29 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.taskGroups, forKey: .taskGroups)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.priority != 0 {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if !self.taskGroups.isEmpty {
+      try container.encode(self.taskGroups, forKey: .taskGroups)
+    }
     try container.encodeIfPresent(self.allocationPolicy, forKey: .allocationPolicy)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.logsPolicy, forKey: .logsPolicy)
-    try container.encode(self.notifications, forKey: .notifications)
+    if !self.notifications.isEmpty {
+      try container.encode(self.notifications, forKey: .notifications)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

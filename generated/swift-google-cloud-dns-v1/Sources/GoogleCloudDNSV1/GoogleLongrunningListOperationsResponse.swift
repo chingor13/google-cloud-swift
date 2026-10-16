@@ -87,8 +87,12 @@ public struct GoogleLongrunningListOperationsResponse: Codable, Equatable, Googl
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.operations, forKey: .operations)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.operations.isEmpty {
+      try container.encode(self.operations, forKey: .operations)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -266,25 +266,57 @@ public struct Revision: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.state, forKey: .state)
+    if self.action != Revision.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if self.state != Revision.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.applyResults, forKey: .applyResults)
-    try container.encode(self.stateDetail, forKey: .stateDetail)
-    try container.encode(self.errorCode, forKey: .errorCode)
-    try container.encode(self.build, forKey: .build)
-    try container.encode(self.logs, forKey: .logs)
-    try container.encode(self.tfErrors, forKey: .tfErrors)
-    try container.encode(self.errorLogs, forKey: .errorLogs)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.importExistingResources, forKey: .importExistingResources)
-    try container.encode(self.workerPool, forKey: .workerPool)
-    try container.encode(self.tfVersionConstraint, forKey: .tfVersionConstraint)
-    try container.encode(self.tfVersion, forKey: .tfVersion)
-    try container.encode(self.quotaValidationResults, forKey: .quotaValidationResults)
-    try container.encode(self.quotaValidation, forKey: .quotaValidation)
+    if !self.stateDetail.isEmpty {
+      try container.encode(self.stateDetail, forKey: .stateDetail)
+    }
+    if self.errorCode != Revision.ErrorCode() {
+      try container.encode(self.errorCode, forKey: .errorCode)
+    }
+    if !self.build.isEmpty {
+      try container.encode(self.build, forKey: .build)
+    }
+    if !self.logs.isEmpty {
+      try container.encode(self.logs, forKey: .logs)
+    }
+    if !self.tfErrors.isEmpty {
+      try container.encode(self.tfErrors, forKey: .tfErrors)
+    }
+    if !self.errorLogs.isEmpty {
+      try container.encode(self.errorLogs, forKey: .errorLogs)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if self.importExistingResources {
+      try container.encode(self.importExistingResources, forKey: .importExistingResources)
+    }
+    if !self.workerPool.isEmpty {
+      try container.encode(self.workerPool, forKey: .workerPool)
+    }
+    if !self.tfVersionConstraint.isEmpty {
+      try container.encode(self.tfVersionConstraint, forKey: .tfVersionConstraint)
+    }
+    if !self.tfVersion.isEmpty {
+      try container.encode(self.tfVersion, forKey: .tfVersion)
+    }
+    if !self.quotaValidationResults.isEmpty {
+      try container.encode(self.quotaValidationResults, forKey: .quotaValidationResults)
+    }
+    if self.quotaValidation != QuotaValidation() {
+      try container.encode(self.quotaValidation, forKey: .quotaValidation)
+    }
     try container.encodeIfPresent(self.providerConfig, forKey: .providerConfig)
 
     if let choice = self.blueprint {

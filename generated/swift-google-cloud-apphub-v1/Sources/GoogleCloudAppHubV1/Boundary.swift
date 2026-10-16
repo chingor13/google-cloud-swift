@@ -112,10 +112,14 @@ public struct Boundary: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.type, forKey: .type)
+    if self.type != Boundary.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
 
     if let choice = self.scope {
       switch choice {

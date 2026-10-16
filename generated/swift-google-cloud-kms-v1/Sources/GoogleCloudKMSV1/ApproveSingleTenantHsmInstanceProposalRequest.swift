@@ -110,7 +110,9 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
 
     if let choice = self.approvalPayload {
       switch choice {
@@ -188,7 +190,9 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.challengeReplies, forKey: .challengeReplies)
+      if !self.challengeReplies.isEmpty {
+        try container.encode(self.challengeReplies, forKey: .challengeReplies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -292,8 +296,12 @@ public struct ApproveSingleTenantHsmInstanceProposalRequest: Codable, Equatable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requiredChallengeReplies, forKey: .requiredChallengeReplies)
-      try container.encode(self.quorumChallengeReplies, forKey: .quorumChallengeReplies)
+      if !self.requiredChallengeReplies.isEmpty {
+        try container.encode(self.requiredChallengeReplies, forKey: .requiredChallengeReplies)
+      }
+      if !self.quorumChallengeReplies.isEmpty {
+        try container.encode(self.quorumChallengeReplies, forKey: .quorumChallengeReplies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

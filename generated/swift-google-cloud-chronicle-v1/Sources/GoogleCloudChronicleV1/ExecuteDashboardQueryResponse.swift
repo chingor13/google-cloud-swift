@@ -114,13 +114,21 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.results, forKey: .results)
-    try container.encode(self.dataSources, forKey: .dataSources)
+    if !self.results.isEmpty {
+      try container.encode(self.results, forKey: .results)
+    }
+    if !self.dataSources.isEmpty {
+      try container.encode(self.dataSources, forKey: .dataSources)
+    }
     try container.encodeIfPresent(
       self.lastBackendCacheRefreshedTime, forKey: .lastBackendCacheRefreshedTime)
     try container.encodeIfPresent(self.timeWindow, forKey: .timeWindow)
-    try container.encode(self.queryRuntimeErrors, forKey: .queryRuntimeErrors)
-    try container.encode(self.languageFeatures, forKey: .languageFeatures)
+    if !self.queryRuntimeErrors.isEmpty {
+      try container.encode(self.queryRuntimeErrors, forKey: .queryRuntimeErrors)
+    }
+    if !self.languageFeatures.isEmpty {
+      try container.encode(self.languageFeatures, forKey: .languageFeatures)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -340,8 +348,12 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleWKT._AnyP
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.links, forKey: .links)
-        try container.encode(self.fieldPaths, forKey: .fieldPaths)
+        if !self.links.isEmpty {
+          try container.encode(self.links, forKey: .links)
+        }
+        if !self.fieldPaths.isEmpty {
+          try container.encode(self.fieldPaths, forKey: .fieldPaths)
+        }
         try container.encodeIfPresent(self.timestampVal, forKey: .timestampVal)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -556,7 +568,9 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleWKT._AnyP
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.values, forKey: .values)
+        if !self.values.isEmpty {
+          try container.encode(self.values, forKey: .values)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -682,8 +696,12 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.column, forKey: .column)
-      try container.encode(self.values, forKey: .values)
+      if !self.column.isEmpty {
+        try container.encode(self.column, forKey: .column)
+      }
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

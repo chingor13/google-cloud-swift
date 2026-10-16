@@ -84,8 +84,12 @@ public struct GoogleSearchSuggestions: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.htmls, forKey: .htmls)
-    try container.encode(self.webSearchQueries, forKey: .webSearchQueries)
+    if !self.htmls.isEmpty {
+      try container.encode(self.htmls, forKey: .htmls)
+    }
+    if !self.webSearchQueries.isEmpty {
+      try container.encode(self.webSearchQueries, forKey: .webSearchQueries)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

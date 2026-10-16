@@ -183,18 +183,30 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.lifecycleState, forKey: .lifecycleState)
-      try container.encode(self.conversationProfile, forKey: .conversationProfile)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.lifecycleState != Conversation.LifecycleState() {
+        try container.encode(self.lifecycleState, forKey: .lifecycleState)
+      }
+      if !self.conversationProfile.isEmpty {
+        try container.encode(self.conversationProfile, forKey: .conversationProfile)
+      }
       try container.encodeIfPresent(self.phoneNumber, forKey: .phoneNumber)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
-      try container.encode(self.conversationStage, forKey: .conversationStage)
+      if self.conversationStage != Conversation.ConversationStage() {
+        try container.encode(self.conversationStage, forKey: .conversationStage)
+      }
       try container.encodeIfPresent(self.telephonyConnectionInfo, forKey: .telephonyConnectionInfo)
       try container.encodeIfPresent(
         self.initialConversationProfile, forKey: .initialConversationProfile)
-      try container.encode(self.ingestedContextReferences, forKey: .ingestedContextReferences)
-      try container.encode(self.initialGeneratorContexts, forKey: .initialGeneratorContexts)
+      if !self.ingestedContextReferences.isEmpty {
+        try container.encode(self.ingestedContextReferences, forKey: .ingestedContextReferences)
+      }
+      if !self.initialGeneratorContexts.isEmpty {
+        try container.encode(self.initialGeneratorContexts, forKey: .initialGeneratorContexts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -283,10 +295,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dialedNumber, forKey: .dialedNumber)
-        try container.encode(self.sdp, forKey: .sdp)
-        try container.encode(self.sipHeaders, forKey: .sipHeaders)
-        try container.encode(self.extraMimeContents, forKey: .extraMimeContents)
+        if !self.dialedNumber.isEmpty {
+          try container.encode(self.dialedNumber, forKey: .dialedNumber)
+        }
+        if !self.sdp.isEmpty {
+          try container.encode(self.sdp, forKey: .sdp)
+        }
+        if !self.sipHeaders.isEmpty {
+          try container.encode(self.sipHeaders, forKey: .sipHeaders)
+        }
+        if !self.extraMimeContents.isEmpty {
+          try container.encode(self.extraMimeContents, forKey: .extraMimeContents)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -352,8 +372,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.name, forKey: .name)
-          try container.encode(self.value, forKey: .value)
+          if !self.name.isEmpty {
+            try container.encode(self.name, forKey: .name)
+          }
+          if !self.value.isEmpty {
+            try container.encode(self.value, forKey: .value)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -442,8 +466,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.mimeType, forKey: .mimeType)
-          try container.encode(self.content, forKey: .content)
+          if !self.mimeType.isEmpty {
+            try container.encode(self.mimeType, forKey: .mimeType)
+          }
+          if !self.content.isEmpty {
+            try container.encode(self.content, forKey: .content)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -575,9 +603,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.contextContents, forKey: .contextContents)
-        try container.encode(self.updateMode, forKey: .updateMode)
-        try container.encode(self.languageCode, forKey: .languageCode)
+        if !self.contextContents.isEmpty {
+          try container.encode(self.contextContents, forKey: .contextContents)
+        }
+        if self.updateMode != Conversation.ContextReference.UpdateMode() {
+          try container.encode(self.updateMode, forKey: .updateMode)
+        }
+        if !self.languageCode.isEmpty {
+          try container.encode(self.languageCode, forKey: .languageCode)
+        }
         try container.encodeIfPresent(self.createTime, forKey: .createTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -665,10 +699,16 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.content, forKey: .content)
-          try container.encode(self.contentFormat, forKey: .contentFormat)
+          if !self.content.isEmpty {
+            try container.encode(self.content, forKey: .content)
+          }
+          if self.contentFormat != Conversation.ContextReference.ContextContent.ContentFormat() {
+            try container.encode(self.contentFormat, forKey: .contentFormat)
+          }
           try container.encodeIfPresent(self.ingestionTime, forKey: .ingestionTime)
-          try container.encode(self.answerRecord, forKey: .answerRecord)
+          if !self.answerRecord.isEmpty {
+            try container.encode(self.answerRecord, forKey: .answerRecord)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1008,7 +1048,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.generatorType, forKey: .generatorType)
+        if self.generatorType != Conversation.GeneratorContext.GeneratorType() {
+          try container.encode(self.generatorType, forKey: .generatorType)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

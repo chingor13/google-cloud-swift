@@ -100,7 +100,9 @@ public struct DnsSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.glueRecords, forKey: .glueRecords)
+    if !self.glueRecords.isEmpty {
+      try container.encode(self.glueRecords, forKey: .glueRecords)
+    }
 
     if let choice = self.dnsProvider {
       switch choice {
@@ -180,8 +182,12 @@ public struct DnsSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nameServers, forKey: .nameServers)
-      try container.encode(self.dsRecords, forKey: .dsRecords)
+      if !self.nameServers.isEmpty {
+        try container.encode(self.nameServers, forKey: .nameServers)
+      }
+      if !self.dsRecords.isEmpty {
+        try container.encode(self.dsRecords, forKey: .dsRecords)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -287,9 +293,15 @@ public struct DnsSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nameServers, forKey: .nameServers)
-      try container.encode(self.dsState, forKey: .dsState)
-      try container.encode(self.dsRecords, forKey: .dsRecords)
+      if !self.nameServers.isEmpty {
+        try container.encode(self.nameServers, forKey: .nameServers)
+      }
+      if self.dsState != DnsSettings.DsState() {
+        try container.encode(self.dsState, forKey: .dsState)
+      }
+      if !self.dsRecords.isEmpty {
+        try container.encode(self.dsRecords, forKey: .dsRecords)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -399,10 +411,18 @@ public struct DnsSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.keyTag, forKey: .keyTag)
-      try container.encode(self.algorithm, forKey: .algorithm)
-      try container.encode(self.digestType, forKey: .digestType)
-      try container.encode(self.digest, forKey: .digest)
+      if self.keyTag != 0 {
+        try container.encode(self.keyTag, forKey: .keyTag)
+      }
+      if self.algorithm != DnsSettings.DsRecord.Algorithm() {
+        try container.encode(self.algorithm, forKey: .algorithm)
+      }
+      if self.digestType != DnsSettings.DsRecord.DigestType() {
+        try container.encode(self.digestType, forKey: .digestType)
+      }
+      if !self.digest.isEmpty {
+        try container.encode(self.digest, forKey: .digest)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -862,9 +882,15 @@ public struct DnsSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.hostName, forKey: .hostName)
-      try container.encode(self.ipv4Addresses, forKey: .ipv4Addresses)
-      try container.encode(self.ipv6Addresses, forKey: .ipv6Addresses)
+      if !self.hostName.isEmpty {
+        try container.encode(self.hostName, forKey: .hostName)
+      }
+      if !self.ipv4Addresses.isEmpty {
+        try container.encode(self.ipv4Addresses, forKey: .ipv4Addresses)
+      }
+      if !self.ipv6Addresses.isEmpty {
+        try container.encode(self.ipv6Addresses, forKey: .ipv6Addresses)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

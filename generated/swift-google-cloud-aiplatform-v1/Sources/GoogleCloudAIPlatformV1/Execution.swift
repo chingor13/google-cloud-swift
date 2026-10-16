@@ -169,17 +169,33 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.state != Execution.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.schemaTitle, forKey: .schemaTitle)
-      try container.encode(self.schemaVersion, forKey: .schemaVersion)
+      if !self.schemaTitle.isEmpty {
+        try container.encode(self.schemaTitle, forKey: .schemaTitle)
+      }
+      if !self.schemaVersion.isEmpty {
+        try container.encode(self.schemaVersion, forKey: .schemaVersion)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
-      try container.encode(self.description, forKey: .description)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

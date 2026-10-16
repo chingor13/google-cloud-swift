@@ -110,10 +110,16 @@ public struct CreateServiceConnectionPolicyRequest: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.serviceConnectionPolicyId, forKey: .serviceConnectionPolicyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.serviceConnectionPolicyId.isEmpty {
+      try container.encode(self.serviceConnectionPolicyId, forKey: .serviceConnectionPolicyId)
+    }
     try container.encodeIfPresent(self.serviceConnectionPolicy, forKey: .serviceConnectionPolicy)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

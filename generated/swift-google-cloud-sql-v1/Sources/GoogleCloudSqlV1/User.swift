@@ -204,20 +204,42 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.password, forKey: .password)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.host, forKey: .host)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.iamEmail, forKey: .iamEmail)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.host.isEmpty {
+        try container.encode(self.host, forKey: .host)
+      }
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if self.type != User.SqlUserType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.iamEmail.isEmpty {
+        try container.encode(self.iamEmail, forKey: .iamEmail)
+      }
       try container.encodeIfPresent(self.passwordPolicy, forKey: .passwordPolicy)
       try container.encodeIfPresent(self.dualPasswordType, forKey: .dualPasswordType)
       try container.encodeIfPresent(self.iamStatus, forKey: .iamStatus)
-      try container.encode(self.databaseRoles, forKey: .databaseRoles)
-      try container.encode(self.serverRoles, forKey: .serverRoles)
+      if !self.databaseRoles.isEmpty {
+        try container.encode(self.databaseRoles, forKey: .databaseRoles)
+      }
+      if !self.serverRoles.isEmpty {
+        try container.encode(self.serverRoles, forKey: .serverRoles)
+      }
 
       if let choice = self.userDetails {
         switch choice {

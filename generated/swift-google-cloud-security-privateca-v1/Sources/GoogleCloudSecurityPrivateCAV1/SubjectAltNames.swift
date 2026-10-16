@@ -108,11 +108,21 @@ public struct SubjectAltNames: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dnsNames, forKey: .dnsNames)
-    try container.encode(self.uris, forKey: .uris)
-    try container.encode(self.emailAddresses, forKey: .emailAddresses)
-    try container.encode(self.ipAddresses, forKey: .ipAddresses)
-    try container.encode(self.customSans, forKey: .customSans)
+    if !self.dnsNames.isEmpty {
+      try container.encode(self.dnsNames, forKey: .dnsNames)
+    }
+    if !self.uris.isEmpty {
+      try container.encode(self.uris, forKey: .uris)
+    }
+    if !self.emailAddresses.isEmpty {
+      try container.encode(self.emailAddresses, forKey: .emailAddresses)
+    }
+    if !self.ipAddresses.isEmpty {
+      try container.encode(self.ipAddresses, forKey: .ipAddresses)
+    }
+    if !self.customSans.isEmpty {
+      try container.encode(self.customSans, forKey: .customSans)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

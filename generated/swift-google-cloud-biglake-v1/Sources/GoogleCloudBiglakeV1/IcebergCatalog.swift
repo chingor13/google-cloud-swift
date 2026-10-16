@@ -199,17 +199,36 @@ public struct IcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.credentialMode, forKey: .credentialMode)
-    try container.encode(self.biglakeServiceAccount, forKey: .biglakeServiceAccount)
-    try container.encode(self.biglakeServiceAccountUniqueId, forKey: .biglakeServiceAccountUniqueId)
-    try container.encode(self.catalogType, forKey: .catalogType)
-    try container.encode(self.defaultLocation, forKey: .defaultLocation)
-    try container.encode(self.storageRegions, forKey: .storageRegions)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.credentialMode != IcebergCatalog.CredentialMode() {
+      try container.encode(self.credentialMode, forKey: .credentialMode)
+    }
+    if !self.biglakeServiceAccount.isEmpty {
+      try container.encode(self.biglakeServiceAccount, forKey: .biglakeServiceAccount)
+    }
+    if !self.biglakeServiceAccountUniqueId.isEmpty {
+      try container.encode(
+        self.biglakeServiceAccountUniqueId, forKey: .biglakeServiceAccountUniqueId)
+    }
+    if self.catalogType != IcebergCatalog.CatalogType() {
+      try container.encode(self.catalogType, forKey: .catalogType)
+    }
+    if !self.defaultLocation.isEmpty {
+      try container.encode(self.defaultLocation, forKey: .defaultLocation)
+    }
+    if !self.storageRegions.isEmpty {
+      try container.encode(self.storageRegions, forKey: .storageRegions)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.replicas, forKey: .replicas)
-    try container.encode(self.description, forKey: .description)
+    if !self.replicas.isEmpty {
+      try container.encode(self.replicas, forKey: .replicas)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(
       self.restrictedLocationsConfig, forKey: .restrictedLocationsConfig)
     try container.encodeIfPresent(self.federatedCatalogOptions, forKey: .federatedCatalogOptions)
@@ -280,8 +299,12 @@ public struct IcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.region, forKey: .region)
-      try container.encode(self.state, forKey: .state)
+      if !self.region.isEmpty {
+        try container.encode(self.region, forKey: .region)
+      }
+      if self.state != IcebergCatalog.Replica.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -496,7 +519,9 @@ public struct IcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.restrictedLocations, forKey: .restrictedLocations)
+      if !self.restrictedLocations.isEmpty {
+        try container.encode(self.restrictedLocations, forKey: .restrictedLocations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1126,7 +1151,9 @@ public struct IcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.namespaceFilters, forKey: .namespaceFilters)
+        if !self.namespaceFilters.isEmpty {
+          try container.encode(self.namespaceFilters, forKey: .namespaceFilters)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -147,15 +147,25 @@ public struct AzureNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmSize, forKey: .vmSize)
+    if !self.vmSize.isEmpty {
+      try container.encode(self.vmSize, forKey: .vmSize)
+    }
     try container.encodeIfPresent(self.rootVolume, forKey: .rootVolume)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.imageType, forKey: .imageType)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.imageType.isEmpty {
+      try container.encode(self.imageType, forKey: .imageType)
+    }
     try container.encodeIfPresent(self.sshConfig, forKey: .sshConfig)
     try container.encodeIfPresent(self.proxyConfig, forKey: .proxyConfig)
     try container.encodeIfPresent(self.configEncryption, forKey: .configEncryption)
-    try container.encode(self.taints, forKey: .taints)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.taints.isEmpty {
+      try container.encode(self.taints, forKey: .taints)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

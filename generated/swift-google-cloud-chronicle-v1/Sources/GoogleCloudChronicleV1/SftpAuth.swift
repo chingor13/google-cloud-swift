@@ -93,10 +93,18 @@ public struct SftpAuth: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.privateKey, forKey: .privateKey)
-    try container.encode(self.privateKeyPassphrase, forKey: .privateKeyPassphrase)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.privateKey.isEmpty {
+      try container.encode(self.privateKey, forKey: .privateKey)
+    }
+    if !self.privateKeyPassphrase.isEmpty {
+      try container.encode(self.privateKeyPassphrase, forKey: .privateKeyPassphrase)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

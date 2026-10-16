@@ -99,9 +99,13 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.location, forKey: .location)
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.slices, forKey: .slices)
+    if !self.slices.isEmpty {
+      try container.encode(self.slices, forKey: .slices)
+    }
     try container.encodeIfPresent(self.macroAverageSlice, forKey: .macroAverageSlice)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -185,7 +189,9 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dimensions, forKey: .dimensions)
+      if !self.dimensions.isEmpty {
+        try container.encode(self.dimensions, forKey: .dimensions)
+      }
       try container.encodeIfPresent(self.total, forKey: .total)
       try container.encodeIfPresent(self.timeSeries, forKey: .timeSeries)
       for (key, value) in self._unknownFields.json {
@@ -424,7 +430,9 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
             self.averageCustomerSatisfactionRating, forKey: .averageCustomerSatisfactionRating)
           try container.encodeIfPresent(
             self.averageQaNormalizedScore, forKey: .averageQaNormalizedScore)
-          try container.encode(self.qaTagScores, forKey: .qaTagScores)
+          if !self.qaTagScores.isEmpty {
+            try container.encode(self.qaTagScores, forKey: .qaTagScores)
+          }
           try container.encodeIfPresent(
             self.averageQaQuestionNormalizedScore, forKey: .averageQaQuestionNormalizedScore)
           for (key, value) in self._unknownFields.json {
@@ -495,8 +503,13 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.tag, forKey: .tag)
-            try container.encode(self.averageTagNormalizedScore, forKey: .averageTagNormalizedScore)
+            if !self.tag.isEmpty {
+              try container.encode(self.tag, forKey: .tag)
+            }
+            if self.averageTagNormalizedScore != 0 {
+              try container.encode(
+                self.averageTagNormalizedScore, forKey: .averageTagNormalizedScore)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -631,7 +644,9 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataPoints, forKey: .dataPoints)
+        if !self.dataPoints.isEmpty {
+          try container.encode(self.dataPoints, forKey: .dataPoints)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

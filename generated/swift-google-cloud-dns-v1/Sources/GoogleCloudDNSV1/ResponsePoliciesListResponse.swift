@@ -76,7 +76,9 @@ public struct ResponsePoliciesListResponse: Codable, Equatable, GoogleWKT._AnyPa
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.responsePolicies, forKey: .responsePolicies)
+    if !self.responsePolicies.isEmpty {
+      try container.encode(self.responsePolicies, forKey: .responsePolicies)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

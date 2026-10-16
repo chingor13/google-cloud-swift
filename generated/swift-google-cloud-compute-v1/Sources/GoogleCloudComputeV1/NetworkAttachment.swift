@@ -202,11 +202,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connectionEndpoints, forKey: .connectionEndpoints)
+      if !self.connectionEndpoints.isEmpty {
+        try container.encode(self.connectionEndpoints, forKey: .connectionEndpoints)
+      }
       try container.encodeIfPresent(self.connectionPreference, forKey: .connectionPreference)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -215,12 +217,18 @@
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.network, forKey: .network)
-      try container.encode(self.producerAcceptLists, forKey: .producerAcceptLists)
-      try container.encode(self.producerRejectLists, forKey: .producerRejectLists)
+      if !self.producerAcceptLists.isEmpty {
+        try container.encode(self.producerAcceptLists, forKey: .producerAcceptLists)
+      }
+      if !self.producerRejectLists.isEmpty {
+        try container.encode(self.producerRejectLists, forKey: .producerRejectLists)
+      }
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
-      try container.encode(self.subnetworks, forKey: .subnetworks)
+      if !self.subnetworks.isEmpty {
+        try container.encode(self.subnetworks, forKey: .subnetworks)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -109,12 +109,24 @@ public struct S3Auth: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accessKeyId, forKey: .accessKeyId)
-    try container.encode(self.secretAccessKey, forKey: .secretAccessKey)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
-    try container.encode(self.refreshUri, forKey: .refreshUri)
-    try container.encode(self.region, forKey: .region)
+    if !self.accessKeyId.isEmpty {
+      try container.encode(self.accessKeyId, forKey: .accessKeyId)
+    }
+    if !self.secretAccessKey.isEmpty {
+      try container.encode(self.secretAccessKey, forKey: .secretAccessKey)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
+    if !self.refreshUri.isEmpty {
+      try container.encode(self.refreshUri, forKey: .refreshUri)
+    }
+    if self.region != S3Region() {
+      try container.encode(self.region, forKey: .region)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -89,9 +89,13 @@ public struct CreateReferenceListRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.referenceList, forKey: .referenceList)
-    try container.encode(self.referenceListId, forKey: .referenceListId)
+    if !self.referenceListId.isEmpty {
+      try container.encode(self.referenceListId, forKey: .referenceListId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

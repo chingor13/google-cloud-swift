@@ -124,12 +124,18 @@ public struct McpToolset: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serverAddress, forKey: .serverAddress)
+    if !self.serverAddress.isEmpty {
+      try container.encode(self.serverAddress, forKey: .serverAddress)
+    }
     try container.encodeIfPresent(self.apiAuthentication, forKey: .apiAuthentication)
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
     try container.encodeIfPresent(self.tlsConfig, forKey: .tlsConfig)
-    try container.encode(self.customHeaders, forKey: .customHeaders)
-    try container.encode(self.toolOverrides, forKey: .toolOverrides)
+    if !self.customHeaders.isEmpty {
+      try container.encode(self.customHeaders, forKey: .customHeaders)
+    }
+    if !self.toolOverrides.isEmpty {
+      try container.encode(self.toolOverrides, forKey: .toolOverrides)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

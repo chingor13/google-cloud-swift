@@ -112,11 +112,19 @@ public struct VmwareEnginePreferences: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpuOvercommitRatio, forKey: .cpuOvercommitRatio)
-    try container.encode(self.memoryOvercommitRatio, forKey: .memoryOvercommitRatio)
-    try container.encode(
-      self.storageDeduplicationCompressionRatio, forKey: .storageDeduplicationCompressionRatio)
-    try container.encode(self.commitmentPlan, forKey: .commitmentPlan)
+    if self.cpuOvercommitRatio != 0 {
+      try container.encode(self.cpuOvercommitRatio, forKey: .cpuOvercommitRatio)
+    }
+    if self.memoryOvercommitRatio != 0 {
+      try container.encode(self.memoryOvercommitRatio, forKey: .memoryOvercommitRatio)
+    }
+    if self.storageDeduplicationCompressionRatio != 0 {
+      try container.encode(
+        self.storageDeduplicationCompressionRatio, forKey: .storageDeduplicationCompressionRatio)
+    }
+    if self.commitmentPlan != VmwareEnginePreferences.CommitmentPlan() {
+      try container.encode(self.commitmentPlan, forKey: .commitmentPlan)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -96,10 +96,18 @@ public struct ContainerHealthDetails: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.expectedConfigVersion, forKey: .expectedConfigVersion)
-    try container.encode(self.currentConfigVersion, forKey: .currentConfigVersion)
-    try container.encode(self.extendedStatus, forKey: .extendedStatus)
-    try container.encode(self.errorMsg, forKey: .errorMsg)
+    if !self.expectedConfigVersion.isEmpty {
+      try container.encode(self.expectedConfigVersion, forKey: .expectedConfigVersion)
+    }
+    if !self.currentConfigVersion.isEmpty {
+      try container.encode(self.currentConfigVersion, forKey: .currentConfigVersion)
+    }
+    if !self.extendedStatus.isEmpty {
+      try container.encode(self.extendedStatus, forKey: .extendedStatus)
+    }
+    if !self.errorMsg.isEmpty {
+      try container.encode(self.errorMsg, forKey: .errorMsg)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

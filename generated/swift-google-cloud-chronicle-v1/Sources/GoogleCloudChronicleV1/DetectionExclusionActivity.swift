@@ -75,8 +75,10 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.detectionExclusionDetectorActivities, forKey: .detectionExclusionDetectorActivities)
+    if !self.detectionExclusionDetectorActivities.isEmpty {
+      try container.encode(
+        self.detectionExclusionDetectorActivities, forKey: .detectionExclusionDetectorActivities)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -185,8 +187,12 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.excludedDetectionCount, forKey: .excludedDetectionCount)
-      try container.encode(self.totalDetectionCount, forKey: .totalDetectionCount)
+      if self.excludedDetectionCount != 0 {
+        try container.encode(self.excludedDetectionCount, forKey: .excludedDetectionCount)
+      }
+      if self.totalDetectionCount != 0 {
+        try container.encode(self.totalDetectionCount, forKey: .totalDetectionCount)
+      }
 
       if let choice = self.detectorName {
         switch choice {

@@ -79,8 +79,12 @@ public struct TextSentimentPredictionInstance: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.mimeType, forKey: .mimeType)
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

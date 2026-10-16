@@ -79,8 +79,12 @@ public struct ListCloudControlsResponse: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudControls, forKey: .cloudControls)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.cloudControls.isEmpty {
+      try container.encode(self.cloudControls, forKey: .cloudControls)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

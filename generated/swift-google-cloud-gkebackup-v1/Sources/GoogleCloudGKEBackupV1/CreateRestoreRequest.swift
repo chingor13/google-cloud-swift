@@ -91,9 +91,13 @@ public struct CreateRestoreRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.restore, forKey: .restore)
-    try container.encode(self.restoreId, forKey: .restoreId)
+    if !self.restoreId.isEmpty {
+      try container.encode(self.restoreId, forKey: .restoreId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -165,13 +165,25 @@ public struct MultiColumnDatatypeChange: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceDataTypeFilter, forKey: .sourceDataTypeFilter)
-    try container.encode(self.newDataType, forKey: .newDataType)
-    try container.encode(self.overrideLength, forKey: .overrideLength)
-    try container.encode(self.overrideScale, forKey: .overrideScale)
-    try container.encode(self.overridePrecision, forKey: .overridePrecision)
-    try container.encode(
-      self.overrideFractionalSecondsPrecision, forKey: .overrideFractionalSecondsPrecision)
+    if !self.sourceDataTypeFilter.isEmpty {
+      try container.encode(self.sourceDataTypeFilter, forKey: .sourceDataTypeFilter)
+    }
+    if !self.newDataType.isEmpty {
+      try container.encode(self.newDataType, forKey: .newDataType)
+    }
+    if self.overrideLength != 0 {
+      try container.encode(self.overrideLength, forKey: .overrideLength)
+    }
+    if self.overrideScale != 0 {
+      try container.encode(self.overrideScale, forKey: .overrideScale)
+    }
+    if self.overridePrecision != 0 {
+      try container.encode(self.overridePrecision, forKey: .overridePrecision)
+    }
+    if self.overrideFractionalSecondsPrecision != 0 {
+      try container.encode(
+        self.overrideFractionalSecondsPrecision, forKey: .overrideFractionalSecondsPrecision)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
 
     if let choice = self.sourceFilter {

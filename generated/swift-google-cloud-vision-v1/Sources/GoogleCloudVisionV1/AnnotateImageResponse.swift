@@ -177,12 +177,24 @@ public struct AnnotateImageResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.faceAnnotations, forKey: .faceAnnotations)
-    try container.encode(self.landmarkAnnotations, forKey: .landmarkAnnotations)
-    try container.encode(self.logoAnnotations, forKey: .logoAnnotations)
-    try container.encode(self.labelAnnotations, forKey: .labelAnnotations)
-    try container.encode(self.localizedObjectAnnotations, forKey: .localizedObjectAnnotations)
-    try container.encode(self.textAnnotations, forKey: .textAnnotations)
+    if !self.faceAnnotations.isEmpty {
+      try container.encode(self.faceAnnotations, forKey: .faceAnnotations)
+    }
+    if !self.landmarkAnnotations.isEmpty {
+      try container.encode(self.landmarkAnnotations, forKey: .landmarkAnnotations)
+    }
+    if !self.logoAnnotations.isEmpty {
+      try container.encode(self.logoAnnotations, forKey: .logoAnnotations)
+    }
+    if !self.labelAnnotations.isEmpty {
+      try container.encode(self.labelAnnotations, forKey: .labelAnnotations)
+    }
+    if !self.localizedObjectAnnotations.isEmpty {
+      try container.encode(self.localizedObjectAnnotations, forKey: .localizedObjectAnnotations)
+    }
+    if !self.textAnnotations.isEmpty {
+      try container.encode(self.textAnnotations, forKey: .textAnnotations)
+    }
     try container.encodeIfPresent(self.fullTextAnnotation, forKey: .fullTextAnnotation)
     try container.encodeIfPresent(self.safeSearchAnnotation, forKey: .safeSearchAnnotation)
     try container.encodeIfPresent(

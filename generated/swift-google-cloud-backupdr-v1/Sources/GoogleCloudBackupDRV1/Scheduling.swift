@@ -127,7 +127,9 @@ public struct Scheduling: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.onHostMaintenance, forKey: .onHostMaintenance)
     try container.encodeIfPresent(self.automaticRestart, forKey: .automaticRestart)
     try container.encodeIfPresent(self.preemptible, forKey: .preemptible)
-    try container.encode(self.nodeAffinities, forKey: .nodeAffinities)
+    if !self.nodeAffinities.isEmpty {
+      try container.encode(self.nodeAffinities, forKey: .nodeAffinities)
+    }
     try container.encodeIfPresent(self.minNodeCpus, forKey: .minNodeCpus)
     try container.encodeIfPresent(self.provisioningModel, forKey: .provisioningModel)
     try container.encodeIfPresent(
@@ -206,7 +208,9 @@ public struct Scheduling: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.key, forKey: .key)
       try container.encodeIfPresent(self.`operator`, forKey: .`operator`)
-      try container.encode(self.values, forKey: .values)
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

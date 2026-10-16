@@ -77,8 +77,12 @@ public struct AutoscalingLimits: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.minServeNodes, forKey: .minServeNodes)
-    try container.encode(self.maxServeNodes, forKey: .maxServeNodes)
+    if self.minServeNodes != 0 {
+      try container.encode(self.minServeNodes, forKey: .minServeNodes)
+    }
+    if self.maxServeNodes != 0 {
+      try container.encode(self.maxServeNodes, forKey: .maxServeNodes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

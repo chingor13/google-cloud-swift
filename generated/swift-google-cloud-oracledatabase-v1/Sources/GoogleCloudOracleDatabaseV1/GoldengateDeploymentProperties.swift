@@ -418,49 +418,112 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.lifecycleState, forKey: .lifecycleState)
-    try container.encode(self.licenseModel, forKey: .licenseModel)
-    try container.encode(self.environmentType, forKey: .environmentType)
-    try container.encode(self.cpuCoreCount, forKey: .cpuCoreCount)
-    try container.encode(self.isAutoScalingEnabled, forKey: .isAutoScalingEnabled)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.deploymentType, forKey: .deploymentType)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.lifecycleState != GoldengateDeploymentProperties.GoldengateDeploymentLifecycleState() {
+      try container.encode(self.lifecycleState, forKey: .lifecycleState)
+    }
+    if self.licenseModel != GoldengateDeploymentProperties.LicenseModel() {
+      try container.encode(self.licenseModel, forKey: .licenseModel)
+    }
+    if !self.environmentType.isEmpty {
+      try container.encode(self.environmentType, forKey: .environmentType)
+    }
+    if self.cpuCoreCount != 0 {
+      try container.encode(self.cpuCoreCount, forKey: .cpuCoreCount)
+    }
+    if self.isAutoScalingEnabled {
+      try container.encode(self.isAutoScalingEnabled, forKey: .isAutoScalingEnabled)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.deploymentType.isEmpty {
+      try container.encode(self.deploymentType, forKey: .deploymentType)
+    }
     try container.encodeIfPresent(self.oggData, forKey: .oggData)
     try container.encodeIfPresent(self.maintenanceWindow, forKey: .maintenanceWindow)
     try container.encodeIfPresent(self.maintenanceConfig, forKey: .maintenanceConfig)
-    try container.encode(self.fqdn, forKey: .fqdn)
-    try container.encode(self.lifecycleSubState, forKey: .lifecycleSubState)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.deploymentBackupId, forKey: .deploymentBackupId)
+    if !self.fqdn.isEmpty {
+      try container.encode(self.fqdn, forKey: .fqdn)
+    }
+    if self.lifecycleSubState
+      != GoldengateDeploymentProperties.GoldengateDeploymentLifecycleSubState()
+    {
+      try container.encode(self.lifecycleSubState, forKey: .lifecycleSubState)
+    }
+    if self.category != GoldengateDeploymentProperties.GoldengateDeploymentCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.deploymentBackupId.isEmpty {
+      try container.encode(self.deploymentBackupId, forKey: .deploymentBackupId)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
-    try container.encode(self.healthy, forKey: .healthy)
-    try container.encode(self.loadBalancerSubnetId, forKey: .loadBalancerSubnetId)
-    try container.encode(self.loadBalancerId, forKey: .loadBalancerId)
-    try container.encode(self.nsgIds, forKey: .nsgIds)
-    try container.encode(self.isPublic, forKey: .isPublic)
-    try container.encode(self.publicIpAddress, forKey: .publicIpAddress)
-    try container.encode(self.privateIpAddress, forKey: .privateIpAddress)
-    try container.encode(self.deploymentUrl, forKey: .deploymentUrl)
-    try container.encode(self.isLatestVersion, forKey: .isLatestVersion)
+    if !self.lifecycleDetails.isEmpty {
+      try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
+    }
+    if self.healthy {
+      try container.encode(self.healthy, forKey: .healthy)
+    }
+    if !self.loadBalancerSubnetId.isEmpty {
+      try container.encode(self.loadBalancerSubnetId, forKey: .loadBalancerSubnetId)
+    }
+    if !self.loadBalancerId.isEmpty {
+      try container.encode(self.loadBalancerId, forKey: .loadBalancerId)
+    }
+    if !self.nsgIds.isEmpty {
+      try container.encode(self.nsgIds, forKey: .nsgIds)
+    }
+    if self.isPublic {
+      try container.encode(self.isPublic, forKey: .isPublic)
+    }
+    if !self.publicIpAddress.isEmpty {
+      try container.encode(self.publicIpAddress, forKey: .publicIpAddress)
+    }
+    if !self.privateIpAddress.isEmpty {
+      try container.encode(self.privateIpAddress, forKey: .privateIpAddress)
+    }
+    if !self.deploymentUrl.isEmpty {
+      try container.encode(self.deploymentUrl, forKey: .deploymentUrl)
+    }
+    if self.isLatestVersion {
+      try container.encode(self.isLatestVersion, forKey: .isLatestVersion)
+    }
     try container.encodeIfPresent(self.upgradeRequiredTime, forKey: .upgradeRequiredTime)
-    try container.encode(self.storageUtilizationBytes, forKey: .storageUtilizationBytes)
-    try container.encode(
-      self.isStorageUtilizationLimitExceeded, forKey: .isStorageUtilizationLimitExceeded)
+    if self.storageUtilizationBytes != 0 {
+      try container.encode(self.storageUtilizationBytes, forKey: .storageUtilizationBytes)
+    }
+    if self.isStorageUtilizationLimitExceeded {
+      try container.encode(
+        self.isStorageUtilizationLimitExceeded, forKey: .isStorageUtilizationLimitExceeded)
+    }
     try container.encodeIfPresent(self.deploymentDiagnosticData, forKey: .deploymentDiagnosticData)
     try container.encodeIfPresent(self.backupSchedule, forKey: .backupSchedule)
     try container.encodeIfPresent(self.nextMaintenanceTime, forKey: .nextMaintenanceTime)
-    try container.encode(self.nextMaintenanceActionType, forKey: .nextMaintenanceActionType)
-    try container.encode(self.nextMaintenanceDescription, forKey: .nextMaintenanceDescription)
+    if self.nextMaintenanceActionType != GoldengateDeploymentProperties.NextMaintenanceActionType()
+    {
+      try container.encode(self.nextMaintenanceActionType, forKey: .nextMaintenanceActionType)
+    }
+    if !self.nextMaintenanceDescription.isEmpty {
+      try container.encode(self.nextMaintenanceDescription, forKey: .nextMaintenanceDescription)
+    }
     try container.encodeIfPresent(self.oggVersionSupportEndTime, forKey: .oggVersionSupportEndTime)
-    try container.encode(self.ingressIps, forKey: .ingressIps)
-    try container.encode(self.deploymentRole, forKey: .deploymentRole)
+    if !self.ingressIps.isEmpty {
+      try container.encode(self.ingressIps, forKey: .ingressIps)
+    }
+    if self.deploymentRole != GoldengateDeploymentProperties.GoldengateDeploymentRoleType() {
+      try container.encode(self.deploymentRole, forKey: .deploymentRole)
+    }
     try container.encodeIfPresent(self.lastBackupScheduleTime, forKey: .lastBackupScheduleTime)
     try container.encodeIfPresent(self.nextBackupScheduleTime, forKey: .nextBackupScheduleTime)
     try container.encodeIfPresent(self.roleChangeTime, forKey: .roleChangeTime)
-    try container.encode(self.locks, forKey: .locks)
-    try container.encode(self.placements, forKey: .placements)
+    if !self.locks.isEmpty {
+      try container.encode(self.locks, forKey: .locks)
+    }
+    if !self.placements.isEmpty {
+      try container.encode(self.placements, forKey: .placements)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

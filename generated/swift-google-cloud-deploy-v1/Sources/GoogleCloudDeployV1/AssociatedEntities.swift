@@ -77,8 +77,12 @@ public struct AssociatedEntities: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gkeClusters, forKey: .gkeClusters)
-    try container.encode(self.anthosClusters, forKey: .anthosClusters)
+    if !self.gkeClusters.isEmpty {
+      try container.encode(self.gkeClusters, forKey: .gkeClusters)
+    }
+    if !self.anthosClusters.isEmpty {
+      try container.encode(self.anthosClusters, forKey: .anthosClusters)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

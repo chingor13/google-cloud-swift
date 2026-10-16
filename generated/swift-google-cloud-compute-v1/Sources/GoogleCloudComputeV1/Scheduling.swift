@@ -231,7 +231,9 @@
       try container.encodeIfPresent(self.locationHint, forKey: .locationHint)
       try container.encodeIfPresent(self.maxRunDuration, forKey: .maxRunDuration)
       try container.encodeIfPresent(self.minNodeCpus, forKey: .minNodeCpus)
-      try container.encode(self.nodeAffinities, forKey: .nodeAffinities)
+      if !self.nodeAffinities.isEmpty {
+        try container.encode(self.nodeAffinities, forKey: .nodeAffinities)
+      }
       try container.encodeIfPresent(self.onHostMaintenance, forKey: .onHostMaintenance)
       try container.encodeIfPresent(self.onInstanceStopAction, forKey: .onInstanceStopAction)
       try container.encodeIfPresent(self.preemptible, forKey: .preemptible)

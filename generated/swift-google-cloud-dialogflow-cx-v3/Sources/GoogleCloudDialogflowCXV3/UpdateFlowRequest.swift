@@ -100,7 +100,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.flow, forKey: .flow)
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

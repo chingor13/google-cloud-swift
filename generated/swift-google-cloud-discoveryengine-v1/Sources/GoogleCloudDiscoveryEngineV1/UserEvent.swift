@@ -437,28 +437,56 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.eventType, forKey: .eventType)
-      try container.encode(self.conversionType, forKey: .conversionType)
-      try container.encode(self.userPseudoId, forKey: .userPseudoId)
-      try container.encode(self.engine, forKey: .engine)
-      try container.encode(self.dataStore, forKey: .dataStore)
+      if !self.eventType.isEmpty {
+        try container.encode(self.eventType, forKey: .eventType)
+      }
+      if !self.conversionType.isEmpty {
+        try container.encode(self.conversionType, forKey: .conversionType)
+      }
+      if !self.userPseudoId.isEmpty {
+        try container.encode(self.userPseudoId, forKey: .userPseudoId)
+      }
+      if !self.engine.isEmpty {
+        try container.encode(self.engine, forKey: .engine)
+      }
+      if !self.dataStore.isEmpty {
+        try container.encode(self.dataStore, forKey: .dataStore)
+      }
       try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
       try container.encodeIfPresent(self.userInfo, forKey: .userInfo)
-      try container.encode(self.directUserRequest, forKey: .directUserRequest)
-      try container.encode(self.sessionId, forKey: .sessionId)
+      if self.directUserRequest {
+        try container.encode(self.directUserRequest, forKey: .directUserRequest)
+      }
+      if !self.sessionId.isEmpty {
+        try container.encode(self.sessionId, forKey: .sessionId)
+      }
       try container.encodeIfPresent(self.pageInfo, forKey: .pageInfo)
-      try container.encode(self.attributionToken, forKey: .attributionToken)
-      try container.encode(self.filter, forKey: .filter)
-      try container.encode(self.documents, forKey: .documents)
+      if !self.attributionToken.isEmpty {
+        try container.encode(self.attributionToken, forKey: .attributionToken)
+      }
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
+      if !self.documents.isEmpty {
+        try container.encode(self.documents, forKey: .documents)
+      }
       try container.encodeIfPresent(self.panel, forKey: .panel)
       try container.encodeIfPresent(self.searchInfo, forKey: .searchInfo)
       try container.encodeIfPresent(self.completionInfo, forKey: .completionInfo)
       try container.encodeIfPresent(self.transactionInfo, forKey: .transactionInfo)
-      try container.encode(self.tagIds, forKey: .tagIds)
-      try container.encode(self.promotionIds, forKey: .promotionIds)
-      try container.encode(self.attributes, forKey: .attributes)
+      if !self.tagIds.isEmpty {
+        try container.encode(self.tagIds, forKey: .tagIds)
+      }
+      if !self.promotionIds.isEmpty {
+        try container.encode(self.promotionIds, forKey: .promotionIds)
+      }
+      if !self.attributes.isEmpty {
+        try container.encode(self.attributes, forKey: .attributes)
+      }
       try container.encodeIfPresent(self.mediaInfo, forKey: .mediaInfo)
-      try container.encode(self.panels, forKey: .panels)
+      if !self.panels.isEmpty {
+        try container.encode(self.panels, forKey: .panels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

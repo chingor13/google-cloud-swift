@@ -82,8 +82,12 @@ public struct TimeSeriesDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labelDescriptors, forKey: .labelDescriptors)
-    try container.encode(self.pointDescriptors, forKey: .pointDescriptors)
+    if !self.labelDescriptors.isEmpty {
+      try container.encode(self.labelDescriptors, forKey: .labelDescriptors)
+    }
+    if !self.pointDescriptors.isEmpty {
+      try container.encode(self.pointDescriptors, forKey: .pointDescriptors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -174,10 +178,18 @@ public struct TimeSeriesDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
-      try container.encode(self.valueType, forKey: .valueType)
-      try container.encode(self.metricKind, forKey: .metricKind)
-      try container.encode(self.unit, forKey: .unit)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
+      if self.valueType != GoogleApi.MetricDescriptor.ValueType() {
+        try container.encode(self.valueType, forKey: .valueType)
+      }
+      if self.metricKind != GoogleApi.MetricDescriptor.MetricKind() {
+        try container.encode(self.metricKind, forKey: .metricKind)
+      }
+      if !self.unit.isEmpty {
+        try container.encode(self.unit, forKey: .unit)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

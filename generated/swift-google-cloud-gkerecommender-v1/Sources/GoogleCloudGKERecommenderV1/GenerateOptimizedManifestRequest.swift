@@ -115,8 +115,12 @@ public struct GenerateOptimizedManifestRequest: Codable, Equatable, GoogleWKT._A
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.modelServerInfo, forKey: .modelServerInfo)
-    try container.encode(self.acceleratorType, forKey: .acceleratorType)
-    try container.encode(self.kubernetesNamespace, forKey: .kubernetesNamespace)
+    if !self.acceleratorType.isEmpty {
+      try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    }
+    if !self.kubernetesNamespace.isEmpty {
+      try container.encode(self.kubernetesNamespace, forKey: .kubernetesNamespace)
+    }
     try container.encodeIfPresent(self.performanceRequirements, forKey: .performanceRequirements)
     try container.encodeIfPresent(self.storageConfig, forKey: .storageConfig)
     for (key, value) in self._unknownFields.json {

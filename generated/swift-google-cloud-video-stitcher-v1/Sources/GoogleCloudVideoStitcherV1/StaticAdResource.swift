@@ -77,8 +77,12 @@ public struct StaticAdResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.creativeType, forKey: .creativeType)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.creativeType.isEmpty {
+      try container.encode(self.creativeType, forKey: .creativeType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

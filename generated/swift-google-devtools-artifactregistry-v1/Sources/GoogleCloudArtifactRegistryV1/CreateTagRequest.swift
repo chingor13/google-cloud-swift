@@ -83,8 +83,12 @@ public struct CreateTagRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.tagId, forKey: .tagId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.tagId.isEmpty {
+      try container.encode(self.tagId, forKey: .tagId)
+    }
     try container.encodeIfPresent(self.tag, forKey: .tag)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

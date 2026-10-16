@@ -114,12 +114,20 @@ public struct Attachment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.creator, forKey: .creator)
-    try container.encode(self.filename, forKey: .filename)
-    try container.encode(self.mimeType, forKey: .mimeType)
-    try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    if !self.filename.isEmpty {
+      try container.encode(self.filename, forKey: .filename)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
+    if self.sizeBytes != 0 {
+      try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -105,12 +105,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedFailedAttempts, forKey: .allowedFailedAttempts)
+      if self.allowedFailedAttempts != 0 {
+        try container.encode(self.allowedFailedAttempts, forKey: .allowedFailedAttempts)
+      }
       try container.encodeIfPresent(
         self.passwordExpirationDuration, forKey: .passwordExpirationDuration)
-      try container.encode(self.enableFailedAttemptsCheck, forKey: .enableFailedAttemptsCheck)
+      if self.enableFailedAttemptsCheck {
+        try container.encode(self.enableFailedAttemptsCheck, forKey: .enableFailedAttemptsCheck)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.enablePasswordVerification, forKey: .enablePasswordVerification)
+      if self.enablePasswordVerification {
+        try container.encode(self.enablePasswordVerification, forKey: .enablePasswordVerification)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

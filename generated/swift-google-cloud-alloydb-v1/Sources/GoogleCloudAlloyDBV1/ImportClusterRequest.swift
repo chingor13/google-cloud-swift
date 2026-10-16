@@ -130,10 +130,18 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.gcsUri, forKey: .gcsUri)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.user, forKey: .user)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.gcsUri.isEmpty {
+      try container.encode(self.gcsUri, forKey: .gcsUri)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.user.isEmpty {
+      try container.encode(self.user, forKey: .user)
+    }
 
     if let choice = self.importOptions {
       switch choice {
@@ -309,11 +317,21 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.table, forKey: .table)
-      try container.encode(self.columns, forKey: .columns)
-      try container.encode(self.fieldDelimiter, forKey: .fieldDelimiter)
-      try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
-      try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
+      if !self.table.isEmpty {
+        try container.encode(self.table, forKey: .table)
+      }
+      if !self.columns.isEmpty {
+        try container.encode(self.columns, forKey: .columns)
+      }
+      if !self.fieldDelimiter.isEmpty {
+        try container.encode(self.fieldDelimiter, forKey: .fieldDelimiter)
+      }
+      if !self.quoteCharacter.isEmpty {
+        try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
+      }
+      if !self.escapeCharacter.isEmpty {
+        try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

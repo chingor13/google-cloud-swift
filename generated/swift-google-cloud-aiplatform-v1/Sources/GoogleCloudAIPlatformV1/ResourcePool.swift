@@ -107,11 +107,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       try container.encodeIfPresent(self.machineSpec, forKey: .machineSpec)
       try container.encodeIfPresent(self.replicaCount, forKey: .replicaCount)
       try container.encodeIfPresent(self.diskSpec, forKey: .diskSpec)
-      try container.encode(self.usedReplicaCount, forKey: .usedReplicaCount)
+      if self.usedReplicaCount != 0 {
+        try container.encode(self.usedReplicaCount, forKey: .usedReplicaCount)
+      }
       try container.encodeIfPresent(self.autoscalingSpec, forKey: .autoscalingSpec)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -94,8 +94,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ipprotocols, forKey: .ipprotocols)
-      try container.encode(self.cidrRanges, forKey: .cidrRanges)
+      if !self.ipprotocols.isEmpty {
+        try container.encode(self.ipprotocols, forKey: .ipprotocols)
+      }
+      if !self.cidrRanges.isEmpty {
+        try container.encode(self.cidrRanges, forKey: .cidrRanges)
+      }
       try container.encodeIfPresent(self.direction, forKey: .direction)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

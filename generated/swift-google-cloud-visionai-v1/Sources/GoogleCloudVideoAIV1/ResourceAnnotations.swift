@@ -88,8 +88,12 @@ public struct ResourceAnnotations: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.applicationAnnotations, forKey: .applicationAnnotations)
-    try container.encode(self.nodeAnnotations, forKey: .nodeAnnotations)
+    if !self.applicationAnnotations.isEmpty {
+      try container.encode(self.applicationAnnotations, forKey: .applicationAnnotations)
+    }
+    if !self.nodeAnnotations.isEmpty {
+      try container.encode(self.nodeAnnotations, forKey: .nodeAnnotations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

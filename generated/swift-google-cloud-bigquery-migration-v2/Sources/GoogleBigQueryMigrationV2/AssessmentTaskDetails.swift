@@ -102,10 +102,18 @@ public struct AssessmentTaskDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputPath, forKey: .inputPath)
-    try container.encode(self.outputDataset, forKey: .outputDataset)
-    try container.encode(self.querylogsPath, forKey: .querylogsPath)
-    try container.encode(self.dataSource, forKey: .dataSource)
+    if !self.inputPath.isEmpty {
+      try container.encode(self.inputPath, forKey: .inputPath)
+    }
+    if !self.outputDataset.isEmpty {
+      try container.encode(self.outputDataset, forKey: .outputDataset)
+    }
+    if !self.querylogsPath.isEmpty {
+      try container.encode(self.querylogsPath, forKey: .querylogsPath)
+    }
+    if !self.dataSource.isEmpty {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
     try container.encodeIfPresent(self.featureHandle, forKey: .featureHandle)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

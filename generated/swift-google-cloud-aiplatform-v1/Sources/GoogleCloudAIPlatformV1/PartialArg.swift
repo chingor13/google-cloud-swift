@@ -118,8 +118,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.jsonPath, forKey: .jsonPath)
-      try container.encode(self.willContinue, forKey: .willContinue)
+      if !self.jsonPath.isEmpty {
+        try container.encode(self.jsonPath, forKey: .jsonPath)
+      }
+      if self.willContinue {
+        try container.encode(self.willContinue, forKey: .willContinue)
+      }
 
       if let choice = self.delta {
         switch choice {

@@ -93,10 +93,16 @@ public struct CreateWorkstationConfigRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.workstationConfigId, forKey: .workstationConfigId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.workstationConfigId.isEmpty {
+      try container.encode(self.workstationConfigId, forKey: .workstationConfigId)
+    }
     try container.encodeIfPresent(self.workstationConfig, forKey: .workstationConfig)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

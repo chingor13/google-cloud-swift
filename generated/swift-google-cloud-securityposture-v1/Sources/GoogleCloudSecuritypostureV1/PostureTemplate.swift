@@ -104,11 +104,21 @@ public struct PostureTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.policySets, forKey: .policySets)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != PostureTemplate.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.policySets.isEmpty {
+      try container.encode(self.policySets, forKey: .policySets)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -164,14 +164,28 @@ public struct Resource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.cloudProvider, forKey: .cloudProvider)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.location, forKey: .location)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.cloudProvider != CloudProvider() {
+      try container.encode(self.cloudProvider, forKey: .cloudProvider)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
     try container.encodeIfPresent(self.resourcePath, forKey: .resourcePath)
-    try container.encode(self.resourcePathString, forKey: .resourcePathString)
+    if !self.resourcePathString.isEmpty {
+      try container.encode(self.resourcePathString, forKey: .resourcePathString)
+    }
 
     if let choice = self.cloudProviderMetadata {
       switch choice {

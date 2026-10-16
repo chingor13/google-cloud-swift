@@ -106,7 +106,9 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.disableAttribution, forKey: .disableAttribution)
+      if self.disableAttribution {
+        try container.encode(self.disableAttribution, forKey: .disableAttribution)
+      }
 
       if let choice = self.source {
         switch choice {

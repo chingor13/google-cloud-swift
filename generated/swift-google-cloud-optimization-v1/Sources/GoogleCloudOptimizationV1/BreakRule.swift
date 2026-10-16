@@ -91,8 +91,12 @@ public struct BreakRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.breakRequests, forKey: .breakRequests)
-    try container.encode(self.frequencyConstraints, forKey: .frequencyConstraints)
+    if !self.breakRequests.isEmpty {
+      try container.encode(self.breakRequests, forKey: .breakRequests)
+    }
+    if !self.frequencyConstraints.isEmpty {
+      try container.encode(self.frequencyConstraints, forKey: .frequencyConstraints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

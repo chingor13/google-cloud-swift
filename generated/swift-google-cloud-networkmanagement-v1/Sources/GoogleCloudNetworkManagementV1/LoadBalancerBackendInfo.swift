@@ -160,17 +160,39 @@ public struct LoadBalancerBackendInfo: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.instanceUri, forKey: .instanceUri)
-    try container.encode(self.backendServiceUri, forKey: .backendServiceUri)
-    try container.encode(self.instanceGroupUri, forKey: .instanceGroupUri)
-    try container.encode(self.networkEndpointGroupUri, forKey: .networkEndpointGroupUri)
-    try container.encode(self.backendBucketUri, forKey: .backendBucketUri)
-    try container.encode(self.pscServiceAttachmentUri, forKey: .pscServiceAttachmentUri)
-    try container.encode(self.pscGoogleApiTarget, forKey: .pscGoogleApiTarget)
-    try container.encode(self.healthCheckUri, forKey: .healthCheckUri)
-    try container.encode(
-      self.healthCheckFirewallsConfigState, forKey: .healthCheckFirewallsConfigState)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.instanceUri.isEmpty {
+      try container.encode(self.instanceUri, forKey: .instanceUri)
+    }
+    if !self.backendServiceUri.isEmpty {
+      try container.encode(self.backendServiceUri, forKey: .backendServiceUri)
+    }
+    if !self.instanceGroupUri.isEmpty {
+      try container.encode(self.instanceGroupUri, forKey: .instanceGroupUri)
+    }
+    if !self.networkEndpointGroupUri.isEmpty {
+      try container.encode(self.networkEndpointGroupUri, forKey: .networkEndpointGroupUri)
+    }
+    if !self.backendBucketUri.isEmpty {
+      try container.encode(self.backendBucketUri, forKey: .backendBucketUri)
+    }
+    if !self.pscServiceAttachmentUri.isEmpty {
+      try container.encode(self.pscServiceAttachmentUri, forKey: .pscServiceAttachmentUri)
+    }
+    if !self.pscGoogleApiTarget.isEmpty {
+      try container.encode(self.pscGoogleApiTarget, forKey: .pscGoogleApiTarget)
+    }
+    if !self.healthCheckUri.isEmpty {
+      try container.encode(self.healthCheckUri, forKey: .healthCheckUri)
+    }
+    if self.healthCheckFirewallsConfigState
+      != LoadBalancerBackendInfo.HealthCheckFirewallsConfigState()
+    {
+      try container.encode(
+        self.healthCheckFirewallsConfigState, forKey: .healthCheckFirewallsConfigState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

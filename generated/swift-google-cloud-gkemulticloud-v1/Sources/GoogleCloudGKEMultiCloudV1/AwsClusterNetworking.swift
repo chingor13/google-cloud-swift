@@ -113,10 +113,18 @@ public struct AwsClusterNetworking: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vpcId, forKey: .vpcId)
-    try container.encode(self.podAddressCidrBlocks, forKey: .podAddressCidrBlocks)
-    try container.encode(self.serviceAddressCidrBlocks, forKey: .serviceAddressCidrBlocks)
-    try container.encode(self.perNodePoolSgRulesDisabled, forKey: .perNodePoolSgRulesDisabled)
+    if !self.vpcId.isEmpty {
+      try container.encode(self.vpcId, forKey: .vpcId)
+    }
+    if !self.podAddressCidrBlocks.isEmpty {
+      try container.encode(self.podAddressCidrBlocks, forKey: .podAddressCidrBlocks)
+    }
+    if !self.serviceAddressCidrBlocks.isEmpty {
+      try container.encode(self.serviceAddressCidrBlocks, forKey: .serviceAddressCidrBlocks)
+    }
+    if self.perNodePoolSgRulesDisabled {
+      try container.encode(self.perNodePoolSgRulesDisabled, forKey: .perNodePoolSgRulesDisabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -91,9 +91,15 @@ public struct ListAppProfilesResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.appProfiles, forKey: .appProfiles)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.failedLocations, forKey: .failedLocations)
+    if !self.appProfiles.isEmpty {
+      try container.encode(self.appProfiles, forKey: .appProfiles)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.failedLocations.isEmpty {
+      try container.encode(self.failedLocations, forKey: .failedLocations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

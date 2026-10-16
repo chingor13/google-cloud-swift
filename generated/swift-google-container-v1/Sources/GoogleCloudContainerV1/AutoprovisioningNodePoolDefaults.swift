@@ -176,16 +176,30 @@ public struct AutoprovisioningNodePoolDefaults: Codable, Equatable, GoogleWKT._A
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.oauthScopes, forKey: .oauthScopes)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.oauthScopes.isEmpty {
+      try container.encode(self.oauthScopes, forKey: .oauthScopes)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.upgradeSettings, forKey: .upgradeSettings)
     try container.encodeIfPresent(self.management, forKey: .management)
-    try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
-    try container.encode(self.diskType, forKey: .diskType)
+    if !self.minCpuPlatform.isEmpty {
+      try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
+    }
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
+    if !self.diskType.isEmpty {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
     try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
-    try container.encode(self.bootDiskKmsKey, forKey: .bootDiskKmsKey)
-    try container.encode(self.imageType, forKey: .imageType)
+    if !self.bootDiskKmsKey.isEmpty {
+      try container.encode(self.bootDiskKmsKey, forKey: .bootDiskKmsKey)
+    }
+    if !self.imageType.isEmpty {
+      try container.encode(self.imageType, forKey: .imageType)
+    }
     try container.encodeIfPresent(
       self.insecureKubeletReadonlyPortEnabled, forKey: .insecureKubeletReadonlyPortEnabled)
     for (key, value) in self._unknownFields.json {

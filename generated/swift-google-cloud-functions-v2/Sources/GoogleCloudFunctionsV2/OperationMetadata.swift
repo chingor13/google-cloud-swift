@@ -164,16 +164,34 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.verb, forKey: .verb)
-    try container.encode(self.statusDetail, forKey: .statusDetail)
-    try container.encode(self.cancelRequested, forKey: .cancelRequested)
-    try container.encode(self.apiVersion, forKey: .apiVersion)
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.verb.isEmpty {
+      try container.encode(self.verb, forKey: .verb)
+    }
+    if !self.statusDetail.isEmpty {
+      try container.encode(self.statusDetail, forKey: .statusDetail)
+    }
+    if self.cancelRequested {
+      try container.encode(self.cancelRequested, forKey: .cancelRequested)
+    }
+    if !self.apiVersion.isEmpty {
+      try container.encode(self.apiVersion, forKey: .apiVersion)
+    }
     try container.encodeIfPresent(self.requestResource, forKey: .requestResource)
-    try container.encode(self.stages, forKey: .stages)
-    try container.encode(self.sourceToken, forKey: .sourceToken)
-    try container.encode(self.buildName, forKey: .buildName)
-    try container.encode(self.operationType, forKey: .operationType)
+    if !self.stages.isEmpty {
+      try container.encode(self.stages, forKey: .stages)
+    }
+    if !self.sourceToken.isEmpty {
+      try container.encode(self.sourceToken, forKey: .sourceToken)
+    }
+    if !self.buildName.isEmpty {
+      try container.encode(self.buildName, forKey: .buildName)
+    }
+    if self.operationType != OperationType() {
+      try container.encode(self.operationType, forKey: .operationType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

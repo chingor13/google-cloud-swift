@@ -166,17 +166,39 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.bandwidth, forKey: .bandwidth)
-    try container.encode(self.vlanAttachments, forKey: .vlanAttachments)
-    try container.encode(self.cidr, forKey: .cidr)
-    try container.encode(self.serviceCidr, forKey: .serviceCidr)
-    try container.encode(self.userNote, forKey: .userNote)
-    try container.encode(self.gcpService, forKey: .gcpService)
-    try container.encode(self.vlanSameProject, forKey: .vlanSameProject)
-    try container.encode(self.jumboFramesEnabled, forKey: .jumboFramesEnabled)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.type != GoogleCloudBareMetalSolutionV2.NetworkConfig.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.bandwidth != GoogleCloudBareMetalSolutionV2.NetworkConfig.Bandwidth() {
+      try container.encode(self.bandwidth, forKey: .bandwidth)
+    }
+    if !self.vlanAttachments.isEmpty {
+      try container.encode(self.vlanAttachments, forKey: .vlanAttachments)
+    }
+    if !self.cidr.isEmpty {
+      try container.encode(self.cidr, forKey: .cidr)
+    }
+    if self.serviceCidr != GoogleCloudBareMetalSolutionV2.NetworkConfig.ServiceCidr() {
+      try container.encode(self.serviceCidr, forKey: .serviceCidr)
+    }
+    if !self.userNote.isEmpty {
+      try container.encode(self.userNote, forKey: .userNote)
+    }
+    if !self.gcpService.isEmpty {
+      try container.encode(self.gcpService, forKey: .gcpService)
+    }
+    if self.vlanSameProject {
+      try container.encode(self.vlanSameProject, forKey: .vlanSameProject)
+    }
+    if self.jumboFramesEnabled {
+      try container.encode(self.jumboFramesEnabled, forKey: .jumboFramesEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -242,8 +264,12 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.pairingKey, forKey: .pairingKey)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.pairingKey.isEmpty {
+        try container.encode(self.pairingKey, forKey: .pairingKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

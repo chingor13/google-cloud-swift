@@ -142,16 +142,36 @@ public struct DbServerProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.ocpuCount, forKey: .ocpuCount)
-    try container.encode(self.maxOcpuCount, forKey: .maxOcpuCount)
-    try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
-    try container.encode(self.maxMemorySizeGb, forKey: .maxMemorySizeGb)
-    try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
-    try container.encode(self.maxDbNodeStorageSizeGb, forKey: .maxDbNodeStorageSizeGb)
-    try container.encode(self.vmCount, forKey: .vmCount)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.dbNodeIds, forKey: .dbNodeIds)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.ocpuCount != 0 {
+      try container.encode(self.ocpuCount, forKey: .ocpuCount)
+    }
+    if self.maxOcpuCount != 0 {
+      try container.encode(self.maxOcpuCount, forKey: .maxOcpuCount)
+    }
+    if self.memorySizeGb != 0 {
+      try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
+    }
+    if self.maxMemorySizeGb != 0 {
+      try container.encode(self.maxMemorySizeGb, forKey: .maxMemorySizeGb)
+    }
+    if self.dbNodeStorageSizeGb != 0 {
+      try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
+    }
+    if self.maxDbNodeStorageSizeGb != 0 {
+      try container.encode(self.maxDbNodeStorageSizeGb, forKey: .maxDbNodeStorageSizeGb)
+    }
+    if self.vmCount != 0 {
+      try container.encode(self.vmCount, forKey: .vmCount)
+    }
+    if self.state != DbServerProperties.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.dbNodeIds.isEmpty {
+      try container.encode(self.dbNodeIds, forKey: .dbNodeIds)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

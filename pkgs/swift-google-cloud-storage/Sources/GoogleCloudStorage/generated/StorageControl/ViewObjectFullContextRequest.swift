@@ -87,9 +87,15 @@ public struct ViewObjectFullContextRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.contextKey, forKey: .contextKey)
-    try container.encode(self.name, forKey: .name)
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.contextKey.isEmpty {
+      try container.encode(self.contextKey, forKey: .contextKey)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -82,8 +82,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.firewallPolicys, forKey: .firewallPolicys)
-      try container.encode(self.firewalls, forKey: .firewalls)
+      if !self.firewallPolicys.isEmpty {
+        try container.encode(self.firewallPolicys, forKey: .firewallPolicys)
+      }
+      if !self.firewalls.isEmpty {
+        try container.encode(self.firewalls, forKey: .firewalls)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

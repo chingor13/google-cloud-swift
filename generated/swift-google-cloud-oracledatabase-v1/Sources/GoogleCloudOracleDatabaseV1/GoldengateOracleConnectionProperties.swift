@@ -159,13 +159,27 @@ public struct GoldengateOracleConnectionProperties: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.authenticationMode, forKey: .authenticationMode)
-    try container.encode(self.connectionString, forKey: .connectionString)
-    try container.encode(self.sessionMode, forKey: .sessionMode)
-    try container.encode(self.gcpOracleDatabaseId, forKey: .gcpOracleDatabaseId)
-    try container.encode(self.walletFile, forKey: .walletFile)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if self.authenticationMode != GoldengateOracleConnectionProperties.OracleAuthenticationMode() {
+      try container.encode(self.authenticationMode, forKey: .authenticationMode)
+    }
+    if !self.connectionString.isEmpty {
+      try container.encode(self.connectionString, forKey: .connectionString)
+    }
+    if self.sessionMode != GoldengateOracleConnectionProperties.SessionMode() {
+      try container.encode(self.sessionMode, forKey: .sessionMode)
+    }
+    if !self.gcpOracleDatabaseId.isEmpty {
+      try container.encode(self.gcpOracleDatabaseId, forKey: .gcpOracleDatabaseId)
+    }
+    if !self.walletFile.isEmpty {
+      try container.encode(self.walletFile, forKey: .walletFile)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

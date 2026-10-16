@@ -103,10 +103,18 @@ public struct LabelAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.entity, forKey: .entity)
-    try container.encode(self.categoryEntities, forKey: .categoryEntities)
-    try container.encode(self.segments, forKey: .segments)
-    try container.encode(self.frames, forKey: .frames)
-    try container.encode(self.version, forKey: .version)
+    if !self.categoryEntities.isEmpty {
+      try container.encode(self.categoryEntities, forKey: .categoryEntities)
+    }
+    if !self.segments.isEmpty {
+      try container.encode(self.segments, forKey: .segments)
+    }
+    if !self.frames.isEmpty {
+      try container.encode(self.frames, forKey: .frames)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

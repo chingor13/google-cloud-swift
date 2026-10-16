@@ -117,9 +117,15 @@ public struct HybridOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.requiredFindingLabelKeys, forKey: .requiredFindingLabelKeys)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.requiredFindingLabelKeys.isEmpty {
+      try container.encode(self.requiredFindingLabelKeys, forKey: .requiredFindingLabelKeys)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.tableOptions, forKey: .tableOptions)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -113,8 +113,12 @@ public struct AttestorPublicKey: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.comment, forKey: .comment)
-    try container.encode(self.id, forKey: .id)
+    if !self.comment.isEmpty {
+      try container.encode(self.comment, forKey: .comment)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
 
     if let choice = self.publicKey {
       switch choice {

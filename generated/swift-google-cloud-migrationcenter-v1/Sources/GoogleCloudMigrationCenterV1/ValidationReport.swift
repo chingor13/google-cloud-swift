@@ -79,8 +79,12 @@ public struct ValidationReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fileValidations, forKey: .fileValidations)
-    try container.encode(self.jobErrors, forKey: .jobErrors)
+    if !self.fileValidations.isEmpty {
+      try container.encode(self.fileValidations, forKey: .fileValidations)
+    }
+    if !self.jobErrors.isEmpty {
+      try container.encode(self.jobErrors, forKey: .jobErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

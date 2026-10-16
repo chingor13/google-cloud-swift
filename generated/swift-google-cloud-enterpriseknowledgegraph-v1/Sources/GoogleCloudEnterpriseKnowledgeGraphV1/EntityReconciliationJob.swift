@@ -126,10 +126,14 @@ public struct EntityReconciliationJob: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
     try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
-    try container.encode(self.state, forKey: .state)
+    if self.state != JobState() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)

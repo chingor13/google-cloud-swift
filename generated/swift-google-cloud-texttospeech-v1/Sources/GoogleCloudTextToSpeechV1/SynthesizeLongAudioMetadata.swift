@@ -91,7 +91,9 @@ public struct SynthesizeLongAudioMetadata: Codable, Equatable, GoogleWKT._AnyPac
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
-    try container.encode(self.progressPercentage, forKey: .progressPercentage)
+    if self.progressPercentage != 0 {
+      try container.encode(self.progressPercentage, forKey: .progressPercentage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

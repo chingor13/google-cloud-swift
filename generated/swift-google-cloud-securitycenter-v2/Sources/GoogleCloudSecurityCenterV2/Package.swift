@@ -93,10 +93,18 @@ public struct Package: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.packageName, forKey: .packageName)
-    try container.encode(self.cpeUri, forKey: .cpeUri)
-    try container.encode(self.packageType, forKey: .packageType)
-    try container.encode(self.packageVersion, forKey: .packageVersion)
+    if !self.packageName.isEmpty {
+      try container.encode(self.packageName, forKey: .packageName)
+    }
+    if !self.cpeUri.isEmpty {
+      try container.encode(self.cpeUri, forKey: .cpeUri)
+    }
+    if !self.packageType.isEmpty {
+      try container.encode(self.packageType, forKey: .packageType)
+    }
+    if !self.packageVersion.isEmpty {
+      try container.encode(self.packageVersion, forKey: .packageVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

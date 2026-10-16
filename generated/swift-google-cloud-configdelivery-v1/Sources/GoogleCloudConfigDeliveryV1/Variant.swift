@@ -102,9 +102,15 @@ public struct Variant: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.resources, forKey: .resources)
-    try container.encode(self.name, forKey: .name)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.resources.isEmpty {
+      try container.encode(self.resources, forKey: .resources)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

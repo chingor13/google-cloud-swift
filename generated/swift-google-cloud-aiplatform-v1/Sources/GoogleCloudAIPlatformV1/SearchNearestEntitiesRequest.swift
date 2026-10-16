@@ -91,9 +91,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.featureView, forKey: .featureView)
+      if !self.featureView.isEmpty {
+        try container.encode(self.featureView, forKey: .featureView)
+      }
       try container.encodeIfPresent(self.query, forKey: .query)
-      try container.encode(self.returnFullEntity, forKey: .returnFullEntity)
+      if self.returnFullEntity {
+        try container.encode(self.returnFullEntity, forKey: .returnFullEntity)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

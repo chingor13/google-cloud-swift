@@ -189,13 +189,27 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.flagName, forKey: .flagName)
-    try container.encode(self.valueType, forKey: .valueType)
-    try container.encode(self.acceptsMultipleValues, forKey: .acceptsMultipleValues)
-    try container.encode(self.supportedDbVersions, forKey: .supportedDbVersions)
-    try container.encode(self.requiresDbRestart, forKey: .requiresDbRestart)
-    try container.encode(self.scope, forKey: .scope)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.flagName.isEmpty {
+      try container.encode(self.flagName, forKey: .flagName)
+    }
+    if self.valueType != SupportedDatabaseFlag.ValueType() {
+      try container.encode(self.valueType, forKey: .valueType)
+    }
+    if self.acceptsMultipleValues {
+      try container.encode(self.acceptsMultipleValues, forKey: .acceptsMultipleValues)
+    }
+    if !self.supportedDbVersions.isEmpty {
+      try container.encode(self.supportedDbVersions, forKey: .supportedDbVersions)
+    }
+    if self.requiresDbRestart {
+      try container.encode(self.requiresDbRestart, forKey: .requiresDbRestart)
+    }
+    if self.scope != SupportedDatabaseFlag.Scope() {
+      try container.encode(self.scope, forKey: .scope)
+    }
 
     if let choice = self.restrictions {
       switch choice {
@@ -272,7 +286,9 @@ public struct SupportedDatabaseFlag: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedValues, forKey: .allowedValues)
+      if !self.allowedValues.isEmpty {
+        try container.encode(self.allowedValues, forKey: .allowedValues)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

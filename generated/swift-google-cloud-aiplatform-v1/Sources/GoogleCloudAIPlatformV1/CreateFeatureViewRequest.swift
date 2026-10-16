@@ -108,10 +108,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.featureView, forKey: .featureView)
-      try container.encode(self.featureViewId, forKey: .featureViewId)
-      try container.encode(self.runSyncImmediately, forKey: .runSyncImmediately)
+      if !self.featureViewId.isEmpty {
+        try container.encode(self.featureViewId, forKey: .featureViewId)
+      }
+      if self.runSyncImmediately {
+        try container.encode(self.runSyncImmediately, forKey: .runSyncImmediately)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

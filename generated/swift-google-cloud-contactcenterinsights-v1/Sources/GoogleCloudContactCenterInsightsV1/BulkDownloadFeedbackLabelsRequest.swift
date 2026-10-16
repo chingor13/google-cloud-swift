@@ -156,12 +156,24 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.maxDownloadCount, forKey: .maxDownloadCount)
-    try container.encode(self.feedbackLabelType, forKey: .feedbackLabelType)
-    try container.encode(self.conversationFilter, forKey: .conversationFilter)
-    try container.encode(self.templateQaScorecardId, forKey: .templateQaScorecardId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if self.maxDownloadCount != 0 {
+      try container.encode(self.maxDownloadCount, forKey: .maxDownloadCount)
+    }
+    if self.feedbackLabelType != BulkDownloadFeedbackLabelsRequest.FeedbackLabelType() {
+      try container.encode(self.feedbackLabelType, forKey: .feedbackLabelType)
+    }
+    if !self.conversationFilter.isEmpty {
+      try container.encode(self.conversationFilter, forKey: .conversationFilter)
+    }
+    if !self.templateQaScorecardId.isEmpty {
+      try container.encode(self.templateQaScorecardId, forKey: .templateQaScorecardId)
+    }
 
     if let choice = self.destination {
       switch choice {
@@ -270,11 +282,21 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.format, forKey: .format)
-      try container.encode(self.objectUri, forKey: .objectUri)
-      try container.encode(self.addWhitespace, forKey: .addWhitespace)
-      try container.encode(self.alwaysPrintEmptyFields, forKey: .alwaysPrintEmptyFields)
-      try container.encode(self.recordsPerFileCount, forKey: .recordsPerFileCount)
+      if self.format != BulkDownloadFeedbackLabelsRequest.GcsDestination.Format() {
+        try container.encode(self.format, forKey: .format)
+      }
+      if !self.objectUri.isEmpty {
+        try container.encode(self.objectUri, forKey: .objectUri)
+      }
+      if self.addWhitespace {
+        try container.encode(self.addWhitespace, forKey: .addWhitespace)
+      }
+      if self.alwaysPrintEmptyFields {
+        try container.encode(self.alwaysPrintEmptyFields, forKey: .alwaysPrintEmptyFields)
+      }
+      if self.recordsPerFileCount != 0 {
+        try container.encode(self.recordsPerFileCount, forKey: .recordsPerFileCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

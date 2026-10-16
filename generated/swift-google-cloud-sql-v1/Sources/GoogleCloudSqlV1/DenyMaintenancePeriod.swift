@@ -94,9 +94,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.startDate, forKey: .startDate)
-      try container.encode(self.endDate, forKey: .endDate)
-      try container.encode(self.time, forKey: .time)
+      if !self.startDate.isEmpty {
+        try container.encode(self.startDate, forKey: .startDate)
+      }
+      if !self.endDate.isEmpty {
+        try container.encode(self.endDate, forKey: .endDate)
+      }
+      if !self.time.isEmpty {
+        try container.encode(self.time, forKey: .time)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

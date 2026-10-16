@@ -106,7 +106,9 @@ public struct AudioProcessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.synthesizeSpeechConfigs, forKey: .synthesizeSpeechConfigs)
+    if !self.synthesizeSpeechConfigs.isEmpty {
+      try container.encode(self.synthesizeSpeechConfigs, forKey: .synthesizeSpeechConfigs)
+    }
     try container.encodeIfPresent(self.bargeInConfig, forKey: .bargeInConfig)
     try container.encodeIfPresent(self.inactivityTimeout, forKey: .inactivityTimeout)
     try container.encodeIfPresent(self.ambientSoundConfig, forKey: .ambientSoundConfig)

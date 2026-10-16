@@ -79,8 +79,12 @@ public struct IntRange: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.min, forKey: .min)
-    try container.encode(self.max, forKey: .max)
+    if self.min != 0 {
+      try container.encode(self.min, forKey: .min)
+    }
+    if self.max != 0 {
+      try container.encode(self.max, forKey: .max)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

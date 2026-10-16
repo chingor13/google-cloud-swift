@@ -176,9 +176,15 @@ public struct MoveObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.sourceObject, forKey: .sourceObject)
-    try container.encode(self.destinationObject, forKey: .destinationObject)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.sourceObject.isEmpty {
+      try container.encode(self.sourceObject, forKey: .sourceObject)
+    }
+    if !self.destinationObject.isEmpty {
+      try container.encode(self.destinationObject, forKey: .destinationObject)
+    }
     try container.encodeIfPresent(self.ifSourceGenerationMatch, forKey: .ifSourceGenerationMatch)
     try container.encodeIfPresent(
       self.ifSourceGenerationNotMatch, forKey: .ifSourceGenerationNotMatch)

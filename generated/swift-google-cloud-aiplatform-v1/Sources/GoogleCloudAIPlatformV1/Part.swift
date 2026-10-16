@@ -171,8 +171,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.thought, forKey: .thought)
-      try container.encode(self.thoughtSignature, forKey: .thoughtSignature)
+      if self.thought {
+        try container.encode(self.thought, forKey: .thought)
+      }
+      if !self.thoughtSignature.isEmpty {
+        try container.encode(self.thoughtSignature, forKey: .thoughtSignature)
+      }
       try container.encodeIfPresent(self.mediaResolution, forKey: .mediaResolution)
 
       if let choice = self.data {

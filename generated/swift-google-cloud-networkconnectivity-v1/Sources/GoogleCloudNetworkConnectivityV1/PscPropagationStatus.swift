@@ -119,13 +119,27 @@ public struct PscPropagationStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceSpoke, forKey: .sourceSpoke)
-    try container.encode(self.sourceGroup, forKey: .sourceGroup)
-    try container.encode(self.sourceForwardingRule, forKey: .sourceForwardingRule)
-    try container.encode(self.targetSpoke, forKey: .targetSpoke)
-    try container.encode(self.targetGroup, forKey: .targetGroup)
-    try container.encode(self.code, forKey: .code)
-    try container.encode(self.message, forKey: .message)
+    if !self.sourceSpoke.isEmpty {
+      try container.encode(self.sourceSpoke, forKey: .sourceSpoke)
+    }
+    if !self.sourceGroup.isEmpty {
+      try container.encode(self.sourceGroup, forKey: .sourceGroup)
+    }
+    if !self.sourceForwardingRule.isEmpty {
+      try container.encode(self.sourceForwardingRule, forKey: .sourceForwardingRule)
+    }
+    if !self.targetSpoke.isEmpty {
+      try container.encode(self.targetSpoke, forKey: .targetSpoke)
+    }
+    if !self.targetGroup.isEmpty {
+      try container.encode(self.targetGroup, forKey: .targetGroup)
+    }
+    if self.code != PscPropagationStatus.Code() {
+      try container.encode(self.code, forKey: .code)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -80,8 +80,12 @@ public struct DeviceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deviceType, forKey: .deviceType)
-    try container.encode(self.id, forKey: .id)
+    if self.deviceType != DeviceInfo.DeviceType() {
+      try container.encode(self.deviceType, forKey: .deviceType)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -105,13 +105,13 @@ public struct PinControlMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    do {
+    if !self.allMatchedPins.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.allMatchedPins.lazy.map { (Swift.String($0), $1) }
       )
       try container.encode(stringKeyed, forKey: .allMatchedPins)
     }
-    do {
+    if !self.droppedPins.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.droppedPins.lazy.map { (Swift.String($0), $1) }
       )
@@ -174,7 +174,9 @@ public struct PinControlMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.productId, forKey: .productId)
+      if !self.productId.isEmpty {
+        try container.encode(self.productId, forKey: .productId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

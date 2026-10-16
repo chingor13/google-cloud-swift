@@ -158,13 +158,25 @@ public struct ExternalSystem: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.assignees, forKey: .assignees)
-    try container.encode(self.externalUid, forKey: .externalUid)
-    try container.encode(self.status, forKey: .status)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.assignees.isEmpty {
+      try container.encode(self.assignees, forKey: .assignees)
+    }
+    if !self.externalUid.isEmpty {
+      try container.encode(self.externalUid, forKey: .externalUid)
+    }
+    if !self.status.isEmpty {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.externalSystemUpdateTime, forKey: .externalSystemUpdateTime)
-    try container.encode(self.caseUri, forKey: .caseUri)
-    try container.encode(self.casePriority, forKey: .casePriority)
+    if !self.caseUri.isEmpty {
+      try container.encode(self.caseUri, forKey: .caseUri)
+    }
+    if !self.casePriority.isEmpty {
+      try container.encode(self.casePriority, forKey: .casePriority)
+    }
     try container.encodeIfPresent(self.caseSla, forKey: .caseSla)
     try container.encodeIfPresent(self.caseCreateTime, forKey: .caseCreateTime)
     try container.encodeIfPresent(self.caseCloseTime, forKey: .caseCloseTime)
@@ -267,11 +279,21 @@ public struct ExternalSystem: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.assignee, forKey: .assignee)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.status, forKey: .status)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.assignee.isEmpty {
+        try container.encode(self.assignee, forKey: .assignee)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.status.isEmpty {
+        try container.encode(self.status, forKey: .status)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -211,22 +211,52 @@ public struct KerberosConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enableKerberos, forKey: .enableKerberos)
-    try container.encode(self.rootPrincipalPasswordUri, forKey: .rootPrincipalPasswordUri)
-    try container.encode(self.kmsKeyUri, forKey: .kmsKeyUri)
-    try container.encode(self.keystoreUri, forKey: .keystoreUri)
-    try container.encode(self.truststoreUri, forKey: .truststoreUri)
-    try container.encode(self.keystorePasswordUri, forKey: .keystorePasswordUri)
-    try container.encode(self.keyPasswordUri, forKey: .keyPasswordUri)
-    try container.encode(self.truststorePasswordUri, forKey: .truststorePasswordUri)
-    try container.encode(self.crossRealmTrustRealm, forKey: .crossRealmTrustRealm)
-    try container.encode(self.crossRealmTrustKdc, forKey: .crossRealmTrustKdc)
-    try container.encode(self.crossRealmTrustAdminServer, forKey: .crossRealmTrustAdminServer)
-    try container.encode(
-      self.crossRealmTrustSharedPasswordUri, forKey: .crossRealmTrustSharedPasswordUri)
-    try container.encode(self.kdcDbKeyUri, forKey: .kdcDbKeyUri)
-    try container.encode(self.tgtLifetimeHours, forKey: .tgtLifetimeHours)
-    try container.encode(self.realm, forKey: .realm)
+    if self.enableKerberos {
+      try container.encode(self.enableKerberos, forKey: .enableKerberos)
+    }
+    if !self.rootPrincipalPasswordUri.isEmpty {
+      try container.encode(self.rootPrincipalPasswordUri, forKey: .rootPrincipalPasswordUri)
+    }
+    if !self.kmsKeyUri.isEmpty {
+      try container.encode(self.kmsKeyUri, forKey: .kmsKeyUri)
+    }
+    if !self.keystoreUri.isEmpty {
+      try container.encode(self.keystoreUri, forKey: .keystoreUri)
+    }
+    if !self.truststoreUri.isEmpty {
+      try container.encode(self.truststoreUri, forKey: .truststoreUri)
+    }
+    if !self.keystorePasswordUri.isEmpty {
+      try container.encode(self.keystorePasswordUri, forKey: .keystorePasswordUri)
+    }
+    if !self.keyPasswordUri.isEmpty {
+      try container.encode(self.keyPasswordUri, forKey: .keyPasswordUri)
+    }
+    if !self.truststorePasswordUri.isEmpty {
+      try container.encode(self.truststorePasswordUri, forKey: .truststorePasswordUri)
+    }
+    if !self.crossRealmTrustRealm.isEmpty {
+      try container.encode(self.crossRealmTrustRealm, forKey: .crossRealmTrustRealm)
+    }
+    if !self.crossRealmTrustKdc.isEmpty {
+      try container.encode(self.crossRealmTrustKdc, forKey: .crossRealmTrustKdc)
+    }
+    if !self.crossRealmTrustAdminServer.isEmpty {
+      try container.encode(self.crossRealmTrustAdminServer, forKey: .crossRealmTrustAdminServer)
+    }
+    if !self.crossRealmTrustSharedPasswordUri.isEmpty {
+      try container.encode(
+        self.crossRealmTrustSharedPasswordUri, forKey: .crossRealmTrustSharedPasswordUri)
+    }
+    if !self.kdcDbKeyUri.isEmpty {
+      try container.encode(self.kdcDbKeyUri, forKey: .kdcDbKeyUri)
+    }
+    if self.tgtLifetimeHours != 0 {
+      try container.encode(self.tgtLifetimeHours, forKey: .tgtLifetimeHours)
+    }
+    if !self.realm.isEmpty {
+      try container.encode(self.realm, forKey: .realm)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

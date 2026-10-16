@@ -82,9 +82,13 @@ public struct Rollback: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.destinationPhase, forKey: .destinationPhase)
-    try container.encode(
-      self.disableRollbackIfRolloutPending, forKey: .disableRollbackIfRolloutPending)
+    if !self.destinationPhase.isEmpty {
+      try container.encode(self.destinationPhase, forKey: .destinationPhase)
+    }
+    if self.disableRollbackIfRolloutPending {
+      try container.encode(
+        self.disableRollbackIfRolloutPending, forKey: .disableRollbackIfRolloutPending)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

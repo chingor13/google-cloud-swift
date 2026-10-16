@@ -246,28 +246,70 @@ public struct ActiveDirectory: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.domain, forKey: .domain)
-    try container.encode(self.site, forKey: .site)
-    try container.encode(self.dns, forKey: .dns)
-    try container.encode(self.netBiosPrefix, forKey: .netBiosPrefix)
-    try container.encode(self.organizationalUnit, forKey: .organizationalUnit)
-    try container.encode(self.aesEncryption, forKey: .aesEncryption)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.backupOperators, forKey: .backupOperators)
-    try container.encode(self.administrators, forKey: .administrators)
-    try container.encode(self.securityOperators, forKey: .securityOperators)
-    try container.encode(self.kdcHostname, forKey: .kdcHostname)
-    try container.encode(self.kdcIp, forKey: .kdcIp)
-    try container.encode(self.nfsUsersWithLdap, forKey: .nfsUsersWithLdap)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.ldapSigning, forKey: .ldapSigning)
-    try container.encode(self.encryptDcConnections, forKey: .encryptDcConnections)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.stateDetails, forKey: .stateDetails)
+    if self.state != ActiveDirectory.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
+    if !self.site.isEmpty {
+      try container.encode(self.site, forKey: .site)
+    }
+    if !self.dns.isEmpty {
+      try container.encode(self.dns, forKey: .dns)
+    }
+    if !self.netBiosPrefix.isEmpty {
+      try container.encode(self.netBiosPrefix, forKey: .netBiosPrefix)
+    }
+    if !self.organizationalUnit.isEmpty {
+      try container.encode(self.organizationalUnit, forKey: .organizationalUnit)
+    }
+    if self.aesEncryption {
+      try container.encode(self.aesEncryption, forKey: .aesEncryption)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.backupOperators.isEmpty {
+      try container.encode(self.backupOperators, forKey: .backupOperators)
+    }
+    if !self.administrators.isEmpty {
+      try container.encode(self.administrators, forKey: .administrators)
+    }
+    if !self.securityOperators.isEmpty {
+      try container.encode(self.securityOperators, forKey: .securityOperators)
+    }
+    if !self.kdcHostname.isEmpty {
+      try container.encode(self.kdcHostname, forKey: .kdcHostname)
+    }
+    if !self.kdcIp.isEmpty {
+      try container.encode(self.kdcIp, forKey: .kdcIp)
+    }
+    if self.nfsUsersWithLdap {
+      try container.encode(self.nfsUsersWithLdap, forKey: .nfsUsersWithLdap)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.ldapSigning {
+      try container.encode(self.ldapSigning, forKey: .ldapSigning)
+    }
+    if self.encryptDcConnections {
+      try container.encode(self.encryptDcConnections, forKey: .encryptDcConnections)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.stateDetails.isEmpty {
+      try container.encode(self.stateDetails, forKey: .stateDetails)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

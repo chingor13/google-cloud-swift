@@ -88,9 +88,15 @@ public struct UsableSubnetworkSecondaryRange: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rangeName, forKey: .rangeName)
-    try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
-    try container.encode(self.status, forKey: .status)
+    if !self.rangeName.isEmpty {
+      try container.encode(self.rangeName, forKey: .rangeName)
+    }
+    if !self.ipCidrRange.isEmpty {
+      try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
+    }
+    if self.status != UsableSubnetworkSecondaryRange.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

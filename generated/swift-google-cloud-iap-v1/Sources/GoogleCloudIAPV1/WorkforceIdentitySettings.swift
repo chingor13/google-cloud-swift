@@ -78,7 +78,9 @@ public struct WorkforceIdentitySettings: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.workforcePools, forKey: .workforcePools)
+    if !self.workforcePools.isEmpty {
+      try container.encode(self.workforcePools, forKey: .workforcePools)
+    }
     try container.encodeIfPresent(self.oauth2, forKey: .oauth2)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -77,7 +77,9 @@ public struct ExportEntitiesResponse: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.outputUrl, forKey: .outputUrl)
+    if !self.outputUrl.isEmpty {
+      try container.encode(self.outputUrl, forKey: .outputUrl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

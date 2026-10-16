@@ -97,9 +97,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.targetDatabaseVersion, forKey: .targetDatabaseVersion)
-      try container.encode(self.preCheckResponse, forKey: .preCheckResponse)
-      try container.encode(self.kind, forKey: .kind)
+      if self.targetDatabaseVersion != SqlDatabaseVersion() {
+        try container.encode(self.targetDatabaseVersion, forKey: .targetDatabaseVersion)
+      }
+      if !self.preCheckResponse.isEmpty {
+        try container.encode(self.preCheckResponse, forKey: .preCheckResponse)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       try container.encodeIfPresent(self.maxRuntime, forKey: .maxRuntime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

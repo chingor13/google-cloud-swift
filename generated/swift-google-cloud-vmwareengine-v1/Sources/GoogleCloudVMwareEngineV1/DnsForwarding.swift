@@ -99,10 +99,14 @@ public struct DnsForwarding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.forwardingRules, forKey: .forwardingRules)
+    if !self.forwardingRules.isEmpty {
+      try container.encode(self.forwardingRules, forKey: .forwardingRules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -171,8 +175,12 @@ public struct DnsForwarding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.domain, forKey: .domain)
-      try container.encode(self.nameServers, forKey: .nameServers)
+      if !self.domain.isEmpty {
+        try container.encode(self.domain, forKey: .domain)
+      }
+      if !self.nameServers.isEmpty {
+        try container.encode(self.nameServers, forKey: .nameServers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

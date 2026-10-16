@@ -114,12 +114,20 @@ public struct RegisterDomainRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.registration, forKey: .registration)
-    try container.encode(self.domainNotices, forKey: .domainNotices)
-    try container.encode(self.contactNotices, forKey: .contactNotices)
+    if !self.domainNotices.isEmpty {
+      try container.encode(self.domainNotices, forKey: .domainNotices)
+    }
+    if !self.contactNotices.isEmpty {
+      try container.encode(self.contactNotices, forKey: .contactNotices)
+    }
     try container.encodeIfPresent(self.yearlyPrice, forKey: .yearlyPrice)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

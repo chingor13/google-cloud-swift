@@ -219,20 +219,46 @@ public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.operationType, forKey: .operationType)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.detail, forKey: .detail)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.selfLink, forKey: .selfLink)
-    try container.encode(self.targetLink, forKey: .targetLink)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.startTime, forKey: .startTime)
-    try container.encode(self.endTime, forKey: .endTime)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if self.operationType != Operation.Type_() {
+      try container.encode(self.operationType, forKey: .operationType)
+    }
+    if self.status != Operation.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.detail.isEmpty {
+      try container.encode(self.detail, forKey: .detail)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
+    if !self.targetLink.isEmpty {
+      try container.encode(self.targetLink, forKey: .targetLink)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.startTime.isEmpty {
+      try container.encode(self.startTime, forKey: .startTime)
+    }
+    if !self.endTime.isEmpty {
+      try container.encode(self.endTime, forKey: .endTime)
+    }
     try container.encodeIfPresent(self.progress, forKey: .progress)
-    try container.encode(self.clusterConditions, forKey: .clusterConditions)
-    try container.encode(self.nodepoolConditions, forKey: .nodepoolConditions)
+    if !self.clusterConditions.isEmpty {
+      try container.encode(self.clusterConditions, forKey: .clusterConditions)
+    }
+    if !self.nodepoolConditions.isEmpty {
+      try container.encode(self.nodepoolConditions, forKey: .nodepoolConditions)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

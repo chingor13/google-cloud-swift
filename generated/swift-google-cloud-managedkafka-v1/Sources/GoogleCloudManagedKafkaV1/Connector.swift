@@ -115,9 +115,15 @@ public struct Connector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.configs, forKey: .configs)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.configs.isEmpty {
+      try container.encode(self.configs, forKey: .configs)
+    }
+    if self.state != Connector.State() {
+      try container.encode(self.state, forKey: .state)
+    }
 
     if let choice = self.restartPolicy {
       switch choice {

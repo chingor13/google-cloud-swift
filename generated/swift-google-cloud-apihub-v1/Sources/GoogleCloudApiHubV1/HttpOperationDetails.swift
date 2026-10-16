@@ -102,8 +102,12 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.httpOperation, forKey: .httpOperation)
-    try container.encode(self.pathParams, forKey: .pathParams)
-    try container.encode(self.queryParams, forKey: .queryParams)
+    if !self.pathParams.isEmpty {
+      try container.encode(self.pathParams, forKey: .pathParams)
+    }
+    if !self.queryParams.isEmpty {
+      try container.encode(self.queryParams, forKey: .queryParams)
+    }
     try container.encodeIfPresent(self.request, forKey: .request)
     try container.encodeIfPresent(self.response, forKey: .response)
     for (key, value) in self._unknownFields.json {
@@ -173,8 +177,12 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.position, forKey: .position)
-      try container.encode(self.dataType, forKey: .dataType)
+      if self.position != 0 {
+        try container.encode(self.position, forKey: .position)
+      }
+      if self.dataType != HttpOperationDetails.DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -273,9 +281,15 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.count, forKey: .count)
-      try container.encode(self.dataType, forKey: .dataType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
+      if self.dataType != HttpOperationDetails.DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -373,9 +387,15 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.count, forKey: .count)
-      try container.encode(self.dataType, forKey: .dataType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
+      if self.dataType != HttpOperationDetails.DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -457,7 +477,9 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.headers, forKey: .headers)
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -559,8 +581,10 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.headers, forKey: .headers)
-      do {
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
+      if !self.responseCodes.isEmpty {
         let stringKeyed = Dictionary(
           uniqueKeysWithValues: self.responseCodes.lazy.map { (Swift.String($0), $1) }
         )

@@ -205,7 +205,9 @@ public struct TransferRun: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.scheduleTime, forKey: .scheduleTime)
     try container.encodeIfPresent(self.runTime, forKey: .runTime)
     try container.encodeIfPresent(self.errorStatus, forKey: .errorStatus)
@@ -213,11 +215,21 @@ public struct TransferRun: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.params, forKey: .params)
-    try container.encode(self.dataSourceId, forKey: .dataSourceId)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.userId, forKey: .userId)
-    try container.encode(self.schedule, forKey: .schedule)
-    try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    if !self.dataSourceId.isEmpty {
+      try container.encode(self.dataSourceId, forKey: .dataSourceId)
+    }
+    if self.state != TransferState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.userId != 0 {
+      try container.encode(self.userId, forKey: .userId)
+    }
+    if !self.schedule.isEmpty {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
+    if !self.notificationPubsubTopic.isEmpty {
+      try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    }
     try container.encodeIfPresent(self.emailPreferences, forKey: .emailPreferences)
 
     if let choice = self.destination {

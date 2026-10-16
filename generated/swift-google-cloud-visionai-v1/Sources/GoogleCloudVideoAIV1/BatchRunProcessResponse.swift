@@ -77,8 +77,12 @@ public struct BatchRunProcessResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.batchId, forKey: .batchId)
-    try container.encode(self.processes, forKey: .processes)
+    if !self.batchId.isEmpty {
+      try container.encode(self.batchId, forKey: .batchId)
+    }
+    if !self.processes.isEmpty {
+      try container.encode(self.processes, forKey: .processes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

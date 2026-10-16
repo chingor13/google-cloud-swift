@@ -104,10 +104,18 @@ public struct NewLustreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.lustre, forKey: .lustre)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.filesystem, forKey: .filesystem)
-    try container.encode(self.capacityGb, forKey: .capacityGb)
+    if !self.lustre.isEmpty {
+      try container.encode(self.lustre, forKey: .lustre)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.filesystem.isEmpty {
+      try container.encode(self.filesystem, forKey: .filesystem)
+    }
+    if self.capacityGb != 0 {
+      try container.encode(self.capacityGb, forKey: .capacityGb)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

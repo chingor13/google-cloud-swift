@@ -99,7 +99,9 @@ public struct TimeBasedSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.schedule, forKey: .schedule)
+    if !self.schedule.isEmpty {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     for (key, value) in self._unknownFields.json {

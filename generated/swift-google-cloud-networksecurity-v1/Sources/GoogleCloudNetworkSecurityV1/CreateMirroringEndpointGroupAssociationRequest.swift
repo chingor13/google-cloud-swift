@@ -102,12 +102,18 @@ public struct CreateMirroringEndpointGroupAssociationRequest: Codable, Equatable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(
-      self.mirroringEndpointGroupAssociationId, forKey: .mirroringEndpointGroupAssociationId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.mirroringEndpointGroupAssociationId.isEmpty {
+      try container.encode(
+        self.mirroringEndpointGroupAssociationId, forKey: .mirroringEndpointGroupAssociationId)
+    }
     try container.encodeIfPresent(
       self.mirroringEndpointGroupAssociation, forKey: .mirroringEndpointGroupAssociation)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

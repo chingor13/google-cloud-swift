@@ -221,18 +221,32 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.description, forKey: .description)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.inferenceParameter, forKey: .inferenceParameter)
-      try container.encode(self.triggerEvent, forKey: .triggerEvent)
+      if self.triggerEvent != GoogleCloudDialogflowV2.TriggerEvent() {
+        try container.encode(self.triggerEvent, forKey: .triggerEvent)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.tools, forKey: .tools)
+      if !self.tools.isEmpty {
+        try container.encode(self.tools, forKey: .tools)
+      }
       try container.encodeIfPresent(
         self.suggestionDedupingConfig, forKey: .suggestionDedupingConfig)
-      try container.encode(self.toolsetTools, forKey: .toolsetTools)
-      try container.encode(self.cesToolSpecs, forKey: .cesToolSpecs)
-      try container.encode(self.cesAppSpecs, forKey: .cesAppSpecs)
+      if !self.toolsetTools.isEmpty {
+        try container.encode(self.toolsetTools, forKey: .toolsetTools)
+      }
+      if !self.cesToolSpecs.isEmpty {
+        try container.encode(self.cesToolSpecs, forKey: .cesToolSpecs)
+      }
+      if !self.cesAppSpecs.isEmpty {
+        try container.encode(self.cesAppSpecs, forKey: .cesAppSpecs)
+      }
 
       if let choice = self.context {
         switch choice {

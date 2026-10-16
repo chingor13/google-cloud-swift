@@ -133,15 +133,28 @@ public struct AttackExposure: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.score, forKey: .score)
+    if self.score != 0 {
+      try container.encode(self.score, forKey: .score)
+    }
     try container.encodeIfPresent(self.latestCalculationTime, forKey: .latestCalculationTime)
-    try container.encode(self.attackExposureResult, forKey: .attackExposureResult)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(
-      self.exposedHighValueResourcesCount, forKey: .exposedHighValueResourcesCount)
-    try container.encode(
-      self.exposedMediumValueResourcesCount, forKey: .exposedMediumValueResourcesCount)
-    try container.encode(self.exposedLowValueResourcesCount, forKey: .exposedLowValueResourcesCount)
+    if !self.attackExposureResult.isEmpty {
+      try container.encode(self.attackExposureResult, forKey: .attackExposureResult)
+    }
+    if self.state != AttackExposure.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.exposedHighValueResourcesCount != 0 {
+      try container.encode(
+        self.exposedHighValueResourcesCount, forKey: .exposedHighValueResourcesCount)
+    }
+    if self.exposedMediumValueResourcesCount != 0 {
+      try container.encode(
+        self.exposedMediumValueResourcesCount, forKey: .exposedMediumValueResourcesCount)
+    }
+    if self.exposedLowValueResourcesCount != 0 {
+      try container.encode(
+        self.exposedLowValueResourcesCount, forKey: .exposedLowValueResourcesCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

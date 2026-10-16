@@ -136,12 +136,22 @@ public struct OptimizeToursResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.routes, forKey: .routes)
-    try container.encode(self.requestLabel, forKey: .requestLabel)
-    try container.encode(self.skippedShipments, forKey: .skippedShipments)
-    try container.encode(self.validationErrors, forKey: .validationErrors)
+    if !self.routes.isEmpty {
+      try container.encode(self.routes, forKey: .routes)
+    }
+    if !self.requestLabel.isEmpty {
+      try container.encode(self.requestLabel, forKey: .requestLabel)
+    }
+    if !self.skippedShipments.isEmpty {
+      try container.encode(self.skippedShipments, forKey: .skippedShipments)
+    }
+    if !self.validationErrors.isEmpty {
+      try container.encode(self.validationErrors, forKey: .validationErrors)
+    }
     try container.encodeIfPresent(self.metrics, forKey: .metrics)
-    try container.encode(self.totalCost, forKey: .totalCost)
+    if self.totalCost != 0 {
+      try container.encode(self.totalCost, forKey: .totalCost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -275,14 +285,22 @@ public struct OptimizeToursResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.aggregatedRouteMetrics, forKey: .aggregatedRouteMetrics)
-      try container.encode(
-        self.skippedMandatoryShipmentCount, forKey: .skippedMandatoryShipmentCount)
-      try container.encode(self.usedVehicleCount, forKey: .usedVehicleCount)
+      if self.skippedMandatoryShipmentCount != 0 {
+        try container.encode(
+          self.skippedMandatoryShipmentCount, forKey: .skippedMandatoryShipmentCount)
+      }
+      if self.usedVehicleCount != 0 {
+        try container.encode(self.usedVehicleCount, forKey: .usedVehicleCount)
+      }
       try container.encodeIfPresent(
         self.earliestVehicleStartTime, forKey: .earliestVehicleStartTime)
       try container.encodeIfPresent(self.latestVehicleEndTime, forKey: .latestVehicleEndTime)
-      try container.encode(self.costs, forKey: .costs)
-      try container.encode(self.totalCost, forKey: .totalCost)
+      if !self.costs.isEmpty {
+        try container.encode(self.costs, forKey: .costs)
+      }
+      if self.totalCost != 0 {
+        try container.encode(self.totalCost, forKey: .totalCost)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -148,13 +148,27 @@ public struct PricingExpression: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.usageUnit, forKey: .usageUnit)
-    try container.encode(self.displayQuantity, forKey: .displayQuantity)
-    try container.encode(self.tieredRates, forKey: .tieredRates)
-    try container.encode(self.usageUnitDescription, forKey: .usageUnitDescription)
-    try container.encode(self.baseUnit, forKey: .baseUnit)
-    try container.encode(self.baseUnitDescription, forKey: .baseUnitDescription)
-    try container.encode(self.baseUnitConversionFactor, forKey: .baseUnitConversionFactor)
+    if !self.usageUnit.isEmpty {
+      try container.encode(self.usageUnit, forKey: .usageUnit)
+    }
+    if self.displayQuantity != 0 {
+      try container.encode(self.displayQuantity, forKey: .displayQuantity)
+    }
+    if !self.tieredRates.isEmpty {
+      try container.encode(self.tieredRates, forKey: .tieredRates)
+    }
+    if !self.usageUnitDescription.isEmpty {
+      try container.encode(self.usageUnitDescription, forKey: .usageUnitDescription)
+    }
+    if !self.baseUnit.isEmpty {
+      try container.encode(self.baseUnit, forKey: .baseUnit)
+    }
+    if !self.baseUnitDescription.isEmpty {
+      try container.encode(self.baseUnitDescription, forKey: .baseUnitDescription)
+    }
+    if self.baseUnitConversionFactor != 0 {
+      try container.encode(self.baseUnitConversionFactor, forKey: .baseUnitConversionFactor)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -221,7 +235,9 @@ public struct PricingExpression: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.startUsageAmount, forKey: .startUsageAmount)
+      if self.startUsageAmount != 0 {
+        try container.encode(self.startUsageAmount, forKey: .startUsageAmount)
+      }
       try container.encodeIfPresent(self.unitPrice, forKey: .unitPrice)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

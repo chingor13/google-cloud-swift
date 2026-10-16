@@ -101,10 +101,16 @@ public struct FetchProfilesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.profile, forKey: .profile)
+    if !self.profile.isEmpty {
+      try container.encode(self.profile, forKey: .profile)
+    }
     try container.encodeIfPresent(self.performanceRange, forKey: .performanceRange)
-    try container.encode(self.comments, forKey: .comments)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.comments.isEmpty {
+      try container.encode(self.comments, forKey: .comments)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

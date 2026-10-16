@@ -90,7 +90,9 @@ public struct ExecuteOntapPostRequest: Codable, Equatable, GoogleWKT._AnyPackabl
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.body, forKey: .body)
-    try container.encode(self.ontapPath, forKey: .ontapPath)
+    if !self.ontapPath.isEmpty {
+      try container.encode(self.ontapPath, forKey: .ontapPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -181,18 +181,34 @@ public struct ConnectorVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.launchStage, forKey: .launchStage)
-    try container.encode(self.releaseVersion, forKey: .releaseVersion)
-    try container.encode(self.authConfigTemplates, forKey: .authConfigTemplates)
-    try container.encode(self.configVariableTemplates, forKey: .configVariableTemplates)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.launchStage != GoogleCloudConnectorsV1.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
+    if !self.releaseVersion.isEmpty {
+      try container.encode(self.releaseVersion, forKey: .releaseVersion)
+    }
+    if !self.authConfigTemplates.isEmpty {
+      try container.encode(self.authConfigTemplates, forKey: .authConfigTemplates)
+    }
+    if !self.configVariableTemplates.isEmpty {
+      try container.encode(self.configVariableTemplates, forKey: .configVariableTemplates)
+    }
     try container.encodeIfPresent(self.supportedRuntimeFeatures, forKey: .supportedRuntimeFeatures)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.egressControlConfig, forKey: .egressControlConfig)
-    try container.encode(self.roleGrants, forKey: .roleGrants)
+    if !self.roleGrants.isEmpty {
+      try container.encode(self.roleGrants, forKey: .roleGrants)
+    }
     try container.encodeIfPresent(self.roleGrant, forKey: .roleGrant)
     try container.encodeIfPresent(self.sslConfigTemplate, forKey: .sslConfigTemplate)
     for (key, value) in self._unknownFields.json {

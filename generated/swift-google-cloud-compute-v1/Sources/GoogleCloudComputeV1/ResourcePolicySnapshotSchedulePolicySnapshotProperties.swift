@@ -98,8 +98,12 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.chainName, forKey: .chainName)
       try container.encodeIfPresent(self.guestFlush, forKey: .guestFlush)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.storageLocations, forKey: .storageLocations)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.storageLocations.isEmpty {
+        try container.encode(self.storageLocations, forKey: .storageLocations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

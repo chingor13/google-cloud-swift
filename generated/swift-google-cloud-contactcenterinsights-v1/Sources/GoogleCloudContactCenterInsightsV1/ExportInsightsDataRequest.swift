@@ -121,10 +121,18 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.writeDisposition, forKey: .writeDisposition)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if self.writeDisposition != ExportInsightsDataRequest.WriteDisposition() {
+      try container.encode(self.writeDisposition, forKey: .writeDisposition)
+    }
 
     if let choice = self.destination {
       switch choice {
@@ -211,9 +219,15 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.dataset, forKey: .dataset)
-      try container.encode(self.table, forKey: .table)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.dataset.isEmpty {
+        try container.encode(self.dataset, forKey: .dataset)
+      }
+      if !self.table.isEmpty {
+        try container.encode(self.table, forKey: .table)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

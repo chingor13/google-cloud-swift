@@ -112,9 +112,15 @@ public struct CopyBackupRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.backupId, forKey: .backupId)
-    try container.encode(self.sourceBackup, forKey: .sourceBackup)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.backupId.isEmpty {
+      try container.encode(self.backupId, forKey: .backupId)
+    }
+    if !self.sourceBackup.isEmpty {
+      try container.encode(self.sourceBackup, forKey: .sourceBackup)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

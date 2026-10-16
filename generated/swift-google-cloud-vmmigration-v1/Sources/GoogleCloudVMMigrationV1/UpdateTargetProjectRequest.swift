@@ -100,7 +100,9 @@ public struct UpdateTargetProjectRequest: Codable, Equatable, GoogleWKT._AnyPack
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.targetProject, forKey: .targetProject)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

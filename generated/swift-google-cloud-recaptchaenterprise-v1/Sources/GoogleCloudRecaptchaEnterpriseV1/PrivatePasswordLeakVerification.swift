@@ -109,11 +109,19 @@ public struct PrivatePasswordLeakVerification: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.lookupHashPrefix, forKey: .lookupHashPrefix)
-    try container.encode(self.encryptedUserCredentialsHash, forKey: .encryptedUserCredentialsHash)
-    try container.encode(self.encryptedLeakMatchPrefixes, forKey: .encryptedLeakMatchPrefixes)
-    try container.encode(
-      self.reencryptedUserCredentialsHash, forKey: .reencryptedUserCredentialsHash)
+    if !self.lookupHashPrefix.isEmpty {
+      try container.encode(self.lookupHashPrefix, forKey: .lookupHashPrefix)
+    }
+    if !self.encryptedUserCredentialsHash.isEmpty {
+      try container.encode(self.encryptedUserCredentialsHash, forKey: .encryptedUserCredentialsHash)
+    }
+    if !self.encryptedLeakMatchPrefixes.isEmpty {
+      try container.encode(self.encryptedLeakMatchPrefixes, forKey: .encryptedLeakMatchPrefixes)
+    }
+    if !self.reencryptedUserCredentialsHash.isEmpty {
+      try container.encode(
+        self.reencryptedUserCredentialsHash, forKey: .reencryptedUserCredentialsHash)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

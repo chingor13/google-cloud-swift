@@ -78,8 +78,12 @@ public struct HostAddress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.port, forKey: .port)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

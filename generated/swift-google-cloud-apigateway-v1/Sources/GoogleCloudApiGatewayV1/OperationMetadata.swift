@@ -135,12 +135,24 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.verb, forKey: .verb)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
-    try container.encode(self.apiVersion, forKey: .apiVersion)
-    try container.encode(self.diagnostics, forKey: .diagnostics)
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.verb.isEmpty {
+      try container.encode(self.verb, forKey: .verb)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if self.requestedCancellation {
+      try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
+    }
+    if !self.apiVersion.isEmpty {
+      try container.encode(self.apiVersion, forKey: .apiVersion)
+    }
+    if !self.diagnostics.isEmpty {
+      try container.encode(self.diagnostics, forKey: .diagnostics)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -206,8 +218,12 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.message, forKey: .message)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if !self.message.isEmpty {
+        try container.encode(self.message, forKey: .message)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

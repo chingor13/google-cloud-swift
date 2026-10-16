@@ -114,8 +114,12 @@ public struct DateShiftConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.upperBoundDays, forKey: .upperBoundDays)
-    try container.encode(self.lowerBoundDays, forKey: .lowerBoundDays)
+    if self.upperBoundDays != 0 {
+      try container.encode(self.upperBoundDays, forKey: .upperBoundDays)
+    }
+    if self.lowerBoundDays != 0 {
+      try container.encode(self.lowerBoundDays, forKey: .lowerBoundDays)
+    }
     try container.encodeIfPresent(self.context, forKey: .context)
 
     if let choice = self.method {

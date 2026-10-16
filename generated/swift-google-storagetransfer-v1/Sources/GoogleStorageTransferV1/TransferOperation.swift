@@ -138,17 +138,27 @@ public struct TransferOperation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
     try container.encodeIfPresent(self.transferSpec, forKey: .transferSpec)
     try container.encodeIfPresent(self.notificationConfig, forKey: .notificationConfig)
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.status, forKey: .status)
+    if self.status != TransferOperation.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.counters, forKey: .counters)
-    try container.encode(self.errorBreakdowns, forKey: .errorBreakdowns)
-    try container.encode(self.transferJobName, forKey: .transferJobName)
+    if !self.errorBreakdowns.isEmpty {
+      try container.encode(self.errorBreakdowns, forKey: .errorBreakdowns)
+    }
+    if !self.transferJobName.isEmpty {
+      try container.encode(self.transferJobName, forKey: .transferJobName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

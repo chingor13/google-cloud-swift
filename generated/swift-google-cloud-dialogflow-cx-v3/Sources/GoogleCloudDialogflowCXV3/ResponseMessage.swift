@@ -187,8 +187,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.responseType, forKey: .responseType)
-      try container.encode(self.channel, forKey: .channel)
+      if self.responseType != ResponseMessage.ResponseType() {
+        try container.encode(self.responseType, forKey: .responseType)
+      }
+      if !self.channel.isEmpty {
+        try container.encode(self.channel, forKey: .channel)
+      }
 
       if let choice = self.message {
         switch choice {
@@ -286,8 +290,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.text, forKey: .text)
-        try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
+        if self.allowPlaybackInterruption {
+          try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -590,7 +598,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+        if self.allowPlaybackInterruption {
+          try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+        }
 
         if let choice = self.source {
           switch choice {
@@ -772,8 +782,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.audioUri, forKey: .audioUri)
-        try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+        if !self.audioUri.isEmpty {
+          try container.encode(self.audioUri, forKey: .audioUri)
+        }
+        if self.allowPlaybackInterruption {
+          try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -863,7 +877,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.segments, forKey: .segments)
+        if !self.segments.isEmpty {
+          try container.encode(self.segments, forKey: .segments)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -951,7 +967,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+          if self.allowPlaybackInterruption {
+            try container.encode(self.allowPlaybackInterruption, forKey: .allowPlaybackInterruption)
+          }
 
           if let choice = self.content {
             switch choice {

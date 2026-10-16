@@ -115,12 +115,20 @@ public struct ParameterDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.parameterType, forKey: .parameterType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.parameterType != ParameterDefinition.ParameterType() {
+      try container.encode(self.parameterType, forKey: .parameterType)
+    }
     try container.encodeIfPresent(self.minValue, forKey: .minValue)
     try container.encodeIfPresent(self.maxValue, forKey: .maxValue)
-    try container.encode(self.allowedValues, forKey: .allowedValues)
-    try container.encode(self.`optional`, forKey: .`optional`)
+    if !self.allowedValues.isEmpty {
+      try container.encode(self.allowedValues, forKey: .allowedValues)
+    }
+    if self.`optional` {
+      try container.encode(self.`optional`, forKey: .`optional`)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -109,11 +109,21 @@ public struct ThreatConnectIoCV3Settings: Codable, Equatable, GoogleWKT._AnyPack
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.owners, forKey: .owners)
-    try container.encode(self.tqlQuery, forKey: .tqlQuery)
-    try container.encode(self.fields, forKey: .fields)
-    try container.encode(self.schedule, forKey: .schedule)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.owners.isEmpty {
+      try container.encode(self.owners, forKey: .owners)
+    }
+    if !self.tqlQuery.isEmpty {
+      try container.encode(self.tqlQuery, forKey: .tqlQuery)
+    }
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
+    if self.schedule != 0 {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

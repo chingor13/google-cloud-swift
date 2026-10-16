@@ -103,9 +103,13 @@ public struct AnnotateFileRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
-    try container.encode(self.features, forKey: .features)
+    if !self.features.isEmpty {
+      try container.encode(self.features, forKey: .features)
+    }
     try container.encodeIfPresent(self.imageContext, forKey: .imageContext)
-    try container.encode(self.pages, forKey: .pages)
+    if !self.pages.isEmpty {
+      try container.encode(self.pages, forKey: .pages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

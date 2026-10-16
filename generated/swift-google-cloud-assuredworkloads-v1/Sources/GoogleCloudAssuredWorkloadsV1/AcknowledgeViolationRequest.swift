@@ -102,9 +102,15 @@ public struct AcknowledgeViolationRequest: Codable, Equatable, GoogleWKT._AnyPac
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.comment, forKey: .comment)
-    try container.encode(self.nonCompliantOrgPolicy, forKey: .nonCompliantOrgPolicy)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.comment.isEmpty {
+      try container.encode(self.comment, forKey: .comment)
+    }
+    if !self.nonCompliantOrgPolicy.isEmpty {
+      try container.encode(self.nonCompliantOrgPolicy, forKey: .nonCompliantOrgPolicy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

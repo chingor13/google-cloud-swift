@@ -118,9 +118,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.exportFullContent, forKey: .exportFullContent)
-      try container.encode(self.smartMessagingPartialUpdate, forKey: .smartMessagingPartialUpdate)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.exportFullContent {
+        try container.encode(self.exportFullContent, forKey: .exportFullContent)
+      }
+      if self.smartMessagingPartialUpdate {
+        try container.encode(self.smartMessagingPartialUpdate, forKey: .smartMessagingPartialUpdate)
+      }
 
       if let choice = self.destination {
         switch choice {

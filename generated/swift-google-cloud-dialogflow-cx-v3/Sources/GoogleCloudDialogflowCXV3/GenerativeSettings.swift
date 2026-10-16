@@ -107,13 +107,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.fallbackSettings, forKey: .fallbackSettings)
       try container.encodeIfPresent(
         self.generativeSafetySettings, forKey: .generativeSafetySettings)
       try container.encodeIfPresent(
         self.knowledgeConnectorSettings, forKey: .knowledgeConnectorSettings)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       try container.encodeIfPresent(self.llmModelSettings, forKey: .llmModelSettings)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -183,8 +187,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.selectedPrompt, forKey: .selectedPrompt)
-        try container.encode(self.promptTemplates, forKey: .promptTemplates)
+        if !self.selectedPrompt.isEmpty {
+          try container.encode(self.selectedPrompt, forKey: .selectedPrompt)
+        }
+        if !self.promptTemplates.isEmpty {
+          try container.encode(self.promptTemplates, forKey: .promptTemplates)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -261,9 +269,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.displayName, forKey: .displayName)
-          try container.encode(self.promptText, forKey: .promptText)
-          try container.encode(self.frozen, forKey: .frozen)
+          if !self.displayName.isEmpty {
+            try container.encode(self.displayName, forKey: .displayName)
+          }
+          if !self.promptText.isEmpty {
+            try container.encode(self.promptText, forKey: .promptText)
+          }
+          if self.frozen {
+            try container.encode(self.frozen, forKey: .frozen)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -419,12 +433,24 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.business, forKey: .business)
-        try container.encode(self.agent, forKey: .agent)
-        try container.encode(self.agentIdentity, forKey: .agentIdentity)
-        try container.encode(self.businessDescription, forKey: .businessDescription)
-        try container.encode(self.agentScope, forKey: .agentScope)
-        try container.encode(self.disableDataStoreFallback, forKey: .disableDataStoreFallback)
+        if !self.business.isEmpty {
+          try container.encode(self.business, forKey: .business)
+        }
+        if !self.agent.isEmpty {
+          try container.encode(self.agent, forKey: .agent)
+        }
+        if !self.agentIdentity.isEmpty {
+          try container.encode(self.agentIdentity, forKey: .agentIdentity)
+        }
+        if !self.businessDescription.isEmpty {
+          try container.encode(self.businessDescription, forKey: .businessDescription)
+        }
+        if !self.agentScope.isEmpty {
+          try container.encode(self.agentScope, forKey: .agentScope)
+        }
+        if self.disableDataStoreFallback {
+          try container.encode(self.disableDataStoreFallback, forKey: .disableDataStoreFallback)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

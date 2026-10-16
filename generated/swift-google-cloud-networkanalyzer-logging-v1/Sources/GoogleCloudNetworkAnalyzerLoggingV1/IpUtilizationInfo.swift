@@ -69,7 +69,9 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subnetIpUtilization, forKey: .subnetIpUtilization)
+    if !self.subnetIpUtilization.isEmpty {
+      try container.encode(self.subnetIpUtilization, forKey: .subnetIpUtilization)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -152,10 +154,18 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.subnetUri, forKey: .subnetUri)
-      try container.encode(self.secondaryRangeName, forKey: .secondaryRangeName)
-      try container.encode(self.totalUsableAddresses, forKey: .totalUsableAddresses)
-      try container.encode(self.allocationRatio, forKey: .allocationRatio)
+      if !self.subnetUri.isEmpty {
+        try container.encode(self.subnetUri, forKey: .subnetUri)
+      }
+      if !self.secondaryRangeName.isEmpty {
+        try container.encode(self.secondaryRangeName, forKey: .secondaryRangeName)
+      }
+      if self.totalUsableAddresses != 0 {
+        try container.encode(self.totalUsableAddresses, forKey: .totalUsableAddresses)
+      }
+      if self.allocationRatio != 0 {
+        try container.encode(self.allocationRatio, forKey: .allocationRatio)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -102,7 +102,9 @@ public struct ContactSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.privacy, forKey: .privacy)
+    if self.privacy != ContactPrivacy() {
+      try container.encode(self.privacy, forKey: .privacy)
+    }
     try container.encodeIfPresent(self.registrantContact, forKey: .registrantContact)
     try container.encodeIfPresent(self.adminContact, forKey: .adminContact)
     try container.encodeIfPresent(self.technicalContact, forKey: .technicalContact)
@@ -189,9 +191,15 @@ public struct ContactSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.postalAddress, forKey: .postalAddress)
-      try container.encode(self.email, forKey: .email)
-      try container.encode(self.phoneNumber, forKey: .phoneNumber)
-      try container.encode(self.faxNumber, forKey: .faxNumber)
+      if !self.email.isEmpty {
+        try container.encode(self.email, forKey: .email)
+      }
+      if !self.phoneNumber.isEmpty {
+        try container.encode(self.phoneNumber, forKey: .phoneNumber)
+      }
+      if !self.faxNumber.isEmpty {
+        try container.encode(self.faxNumber, forKey: .faxNumber)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

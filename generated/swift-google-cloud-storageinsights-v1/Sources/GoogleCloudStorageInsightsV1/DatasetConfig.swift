@@ -297,20 +297,38 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.organizationNumber, forKey: .organizationNumber)
-    try container.encode(self.includeNewlyCreatedBuckets, forKey: .includeNewlyCreatedBuckets)
-    try container.encode(self.skipVerificationAndIngest, forKey: .skipVerificationAndIngest)
-    try container.encode(self.retentionPeriodDays, forKey: .retentionPeriodDays)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.organizationNumber != 0 {
+      try container.encode(self.organizationNumber, forKey: .organizationNumber)
+    }
+    if self.includeNewlyCreatedBuckets {
+      try container.encode(self.includeNewlyCreatedBuckets, forKey: .includeNewlyCreatedBuckets)
+    }
+    if self.skipVerificationAndIngest {
+      try container.encode(self.skipVerificationAndIngest, forKey: .skipVerificationAndIngest)
+    }
+    if self.retentionPeriodDays != 0 {
+      try container.encode(self.retentionPeriodDays, forKey: .retentionPeriodDays)
+    }
     try container.encodeIfPresent(self.link, forKey: .link)
     try container.encodeIfPresent(self.identity, forKey: .identity)
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.datasetConfigState, forKey: .datasetConfigState)
-    try container.encode(self.description, forKey: .description)
+    if self.datasetConfigState != DatasetConfig.ConfigState() {
+      try container.encode(self.datasetConfigState, forKey: .datasetConfigState)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
 
     if let choice = self.sourceOptions {
       switch choice {
@@ -398,7 +416,9 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectNumbers, forKey: .projectNumbers)
+      if !self.projectNumbers.isEmpty {
+        try container.encode(self.projectNumbers, forKey: .projectNumbers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -478,7 +498,9 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.folderNumbers, forKey: .folderNumbers)
+      if !self.folderNumbers.isEmpty {
+        try container.encode(self.folderNumbers, forKey: .folderNumbers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -557,7 +579,9 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.locations, forKey: .locations)
+      if !self.locations.isEmpty {
+        try container.encode(self.locations, forKey: .locations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -639,7 +663,9 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cloudStorageBuckets, forKey: .cloudStorageBuckets)
+      if !self.cloudStorageBuckets.isEmpty {
+        try container.encode(self.cloudStorageBuckets, forKey: .cloudStorageBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -842,8 +868,12 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataset, forKey: .dataset)
-      try container.encode(self.linked, forKey: .linked)
+      if !self.dataset.isEmpty {
+        try container.encode(self.dataset, forKey: .dataset)
+      }
+      if self.linked {
+        try container.encode(self.linked, forKey: .linked)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -995,17 +1025,31 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.validatedCount, forKey: .validatedCount)
-      try container.encode(self.permissionDeniedCount, forKey: .permissionDeniedCount)
-      try container.encode(self.permissionDeniedBucketIds, forKey: .permissionDeniedBucketIds)
-      try container.encode(
-        self.nonManagementHubEntitledCount, forKey: .nonManagementHubEntitledCount)
-      try container.encode(self.internalErrorCount, forKey: .internalErrorCount)
-      try container.encode(
-        self.nonStorageIntelligenceEntitledCount, forKey: .nonStorageIntelligenceEntitledCount)
-      try container.encode(
-        self.nonStorageIntelligenceEntitledBucketIds,
-        forKey: .nonStorageIntelligenceEntitledBucketIds)
+      if self.validatedCount != 0 {
+        try container.encode(self.validatedCount, forKey: .validatedCount)
+      }
+      if self.permissionDeniedCount != 0 {
+        try container.encode(self.permissionDeniedCount, forKey: .permissionDeniedCount)
+      }
+      if !self.permissionDeniedBucketIds.isEmpty {
+        try container.encode(self.permissionDeniedBucketIds, forKey: .permissionDeniedBucketIds)
+      }
+      if self.nonManagementHubEntitledCount != 0 {
+        try container.encode(
+          self.nonManagementHubEntitledCount, forKey: .nonManagementHubEntitledCount)
+      }
+      if self.internalErrorCount != 0 {
+        try container.encode(self.internalErrorCount, forKey: .internalErrorCount)
+      }
+      if self.nonStorageIntelligenceEntitledCount != 0 {
+        try container.encode(
+          self.nonStorageIntelligenceEntitledCount, forKey: .nonStorageIntelligenceEntitledCount)
+      }
+      if !self.nonStorageIntelligenceEntitledBucketIds.isEmpty {
+        try container.encode(
+          self.nonStorageIntelligenceEntitledBucketIds,
+          forKey: .nonStorageIntelligenceEntitledBucketIds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1195,18 +1239,24 @@ public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.validatedCount, forKey: .validatedCount)
       try container.encodeIfPresent(self.outsideOrgErrorCount, forKey: .outsideOrgErrorCount)
-      try container.encode(self.outsideOrgProjectNumbers, forKey: .outsideOrgProjectNumbers)
+      if !self.outsideOrgProjectNumbers.isEmpty {
+        try container.encode(self.outsideOrgProjectNumbers, forKey: .outsideOrgProjectNumbers)
+      }
       try container.encodeIfPresent(
         self.nonManagementHubEntitledErrorCount, forKey: .nonManagementHubEntitledErrorCount)
-      try container.encode(
-        self.nonManagementHubEntitledProjectNumbers, forKey: .nonManagementHubEntitledProjectNumbers
-      )
+      if !self.nonManagementHubEntitledProjectNumbers.isEmpty {
+        try container.encode(
+          self.nonManagementHubEntitledProjectNumbers,
+          forKey: .nonManagementHubEntitledProjectNumbers)
+      }
       try container.encodeIfPresent(
         self.nonStorageIntelligenceEntitledErrorCount,
         forKey: .nonStorageIntelligenceEntitledErrorCount)
-      try container.encode(
-        self.nonStorageIntelligenceEntitledProjectNumbers,
-        forKey: .nonStorageIntelligenceEntitledProjectNumbers)
+      if !self.nonStorageIntelligenceEntitledProjectNumbers.isEmpty {
+        try container.encode(
+          self.nonStorageIntelligenceEntitledProjectNumbers,
+          forKey: .nonStorageIntelligenceEntitledProjectNumbers)
+      }
       try container.encodeIfPresent(self.internalErrorCount, forKey: .internalErrorCount)
 
       if let choice = self.destinationProjectCheckResult {

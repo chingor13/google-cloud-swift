@@ -77,7 +77,9 @@ public struct ExtractionRule: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.source, forKey: .source)
-    try container.encode(self.extractionRegex, forKey: .extractionRegex)
+    if !self.extractionRegex.isEmpty {
+      try container.encode(self.extractionRegex, forKey: .extractionRegex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -145,8 +147,12 @@ public struct ExtractionRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceType, forKey: .sourceType)
-      try container.encode(self.fieldId, forKey: .fieldId)
+      if self.sourceType != ExtractionRule.SourceType() {
+        try container.encode(self.sourceType, forKey: .sourceType)
+      }
+      if !self.fieldId.isEmpty {
+        try container.encode(self.fieldId, forKey: .fieldId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

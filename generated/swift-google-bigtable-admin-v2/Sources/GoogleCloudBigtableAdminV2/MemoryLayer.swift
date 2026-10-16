@@ -98,10 +98,16 @@ public struct MemoryLayer: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.memoryConfig, forKey: .memoryConfig)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.state, forKey: .state)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.state != MemoryLayer.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -159,7 +165,9 @@ public struct MemoryLayer: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.storageSizeGib, forKey: .storageSizeGib)
+      if self.storageSizeGib != 0 {
+        try container.encode(self.storageSizeGib, forKey: .storageSizeGib)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

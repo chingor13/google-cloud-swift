@@ -94,10 +94,16 @@ public struct PreviewOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.step, forKey: .step)
+    if self.step != PreviewOperationMetadata.PreviewStep() {
+      try container.encode(self.step, forKey: .step)
+    }
     try container.encodeIfPresent(self.previewArtifacts, forKey: .previewArtifacts)
-    try container.encode(self.logs, forKey: .logs)
-    try container.encode(self.build, forKey: .build)
+    if !self.logs.isEmpty {
+      try container.encode(self.logs, forKey: .logs)
+    }
+    if !self.build.isEmpty {
+      try container.encode(self.build, forKey: .build)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

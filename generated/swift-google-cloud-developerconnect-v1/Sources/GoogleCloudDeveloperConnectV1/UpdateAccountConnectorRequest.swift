@@ -116,9 +116,15 @@ public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleWKT._AnyP
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.accountConnector, forKey: .accountConnector)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

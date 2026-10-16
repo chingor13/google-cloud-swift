@@ -143,7 +143,9 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.response, forKey: .response)
     try container.encodeIfPresent(self.resource, forKey: .resource)
     try container.encodeIfPresent(self.api, forKey: .api)
-    try container.encode(self.extensions, forKey: .extensions)
+    if !self.extensions.isEmpty {
+      try container.encode(self.extensions, forKey: .extensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -242,11 +244,21 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ip, forKey: .ip)
-      try container.encode(self.port, forKey: .port)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.principal, forKey: .principal)
-      try container.encode(self.regionCode, forKey: .regionCode)
+      if !self.ip.isEmpty {
+        try container.encode(self.ip, forKey: .ip)
+      }
+      if self.port != 0 {
+        try container.encode(self.port, forKey: .port)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.principal.isEmpty {
+        try container.encode(self.principal, forKey: .principal)
+      }
+      if !self.regionCode.isEmpty {
+        try container.encode(self.regionCode, forKey: .regionCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -358,10 +370,18 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.service, forKey: .service)
-      try container.encode(self.operation, forKey: .operation)
-      try container.encode(self.`protocol`, forKey: .`protocol`)
-      try container.encode(self.version, forKey: .version)
+      if !self.service.isEmpty {
+        try container.encode(self.service, forKey: .service)
+      }
+      if !self.operation.isEmpty {
+        try container.encode(self.operation, forKey: .operation)
+      }
+      if !self.`protocol`.isEmpty {
+        try container.encode(self.`protocol`, forKey: .`protocol`)
+      }
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -513,11 +533,19 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.principal, forKey: .principal)
-      try container.encode(self.audiences, forKey: .audiences)
-      try container.encode(self.presenter, forKey: .presenter)
+      if !self.principal.isEmpty {
+        try container.encode(self.principal, forKey: .principal)
+      }
+      if !self.audiences.isEmpty {
+        try container.encode(self.audiences, forKey: .audiences)
+      }
+      if !self.presenter.isEmpty {
+        try container.encode(self.presenter, forKey: .presenter)
+      }
       try container.encodeIfPresent(self.claims, forKey: .claims)
-      try container.encode(self.accessLevels, forKey: .accessLevels)
+      if !self.accessLevels.isEmpty {
+        try container.encode(self.accessLevels, forKey: .accessLevels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -707,19 +735,41 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.method, forKey: .method)
-      try container.encode(self.headers, forKey: .headers)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.host, forKey: .host)
-      try container.encode(self.scheme, forKey: .scheme)
-      try container.encode(self.query, forKey: .query)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.method.isEmpty {
+        try container.encode(self.method, forKey: .method)
+      }
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.host.isEmpty {
+        try container.encode(self.host, forKey: .host)
+      }
+      if !self.scheme.isEmpty {
+        try container.encode(self.scheme, forKey: .scheme)
+      }
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
       try container.encodeIfPresent(self.time, forKey: .time)
-      try container.encode(self.size, forKey: .size)
-      try container.encode(self.`protocol`, forKey: .`protocol`)
-      try container.encode(self.reason, forKey: .reason)
+      if self.size != 0 {
+        try container.encode(self.size, forKey: .size)
+      }
+      if !self.`protocol`.isEmpty {
+        try container.encode(self.`protocol`, forKey: .`protocol`)
+      }
+      if !self.reason.isEmpty {
+        try container.encode(self.reason, forKey: .reason)
+      }
       try container.encodeIfPresent(self.auth, forKey: .auth)
-      try container.encode(self.origin, forKey: .origin)
+      if !self.origin.isEmpty {
+        try container.encode(self.origin, forKey: .origin)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -837,9 +887,15 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.code, forKey: .code)
-      try container.encode(self.size, forKey: .size)
-      try container.encode(self.headers, forKey: .headers)
+      if self.code != 0 {
+        try container.encode(self.code, forKey: .code)
+      }
+      if self.size != 0 {
+        try container.encode(self.size, forKey: .size)
+      }
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
       try container.encodeIfPresent(self.time, forKey: .time)
       try container.encodeIfPresent(self.backendLatency, forKey: .backendLatency)
       for (key, value) in self._unknownFields.json {
@@ -1052,18 +1108,36 @@ public struct AttributeContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.service, forKey: .service)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.uid, forKey: .uid)
-      try container.encode(self.annotations, forKey: .annotations)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.service.isEmpty {
+        try container.encode(self.service, forKey: .service)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.uid.isEmpty {
+        try container.encode(self.uid, forKey: .uid)
+      }
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.location, forKey: .location)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -69,7 +69,9 @@ public struct DisksMigrationVmTargetDetails: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmUri, forKey: .vmUri)
+    if !self.vmUri.isEmpty {
+      try container.encode(self.vmUri, forKey: .vmUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -107,10 +107,18 @@ public struct CheckResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.operationId, forKey: .operationId)
-    try container.encode(self.checkErrors, forKey: .checkErrors)
-    try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
-    try container.encode(self.serviceRolloutId, forKey: .serviceRolloutId)
+    if !self.operationId.isEmpty {
+      try container.encode(self.operationId, forKey: .operationId)
+    }
+    if !self.checkErrors.isEmpty {
+      try container.encode(self.checkErrors, forKey: .checkErrors)
+    }
+    if !self.serviceConfigId.isEmpty {
+      try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
+    }
+    if !self.serviceRolloutId.isEmpty {
+      try container.encode(self.serviceRolloutId, forKey: .serviceRolloutId)
+    }
     try container.encodeIfPresent(self.checkInfo, forKey: .checkInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -188,9 +196,13 @@ public struct CheckResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.unusedArguments, forKey: .unusedArguments)
+      if !self.unusedArguments.isEmpty {
+        try container.encode(self.unusedArguments, forKey: .unusedArguments)
+      }
       try container.encodeIfPresent(self.consumerInfo, forKey: .consumerInfo)
-      try container.encode(self.apiKeyUid, forKey: .apiKeyUid)
+      if !self.apiKeyUid.isEmpty {
+        try container.encode(self.apiKeyUid, forKey: .apiKeyUid)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -296,9 +308,15 @@ public struct CheckResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectNumber, forKey: .projectNumber)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.consumerNumber, forKey: .consumerNumber)
+      if self.projectNumber != 0 {
+        try container.encode(self.projectNumber, forKey: .projectNumber)
+      }
+      if self.type != CheckResponse.ConsumerInfo.ConsumerType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.consumerNumber != 0 {
+        try container.encode(self.consumerNumber, forKey: .consumerNumber)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

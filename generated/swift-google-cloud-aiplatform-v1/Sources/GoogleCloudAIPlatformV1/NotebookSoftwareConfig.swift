@@ -99,7 +99,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.env, forKey: .env)
+      if !self.env.isEmpty {
+        try container.encode(self.env, forKey: .env)
+      }
       try container.encodeIfPresent(self.postStartupScriptConfig, forKey: .postStartupScriptConfig)
 
       if let choice = self.runtimeImage {

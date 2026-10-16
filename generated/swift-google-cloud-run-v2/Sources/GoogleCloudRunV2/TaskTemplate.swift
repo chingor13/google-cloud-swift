@@ -159,12 +159,22 @@ public struct TaskTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.containers, forKey: .containers)
-    try container.encode(self.volumes, forKey: .volumes)
+    if !self.containers.isEmpty {
+      try container.encode(self.containers, forKey: .containers)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.executionEnvironment, forKey: .executionEnvironment)
-    try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if self.executionEnvironment != ExecutionEnvironment() {
+      try container.encode(self.executionEnvironment, forKey: .executionEnvironment)
+    }
+    if !self.encryptionKey.isEmpty {
+      try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    }
     try container.encodeIfPresent(self.vpcAccess, forKey: .vpcAccess)
     try container.encodeIfPresent(self.nodeSelector, forKey: .nodeSelector)
     try container.encodeIfPresent(

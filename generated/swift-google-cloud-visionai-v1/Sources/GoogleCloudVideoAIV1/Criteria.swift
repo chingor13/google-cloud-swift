@@ -136,8 +136,12 @@ public struct Criteria: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.field, forKey: .field)
-    try container.encode(self.fetchMatchedAnnotations, forKey: .fetchMatchedAnnotations)
+    if !self.field.isEmpty {
+      try container.encode(self.field, forKey: .field)
+    }
+    if self.fetchMatchedAnnotations {
+      try container.encode(self.fetchMatchedAnnotations, forKey: .fetchMatchedAnnotations)
+    }
 
     if let choice = self.value {
       switch choice {

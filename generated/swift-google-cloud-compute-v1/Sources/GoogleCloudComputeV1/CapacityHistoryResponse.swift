@@ -97,8 +97,12 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.location, forKey: .location)
       try container.encodeIfPresent(self.machineType, forKey: .machineType)
-      try container.encode(self.preemptionHistory, forKey: .preemptionHistory)
-      try container.encode(self.priceHistory, forKey: .priceHistory)
+      if !self.preemptionHistory.isEmpty {
+        try container.encode(self.preemptionHistory, forKey: .preemptionHistory)
+      }
+      if !self.priceHistory.isEmpty {
+        try container.encode(self.priceHistory, forKey: .priceHistory)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

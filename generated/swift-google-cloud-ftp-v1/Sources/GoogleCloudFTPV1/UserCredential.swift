@@ -87,9 +87,15 @@ public struct UserCredential: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.credentialName, forKey: .credentialName)
-    try container.encode(self.credentialType, forKey: .credentialType)
-    try container.encode(self.sshPublicKeyBody, forKey: .sshPublicKeyBody)
+    if !self.credentialName.isEmpty {
+      try container.encode(self.credentialName, forKey: .credentialName)
+    }
+    if self.credentialType != UserCredential.Type_() {
+      try container.encode(self.credentialType, forKey: .credentialType)
+    }
+    if !self.sshPublicKeyBody.isEmpty {
+      try container.encode(self.sshPublicKeyBody, forKey: .sshPublicKeyBody)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -84,7 +84,9 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uploadUrl, forKey: .uploadUrl)
+    if !self.uploadUrl.isEmpty {
+      try container.encode(self.uploadUrl, forKey: .uploadUrl)
+    }
     try container.encodeIfPresent(self.storageSource, forKey: .storageSource)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

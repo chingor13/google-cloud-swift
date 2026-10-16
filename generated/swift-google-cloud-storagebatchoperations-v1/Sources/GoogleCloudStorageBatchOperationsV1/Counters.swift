@@ -119,9 +119,15 @@ public struct Counters: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalObjectCount, forKey: .totalObjectCount)
-    try container.encode(self.succeededObjectCount, forKey: .succeededObjectCount)
-    try container.encode(self.failedObjectCount, forKey: .failedObjectCount)
+    if self.totalObjectCount != 0 {
+      try container.encode(self.totalObjectCount, forKey: .totalObjectCount)
+    }
+    if self.succeededObjectCount != 0 {
+      try container.encode(self.succeededObjectCount, forKey: .succeededObjectCount)
+    }
+    if self.failedObjectCount != 0 {
+      try container.encode(self.failedObjectCount, forKey: .failedObjectCount)
+    }
     try container.encodeIfPresent(self.totalBytesFound, forKey: .totalBytesFound)
     try container.encodeIfPresent(
       self.objectCustomContextsCreated, forKey: .objectCustomContextsCreated)

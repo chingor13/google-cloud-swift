@@ -104,9 +104,15 @@ public struct TransformationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deidentifyTemplate, forKey: .deidentifyTemplate)
-    try container.encode(self.structuredDeidentifyTemplate, forKey: .structuredDeidentifyTemplate)
-    try container.encode(self.imageRedactTemplate, forKey: .imageRedactTemplate)
+    if !self.deidentifyTemplate.isEmpty {
+      try container.encode(self.deidentifyTemplate, forKey: .deidentifyTemplate)
+    }
+    if !self.structuredDeidentifyTemplate.isEmpty {
+      try container.encode(self.structuredDeidentifyTemplate, forKey: .structuredDeidentifyTemplate)
+    }
+    if !self.imageRedactTemplate.isEmpty {
+      try container.encode(self.imageRedactTemplate, forKey: .imageRedactTemplate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

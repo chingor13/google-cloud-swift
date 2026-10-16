@@ -204,17 +204,35 @@ public struct BackupPlanAssociation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.backupPlan, forKey: .backupPlan)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.backupPlan.isEmpty {
+      try container.encode(self.backupPlan, forKey: .backupPlan)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.rulesConfigInfo, forKey: .rulesConfigInfo)
-    try container.encode(self.dataSource, forKey: .dataSource)
-    try container.encode(self.backupPlanRevisionId, forKey: .backupPlanRevisionId)
-    try container.encode(self.backupPlanRevisionName, forKey: .backupPlanRevisionName)
+    if self.state != BackupPlanAssociation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.rulesConfigInfo.isEmpty {
+      try container.encode(self.rulesConfigInfo, forKey: .rulesConfigInfo)
+    }
+    if !self.dataSource.isEmpty {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
+    if !self.backupPlanRevisionId.isEmpty {
+      try container.encode(self.backupPlanRevisionId, forKey: .backupPlanRevisionId)
+    }
+    if !self.backupPlanRevisionName.isEmpty {
+      try container.encode(self.backupPlanRevisionName, forKey: .backupPlanRevisionName)
+    }
 
     if let choice = self.resourceProperties {
       switch choice {

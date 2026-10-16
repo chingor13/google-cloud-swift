@@ -116,12 +116,22 @@ public struct BiosDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.biosName, forKey: .biosName)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.manufacturer, forKey: .manufacturer)
-    try container.encode(self.version, forKey: .version)
+    if !self.biosName.isEmpty {
+      try container.encode(self.biosName, forKey: .biosName)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.manufacturer.isEmpty {
+      try container.encode(self.manufacturer, forKey: .manufacturer)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.releaseDate, forKey: .releaseDate)
-    try container.encode(self.smbiosUuid, forKey: .smbiosUuid)
+    if !self.smbiosUuid.isEmpty {
+      try container.encode(self.smbiosUuid, forKey: .smbiosUuid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

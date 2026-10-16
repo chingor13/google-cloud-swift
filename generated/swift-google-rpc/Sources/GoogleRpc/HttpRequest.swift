@@ -94,10 +94,18 @@ public struct HttpRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.method, forKey: .method)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.headers, forKey: .headers)
-    try container.encode(self.body, forKey: .body)
+    if !self.method.isEmpty {
+      try container.encode(self.method, forKey: .method)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.headers.isEmpty {
+      try container.encode(self.headers, forKey: .headers)
+    }
+    if !self.body.isEmpty {
+      try container.encode(self.body, forKey: .body)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

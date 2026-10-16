@@ -151,9 +151,13 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.upstreamCredentials, forKey: .upstreamCredentials)
-    try container.encode(self.disableUpstreamValidation, forKey: .disableUpstreamValidation)
+    if self.disableUpstreamValidation {
+      try container.encode(self.disableUpstreamValidation, forKey: .disableUpstreamValidation)
+    }
 
     if let choice = self.remoteSource {
       switch choice {
@@ -321,8 +325,12 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.passwordSecretVersion, forKey: .passwordSecretVersion)
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if !self.passwordSecretVersion.isEmpty {
+          try container.encode(self.passwordSecretVersion, forKey: .passwordSecretVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -520,7 +528,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -832,7 +842,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1144,7 +1156,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1455,7 +1469,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1779,8 +1795,14 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.repositoryBase, forKey: .repositoryBase)
-        try container.encode(self.repositoryPath, forKey: .repositoryPath)
+        if self.repositoryBase
+          != RemoteRepositoryConfig.AptRepository.PublicRepository.RepositoryBase()
+        {
+          try container.encode(self.repositoryBase, forKey: .repositoryBase)
+        }
+        if !self.repositoryPath.isEmpty {
+          try container.encode(self.repositoryPath, forKey: .repositoryPath)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1986,7 +2008,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2200,8 +2224,14 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.repositoryBase, forKey: .repositoryBase)
-        try container.encode(self.repositoryPath, forKey: .repositoryPath)
+        if self.repositoryBase
+          != RemoteRepositoryConfig.YumRepository.PublicRepository.RepositoryBase()
+        {
+          try container.encode(self.repositoryBase, forKey: .repositoryBase)
+        }
+        if !self.repositoryPath.isEmpty {
+          try container.encode(self.repositoryPath, forKey: .repositoryPath)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2428,7 +2458,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2541,7 +2573,9 @@ public struct RemoteRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

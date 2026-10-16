@@ -202,18 +202,28 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.ipv4Enabled, forKey: .ipv4Enabled)
-      try container.encode(self.privateNetwork, forKey: .privateNetwork)
+      if !self.privateNetwork.isEmpty {
+        try container.encode(self.privateNetwork, forKey: .privateNetwork)
+      }
       try container.encodeIfPresent(self.requireSsl, forKey: .requireSsl)
-      try container.encode(self.authorizedNetworks, forKey: .authorizedNetworks)
-      try container.encode(self.allocatedIpRange, forKey: .allocatedIpRange)
+      if !self.authorizedNetworks.isEmpty {
+        try container.encode(self.authorizedNetworks, forKey: .authorizedNetworks)
+      }
+      if !self.allocatedIpRange.isEmpty {
+        try container.encode(self.allocatedIpRange, forKey: .allocatedIpRange)
+      }
       try container.encodeIfPresent(
         self.enablePrivatePathForGoogleCloudServices,
         forKey: .enablePrivatePathForGoogleCloudServices)
-      try container.encode(self.sslMode, forKey: .sslMode)
+      if self.sslMode != IpConfiguration.SslMode() {
+        try container.encode(self.sslMode, forKey: .sslMode)
+      }
       try container.encodeIfPresent(self.pscConfig, forKey: .pscConfig)
       try container.encodeIfPresent(self.serverCaMode, forKey: .serverCaMode)
-      try container.encode(
-        self.customSubjectAlternativeNames, forKey: .customSubjectAlternativeNames)
+      if !self.customSubjectAlternativeNames.isEmpty {
+        try container.encode(
+          self.customSubjectAlternativeNames, forKey: .customSubjectAlternativeNames)
+      }
       try container.encodeIfPresent(self.serverCaPool, forKey: .serverCaPool)
       try container.encodeIfPresent(
         self.serverCertificateRotationMode, forKey: .serverCertificateRotationMode)

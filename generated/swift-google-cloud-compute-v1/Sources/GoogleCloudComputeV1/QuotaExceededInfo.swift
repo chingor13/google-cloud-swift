@@ -105,7 +105,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dimensions, forKey: .dimensions)
+      if !self.dimensions.isEmpty {
+        try container.encode(self.dimensions, forKey: .dimensions)
+      }
       try container.encodeIfPresent(self.futureLimit, forKey: .futureLimit)
       try container.encodeIfPresent(self.limit, forKey: .limit)
       try container.encodeIfPresent(self.limitName, forKey: .limitName)

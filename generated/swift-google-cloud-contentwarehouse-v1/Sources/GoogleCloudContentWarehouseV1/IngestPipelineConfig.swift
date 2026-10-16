@@ -141,9 +141,15 @@ public struct IngestPipelineConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.documentAclPolicy, forKey: .documentAclPolicy)
-    try container.encode(self.enableDocumentTextExtraction, forKey: .enableDocumentTextExtraction)
-    try container.encode(self.folder, forKey: .folder)
-    try container.encode(self.cloudFunction, forKey: .cloudFunction)
+    if self.enableDocumentTextExtraction {
+      try container.encode(self.enableDocumentTextExtraction, forKey: .enableDocumentTextExtraction)
+    }
+    if !self.folder.isEmpty {
+      try container.encode(self.folder, forKey: .folder)
+    }
+    if !self.cloudFunction.isEmpty {
+      try container.encode(self.cloudFunction, forKey: .cloudFunction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

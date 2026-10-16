@@ -124,9 +124,15 @@ public struct UpdateEntryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.entry, forKey: .entry)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.deleteMissingAspects, forKey: .deleteMissingAspects)
-    try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if self.deleteMissingAspects {
+      try container.encode(self.deleteMissingAspects, forKey: .deleteMissingAspects)
+    }
+    if !self.aspectKeys.isEmpty {
+      try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

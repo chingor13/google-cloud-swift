@@ -79,8 +79,12 @@ public struct ListBlueprintRevisionsResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.blueprints, forKey: .blueprints)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.blueprints.isEmpty {
+      try container.encode(self.blueprints, forKey: .blueprints)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

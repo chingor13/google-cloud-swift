@@ -97,10 +97,18 @@ public struct ChallengeMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pageloadCount, forKey: .pageloadCount)
-    try container.encode(self.nocaptchaCount, forKey: .nocaptchaCount)
-    try container.encode(self.failedCount, forKey: .failedCount)
-    try container.encode(self.passedCount, forKey: .passedCount)
+    if self.pageloadCount != 0 {
+      try container.encode(self.pageloadCount, forKey: .pageloadCount)
+    }
+    if self.nocaptchaCount != 0 {
+      try container.encode(self.nocaptchaCount, forKey: .nocaptchaCount)
+    }
+    if self.failedCount != 0 {
+      try container.encode(self.failedCount, forKey: .failedCount)
+    }
+    if self.passedCount != 0 {
+      try container.encode(self.passedCount, forKey: .passedCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

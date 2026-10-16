@@ -78,8 +78,12 @@ public struct SectionHeader: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subtitle, forKey: .subtitle)
-    try container.encode(self.dividerBelow, forKey: .dividerBelow)
+    if !self.subtitle.isEmpty {
+      try container.encode(self.subtitle, forKey: .subtitle)
+    }
+    if self.dividerBelow {
+      try container.encode(self.dividerBelow, forKey: .dividerBelow)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

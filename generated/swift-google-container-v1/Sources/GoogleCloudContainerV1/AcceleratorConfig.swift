@@ -102,9 +102,15 @@ public struct AcceleratorConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.acceleratorCount, forKey: .acceleratorCount)
-    try container.encode(self.acceleratorType, forKey: .acceleratorType)
-    try container.encode(self.gpuPartitionSize, forKey: .gpuPartitionSize)
+    if self.acceleratorCount != 0 {
+      try container.encode(self.acceleratorCount, forKey: .acceleratorCount)
+    }
+    if !self.acceleratorType.isEmpty {
+      try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    }
+    if !self.gpuPartitionSize.isEmpty {
+      try container.encode(self.gpuPartitionSize, forKey: .gpuPartitionSize)
+    }
     try container.encodeIfPresent(self.gpuSharingConfig, forKey: .gpuSharingConfig)
     try container.encodeIfPresent(
       self.gpuDriverInstallationConfig, forKey: .gpuDriverInstallationConfig)

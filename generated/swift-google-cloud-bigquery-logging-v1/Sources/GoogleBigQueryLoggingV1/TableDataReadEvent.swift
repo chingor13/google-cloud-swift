@@ -79,7 +79,9 @@ public struct TableDataReadEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.tableName, forKey: .tableName)
-    try container.encode(self.referencedFields, forKey: .referencedFields)
+    if !self.referencedFields.isEmpty {
+      try container.encode(self.referencedFields, forKey: .referencedFields)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -104,7 +104,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.interconnect, forKey: .interconnect)
-      try container.encode(self.vlanTags, forKey: .vlanTags)
+      if !self.vlanTags.isEmpty {
+        try container.encode(self.vlanTags, forKey: .vlanTags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

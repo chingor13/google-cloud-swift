@@ -159,12 +159,20 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accelerators, forKey: .accelerators)
+      if !self.accelerators.isEmpty {
+        try container.encode(self.accelerators, forKey: .accelerators)
+      }
       try container.encodeIfPresent(self.consumedResources, forKey: .consumedResources)
       try container.encodeIfPresent(self.cpuOvercommitType, forKey: .cpuOvercommitType)
-      try container.encode(self.disks, forKey: .disks)
-      try container.encode(self.instanceConsumptionData, forKey: .instanceConsumptionData)
-      try container.encode(self.instances, forKey: .instances)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
+      if !self.instanceConsumptionData.isEmpty {
+        try container.encode(self.instanceConsumptionData, forKey: .instanceConsumptionData)
+      }
+      if !self.instances.isEmpty {
+        try container.encode(self.instances, forKey: .instances)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.nodeType, forKey: .nodeType)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)

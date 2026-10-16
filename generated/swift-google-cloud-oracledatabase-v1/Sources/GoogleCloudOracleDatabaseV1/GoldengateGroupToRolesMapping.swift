@@ -93,10 +93,18 @@ public struct GoldengateGroupToRolesMapping: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.securityGroupId, forKey: .securityGroupId)
-    try container.encode(self.administratorGroupId, forKey: .administratorGroupId)
-    try container.encode(self.operatorGroupId, forKey: .operatorGroupId)
-    try container.encode(self.userGroupId, forKey: .userGroupId)
+    if !self.securityGroupId.isEmpty {
+      try container.encode(self.securityGroupId, forKey: .securityGroupId)
+    }
+    if !self.administratorGroupId.isEmpty {
+      try container.encode(self.administratorGroupId, forKey: .administratorGroupId)
+    }
+    if !self.operatorGroupId.isEmpty {
+      try container.encode(self.operatorGroupId, forKey: .operatorGroupId)
+    }
+    if !self.userGroupId.isEmpty {
+      try container.encode(self.userGroupId, forKey: .userGroupId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

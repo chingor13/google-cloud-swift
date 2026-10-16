@@ -95,10 +95,18 @@ public struct Requests: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ratio, forKey: .ratio)
-    try container.encode(self.shortTermAllowed, forKey: .shortTermAllowed)
-    try container.encode(self.longTermAllowed, forKey: .longTermAllowed)
-    try container.encode(self.longTermDenied, forKey: .longTermDenied)
+    if self.ratio != 0 {
+      try container.encode(self.ratio, forKey: .ratio)
+    }
+    if self.shortTermAllowed != 0 {
+      try container.encode(self.shortTermAllowed, forKey: .shortTermAllowed)
+    }
+    if self.longTermAllowed != 0 {
+      try container.encode(self.longTermAllowed, forKey: .longTermAllowed)
+    }
+    if self.longTermDenied != 0 {
+      try container.encode(self.longTermDenied, forKey: .longTermDenied)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

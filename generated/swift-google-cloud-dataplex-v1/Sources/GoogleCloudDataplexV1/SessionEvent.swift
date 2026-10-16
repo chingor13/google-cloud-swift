@@ -139,12 +139,24 @@ public struct SessionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.userId, forKey: .userId)
-    try container.encode(self.sessionId, forKey: .sessionId)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.eventSucceeded, forKey: .eventSucceeded)
-    try container.encode(self.fastStartupEnabled, forKey: .fastStartupEnabled)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.userId.isEmpty {
+      try container.encode(self.userId, forKey: .userId)
+    }
+    if !self.sessionId.isEmpty {
+      try container.encode(self.sessionId, forKey: .sessionId)
+    }
+    if self.type != SessionEvent.EventType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.eventSucceeded {
+      try container.encode(self.eventSucceeded, forKey: .eventSucceeded)
+    }
+    if self.fastStartupEnabled {
+      try container.encode(self.fastStartupEnabled, forKey: .fastStartupEnabled)
+    }
     try container.encodeIfPresent(self.unassignedDuration, forKey: .unassignedDuration)
 
     if let choice = self.detail {
@@ -250,12 +262,22 @@ public struct SessionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryId, forKey: .queryId)
-      try container.encode(self.queryText, forKey: .queryText)
-      try container.encode(self.engine, forKey: .engine)
+      if !self.queryId.isEmpty {
+        try container.encode(self.queryId, forKey: .queryId)
+      }
+      if !self.queryText.isEmpty {
+        try container.encode(self.queryText, forKey: .queryText)
+      }
+      if self.engine != SessionEvent.QueryDetail.Engine() {
+        try container.encode(self.engine, forKey: .engine)
+      }
       try container.encodeIfPresent(self.duration, forKey: .duration)
-      try container.encode(self.resultSizeBytes, forKey: .resultSizeBytes)
-      try container.encode(self.dataProcessedBytes, forKey: .dataProcessedBytes)
+      if self.resultSizeBytes != 0 {
+        try container.encode(self.resultSizeBytes, forKey: .resultSizeBytes)
+      }
+      if self.dataProcessedBytes != 0 {
+        try container.encode(self.dataProcessedBytes, forKey: .dataProcessedBytes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

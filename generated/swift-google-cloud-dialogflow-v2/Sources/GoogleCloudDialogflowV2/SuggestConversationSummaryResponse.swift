@@ -101,8 +101,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.summary, forKey: .summary)
-      try container.encode(self.latestMessage, forKey: .latestMessage)
-      try container.encode(self.contextSize, forKey: .contextSize)
+      if !self.latestMessage.isEmpty {
+        try container.encode(self.latestMessage, forKey: .latestMessage)
+      }
+      if self.contextSize != 0 {
+        try container.encode(self.contextSize, forKey: .contextSize)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -205,11 +209,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.text, forKey: .text)
-        try container.encode(self.textSections, forKey: .textSections)
-        try container.encode(self.sortedTextSections, forKey: .sortedTextSections)
-        try container.encode(self.answerRecord, forKey: .answerRecord)
-        try container.encode(self.baselineModelVersion, forKey: .baselineModelVersion)
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
+        if !self.textSections.isEmpty {
+          try container.encode(self.textSections, forKey: .textSections)
+        }
+        if !self.sortedTextSections.isEmpty {
+          try container.encode(self.sortedTextSections, forKey: .sortedTextSections)
+        }
+        if !self.answerRecord.isEmpty {
+          try container.encode(self.answerRecord, forKey: .answerRecord)
+        }
+        if !self.baselineModelVersion.isEmpty {
+          try container.encode(self.baselineModelVersion, forKey: .baselineModelVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -275,8 +289,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.section, forKey: .section)
-          try container.encode(self.summary, forKey: .summary)
+          if !self.section.isEmpty {
+            try container.encode(self.section, forKey: .section)
+          }
+          if !self.summary.isEmpty {
+            try container.encode(self.summary, forKey: .summary)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

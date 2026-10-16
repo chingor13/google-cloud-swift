@@ -114,7 +114,9 @@
       try container.encodeIfPresent(self.enabled, forKey: .enabled)
       try container.encodeIfPresent(self.minNodeCount, forKey: .minNodeCount)
       try container.encodeIfPresent(self.maxNodeCount, forKey: .maxNodeCount)
-      try container.encode(self.targetMetrics, forKey: .targetMetrics)
+      if !self.targetMetrics.isEmpty {
+        try container.encode(self.targetMetrics, forKey: .targetMetrics)
+      }
       try container.encodeIfPresent(self.disableScaleIn, forKey: .disableScaleIn)
       try container.encodeIfPresent(self.scaleInCooldownSeconds, forKey: .scaleInCooldownSeconds)
       try container.encodeIfPresent(self.scaleOutCooldownSeconds, forKey: .scaleOutCooldownSeconds)

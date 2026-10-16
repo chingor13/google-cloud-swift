@@ -104,8 +104,12 @@ public struct Trace: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.endpointInfo, forKey: .endpointInfo)
-    try container.encode(self.steps, forKey: .steps)
-    try container.encode(self.forwardTraceId, forKey: .forwardTraceId)
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
+    if self.forwardTraceId != 0 {
+      try container.encode(self.forwardTraceId, forKey: .forwardTraceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

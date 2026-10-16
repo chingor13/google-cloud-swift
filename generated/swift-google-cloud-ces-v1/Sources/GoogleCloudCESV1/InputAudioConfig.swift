@@ -88,9 +88,15 @@ public struct InputAudioConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.audioEncoding, forKey: .audioEncoding)
-    try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
-    try container.encode(self.noiseSuppressionLevel, forKey: .noiseSuppressionLevel)
+    if self.audioEncoding != AudioEncoding() {
+      try container.encode(self.audioEncoding, forKey: .audioEncoding)
+    }
+    if self.sampleRateHertz != 0 {
+      try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
+    }
+    if !self.noiseSuppressionLevel.isEmpty {
+      try container.encode(self.noiseSuppressionLevel, forKey: .noiseSuppressionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -290,8 +290,12 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.boost, forKey: .boost)
-      try container.encode(self.productsFilter, forKey: .productsFilter)
+      if self.boost != 0 {
+        try container.encode(self.boost, forKey: .boost)
+      }
+      if !self.productsFilter.isEmpty {
+        try container.encode(self.productsFilter, forKey: .productsFilter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -403,7 +407,9 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.filter, forKey: .filter)
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -491,7 +497,9 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.redirectUri, forKey: .redirectUri)
+      if !self.redirectUri.isEmpty {
+        try container.encode(self.redirectUri, forKey: .redirectUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -577,7 +585,9 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.synonyms, forKey: .synonyms)
+      if !self.synonyms.isEmpty {
+        try container.encode(self.synonyms, forKey: .synonyms)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -682,9 +692,15 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryTerms, forKey: .queryTerms)
-      try container.encode(self.synonyms, forKey: .synonyms)
-      try container.encode(self.onewayTerms, forKey: .onewayTerms)
+      if !self.queryTerms.isEmpty {
+        try container.encode(self.queryTerms, forKey: .queryTerms)
+      }
+      if !self.synonyms.isEmpty {
+        try container.encode(self.synonyms, forKey: .synonyms)
+      }
+      if !self.onewayTerms.isEmpty {
+        try container.encode(self.onewayTerms, forKey: .onewayTerms)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -787,9 +803,15 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryTerms, forKey: .queryTerms)
-      try container.encode(self.doNotAssociateTerms, forKey: .doNotAssociateTerms)
-      try container.encode(self.terms, forKey: .terms)
+      if !self.queryTerms.isEmpty {
+        try container.encode(self.queryTerms, forKey: .queryTerms)
+      }
+      if !self.doNotAssociateTerms.isEmpty {
+        try container.encode(self.doNotAssociateTerms, forKey: .doNotAssociateTerms)
+      }
+      if !self.terms.isEmpty {
+        try container.encode(self.terms, forKey: .terms)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -889,9 +911,15 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryTerms, forKey: .queryTerms)
-      try container.encode(self.replacementTerm, forKey: .replacementTerm)
-      try container.encode(self.term, forKey: .term)
+      if !self.queryTerms.isEmpty {
+        try container.encode(self.queryTerms, forKey: .queryTerms)
+      }
+      if !self.replacementTerm.isEmpty {
+        try container.encode(self.replacementTerm, forKey: .replacementTerm)
+      }
+      if !self.term.isEmpty {
+        try container.encode(self.term, forKey: .term)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -972,7 +1000,9 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ignoreTerms, forKey: .ignoreTerms)
+      if !self.ignoreTerms.isEmpty {
+        try container.encode(self.ignoreTerms, forKey: .ignoreTerms)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1087,7 +1117,9 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.facetPositionAdjustments, forKey: .facetPositionAdjustments)
+      if !self.facetPositionAdjustments.isEmpty {
+        try container.encode(self.facetPositionAdjustments, forKey: .facetPositionAdjustments)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1157,8 +1189,12 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.attributeName, forKey: .attributeName)
-        try container.encode(self.position, forKey: .position)
+        if !self.attributeName.isEmpty {
+          try container.encode(self.attributeName, forKey: .attributeName)
+        }
+        if self.position != 0 {
+          try container.encode(self.position, forKey: .position)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1284,7 +1320,9 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attributeNames, forKey: .attributeNames)
+      if !self.attributeNames.isEmpty {
+        try container.encode(self.attributeNames, forKey: .attributeNames)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1416,7 +1454,7 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      do {
+      if !self.pinMap.isEmpty {
         let stringKeyed = Dictionary(
           uniqueKeysWithValues: self.pinMap.lazy.map { (Swift.String($0), $1) }
         )

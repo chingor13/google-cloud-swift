@@ -102,11 +102,21 @@ public struct DirectVpcEgressConnectionInfo: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.subnetworkUri, forKey: .subnetworkUri)
-    try container.encode(self.selectedIpRange, forKey: .selectedIpRange)
-    try container.encode(self.selectedIpAddress, forKey: .selectedIpAddress)
-    try container.encode(self.region, forKey: .region)
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.subnetworkUri.isEmpty {
+      try container.encode(self.subnetworkUri, forKey: .subnetworkUri)
+    }
+    if !self.selectedIpRange.isEmpty {
+      try container.encode(self.selectedIpRange, forKey: .selectedIpRange)
+    }
+    if !self.selectedIpAddress.isEmpty {
+      try container.encode(self.selectedIpAddress, forKey: .selectedIpAddress)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

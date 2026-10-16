@@ -110,12 +110,24 @@ public struct WhatsAppCredentials: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.authCode, forKey: .authCode)
-    try container.encode(self.pin, forKey: .pin)
-    try container.encode(self.phoneNumber, forKey: .phoneNumber)
-    try container.encode(self.businessAccountId, forKey: .businessAccountId)
-    try container.encode(self.wabaId, forKey: .wabaId)
-    try container.encode(self.conversationProfileId, forKey: .conversationProfileId)
+    if !self.authCode.isEmpty {
+      try container.encode(self.authCode, forKey: .authCode)
+    }
+    if !self.pin.isEmpty {
+      try container.encode(self.pin, forKey: .pin)
+    }
+    if !self.phoneNumber.isEmpty {
+      try container.encode(self.phoneNumber, forKey: .phoneNumber)
+    }
+    if !self.businessAccountId.isEmpty {
+      try container.encode(self.businessAccountId, forKey: .businessAccountId)
+    }
+    if !self.wabaId.isEmpty {
+      try container.encode(self.wabaId, forKey: .wabaId)
+    }
+    if !self.conversationProfileId.isEmpty {
+      try container.encode(self.conversationProfileId, forKey: .conversationProfileId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

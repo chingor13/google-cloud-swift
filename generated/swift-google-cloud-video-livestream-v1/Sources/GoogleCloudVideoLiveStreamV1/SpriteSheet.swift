@@ -138,14 +138,28 @@ public struct SpriteSheet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.format, forKey: .format)
-    try container.encode(self.filePrefix, forKey: .filePrefix)
-    try container.encode(self.spriteWidthPixels, forKey: .spriteWidthPixels)
-    try container.encode(self.spriteHeightPixels, forKey: .spriteHeightPixels)
-    try container.encode(self.columnCount, forKey: .columnCount)
-    try container.encode(self.rowCount, forKey: .rowCount)
+    if !self.format.isEmpty {
+      try container.encode(self.format, forKey: .format)
+    }
+    if !self.filePrefix.isEmpty {
+      try container.encode(self.filePrefix, forKey: .filePrefix)
+    }
+    if self.spriteWidthPixels != 0 {
+      try container.encode(self.spriteWidthPixels, forKey: .spriteWidthPixels)
+    }
+    if self.spriteHeightPixels != 0 {
+      try container.encode(self.spriteHeightPixels, forKey: .spriteHeightPixels)
+    }
+    if self.columnCount != 0 {
+      try container.encode(self.columnCount, forKey: .columnCount)
+    }
+    if self.rowCount != 0 {
+      try container.encode(self.rowCount, forKey: .rowCount)
+    }
     try container.encodeIfPresent(self.interval, forKey: .interval)
-    try container.encode(self.quality, forKey: .quality)
+    if self.quality != 0 {
+      try container.encode(self.quality, forKey: .quality)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -98,9 +98,15 @@ public struct SpokeSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.spokeTypeCounts, forKey: .spokeTypeCounts)
-    try container.encode(self.spokeStateCounts, forKey: .spokeStateCounts)
-    try container.encode(self.spokeStateReasonCounts, forKey: .spokeStateReasonCounts)
+    if !self.spokeTypeCounts.isEmpty {
+      try container.encode(self.spokeTypeCounts, forKey: .spokeTypeCounts)
+    }
+    if !self.spokeStateCounts.isEmpty {
+      try container.encode(self.spokeStateCounts, forKey: .spokeStateCounts)
+    }
+    if !self.spokeStateReasonCounts.isEmpty {
+      try container.encode(self.spokeStateReasonCounts, forKey: .spokeStateReasonCounts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -169,8 +175,12 @@ public struct SpokeSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.spokeType, forKey: .spokeType)
-      try container.encode(self.count, forKey: .count)
+      if self.spokeType != SpokeType() {
+        try container.encode(self.spokeType, forKey: .spokeType)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -263,8 +273,12 @@ public struct SpokeSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.count, forKey: .count)
+      if self.state != GoogleCloudNetworkConnectivityV1.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -355,8 +369,12 @@ public struct SpokeSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.stateReasonCode, forKey: .stateReasonCode)
-      try container.encode(self.count, forKey: .count)
+      if self.stateReasonCode != Spoke.StateReason.Code() {
+        try container.encode(self.stateReasonCode, forKey: .stateReasonCode)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -89,9 +89,15 @@ public struct BigQueryExportSettings: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.dataset, forKey: .dataset)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

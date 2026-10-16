@@ -95,10 +95,18 @@ public struct ViolationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.asset, forKey: .asset)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.observed, forKey: .observed)
-    try container.encode(self.ruleOutput, forKey: .ruleOutput)
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.observed.isEmpty {
+      try container.encode(self.observed, forKey: .observed)
+    }
+    if !self.ruleOutput.isEmpty {
+      try container.encode(self.ruleOutput, forKey: .ruleOutput)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

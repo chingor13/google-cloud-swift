@@ -130,9 +130,15 @@ public struct CloudStorageRegexFileSet: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucketName, forKey: .bucketName)
-    try container.encode(self.includeRegex, forKey: .includeRegex)
-    try container.encode(self.excludeRegex, forKey: .excludeRegex)
+    if !self.bucketName.isEmpty {
+      try container.encode(self.bucketName, forKey: .bucketName)
+    }
+    if !self.includeRegex.isEmpty {
+      try container.encode(self.includeRegex, forKey: .includeRegex)
+    }
+    if !self.excludeRegex.isEmpty {
+      try container.encode(self.excludeRegex, forKey: .excludeRegex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

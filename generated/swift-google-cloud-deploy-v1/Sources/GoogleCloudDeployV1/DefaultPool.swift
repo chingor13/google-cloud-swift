@@ -82,8 +82,12 @@ public struct DefaultPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.artifactStorage, forKey: .artifactStorage)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.artifactStorage.isEmpty {
+      try container.encode(self.artifactStorage, forKey: .artifactStorage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

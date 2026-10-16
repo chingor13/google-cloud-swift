@@ -111,10 +111,18 @@ public struct TableFieldSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.field, forKey: .field)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.fields, forKey: .fields)
+    if !self.field.isEmpty {
+      try container.encode(self.field, forKey: .field)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.mode.isEmpty {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

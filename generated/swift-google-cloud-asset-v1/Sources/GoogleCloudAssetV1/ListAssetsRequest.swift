@@ -158,13 +158,25 @@ public struct ListAssetsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.readTime, forKey: .readTime)
-    try container.encode(self.assetTypes, forKey: .assetTypes)
-    try container.encode(self.contentType, forKey: .contentType)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.relationshipTypes, forKey: .relationshipTypes)
+    if !self.assetTypes.isEmpty {
+      try container.encode(self.assetTypes, forKey: .assetTypes)
+    }
+    if self.contentType != ContentType() {
+      try container.encode(self.contentType, forKey: .contentType)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.relationshipTypes.isEmpty {
+      try container.encode(self.relationshipTypes, forKey: .relationshipTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

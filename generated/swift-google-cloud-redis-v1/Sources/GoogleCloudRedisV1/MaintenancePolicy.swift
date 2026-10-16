@@ -98,8 +98,12 @@ public struct MaintenancePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.weeklyMaintenanceWindow, forKey: .weeklyMaintenanceWindow)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.weeklyMaintenanceWindow.isEmpty {
+      try container.encode(self.weeklyMaintenanceWindow, forKey: .weeklyMaintenanceWindow)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

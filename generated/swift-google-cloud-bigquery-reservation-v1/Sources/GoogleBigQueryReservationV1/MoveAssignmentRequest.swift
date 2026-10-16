@@ -102,9 +102,15 @@ public struct MoveAssignmentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.destinationId, forKey: .destinationId)
-    try container.encode(self.assignmentId, forKey: .assignmentId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.destinationId.isEmpty {
+      try container.encode(self.destinationId, forKey: .destinationId)
+    }
+    if !self.assignmentId.isEmpty {
+      try container.encode(self.assignmentId, forKey: .assignmentId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

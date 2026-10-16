@@ -95,8 +95,12 @@ public struct TimestampedObject: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.normalizedBoundingBox, forKey: .normalizedBoundingBox)
     try container.encodeIfPresent(self.timeOffset, forKey: .timeOffset)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.landmarks, forKey: .landmarks)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.landmarks.isEmpty {
+      try container.encode(self.landmarks, forKey: .landmarks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

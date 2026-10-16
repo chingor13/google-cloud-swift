@@ -98,7 +98,9 @@ extension OutboundEndpointsClient {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
       try container.encodeIfPresent(self.outboundEndpointId, forKey: .outboundEndpointId)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.requestId, forKey: .requestId)
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
@@ -194,7 +196,9 @@ extension OutboundEndpointsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.requestId, forKey: .requestId)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -283,7 +287,9 @@ extension OutboundEndpointsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -384,7 +390,9 @@ extension OutboundEndpointsClient {
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
       try container.encodeIfPresent(self.pageSize, forKey: .pageSize)
       try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -491,7 +499,9 @@ extension OutboundEndpointsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.requestId, forKey: .requestId)
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
       try container.encodeIfPresent(self.body, forKey: .body)

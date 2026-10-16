@@ -94,9 +94,15 @@ extension ManagedZoneOperationsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.operation, forKey: .operation)
-      try container.encode(self.project, forKey: .project)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.operation.isEmpty {
+        try container.encode(self.operation, forKey: .operation)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -203,10 +209,14 @@ extension ManagedZoneOperationsClient {
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.managedZone, forKey: .managedZone)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
       try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
       try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-      try container.encode(self.project, forKey: .project)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.sortBy, forKey: .sortBy)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

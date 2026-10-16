@@ -138,8 +138,12 @@ public struct AuditData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.addedPermissions, forKey: .addedPermissions)
-      try container.encode(self.removedPermissions, forKey: .removedPermissions)
+      if !self.addedPermissions.isEmpty {
+        try container.encode(self.addedPermissions, forKey: .addedPermissions)
+      }
+      if !self.removedPermissions.isEmpty {
+        try container.encode(self.removedPermissions, forKey: .removedPermissions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

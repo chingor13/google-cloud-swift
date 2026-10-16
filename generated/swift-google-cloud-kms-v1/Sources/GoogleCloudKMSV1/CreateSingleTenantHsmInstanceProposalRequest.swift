@@ -104,9 +104,13 @@ public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, 
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(
-      self.singleTenantHsmInstanceProposalId, forKey: .singleTenantHsmInstanceProposalId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.singleTenantHsmInstanceProposalId.isEmpty {
+      try container.encode(
+        self.singleTenantHsmInstanceProposalId, forKey: .singleTenantHsmInstanceProposalId)
+    }
     try container.encodeIfPresent(
       self.singleTenantHsmInstanceProposal, forKey: .singleTenantHsmInstanceProposal)
     for (key, value) in self._unknownFields.json {

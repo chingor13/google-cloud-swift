@@ -234,15 +234,27 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.dataStoreIds, forKey: .dataStoreIds)
-      try container.encode(self.solutionType, forKey: .solutionType)
-      try container.encode(self.industryVertical, forKey: .industryVertical)
+      if !self.dataStoreIds.isEmpty {
+        try container.encode(self.dataStoreIds, forKey: .dataStoreIds)
+      }
+      if self.solutionType != SolutionType() {
+        try container.encode(self.solutionType, forKey: .solutionType)
+      }
+      if self.industryVertical != IndustryVertical() {
+        try container.encode(self.industryVertical, forKey: .industryVertical)
+      }
       try container.encodeIfPresent(self.commonConfig, forKey: .commonConfig)
-      try container.encode(self.disableAnalytics, forKey: .disableAnalytics)
+      if self.disableAnalytics {
+        try container.encode(self.disableAnalytics, forKey: .disableAnalytics)
+      }
 
       if let choice = self.engineConfig {
         switch choice {
@@ -335,8 +347,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.searchTier, forKey: .searchTier)
-        try container.encode(self.searchAddOns, forKey: .searchAddOns)
+        if self.searchTier != SearchTier() {
+          try container.encode(self.searchTier, forKey: .searchTier)
+        }
+        if !self.searchAddOns.isEmpty {
+          try container.encode(self.searchAddOns, forKey: .searchAddOns)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -494,11 +510,17 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.optimizationObjective, forKey: .optimizationObjective)
+        if !self.type.isEmpty {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.optimizationObjective.isEmpty {
+          try container.encode(self.optimizationObjective, forKey: .optimizationObjective)
+        }
         try container.encodeIfPresent(
           self.optimizationObjectiveConfig, forKey: .optimizationObjectiveConfig)
-        try container.encode(self.trainingState, forKey: .trainingState)
+        if self.trainingState != Engine.MediaRecommendationEngineConfig.TrainingState() {
+          try container.encode(self.trainingState, forKey: .trainingState)
+        }
         try container.encodeIfPresent(self.engineFeaturesConfig, forKey: .engineFeaturesConfig)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -568,8 +590,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.targetField, forKey: .targetField)
-          try container.encode(self.targetFieldValueFloat, forKey: .targetFieldValueFloat)
+          if !self.targetField.isEmpty {
+            try container.encode(self.targetField, forKey: .targetField)
+          }
+          if self.targetFieldValueFloat != 0 {
+            try container.encode(self.targetFieldValueFloat, forKey: .targetFieldValueFloat)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -782,7 +808,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.contextEventType, forKey: .contextEventType)
+          if !self.contextEventType.isEmpty {
+            try container.encode(self.contextEventType, forKey: .contextEventType)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -867,7 +895,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.timeWindowDays, forKey: .timeWindowDays)
+          if self.timeWindowDays != 0 {
+            try container.encode(self.timeWindowDays, forKey: .timeWindowDays)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1150,8 +1180,12 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.agentCreationConfig, forKey: .agentCreationConfig)
-        try container.encode(self.dialogflowAgentToLink, forKey: .dialogflowAgentToLink)
-        try container.encode(self.allowCrossRegion, forKey: .allowCrossRegion)
+        if !self.dialogflowAgentToLink.isEmpty {
+          try container.encode(self.dialogflowAgentToLink, forKey: .dialogflowAgentToLink)
+        }
+        if self.allowCrossRegion {
+          try container.encode(self.allowCrossRegion, forKey: .allowCrossRegion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1254,10 +1288,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.business, forKey: .business)
-          try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
-          try container.encode(self.timeZone, forKey: .timeZone)
-          try container.encode(self.location, forKey: .location)
+          if !self.business.isEmpty {
+            try container.encode(self.business, forKey: .business)
+          }
+          if !self.defaultLanguageCode.isEmpty {
+            try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
+          }
+          if !self.timeZone.isEmpty {
+            try container.encode(self.timeZone, forKey: .timeZone)
+          }
+          if !self.location.isEmpty {
+            try container.encode(self.location, forKey: .location)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1361,7 +1403,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.companyName, forKey: .companyName)
+        if !self.companyName.isEmpty {
+          try container.encode(self.companyName, forKey: .companyName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1446,7 +1490,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dialogflowAgent, forKey: .dialogflowAgent)
+        if !self.dialogflowAgent.isEmpty {
+          try container.encode(self.dialogflowAgent, forKey: .dialogflowAgent)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

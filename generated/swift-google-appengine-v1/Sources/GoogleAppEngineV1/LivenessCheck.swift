@@ -117,10 +117,18 @@ public struct LivenessCheck: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.failureThreshold, forKey: .failureThreshold)
-    try container.encode(self.successThreshold, forKey: .successThreshold)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.failureThreshold != 0 {
+      try container.encode(self.failureThreshold, forKey: .failureThreshold)
+    }
+    if self.successThreshold != 0 {
+      try container.encode(self.successThreshold, forKey: .successThreshold)
+    }
     try container.encodeIfPresent(self.checkInterval, forKey: .checkInterval)
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
     try container.encodeIfPresent(self.initialDelay, forKey: .initialDelay)

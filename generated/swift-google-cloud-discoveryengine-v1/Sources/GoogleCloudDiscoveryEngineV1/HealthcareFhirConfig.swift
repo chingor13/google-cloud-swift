@@ -91,9 +91,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableConfigurableSchema, forKey: .enableConfigurableSchema)
-      try container.encode(
-        self.enableStaticIndexingForBatchIngestion, forKey: .enableStaticIndexingForBatchIngestion)
+      if self.enableConfigurableSchema {
+        try container.encode(self.enableConfigurableSchema, forKey: .enableConfigurableSchema)
+      }
+      if self.enableStaticIndexingForBatchIngestion {
+        try container.encode(
+          self.enableStaticIndexingForBatchIngestion, forKey: .enableStaticIndexingForBatchIngestion
+        )
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

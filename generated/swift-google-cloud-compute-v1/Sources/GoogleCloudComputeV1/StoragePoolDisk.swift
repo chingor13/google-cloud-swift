@@ -137,13 +137,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attachedInstances, forKey: .attachedInstances)
+      if !self.attachedInstances.isEmpty {
+        try container.encode(self.attachedInstances, forKey: .attachedInstances)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.disk, forKey: .disk)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.provisionedIops, forKey: .provisionedIops)
       try container.encodeIfPresent(self.provisionedThroughput, forKey: .provisionedThroughput)
-      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      if !self.resourcePolicies.isEmpty {
+        try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      }
       try container.encodeIfPresent(self.sizeGb, forKey: .sizeGb)
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.type, forKey: .type)

@@ -89,9 +89,15 @@ public struct VerifyReferenceListRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.syntaxType, forKey: .syntaxType)
-    try container.encode(self.entries, forKey: .entries)
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if self.syntaxType != ReferenceListSyntaxType() {
+      try container.encode(self.syntaxType, forKey: .syntaxType)
+    }
+    if !self.entries.isEmpty {
+      try container.encode(self.entries, forKey: .entries)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

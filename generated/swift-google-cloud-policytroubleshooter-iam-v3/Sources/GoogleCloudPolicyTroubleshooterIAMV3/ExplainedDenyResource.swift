@@ -121,10 +121,18 @@ public struct ExplainedDenyResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.denyAccessState, forKey: .denyAccessState)
-    try container.encode(self.fullResourceName, forKey: .fullResourceName)
-    try container.encode(self.explainedPolicies, forKey: .explainedPolicies)
-    try container.encode(self.relevance, forKey: .relevance)
+    if self.denyAccessState != DenyAccessState() {
+      try container.encode(self.denyAccessState, forKey: .denyAccessState)
+    }
+    if !self.fullResourceName.isEmpty {
+      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    }
+    if !self.explainedPolicies.isEmpty {
+      try container.encode(self.explainedPolicies, forKey: .explainedPolicies)
+    }
+    if self.relevance != HeuristicRelevance() {
+      try container.encode(self.relevance, forKey: .relevance)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

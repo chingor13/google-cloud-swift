@@ -111,11 +111,21 @@ public struct LocationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.supportedServiceLevels, forKey: .supportedServiceLevels)
-    try container.encode(self.supportedFlexPerformance, forKey: .supportedFlexPerformance)
-    try container.encode(self.hasVcp, forKey: .hasVcp)
-    try container.encode(self.hasOntapProxy, forKey: .hasOntapProxy)
-    try container.encode(self.flexPerformanceTier, forKey: .flexPerformanceTier)
+    if !self.supportedServiceLevels.isEmpty {
+      try container.encode(self.supportedServiceLevels, forKey: .supportedServiceLevels)
+    }
+    if !self.supportedFlexPerformance.isEmpty {
+      try container.encode(self.supportedFlexPerformance, forKey: .supportedFlexPerformance)
+    }
+    if self.hasVcp {
+      try container.encode(self.hasVcp, forKey: .hasVcp)
+    }
+    if self.hasOntapProxy {
+      try container.encode(self.hasOntapProxy, forKey: .hasOntapProxy)
+    }
+    if self.flexPerformanceTier != LocationMetadata.FlexPerformanceTier() {
+      try container.encode(self.flexPerformanceTier, forKey: .flexPerformanceTier)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

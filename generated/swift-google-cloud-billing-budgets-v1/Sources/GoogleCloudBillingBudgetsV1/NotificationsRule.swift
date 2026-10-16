@@ -172,12 +172,22 @@ public struct NotificationsRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pubsubTopic, forKey: .pubsubTopic)
-    try container.encode(self.schemaVersion, forKey: .schemaVersion)
-    try container.encode(
-      self.monitoringNotificationChannels, forKey: .monitoringNotificationChannels)
-    try container.encode(self.disableDefaultIamRecipients, forKey: .disableDefaultIamRecipients)
-    try container.encode(self.enableProjectLevelRecipients, forKey: .enableProjectLevelRecipients)
+    if !self.pubsubTopic.isEmpty {
+      try container.encode(self.pubsubTopic, forKey: .pubsubTopic)
+    }
+    if !self.schemaVersion.isEmpty {
+      try container.encode(self.schemaVersion, forKey: .schemaVersion)
+    }
+    if !self.monitoringNotificationChannels.isEmpty {
+      try container.encode(
+        self.monitoringNotificationChannels, forKey: .monitoringNotificationChannels)
+    }
+    if self.disableDefaultIamRecipients {
+      try container.encode(self.disableDefaultIamRecipients, forKey: .disableDefaultIamRecipients)
+    }
+    if self.enableProjectLevelRecipients {
+      try container.encode(self.enableProjectLevelRecipients, forKey: .enableProjectLevelRecipients)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

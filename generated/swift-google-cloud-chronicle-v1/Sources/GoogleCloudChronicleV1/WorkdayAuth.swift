@@ -115,12 +115,24 @@ public struct WorkdayAuth: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.user, forKey: .user)
-    try container.encode(self.secret, forKey: .secret)
-    try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
-    try container.encode(self.refreshToken, forKey: .refreshToken)
+    if !self.user.isEmpty {
+      try container.encode(self.user, forKey: .user)
+    }
+    if !self.secret.isEmpty {
+      try container.encode(self.secret, forKey: .secret)
+    }
+    if !self.tokenEndpoint.isEmpty {
+      try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
+    if !self.refreshToken.isEmpty {
+      try container.encode(self.refreshToken, forKey: .refreshToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

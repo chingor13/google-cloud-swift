@@ -168,16 +168,32 @@ public struct DeploymentGroup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDescription, forKey: .stateDescription)
-    try container.encode(self.deploymentUnits, forKey: .deploymentUnits)
-    try container.encode(self.provisioningState, forKey: .provisioningState)
-    try container.encode(self.provisioningStateDescription, forKey: .provisioningStateDescription)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if self.state != DeploymentGroup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDescription.isEmpty {
+      try container.encode(self.stateDescription, forKey: .stateDescription)
+    }
+    if !self.deploymentUnits.isEmpty {
+      try container.encode(self.deploymentUnits, forKey: .deploymentUnits)
+    }
+    if self.provisioningState != DeploymentGroup.ProvisioningState() {
+      try container.encode(self.provisioningState, forKey: .provisioningState)
+    }
+    if !self.provisioningStateDescription.isEmpty {
+      try container.encode(self.provisioningStateDescription, forKey: .provisioningStateDescription)
+    }
     try container.encodeIfPresent(self.provisioningError, forKey: .provisioningError)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

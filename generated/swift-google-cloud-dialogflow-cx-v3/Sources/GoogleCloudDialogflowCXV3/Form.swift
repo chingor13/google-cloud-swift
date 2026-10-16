@@ -78,7 +78,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parameters, forKey: .parameters)
+      if !self.parameters.isEmpty {
+        try container.encode(self.parameters, forKey: .parameters)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -207,13 +209,23 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.`required`, forKey: .`required`)
-        try container.encode(self.entityType, forKey: .entityType)
-        try container.encode(self.isList, forKey: .isList)
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if self.`required` {
+          try container.encode(self.`required`, forKey: .`required`)
+        }
+        if !self.entityType.isEmpty {
+          try container.encode(self.entityType, forKey: .entityType)
+        }
+        if self.isList {
+          try container.encode(self.isList, forKey: .isList)
+        }
         try container.encodeIfPresent(self.fillBehavior, forKey: .fillBehavior)
         try container.encodeIfPresent(self.defaultValue, forKey: .defaultValue)
-        try container.encode(self.redact, forKey: .redact)
+        if self.redact {
+          try container.encode(self.redact, forKey: .redact)
+        }
         try container.encodeIfPresent(self.advancedSettings, forKey: .advancedSettings)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -315,7 +327,9 @@
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(
             self.initialPromptFulfillment, forKey: .initialPromptFulfillment)
-          try container.encode(self.repromptEventHandlers, forKey: .repromptEventHandlers)
+          if !self.repromptEventHandlers.isEmpty {
+            try container.encode(self.repromptEventHandlers, forKey: .repromptEventHandlers)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

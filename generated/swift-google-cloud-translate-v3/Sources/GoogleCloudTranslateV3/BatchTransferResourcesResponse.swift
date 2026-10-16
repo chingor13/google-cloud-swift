@@ -72,7 +72,9 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.responses, forKey: .responses)
+    if !self.responses.isEmpty {
+      try container.encode(self.responses, forKey: .responses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -145,8 +147,12 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleWKT._Any
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.source, forKey: .source)
-      try container.encode(self.target, forKey: .target)
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
+      if !self.target.isEmpty {
+        try container.encode(self.target, forKey: .target)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

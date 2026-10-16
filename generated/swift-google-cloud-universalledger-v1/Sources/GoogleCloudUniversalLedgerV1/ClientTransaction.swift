@@ -333,11 +333,21 @@ public struct ClientTransaction: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.senderId, forKey: .senderId)
-    try container.encode(self.otherSignatoryIds, forKey: .otherSignatoryIds)
-    try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
-    try container.encode(self.chainedUnit, forKey: .chainedUnit)
-    try container.encode(self.network, forKey: .network)
+    if !self.senderId.isEmpty {
+      try container.encode(self.senderId, forKey: .senderId)
+    }
+    if !self.otherSignatoryIds.isEmpty {
+      try container.encode(self.otherSignatoryIds, forKey: .otherSignatoryIds)
+    }
+    if self.sequenceNumber != 0 {
+      try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
+    }
+    if self.chainedUnit {
+      try container.encode(self.chainedUnit, forKey: .chainedUnit)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
 
     if let choice = self.kind {
       switch choice {

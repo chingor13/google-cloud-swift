@@ -103,10 +103,18 @@ public struct LinkedRouterApplianceInstances: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instances, forKey: .instances)
-    try container.encode(self.siteToSiteDataTransfer, forKey: .siteToSiteDataTransfer)
-    try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
-    try container.encode(self.includeImportRanges, forKey: .includeImportRanges)
+    if !self.instances.isEmpty {
+      try container.encode(self.instances, forKey: .instances)
+    }
+    if self.siteToSiteDataTransfer {
+      try container.encode(self.siteToSiteDataTransfer, forKey: .siteToSiteDataTransfer)
+    }
+    if !self.vpcNetwork.isEmpty {
+      try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
+    }
+    if !self.includeImportRanges.isEmpty {
+      try container.encode(self.includeImportRanges, forKey: .includeImportRanges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

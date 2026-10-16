@@ -156,14 +156,29 @@ public struct ReleaseConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.gitCommitish, forKey: .gitCommitish)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.gitCommitish.isEmpty {
+      try container.encode(self.gitCommitish, forKey: .gitCommitish)
+    }
     try container.encodeIfPresent(self.codeCompilationConfig, forKey: .codeCompilationConfig)
-    try container.encode(self.cronSchedule, forKey: .cronSchedule)
-    try container.encode(self.timeZone, forKey: .timeZone)
-    try container.encode(self.recentScheduledReleaseRecords, forKey: .recentScheduledReleaseRecords)
-    try container.encode(self.releaseCompilationResult, forKey: .releaseCompilationResult)
-    try container.encode(self.disabled, forKey: .disabled)
+    if !self.cronSchedule.isEmpty {
+      try container.encode(self.cronSchedule, forKey: .cronSchedule)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
+    if !self.recentScheduledReleaseRecords.isEmpty {
+      try container.encode(
+        self.recentScheduledReleaseRecords, forKey: .recentScheduledReleaseRecords)
+    }
+    if !self.releaseCompilationResult.isEmpty {
+      try container.encode(self.releaseCompilationResult, forKey: .releaseCompilationResult)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

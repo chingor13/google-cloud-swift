@@ -256,8 +256,10 @@ public struct StorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.timestampField, forKey: .timestampField)
-      try container.encode(
-        self.enableAutoPopulationOfTimespanConfig, forKey: .enableAutoPopulationOfTimespanConfig)
+      if self.enableAutoPopulationOfTimespanConfig {
+        try container.encode(
+          self.enableAutoPopulationOfTimespanConfig, forKey: .enableAutoPopulationOfTimespanConfig)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

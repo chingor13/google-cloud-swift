@@ -100,8 +100,12 @@ public struct ImportIssueModelRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.createNewModel, forKey: .createNewModel)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if self.createNewModel {
+      try container.encode(self.createNewModel, forKey: .createNewModel)
+    }
 
     if let choice = self.source {
       switch choice {
@@ -166,7 +170,9 @@ public struct ImportIssueModelRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.objectUri, forKey: .objectUri)
+      if !self.objectUri.isEmpty {
+        try container.encode(self.objectUri, forKey: .objectUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

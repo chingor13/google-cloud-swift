@@ -85,8 +85,12 @@ public struct RedactImageResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.redactedImage, forKey: .redactedImage)
-    try container.encode(self.extractedText, forKey: .extractedText)
+    if !self.redactedImage.isEmpty {
+      try container.encode(self.redactedImage, forKey: .redactedImage)
+    }
+    if !self.extractedText.isEmpty {
+      try container.encode(self.extractedText, forKey: .extractedText)
+    }
     try container.encodeIfPresent(self.inspectResult, forKey: .inspectResult)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

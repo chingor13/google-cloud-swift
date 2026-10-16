@@ -148,11 +148,15 @@ public struct QueuedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.queueingPolicy, forKey: .queueingPolicy)
     try container.encodeIfPresent(self.state, forKey: .state)
-    try container.encode(self.reservationName, forKey: .reservationName)
+    if !self.reservationName.isEmpty {
+      try container.encode(self.reservationName, forKey: .reservationName)
+    }
 
     if let choice = self.resource {
       switch choice {
@@ -228,7 +232,9 @@ public struct QueuedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nodeSpec, forKey: .nodeSpec)
+      if !self.nodeSpec.isEmpty {
+        try container.encode(self.nodeSpec, forKey: .nodeSpec)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -321,7 +327,9 @@ public struct QueuedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.parent, forKey: .parent)
+        if !self.parent.isEmpty {
+          try container.encode(self.parent, forKey: .parent)
+        }
         try container.encodeIfPresent(self.node, forKey: .node)
 
         if let choice = self.nameStrategy {
@@ -405,8 +413,12 @@ public struct QueuedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.nodeCount, forKey: .nodeCount)
-          try container.encode(self.nodeIdPrefix, forKey: .nodeIdPrefix)
+          if self.nodeCount != 0 {
+            try container.encode(self.nodeCount, forKey: .nodeCount)
+          }
+          if !self.nodeIdPrefix.isEmpty {
+            try container.encode(self.nodeIdPrefix, forKey: .nodeIdPrefix)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

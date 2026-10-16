@@ -70,7 +70,9 @@ public struct VertexDatasetRegex: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectIdRegex, forKey: .projectIdRegex)
+    if !self.projectIdRegex.isEmpty {
+      try container.encode(self.projectIdRegex, forKey: .projectIdRegex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

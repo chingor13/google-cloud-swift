@@ -122,9 +122,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.intents, forKey: .intents)
-      try container.encode(self.dataFormat, forKey: .dataFormat)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.intents.isEmpty {
+        try container.encode(self.intents, forKey: .intents)
+      }
+      if self.dataFormat != ExportIntentsRequest.DataFormat() {
+        try container.encode(self.dataFormat, forKey: .dataFormat)
+      }
 
       if let choice = self.destination {
         switch choice {

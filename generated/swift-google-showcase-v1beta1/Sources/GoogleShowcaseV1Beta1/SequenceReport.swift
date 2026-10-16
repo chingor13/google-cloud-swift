@@ -77,8 +77,12 @@ public struct SequenceReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.attempts, forKey: .attempts)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.attempts.isEmpty {
+      try container.encode(self.attempts, forKey: .attempts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -165,7 +169,9 @@ public struct SequenceReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attemptNumber, forKey: .attemptNumber)
+      if self.attemptNumber != 0 {
+        try container.encode(self.attemptNumber, forKey: .attemptNumber)
+      }
       try container.encodeIfPresent(self.attemptDeadline, forKey: .attemptDeadline)
       try container.encodeIfPresent(self.responseTime, forKey: .responseTime)
       try container.encodeIfPresent(self.attemptDelay, forKey: .attemptDelay)

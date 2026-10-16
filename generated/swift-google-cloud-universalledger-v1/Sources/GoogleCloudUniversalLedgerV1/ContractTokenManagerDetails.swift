@@ -105,9 +105,13 @@ public struct ContractTokenManagerDetails: Codable, Equatable, GoogleWKT._AnyPac
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.issuanceLimit, forKey: .issuanceLimit)
     try container.encodeIfPresent(self.issuedTokens, forKey: .issuedTokens)
-    try container.encode(
-      self.previousContractTokenManagerId, forKey: .previousContractTokenManagerId)
-    try container.encode(self.accountStatus, forKey: .accountStatus)
+    if !self.previousContractTokenManagerId.isEmpty {
+      try container.encode(
+        self.previousContractTokenManagerId, forKey: .previousContractTokenManagerId)
+    }
+    if self.accountStatus != AccountStatus() {
+      try container.encode(self.accountStatus, forKey: .accountStatus)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

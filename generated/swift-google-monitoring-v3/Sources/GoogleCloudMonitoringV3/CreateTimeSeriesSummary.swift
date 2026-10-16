@@ -88,9 +88,15 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalPointCount, forKey: .totalPointCount)
-    try container.encode(self.successPointCount, forKey: .successPointCount)
-    try container.encode(self.errors, forKey: .errors)
+    if self.totalPointCount != 0 {
+      try container.encode(self.totalPointCount, forKey: .totalPointCount)
+    }
+    if self.successPointCount != 0 {
+      try container.encode(self.successPointCount, forKey: .successPointCount)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -155,7 +161,9 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleWKT._AnyPackabl
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.pointCount, forKey: .pointCount)
+      if self.pointCount != 0 {
+        try container.encode(self.pointCount, forKey: .pointCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

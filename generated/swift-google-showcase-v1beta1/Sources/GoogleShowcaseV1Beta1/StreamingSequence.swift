@@ -91,9 +91,15 @@ public struct StreamingSequence: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.responses, forKey: .responses)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if !self.responses.isEmpty {
+      try container.encode(self.responses, forKey: .responses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -165,7 +171,9 @@ public struct StreamingSequence: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.delay, forKey: .delay)
-      try container.encode(self.responseIndex, forKey: .responseIndex)
+      if self.responseIndex != 0 {
+        try container.encode(self.responseIndex, forKey: .responseIndex)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

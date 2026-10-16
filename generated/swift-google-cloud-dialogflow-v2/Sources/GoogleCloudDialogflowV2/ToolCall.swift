@@ -151,13 +151,23 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.toolDisplayName, forKey: .toolDisplayName)
-      try container.encode(self.toolDisplayDetails, forKey: .toolDisplayDetails)
-      try container.encode(self.action, forKey: .action)
+      if !self.toolDisplayName.isEmpty {
+        try container.encode(self.toolDisplayName, forKey: .toolDisplayName)
+      }
+      if !self.toolDisplayDetails.isEmpty {
+        try container.encode(self.toolDisplayDetails, forKey: .toolDisplayDetails)
+      }
+      if !self.action.isEmpty {
+        try container.encode(self.action, forKey: .action)
+      }
       try container.encodeIfPresent(self.inputParameters, forKey: .inputParameters)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.answerRecord, forKey: .answerRecord)
-      try container.encode(self.state, forKey: .state)
+      if !self.answerRecord.isEmpty {
+        try container.encode(self.answerRecord, forKey: .answerRecord)
+      }
+      if self.state != ToolCall.State() {
+        try container.encode(self.state, forKey: .state)
+      }
 
       if let choice = self.source {
         switch choice {

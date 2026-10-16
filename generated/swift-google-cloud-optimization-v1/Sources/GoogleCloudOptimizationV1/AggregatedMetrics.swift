@@ -195,17 +195,27 @@ public struct AggregatedMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.performedShipmentCount, forKey: .performedShipmentCount)
+    if self.performedShipmentCount != 0 {
+      try container.encode(self.performedShipmentCount, forKey: .performedShipmentCount)
+    }
     try container.encodeIfPresent(self.travelDuration, forKey: .travelDuration)
     try container.encodeIfPresent(self.waitDuration, forKey: .waitDuration)
     try container.encodeIfPresent(self.delayDuration, forKey: .delayDuration)
     try container.encodeIfPresent(self.breakDuration, forKey: .breakDuration)
     try container.encodeIfPresent(self.visitDuration, forKey: .visitDuration)
     try container.encodeIfPresent(self.totalDuration, forKey: .totalDuration)
-    try container.encode(self.travelDistanceMeters, forKey: .travelDistanceMeters)
-    try container.encode(self.maxLoads, forKey: .maxLoads)
-    try container.encode(self.costs, forKey: .costs)
-    try container.encode(self.totalCost, forKey: .totalCost)
+    if self.travelDistanceMeters != 0 {
+      try container.encode(self.travelDistanceMeters, forKey: .travelDistanceMeters)
+    }
+    if !self.maxLoads.isEmpty {
+      try container.encode(self.maxLoads, forKey: .maxLoads)
+    }
+    if !self.costs.isEmpty {
+      try container.encode(self.costs, forKey: .costs)
+    }
+    if self.totalCost != 0 {
+      try container.encode(self.totalCost, forKey: .totalCost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -142,11 +142,15 @@ public struct TrainProcessorVersionRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.processorVersion, forKey: .processorVersion)
     try container.encodeIfPresent(self.documentSchema, forKey: .documentSchema)
     try container.encodeIfPresent(self.inputData, forKey: .inputData)
-    try container.encode(self.baseProcessorVersion, forKey: .baseProcessorVersion)
+    if !self.baseProcessorVersion.isEmpty {
+      try container.encode(self.baseProcessorVersion, forKey: .baseProcessorVersion)
+    }
 
     if let choice = self.processorFlags {
       switch choice {
@@ -309,7 +313,11 @@ public struct TrainProcessorVersionRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trainingMethod, forKey: .trainingMethod)
+      if self.trainingMethod
+        != TrainProcessorVersionRequest.CustomDocumentExtractionOptions.TrainingMethod()
+      {
+        try container.encode(self.trainingMethod, forKey: .trainingMethod)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -518,8 +526,12 @@ public struct TrainProcessorVersionRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trainSteps, forKey: .trainSteps)
-      try container.encode(self.learningRateMultiplier, forKey: .learningRateMultiplier)
+      if self.trainSteps != 0 {
+        try container.encode(self.trainSteps, forKey: .trainSteps)
+      }
+      if self.learningRateMultiplier != 0 {
+        try container.encode(self.learningRateMultiplier, forKey: .learningRateMultiplier)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

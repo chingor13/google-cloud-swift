@@ -160,7 +160,9 @@
       try container.encodeIfPresent(self.adminEnabled, forKey: .adminEnabled)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.endpoints, forKey: .endpoints)
+      if !self.endpoints.isEmpty {
+        try container.encode(self.endpoints, forKey: .endpoints)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
@@ -168,7 +170,9 @@
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.topology, forKey: .topology)
       try container.encodeIfPresent(self.wireProperties, forKey: .wireProperties)
-      try container.encode(self.wires, forKey: .wires)
+      if !self.wires.isEmpty {
+        try container.encode(self.wires, forKey: .wires)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

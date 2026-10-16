@@ -116,8 +116,12 @@ public struct GerritSourceContext: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostUri, forKey: .hostUri)
-    try container.encode(self.gerritProject, forKey: .gerritProject)
+    if !self.hostUri.isEmpty {
+      try container.encode(self.hostUri, forKey: .hostUri)
+    }
+    if !self.gerritProject.isEmpty {
+      try container.encode(self.gerritProject, forKey: .gerritProject)
+    }
 
     if let choice = self.revision {
       switch choice {

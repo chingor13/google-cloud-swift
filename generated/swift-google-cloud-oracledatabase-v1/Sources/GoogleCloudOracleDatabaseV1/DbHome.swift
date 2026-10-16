@@ -94,10 +94,16 @@ public struct DbHome: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.dbVersion, forKey: .dbVersion)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.dbVersion.isEmpty {
+      try container.encode(self.dbVersion, forKey: .dbVersion)
+    }
     try container.encodeIfPresent(self.database, forKey: .database)
-    try container.encode(self.isUnifiedAuditingEnabled, forKey: .isUnifiedAuditingEnabled)
+    if self.isUnifiedAuditingEnabled {
+      try container.encode(self.isUnifiedAuditingEnabled, forKey: .isUnifiedAuditingEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

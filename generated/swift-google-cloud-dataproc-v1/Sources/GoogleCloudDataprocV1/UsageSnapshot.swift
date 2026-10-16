@@ -126,12 +126,24 @@ public struct UsageSnapshot: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.milliDcu, forKey: .milliDcu)
-    try container.encode(self.shuffleStorageGb, forKey: .shuffleStorageGb)
-    try container.encode(self.milliDcuPremium, forKey: .milliDcuPremium)
-    try container.encode(self.shuffleStorageGbPremium, forKey: .shuffleStorageGbPremium)
-    try container.encode(self.milliAccelerator, forKey: .milliAccelerator)
-    try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    if self.milliDcu != 0 {
+      try container.encode(self.milliDcu, forKey: .milliDcu)
+    }
+    if self.shuffleStorageGb != 0 {
+      try container.encode(self.shuffleStorageGb, forKey: .shuffleStorageGb)
+    }
+    if self.milliDcuPremium != 0 {
+      try container.encode(self.milliDcuPremium, forKey: .milliDcuPremium)
+    }
+    if self.shuffleStorageGbPremium != 0 {
+      try container.encode(self.shuffleStorageGbPremium, forKey: .shuffleStorageGbPremium)
+    }
+    if self.milliAccelerator != 0 {
+      try container.encode(self.milliAccelerator, forKey: .milliAccelerator)
+    }
+    if !self.acceleratorType.isEmpty {
+      try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    }
     try container.encodeIfPresent(self.snapshotTime, forKey: .snapshotTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

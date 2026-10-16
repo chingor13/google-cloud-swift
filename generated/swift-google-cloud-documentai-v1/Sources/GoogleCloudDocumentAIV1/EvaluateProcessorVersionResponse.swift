@@ -73,7 +73,9 @@ public struct EvaluateProcessorVersionResponse: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.evaluation, forKey: .evaluation)
+    if !self.evaluation.isEmpty {
+      try container.encode(self.evaluation, forKey: .evaluation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

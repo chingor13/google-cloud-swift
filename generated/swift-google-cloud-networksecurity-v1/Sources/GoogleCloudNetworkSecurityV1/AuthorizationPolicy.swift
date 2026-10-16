@@ -126,13 +126,23 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.rules, forKey: .rules)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.action != AuthorizationPolicy.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -209,8 +219,12 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sources, forKey: .sources)
-      try container.encode(self.destinations, forKey: .destinations)
+      if !self.sources.isEmpty {
+        try container.encode(self.sources, forKey: .sources)
+      }
+      if !self.destinations.isEmpty {
+        try container.encode(self.destinations, forKey: .destinations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -285,8 +299,12 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.principals, forKey: .principals)
-        try container.encode(self.ipBlocks, forKey: .ipBlocks)
+        if !self.principals.isEmpty {
+          try container.encode(self.principals, forKey: .principals)
+        }
+        if !self.ipBlocks.isEmpty {
+          try container.encode(self.ipBlocks, forKey: .ipBlocks)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -398,9 +416,15 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.hosts, forKey: .hosts)
-        try container.encode(self.ports, forKey: .ports)
-        try container.encode(self.methods, forKey: .methods)
+        if !self.hosts.isEmpty {
+          try container.encode(self.hosts, forKey: .hosts)
+        }
+        if !self.ports.isEmpty {
+          try container.encode(self.ports, forKey: .ports)
+        }
+        if !self.methods.isEmpty {
+          try container.encode(self.methods, forKey: .methods)
+        }
         try container.encodeIfPresent(self.httpHeaderMatch, forKey: .httpHeaderMatch)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -482,7 +506,9 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.headerName, forKey: .headerName)
+          if !self.headerName.isEmpty {
+            try container.encode(self.headerName, forKey: .headerName)
+          }
 
           if let choice = self.type {
             switch choice {

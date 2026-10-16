@@ -137,7 +137,9 @@ public struct BDRProtectedResourceLog: Codable, Equatable, GoogleWKT._AnyPackabl
     try container.encodeIfPresent(
       self.sourceResourceDataSizeGib, forKey: .sourceResourceDataSizeGib)
     try container.encodeIfPresent(self.currentBackupPlanName, forKey: .currentBackupPlanName)
-    try container.encode(self.currentBackupRuleDetails, forKey: .currentBackupRuleDetails)
+    if !self.currentBackupRuleDetails.isEmpty {
+      try container.encode(self.currentBackupRuleDetails, forKey: .currentBackupRuleDetails)
+    }
     try container.encodeIfPresent(self.lastProtectedOn, forKey: .lastProtectedOn)
     try container.encodeIfPresent(self.currentBackupVaultName, forKey: .currentBackupVaultName)
     try container.encodeIfPresent(self.sourceResourceLocation, forKey: .sourceResourceLocation)

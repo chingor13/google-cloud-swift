@@ -117,11 +117,21 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.contextUrls, forKey: .contextUrls)
-    try container.encode(self.preferredDomains, forKey: .preferredDomains)
-    try container.encode(self.excludeDomains, forKey: .excludeDomains)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.contextUrls.isEmpty {
+      try container.encode(self.contextUrls, forKey: .contextUrls)
+    }
+    if !self.preferredDomains.isEmpty {
+      try container.encode(self.preferredDomains, forKey: .preferredDomains)
+    }
+    if !self.excludeDomains.isEmpty {
+      try container.encode(self.excludeDomains, forKey: .excludeDomains)
+    }
     try container.encodeIfPresent(self.promptConfig, forKey: .promptConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -193,8 +203,12 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.textPrompt, forKey: .textPrompt)
-      try container.encode(self.voicePrompt, forKey: .voicePrompt)
+      if !self.textPrompt.isEmpty {
+        try container.encode(self.textPrompt, forKey: .textPrompt)
+      }
+      if !self.voicePrompt.isEmpty {
+        try container.encode(self.voicePrompt, forKey: .voicePrompt)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

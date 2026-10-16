@@ -122,11 +122,21 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.resourceGroups, forKey: .resourceGroups)
-    try container.encode(self.allowNoResourceGroupMatch, forKey: .allowNoResourceGroupMatch)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.mode != OSPolicy.Mode() {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if !self.resourceGroups.isEmpty {
+      try container.encode(self.resourceGroups, forKey: .resourceGroups)
+    }
+    if self.allowNoResourceGroupMatch {
+      try container.encode(self.allowNoResourceGroupMatch, forKey: .allowNoResourceGroupMatch)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -198,8 +208,12 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.osShortName, forKey: .osShortName)
-      try container.encode(self.osVersion, forKey: .osVersion)
+      if !self.osShortName.isEmpty {
+        try container.encode(self.osShortName, forKey: .osShortName)
+      }
+      if !self.osVersion.isEmpty {
+        try container.encode(self.osVersion, forKey: .osVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -333,7 +347,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
 
       if let choice = self.resourceType {
         switch choice {
@@ -440,7 +456,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.allowInsecure, forKey: .allowInsecure)
+        if self.allowInsecure {
+          try container.encode(self.allowInsecure, forKey: .allowInsecure)
+        }
 
         if let choice = self.type {
           switch choice {
@@ -518,8 +536,12 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.uri, forKey: .uri)
-          try container.encode(self.sha256Checksum, forKey: .sha256Checksum)
+          if !self.uri.isEmpty {
+            try container.encode(self.uri, forKey: .uri)
+          }
+          if !self.sha256Checksum.isEmpty {
+            try container.encode(self.sha256Checksum, forKey: .sha256Checksum)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -615,9 +637,15 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.bucket, forKey: .bucket)
-          try container.encode(self.object, forKey: .object)
-          try container.encode(self.generation, forKey: .generation)
+          if !self.bucket.isEmpty {
+            try container.encode(self.bucket, forKey: .bucket)
+          }
+          if !self.object.isEmpty {
+            try container.encode(self.object, forKey: .object)
+          }
+          if self.generation != 0 {
+            try container.encode(self.generation, forKey: .generation)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -796,7 +824,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.desiredState, forKey: .desiredState)
+        if self.desiredState != OSPolicy.Resource.PackageResource.DesiredState() {
+          try container.encode(self.desiredState, forKey: .desiredState)
+        }
 
         if let choice = self.systemPackage {
           switch choice {
@@ -883,7 +913,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.source, forKey: .source)
-          try container.encode(self.pullDeps, forKey: .pullDeps)
+          if self.pullDeps {
+            try container.encode(self.pullDeps, forKey: .pullDeps)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -966,7 +998,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.name, forKey: .name)
+          if !self.name.isEmpty {
+            try container.encode(self.name, forKey: .name)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1057,7 +1091,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.source, forKey: .source)
-          try container.encode(self.pullDeps, forKey: .pullDeps)
+          if self.pullDeps {
+            try container.encode(self.pullDeps, forKey: .pullDeps)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1140,7 +1176,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.name, forKey: .name)
+          if !self.name.isEmpty {
+            try container.encode(self.name, forKey: .name)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1223,7 +1261,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.name, forKey: .name)
+          if !self.name.isEmpty {
+            try container.encode(self.name, forKey: .name)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1306,7 +1346,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.name, forKey: .name)
+          if !self.name.isEmpty {
+            try container.encode(self.name, forKey: .name)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1397,7 +1439,9 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.source, forKey: .source)
-          try container.encode(self.properties, forKey: .properties)
+          if !self.properties.isEmpty {
+            try container.encode(self.properties, forKey: .properties)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1781,11 +1825,21 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.archiveType, forKey: .archiveType)
-          try container.encode(self.uri, forKey: .uri)
-          try container.encode(self.distribution, forKey: .distribution)
-          try container.encode(self.components, forKey: .components)
-          try container.encode(self.gpgKey, forKey: .gpgKey)
+          if self.archiveType != OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType() {
+            try container.encode(self.archiveType, forKey: .archiveType)
+          }
+          if !self.uri.isEmpty {
+            try container.encode(self.uri, forKey: .uri)
+          }
+          if !self.distribution.isEmpty {
+            try container.encode(self.distribution, forKey: .distribution)
+          }
+          if !self.components.isEmpty {
+            try container.encode(self.components, forKey: .components)
+          }
+          if !self.gpgKey.isEmpty {
+            try container.encode(self.gpgKey, forKey: .gpgKey)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2012,10 +2066,18 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.id, forKey: .id)
-          try container.encode(self.displayName, forKey: .displayName)
-          try container.encode(self.baseUrl, forKey: .baseUrl)
-          try container.encode(self.gpgKeys, forKey: .gpgKeys)
+          if !self.id.isEmpty {
+            try container.encode(self.id, forKey: .id)
+          }
+          if !self.displayName.isEmpty {
+            try container.encode(self.displayName, forKey: .displayName)
+          }
+          if !self.baseUrl.isEmpty {
+            try container.encode(self.baseUrl, forKey: .baseUrl)
+          }
+          if !self.gpgKeys.isEmpty {
+            try container.encode(self.gpgKeys, forKey: .gpgKeys)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2125,10 +2187,18 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.id, forKey: .id)
-          try container.encode(self.displayName, forKey: .displayName)
-          try container.encode(self.baseUrl, forKey: .baseUrl)
-          try container.encode(self.gpgKeys, forKey: .gpgKeys)
+          if !self.id.isEmpty {
+            try container.encode(self.id, forKey: .id)
+          }
+          if !self.displayName.isEmpty {
+            try container.encode(self.displayName, forKey: .displayName)
+          }
+          if !self.baseUrl.isEmpty {
+            try container.encode(self.baseUrl, forKey: .baseUrl)
+          }
+          if !self.gpgKeys.isEmpty {
+            try container.encode(self.gpgKeys, forKey: .gpgKeys)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2219,8 +2289,12 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.name, forKey: .name)
-          try container.encode(self.url, forKey: .url)
+          if !self.name.isEmpty {
+            try container.encode(self.name, forKey: .name)
+          }
+          if !self.url.isEmpty {
+            try container.encode(self.url, forKey: .url)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2479,9 +2553,15 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.args, forKey: .args)
-          try container.encode(self.interpreter, forKey: .interpreter)
-          try container.encode(self.outputFilePath, forKey: .outputFilePath)
+          if !self.args.isEmpty {
+            try container.encode(self.args, forKey: .args)
+          }
+          if self.interpreter != OSPolicy.Resource.ExecResource.Exec.Interpreter() {
+            try container.encode(self.interpreter, forKey: .interpreter)
+          }
+          if !self.outputFilePath.isEmpty {
+            try container.encode(self.outputFilePath, forKey: .outputFilePath)
+          }
 
           if let choice = self.source {
             switch choice {
@@ -2786,9 +2866,15 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.path, forKey: .path)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.permissions, forKey: .permissions)
+        if !self.path.isEmpty {
+          try container.encode(self.path, forKey: .path)
+        }
+        if self.state != OSPolicy.Resource.FileResource.DesiredState() {
+          try container.encode(self.state, forKey: .state)
+        }
+        if !self.permissions.isEmpty {
+          try container.encode(self.permissions, forKey: .permissions)
+        }
 
         if let choice = self.source {
           switch choice {
@@ -3075,8 +3161,12 @@ public struct OSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inventoryFilters, forKey: .inventoryFilters)
-      try container.encode(self.resources, forKey: .resources)
+      if !self.inventoryFilters.isEmpty {
+        try container.encode(self.inventoryFilters, forKey: .inventoryFilters)
+      }
+      if !self.resources.isEmpty {
+        try container.encode(self.resources, forKey: .resources)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

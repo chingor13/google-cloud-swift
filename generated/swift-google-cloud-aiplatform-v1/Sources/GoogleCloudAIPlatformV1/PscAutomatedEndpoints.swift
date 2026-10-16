@@ -87,9 +87,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.matchAddress, forKey: .matchAddress)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.matchAddress.isEmpty {
+        try container.encode(self.matchAddress, forKey: .matchAddress)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

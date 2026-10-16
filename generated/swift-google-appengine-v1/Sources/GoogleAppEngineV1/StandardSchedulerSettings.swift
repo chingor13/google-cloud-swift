@@ -97,10 +97,18 @@ public struct StandardSchedulerSettings: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.targetCpuUtilization, forKey: .targetCpuUtilization)
-    try container.encode(self.targetThroughputUtilization, forKey: .targetThroughputUtilization)
-    try container.encode(self.minInstances, forKey: .minInstances)
-    try container.encode(self.maxInstances, forKey: .maxInstances)
+    if self.targetCpuUtilization != 0 {
+      try container.encode(self.targetCpuUtilization, forKey: .targetCpuUtilization)
+    }
+    if self.targetThroughputUtilization != 0 {
+      try container.encode(self.targetThroughputUtilization, forKey: .targetThroughputUtilization)
+    }
+    if self.minInstances != 0 {
+      try container.encode(self.minInstances, forKey: .minInstances)
+    }
+    if self.maxInstances != 0 {
+      try container.encode(self.maxInstances, forKey: .maxInstances)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

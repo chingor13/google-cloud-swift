@@ -83,7 +83,9 @@ public struct UpdateIngressRuleRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.rule, forKey: .rule)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

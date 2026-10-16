@@ -81,8 +81,12 @@ public struct StorageCredential: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`prefix`, forKey: .`prefix`)
-    try container.encode(self.config, forKey: .config)
+    if !self.`prefix`.isEmpty {
+      try container.encode(self.`prefix`, forKey: .`prefix`)
+    }
+    if !self.config.isEmpty {
+      try container.encode(self.config, forKey: .config)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

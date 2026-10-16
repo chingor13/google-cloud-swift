@@ -118,13 +118,27 @@ public struct ImportRegisteredPartiesResponse: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.partiesAdded, forKey: .partiesAdded)
-    try container.encode(self.partiesRemoved, forKey: .partiesRemoved)
-    try container.encode(self.partiesTotal, forKey: .partiesTotal)
-    try container.encode(self.partiesFailedToRemove, forKey: .partiesFailedToRemove)
-    try container.encode(self.partiesUptiered, forKey: .partiesUptiered)
-    try container.encode(self.partiesDowntiered, forKey: .partiesDowntiered)
-    try container.encode(self.partiesFailedToDowntier, forKey: .partiesFailedToDowntier)
+    if self.partiesAdded != 0 {
+      try container.encode(self.partiesAdded, forKey: .partiesAdded)
+    }
+    if self.partiesRemoved != 0 {
+      try container.encode(self.partiesRemoved, forKey: .partiesRemoved)
+    }
+    if self.partiesTotal != 0 {
+      try container.encode(self.partiesTotal, forKey: .partiesTotal)
+    }
+    if self.partiesFailedToRemove != 0 {
+      try container.encode(self.partiesFailedToRemove, forKey: .partiesFailedToRemove)
+    }
+    if self.partiesUptiered != 0 {
+      try container.encode(self.partiesUptiered, forKey: .partiesUptiered)
+    }
+    if self.partiesDowntiered != 0 {
+      try container.encode(self.partiesDowntiered, forKey: .partiesDowntiered)
+    }
+    if self.partiesFailedToDowntier != 0 {
+      try container.encode(self.partiesFailedToDowntier, forKey: .partiesFailedToDowntier)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

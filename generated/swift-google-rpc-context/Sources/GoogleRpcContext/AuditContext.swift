@@ -107,11 +107,17 @@ public struct AuditContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.auditLog, forKey: .auditLog)
+    if !self.auditLog.isEmpty {
+      try container.encode(self.auditLog, forKey: .auditLog)
+    }
     try container.encodeIfPresent(self.scrubbedRequest, forKey: .scrubbedRequest)
     try container.encodeIfPresent(self.scrubbedResponse, forKey: .scrubbedResponse)
-    try container.encode(self.scrubbedResponseItemCount, forKey: .scrubbedResponseItemCount)
-    try container.encode(self.targetResource, forKey: .targetResource)
+    if self.scrubbedResponseItemCount != 0 {
+      try container.encode(self.scrubbedResponseItemCount, forKey: .scrubbedResponseItemCount)
+    }
+    if !self.targetResource.isEmpty {
+      try container.encode(self.targetResource, forKey: .targetResource)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -115,12 +115,24 @@ public struct Index: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.indexId, forKey: .indexId)
-    try container.encode(self.kind, forKey: .kind)
-    try container.encode(self.ancestor, forKey: .ancestor)
-    try container.encode(self.properties, forKey: .properties)
-    try container.encode(self.state, forKey: .state)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.indexId.isEmpty {
+      try container.encode(self.indexId, forKey: .indexId)
+    }
+    if !self.kind.isEmpty {
+      try container.encode(self.kind, forKey: .kind)
+    }
+    if self.ancestor != Index.AncestorMode() {
+      try container.encode(self.ancestor, forKey: .ancestor)
+    }
+    if !self.properties.isEmpty {
+      try container.encode(self.properties, forKey: .properties)
+    }
+    if self.state != Index.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -187,8 +199,12 @@ public struct Index: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.direction, forKey: .direction)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.direction != Index.Direction() {
+        try container.encode(self.direction, forKey: .direction)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

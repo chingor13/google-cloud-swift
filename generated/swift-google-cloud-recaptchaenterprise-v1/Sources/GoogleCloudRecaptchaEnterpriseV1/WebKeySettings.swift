@@ -123,11 +123,21 @@ public struct WebKeySettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.allowAllDomains, forKey: .allowAllDomains)
-    try container.encode(self.allowedDomains, forKey: .allowedDomains)
-    try container.encode(self.allowAmpTraffic, forKey: .allowAmpTraffic)
-    try container.encode(self.integrationType, forKey: .integrationType)
-    try container.encode(self.challengeSecurityPreference, forKey: .challengeSecurityPreference)
+    if self.allowAllDomains {
+      try container.encode(self.allowAllDomains, forKey: .allowAllDomains)
+    }
+    if !self.allowedDomains.isEmpty {
+      try container.encode(self.allowedDomains, forKey: .allowedDomains)
+    }
+    if self.allowAmpTraffic {
+      try container.encode(self.allowAmpTraffic, forKey: .allowAmpTraffic)
+    }
+    if self.integrationType != WebKeySettings.IntegrationType() {
+      try container.encode(self.integrationType, forKey: .integrationType)
+    }
+    if self.challengeSecurityPreference != WebKeySettings.ChallengeSecurityPreference() {
+      try container.encode(self.challengeSecurityPreference, forKey: .challengeSecurityPreference)
+    }
     try container.encodeIfPresent(self.challengeSettings, forKey: .challengeSettings)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -187,7 +197,9 @@ public struct WebKeySettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.scoreThreshold, forKey: .scoreThreshold)
+      if self.scoreThreshold != 0 {
+        try container.encode(self.scoreThreshold, forKey: .scoreThreshold)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -285,7 +297,9 @@ public struct WebKeySettings: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.defaultSettings, forKey: .defaultSettings)
-      try container.encode(self.actionSettings, forKey: .actionSettings)
+      if !self.actionSettings.isEmpty {
+        try container.encode(self.actionSettings, forKey: .actionSettings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

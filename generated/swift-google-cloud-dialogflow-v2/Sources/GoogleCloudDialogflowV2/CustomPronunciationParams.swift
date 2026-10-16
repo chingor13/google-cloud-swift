@@ -92,9 +92,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.phrase, forKey: .phrase)
-      try container.encode(self.phoneticEncoding, forKey: .phoneticEncoding)
-      try container.encode(self.pronunciation, forKey: .pronunciation)
+      if !self.phrase.isEmpty {
+        try container.encode(self.phrase, forKey: .phrase)
+      }
+      if self.phoneticEncoding != CustomPronunciationParams.PhoneticEncoding() {
+        try container.encode(self.phoneticEncoding, forKey: .phoneticEncoding)
+      }
+      if !self.pronunciation.isEmpty {
+        try container.encode(self.pronunciation, forKey: .pronunciation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

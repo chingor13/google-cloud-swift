@@ -96,8 +96,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.kmsKeyName.isEmpty {
+        try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       try container.encodeIfPresent(self.confidentialMode, forKey: .confidentialMode)
       try container.encodeIfPresent(
         self.cmekSourceLogEncryptionEnforced, forKey: .cmekSourceLogEncryptionEnforced)

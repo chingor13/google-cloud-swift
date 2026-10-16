@@ -123,13 +123,25 @@ public struct TokenProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.valid, forKey: .valid)
-    try container.encode(self.invalidReason, forKey: .invalidReason)
+    if self.valid {
+      try container.encode(self.valid, forKey: .valid)
+    }
+    if self.invalidReason != TokenProperties.InvalidReason() {
+      try container.encode(self.invalidReason, forKey: .invalidReason)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.androidPackageName, forKey: .androidPackageName)
-    try container.encode(self.iosBundleId, forKey: .iosBundleId)
-    try container.encode(self.action, forKey: .action)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.androidPackageName.isEmpty {
+      try container.encode(self.androidPackageName, forKey: .androidPackageName)
+    }
+    if !self.iosBundleId.isEmpty {
+      try container.encode(self.iosBundleId, forKey: .iosBundleId)
+    }
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

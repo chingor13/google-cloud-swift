@@ -84,7 +84,9 @@ public struct AddCatalogAttributeRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attributesConfig, forKey: .attributesConfig)
+    if !self.attributesConfig.isEmpty {
+      try container.encode(self.attributesConfig, forKey: .attributesConfig)
+    }
     try container.encodeIfPresent(self.catalogAttribute, forKey: .catalogAttribute)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

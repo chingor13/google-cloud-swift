@@ -177,14 +177,24 @@ public struct Connection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.installationState, forKey: .installationState)
-    try container.encode(self.disabled, forKey: .disabled)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.etag, forKey: .etag)
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
 
     if let choice = self.connectionConfig {
       switch choice {

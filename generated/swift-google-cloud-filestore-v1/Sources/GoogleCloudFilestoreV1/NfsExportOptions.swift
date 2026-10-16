@@ -122,11 +122,21 @@ public struct NfsExportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ipRanges, forKey: .ipRanges)
-    try container.encode(self.accessMode, forKey: .accessMode)
-    try container.encode(self.squashMode, forKey: .squashMode)
-    try container.encode(self.anonUid, forKey: .anonUid)
-    try container.encode(self.anonGid, forKey: .anonGid)
+    if !self.ipRanges.isEmpty {
+      try container.encode(self.ipRanges, forKey: .ipRanges)
+    }
+    if self.accessMode != NfsExportOptions.AccessMode() {
+      try container.encode(self.accessMode, forKey: .accessMode)
+    }
+    if self.squashMode != NfsExportOptions.SquashMode() {
+      try container.encode(self.squashMode, forKey: .squashMode)
+    }
+    if self.anonUid != 0 {
+      try container.encode(self.anonUid, forKey: .anonUid)
+    }
+    if self.anonGid != 0 {
+      try container.encode(self.anonGid, forKey: .anonGid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

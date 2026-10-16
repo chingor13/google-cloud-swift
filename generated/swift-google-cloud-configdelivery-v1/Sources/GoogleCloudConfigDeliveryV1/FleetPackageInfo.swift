@@ -97,10 +97,18 @@ public struct FleetPackageInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.activeRollout, forKey: .activeRollout)
-    try container.encode(self.lastCompletedRollout, forKey: .lastCompletedRollout)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.activeRollout.isEmpty {
+      try container.encode(self.activeRollout, forKey: .activeRollout)
+    }
+    if !self.lastCompletedRollout.isEmpty {
+      try container.encode(self.lastCompletedRollout, forKey: .lastCompletedRollout)
+    }
+    if self.state != FleetPackageInfo.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

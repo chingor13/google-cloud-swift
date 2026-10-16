@@ -402,28 +402,54 @@ public struct OptimizeToursRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
     try container.encodeIfPresent(self.model, forKey: .model)
-    try container.encode(self.solvingMode, forKey: .solvingMode)
-    try container.encode(self.searchMode, forKey: .searchMode)
-    try container.encode(self.injectedFirstSolutionRoutes, forKey: .injectedFirstSolutionRoutes)
+    if self.solvingMode != OptimizeToursRequest.SolvingMode() {
+      try container.encode(self.solvingMode, forKey: .solvingMode)
+    }
+    if self.searchMode != OptimizeToursRequest.SearchMode() {
+      try container.encode(self.searchMode, forKey: .searchMode)
+    }
+    if !self.injectedFirstSolutionRoutes.isEmpty {
+      try container.encode(self.injectedFirstSolutionRoutes, forKey: .injectedFirstSolutionRoutes)
+    }
     try container.encodeIfPresent(
       self.injectedSolutionConstraint, forKey: .injectedSolutionConstraint)
-    try container.encode(self.refreshDetailsRoutes, forKey: .refreshDetailsRoutes)
-    try container.encode(
-      self.interpretInjectedSolutionsUsingLabels, forKey: .interpretInjectedSolutionsUsingLabels)
-    try container.encode(self.considerRoadTraffic, forKey: .considerRoadTraffic)
-    try container.encode(self.populatePolylines, forKey: .populatePolylines)
-    try container.encode(self.populateTransitionPolylines, forKey: .populateTransitionPolylines)
-    try container.encode(
-      self.allowLargeDeadlineDespiteInterruptionRisk,
-      forKey: .allowLargeDeadlineDespiteInterruptionRisk)
-    try container.encode(self.useGeodesicDistances, forKey: .useGeodesicDistances)
+    if !self.refreshDetailsRoutes.isEmpty {
+      try container.encode(self.refreshDetailsRoutes, forKey: .refreshDetailsRoutes)
+    }
+    if self.interpretInjectedSolutionsUsingLabels {
+      try container.encode(
+        self.interpretInjectedSolutionsUsingLabels, forKey: .interpretInjectedSolutionsUsingLabels)
+    }
+    if self.considerRoadTraffic {
+      try container.encode(self.considerRoadTraffic, forKey: .considerRoadTraffic)
+    }
+    if self.populatePolylines {
+      try container.encode(self.populatePolylines, forKey: .populatePolylines)
+    }
+    if self.populateTransitionPolylines {
+      try container.encode(self.populateTransitionPolylines, forKey: .populateTransitionPolylines)
+    }
+    if self.allowLargeDeadlineDespiteInterruptionRisk {
+      try container.encode(
+        self.allowLargeDeadlineDespiteInterruptionRisk,
+        forKey: .allowLargeDeadlineDespiteInterruptionRisk)
+    }
+    if self.useGeodesicDistances {
+      try container.encode(self.useGeodesicDistances, forKey: .useGeodesicDistances)
+    }
     try container.encodeIfPresent(self.geodesicMetersPerSecond, forKey: .geodesicMetersPerSecond)
     try container.encodeIfPresent(self.maxValidationErrors, forKey: .maxValidationErrors)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.populateTravelStepPolylines, forKey: .populateTravelStepPolylines)
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if self.populateTravelStepPolylines {
+      try container.encode(self.populateTravelStepPolylines, forKey: .populateTravelStepPolylines)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

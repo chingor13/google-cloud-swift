@@ -100,10 +100,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attributedItems, forKey: .attributedItems)
-      try container.encode(self.queryType, forKey: .queryType)
-      try container.encode(self.outlierScore, forKey: .outlierScore)
-      try container.encode(self.outlierThreshold, forKey: .outlierThreshold)
+      if !self.attributedItems.isEmpty {
+        try container.encode(self.attributedItems, forKey: .attributedItems)
+      }
+      if self.queryType != ErrorAnalysisAnnotation.QueryType() {
+        try container.encode(self.queryType, forKey: .queryType)
+      }
+      if self.outlierScore != 0 {
+        try container.encode(self.outlierScore, forKey: .outlierScore)
+      }
+      if self.outlierThreshold != 0 {
+        try container.encode(self.outlierThreshold, forKey: .outlierThreshold)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -173,8 +181,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.annotationResourceName, forKey: .annotationResourceName)
-        try container.encode(self.distance, forKey: .distance)
+        if !self.annotationResourceName.isEmpty {
+          try container.encode(self.annotationResourceName, forKey: .annotationResourceName)
+        }
+        if self.distance != 0 {
+          try container.encode(self.distance, forKey: .distance)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

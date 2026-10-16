@@ -97,9 +97,15 @@ public struct TrellixIAMAuthentication: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
-    try container.encode(self.scope, forKey: .scope)
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

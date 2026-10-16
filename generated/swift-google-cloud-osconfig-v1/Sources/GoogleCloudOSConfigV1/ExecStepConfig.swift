@@ -108,8 +108,12 @@ public struct ExecStepConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.allowedSuccessCodes, forKey: .allowedSuccessCodes)
-    try container.encode(self.interpreter, forKey: .interpreter)
+    if !self.allowedSuccessCodes.isEmpty {
+      try container.encode(self.allowedSuccessCodes, forKey: .allowedSuccessCodes)
+    }
+    if self.interpreter != ExecStepConfig.Interpreter() {
+      try container.encode(self.interpreter, forKey: .interpreter)
+    }
 
     if let choice = self.executable {
       switch choice {

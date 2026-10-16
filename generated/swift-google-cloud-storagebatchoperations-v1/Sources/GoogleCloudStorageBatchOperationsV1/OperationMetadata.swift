@@ -115,11 +115,17 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.operation, forKey: .operation)
+    if !self.operation.isEmpty {
+      try container.encode(self.operation, forKey: .operation)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
-    try container.encode(self.apiVersion, forKey: .apiVersion)
+    if self.requestedCancellation {
+      try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
+    }
+    if !self.apiVersion.isEmpty {
+      try container.encode(self.apiVersion, forKey: .apiVersion)
+    }
     try container.encodeIfPresent(self.job, forKey: .job)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

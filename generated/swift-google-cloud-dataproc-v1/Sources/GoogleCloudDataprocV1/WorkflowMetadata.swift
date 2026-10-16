@@ -183,17 +183,29 @@ public struct WorkflowMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.template, forKey: .template)
-    try container.encode(self.version, forKey: .version)
+    if !self.template.isEmpty {
+      try container.encode(self.template, forKey: .template)
+    }
+    if self.version != 0 {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.createCluster, forKey: .createCluster)
     try container.encodeIfPresent(self.graph, forKey: .graph)
     try container.encodeIfPresent(self.deleteCluster, forKey: .deleteCluster)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.clusterName, forKey: .clusterName)
-    try container.encode(self.parameters, forKey: .parameters)
+    if self.state != WorkflowMetadata.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    if !self.clusterUuid.isEmpty {
+      try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    }
     try container.encodeIfPresent(self.dagTimeout, forKey: .dagTimeout)
     try container.encodeIfPresent(self.dagStartTime, forKey: .dagStartTime)
     try container.encodeIfPresent(self.dagEndTime, forKey: .dagEndTime)

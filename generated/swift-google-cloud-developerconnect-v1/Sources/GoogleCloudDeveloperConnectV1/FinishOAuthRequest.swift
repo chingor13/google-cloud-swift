@@ -99,7 +99,9 @@ public struct FinishOAuthRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accountConnector, forKey: .accountConnector)
+    if !self.accountConnector.isEmpty {
+      try container.encode(self.accountConnector, forKey: .accountConnector)
+    }
 
     if let choice = self.params {
       switch choice {
@@ -175,8 +177,12 @@ public struct FinishOAuthRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.code, forKey: .code)
-      try container.encode(self.ticket, forKey: .ticket)
+      if !self.code.isEmpty {
+        try container.encode(self.code, forKey: .code)
+      }
+      if !self.ticket.isEmpty {
+        try container.encode(self.ticket, forKey: .ticket)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -273,9 +279,15 @@ public struct FinishOAuthRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.scopes, forKey: .scopes)
-      try container.encode(self.versionInfo, forKey: .versionInfo)
-      try container.encode(self.ticket, forKey: .ticket)
+      if !self.scopes.isEmpty {
+        try container.encode(self.scopes, forKey: .scopes)
+      }
+      if !self.versionInfo.isEmpty {
+        try container.encode(self.versionInfo, forKey: .versionInfo)
+      }
+      if !self.ticket.isEmpty {
+        try container.encode(self.ticket, forKey: .ticket)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

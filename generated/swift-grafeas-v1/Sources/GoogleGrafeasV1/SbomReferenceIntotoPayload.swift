@@ -97,9 +97,15 @@ public struct SbomReferenceIntotoPayload: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.predicateType, forKey: .predicateType)
-    try container.encode(self.subject, forKey: .subject)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.predicateType.isEmpty {
+      try container.encode(self.predicateType, forKey: .predicateType)
+    }
+    if !self.subject.isEmpty {
+      try container.encode(self.subject, forKey: .subject)
+    }
     try container.encodeIfPresent(self.predicate, forKey: .predicate)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

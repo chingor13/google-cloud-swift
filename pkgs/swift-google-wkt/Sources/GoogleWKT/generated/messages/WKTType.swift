@@ -115,13 +115,25 @@ public struct WKTType: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.fields, forKey: .fields)
-    try container.encode(self.oneofs, forKey: .oneofs)
-    try container.encode(self.options, forKey: .options)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
+    if !self.oneofs.isEmpty {
+      try container.encode(self.oneofs, forKey: .oneofs)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
     try container.encodeIfPresent(self.sourceContext, forKey: .sourceContext)
-    try container.encode(self.syntax, forKey: .syntax)
-    try container.encode(self.edition, forKey: .edition)
+    if self.syntax != WKTSyntax() {
+      try container.encode(self.syntax, forKey: .syntax)
+    }
+    if !self.edition.isEmpty {
+      try container.encode(self.edition, forKey: .edition)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

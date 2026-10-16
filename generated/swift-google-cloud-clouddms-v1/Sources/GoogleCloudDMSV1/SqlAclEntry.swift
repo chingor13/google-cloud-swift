@@ -104,8 +104,12 @@ public struct SqlAclEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.value, forKey: .value)
-    try container.encode(self.label, forKey: .label)
+    if !self.value.isEmpty {
+      try container.encode(self.value, forKey: .value)
+    }
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
 
     if let choice = self.expiration {
       switch choice {

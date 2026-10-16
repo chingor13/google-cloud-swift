@@ -164,7 +164,9 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.gcsUri, forKey: .gcsUri)
+      if !self.gcsUri.isEmpty {
+        try container.encode(self.gcsUri, forKey: .gcsUri)
+      }
       try container.encodeIfPresent(self.fieldMask, forKey: .fieldMask)
       try container.encodeIfPresent(self.shardingConfig, forKey: .shardingConfig)
       for (key, value) in self._unknownFields.json {
@@ -232,8 +234,12 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.pagesPerShard, forKey: .pagesPerShard)
-        try container.encode(self.pagesOverlap, forKey: .pagesOverlap)
+        if self.pagesPerShard != 0 {
+          try container.encode(self.pagesPerShard, forKey: .pagesPerShard)
+        }
+        if self.pagesOverlap != 0 {
+          try container.encode(self.pagesOverlap, forKey: .pagesOverlap)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

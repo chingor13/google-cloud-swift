@@ -288,21 +288,45 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.persistentResourceId, forKey: .persistentResourceId)
-      try container.encode(self.workerPoolSpecs, forKey: .workerPoolSpecs)
+      if !self.persistentResourceId.isEmpty {
+        try container.encode(self.persistentResourceId, forKey: .persistentResourceId)
+      }
+      if !self.workerPoolSpecs.isEmpty {
+        try container.encode(self.workerPoolSpecs, forKey: .workerPoolSpecs)
+      }
       try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.reservedIpRanges.isEmpty {
+        try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      }
       try container.encodeIfPresent(self.pscInterfaceConfig, forKey: .pscInterfaceConfig)
       try container.encodeIfPresent(self.baseOutputDirectory, forKey: .baseOutputDirectory)
-      try container.encode(self.protectedArtifactLocationId, forKey: .protectedArtifactLocationId)
-      try container.encode(self.tensorboard, forKey: .tensorboard)
-      try container.encode(self.enableWebAccess, forKey: .enableWebAccess)
-      try container.encode(self.enableDashboardAccess, forKey: .enableDashboardAccess)
-      try container.encode(self.experiment, forKey: .experiment)
-      try container.encode(self.experimentRun, forKey: .experimentRun)
-      try container.encode(self.models, forKey: .models)
+      if !self.protectedArtifactLocationId.isEmpty {
+        try container.encode(self.protectedArtifactLocationId, forKey: .protectedArtifactLocationId)
+      }
+      if !self.tensorboard.isEmpty {
+        try container.encode(self.tensorboard, forKey: .tensorboard)
+      }
+      if self.enableWebAccess {
+        try container.encode(self.enableWebAccess, forKey: .enableWebAccess)
+      }
+      if self.enableDashboardAccess {
+        try container.encode(self.enableDashboardAccess, forKey: .enableDashboardAccess)
+      }
+      if !self.experiment.isEmpty {
+        try container.encode(self.experiment, forKey: .experiment)
+      }
+      if !self.experimentRun.isEmpty {
+        try container.encode(self.experimentRun, forKey: .experimentRun)
+      }
+      if !self.models.isEmpty {
+        try container.encode(self.models, forKey: .models)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

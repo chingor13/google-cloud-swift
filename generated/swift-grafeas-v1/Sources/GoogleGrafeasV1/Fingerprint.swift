@@ -89,9 +89,15 @@ public struct Fingerprint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.v1Name, forKey: .v1Name)
-    try container.encode(self.v2Blob, forKey: .v2Blob)
-    try container.encode(self.v2Name, forKey: .v2Name)
+    if !self.v1Name.isEmpty {
+      try container.encode(self.v1Name, forKey: .v1Name)
+    }
+    if !self.v2Blob.isEmpty {
+      try container.encode(self.v2Blob, forKey: .v2Blob)
+    }
+    if !self.v2Name.isEmpty {
+      try container.encode(self.v2Name, forKey: .v2Name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -106,10 +106,18 @@ public struct TagBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.tagValue, forKey: .tagValue)
-    try container.encode(self.tagValueNamespacedName, forKey: .tagValueNamespacedName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.tagValue.isEmpty {
+      try container.encode(self.tagValue, forKey: .tagValue)
+    }
+    if !self.tagValueNamespacedName.isEmpty {
+      try container.encode(self.tagValueNamespacedName, forKey: .tagValueNamespacedName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

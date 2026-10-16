@@ -101,10 +101,16 @@ public struct PropertyChange: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.beforeSensitivePaths, forKey: .beforeSensitivePaths)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.beforeSensitivePaths.isEmpty {
+      try container.encode(self.beforeSensitivePaths, forKey: .beforeSensitivePaths)
+    }
     try container.encodeIfPresent(self.before, forKey: .before)
-    try container.encode(self.afterSensitivePaths, forKey: .afterSensitivePaths)
+    if !self.afterSensitivePaths.isEmpty {
+      try container.encode(self.afterSensitivePaths, forKey: .afterSensitivePaths)
+    }
     try container.encodeIfPresent(self.after, forKey: .after)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

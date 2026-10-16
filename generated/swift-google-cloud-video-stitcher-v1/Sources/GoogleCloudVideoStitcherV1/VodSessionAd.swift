@@ -87,7 +87,9 @@ public struct VodSessionAd: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.duration, forKey: .duration)
     try container.encodeIfPresent(self.companionAds, forKey: .companionAds)
-    try container.encode(self.activityEvents, forKey: .activityEvents)
+    if !self.activityEvents.isEmpty {
+      try container.encode(self.activityEvents, forKey: .activityEvents)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

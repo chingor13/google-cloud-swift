@@ -317,23 +317,37 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       try container.encodeIfPresent(self.parameters, forKey: .parameters)
-      try container.encode(self.responseMessages, forKey: .responseMessages)
-      try container.encode(self.webhookStatuses, forKey: .webhookStatuses)
-      try container.encode(self.webhookPayloads, forKey: .webhookPayloads)
+      if !self.responseMessages.isEmpty {
+        try container.encode(self.responseMessages, forKey: .responseMessages)
+      }
+      if !self.webhookStatuses.isEmpty {
+        try container.encode(self.webhookStatuses, forKey: .webhookStatuses)
+      }
+      if !self.webhookPayloads.isEmpty {
+        try container.encode(self.webhookPayloads, forKey: .webhookPayloads)
+      }
       try container.encodeIfPresent(self.currentPage, forKey: .currentPage)
       try container.encodeIfPresent(self.currentFlow, forKey: .currentFlow)
       try container.encodeIfPresent(self.intent, forKey: .intent)
-      try container.encode(self.intentDetectionConfidence, forKey: .intentDetectionConfidence)
+      if self.intentDetectionConfidence != 0 {
+        try container.encode(self.intentDetectionConfidence, forKey: .intentDetectionConfidence)
+      }
       try container.encodeIfPresent(self.match, forKey: .match)
       try container.encodeIfPresent(self.diagnosticInfo, forKey: .diagnosticInfo)
       try container.encodeIfPresent(self.sentimentAnalysisResult, forKey: .sentimentAnalysisResult)
       try container.encodeIfPresent(self.advancedSettings, forKey: .advancedSettings)
-      try container.encode(self.allowAnswerFeedback, forKey: .allowAnswerFeedback)
+      if self.allowAnswerFeedback {
+        try container.encode(self.allowAnswerFeedback, forKey: .allowAnswerFeedback)
+      }
       try container.encodeIfPresent(
         self.dataStoreConnectionSignals, forKey: .dataStoreConnectionSignals)
-      try container.encode(self.traceBlocks, forKey: .traceBlocks)
+      if !self.traceBlocks.isEmpty {
+        try container.encode(self.traceBlocks, forKey: .traceBlocks)
+      }
 
       if let choice = self.query {
         switch choice {

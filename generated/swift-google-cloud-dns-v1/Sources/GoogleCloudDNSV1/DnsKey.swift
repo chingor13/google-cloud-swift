@@ -131,7 +131,9 @@ public struct DnsKey: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.algorithm, forKey: .algorithm)
     try container.encodeIfPresent(self.creationTime, forKey: .creationTime)
     try container.encodeIfPresent(self.description, forKey: .description)
-    try container.encode(self.digests, forKey: .digests)
+    if !self.digests.isEmpty {
+      try container.encode(self.digests, forKey: .digests)
+    }
     try container.encodeIfPresent(self.id, forKey: .id)
     try container.encodeIfPresent(self.isActive, forKey: .isActive)
     try container.encodeIfPresent(self.keyLength, forKey: .keyLength)

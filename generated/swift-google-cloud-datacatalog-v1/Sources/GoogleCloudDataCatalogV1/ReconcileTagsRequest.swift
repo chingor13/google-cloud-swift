@@ -103,10 +103,18 @@ public struct ReconcileTagsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.tagTemplate, forKey: .tagTemplate)
-    try container.encode(self.forceDeleteMissing, forKey: .forceDeleteMissing)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.tagTemplate.isEmpty {
+      try container.encode(self.tagTemplate, forKey: .tagTemplate)
+    }
+    if self.forceDeleteMissing {
+      try container.encode(self.forceDeleteMissing, forKey: .forceDeleteMissing)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

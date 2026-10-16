@@ -84,8 +84,12 @@ public struct CreateConnectorRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.connectorId, forKey: .connectorId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.connectorId.isEmpty {
+      try container.encode(self.connectorId, forKey: .connectorId)
+    }
     try container.encodeIfPresent(self.connector, forKey: .connector)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

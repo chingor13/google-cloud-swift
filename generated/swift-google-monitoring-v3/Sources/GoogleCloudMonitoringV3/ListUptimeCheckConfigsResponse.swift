@@ -93,9 +93,15 @@ public struct ListUptimeCheckConfigsResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uptimeCheckConfigs, forKey: .uptimeCheckConfigs)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.totalSize, forKey: .totalSize)
+    if !self.uptimeCheckConfigs.isEmpty {
+      try container.encode(self.uptimeCheckConfigs, forKey: .uptimeCheckConfigs)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

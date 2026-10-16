@@ -101,7 +101,9 @@
       try container.encodeIfPresent(
         self.externalIpv6LbUtilization, forKey: .externalIpv6LbUtilization)
       try container.encodeIfPresent(self.internalIpv6Utilization, forKey: .internalIpv6Utilization)
-      try container.encode(self.ipv4Utilizations, forKey: .ipv4Utilizations)
+      if !self.ipv4Utilizations.isEmpty {
+        try container.encode(self.ipv4Utilizations, forKey: .ipv4Utilizations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

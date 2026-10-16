@@ -86,8 +86,12 @@ public struct CreateDataExchangeRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.dataExchangeId, forKey: .dataExchangeId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.dataExchangeId.isEmpty {
+      try container.encode(self.dataExchangeId, forKey: .dataExchangeId)
+    }
     try container.encodeIfPresent(self.dataExchange, forKey: .dataExchange)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

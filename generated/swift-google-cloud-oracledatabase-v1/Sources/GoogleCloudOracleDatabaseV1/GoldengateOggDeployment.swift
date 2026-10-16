@@ -158,13 +158,27 @@ public struct GoldengateOggDeployment: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deployment, forKey: .deployment)
-    try container.encode(self.adminUsername, forKey: .adminUsername)
-    try container.encode(self.oggVersion, forKey: .oggVersion)
-    try container.encode(self.certificate, forKey: .certificate)
-    try container.encode(self.credentialStore, forKey: .credentialStore)
-    try container.encode(self.identityDomainId, forKey: .identityDomainId)
-    try container.encode(self.passwordSecretId, forKey: .passwordSecretId)
+    if !self.deployment.isEmpty {
+      try container.encode(self.deployment, forKey: .deployment)
+    }
+    if !self.adminUsername.isEmpty {
+      try container.encode(self.adminUsername, forKey: .adminUsername)
+    }
+    if !self.oggVersion.isEmpty {
+      try container.encode(self.oggVersion, forKey: .oggVersion)
+    }
+    if !self.certificate.isEmpty {
+      try container.encode(self.certificate, forKey: .certificate)
+    }
+    if self.credentialStore != GoldengateOggDeployment.CredentialStore() {
+      try container.encode(self.credentialStore, forKey: .credentialStore)
+    }
+    if !self.identityDomainId.isEmpty {
+      try container.encode(self.identityDomainId, forKey: .identityDomainId)
+    }
+    if !self.passwordSecretId.isEmpty {
+      try container.encode(self.passwordSecretId, forKey: .passwordSecretId)
+    }
     try container.encodeIfPresent(self.groupRolesMapping, forKey: .groupRolesMapping)
 
     if let choice = self.deploymentPasswordOptions {

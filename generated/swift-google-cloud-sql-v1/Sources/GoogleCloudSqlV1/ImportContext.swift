@@ -139,12 +139,22 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.database, forKey: .database)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.fileType, forKey: .fileType)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.database.isEmpty {
+        try container.encode(self.database, forKey: .database)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.fileType != SqlFileType() {
+        try container.encode(self.fileType, forKey: .fileType)
+      }
       try container.encodeIfPresent(self.csvImportOptions, forKey: .csvImportOptions)
-      try container.encode(self.importUser, forKey: .importUser)
+      if !self.importUser.isEmpty {
+        try container.encode(self.importUser, forKey: .importUser)
+      }
       try container.encodeIfPresent(self.bakImportOptions, forKey: .bakImportOptions)
       try container.encodeIfPresent(self.sqlImportOptions, forKey: .sqlImportOptions)
       try container.encodeIfPresent(self.tdeImportOptions, forKey: .tdeImportOptions)
@@ -431,12 +441,24 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.table, forKey: .table)
-        try container.encode(self.columns, forKey: .columns)
-        try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
-        try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
-        try container.encode(self.fieldsTerminatedBy, forKey: .fieldsTerminatedBy)
-        try container.encode(self.linesTerminatedBy, forKey: .linesTerminatedBy)
+        if !self.table.isEmpty {
+          try container.encode(self.table, forKey: .table)
+        }
+        if !self.columns.isEmpty {
+          try container.encode(self.columns, forKey: .columns)
+        }
+        if !self.escapeCharacter.isEmpty {
+          try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
+        }
+        if !self.quoteCharacter.isEmpty {
+          try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
+        }
+        if !self.fieldsTerminatedBy.isEmpty {
+          try container.encode(self.fieldsTerminatedBy, forKey: .fieldsTerminatedBy)
+        }
+        if !self.linesTerminatedBy.isEmpty {
+          try container.encode(self.linesTerminatedBy, forKey: .linesTerminatedBy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -570,9 +592,13 @@
         try container.encodeIfPresent(self.striped, forKey: .striped)
         try container.encodeIfPresent(self.noRecovery, forKey: .noRecovery)
         try container.encodeIfPresent(self.recoveryOnly, forKey: .recoveryOnly)
-        try container.encode(self.bakType, forKey: .bakType)
+        if self.bakType != BakType() {
+          try container.encode(self.bakType, forKey: .bakType)
+        }
         try container.encodeIfPresent(self.stopAt, forKey: .stopAt)
-        try container.encode(self.stopAtMark, forKey: .stopAtMark)
+        if !self.stopAtMark.isEmpty {
+          try container.encode(self.stopAtMark, forKey: .stopAtMark)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -656,9 +682,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.certPath, forKey: .certPath)
-          try container.encode(self.pvkPath, forKey: .pvkPath)
-          try container.encode(self.pvkPassword, forKey: .pvkPassword)
+          if !self.certPath.isEmpty {
+            try container.encode(self.certPath, forKey: .certPath)
+          }
+          if !self.pvkPath.isEmpty {
+            try container.encode(self.pvkPath, forKey: .pvkPath)
+          }
+          if !self.pvkPassword.isEmpty {
+            try container.encode(self.pvkPassword, forKey: .pvkPassword)
+          }
           try container.encodeIfPresent(self.keepEncrypted, forKey: .keepEncrypted)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -793,10 +825,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.certificatePath, forKey: .certificatePath)
-        try container.encode(self.privateKeyPath, forKey: .privateKeyPath)
-        try container.encode(self.privateKeyPassword, forKey: .privateKeyPassword)
-        try container.encode(self.name, forKey: .name)
+        if !self.certificatePath.isEmpty {
+          try container.encode(self.certificatePath, forKey: .certificatePath)
+        }
+        if !self.privateKeyPath.isEmpty {
+          try container.encode(self.privateKeyPath, forKey: .privateKeyPath)
+        }
+        if !self.privateKeyPassword.isEmpty {
+          try container.encode(self.privateKeyPassword, forKey: .privateKeyPassword)
+        }
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

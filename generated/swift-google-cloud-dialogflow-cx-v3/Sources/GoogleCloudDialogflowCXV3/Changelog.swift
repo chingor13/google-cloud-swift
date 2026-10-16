@@ -127,14 +127,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.userEmail, forKey: .userEmail)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.action, forKey: .action)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.resource, forKey: .resource)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.userEmail.isEmpty {
+        try container.encode(self.userEmail, forKey: .userEmail)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.action.isEmpty {
+        try container.encode(self.action, forKey: .action)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.resource.isEmpty {
+        try container.encode(self.resource, forKey: .resource)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

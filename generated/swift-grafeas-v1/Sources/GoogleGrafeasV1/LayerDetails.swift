@@ -103,11 +103,21 @@ public struct LayerDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.index, forKey: .index)
-    try container.encode(self.diffId, forKey: .diffId)
-    try container.encode(self.chainId, forKey: .chainId)
-    try container.encode(self.command, forKey: .command)
-    try container.encode(self.baseImages, forKey: .baseImages)
+    if self.index != 0 {
+      try container.encode(self.index, forKey: .index)
+    }
+    if !self.diffId.isEmpty {
+      try container.encode(self.diffId, forKey: .diffId)
+    }
+    if !self.chainId.isEmpty {
+      try container.encode(self.chainId, forKey: .chainId)
+    }
+    if !self.command.isEmpty {
+      try container.encode(self.command, forKey: .command)
+    }
+    if !self.baseImages.isEmpty {
+      try container.encode(self.baseImages, forKey: .baseImages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

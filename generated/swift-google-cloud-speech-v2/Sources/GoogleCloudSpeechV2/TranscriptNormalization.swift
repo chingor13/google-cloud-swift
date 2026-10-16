@@ -77,7 +77,9 @@ public struct TranscriptNormalization: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.entries, forKey: .entries)
+    if !self.entries.isEmpty {
+      try container.encode(self.entries, forKey: .entries)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -151,9 +153,15 @@ public struct TranscriptNormalization: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.search, forKey: .search)
-      try container.encode(self.replace, forKey: .replace)
-      try container.encode(self.caseSensitive, forKey: .caseSensitive)
+      if !self.search.isEmpty {
+        try container.encode(self.search, forKey: .search)
+      }
+      if !self.replace.isEmpty {
+        try container.encode(self.replace, forKey: .replace)
+      }
+      if self.caseSensitive {
+        try container.encode(self.caseSensitive, forKey: .caseSensitive)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

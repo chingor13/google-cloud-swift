@@ -231,17 +231,37 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataset, forKey: .dataset)
-      try container.encode(self.savedQuery, forKey: .savedQuery)
-      try container.encode(self.dataLabelingJob, forKey: .dataLabelingJob)
-      try container.encode(self.dataItemFilter, forKey: .dataItemFilter)
-      try container.encode(self.annotationsFilter, forKey: .annotationsFilter)
-      try container.encode(self.annotationFilters, forKey: .annotationFilters)
+      if !self.dataset.isEmpty {
+        try container.encode(self.dataset, forKey: .dataset)
+      }
+      if !self.savedQuery.isEmpty {
+        try container.encode(self.savedQuery, forKey: .savedQuery)
+      }
+      if !self.dataLabelingJob.isEmpty {
+        try container.encode(self.dataLabelingJob, forKey: .dataLabelingJob)
+      }
+      if !self.dataItemFilter.isEmpty {
+        try container.encode(self.dataItemFilter, forKey: .dataItemFilter)
+      }
+      if !self.annotationsFilter.isEmpty {
+        try container.encode(self.annotationsFilter, forKey: .annotationsFilter)
+      }
+      if !self.annotationFilters.isEmpty {
+        try container.encode(self.annotationFilters, forKey: .annotationFilters)
+      }
       try container.encodeIfPresent(self.fieldMask, forKey: .fieldMask)
-      try container.encode(self.annotationsLimit, forKey: .annotationsLimit)
-      try container.encode(self.pageSize, forKey: .pageSize)
-      try container.encode(self.orderBy, forKey: .orderBy)
-      try container.encode(self.pageToken, forKey: .pageToken)
+      if self.annotationsLimit != 0 {
+        try container.encode(self.annotationsLimit, forKey: .annotationsLimit)
+      }
+      if self.pageSize != 0 {
+        try container.encode(self.pageSize, forKey: .pageSize)
+      }
+      if !self.orderBy.isEmpty {
+        try container.encode(self.orderBy, forKey: .orderBy)
+      }
+      if !self.pageToken.isEmpty {
+        try container.encode(self.pageToken, forKey: .pageToken)
+      }
 
       if let choice = self.order {
         switch choice {
@@ -319,8 +339,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.savedQuery, forKey: .savedQuery)
-        try container.encode(self.orderBy, forKey: .orderBy)
+        if !self.savedQuery.isEmpty {
+          try container.encode(self.savedQuery, forKey: .savedQuery)
+        }
+        if !self.orderBy.isEmpty {
+          try container.encode(self.orderBy, forKey: .orderBy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -98,8 +98,12 @@ public struct CreateVersionRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.versionId, forKey: .versionId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.versionId.isEmpty {
+      try container.encode(self.versionId, forKey: .versionId)
+    }
     try container.encodeIfPresent(self.version, forKey: .version)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

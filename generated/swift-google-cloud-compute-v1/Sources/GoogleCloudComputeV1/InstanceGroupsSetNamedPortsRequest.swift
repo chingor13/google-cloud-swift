@@ -88,12 +88,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
-      try container.encode(self.namedPorts, forKey: .namedPorts)
+      if !self.namedPorts.isEmpty {
+        try container.encode(self.namedPorts, forKey: .namedPorts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

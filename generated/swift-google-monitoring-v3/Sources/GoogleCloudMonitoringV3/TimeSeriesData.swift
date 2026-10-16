@@ -83,8 +83,12 @@ public struct TimeSeriesData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labelValues, forKey: .labelValues)
-    try container.encode(self.pointData, forKey: .pointData)
+    if !self.labelValues.isEmpty {
+      try container.encode(self.labelValues, forKey: .labelValues)
+    }
+    if !self.pointData.isEmpty {
+      try container.encode(self.pointData, forKey: .pointData)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -150,7 +154,9 @@ public struct TimeSeriesData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.values, forKey: .values)
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       try container.encodeIfPresent(self.timeInterval, forKey: .timeInterval)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

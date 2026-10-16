@@ -78,8 +78,12 @@ public struct Escalation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.reason, forKey: .reason)
-    try container.encode(self.justification, forKey: .justification)
+    if self.reason != Escalation.Reason() {
+      try container.encode(self.reason, forKey: .reason)
+    }
+    if !self.justification.isEmpty {
+      try container.encode(self.justification, forKey: .justification)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

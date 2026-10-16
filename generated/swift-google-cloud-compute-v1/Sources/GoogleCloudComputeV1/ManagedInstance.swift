@@ -201,7 +201,9 @@
       try container.encodeIfPresent(self.currentAction, forKey: .currentAction)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.instance, forKey: .instance)
-      try container.encode(self.instanceHealth, forKey: .instanceHealth)
+      if !self.instanceHealth.isEmpty {
+        try container.encode(self.instanceHealth, forKey: .instanceHealth)
+      }
       try container.encodeIfPresent(self.instanceStatus, forKey: .instanceStatus)
       try container.encodeIfPresent(self.lastAttempt, forKey: .lastAttempt)
       try container.encodeIfPresent(self.name, forKey: .name)

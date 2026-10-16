@@ -94,10 +94,18 @@ public struct YumArtifact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.packageName, forKey: .packageName)
-    try container.encode(self.packageType, forKey: .packageType)
-    try container.encode(self.architecture, forKey: .architecture)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.packageName.isEmpty {
+      try container.encode(self.packageName, forKey: .packageName)
+    }
+    if self.packageType != YumArtifact.PackageType() {
+      try container.encode(self.packageType, forKey: .packageType)
+    }
+    if !self.architecture.isEmpty {
+      try container.encode(self.architecture, forKey: .architecture)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

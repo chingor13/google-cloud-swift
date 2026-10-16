@@ -94,9 +94,13 @@ public struct UpgradeNote: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`package`, forKey: .`package`)
+    if !self.`package`.isEmpty {
+      try container.encode(self.`package`, forKey: .`package`)
+    }
     try container.encodeIfPresent(self.version, forKey: .version)
-    try container.encode(self.distributions, forKey: .distributions)
+    if !self.distributions.isEmpty {
+      try container.encode(self.distributions, forKey: .distributions)
+    }
     try container.encodeIfPresent(self.windowsUpdate, forKey: .windowsUpdate)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

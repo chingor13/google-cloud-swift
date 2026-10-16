@@ -73,7 +73,9 @@ public struct DesiredAdditionalIPRangesConfig: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.additionalIpRangesConfigs, forKey: .additionalIpRangesConfigs)
+    if !self.additionalIpRangesConfigs.isEmpty {
+      try container.encode(self.additionalIpRangesConfigs, forKey: .additionalIpRangesConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

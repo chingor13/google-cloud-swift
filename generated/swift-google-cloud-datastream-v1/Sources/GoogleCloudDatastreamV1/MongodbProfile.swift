@@ -147,11 +147,21 @@ public struct MongodbProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostAddresses, forKey: .hostAddresses)
-    try container.encode(self.replicaSet, forKey: .replicaSet)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+    if !self.hostAddresses.isEmpty {
+      try container.encode(self.hostAddresses, forKey: .hostAddresses)
+    }
+    if !self.replicaSet.isEmpty {
+      try container.encode(self.replicaSet, forKey: .replicaSet)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.secretManagerStoredPassword.isEmpty {
+      try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+    }
     try container.encodeIfPresent(self.sslConfig, forKey: .sslConfig)
 
     if let choice = self.mongodbConnectionFormat {

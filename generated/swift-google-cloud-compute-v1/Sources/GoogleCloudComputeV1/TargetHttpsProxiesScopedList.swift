@@ -79,7 +79,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.targetHttpsProxies, forKey: .targetHttpsProxies)
+      if !self.targetHttpsProxies.isEmpty {
+        try container.encode(self.targetHttpsProxies, forKey: .targetHttpsProxies)
+      }
       try container.encodeIfPresent(self.warning, forKey: .warning)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -165,7 +167,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.code, forKey: .code)
-        try container.encode(self.data, forKey: .data)
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         try container.encodeIfPresent(self.message, forKey: .message)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

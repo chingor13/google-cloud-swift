@@ -116,7 +116,9 @@
       try container.encodeIfPresent(self.consumerNetwork, forKey: .consumerNetwork)
       try container.encodeIfPresent(self.endpoint, forKey: .endpoint)
       try container.encodeIfPresent(self.endpointWithId, forKey: .endpointWithId)
-      try container.encode(self.natIps, forKey: .natIps)
+      if !self.natIps.isEmpty {
+        try container.encode(self.natIps, forKey: .natIps)
+      }
       try container.encodeIfPresent(
         self.propagatedConnectionCount, forKey: .propagatedConnectionCount)
       try container.encodeIfPresent(self.pscConnectionId, forKey: .pscConnectionId)

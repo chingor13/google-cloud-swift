@@ -157,11 +157,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.datasetId, forKey: .datasetId)
-      try container.encode(self.tableId, forKey: .tableId)
-      try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
-      try container.encode(self.dataSchema, forKey: .dataSchema)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.datasetId.isEmpty {
+        try container.encode(self.datasetId, forKey: .datasetId)
+      }
+      if !self.tableId.isEmpty {
+        try container.encode(self.tableId, forKey: .tableId)
+      }
+      if !self.gcsStagingDir.isEmpty {
+        try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
+      }
+      if !self.dataSchema.isEmpty {
+        try container.encode(self.dataSchema, forKey: .dataSchema)
+      }
 
       if let choice = self.partition {
         switch choice {

@@ -99,10 +99,18 @@ public struct Test: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.expectationLevel, forKey: .expectationLevel)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.blueprints, forKey: .blueprints)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.expectationLevel != Test.ExpectationLevel() {
+      try container.encode(self.expectationLevel, forKey: .expectationLevel)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.blueprints.isEmpty {
+      try container.encode(self.blueprints, forKey: .blueprints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -187,10 +195,16 @@ public struct Test: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.description, forKey: .description)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.request, forKey: .request)
-      try container.encode(self.additionalRequests, forKey: .additionalRequests)
+      if !self.additionalRequests.isEmpty {
+        try container.encode(self.additionalRequests, forKey: .additionalRequests)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -258,8 +272,12 @@ public struct Test: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.method, forKey: .method)
-        try container.encode(self.serializedRequest, forKey: .serializedRequest)
+        if !self.method.isEmpty {
+          try container.encode(self.method, forKey: .method)
+        }
+        if !self.serializedRequest.isEmpty {
+          try container.encode(self.serializedRequest, forKey: .serializedRequest)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

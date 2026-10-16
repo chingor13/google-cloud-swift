@@ -221,25 +221,47 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.status, forKey: .status)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.status != SqlBackupRunStatus() {
+        try container.encode(self.status, forKey: .status)
+      }
       try container.encodeIfPresent(self.enqueuedTime, forKey: .enqueuedTime)
-      try container.encode(self.id, forKey: .id)
+      if self.id != 0 {
+        try container.encode(self.id, forKey: .id)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.description, forKey: .description)
+      if self.type != SqlBackupRunType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.windowStartTime, forKey: .windowStartTime)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.selfLink, forKey: .selfLink)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.databaseVersion, forKey: .databaseVersion)
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.selfLink.isEmpty {
+        try container.encode(self.selfLink, forKey: .selfLink)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if self.databaseVersion != SqlDatabaseVersion() {
+        try container.encode(self.databaseVersion, forKey: .databaseVersion)
+      }
       try container.encodeIfPresent(
         self.diskEncryptionConfiguration, forKey: .diskEncryptionConfiguration)
       try container.encodeIfPresent(self.diskEncryptionStatus, forKey: .diskEncryptionStatus)
-      try container.encode(self.backupKind, forKey: .backupKind)
-      try container.encode(self.timeZone, forKey: .timeZone)
+      if self.backupKind != SqlBackupKind() {
+        try container.encode(self.backupKind, forKey: .backupKind)
+      }
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
       try container.encodeIfPresent(self.maxChargeableBytes, forKey: .maxChargeableBytes)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

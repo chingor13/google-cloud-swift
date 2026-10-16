@@ -90,9 +90,15 @@ public struct PersonDetectionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.includeBoundingBoxes, forKey: .includeBoundingBoxes)
-    try container.encode(self.includePoseLandmarks, forKey: .includePoseLandmarks)
-    try container.encode(self.includeAttributes, forKey: .includeAttributes)
+    if self.includeBoundingBoxes {
+      try container.encode(self.includeBoundingBoxes, forKey: .includeBoundingBoxes)
+    }
+    if self.includePoseLandmarks {
+      try container.encode(self.includePoseLandmarks, forKey: .includePoseLandmarks)
+    }
+    if self.includeAttributes {
+      try container.encode(self.includeAttributes, forKey: .includeAttributes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -101,10 +101,18 @@ public struct ImageObjectDetectionPredictionResult: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ids, forKey: .ids)
-    try container.encode(self.displayNames, forKey: .displayNames)
-    try container.encode(self.confidences, forKey: .confidences)
-    try container.encode(self.bboxes, forKey: .bboxes)
+    if !self.ids.isEmpty {
+      try container.encode(self.ids, forKey: .ids)
+    }
+    if !self.displayNames.isEmpty {
+      try container.encode(self.displayNames, forKey: .displayNames)
+    }
+    if !self.confidences.isEmpty {
+      try container.encode(self.confidences, forKey: .confidences)
+    }
+    if !self.bboxes.isEmpty {
+      try container.encode(self.bboxes, forKey: .bboxes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

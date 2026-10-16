@@ -95,7 +95,9 @@ public struct SlsaProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.builder, forKey: .builder)
     try container.encodeIfPresent(self.recipe, forKey: .recipe)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.materials, forKey: .materials)
+    if !self.materials.isEmpty {
+      try container.encode(self.materials, forKey: .materials)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -200,9 +202,15 @@ public struct SlsaProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.definedInMaterial, forKey: .definedInMaterial)
-      try container.encode(self.entryPoint, forKey: .entryPoint)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.definedInMaterial != 0 {
+        try container.encode(self.definedInMaterial, forKey: .definedInMaterial)
+      }
+      if !self.entryPoint.isEmpty {
+        try container.encode(self.entryPoint, forKey: .entryPoint)
+      }
       try container.encodeIfPresent(self.arguments, forKey: .arguments)
       try container.encodeIfPresent(self.environment, forKey: .environment)
       for (key, value) in self._unknownFields.json {
@@ -304,9 +312,15 @@ public struct SlsaProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.arguments, forKey: .arguments)
-      try container.encode(self.environment, forKey: .environment)
-      try container.encode(self.materials, forKey: .materials)
+      if self.arguments {
+        try container.encode(self.arguments, forKey: .arguments)
+      }
+      if self.environment {
+        try container.encode(self.environment, forKey: .environment)
+      }
+      if self.materials {
+        try container.encode(self.materials, forKey: .materials)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -419,11 +433,15 @@ public struct SlsaProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.buildInvocationId, forKey: .buildInvocationId)
+      if !self.buildInvocationId.isEmpty {
+        try container.encode(self.buildInvocationId, forKey: .buildInvocationId)
+      }
       try container.encodeIfPresent(self.buildStartedOn, forKey: .buildStartedOn)
       try container.encodeIfPresent(self.buildFinishedOn, forKey: .buildFinishedOn)
       try container.encodeIfPresent(self.completeness, forKey: .completeness)
-      try container.encode(self.reproducible, forKey: .reproducible)
+      if self.reproducible {
+        try container.encode(self.reproducible, forKey: .reproducible)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -501,7 +519,9 @@ public struct SlsaProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -588,8 +608,12 @@ public struct SlsaProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.digest, forKey: .digest)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.digest.isEmpty {
+        try container.encode(self.digest, forKey: .digest)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

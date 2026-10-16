@@ -127,7 +127,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destination, forKey: .destination)
+      if !self.destination.isEmpty {
+        try container.encode(self.destination, forKey: .destination)
+      }
       try container.encodeIfPresent(self.modelConfig, forKey: .modelConfig)
       try container.encodeIfPresent(self.endpointConfig, forKey: .endpointConfig)
       try container.encodeIfPresent(self.deployConfig, forKey: .deployConfig)
@@ -252,12 +254,22 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.acceptEula, forKey: .acceptEula)
-        try container.encode(self.huggingFaceAccessToken, forKey: .huggingFaceAccessToken)
-        try container.encode(self.huggingFaceCacheEnabled, forKey: .huggingFaceCacheEnabled)
-        try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+        if self.acceptEula {
+          try container.encode(self.acceptEula, forKey: .acceptEula)
+        }
+        if !self.huggingFaceAccessToken.isEmpty {
+          try container.encode(self.huggingFaceAccessToken, forKey: .huggingFaceAccessToken)
+        }
+        if self.huggingFaceCacheEnabled {
+          try container.encode(self.huggingFaceCacheEnabled, forKey: .huggingFaceCacheEnabled)
+        }
+        if !self.modelDisplayName.isEmpty {
+          try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+        }
         try container.encodeIfPresent(self.containerSpec, forKey: .containerSpec)
-        try container.encode(self.modelUserId, forKey: .modelUserId)
+        if !self.modelUserId.isEmpty {
+          try container.encode(self.modelUserId, forKey: .modelUserId)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -405,10 +417,18 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.endpointDisplayName, forKey: .endpointDisplayName)
-        try container.encode(self.dedicatedEndpointEnabled, forKey: .dedicatedEndpointEnabled)
-        try container.encode(self.dedicatedEndpointDisabled, forKey: .dedicatedEndpointDisabled)
-        try container.encode(self.endpointUserId, forKey: .endpointUserId)
+        if !self.endpointDisplayName.isEmpty {
+          try container.encode(self.endpointDisplayName, forKey: .endpointDisplayName)
+        }
+        if self.dedicatedEndpointEnabled {
+          try container.encode(self.dedicatedEndpointEnabled, forKey: .dedicatedEndpointEnabled)
+        }
+        if self.dedicatedEndpointDisabled {
+          try container.encode(self.dedicatedEndpointDisabled, forKey: .dedicatedEndpointDisabled)
+        }
+        if !self.endpointUserId.isEmpty {
+          try container.encode(self.endpointUserId, forKey: .endpointUserId)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -509,8 +529,12 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.dedicatedResources, forKey: .dedicatedResources)
-        try container.encode(self.fastTryoutEnabled, forKey: .fastTryoutEnabled)
-        try container.encode(self.systemLabels, forKey: .systemLabels)
+        if self.fastTryoutEnabled {
+          try container.encode(self.fastTryoutEnabled, forKey: .fastTryoutEnabled)
+        }
+        if !self.systemLabels.isEmpty {
+          try container.encode(self.systemLabels, forKey: .systemLabels)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

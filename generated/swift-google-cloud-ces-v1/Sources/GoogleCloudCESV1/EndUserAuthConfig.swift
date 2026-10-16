@@ -159,7 +159,9 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.oauthToken, forKey: .oauthToken)
+      if !self.oauthToken.isEmpty {
+        try container.encode(self.oauthToken, forKey: .oauthToken)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -258,9 +260,15 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.issuer, forKey: .issuer)
-      try container.encode(self.subject, forKey: .subject)
-      try container.encode(self.clientKey, forKey: .clientKey)
+      if !self.issuer.isEmpty {
+        try container.encode(self.issuer, forKey: .issuer)
+      }
+      if !self.subject.isEmpty {
+        try container.encode(self.subject, forKey: .subject)
+      }
+      if !self.clientKey.isEmpty {
+        try container.encode(self.clientKey, forKey: .clientKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

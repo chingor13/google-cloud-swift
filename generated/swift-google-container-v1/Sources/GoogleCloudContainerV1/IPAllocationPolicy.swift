@@ -364,30 +364,68 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.useIpAliases, forKey: .useIpAliases)
-    try container.encode(self.createSubnetwork, forKey: .createSubnetwork)
-    try container.encode(self.subnetworkName, forKey: .subnetworkName)
-    try container.encode(self.clusterIpv4Cidr, forKey: .clusterIpv4Cidr)
-    try container.encode(self.nodeIpv4Cidr, forKey: .nodeIpv4Cidr)
-    try container.encode(self.servicesIpv4Cidr, forKey: .servicesIpv4Cidr)
-    try container.encode(self.clusterSecondaryRangeName, forKey: .clusterSecondaryRangeName)
-    try container.encode(self.servicesSecondaryRangeName, forKey: .servicesSecondaryRangeName)
-    try container.encode(self.clusterIpv4CidrBlock, forKey: .clusterIpv4CidrBlock)
-    try container.encode(self.nodeIpv4CidrBlock, forKey: .nodeIpv4CidrBlock)
-    try container.encode(self.servicesIpv4CidrBlock, forKey: .servicesIpv4CidrBlock)
-    try container.encode(self.tpuIpv4CidrBlock, forKey: .tpuIpv4CidrBlock)
-    try container.encode(self.useRoutes, forKey: .useRoutes)
-    try container.encode(self.stackType, forKey: .stackType)
-    try container.encode(self.ipv6AccessType, forKey: .ipv6AccessType)
+    if self.useIpAliases {
+      try container.encode(self.useIpAliases, forKey: .useIpAliases)
+    }
+    if self.createSubnetwork {
+      try container.encode(self.createSubnetwork, forKey: .createSubnetwork)
+    }
+    if !self.subnetworkName.isEmpty {
+      try container.encode(self.subnetworkName, forKey: .subnetworkName)
+    }
+    if !self.clusterIpv4Cidr.isEmpty {
+      try container.encode(self.clusterIpv4Cidr, forKey: .clusterIpv4Cidr)
+    }
+    if !self.nodeIpv4Cidr.isEmpty {
+      try container.encode(self.nodeIpv4Cidr, forKey: .nodeIpv4Cidr)
+    }
+    if !self.servicesIpv4Cidr.isEmpty {
+      try container.encode(self.servicesIpv4Cidr, forKey: .servicesIpv4Cidr)
+    }
+    if !self.clusterSecondaryRangeName.isEmpty {
+      try container.encode(self.clusterSecondaryRangeName, forKey: .clusterSecondaryRangeName)
+    }
+    if !self.servicesSecondaryRangeName.isEmpty {
+      try container.encode(self.servicesSecondaryRangeName, forKey: .servicesSecondaryRangeName)
+    }
+    if !self.clusterIpv4CidrBlock.isEmpty {
+      try container.encode(self.clusterIpv4CidrBlock, forKey: .clusterIpv4CidrBlock)
+    }
+    if !self.nodeIpv4CidrBlock.isEmpty {
+      try container.encode(self.nodeIpv4CidrBlock, forKey: .nodeIpv4CidrBlock)
+    }
+    if !self.servicesIpv4CidrBlock.isEmpty {
+      try container.encode(self.servicesIpv4CidrBlock, forKey: .servicesIpv4CidrBlock)
+    }
+    if !self.tpuIpv4CidrBlock.isEmpty {
+      try container.encode(self.tpuIpv4CidrBlock, forKey: .tpuIpv4CidrBlock)
+    }
+    if self.useRoutes {
+      try container.encode(self.useRoutes, forKey: .useRoutes)
+    }
+    if self.stackType != StackType() {
+      try container.encode(self.stackType, forKey: .stackType)
+    }
+    if self.ipv6AccessType != IPv6AccessType() {
+      try container.encode(self.ipv6AccessType, forKey: .ipv6AccessType)
+    }
     try container.encodeIfPresent(
       self.podCidrOverprovisionConfig, forKey: .podCidrOverprovisionConfig)
-    try container.encode(self.subnetIpv6CidrBlock, forKey: .subnetIpv6CidrBlock)
-    try container.encode(self.servicesIpv6CidrBlock, forKey: .servicesIpv6CidrBlock)
+    if !self.subnetIpv6CidrBlock.isEmpty {
+      try container.encode(self.subnetIpv6CidrBlock, forKey: .subnetIpv6CidrBlock)
+    }
+    if !self.servicesIpv6CidrBlock.isEmpty {
+      try container.encode(self.servicesIpv6CidrBlock, forKey: .servicesIpv6CidrBlock)
+    }
     try container.encodeIfPresent(
       self.additionalPodRangesConfig, forKey: .additionalPodRangesConfig)
-    try container.encode(
-      self.defaultPodIpv4RangeUtilization, forKey: .defaultPodIpv4RangeUtilization)
-    try container.encode(self.additionalIpRangesConfigs, forKey: .additionalIpRangesConfigs)
+    if self.defaultPodIpv4RangeUtilization != 0 {
+      try container.encode(
+        self.defaultPodIpv4RangeUtilization, forKey: .defaultPodIpv4RangeUtilization)
+    }
+    if !self.additionalIpRangesConfigs.isEmpty {
+      try container.encode(self.additionalIpRangesConfigs, forKey: .additionalIpRangesConfigs)
+    }
     try container.encodeIfPresent(self.autoIpamConfig, forKey: .autoIpamConfig)
     try container.encodeIfPresent(self.networkTierConfig, forKey: .networkTierConfig)
     for (key, value) in self._unknownFields.json {

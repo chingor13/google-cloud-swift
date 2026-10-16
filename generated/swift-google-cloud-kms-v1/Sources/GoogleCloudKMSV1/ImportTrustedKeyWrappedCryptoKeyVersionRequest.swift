@@ -149,11 +149,21 @@ public struct ImportTrustedKeyWrappedCryptoKeyVersionRequest: Codable, Equatable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.importingKey, forKey: .importingKey)
-    try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
-    try container.encode(self.wrappedKey, forKey: .wrappedKey)
-    try container.encode(self.algorithm, forKey: .algorithm)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.importingKey.isEmpty {
+      try container.encode(self.importingKey, forKey: .importingKey)
+    }
+    if !self.cryptoKeyVersion.isEmpty {
+      try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
+    }
+    if !self.wrappedKey.isEmpty {
+      try container.encode(self.wrappedKey, forKey: .wrappedKey)
+    }
+    if self.algorithm != CryptoKeyVersion.CryptoKeyVersionAlgorithm() {
+      try container.encode(self.algorithm, forKey: .algorithm)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -100,7 +100,9 @@ public struct UpdateTableRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.table, forKey: .table)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.ignoreWarnings, forKey: .ignoreWarnings)
+    if self.ignoreWarnings {
+      try container.encode(self.ignoreWarnings, forKey: .ignoreWarnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

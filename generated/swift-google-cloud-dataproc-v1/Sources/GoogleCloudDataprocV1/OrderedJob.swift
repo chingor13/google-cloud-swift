@@ -180,10 +180,16 @@ public struct OrderedJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.stepId, forKey: .stepId)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.stepId.isEmpty {
+      try container.encode(self.stepId, forKey: .stepId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
-    try container.encode(self.prerequisiteStepIds, forKey: .prerequisiteStepIds)
+    if !self.prerequisiteStepIds.isEmpty {
+      try container.encode(self.prerequisiteStepIds, forKey: .prerequisiteStepIds)
+    }
 
     if let choice = self.jobType {
       switch choice {

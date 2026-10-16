@@ -96,8 +96,12 @@ public struct ManualApprovals: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.requireApproverJustification, forKey: .requireApproverJustification)
-    try container.encode(self.steps, forKey: .steps)
+    if self.requireApproverJustification {
+      try container.encode(self.requireApproverJustification, forKey: .requireApproverJustification)
+    }
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -177,9 +181,15 @@ public struct ManualApprovals: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.approvers, forKey: .approvers)
-      try container.encode(self.approvalsNeeded, forKey: .approvalsNeeded)
-      try container.encode(self.approverEmailRecipients, forKey: .approverEmailRecipients)
+      if !self.approvers.isEmpty {
+        try container.encode(self.approvers, forKey: .approvers)
+      }
+      if self.approvalsNeeded != 0 {
+        try container.encode(self.approvalsNeeded, forKey: .approvalsNeeded)
+      }
+      if !self.approverEmailRecipients.isEmpty {
+        try container.encode(self.approverEmailRecipients, forKey: .approverEmailRecipients)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -136,13 +136,23 @@ public struct FileClusterSummary: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.fileClusterType, forKey: .fileClusterType)
-    try container.encode(self.fileStoreInfoTypeSummaries, forKey: .fileStoreInfoTypeSummaries)
+    if !self.fileStoreInfoTypeSummaries.isEmpty {
+      try container.encode(self.fileStoreInfoTypeSummaries, forKey: .fileStoreInfoTypeSummaries)
+    }
     try container.encodeIfPresent(self.sensitivityScore, forKey: .sensitivityScore)
     try container.encodeIfPresent(self.dataRiskLevel, forKey: .dataRiskLevel)
-    try container.encode(self.errors, forKey: .errors)
-    try container.encode(self.fileExtensionsScanned, forKey: .fileExtensionsScanned)
-    try container.encode(self.fileExtensionsSeen, forKey: .fileExtensionsSeen)
-    try container.encode(self.noFilesExist, forKey: .noFilesExist)
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
+    if !self.fileExtensionsScanned.isEmpty {
+      try container.encode(self.fileExtensionsScanned, forKey: .fileExtensionsScanned)
+    }
+    if !self.fileExtensionsSeen.isEmpty {
+      try container.encode(self.fileExtensionsSeen, forKey: .fileExtensionsSeen)
+    }
+    if self.noFilesExist {
+      try container.encode(self.noFilesExist, forKey: .noFilesExist)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

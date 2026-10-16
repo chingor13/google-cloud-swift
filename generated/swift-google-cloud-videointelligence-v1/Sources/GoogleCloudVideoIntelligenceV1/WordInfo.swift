@@ -115,9 +115,15 @@ public struct WordInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.word, forKey: .word)
-    try container.encode(self.confidence, forKey: .confidence)
-    try container.encode(self.speakerTag, forKey: .speakerTag)
+    if !self.word.isEmpty {
+      try container.encode(self.word, forKey: .word)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
+    if self.speakerTag != 0 {
+      try container.encode(self.speakerTag, forKey: .speakerTag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

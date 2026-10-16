@@ -132,17 +132,23 @@ public struct MessageWithBool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.singular, forKey: .singular)
+    if self.singular {
+      try container.encode(self.singular, forKey: .singular)
+    }
     try container.encodeIfPresent(self.option, forKey: .option)
-    try container.encode(self.repeated, forKey: .repeated)
-    try container.encode(self.mapValue, forKey: .mapValue)
-    do {
+    if !self.repeated.isEmpty {
+      try container.encode(self.repeated, forKey: .repeated)
+    }
+    if !self.mapValue.isEmpty {
+      try container.encode(self.mapValue, forKey: .mapValue)
+    }
+    if !self.mapKey.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.mapKey.lazy.map { (Swift.String($0), $1) }
       )
       try container.encode(stringKeyed, forKey: .mapKey)
     }
-    do {
+    if !self.mapKeyValue.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.mapKeyValue.lazy.map { (Swift.String($0), $1) }
       )

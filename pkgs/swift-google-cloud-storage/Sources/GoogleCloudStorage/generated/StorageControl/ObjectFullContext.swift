@@ -105,9 +105,15 @@ public struct ObjectFullContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.value, forKey: .value)
+    if self.type != ObjectFullContext.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.value.isEmpty {
+      try container.encode(self.value, forKey: .value)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.extendedData, forKey: .extendedData)

@@ -122,13 +122,23 @@ public struct HotTablet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.tableName, forKey: .tableName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.tableName.isEmpty {
+      try container.encode(self.tableName, forKey: .tableName)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.startKey, forKey: .startKey)
-    try container.encode(self.endKey, forKey: .endKey)
-    try container.encode(self.nodeCpuUsagePercent, forKey: .nodeCpuUsagePercent)
+    if !self.startKey.isEmpty {
+      try container.encode(self.startKey, forKey: .startKey)
+    }
+    if !self.endKey.isEmpty {
+      try container.encode(self.endKey, forKey: .endKey)
+    }
+    if self.nodeCpuUsagePercent != 0 {
+      try container.encode(self.nodeCpuUsagePercent, forKey: .nodeCpuUsagePercent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

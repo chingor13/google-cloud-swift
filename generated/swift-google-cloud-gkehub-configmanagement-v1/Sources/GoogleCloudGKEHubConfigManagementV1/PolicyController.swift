@@ -114,12 +114,20 @@ public struct PolicyController: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
     try container.encodeIfPresent(self.templateLibraryInstalled, forKey: .templateLibraryInstalled)
     try container.encodeIfPresent(self.auditIntervalSeconds, forKey: .auditIntervalSeconds)
-    try container.encode(self.exemptableNamespaces, forKey: .exemptableNamespaces)
-    try container.encode(self.referentialRulesEnabled, forKey: .referentialRulesEnabled)
-    try container.encode(self.logDeniesEnabled, forKey: .logDeniesEnabled)
+    if !self.exemptableNamespaces.isEmpty {
+      try container.encode(self.exemptableNamespaces, forKey: .exemptableNamespaces)
+    }
+    if self.referentialRulesEnabled {
+      try container.encode(self.referentialRulesEnabled, forKey: .referentialRulesEnabled)
+    }
+    if self.logDeniesEnabled {
+      try container.encode(self.logDeniesEnabled, forKey: .logDeniesEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

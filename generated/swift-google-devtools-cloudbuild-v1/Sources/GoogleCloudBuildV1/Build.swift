@@ -353,37 +353,71 @@ public struct Build: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.statusDetail, forKey: .statusDetail)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if self.status != Build.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.statusDetail.isEmpty {
+      try container.encode(self.statusDetail, forKey: .statusDetail)
+    }
     try container.encodeIfPresent(self.source, forKey: .source)
-    try container.encode(self.steps, forKey: .steps)
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
     try container.encodeIfPresent(self.results, forKey: .results)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.finishTime, forKey: .finishTime)
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.images, forKey: .images)
+    if !self.images.isEmpty {
+      try container.encode(self.images, forKey: .images)
+    }
     try container.encodeIfPresent(self.queueTtl, forKey: .queueTtl)
     try container.encodeIfPresent(self.artifacts, forKey: .artifacts)
-    try container.encode(self.logsBucket, forKey: .logsBucket)
+    if !self.logsBucket.isEmpty {
+      try container.encode(self.logsBucket, forKey: .logsBucket)
+    }
     try container.encodeIfPresent(self.sourceProvenance, forKey: .sourceProvenance)
-    try container.encode(self.buildTriggerId, forKey: .buildTriggerId)
+    if !self.buildTriggerId.isEmpty {
+      try container.encode(self.buildTriggerId, forKey: .buildTriggerId)
+    }
     try container.encodeIfPresent(self.options, forKey: .options)
-    try container.encode(self.logUrl, forKey: .logUrl)
-    try container.encode(self.substitutions, forKey: .substitutions)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.secrets, forKey: .secrets)
-    try container.encode(self.timing, forKey: .timing)
+    if !self.logUrl.isEmpty {
+      try container.encode(self.logUrl, forKey: .logUrl)
+    }
+    if !self.substitutions.isEmpty {
+      try container.encode(self.substitutions, forKey: .substitutions)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.secrets.isEmpty {
+      try container.encode(self.secrets, forKey: .secrets)
+    }
+    if !self.timing.isEmpty {
+      try container.encode(self.timing, forKey: .timing)
+    }
     try container.encodeIfPresent(self.approval, forKey: .approval)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.availableSecrets, forKey: .availableSecrets)
-    try container.encode(self.warnings, forKey: .warnings)
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
     try container.encodeIfPresent(self.gitConfig, forKey: .gitConfig)
     try container.encodeIfPresent(self.failureInfo, forKey: .failureInfo)
-    try container.encode(self.dependencies, forKey: .dependencies)
+    if !self.dependencies.isEmpty {
+      try container.encode(self.dependencies, forKey: .dependencies)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -449,8 +483,12 @@ public struct Build: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.text, forKey: .text)
-      try container.encode(self.priority, forKey: .priority)
+      if !self.text.isEmpty {
+        try container.encode(self.text, forKey: .text)
+      }
+      if self.priority != Build.Warning.Priority() {
+        try container.encode(self.priority, forKey: .priority)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -664,8 +702,12 @@ public struct Build: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.detail, forKey: .detail)
+      if self.type != Build.FailureInfo.FailureType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.detail.isEmpty {
+        try container.encode(self.detail, forKey: .detail)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

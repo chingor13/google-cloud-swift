@@ -109,7 +109,9 @@ public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatab
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(
       self.securityHealthAnalyticsCustomModule, forKey: .securityHealthAnalyticsCustomModule)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

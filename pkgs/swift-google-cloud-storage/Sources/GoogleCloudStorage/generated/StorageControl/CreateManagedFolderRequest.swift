@@ -96,10 +96,16 @@ public struct CreateManagedFolderRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.managedFolder, forKey: .managedFolder)
-    try container.encode(self.managedFolderId, forKey: .managedFolderId)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.managedFolderId.isEmpty {
+      try container.encode(self.managedFolderId, forKey: .managedFolderId)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -97,7 +97,9 @@ public struct Location: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.byteRange, forKey: .byteRange)
     try container.encodeIfPresent(self.codepointRange, forKey: .codepointRange)
-    try container.encode(self.contentLocations, forKey: .contentLocations)
+    if !self.contentLocations.isEmpty {
+      try container.encode(self.contentLocations, forKey: .contentLocations)
+    }
     try container.encodeIfPresent(self.container, forKey: .container)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

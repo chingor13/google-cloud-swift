@@ -171,15 +171,27 @@ public struct AuthorizedCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.domainNames, forKey: .domainNames)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.domainNames.isEmpty {
+      try container.encode(self.domainNames, forKey: .domainNames)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     try container.encodeIfPresent(self.certificateRawData, forKey: .certificateRawData)
     try container.encodeIfPresent(self.managedCertificate, forKey: .managedCertificate)
-    try container.encode(self.visibleDomainMappings, forKey: .visibleDomainMappings)
-    try container.encode(self.domainMappingsCount, forKey: .domainMappingsCount)
+    if !self.visibleDomainMappings.isEmpty {
+      try container.encode(self.visibleDomainMappings, forKey: .visibleDomainMappings)
+    }
+    if self.domainMappingsCount != 0 {
+      try container.encode(self.domainMappingsCount, forKey: .domainMappingsCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

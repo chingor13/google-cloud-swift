@@ -112,8 +112,12 @@ public struct CheckConsistencyRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.consistencyToken, forKey: .consistencyToken)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.consistencyToken.isEmpty {
+      try container.encode(self.consistencyToken, forKey: .consistencyToken)
+    }
 
     if let choice = self.mode {
       switch choice {

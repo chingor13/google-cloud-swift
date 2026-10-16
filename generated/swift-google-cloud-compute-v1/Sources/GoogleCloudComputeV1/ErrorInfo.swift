@@ -125,7 +125,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.domain, forKey: .domain)
-      try container.encode(self.metadatas, forKey: .metadatas)
+      if !self.metadatas.isEmpty {
+        try container.encode(self.metadatas, forKey: .metadatas)
+      }
       try container.encodeIfPresent(self.reason, forKey: .reason)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

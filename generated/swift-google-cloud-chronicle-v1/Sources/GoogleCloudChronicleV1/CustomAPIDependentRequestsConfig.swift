@@ -91,9 +91,15 @@ public struct CustomAPIDependentRequestsConfig: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.itemIdJsonPath, forKey: .itemIdJsonPath)
-    try container.encode(self.itemIdVariable, forKey: .itemIdVariable)
-    try container.encode(self.dependentRequests, forKey: .dependentRequests)
+    if !self.itemIdJsonPath.isEmpty {
+      try container.encode(self.itemIdJsonPath, forKey: .itemIdJsonPath)
+    }
+    if !self.itemIdVariable.isEmpty {
+      try container.encode(self.itemIdVariable, forKey: .itemIdVariable)
+    }
+    if !self.dependentRequests.isEmpty {
+      try container.encode(self.dependentRequests, forKey: .dependentRequests)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

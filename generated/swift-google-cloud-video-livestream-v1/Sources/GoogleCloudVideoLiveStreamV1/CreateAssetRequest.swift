@@ -109,10 +109,16 @@ public struct CreateAssetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.asset, forKey: .asset)
-    try container.encode(self.assetId, forKey: .assetId)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.assetId.isEmpty {
+      try container.encode(self.assetId, forKey: .assetId)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

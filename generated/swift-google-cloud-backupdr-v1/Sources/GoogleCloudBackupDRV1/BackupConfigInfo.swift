@@ -118,7 +118,9 @@ public struct BackupConfigInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.lastBackupState, forKey: .lastBackupState)
+    if self.lastBackupState != BackupConfigInfo.LastBackupState() {
+      try container.encode(self.lastBackupState, forKey: .lastBackupState)
+    }
     try container.encodeIfPresent(
       self.lastSuccessfulBackupConsistencyTime, forKey: .lastSuccessfulBackupConsistencyTime)
     try container.encodeIfPresent(self.lastBackupError, forKey: .lastBackupError)

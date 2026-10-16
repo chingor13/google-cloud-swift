@@ -107,7 +107,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.items, forKey: .items)
+      if !self.items.isEmpty {
+        try container.encode(self.items, forKey: .items)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
@@ -193,7 +195,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.code, forKey: .code)
-        try container.encode(self.data, forKey: .data)
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         try container.encodeIfPresent(self.message, forKey: .message)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

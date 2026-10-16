@@ -160,17 +160,39 @@ public struct NodeType: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.nodeTypeId, forKey: .nodeTypeId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.virtualCpuCount, forKey: .virtualCpuCount)
-    try container.encode(self.totalCoreCount, forKey: .totalCoreCount)
-    try container.encode(self.memoryGb, forKey: .memoryGb)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
-    try container.encode(self.availableCustomCoreCounts, forKey: .availableCustomCoreCounts)
-    try container.encode(self.kind, forKey: .kind)
-    try container.encode(self.families, forKey: .families)
-    try container.encode(self.capabilities, forKey: .capabilities)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.nodeTypeId.isEmpty {
+      try container.encode(self.nodeTypeId, forKey: .nodeTypeId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.virtualCpuCount != 0 {
+      try container.encode(self.virtualCpuCount, forKey: .virtualCpuCount)
+    }
+    if self.totalCoreCount != 0 {
+      try container.encode(self.totalCoreCount, forKey: .totalCoreCount)
+    }
+    if self.memoryGb != 0 {
+      try container.encode(self.memoryGb, forKey: .memoryGb)
+    }
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
+    if !self.availableCustomCoreCounts.isEmpty {
+      try container.encode(self.availableCustomCoreCounts, forKey: .availableCustomCoreCounts)
+    }
+    if self.kind != NodeType.Kind() {
+      try container.encode(self.kind, forKey: .kind)
+    }
+    if !self.families.isEmpty {
+      try container.encode(self.families, forKey: .families)
+    }
+    if !self.capabilities.isEmpty {
+      try container.encode(self.capabilities, forKey: .capabilities)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

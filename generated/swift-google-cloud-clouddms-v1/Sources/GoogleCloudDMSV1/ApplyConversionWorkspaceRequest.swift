@@ -121,10 +121,18 @@ public struct ApplyConversionWorkspaceRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.dryRun, forKey: .dryRun)
-    try container.encode(self.autoCommit, forKey: .autoCommit)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if self.dryRun {
+      try container.encode(self.dryRun, forKey: .dryRun)
+    }
+    if self.autoCommit {
+      try container.encode(self.autoCommit, forKey: .autoCommit)
+    }
 
     if let choice = self.destination {
       switch choice {

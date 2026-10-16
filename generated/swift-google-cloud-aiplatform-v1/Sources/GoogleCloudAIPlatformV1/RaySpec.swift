@@ -121,9 +121,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.imageUri, forKey: .imageUri)
-      try container.encode(self.resourcePoolImages, forKey: .resourcePoolImages)
-      try container.encode(self.headNodeResourcePoolId, forKey: .headNodeResourcePoolId)
+      if !self.imageUri.isEmpty {
+        try container.encode(self.imageUri, forKey: .imageUri)
+      }
+      if !self.resourcePoolImages.isEmpty {
+        try container.encode(self.resourcePoolImages, forKey: .resourcePoolImages)
+      }
+      if !self.headNodeResourcePoolId.isEmpty {
+        try container.encode(self.headNodeResourcePoolId, forKey: .headNodeResourcePoolId)
+      }
       try container.encodeIfPresent(self.rayMetricSpec, forKey: .rayMetricSpec)
       try container.encodeIfPresent(self.rayLogsSpec, forKey: .rayLogsSpec)
       for (key, value) in self._unknownFields.json {

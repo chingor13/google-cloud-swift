@@ -117,13 +117,19 @@ public struct ClientConnectorService: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.ingress, forKey: .ingress)
     try container.encodeIfPresent(self.egress, forKey: .egress)
-    try container.encode(self.state, forKey: .state)
+    if self.state != ClientConnectorService.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -273,8 +279,12 @@ public struct ClientConnectorService: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.transportProtocol, forKey: .transportProtocol)
-        try container.encode(self.destinationRoutes, forKey: .destinationRoutes)
+        if self.transportProtocol != ClientConnectorService.Ingress.Config.TransportProtocol() {
+          try container.encode(self.transportProtocol, forKey: .transportProtocol)
+        }
+        if !self.destinationRoutes.isEmpty {
+          try container.encode(self.destinationRoutes, forKey: .destinationRoutes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -344,8 +354,12 @@ public struct ClientConnectorService: Codable, Equatable, GoogleWKT._AnyPackable
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.address, forKey: .address)
-          try container.encode(self.netmask, forKey: .netmask)
+          if !self.address.isEmpty {
+            try container.encode(self.address, forKey: .address)
+          }
+          if !self.netmask.isEmpty {
+            try container.encode(self.netmask, forKey: .netmask)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -664,7 +678,9 @@ public struct ClientConnectorService: Codable, Equatable, GoogleWKT._AnyPackable
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.networkVpc, forKey: .networkVpc)
+        if !self.networkVpc.isEmpty {
+          try container.encode(self.networkVpc, forKey: .networkVpc)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

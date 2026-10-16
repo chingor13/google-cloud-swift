@@ -183,14 +183,18 @@
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.interfaces, forKey: .interfaces)
+      if !self.interfaces.isEmpty {
+        try container.encode(self.interfaces, forKey: .interfaces)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.redundancyType, forKey: .redundancyType)

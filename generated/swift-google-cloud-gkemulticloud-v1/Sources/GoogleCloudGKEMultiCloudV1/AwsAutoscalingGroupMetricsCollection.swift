@@ -83,8 +83,12 @@ public struct AwsAutoscalingGroupMetricsCollection: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.granularity, forKey: .granularity)
-    try container.encode(self.metrics, forKey: .metrics)
+    if !self.granularity.isEmpty {
+      try container.encode(self.granularity, forKey: .granularity)
+    }
+    if !self.metrics.isEmpty {
+      try container.encode(self.metrics, forKey: .metrics)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

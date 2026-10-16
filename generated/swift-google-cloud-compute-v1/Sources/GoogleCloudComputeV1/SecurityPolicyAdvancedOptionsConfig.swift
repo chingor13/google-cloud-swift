@@ -106,7 +106,9 @@
       try container.encodeIfPresent(self.logLevel, forKey: .logLevel)
       try container.encodeIfPresent(
         self.requestBodyInspectionSize, forKey: .requestBodyInspectionSize)
-      try container.encode(self.userIpRequestHeaders, forKey: .userIpRequestHeaders)
+      if !self.userIpRequestHeaders.isEmpty {
+        try container.encode(self.userIpRequestHeaders, forKey: .userIpRequestHeaders)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

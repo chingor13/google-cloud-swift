@@ -79,8 +79,12 @@ public struct ListSynonymSetsResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.synonymSets, forKey: .synonymSets)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.synonymSets.isEmpty {
+      try container.encode(self.synonymSets, forKey: .synonymSets)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

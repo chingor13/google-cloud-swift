@@ -107,7 +107,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.wallTime, forKey: .wallTime)
-      try container.encode(self.step, forKey: .step)
+      if self.step != 0 {
+        try container.encode(self.step, forKey: .step)
+      }
 
       if let choice = self.value {
         switch choice {

@@ -128,9 +128,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.machineSpec, forKey: .machineSpec)
-      try container.encode(self.replicaCount, forKey: .replicaCount)
-      try container.encode(self.nfsMounts, forKey: .nfsMounts)
-      try container.encode(self.lustreMounts, forKey: .lustreMounts)
+      if self.replicaCount != 0 {
+        try container.encode(self.replicaCount, forKey: .replicaCount)
+      }
+      if !self.nfsMounts.isEmpty {
+        try container.encode(self.nfsMounts, forKey: .nfsMounts)
+      }
+      if !self.lustreMounts.isEmpty {
+        try container.encode(self.lustreMounts, forKey: .lustreMounts)
+      }
       try container.encodeIfPresent(self.diskSpec, forKey: .diskSpec)
 
       if let choice = self.task {

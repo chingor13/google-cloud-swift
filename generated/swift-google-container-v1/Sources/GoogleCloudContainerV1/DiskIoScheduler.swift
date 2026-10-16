@@ -83,8 +83,12 @@ public struct DiskIoScheduler: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nodeSystemIoScheduler, forKey: .nodeSystemIoScheduler)
-    try container.encode(self.nodeAttachedDiskIoScheduler, forKey: .nodeAttachedDiskIoScheduler)
+    if !self.nodeSystemIoScheduler.isEmpty {
+      try container.encode(self.nodeSystemIoScheduler, forKey: .nodeSystemIoScheduler)
+    }
+    if !self.nodeAttachedDiskIoScheduler.isEmpty {
+      try container.encode(self.nodeAttachedDiskIoScheduler, forKey: .nodeAttachedDiskIoScheduler)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

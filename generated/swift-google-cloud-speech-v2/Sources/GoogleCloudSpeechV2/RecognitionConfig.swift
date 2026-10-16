@@ -164,8 +164,12 @@ public struct RecognitionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.model, forKey: .model)
-    try container.encode(self.languageCodes, forKey: .languageCodes)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
+    if !self.languageCodes.isEmpty {
+      try container.encode(self.languageCodes, forKey: .languageCodes)
+    }
     try container.encodeIfPresent(self.features, forKey: .features)
     try container.encodeIfPresent(self.adaptation, forKey: .adaptation)
     try container.encodeIfPresent(self.transcriptNormalization, forKey: .transcriptNormalization)

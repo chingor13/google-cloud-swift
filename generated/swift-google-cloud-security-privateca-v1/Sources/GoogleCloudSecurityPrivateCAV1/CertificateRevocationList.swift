@@ -173,16 +173,32 @@ public struct CertificateRevocationList: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
-    try container.encode(self.revokedCertificates, forKey: .revokedCertificates)
-    try container.encode(self.pemCrl, forKey: .pemCrl)
-    try container.encode(self.accessUrl, forKey: .accessUrl)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.sequenceNumber != 0 {
+      try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
+    }
+    if !self.revokedCertificates.isEmpty {
+      try container.encode(self.revokedCertificates, forKey: .revokedCertificates)
+    }
+    if !self.pemCrl.isEmpty {
+      try container.encode(self.pemCrl, forKey: .pemCrl)
+    }
+    if !self.accessUrl.isEmpty {
+      try container.encode(self.accessUrl, forKey: .accessUrl)
+    }
+    if self.state != CertificateRevocationList.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -271,9 +287,15 @@ public struct CertificateRevocationList: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.certificate, forKey: .certificate)
-      try container.encode(self.hexSerialNumber, forKey: .hexSerialNumber)
-      try container.encode(self.revocationReason, forKey: .revocationReason)
+      if !self.certificate.isEmpty {
+        try container.encode(self.certificate, forKey: .certificate)
+      }
+      if !self.hexSerialNumber.isEmpty {
+        try container.encode(self.hexSerialNumber, forKey: .hexSerialNumber)
+      }
+      if self.revocationReason != RevocationReason() {
+        try container.encode(self.revocationReason, forKey: .revocationReason)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

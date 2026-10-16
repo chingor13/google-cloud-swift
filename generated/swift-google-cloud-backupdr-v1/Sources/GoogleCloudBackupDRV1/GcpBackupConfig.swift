@@ -115,12 +115,24 @@ public struct GcpBackupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupPlan, forKey: .backupPlan)
-    try container.encode(self.backupPlanDescription, forKey: .backupPlanDescription)
-    try container.encode(self.backupPlanAssociation, forKey: .backupPlanAssociation)
-    try container.encode(self.backupPlanRules, forKey: .backupPlanRules)
-    try container.encode(self.backupPlanRevisionName, forKey: .backupPlanRevisionName)
-    try container.encode(self.backupPlanRevisionId, forKey: .backupPlanRevisionId)
+    if !self.backupPlan.isEmpty {
+      try container.encode(self.backupPlan, forKey: .backupPlan)
+    }
+    if !self.backupPlanDescription.isEmpty {
+      try container.encode(self.backupPlanDescription, forKey: .backupPlanDescription)
+    }
+    if !self.backupPlanAssociation.isEmpty {
+      try container.encode(self.backupPlanAssociation, forKey: .backupPlanAssociation)
+    }
+    if !self.backupPlanRules.isEmpty {
+      try container.encode(self.backupPlanRules, forKey: .backupPlanRules)
+    }
+    if !self.backupPlanRevisionName.isEmpty {
+      try container.encode(self.backupPlanRevisionName, forKey: .backupPlanRevisionName)
+    }
+    if !self.backupPlanRevisionId.isEmpty {
+      try container.encode(self.backupPlanRevisionId, forKey: .backupPlanRevisionId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

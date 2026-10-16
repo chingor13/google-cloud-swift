@@ -85,9 +85,15 @@ public struct ObservationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.currentValue, forKey: .currentValue)
-    try container.encode(self.expectedValue, forKey: .expectedValue)
-    try container.encode(self.guidance, forKey: .guidance)
+    if !self.currentValue.isEmpty {
+      try container.encode(self.currentValue, forKey: .currentValue)
+    }
+    if !self.expectedValue.isEmpty {
+      try container.encode(self.expectedValue, forKey: .expectedValue)
+    }
+    if !self.guidance.isEmpty {
+      try container.encode(self.guidance, forKey: .guidance)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

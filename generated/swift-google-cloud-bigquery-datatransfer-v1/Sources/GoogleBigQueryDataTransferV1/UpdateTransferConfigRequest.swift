@@ -152,10 +152,16 @@ public struct UpdateTransferConfigRequest: Codable, Equatable, GoogleWKT._AnyPac
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.transferConfig, forKey: .transferConfig)
-    try container.encode(self.authorizationCode, forKey: .authorizationCode)
+    if !self.authorizationCode.isEmpty {
+      try container.encode(self.authorizationCode, forKey: .authorizationCode)
+    }
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.versionInfo, forKey: .versionInfo)
-    try container.encode(self.serviceAccountName, forKey: .serviceAccountName)
+    if !self.versionInfo.isEmpty {
+      try container.encode(self.versionInfo, forKey: .versionInfo)
+    }
+    if !self.serviceAccountName.isEmpty {
+      try container.encode(self.serviceAccountName, forKey: .serviceAccountName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -99,9 +99,15 @@ public struct GcpUserAccessBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.groupKey, forKey: .groupKey)
-    try container.encode(self.accessLevels, forKey: .accessLevels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.groupKey.isEmpty {
+      try container.encode(self.groupKey, forKey: .groupKey)
+    }
+    if !self.accessLevels.isEmpty {
+      try container.encode(self.accessLevels, forKey: .accessLevels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

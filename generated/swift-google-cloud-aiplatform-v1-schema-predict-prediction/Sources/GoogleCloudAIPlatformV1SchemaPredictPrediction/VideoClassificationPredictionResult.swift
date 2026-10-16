@@ -123,9 +123,15 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.type, forKey: .type)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.timeSegmentStart, forKey: .timeSegmentStart)
     try container.encodeIfPresent(self.timeSegmentEnd, forKey: .timeSegmentEnd)
     try container.encodeIfPresent(self.confidence, forKey: .confidence)

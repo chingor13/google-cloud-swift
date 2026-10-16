@@ -118,13 +118,23 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.userEmail, forKey: .userEmail)
+    if !self.userEmail.isEmpty {
+      try container.encode(self.userEmail, forKey: .userEmail)
+    }
     try container.encodeIfPresent(self.deployTime, forKey: .deployTime)
     try container.encodeIfPresent(self.undeployTime, forKey: .undeployTime)
-    try container.encode(self.config, forKey: .config)
-    try container.encode(self.address, forKey: .address)
-    try container.encode(self.resourceUri, forKey: .resourceUri)
-    try container.encode(self.platform, forKey: .platform)
+    if !self.config.isEmpty {
+      try container.encode(self.config, forKey: .config)
+    }
+    if !self.address.isEmpty {
+      try container.encode(self.address, forKey: .address)
+    }
+    if !self.resourceUri.isEmpty {
+      try container.encode(self.resourceUri, forKey: .resourceUri)
+    }
+    if self.platform != DeploymentOccurrence.Platform() {
+      try container.encode(self.platform, forKey: .platform)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

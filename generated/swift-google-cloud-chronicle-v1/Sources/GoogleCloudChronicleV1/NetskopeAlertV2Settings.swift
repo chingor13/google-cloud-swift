@@ -93,9 +93,15 @@ public struct NetskopeAlertV2Settings: Codable, Equatable, GoogleWKT._AnyPackabl
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.contentCategory, forKey: .contentCategory)
-    try container.encode(self.contentTypes, forKey: .contentTypes)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.contentCategory.isEmpty {
+      try container.encode(self.contentCategory, forKey: .contentCategory)
+    }
+    if !self.contentTypes.isEmpty {
+      try container.encode(self.contentTypes, forKey: .contentTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

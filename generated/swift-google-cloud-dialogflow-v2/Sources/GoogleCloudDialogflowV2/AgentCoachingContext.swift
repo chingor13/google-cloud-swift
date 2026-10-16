@@ -99,10 +99,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.overarchingGuidance, forKey: .overarchingGuidance)
-      try container.encode(self.instructions, forKey: .instructions)
-      try container.encode(self.version, forKey: .version)
-      try container.encode(self.outputLanguageCode, forKey: .outputLanguageCode)
+      if !self.overarchingGuidance.isEmpty {
+        try container.encode(self.overarchingGuidance, forKey: .overarchingGuidance)
+      }
+      if !self.instructions.isEmpty {
+        try container.encode(self.instructions, forKey: .instructions)
+      }
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
+      if !self.outputLanguageCode.isEmpty {
+        try container.encode(self.outputLanguageCode, forKey: .outputLanguageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

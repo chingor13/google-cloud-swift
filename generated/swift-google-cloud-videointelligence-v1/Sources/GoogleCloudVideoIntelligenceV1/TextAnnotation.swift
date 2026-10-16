@@ -87,9 +87,15 @@ public struct TextAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.text, forKey: .text)
-    try container.encode(self.segments, forKey: .segments)
-    try container.encode(self.version, forKey: .version)
+    if !self.text.isEmpty {
+      try container.encode(self.text, forKey: .text)
+    }
+    if !self.segments.isEmpty {
+      try container.encode(self.segments, forKey: .segments)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -84,9 +84,15 @@ public struct VerifyTestRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.answer, forKey: .answer)
-    try container.encode(self.answers, forKey: .answers)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.answer.isEmpty {
+      try container.encode(self.answer, forKey: .answer)
+    }
+    if !self.answers.isEmpty {
+      try container.encode(self.answers, forKey: .answers)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

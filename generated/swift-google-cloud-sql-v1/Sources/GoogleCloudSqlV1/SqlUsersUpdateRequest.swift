@@ -143,17 +143,31 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.host, forKey: .host)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.databaseRoles, forKey: .databaseRoles)
+      if !self.host.isEmpty {
+        try container.encode(self.host, forKey: .host)
+      }
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.databaseRoles.isEmpty {
+        try container.encode(self.databaseRoles, forKey: .databaseRoles)
+      }
       try container.encodeIfPresent(self.revokeExistingRoles, forKey: .revokeExistingRoles)
-      try container.encode(self.serverRoles, forKey: .serverRoles)
+      if !self.serverRoles.isEmpty {
+        try container.encode(self.serverRoles, forKey: .serverRoles)
+      }
       try container.encodeIfPresent(
         self.revokeExistingServerRoles, forKey: .revokeExistingServerRoles)
       try container.encodeIfPresent(self.body, forKey: .body)
-      try container.encode(self.location, forKey: .location)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

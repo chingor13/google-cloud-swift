@@ -134,15 +134,31 @@ public struct ClusterOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterName, forKey: .clusterName)
-    try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
+    if !self.clusterUuid.isEmpty {
+      try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.statusHistory, forKey: .statusHistory)
-    try container.encode(self.operationType, forKey: .operationType)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.warnings, forKey: .warnings)
-    try container.encode(self.childOperationIds, forKey: .childOperationIds)
+    if !self.statusHistory.isEmpty {
+      try container.encode(self.statusHistory, forKey: .statusHistory)
+    }
+    if !self.operationType.isEmpty {
+      try container.encode(self.operationType, forKey: .operationType)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
+    if !self.childOperationIds.isEmpty {
+      try container.encode(self.childOperationIds, forKey: .childOperationIds)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

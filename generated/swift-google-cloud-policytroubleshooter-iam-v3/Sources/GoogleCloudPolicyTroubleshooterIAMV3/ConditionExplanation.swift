@@ -89,8 +89,12 @@ public struct ConditionExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.value, forKey: .value)
-    try container.encode(self.errors, forKey: .errors)
-    try container.encode(self.evaluationStates, forKey: .evaluationStates)
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
+    if !self.evaluationStates.isEmpty {
+      try container.encode(self.evaluationStates, forKey: .evaluationStates)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -173,10 +177,16 @@ public struct ConditionExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.start, forKey: .start)
-      try container.encode(self.end, forKey: .end)
+      if self.start != 0 {
+        try container.encode(self.start, forKey: .start)
+      }
+      if self.end != 0 {
+        try container.encode(self.end, forKey: .end)
+      }
       try container.encodeIfPresent(self.value, forKey: .value)
-      try container.encode(self.errors, forKey: .errors)
+      if !self.errors.isEmpty {
+        try container.encode(self.errors, forKey: .errors)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

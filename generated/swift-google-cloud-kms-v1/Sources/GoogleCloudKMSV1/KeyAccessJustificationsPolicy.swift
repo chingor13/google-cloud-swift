@@ -88,7 +88,9 @@ public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.allowedAccessReasons, forKey: .allowedAccessReasons)
+    if !self.allowedAccessReasons.isEmpty {
+      try container.encode(self.allowedAccessReasons, forKey: .allowedAccessReasons)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

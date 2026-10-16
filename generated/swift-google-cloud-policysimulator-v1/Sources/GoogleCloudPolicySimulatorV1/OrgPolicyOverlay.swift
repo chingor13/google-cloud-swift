@@ -95,8 +95,12 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.policies, forKey: .policies)
-    try container.encode(self.customConstraints, forKey: .customConstraints)
+    if !self.policies.isEmpty {
+      try container.encode(self.policies, forKey: .policies)
+    }
+    if !self.customConstraints.isEmpty {
+      try container.encode(self.customConstraints, forKey: .customConstraints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -162,7 +166,9 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.policyParent, forKey: .policyParent)
+      if !self.policyParent.isEmpty {
+        try container.encode(self.policyParent, forKey: .policyParent)
+      }
       try container.encodeIfPresent(self.policy, forKey: .policy)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -253,7 +259,9 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.customConstraintParent, forKey: .customConstraintParent)
+      if !self.customConstraintParent.isEmpty {
+        try container.encode(self.customConstraintParent, forKey: .customConstraintParent)
+      }
       try container.encodeIfPresent(self.customConstraint, forKey: .customConstraint)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

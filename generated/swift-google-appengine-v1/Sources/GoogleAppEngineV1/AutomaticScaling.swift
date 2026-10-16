@@ -174,12 +174,22 @@ public struct AutomaticScaling: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.coolDownPeriod, forKey: .coolDownPeriod)
     try container.encodeIfPresent(self.cpuUtilization, forKey: .cpuUtilization)
-    try container.encode(self.maxConcurrentRequests, forKey: .maxConcurrentRequests)
-    try container.encode(self.maxIdleInstances, forKey: .maxIdleInstances)
-    try container.encode(self.maxTotalInstances, forKey: .maxTotalInstances)
+    if self.maxConcurrentRequests != 0 {
+      try container.encode(self.maxConcurrentRequests, forKey: .maxConcurrentRequests)
+    }
+    if self.maxIdleInstances != 0 {
+      try container.encode(self.maxIdleInstances, forKey: .maxIdleInstances)
+    }
+    if self.maxTotalInstances != 0 {
+      try container.encode(self.maxTotalInstances, forKey: .maxTotalInstances)
+    }
     try container.encodeIfPresent(self.maxPendingLatency, forKey: .maxPendingLatency)
-    try container.encode(self.minIdleInstances, forKey: .minIdleInstances)
-    try container.encode(self.minTotalInstances, forKey: .minTotalInstances)
+    if self.minIdleInstances != 0 {
+      try container.encode(self.minIdleInstances, forKey: .minIdleInstances)
+    }
+    if self.minTotalInstances != 0 {
+      try container.encode(self.minTotalInstances, forKey: .minTotalInstances)
+    }
     try container.encodeIfPresent(self.minPendingLatency, forKey: .minPendingLatency)
     try container.encodeIfPresent(self.requestUtilization, forKey: .requestUtilization)
     try container.encodeIfPresent(self.diskUtilization, forKey: .diskUtilization)

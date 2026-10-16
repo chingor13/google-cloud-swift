@@ -88,9 +88,13 @@ public struct AppPlatformEventBody: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.eventMessage, forKey: .eventMessage)
+    if !self.eventMessage.isEmpty {
+      try container.encode(self.eventMessage, forKey: .eventMessage)
+    }
     try container.encodeIfPresent(self.payload, forKey: .payload)
-    try container.encode(self.eventId, forKey: .eventId)
+    if !self.eventId.isEmpty {
+      try container.encode(self.eventId, forKey: .eventId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

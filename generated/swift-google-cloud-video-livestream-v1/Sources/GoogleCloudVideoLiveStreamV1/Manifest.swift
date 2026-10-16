@@ -151,13 +151,25 @@ public struct Manifest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fileName, forKey: .fileName)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.muxStreams, forKey: .muxStreams)
-    try container.encode(self.maxSegmentCount, forKey: .maxSegmentCount)
+    if !self.fileName.isEmpty {
+      try container.encode(self.fileName, forKey: .fileName)
+    }
+    if self.type != Manifest.ManifestType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.muxStreams.isEmpty {
+      try container.encode(self.muxStreams, forKey: .muxStreams)
+    }
+    if self.maxSegmentCount != 0 {
+      try container.encode(self.maxSegmentCount, forKey: .maxSegmentCount)
+    }
     try container.encodeIfPresent(self.segmentKeepDuration, forKey: .segmentKeepDuration)
-    try container.encode(self.useTimecodeAsTimeline, forKey: .useTimecodeAsTimeline)
-    try container.encode(self.key, forKey: .key)
+    if self.useTimecodeAsTimeline {
+      try container.encode(self.useTimecodeAsTimeline, forKey: .useTimecodeAsTimeline)
+    }
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

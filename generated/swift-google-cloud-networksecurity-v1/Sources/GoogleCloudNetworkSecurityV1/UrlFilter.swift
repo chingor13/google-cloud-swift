@@ -88,8 +88,12 @@ public struct UrlFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.filteringAction, forKey: .filteringAction)
-    try container.encode(self.urls, forKey: .urls)
+    if self.filteringAction != UrlFilter.UrlFilteringAction() {
+      try container.encode(self.filteringAction, forKey: .filteringAction)
+    }
+    if !self.urls.isEmpty {
+      try container.encode(self.urls, forKey: .urls)
+    }
     try container.encodeIfPresent(self.priority, forKey: .priority)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

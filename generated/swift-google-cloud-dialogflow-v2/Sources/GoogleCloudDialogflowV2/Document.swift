@@ -188,14 +188,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.mimeType, forKey: .mimeType)
-      try container.encode(self.knowledgeTypes, forKey: .knowledgeTypes)
-      try container.encode(self.enableAutoReload, forKey: .enableAutoReload)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.mimeType.isEmpty {
+        try container.encode(self.mimeType, forKey: .mimeType)
+      }
+      if !self.knowledgeTypes.isEmpty {
+        try container.encode(self.knowledgeTypes, forKey: .knowledgeTypes)
+      }
+      if self.enableAutoReload {
+        try container.encode(self.enableAutoReload, forKey: .enableAutoReload)
+      }
       try container.encodeIfPresent(self.latestReloadStatus, forKey: .latestReloadStatus)
-      try container.encode(self.metadata, forKey: .metadata)
-      try container.encode(self.state, forKey: .state)
+      if !self.metadata.isEmpty {
+        try container.encode(self.metadata, forKey: .metadata)
+      }
+      if self.state != Document.State() {
+        try container.encode(self.state, forKey: .state)
+      }
 
       if let choice = self.source {
         switch choice {

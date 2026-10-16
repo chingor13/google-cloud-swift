@@ -114,8 +114,12 @@ public struct MetadataExport: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.databaseDumpType, forKey: .databaseDumpType)
+    if self.state != MetadataExport.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.databaseDumpType != DatabaseDumpSpec.Type_() {
+      try container.encode(self.databaseDumpType, forKey: .databaseDumpType)
+    }
 
     if let choice = self.destination {
       switch choice {

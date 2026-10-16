@@ -128,10 +128,14 @@ public struct CommuteFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.commuteMethod, forKey: .commuteMethod)
+    if self.commuteMethod != CommuteMethod() {
+      try container.encode(self.commuteMethod, forKey: .commuteMethod)
+    }
     try container.encodeIfPresent(self.startCoordinates, forKey: .startCoordinates)
     try container.encodeIfPresent(self.travelDuration, forKey: .travelDuration)
-    try container.encode(self.allowImpreciseAddresses, forKey: .allowImpreciseAddresses)
+    if self.allowImpreciseAddresses {
+      try container.encode(self.allowImpreciseAddresses, forKey: .allowImpreciseAddresses)
+    }
 
     if let choice = self.trafficOption {
       switch choice {

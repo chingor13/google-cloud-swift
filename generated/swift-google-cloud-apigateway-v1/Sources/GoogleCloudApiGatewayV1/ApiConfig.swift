@@ -179,17 +179,35 @@ public struct ApiConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.gatewayServiceAccount, forKey: .gatewayServiceAccount)
-    try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.openapiDocuments, forKey: .openapiDocuments)
-    try container.encode(self.grpcServices, forKey: .grpcServices)
-    try container.encode(self.managedServiceConfigs, forKey: .managedServiceConfigs)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.gatewayServiceAccount.isEmpty {
+      try container.encode(self.gatewayServiceAccount, forKey: .gatewayServiceAccount)
+    }
+    if !self.serviceConfigId.isEmpty {
+      try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
+    }
+    if self.state != ApiConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.openapiDocuments.isEmpty {
+      try container.encode(self.openapiDocuments, forKey: .openapiDocuments)
+    }
+    if !self.grpcServices.isEmpty {
+      try container.encode(self.grpcServices, forKey: .grpcServices)
+    }
+    if !self.managedServiceConfigs.isEmpty {
+      try container.encode(self.managedServiceConfigs, forKey: .managedServiceConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -256,8 +274,12 @@ public struct ApiConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.contents, forKey: .contents)
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.contents.isEmpty {
+        try container.encode(self.contents, forKey: .contents)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -432,7 +454,9 @@ public struct ApiConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.fileDescriptorSet, forKey: .fileDescriptorSet)
-      try container.encode(self.source, forKey: .source)
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

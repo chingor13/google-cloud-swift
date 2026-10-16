@@ -188,14 +188,30 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.imageUri, forKey: .imageUri)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.workerPool, forKey: .workerPool)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.releaseTrack, forKey: .releaseTrack)
-    try container.encode(self.client, forKey: .client)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.imageUri.isEmpty {
+      try container.encode(self.imageUri, forKey: .imageUri)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.workerPool.isEmpty {
+      try container.encode(self.workerPool, forKey: .workerPool)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if self.releaseTrack != GoogleApi.LaunchStage() {
+      try container.encode(self.releaseTrack, forKey: .releaseTrack)
+    }
+    if !self.client.isEmpty {
+      try container.encode(self.client, forKey: .client)
+    }
 
     if let choice = self.source {
       switch choice {
@@ -405,13 +421,27 @@ public struct SubmitBuildRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.runtime, forKey: .runtime)
-      try container.encode(self.functionTarget, forKey: .functionTarget)
-      try container.encode(self.cacheImageUri, forKey: .cacheImageUri)
-      try container.encode(self.baseImage, forKey: .baseImage)
-      try container.encode(self.environmentVariables, forKey: .environmentVariables)
-      try container.encode(self.enableAutomaticUpdates, forKey: .enableAutomaticUpdates)
-      try container.encode(self.projectDescriptor, forKey: .projectDescriptor)
+      if !self.runtime.isEmpty {
+        try container.encode(self.runtime, forKey: .runtime)
+      }
+      if !self.functionTarget.isEmpty {
+        try container.encode(self.functionTarget, forKey: .functionTarget)
+      }
+      if !self.cacheImageUri.isEmpty {
+        try container.encode(self.cacheImageUri, forKey: .cacheImageUri)
+      }
+      if !self.baseImage.isEmpty {
+        try container.encode(self.baseImage, forKey: .baseImage)
+      }
+      if !self.environmentVariables.isEmpty {
+        try container.encode(self.environmentVariables, forKey: .environmentVariables)
+      }
+      if self.enableAutomaticUpdates {
+        try container.encode(self.enableAutomaticUpdates, forKey: .enableAutomaticUpdates)
+      }
+      if !self.projectDescriptor.isEmpty {
+        try container.encode(self.projectDescriptor, forKey: .projectDescriptor)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

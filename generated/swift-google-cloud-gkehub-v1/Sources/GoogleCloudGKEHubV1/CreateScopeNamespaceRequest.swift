@@ -92,8 +92,12 @@ public struct CreateScopeNamespaceRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.scopeNamespaceId, forKey: .scopeNamespaceId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.scopeNamespaceId.isEmpty {
+      try container.encode(self.scopeNamespaceId, forKey: .scopeNamespaceId)
+    }
     try container.encodeIfPresent(self.scopeNamespace, forKey: .scopeNamespace)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

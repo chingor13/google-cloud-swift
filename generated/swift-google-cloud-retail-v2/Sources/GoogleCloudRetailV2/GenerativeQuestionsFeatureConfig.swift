@@ -89,9 +89,15 @@ public struct GenerativeQuestionsFeatureConfig: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.catalog, forKey: .catalog)
-    try container.encode(self.featureEnabled, forKey: .featureEnabled)
-    try container.encode(self.minimumProducts, forKey: .minimumProducts)
+    if !self.catalog.isEmpty {
+      try container.encode(self.catalog, forKey: .catalog)
+    }
+    if self.featureEnabled {
+      try container.encode(self.featureEnabled, forKey: .featureEnabled)
+    }
+    if self.minimumProducts != 0 {
+      try container.encode(self.minimumProducts, forKey: .minimumProducts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

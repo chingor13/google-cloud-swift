@@ -69,7 +69,9 @@ public struct UserEventInlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.userEvents, forKey: .userEvents)
+    if !self.userEvents.isEmpty {
+      try container.encode(self.userEvents, forKey: .userEvents)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -177,14 +177,26 @@ public struct EntitlementChange: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.entitlement, forKey: .entitlement)
-    try container.encode(self.offer, forKey: .offer)
+    if !self.entitlement.isEmpty {
+      try container.encode(self.entitlement, forKey: .entitlement)
+    }
+    if !self.offer.isEmpty {
+      try container.encode(self.offer, forKey: .offer)
+    }
     try container.encodeIfPresent(self.provisionedService, forKey: .provisionedService)
-    try container.encode(self.changeType, forKey: .changeType)
+    if self.changeType != EntitlementChange.ChangeType() {
+      try container.encode(self.changeType, forKey: .changeType)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.operatorType, forKey: .operatorType)
-    try container.encode(self.parameters, forKey: .parameters)
-    try container.encode(self.`operator`, forKey: .`operator`)
+    if self.operatorType != EntitlementChange.OperatorType() {
+      try container.encode(self.operatorType, forKey: .operatorType)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
+    if !self.`operator`.isEmpty {
+      try container.encode(self.`operator`, forKey: .`operator`)
+    }
 
     if let choice = self.changeReason {
       switch choice {

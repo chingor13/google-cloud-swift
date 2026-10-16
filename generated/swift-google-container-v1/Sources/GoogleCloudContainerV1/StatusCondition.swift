@@ -95,9 +95,15 @@ public struct StatusCondition: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.code, forKey: .code)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.canonicalCode, forKey: .canonicalCode)
+    if self.code != StatusCondition.Code() {
+      try container.encode(self.code, forKey: .code)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if self.canonicalCode != GoogleRpc.Code() {
+      try container.encode(self.canonicalCode, forKey: .canonicalCode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -101,12 +101,21 @@ public struct ReplicatingStep: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalBytes, forKey: .totalBytes)
-    try container.encode(self.replicatedBytes, forKey: .replicatedBytes)
-    try container.encode(
-      self.lastTwoMinutesAverageBytesPerSecond, forKey: .lastTwoMinutesAverageBytesPerSecond)
-    try container.encode(
-      self.lastThirtyMinutesAverageBytesPerSecond, forKey: .lastThirtyMinutesAverageBytesPerSecond)
+    if self.totalBytes != 0 {
+      try container.encode(self.totalBytes, forKey: .totalBytes)
+    }
+    if self.replicatedBytes != 0 {
+      try container.encode(self.replicatedBytes, forKey: .replicatedBytes)
+    }
+    if self.lastTwoMinutesAverageBytesPerSecond != 0 {
+      try container.encode(
+        self.lastTwoMinutesAverageBytesPerSecond, forKey: .lastTwoMinutesAverageBytesPerSecond)
+    }
+    if self.lastThirtyMinutesAverageBytesPerSecond != 0 {
+      try container.encode(
+        self.lastThirtyMinutesAverageBytesPerSecond, forKey: .lastThirtyMinutesAverageBytesPerSecond
+      )
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

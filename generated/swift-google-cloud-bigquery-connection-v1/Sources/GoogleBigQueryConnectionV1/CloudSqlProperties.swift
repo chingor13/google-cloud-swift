@@ -106,11 +106,19 @@ public struct CloudSqlProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceId, forKey: .instanceId)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.type, forKey: .type)
+    if !self.instanceId.isEmpty {
+      try container.encode(self.instanceId, forKey: .instanceId)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if self.type != CloudSqlProperties.DatabaseType() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.credential, forKey: .credential)
-    try container.encode(self.serviceAccountId, forKey: .serviceAccountId)
+    if !self.serviceAccountId.isEmpty {
+      try container.encode(self.serviceAccountId, forKey: .serviceAccountId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

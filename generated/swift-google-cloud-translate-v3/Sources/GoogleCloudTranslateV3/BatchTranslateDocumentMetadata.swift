@@ -150,15 +150,33 @@ public struct BatchTranslateDocumentMetadata: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.totalPages, forKey: .totalPages)
-    try container.encode(self.translatedPages, forKey: .translatedPages)
-    try container.encode(self.failedPages, forKey: .failedPages)
-    try container.encode(self.totalBillablePages, forKey: .totalBillablePages)
-    try container.encode(self.totalCharacters, forKey: .totalCharacters)
-    try container.encode(self.translatedCharacters, forKey: .translatedCharacters)
-    try container.encode(self.failedCharacters, forKey: .failedCharacters)
-    try container.encode(self.totalBillableCharacters, forKey: .totalBillableCharacters)
+    if self.state != BatchTranslateDocumentMetadata.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.totalPages != 0 {
+      try container.encode(self.totalPages, forKey: .totalPages)
+    }
+    if self.translatedPages != 0 {
+      try container.encode(self.translatedPages, forKey: .translatedPages)
+    }
+    if self.failedPages != 0 {
+      try container.encode(self.failedPages, forKey: .failedPages)
+    }
+    if self.totalBillablePages != 0 {
+      try container.encode(self.totalBillablePages, forKey: .totalBillablePages)
+    }
+    if self.totalCharacters != 0 {
+      try container.encode(self.totalCharacters, forKey: .totalCharacters)
+    }
+    if self.translatedCharacters != 0 {
+      try container.encode(self.translatedCharacters, forKey: .translatedCharacters)
+    }
+    if self.failedCharacters != 0 {
+      try container.encode(self.failedCharacters, forKey: .failedCharacters)
+    }
+    if self.totalBillableCharacters != 0 {
+      try container.encode(self.totalBillableCharacters, forKey: .totalBillableCharacters)
+    }
     try container.encodeIfPresent(self.submitTime, forKey: .submitTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

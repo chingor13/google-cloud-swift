@@ -122,8 +122,12 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.authType, forKey: .authType)
-    try container.encode(self.additionalVariables, forKey: .additionalVariables)
+    if self.authType != AuthType() {
+      try container.encode(self.authType, forKey: .authType)
+    }
+    if !self.additionalVariables.isEmpty {
+      try container.encode(self.additionalVariables, forKey: .additionalVariables)
+    }
 
     if let choice = self.type {
       switch choice {
@@ -200,7 +204,9 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.username, forKey: .username)
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
       try container.encodeIfPresent(self.password, forKey: .password)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -366,9 +372,15 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.issuer, forKey: .issuer)
-        try container.encode(self.subject, forKey: .subject)
-        try container.encode(self.audience, forKey: .audience)
+        if !self.issuer.isEmpty {
+          try container.encode(self.issuer, forKey: .issuer)
+        }
+        if !self.subject.isEmpty {
+          try container.encode(self.subject, forKey: .subject)
+        }
+        if !self.audience.isEmpty {
+          try container.encode(self.audience, forKey: .audience)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -477,7 +489,9 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clientId, forKey: .clientId)
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
       try container.encodeIfPresent(self.clientSecret, forKey: .clientSecret)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -579,9 +593,13 @@ public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.username, forKey: .username)
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
       try container.encodeIfPresent(self.sshClientCert, forKey: .sshClientCert)
-      try container.encode(self.certType, forKey: .certType)
+      if !self.certType.isEmpty {
+        try container.encode(self.certType, forKey: .certType)
+      }
       try container.encodeIfPresent(self.sshClientCertPass, forKey: .sshClientCertPass)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -270,27 +270,47 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.pipelineSpec, forKey: .pipelineSpec)
-      try container.encode(self.state, forKey: .state)
+      if self.state != PipelineState() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.jobDetail, forKey: .jobDetail)
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.runtimeConfig, forKey: .runtimeConfig)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.reservedIpRanges.isEmpty {
+        try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      }
       try container.encodeIfPresent(self.pscInterfaceConfig, forKey: .pscInterfaceConfig)
-      try container.encode(self.templateUri, forKey: .templateUri)
+      if !self.templateUri.isEmpty {
+        try container.encode(self.templateUri, forKey: .templateUri)
+      }
       try container.encodeIfPresent(self.templateMetadata, forKey: .templateMetadata)
-      try container.encode(self.scheduleName, forKey: .scheduleName)
-      try container.encode(self.preflightValidations, forKey: .preflightValidations)
+      if !self.scheduleName.isEmpty {
+        try container.encode(self.scheduleName, forKey: .scheduleName)
+      }
+      if self.preflightValidations {
+        try container.encode(self.preflightValidations, forKey: .preflightValidations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -426,11 +446,21 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.parameters, forKey: .parameters)
-        try container.encode(self.gcsOutputDirectory, forKey: .gcsOutputDirectory)
-        try container.encode(self.parameterValues, forKey: .parameterValues)
-        try container.encode(self.failurePolicy, forKey: .failurePolicy)
-        try container.encode(self.inputArtifacts, forKey: .inputArtifacts)
+        if !self.parameters.isEmpty {
+          try container.encode(self.parameters, forKey: .parameters)
+        }
+        if !self.gcsOutputDirectory.isEmpty {
+          try container.encode(self.gcsOutputDirectory, forKey: .gcsOutputDirectory)
+        }
+        if !self.parameterValues.isEmpty {
+          try container.encode(self.parameterValues, forKey: .parameterValues)
+        }
+        if self.failurePolicy != PipelineFailurePolicy() {
+          try container.encode(self.failurePolicy, forKey: .failurePolicy)
+        }
+        if !self.inputArtifacts.isEmpty {
+          try container.encode(self.inputArtifacts, forKey: .inputArtifacts)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

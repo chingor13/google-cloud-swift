@@ -171,19 +171,33 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.privateConfig, forKey: .privateConfig)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateNote, forKey: .stateNote)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.stateNote != Instance.StateNote() {
+      try container.encode(self.stateNote, forKey: .stateNote)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
     try container.encodeIfPresent(self.hostConfig, forKey: .hostConfig)
     try container.encodeIfPresent(
       self.workforceIdentityFederationConfig, forKey: .workforceIdentityFederationConfig)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -265,10 +279,18 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.html, forKey: .html)
-      try container.encode(self.api, forKey: .api)
-      try container.encode(self.gitHttp, forKey: .gitHttp)
-      try container.encode(self.gitSsh, forKey: .gitSsh)
+      if !self.html.isEmpty {
+        try container.encode(self.html, forKey: .html)
+      }
+      if !self.api.isEmpty {
+        try container.encode(self.api, forKey: .api)
+      }
+      if !self.gitHttp.isEmpty {
+        try container.encode(self.gitHttp, forKey: .gitHttp)
+      }
+      if !self.gitSsh.isEmpty {
+        try container.encode(self.gitSsh, forKey: .gitSsh)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -396,11 +418,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.isPrivate, forKey: .isPrivate)
-      try container.encode(self.caPool, forKey: .caPool)
-      try container.encode(self.httpServiceAttachment, forKey: .httpServiceAttachment)
-      try container.encode(self.sshServiceAttachment, forKey: .sshServiceAttachment)
-      try container.encode(self.pscAllowedProjects, forKey: .pscAllowedProjects)
+      if self.isPrivate {
+        try container.encode(self.isPrivate, forKey: .isPrivate)
+      }
+      if !self.caPool.isEmpty {
+        try container.encode(self.caPool, forKey: .caPool)
+      }
+      if !self.httpServiceAttachment.isEmpty {
+        try container.encode(self.httpServiceAttachment, forKey: .httpServiceAttachment)
+      }
+      if !self.sshServiceAttachment.isEmpty {
+        try container.encode(self.sshServiceAttachment, forKey: .sshServiceAttachment)
+      }
+      if !self.pscAllowedProjects.isEmpty {
+        try container.encode(self.pscAllowedProjects, forKey: .pscAllowedProjects)
+      }
       try container.encodeIfPresent(self.customHostConfig, forKey: .customHostConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -487,10 +519,18 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.html, forKey: .html)
-        try container.encode(self.api, forKey: .api)
-        try container.encode(self.gitSsh, forKey: .gitSsh)
-        try container.encode(self.gitHttp, forKey: .gitHttp)
+        if !self.html.isEmpty {
+          try container.encode(self.html, forKey: .html)
+        }
+        if !self.api.isEmpty {
+          try container.encode(self.api, forKey: .api)
+        }
+        if !self.gitSsh.isEmpty {
+          try container.encode(self.gitSsh, forKey: .gitSsh)
+        }
+        if !self.gitHttp.isEmpty {
+          try container.encode(self.gitHttp, forKey: .gitHttp)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -594,7 +634,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

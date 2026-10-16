@@ -94,10 +94,16 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.policyId, forKey: .policyId)
-    try container.encode(self.complianceStandards, forKey: .complianceStandards)
+    if !self.policyId.isEmpty {
+      try container.encode(self.policyId, forKey: .policyId)
+    }
+    if !self.complianceStandards.isEmpty {
+      try container.encode(self.complianceStandards, forKey: .complianceStandards)
+    }
     try container.encodeIfPresent(self.constraint, forKey: .constraint)
-    try container.encode(self.description, forKey: .description)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -163,8 +169,12 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.standard, forKey: .standard)
-      try container.encode(self.control, forKey: .control)
+      if !self.standard.isEmpty {
+        try container.encode(self.standard, forKey: .standard)
+      }
+      if !self.control.isEmpty {
+        try container.encode(self.control, forKey: .control)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -94,10 +94,14 @@ public struct ProvisionCloudIdentityRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.customer, forKey: .customer)
+    if !self.customer.isEmpty {
+      try container.encode(self.customer, forKey: .customer)
+    }
     try container.encodeIfPresent(self.cloudIdentityInfo, forKey: .cloudIdentityInfo)
     try container.encodeIfPresent(self.user, forKey: .user)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

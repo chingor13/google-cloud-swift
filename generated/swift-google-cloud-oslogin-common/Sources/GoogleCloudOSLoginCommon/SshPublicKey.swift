@@ -94,10 +94,18 @@ public struct SshPublicKey: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.expirationTimeUsec, forKey: .expirationTimeUsec)
-    try container.encode(self.fingerprint, forKey: .fingerprint)
-    try container.encode(self.name, forKey: .name)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if self.expirationTimeUsec != 0 {
+      try container.encode(self.expirationTimeUsec, forKey: .expirationTimeUsec)
+    }
+    if !self.fingerprint.isEmpty {
+      try container.encode(self.fingerprint, forKey: .fingerprint)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

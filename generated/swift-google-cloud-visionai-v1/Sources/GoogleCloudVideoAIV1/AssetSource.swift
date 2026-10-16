@@ -155,7 +155,9 @@ public struct AssetSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.gcsUri, forKey: .gcsUri)
+      if !self.gcsUri.isEmpty {
+        try container.encode(self.gcsUri, forKey: .gcsUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -235,7 +237,9 @@ public struct AssetSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.assetContentData, forKey: .assetContentData)
+      if !self.assetContentData.isEmpty {
+        try container.encode(self.assetContentData, forKey: .assetContentData)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

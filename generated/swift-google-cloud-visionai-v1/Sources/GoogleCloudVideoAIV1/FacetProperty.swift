@@ -143,10 +143,18 @@ public struct FacetProperty: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mappedFields, forKey: .mappedFields)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.resultSize, forKey: .resultSize)
-    try container.encode(self.bucketType, forKey: .bucketType)
+    if !self.mappedFields.isEmpty {
+      try container.encode(self.mappedFields, forKey: .mappedFields)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.resultSize != 0 {
+      try container.encode(self.resultSize, forKey: .resultSize)
+    }
+    if self.bucketType != FacetBucketType() {
+      try container.encode(self.bucketType, forKey: .bucketType)
+    }
 
     if let choice = self.rangeFacetConfig {
       switch choice {
@@ -238,7 +246,9 @@ public struct FacetProperty: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.bucketStart, forKey: .bucketStart)
       try container.encodeIfPresent(self.bucketGranularity, forKey: .bucketGranularity)
-      try container.encode(self.bucketCount, forKey: .bucketCount)
+      if self.bucketCount != 0 {
+        try container.encode(self.bucketCount, forKey: .bucketCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -325,7 +335,9 @@ public struct FacetProperty: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.endpoints, forKey: .endpoints)
+      if !self.endpoints.isEmpty {
+        try container.encode(self.endpoints, forKey: .endpoints)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -408,7 +420,9 @@ public struct FacetProperty: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.granularity, forKey: .granularity)
+      if self.granularity != FacetProperty.DateTimeBucketSpec.Granularity() {
+        try container.encode(self.granularity, forKey: .granularity)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

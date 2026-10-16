@@ -217,10 +217,18 @@ public struct AnalyzerOrgPolicyConstraint: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.constraintDefault, forKey: .constraintDefault)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.constraintDefault != AnalyzerOrgPolicyConstraint.Constraint.ConstraintDefault() {
+        try container.encode(self.constraintDefault, forKey: .constraintDefault)
+      }
 
       if let choice = self.constraintType {
         switch choice {
@@ -301,8 +309,12 @@ public struct AnalyzerOrgPolicyConstraint: Codable, Equatable, GoogleWKT._AnyPac
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.supportsIn, forKey: .supportsIn)
-        try container.encode(self.supportsUnder, forKey: .supportsUnder)
+        if self.supportsIn {
+          try container.encode(self.supportsIn, forKey: .supportsIn)
+        }
+        if self.supportsUnder {
+          try container.encode(self.supportsUnder, forKey: .supportsUnder)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -672,13 +684,27 @@ public struct AnalyzerOrgPolicyConstraint: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.resourceTypes, forKey: .resourceTypes)
-      try container.encode(self.methodTypes, forKey: .methodTypes)
-      try container.encode(self.condition, forKey: .condition)
-      try container.encode(self.actionType, forKey: .actionType)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.resourceTypes.isEmpty {
+        try container.encode(self.resourceTypes, forKey: .resourceTypes)
+      }
+      if !self.methodTypes.isEmpty {
+        try container.encode(self.methodTypes, forKey: .methodTypes)
+      }
+      if !self.condition.isEmpty {
+        try container.encode(self.condition, forKey: .condition)
+      }
+      if self.actionType != AnalyzerOrgPolicyConstraint.CustomConstraint.ActionType() {
+        try container.encode(self.actionType, forKey: .actionType)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

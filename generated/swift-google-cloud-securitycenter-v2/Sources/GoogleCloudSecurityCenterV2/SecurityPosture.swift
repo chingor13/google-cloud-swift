@@ -137,14 +137,30 @@ public struct SecurityPosture: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.postureDeploymentResource, forKey: .postureDeploymentResource)
-    try container.encode(self.postureDeployment, forKey: .postureDeployment)
-    try container.encode(self.changedPolicy, forKey: .changedPolicy)
-    try container.encode(self.policySet, forKey: .policySet)
-    try container.encode(self.policy, forKey: .policy)
-    try container.encode(self.policyDriftDetails, forKey: .policyDriftDetails)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.postureDeploymentResource.isEmpty {
+      try container.encode(self.postureDeploymentResource, forKey: .postureDeploymentResource)
+    }
+    if !self.postureDeployment.isEmpty {
+      try container.encode(self.postureDeployment, forKey: .postureDeployment)
+    }
+    if !self.changedPolicy.isEmpty {
+      try container.encode(self.changedPolicy, forKey: .changedPolicy)
+    }
+    if !self.policySet.isEmpty {
+      try container.encode(self.policySet, forKey: .policySet)
+    }
+    if !self.policy.isEmpty {
+      try container.encode(self.policy, forKey: .policy)
+    }
+    if !self.policyDriftDetails.isEmpty {
+      try container.encode(self.policyDriftDetails, forKey: .policyDriftDetails)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -222,9 +238,15 @@ public struct SecurityPosture: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.field, forKey: .field)
-      try container.encode(self.expectedValue, forKey: .expectedValue)
-      try container.encode(self.detectedValue, forKey: .detectedValue)
+      if !self.field.isEmpty {
+        try container.encode(self.field, forKey: .field)
+      }
+      if !self.expectedValue.isEmpty {
+        try container.encode(self.expectedValue, forKey: .expectedValue)
+      }
+      if !self.detectedValue.isEmpty {
+        try container.encode(self.detectedValue, forKey: .detectedValue)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -92,10 +92,16 @@ public struct MessageWithF64: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.singular, forKey: .singular)
+    if self.singular != 0 {
+      try container.encode(self.singular, forKey: .singular)
+    }
     try container.encodeIfPresent(self.option, forKey: .option)
-    try container.encode(self.repeated, forKey: .repeated)
-    try container.encode(self.map, forKey: .map)
+    if !self.repeated.isEmpty {
+      try container.encode(self.repeated, forKey: .repeated)
+    }
+    if !self.map.isEmpty {
+      try container.encode(self.map, forKey: .map)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

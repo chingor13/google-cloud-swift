@@ -136,13 +136,23 @@ public struct ServiceConnectionToken: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.token, forKey: .token)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.token.isEmpty {
+      try container.encode(self.token, forKey: .token)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     try container.encodeIfPresent(self.etag, forKey: .etag)
     for (key, value) in self._unknownFields.json {

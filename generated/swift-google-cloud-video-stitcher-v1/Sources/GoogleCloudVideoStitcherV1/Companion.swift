@@ -171,15 +171,33 @@ public struct Companion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.apiFramework, forKey: .apiFramework)
-    try container.encode(self.heightPx, forKey: .heightPx)
-    try container.encode(self.widthPx, forKey: .widthPx)
-    try container.encode(self.assetHeightPx, forKey: .assetHeightPx)
-    try container.encode(self.expandedHeightPx, forKey: .expandedHeightPx)
-    try container.encode(self.assetWidthPx, forKey: .assetWidthPx)
-    try container.encode(self.expandedWidthPx, forKey: .expandedWidthPx)
-    try container.encode(self.adSlotId, forKey: .adSlotId)
-    try container.encode(self.events, forKey: .events)
+    if !self.apiFramework.isEmpty {
+      try container.encode(self.apiFramework, forKey: .apiFramework)
+    }
+    if self.heightPx != 0 {
+      try container.encode(self.heightPx, forKey: .heightPx)
+    }
+    if self.widthPx != 0 {
+      try container.encode(self.widthPx, forKey: .widthPx)
+    }
+    if self.assetHeightPx != 0 {
+      try container.encode(self.assetHeightPx, forKey: .assetHeightPx)
+    }
+    if self.expandedHeightPx != 0 {
+      try container.encode(self.expandedHeightPx, forKey: .expandedHeightPx)
+    }
+    if self.assetWidthPx != 0 {
+      try container.encode(self.assetWidthPx, forKey: .assetWidthPx)
+    }
+    if self.expandedWidthPx != 0 {
+      try container.encode(self.expandedWidthPx, forKey: .expandedWidthPx)
+    }
+    if !self.adSlotId.isEmpty {
+      try container.encode(self.adSlotId, forKey: .adSlotId)
+    }
+    if !self.events.isEmpty {
+      try container.encode(self.events, forKey: .events)
+    }
 
     if let choice = self.adResource {
       switch choice {

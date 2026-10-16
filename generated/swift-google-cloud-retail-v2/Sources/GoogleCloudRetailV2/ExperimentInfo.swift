@@ -93,7 +93,9 @@ public struct ExperimentInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.experiment, forKey: .experiment)
+    if !self.experiment.isEmpty {
+      try container.encode(self.experiment, forKey: .experiment)
+    }
 
     if let choice = self.experimentMetadata {
       switch choice {
@@ -178,8 +180,12 @@ public struct ExperimentInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.originalServingConfig, forKey: .originalServingConfig)
-      try container.encode(self.experimentServingConfig, forKey: .experimentServingConfig)
+      if !self.originalServingConfig.isEmpty {
+        try container.encode(self.originalServingConfig, forKey: .originalServingConfig)
+      }
+      if !self.experimentServingConfig.isEmpty {
+        try container.encode(self.experimentServingConfig, forKey: .experimentServingConfig)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

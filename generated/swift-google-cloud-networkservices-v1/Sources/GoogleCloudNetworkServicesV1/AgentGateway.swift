@@ -184,14 +184,26 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.protocols, forKey: .protocols)
-    try container.encode(self.registries, forKey: .registries)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.protocols.isEmpty {
+      try container.encode(self.protocols, forKey: .protocols)
+    }
+    if !self.registries.isEmpty {
+      try container.encode(self.registries, forKey: .registries)
+    }
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
     try container.encodeIfPresent(self.agentGatewayCard, forKey: .agentGatewayCard)
 
@@ -264,7 +276,9 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.governedAccessPath, forKey: .governedAccessPath)
+      if self.governedAccessPath != AgentGateway.GoogleManaged.GovernedAccessPath() {
+        try container.encode(self.governedAccessPath, forKey: .governedAccessPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -473,8 +487,12 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceUri, forKey: .resourceUri)
-      try container.encode(self.resourceUris, forKey: .resourceUris)
+      if !self.resourceUri.isEmpty {
+        try container.encode(self.resourceUri, forKey: .resourceUri)
+      }
+      if !self.resourceUris.isEmpty {
+        try container.encode(self.resourceUris, forKey: .resourceUris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -629,7 +647,9 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.networkAttachment, forKey: .networkAttachment)
+        if !self.networkAttachment.isEmpty {
+          try container.encode(self.networkAttachment, forKey: .networkAttachment)
+        }
         try container.encodeIfPresent(self.trustConfig, forKey: .trustConfig)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -691,7 +711,9 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.pemCertificates, forKey: .pemCertificates)
+          if !self.pemCertificates.isEmpty {
+            try container.encode(self.pemCertificates, forKey: .pemCertificates)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -816,9 +838,15 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.domains, forKey: .domains)
-        try container.encode(self.targetProject, forKey: .targetProject)
-        try container.encode(self.targetNetwork, forKey: .targetNetwork)
+        if !self.domains.isEmpty {
+          try container.encode(self.domains, forKey: .domains)
+        }
+        if !self.targetProject.isEmpty {
+          try container.encode(self.targetProject, forKey: .targetProject)
+        }
+        if !self.targetNetwork.isEmpty {
+          try container.encode(self.targetNetwork, forKey: .targetNetwork)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -940,10 +968,16 @@ public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.mtlsEndpoint, forKey: .mtlsEndpoint)
-      try container.encode(self.rootCertificates, forKey: .rootCertificates)
-      try container.encode(
-        self.serviceExtensionsServiceAccount, forKey: .serviceExtensionsServiceAccount)
+      if !self.mtlsEndpoint.isEmpty {
+        try container.encode(self.mtlsEndpoint, forKey: .mtlsEndpoint)
+      }
+      if !self.rootCertificates.isEmpty {
+        try container.encode(self.rootCertificates, forKey: .rootCertificates)
+      }
+      if !self.serviceExtensionsServiceAccount.isEmpty {
+        try container.encode(
+          self.serviceExtensionsServiceAccount, forKey: .serviceExtensionsServiceAccount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

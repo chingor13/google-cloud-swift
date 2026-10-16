@@ -124,7 +124,9 @@ public struct TimeSeriesFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.filter, forKey: .filter)
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     try container.encodeIfPresent(self.aggregation, forKey: .aggregation)
     try container.encodeIfPresent(self.secondaryAggregation, forKey: .secondaryAggregation)
 

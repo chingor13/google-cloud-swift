@@ -97,10 +97,18 @@ public struct ExecuteAirflowCommandRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.environment, forKey: .environment)
-    try container.encode(self.command, forKey: .command)
-    try container.encode(self.subcommand, forKey: .subcommand)
-    try container.encode(self.parameters, forKey: .parameters)
+    if !self.environment.isEmpty {
+      try container.encode(self.environment, forKey: .environment)
+    }
+    if !self.command.isEmpty {
+      try container.encode(self.command, forKey: .command)
+    }
+    if !self.subcommand.isEmpty {
+      try container.encode(self.subcommand, forKey: .subcommand)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

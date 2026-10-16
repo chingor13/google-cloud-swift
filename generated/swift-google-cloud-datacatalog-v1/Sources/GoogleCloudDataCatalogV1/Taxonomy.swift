@@ -154,12 +154,22 @@ public struct Taxonomy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.policyTagCount, forKey: .policyTagCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.policyTagCount != 0 {
+      try container.encode(self.policyTagCount, forKey: .policyTagCount)
+    }
     try container.encodeIfPresent(self.taxonomyTimestamps, forKey: .taxonomyTimestamps)
-    try container.encode(self.activatedPolicyTypes, forKey: .activatedPolicyTypes)
+    if !self.activatedPolicyTypes.isEmpty {
+      try container.encode(self.activatedPolicyTypes, forKey: .activatedPolicyTypes)
+    }
     try container.encodeIfPresent(self.service, forKey: .service)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -226,8 +236,12 @@ public struct Taxonomy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.identity, forKey: .identity)
+      if self.name != ManagingSystem() {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.identity.isEmpty {
+        try container.encode(self.identity, forKey: .identity)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

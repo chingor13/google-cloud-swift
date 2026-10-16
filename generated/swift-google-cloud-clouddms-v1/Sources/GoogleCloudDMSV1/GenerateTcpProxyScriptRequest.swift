@@ -107,11 +107,21 @@ public struct GenerateTcpProxyScriptRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.migrationJob, forKey: .migrationJob)
-    try container.encode(self.vmName, forKey: .vmName)
-    try container.encode(self.vmMachineType, forKey: .vmMachineType)
-    try container.encode(self.vmZone, forKey: .vmZone)
-    try container.encode(self.vmSubnet, forKey: .vmSubnet)
+    if !self.migrationJob.isEmpty {
+      try container.encode(self.migrationJob, forKey: .migrationJob)
+    }
+    if !self.vmName.isEmpty {
+      try container.encode(self.vmName, forKey: .vmName)
+    }
+    if !self.vmMachineType.isEmpty {
+      try container.encode(self.vmMachineType, forKey: .vmMachineType)
+    }
+    if !self.vmZone.isEmpty {
+      try container.encode(self.vmZone, forKey: .vmZone)
+    }
+    if !self.vmSubnet.isEmpty {
+      try container.encode(self.vmSubnet, forKey: .vmSubnet)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

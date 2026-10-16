@@ -146,15 +146,29 @@ public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.ancestorModule, forKey: .ancestorModule)
-    try container.encode(self.enablementState, forKey: .enablementState)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.ancestorModule.isEmpty {
+      try container.encode(self.ancestorModule, forKey: .ancestorModule)
+    }
+    if self.enablementState != EventThreatDetectionCustomModule.EnablementState() {
+      try container.encode(self.enablementState, forKey: .enablementState)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.lastEditor, forKey: .lastEditor)
+    if !self.lastEditor.isEmpty {
+      try container.encode(self.lastEditor, forKey: .lastEditor)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

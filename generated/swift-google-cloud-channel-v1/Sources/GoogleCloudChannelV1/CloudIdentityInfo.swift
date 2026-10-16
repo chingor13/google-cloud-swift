@@ -129,13 +129,27 @@ public struct CloudIdentityInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.customerType, forKey: .customerType)
-    try container.encode(self.primaryDomain, forKey: .primaryDomain)
-    try container.encode(self.isDomainVerified, forKey: .isDomainVerified)
-    try container.encode(self.alternateEmail, forKey: .alternateEmail)
-    try container.encode(self.phoneNumber, forKey: .phoneNumber)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.adminConsoleUri, forKey: .adminConsoleUri)
+    if self.customerType != CloudIdentityInfo.CustomerType() {
+      try container.encode(self.customerType, forKey: .customerType)
+    }
+    if !self.primaryDomain.isEmpty {
+      try container.encode(self.primaryDomain, forKey: .primaryDomain)
+    }
+    if self.isDomainVerified {
+      try container.encode(self.isDomainVerified, forKey: .isDomainVerified)
+    }
+    if !self.alternateEmail.isEmpty {
+      try container.encode(self.alternateEmail, forKey: .alternateEmail)
+    }
+    if !self.phoneNumber.isEmpty {
+      try container.encode(self.phoneNumber, forKey: .phoneNumber)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.adminConsoleUri.isEmpty {
+      try container.encode(self.adminConsoleUri, forKey: .adminConsoleUri)
+    }
     try container.encodeIfPresent(self.eduData, forKey: .eduData)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

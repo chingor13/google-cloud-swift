@@ -119,11 +119,21 @@ public struct DiagnosticConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gcsBucket, forKey: .gcsBucket)
-    try container.encode(self.relativePath, forKey: .relativePath)
-    try container.encode(self.enableRepairFlag, forKey: .enableRepairFlag)
-    try container.encode(self.enablePacketCaptureFlag, forKey: .enablePacketCaptureFlag)
-    try container.encode(self.enableCopyHomeFilesFlag, forKey: .enableCopyHomeFilesFlag)
+    if !self.gcsBucket.isEmpty {
+      try container.encode(self.gcsBucket, forKey: .gcsBucket)
+    }
+    if !self.relativePath.isEmpty {
+      try container.encode(self.relativePath, forKey: .relativePath)
+    }
+    if self.enableRepairFlag {
+      try container.encode(self.enableRepairFlag, forKey: .enableRepairFlag)
+    }
+    if self.enablePacketCaptureFlag {
+      try container.encode(self.enablePacketCaptureFlag, forKey: .enablePacketCaptureFlag)
+    }
+    if self.enableCopyHomeFilesFlag {
+      try container.encode(self.enableCopyHomeFilesFlag, forKey: .enableCopyHomeFilesFlag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

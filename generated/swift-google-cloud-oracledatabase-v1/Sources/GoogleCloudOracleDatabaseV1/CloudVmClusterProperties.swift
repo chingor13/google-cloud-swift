@@ -375,43 +375,111 @@ public struct CloudVmClusterProperties: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.licenseType, forKey: .licenseType)
-    try container.encode(self.giVersion, forKey: .giVersion)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.licenseType != CloudVmClusterProperties.LicenseType() {
+      try container.encode(self.licenseType, forKey: .licenseType)
+    }
+    if !self.giVersion.isEmpty {
+      try container.encode(self.giVersion, forKey: .giVersion)
+    }
     try container.encodeIfPresent(self.timeZone, forKey: .timeZone)
-    try container.encode(self.sshPublicKeys, forKey: .sshPublicKeys)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
-    try container.encode(self.shape, forKey: .shape)
-    try container.encode(self.ocpuCount, forKey: .ocpuCount)
-    try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
-    try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
-    try container.encode(self.storageSizeGb, forKey: .storageSizeGb)
-    try container.encode(self.dataStorageSizeTb, forKey: .dataStorageSizeTb)
-    try container.encode(self.diskRedundancy, forKey: .diskRedundancy)
-    try container.encode(self.sparseDiskgroupEnabled, forKey: .sparseDiskgroupEnabled)
-    try container.encode(self.localBackupEnabled, forKey: .localBackupEnabled)
-    try container.encode(self.hostnamePrefix, forKey: .hostnamePrefix)
+    if !self.sshPublicKeys.isEmpty {
+      try container.encode(self.sshPublicKeys, forKey: .sshPublicKeys)
+    }
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
+    if !self.shape.isEmpty {
+      try container.encode(self.shape, forKey: .shape)
+    }
+    if self.ocpuCount != 0 {
+      try container.encode(self.ocpuCount, forKey: .ocpuCount)
+    }
+    if self.memorySizeGb != 0 {
+      try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
+    }
+    if self.dbNodeStorageSizeGb != 0 {
+      try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
+    }
+    if self.storageSizeGb != 0 {
+      try container.encode(self.storageSizeGb, forKey: .storageSizeGb)
+    }
+    if self.dataStorageSizeTb != 0 {
+      try container.encode(self.dataStorageSizeTb, forKey: .dataStorageSizeTb)
+    }
+    if self.diskRedundancy != CloudVmClusterProperties.DiskRedundancy() {
+      try container.encode(self.diskRedundancy, forKey: .diskRedundancy)
+    }
+    if self.sparseDiskgroupEnabled {
+      try container.encode(self.sparseDiskgroupEnabled, forKey: .sparseDiskgroupEnabled)
+    }
+    if self.localBackupEnabled {
+      try container.encode(self.localBackupEnabled, forKey: .localBackupEnabled)
+    }
+    if !self.hostnamePrefix.isEmpty {
+      try container.encode(self.hostnamePrefix, forKey: .hostnamePrefix)
+    }
     try container.encodeIfPresent(
       self.diagnosticsDataCollectionOptions, forKey: .diagnosticsDataCollectionOptions)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.scanListenerPortTcp, forKey: .scanListenerPortTcp)
-    try container.encode(self.scanListenerPortTcpSsl, forKey: .scanListenerPortTcpSsl)
-    try container.encode(self.domain, forKey: .domain)
-    try container.encode(self.scanDns, forKey: .scanDns)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.cpuCoreCount, forKey: .cpuCoreCount)
-    try container.encode(self.systemVersion, forKey: .systemVersion)
-    try container.encode(self.scanIpIds, forKey: .scanIpIds)
-    try container.encode(self.scanDnsRecordId, forKey: .scanDnsRecordId)
-    try container.encode(self.ociUrl, forKey: .ociUrl)
-    try container.encode(self.dbServerOcids, forKey: .dbServerOcids)
-    try container.encode(self.compartmentId, forKey: .compartmentId)
-    try container.encode(self.dnsListenerIp, forKey: .dnsListenerIp)
-    try container.encode(self.clusterName, forKey: .clusterName)
-    try container.encode(self.computeModel, forKey: .computeModel)
-    try container.encode(self.storageManagementType, forKey: .storageManagementType)
-    try container.encode(self.vmFileSystemStorageType, forKey: .vmFileSystemStorageType)
-    try container.encode(self.vmBackupStorageType, forKey: .vmBackupStorageType)
+    if self.state != CloudVmClusterProperties.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.scanListenerPortTcp != 0 {
+      try container.encode(self.scanListenerPortTcp, forKey: .scanListenerPortTcp)
+    }
+    if self.scanListenerPortTcpSsl != 0 {
+      try container.encode(self.scanListenerPortTcpSsl, forKey: .scanListenerPortTcpSsl)
+    }
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
+    if !self.scanDns.isEmpty {
+      try container.encode(self.scanDns, forKey: .scanDns)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.cpuCoreCount != 0 {
+      try container.encode(self.cpuCoreCount, forKey: .cpuCoreCount)
+    }
+    if !self.systemVersion.isEmpty {
+      try container.encode(self.systemVersion, forKey: .systemVersion)
+    }
+    if !self.scanIpIds.isEmpty {
+      try container.encode(self.scanIpIds, forKey: .scanIpIds)
+    }
+    if !self.scanDnsRecordId.isEmpty {
+      try container.encode(self.scanDnsRecordId, forKey: .scanDnsRecordId)
+    }
+    if !self.ociUrl.isEmpty {
+      try container.encode(self.ociUrl, forKey: .ociUrl)
+    }
+    if !self.dbServerOcids.isEmpty {
+      try container.encode(self.dbServerOcids, forKey: .dbServerOcids)
+    }
+    if !self.compartmentId.isEmpty {
+      try container.encode(self.compartmentId, forKey: .compartmentId)
+    }
+    if !self.dnsListenerIp.isEmpty {
+      try container.encode(self.dnsListenerIp, forKey: .dnsListenerIp)
+    }
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
+    if self.computeModel != GoogleCloudOracleDatabaseV1.ComputeModel() {
+      try container.encode(self.computeModel, forKey: .computeModel)
+    }
+    if self.storageManagementType != CloudVmClusterProperties.StorageManagementType() {
+      try container.encode(self.storageManagementType, forKey: .storageManagementType)
+    }
+    if self.vmFileSystemStorageType != CloudVmClusterProperties.VmFileSystemStorageType() {
+      try container.encode(self.vmFileSystemStorageType, forKey: .vmFileSystemStorageType)
+    }
+    if self.vmBackupStorageType != CloudVmClusterProperties.VmBackupStorageType() {
+      try container.encode(self.vmBackupStorageType, forKey: .vmBackupStorageType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

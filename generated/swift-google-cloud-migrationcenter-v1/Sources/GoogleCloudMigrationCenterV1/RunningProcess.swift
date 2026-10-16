@@ -103,11 +103,21 @@ public struct RunningProcess: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pid, forKey: .pid)
-    try container.encode(self.exePath, forKey: .exePath)
-    try container.encode(self.cmdline, forKey: .cmdline)
-    try container.encode(self.user, forKey: .user)
-    try container.encode(self.attributes, forKey: .attributes)
+    if self.pid != 0 {
+      try container.encode(self.pid, forKey: .pid)
+    }
+    if !self.exePath.isEmpty {
+      try container.encode(self.exePath, forKey: .exePath)
+    }
+    if !self.cmdline.isEmpty {
+      try container.encode(self.cmdline, forKey: .cmdline)
+    }
+    if !self.user.isEmpty {
+      try container.encode(self.user, forKey: .user)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

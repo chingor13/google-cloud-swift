@@ -141,14 +141,24 @@ public struct BackupPlanBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.backupPlan, forKey: .backupPlan)
-    try container.encode(self.cluster, forKey: .cluster)
+    if !self.backupPlan.isEmpty {
+      try container.encode(self.backupPlan, forKey: .backupPlan)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
     try container.encodeIfPresent(self.backupPlanDetails, forKey: .backupPlanDetails)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -273,13 +283,21 @@ public struct BackupPlanBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.protectedPodCount, forKey: .protectedPodCount)
-      try container.encode(self.state, forKey: .state)
+      if self.protectedPodCount != 0 {
+        try container.encode(self.protectedPodCount, forKey: .protectedPodCount)
+      }
+      if self.state != BackupPlanBinding.BackupPlanDetails.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(
         self.lastSuccessfulBackupTime, forKey: .lastSuccessfulBackupTime)
       try container.encodeIfPresent(self.nextScheduledBackupTime, forKey: .nextScheduledBackupTime)
-      try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
-      try container.encode(self.lastSuccessfulBackup, forKey: .lastSuccessfulBackup)
+      if self.rpoRiskLevel != 0 {
+        try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
+      }
+      if !self.lastSuccessfulBackup.isEmpty {
+        try container.encode(self.lastSuccessfulBackup, forKey: .lastSuccessfulBackup)
+      }
       try container.encodeIfPresent(self.backupConfigDetails, forKey: .backupConfigDetails)
       try container.encodeIfPresent(self.retentionPolicyDetails, forKey: .retentionPolicyDetails)
       for (key, value) in self._unknownFields.json {
@@ -403,8 +421,12 @@ public struct BackupPlanBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.includeVolumeData, forKey: .includeVolumeData)
-        try container.encode(self.includeSecrets, forKey: .includeSecrets)
+        if self.includeVolumeData {
+          try container.encode(self.includeVolumeData, forKey: .includeVolumeData)
+        }
+        if self.includeSecrets {
+          try container.encode(self.includeSecrets, forKey: .includeSecrets)
+        }
         try container.encodeIfPresent(self.encryptionKey, forKey: .encryptionKey)
 
         if let choice = self.backupScope {
@@ -536,8 +558,12 @@ public struct BackupPlanBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.backupDeleteLockDays, forKey: .backupDeleteLockDays)
-        try container.encode(self.backupRetainDays, forKey: .backupRetainDays)
+        if self.backupDeleteLockDays != 0 {
+          try container.encode(self.backupDeleteLockDays, forKey: .backupDeleteLockDays)
+        }
+        if self.backupRetainDays != 0 {
+          try container.encode(self.backupRetainDays, forKey: .backupRetainDays)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

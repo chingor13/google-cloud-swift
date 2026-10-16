@@ -86,9 +86,15 @@ public struct FaceAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.thumbnail, forKey: .thumbnail)
-    try container.encode(self.segments, forKey: .segments)
-    try container.encode(self.frames, forKey: .frames)
+    if !self.thumbnail.isEmpty {
+      try container.encode(self.thumbnail, forKey: .thumbnail)
+    }
+    if !self.segments.isEmpty {
+      try container.encode(self.segments, forKey: .segments)
+    }
+    if !self.frames.isEmpty {
+      try container.encode(self.frames, forKey: .frames)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

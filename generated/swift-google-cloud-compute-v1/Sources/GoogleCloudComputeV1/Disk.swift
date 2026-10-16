@@ -623,25 +623,35 @@
       try container.encodeIfPresent(self.accessMode, forKey: .accessMode)
       try container.encodeIfPresent(self.architecture, forKey: .architecture)
       try container.encodeIfPresent(self.asyncPrimaryDisk, forKey: .asyncPrimaryDisk)
-      try container.encode(self.asyncSecondaryDisks, forKey: .asyncSecondaryDisks)
+      if !self.asyncSecondaryDisks.isEmpty {
+        try container.encode(self.asyncSecondaryDisks, forKey: .asyncSecondaryDisks)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.diskEncryptionKey, forKey: .diskEncryptionKey)
       try container.encodeIfPresent(
         self.enableConfidentialCompute, forKey: .enableConfidentialCompute)
-      try container.encode(self.guestOsFeatures, forKey: .guestOsFeatures)
+      if !self.guestOsFeatures.isEmpty {
+        try container.encode(self.guestOsFeatures, forKey: .guestOsFeatures)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.lastAttachTimestamp, forKey: .lastAttachTimestamp)
       try container.encodeIfPresent(self.lastDetachTimestamp, forKey: .lastDetachTimestamp)
-      try container.encode(self.licenseCodes, forKey: .licenseCodes)
-      try container.encode(self.licenses, forKey: .licenses)
+      if !self.licenseCodes.isEmpty {
+        try container.encode(self.licenseCodes, forKey: .licenseCodes)
+      }
+      if !self.licenses.isEmpty {
+        try container.encode(self.licenses, forKey: .licenses)
+      }
       try container.encodeIfPresent(self.locationHint, forKey: .locationHint)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.options, forKey: .options)
@@ -650,8 +660,12 @@
       try container.encodeIfPresent(self.provisionedIops, forKey: .provisionedIops)
       try container.encodeIfPresent(self.provisionedThroughput, forKey: .provisionedThroughput)
       try container.encodeIfPresent(self.region, forKey: .region)
-      try container.encode(self.replicaZones, forKey: .replicaZones)
-      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      if !self.replicaZones.isEmpty {
+        try container.encode(self.replicaZones, forKey: .replicaZones)
+      }
+      if !self.resourcePolicies.isEmpty {
+        try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      }
       try container.encodeIfPresent(self.resourceStatus, forKey: .resourceStatus)
       try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
@@ -677,7 +691,9 @@
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.storagePool, forKey: .storagePool)
       try container.encodeIfPresent(self.type, forKey: .type)
-      try container.encode(self.users, forKey: .users)
+      if !self.users.isEmpty {
+        try container.encode(self.users, forKey: .users)
+      }
       try container.encodeIfPresent(self.zone, forKey: .zone)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

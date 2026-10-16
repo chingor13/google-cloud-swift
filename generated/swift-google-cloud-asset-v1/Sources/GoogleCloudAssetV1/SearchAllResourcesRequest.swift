@@ -271,12 +271,24 @@ public struct SearchAllResourcesRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.assetTypes, forKey: .assetTypes)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.orderBy, forKey: .orderBy)
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.assetTypes.isEmpty {
+      try container.encode(self.assetTypes, forKey: .assetTypes)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.orderBy.isEmpty {
+      try container.encode(self.orderBy, forKey: .orderBy)
+    }
     try container.encodeIfPresent(self.readMask, forKey: .readMask)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

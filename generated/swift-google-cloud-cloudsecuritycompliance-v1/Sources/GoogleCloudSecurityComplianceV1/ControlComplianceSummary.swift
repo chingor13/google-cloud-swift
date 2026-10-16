@@ -158,17 +158,39 @@ public struct ControlComplianceSummary: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.control, forKey: .control)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.overallEvaluationState, forKey: .overallEvaluationState)
-    try container.encode(self.totalFindingsCount, forKey: .totalFindingsCount)
-    try container.encode(self.complianceFrameworks, forKey: .complianceFrameworks)
-    try container.encode(self.similarControls, forKey: .similarControls)
-    try container.encode(self.cloudControlReports, forKey: .cloudControlReports)
-    try container.encode(self.controlResponsibilityType, forKey: .controlResponsibilityType)
-    try container.encode(self.isFakeControl, forKey: .isFakeControl)
-    try container.encode(self.name, forKey: .name)
+    if !self.control.isEmpty {
+      try container.encode(self.control, forKey: .control)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.overallEvaluationState != EvaluationState() {
+      try container.encode(self.overallEvaluationState, forKey: .overallEvaluationState)
+    }
+    if self.totalFindingsCount != 0 {
+      try container.encode(self.totalFindingsCount, forKey: .totalFindingsCount)
+    }
+    if !self.complianceFrameworks.isEmpty {
+      try container.encode(self.complianceFrameworks, forKey: .complianceFrameworks)
+    }
+    if !self.similarControls.isEmpty {
+      try container.encode(self.similarControls, forKey: .similarControls)
+    }
+    if !self.cloudControlReports.isEmpty {
+      try container.encode(self.cloudControlReports, forKey: .cloudControlReports)
+    }
+    if self.controlResponsibilityType != RegulatoryControlResponsibilityType() {
+      try container.encode(self.controlResponsibilityType, forKey: .controlResponsibilityType)
+    }
+    if self.isFakeControl {
+      try container.encode(self.isFakeControl, forKey: .isFakeControl)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

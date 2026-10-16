@@ -146,12 +146,22 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.allowCredentials, forKey: .allowCredentials)
-      try container.encode(self.allowHeaders, forKey: .allowHeaders)
-      try container.encode(self.allowMethods, forKey: .allowMethods)
-      try container.encode(self.allowOriginRegexes, forKey: .allowOriginRegexes)
-      try container.encode(self.allowOrigins, forKey: .allowOrigins)
+      if !self.allowHeaders.isEmpty {
+        try container.encode(self.allowHeaders, forKey: .allowHeaders)
+      }
+      if !self.allowMethods.isEmpty {
+        try container.encode(self.allowMethods, forKey: .allowMethods)
+      }
+      if !self.allowOriginRegexes.isEmpty {
+        try container.encode(self.allowOriginRegexes, forKey: .allowOriginRegexes)
+      }
+      if !self.allowOrigins.isEmpty {
+        try container.encode(self.allowOrigins, forKey: .allowOrigins)
+      }
       try container.encodeIfPresent(self.disabled, forKey: .disabled)
-      try container.encode(self.exposeHeaders, forKey: .exposeHeaders)
+      if !self.exposeHeaders.isEmpty {
+        try container.encode(self.exposeHeaders, forKey: .exposeHeaders)
+      }
       try container.encodeIfPresent(self.maxAge, forKey: .maxAge)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

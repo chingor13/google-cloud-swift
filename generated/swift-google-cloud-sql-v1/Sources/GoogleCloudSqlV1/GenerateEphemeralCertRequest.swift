@@ -108,10 +108,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.publicKey, forKey: .publicKey)
-      try container.encode(self.accessToken, forKey: .accessToken)
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.publicKey.isEmpty {
+        try container.encode(self.publicKey, forKey: .publicKey)
+      }
+      if !self.accessToken.isEmpty {
+        try container.encode(self.accessToken, forKey: .accessToken)
+      }
       try container.encodeIfPresent(self.readTime, forKey: .readTime)
       try container.encodeIfPresent(self.validDuration, forKey: .validDuration)
       for (key, value) in self._unknownFields.json {

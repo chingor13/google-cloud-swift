@@ -155,11 +155,15 @@ public struct UpdateObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.ifGenerationNotMatch, forKey: .ifGenerationNotMatch)
     try container.encodeIfPresent(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)
     try container.encodeIfPresent(self.ifMetagenerationNotMatch, forKey: .ifMetagenerationNotMatch)
-    try container.encode(self.predefinedAcl, forKey: .predefinedAcl)
+    if !self.predefinedAcl.isEmpty {
+      try container.encode(self.predefinedAcl, forKey: .predefinedAcl)
+    }
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(
       self.commonObjectRequestParams, forKey: .commonObjectRequestParams)
-    try container.encode(self.overrideUnlockedRetention, forKey: .overrideUnlockedRetention)
+    if self.overrideUnlockedRetention {
+      try container.encode(self.overrideUnlockedRetention, forKey: .overrideUnlockedRetention)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

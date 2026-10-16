@@ -85,7 +85,9 @@ public struct AllocationAffinity: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.consumeAllocationType, forKey: .consumeAllocationType)
     try container.encodeIfPresent(self.key, forKey: .key)
-    try container.encode(self.values, forKey: .values)
+    if !self.values.isEmpty {
+      try container.encode(self.values, forKey: .values)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -100,7 +100,9 @@ public struct ApproveDecision: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     try container.encodeIfPresent(self.invalidateTime, forKey: .invalidateTime)
     try container.encodeIfPresent(self.signatureInfo, forKey: .signatureInfo)
-    try container.encode(self.autoApproved, forKey: .autoApproved)
+    if self.autoApproved {
+      try container.encode(self.autoApproved, forKey: .autoApproved)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

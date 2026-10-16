@@ -108,11 +108,21 @@ public struct ResourceBundleDeploymentInfo: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.release, forKey: .release)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.variant, forKey: .variant)
-    try container.encode(self.syncState, forKey: .syncState)
-    try container.encode(self.messages, forKey: .messages)
+    if !self.release.isEmpty {
+      try container.encode(self.release, forKey: .release)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.variant.isEmpty {
+      try container.encode(self.variant, forKey: .variant)
+    }
+    if self.syncState != ResourceBundleDeploymentInfo.SyncState() {
+      try container.encode(self.syncState, forKey: .syncState)
+    }
+    if !self.messages.isEmpty {
+      try container.encode(self.messages, forKey: .messages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

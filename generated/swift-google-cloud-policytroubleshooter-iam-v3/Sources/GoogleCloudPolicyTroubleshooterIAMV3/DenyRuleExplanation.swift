@@ -208,18 +208,30 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.denyAccessState, forKey: .denyAccessState)
+    if self.denyAccessState != DenyAccessState() {
+      try container.encode(self.denyAccessState, forKey: .denyAccessState)
+    }
     try container.encodeIfPresent(self.combinedDeniedPermission, forKey: .combinedDeniedPermission)
-    try container.encode(self.deniedPermissions, forKey: .deniedPermissions)
+    if !self.deniedPermissions.isEmpty {
+      try container.encode(self.deniedPermissions, forKey: .deniedPermissions)
+    }
     try container.encodeIfPresent(
       self.combinedExceptionPermission, forKey: .combinedExceptionPermission)
-    try container.encode(self.exceptionPermissions, forKey: .exceptionPermissions)
+    if !self.exceptionPermissions.isEmpty {
+      try container.encode(self.exceptionPermissions, forKey: .exceptionPermissions)
+    }
     try container.encodeIfPresent(self.combinedDeniedPrincipal, forKey: .combinedDeniedPrincipal)
-    try container.encode(self.deniedPrincipals, forKey: .deniedPrincipals)
+    if !self.deniedPrincipals.isEmpty {
+      try container.encode(self.deniedPrincipals, forKey: .deniedPrincipals)
+    }
     try container.encodeIfPresent(
       self.combinedExceptionPrincipal, forKey: .combinedExceptionPrincipal)
-    try container.encode(self.exceptionPrincipals, forKey: .exceptionPrincipals)
-    try container.encode(self.relevance, forKey: .relevance)
+    if !self.exceptionPrincipals.isEmpty {
+      try container.encode(self.exceptionPrincipals, forKey: .exceptionPrincipals)
+    }
+    if self.relevance != HeuristicRelevance() {
+      try container.encode(self.relevance, forKey: .relevance)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
     try container.encodeIfPresent(self.conditionExplanation, forKey: .conditionExplanation)
     for (key, value) in self._unknownFields.json {
@@ -293,8 +305,12 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.permissionMatchingState, forKey: .permissionMatchingState)
-      try container.encode(self.relevance, forKey: .relevance)
+      if self.permissionMatchingState != PermissionPatternMatchingState() {
+        try container.encode(self.permissionMatchingState, forKey: .permissionMatchingState)
+      }
+      if self.relevance != HeuristicRelevance() {
+        try container.encode(self.relevance, forKey: .relevance)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -389,8 +405,12 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.membership, forKey: .membership)
-      try container.encode(self.relevance, forKey: .relevance)
+      if self.membership != MembershipMatchingState() {
+        try container.encode(self.membership, forKey: .membership)
+      }
+      if self.relevance != HeuristicRelevance() {
+        try container.encode(self.relevance, forKey: .relevance)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

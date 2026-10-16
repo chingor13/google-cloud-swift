@@ -177,20 +177,48 @@ public struct NatInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.oldSourceIp, forKey: .oldSourceIp)
-    try container.encode(self.newSourceIp, forKey: .newSourceIp)
-    try container.encode(self.oldDestinationIp, forKey: .oldDestinationIp)
-    try container.encode(self.newDestinationIp, forKey: .newDestinationIp)
-    try container.encode(self.oldSourcePort, forKey: .oldSourcePort)
-    try container.encode(self.newSourcePort, forKey: .newSourcePort)
-    try container.encode(self.oldDestinationPort, forKey: .oldDestinationPort)
-    try container.encode(self.newDestinationPort, forKey: .newDestinationPort)
-    try container.encode(self.routerUri, forKey: .routerUri)
-    try container.encode(self.natGatewayName, forKey: .natGatewayName)
-    try container.encode(self.cloudNatGatewayType, forKey: .cloudNatGatewayType)
+    if self.type != NatInfo.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.`protocol`.isEmpty {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.oldSourceIp.isEmpty {
+      try container.encode(self.oldSourceIp, forKey: .oldSourceIp)
+    }
+    if !self.newSourceIp.isEmpty {
+      try container.encode(self.newSourceIp, forKey: .newSourceIp)
+    }
+    if !self.oldDestinationIp.isEmpty {
+      try container.encode(self.oldDestinationIp, forKey: .oldDestinationIp)
+    }
+    if !self.newDestinationIp.isEmpty {
+      try container.encode(self.newDestinationIp, forKey: .newDestinationIp)
+    }
+    if self.oldSourcePort != 0 {
+      try container.encode(self.oldSourcePort, forKey: .oldSourcePort)
+    }
+    if self.newSourcePort != 0 {
+      try container.encode(self.newSourcePort, forKey: .newSourcePort)
+    }
+    if self.oldDestinationPort != 0 {
+      try container.encode(self.oldDestinationPort, forKey: .oldDestinationPort)
+    }
+    if self.newDestinationPort != 0 {
+      try container.encode(self.newDestinationPort, forKey: .newDestinationPort)
+    }
+    if !self.routerUri.isEmpty {
+      try container.encode(self.routerUri, forKey: .routerUri)
+    }
+    if !self.natGatewayName.isEmpty {
+      try container.encode(self.natGatewayName, forKey: .natGatewayName)
+    }
+    if self.cloudNatGatewayType != NatInfo.CloudNatGatewayType() {
+      try container.encode(self.cloudNatGatewayType, forKey: .cloudNatGatewayType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

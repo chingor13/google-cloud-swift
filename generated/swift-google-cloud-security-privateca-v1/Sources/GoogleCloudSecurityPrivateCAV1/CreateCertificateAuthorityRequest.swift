@@ -119,10 +119,16 @@ public struct CreateCertificateAuthorityRequest: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.certificateAuthorityId, forKey: .certificateAuthorityId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.certificateAuthorityId.isEmpty {
+      try container.encode(self.certificateAuthorityId, forKey: .certificateAuthorityId)
+    }
     try container.encodeIfPresent(self.certificateAuthority, forKey: .certificateAuthority)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

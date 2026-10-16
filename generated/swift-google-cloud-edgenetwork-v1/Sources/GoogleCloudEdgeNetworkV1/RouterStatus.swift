@@ -80,8 +80,12 @@ public struct RouterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.bgpPeerStatus, forKey: .bgpPeerStatus)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.bgpPeerStatus.isEmpty {
+      try container.encode(self.bgpPeerStatus, forKey: .bgpPeerStatus)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -198,13 +202,27 @@ public struct RouterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.ipAddress, forKey: .ipAddress)
-      try container.encode(self.peerIpAddress, forKey: .peerIpAddress)
-      try container.encode(self.status, forKey: .status)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.uptime, forKey: .uptime)
-      try container.encode(self.uptimeSeconds, forKey: .uptimeSeconds)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.ipAddress.isEmpty {
+        try container.encode(self.ipAddress, forKey: .ipAddress)
+      }
+      if !self.peerIpAddress.isEmpty {
+        try container.encode(self.peerIpAddress, forKey: .peerIpAddress)
+      }
+      if self.status != RouterStatus.BgpPeerStatus.BgpStatus() {
+        try container.encode(self.status, forKey: .status)
+      }
+      if !self.state.isEmpty {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.uptime.isEmpty {
+        try container.encode(self.uptime, forKey: .uptime)
+      }
+      if self.uptimeSeconds != 0 {
+        try container.encode(self.uptimeSeconds, forKey: .uptimeSeconds)
+      }
       try container.encodeIfPresent(self.prefixCounter, forKey: .prefixCounter)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -442,12 +460,24 @@ public struct RouterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.advertised, forKey: .advertised)
-      try container.encode(self.denied, forKey: .denied)
-      try container.encode(self.received, forKey: .received)
-      try container.encode(self.sent, forKey: .sent)
-      try container.encode(self.suppressed, forKey: .suppressed)
-      try container.encode(self.withdrawn, forKey: .withdrawn)
+      if self.advertised != 0 {
+        try container.encode(self.advertised, forKey: .advertised)
+      }
+      if self.denied != 0 {
+        try container.encode(self.denied, forKey: .denied)
+      }
+      if self.received != 0 {
+        try container.encode(self.received, forKey: .received)
+      }
+      if self.sent != 0 {
+        try container.encode(self.sent, forKey: .sent)
+      }
+      if self.suppressed != 0 {
+        try container.encode(self.suppressed, forKey: .suppressed)
+      }
+      if self.withdrawn != 0 {
+        try container.encode(self.withdrawn, forKey: .withdrawn)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -121,10 +121,18 @@ public struct LanguageSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
-    try container.encode(self.supportedLanguageCodes, forKey: .supportedLanguageCodes)
-    try container.encode(self.enableMultilingualSupport, forKey: .enableMultilingualSupport)
-    try container.encode(self.fallbackAction, forKey: .fallbackAction)
+    if !self.defaultLanguageCode.isEmpty {
+      try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
+    }
+    if !self.supportedLanguageCodes.isEmpty {
+      try container.encode(self.supportedLanguageCodes, forKey: .supportedLanguageCodes)
+    }
+    if self.enableMultilingualSupport {
+      try container.encode(self.enableMultilingualSupport, forKey: .enableMultilingualSupport)
+    }
+    if !self.fallbackAction.isEmpty {
+      try container.encode(self.fallbackAction, forKey: .fallbackAction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

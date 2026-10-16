@@ -79,7 +79,9 @@ public struct PurchasableOffer: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.offer, forKey: .offer)
-    try container.encode(self.priceReferenceId, forKey: .priceReferenceId)
+    if !self.priceReferenceId.isEmpty {
+      try container.encode(self.priceReferenceId, forKey: .priceReferenceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

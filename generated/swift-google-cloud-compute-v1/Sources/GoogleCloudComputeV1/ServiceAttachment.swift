@@ -308,25 +308,37 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connectedEndpoints, forKey: .connectedEndpoints)
+      if !self.connectedEndpoints.isEmpty {
+        try container.encode(self.connectedEndpoints, forKey: .connectedEndpoints)
+      }
       try container.encodeIfPresent(self.connectionPreference, forKey: .connectionPreference)
-      try container.encode(self.consumerAcceptLists, forKey: .consumerAcceptLists)
-      try container.encode(self.consumerRejectLists, forKey: .consumerRejectLists)
+      if !self.consumerAcceptLists.isEmpty {
+        try container.encode(self.consumerAcceptLists, forKey: .consumerAcceptLists)
+      }
+      if !self.consumerRejectLists.isEmpty {
+        try container.encode(self.consumerRejectLists, forKey: .consumerRejectLists)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.domainNames, forKey: .domainNames)
+      if !self.domainNames.isEmpty {
+        try container.encode(self.domainNames, forKey: .domainNames)
+      }
       try container.encodeIfPresent(self.enableProxyProtocol, forKey: .enableProxyProtocol)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      try container.encode(self.metadata, forKey: .metadata)
+      if !self.metadata.isEmpty {
+        try container.encode(self.metadata, forKey: .metadata)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.natIpsPerEndpoint, forKey: .natIpsPerEndpoint)
-      try container.encode(self.natSubnets, forKey: .natSubnets)
+      if !self.natSubnets.isEmpty {
+        try container.encode(self.natSubnets, forKey: .natSubnets)
+      }
       try container.encodeIfPresent(self.producerForwardingRule, forKey: .producerForwardingRule)
       try container.encodeIfPresent(
         self.propagatedConnectionLimit, forKey: .propagatedConnectionLimit)

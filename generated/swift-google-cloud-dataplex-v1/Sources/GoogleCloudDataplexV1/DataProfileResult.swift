@@ -100,7 +100,9 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rowCount, forKey: .rowCount)
+    if self.rowCount != 0 {
+      try container.encode(self.rowCount, forKey: .rowCount)
+    }
     try container.encodeIfPresent(self.profile, forKey: .profile)
     try container.encodeIfPresent(self.scannedData, forKey: .scannedData)
     try container.encodeIfPresent(self.postScanActionsResult, forKey: .postScanActionsResult)
@@ -165,7 +167,9 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fields, forKey: .fields)
+      if !self.fields.isEmpty {
+        try container.encode(self.fields, forKey: .fields)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -255,9 +259,15 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.mode, forKey: .mode)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.type.isEmpty {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.mode.isEmpty {
+          try container.encode(self.mode, forKey: .mode)
+        }
         try container.encodeIfPresent(self.profile, forKey: .profile)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -384,9 +394,15 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.nullRatio, forKey: .nullRatio)
-          try container.encode(self.distinctRatio, forKey: .distinctRatio)
-          try container.encode(self.topNValues, forKey: .topNValues)
+          if self.nullRatio != 0 {
+            try container.encode(self.nullRatio, forKey: .nullRatio)
+          }
+          if self.distinctRatio != 0 {
+            try container.encode(self.distinctRatio, forKey: .distinctRatio)
+          }
+          if !self.topNValues.isEmpty {
+            try container.encode(self.topNValues, forKey: .topNValues)
+          }
 
           if let choice = self.fieldInfo {
             switch choice {
@@ -472,9 +488,15 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.minLength, forKey: .minLength)
-            try container.encode(self.maxLength, forKey: .maxLength)
-            try container.encode(self.averageLength, forKey: .averageLength)
+            if self.minLength != 0 {
+              try container.encode(self.minLength, forKey: .minLength)
+            }
+            if self.maxLength != 0 {
+              try container.encode(self.maxLength, forKey: .maxLength)
+            }
+            if self.averageLength != 0 {
+              try container.encode(self.averageLength, forKey: .averageLength)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -604,11 +626,21 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.average, forKey: .average)
-            try container.encode(self.standardDeviation, forKey: .standardDeviation)
-            try container.encode(self.min, forKey: .min)
-            try container.encode(self.quartiles, forKey: .quartiles)
-            try container.encode(self.max, forKey: .max)
+            if self.average != 0 {
+              try container.encode(self.average, forKey: .average)
+            }
+            if self.standardDeviation != 0 {
+              try container.encode(self.standardDeviation, forKey: .standardDeviation)
+            }
+            if self.min != 0 {
+              try container.encode(self.min, forKey: .min)
+            }
+            if !self.quartiles.isEmpty {
+              try container.encode(self.quartiles, forKey: .quartiles)
+            }
+            if self.max != 0 {
+              try container.encode(self.max, forKey: .max)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -738,11 +770,21 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.average, forKey: .average)
-            try container.encode(self.standardDeviation, forKey: .standardDeviation)
-            try container.encode(self.min, forKey: .min)
-            try container.encode(self.quartiles, forKey: .quartiles)
-            try container.encode(self.max, forKey: .max)
+            if self.average != 0 {
+              try container.encode(self.average, forKey: .average)
+            }
+            if self.standardDeviation != 0 {
+              try container.encode(self.standardDeviation, forKey: .standardDeviation)
+            }
+            if self.min != 0 {
+              try container.encode(self.min, forKey: .min)
+            }
+            if !self.quartiles.isEmpty {
+              try container.encode(self.quartiles, forKey: .quartiles)
+            }
+            if self.max != 0 {
+              try container.encode(self.max, forKey: .max)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -840,9 +882,15 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.value, forKey: .value)
-            try container.encode(self.count, forKey: .count)
-            try container.encode(self.ratio, forKey: .ratio)
+            if !self.value.isEmpty {
+              try container.encode(self.value, forKey: .value)
+            }
+            if self.count != 0 {
+              try container.encode(self.count, forKey: .count)
+            }
+            if self.ratio != 0 {
+              try container.encode(self.ratio, forKey: .ratio)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -1076,8 +1124,15 @@ public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.message, forKey: .message)
+        if self.state
+          != GoogleCloudDataplexV1.DataProfileResult.PostScanActionsResult.BigQueryExportResult
+          .State()
+        {
+          try container.encode(self.state, forKey: .state)
+        }
+        if !self.message.isEmpty {
+          try container.encode(self.message, forKey: .message)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

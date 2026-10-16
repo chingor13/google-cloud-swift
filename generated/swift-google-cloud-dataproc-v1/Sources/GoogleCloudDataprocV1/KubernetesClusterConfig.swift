@@ -101,7 +101,9 @@ public struct KubernetesClusterConfig: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kubernetesNamespace, forKey: .kubernetesNamespace)
+    if !self.kubernetesNamespace.isEmpty {
+      try container.encode(self.kubernetesNamespace, forKey: .kubernetesNamespace)
+    }
     try container.encodeIfPresent(self.kubernetesSoftwareConfig, forKey: .kubernetesSoftwareConfig)
 
     if let choice = self.config {

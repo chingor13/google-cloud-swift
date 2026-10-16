@@ -99,10 +99,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.objective, forKey: .objective)
-      try container.encode(self.deployedModelId, forKey: .deployedModelId)
-      try container.encode(self.anomalyCount, forKey: .anomalyCount)
-      try container.encode(self.featureStats, forKey: .featureStats)
+      if self.objective != ModelDeploymentMonitoringObjectiveType() {
+        try container.encode(self.objective, forKey: .objective)
+      }
+      if !self.deployedModelId.isEmpty {
+        try container.encode(self.deployedModelId, forKey: .deployedModelId)
+      }
+      if self.anomalyCount != 0 {
+        try container.encode(self.anomalyCount, forKey: .anomalyCount)
+      }
+      if !self.featureStats.isEmpty {
+        try container.encode(self.featureStats, forKey: .featureStats)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -186,10 +194,14 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.featureDisplayName, forKey: .featureDisplayName)
+        if !self.featureDisplayName.isEmpty {
+          try container.encode(self.featureDisplayName, forKey: .featureDisplayName)
+        }
         try container.encodeIfPresent(self.threshold, forKey: .threshold)
         try container.encodeIfPresent(self.trainingStats, forKey: .trainingStats)
-        try container.encode(self.predictionStats, forKey: .predictionStats)
+        if !self.predictionStats.isEmpty {
+          try container.encode(self.predictionStats, forKey: .predictionStats)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

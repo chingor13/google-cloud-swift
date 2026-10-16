@@ -104,10 +104,18 @@ public struct AccessRulesOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accessRules, forKey: .accessRules)
-    try container.encode(self.defaultSquashMode, forKey: .defaultSquashMode)
-    try container.encode(self.defaultSquashUid, forKey: .defaultSquashUid)
-    try container.encode(self.defaultSquashGid, forKey: .defaultSquashGid)
+    if !self.accessRules.isEmpty {
+      try container.encode(self.accessRules, forKey: .accessRules)
+    }
+    if self.defaultSquashMode != AccessRulesOptions.SquashMode() {
+      try container.encode(self.defaultSquashMode, forKey: .defaultSquashMode)
+    }
+    if self.defaultSquashUid != 0 {
+      try container.encode(self.defaultSquashUid, forKey: .defaultSquashUid)
+    }
+    if self.defaultSquashGid != 0 {
+      try container.encode(self.defaultSquashGid, forKey: .defaultSquashGid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -188,9 +196,15 @@ public struct AccessRulesOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.ipAddressRanges, forKey: .ipAddressRanges)
-      try container.encode(self.squashMode, forKey: .squashMode)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.ipAddressRanges.isEmpty {
+        try container.encode(self.ipAddressRanges, forKey: .ipAddressRanges)
+      }
+      if self.squashMode != AccessRulesOptions.SquashMode() {
+        try container.encode(self.squashMode, forKey: .squashMode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -106,7 +106,9 @@ public struct AggregationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.field, forKey: .field)
+    if !self.field.isEmpty {
+      try container.encode(self.field, forKey: .field)
+    }
 
     if let choice = self.result {
       switch choice {
@@ -176,7 +178,9 @@ public struct AggregationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.value, forKey: .value)
+      if self.value != 0 {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -255,7 +259,9 @@ public struct AggregationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.value, forKey: .value)
+      if self.value != 0 {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -341,7 +347,9 @@ public struct AggregationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.buckets, forKey: .buckets)
+      if !self.buckets.isEmpty {
+        try container.encode(self.buckets, forKey: .buckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -418,9 +426,15 @@ public struct AggregationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.lowerBound, forKey: .lowerBound)
-        try container.encode(self.upperBound, forKey: .upperBound)
-        try container.encode(self.count, forKey: .count)
+        if self.lowerBound != 0 {
+          try container.encode(self.lowerBound, forKey: .lowerBound)
+        }
+        if self.upperBound != 0 {
+          try container.encode(self.upperBound, forKey: .upperBound)
+        }
+        if self.count != 0 {
+          try container.encode(self.count, forKey: .count)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -524,7 +538,9 @@ public struct AggregationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.values, forKey: .values)
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

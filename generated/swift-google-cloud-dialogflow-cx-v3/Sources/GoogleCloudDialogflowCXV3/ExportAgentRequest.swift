@@ -130,13 +130,23 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.agentUri, forKey: .agentUri)
-      try container.encode(self.dataFormat, forKey: .dataFormat)
-      try container.encode(self.environment, forKey: .environment)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.agentUri.isEmpty {
+        try container.encode(self.agentUri, forKey: .agentUri)
+      }
+      if self.dataFormat != ExportAgentRequest.DataFormat() {
+        try container.encode(self.dataFormat, forKey: .dataFormat)
+      }
+      if !self.environment.isEmpty {
+        try container.encode(self.environment, forKey: .environment)
+      }
       try container.encodeIfPresent(self.gitDestination, forKey: .gitDestination)
-      try container.encode(
-        self.includeBigqueryExportSettings, forKey: .includeBigqueryExportSettings)
+      if self.includeBigqueryExportSettings {
+        try container.encode(
+          self.includeBigqueryExportSettings, forKey: .includeBigqueryExportSettings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -202,8 +212,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.trackingBranch, forKey: .trackingBranch)
-        try container.encode(self.commitMessage, forKey: .commitMessage)
+        if !self.trackingBranch.isEmpty {
+          try container.encode(self.trackingBranch, forKey: .trackingBranch)
+        }
+        if !self.commitMessage.isEmpty {
+          try container.encode(self.commitMessage, forKey: .commitMessage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

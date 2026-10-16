@@ -179,14 +179,28 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enablePrivateNodes, forKey: .enablePrivateNodes)
-    try container.encode(self.enablePrivateEndpoint, forKey: .enablePrivateEndpoint)
-    try container.encode(self.masterIpv4CidrBlock, forKey: .masterIpv4CidrBlock)
-    try container.encode(self.privateEndpoint, forKey: .privateEndpoint)
-    try container.encode(self.publicEndpoint, forKey: .publicEndpoint)
-    try container.encode(self.peeringName, forKey: .peeringName)
+    if self.enablePrivateNodes {
+      try container.encode(self.enablePrivateNodes, forKey: .enablePrivateNodes)
+    }
+    if self.enablePrivateEndpoint {
+      try container.encode(self.enablePrivateEndpoint, forKey: .enablePrivateEndpoint)
+    }
+    if !self.masterIpv4CidrBlock.isEmpty {
+      try container.encode(self.masterIpv4CidrBlock, forKey: .masterIpv4CidrBlock)
+    }
+    if !self.privateEndpoint.isEmpty {
+      try container.encode(self.privateEndpoint, forKey: .privateEndpoint)
+    }
+    if !self.publicEndpoint.isEmpty {
+      try container.encode(self.publicEndpoint, forKey: .publicEndpoint)
+    }
+    if !self.peeringName.isEmpty {
+      try container.encode(self.peeringName, forKey: .peeringName)
+    }
     try container.encodeIfPresent(self.masterGlobalAccessConfig, forKey: .masterGlobalAccessConfig)
-    try container.encode(self.privateEndpointSubnetwork, forKey: .privateEndpointSubnetwork)
+    if !self.privateEndpointSubnetwork.isEmpty {
+      try container.encode(self.privateEndpointSubnetwork, forKey: .privateEndpointSubnetwork)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

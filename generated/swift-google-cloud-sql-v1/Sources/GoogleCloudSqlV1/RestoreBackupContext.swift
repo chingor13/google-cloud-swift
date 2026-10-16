@@ -95,10 +95,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.backupRunId, forKey: .backupRunId)
-      try container.encode(self.instanceId, forKey: .instanceId)
-      try container.encode(self.project, forKey: .project)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.backupRunId != 0 {
+        try container.encode(self.backupRunId, forKey: .backupRunId)
+      }
+      if !self.instanceId.isEmpty {
+        try container.encode(self.instanceId, forKey: .instanceId)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

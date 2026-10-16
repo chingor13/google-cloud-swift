@@ -70,7 +70,9 @@ public struct Citations: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.citedChunks, forKey: .citedChunks)
+    if !self.citedChunks.isEmpty {
+      try container.encode(self.citedChunks, forKey: .citedChunks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -152,10 +154,18 @@ public struct Citations: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.text, forKey: .text)
-      try container.encode(self.requiresAttribution, forKey: .requiresAttribution)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.text.isEmpty {
+        try container.encode(self.text, forKey: .text)
+      }
+      if self.requiresAttribution {
+        try container.encode(self.requiresAttribution, forKey: .requiresAttribution)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

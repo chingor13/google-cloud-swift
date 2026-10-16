@@ -184,16 +184,36 @@ public struct GoldengateDb2ConnectionProperties: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.securityProtocol, forKey: .securityProtocol)
-    try container.encode(self.additionalAttributes, forKey: .additionalAttributes)
-    try container.encode(self.sslClientKeystoredbFile, forKey: .sslClientKeystoredbFile)
-    try container.encode(self.sslClientKeystashFile, forKey: .sslClientKeystashFile)
-    try container.encode(self.sslServerCertificateFile, forKey: .sslServerCertificateFile)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if self.securityProtocol != GoldengateDb2ConnectionProperties.Db2SecurityProtocol() {
+      try container.encode(self.securityProtocol, forKey: .securityProtocol)
+    }
+    if !self.additionalAttributes.isEmpty {
+      try container.encode(self.additionalAttributes, forKey: .additionalAttributes)
+    }
+    if !self.sslClientKeystoredbFile.isEmpty {
+      try container.encode(self.sslClientKeystoredbFile, forKey: .sslClientKeystoredbFile)
+    }
+    if !self.sslClientKeystashFile.isEmpty {
+      try container.encode(self.sslClientKeystashFile, forKey: .sslClientKeystashFile)
+    }
+    if !self.sslServerCertificateFile.isEmpty {
+      try container.encode(self.sslServerCertificateFile, forKey: .sslServerCertificateFile)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

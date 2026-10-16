@@ -269,22 +269,36 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.inputDataConfig, forKey: .inputDataConfig)
-      try container.encode(self.trainingTaskDefinition, forKey: .trainingTaskDefinition)
+      if !self.trainingTaskDefinition.isEmpty {
+        try container.encode(self.trainingTaskDefinition, forKey: .trainingTaskDefinition)
+      }
       try container.encodeIfPresent(self.trainingTaskInputs, forKey: .trainingTaskInputs)
       try container.encodeIfPresent(self.trainingTaskMetadata, forKey: .trainingTaskMetadata)
       try container.encodeIfPresent(self.modelToUpload, forKey: .modelToUpload)
-      try container.encode(self.modelId, forKey: .modelId)
-      try container.encode(self.parentModel, forKey: .parentModel)
-      try container.encode(self.state, forKey: .state)
+      if !self.modelId.isEmpty {
+        try container.encode(self.modelId, forKey: .modelId)
+      }
+      if !self.parentModel.isEmpty {
+        try container.encode(self.parentModel, forKey: .parentModel)
+      }
+      if self.state != PipelineState() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

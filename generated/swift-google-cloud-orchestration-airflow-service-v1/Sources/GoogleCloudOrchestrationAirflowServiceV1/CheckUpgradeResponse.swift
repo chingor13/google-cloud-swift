@@ -111,11 +111,21 @@ public struct CheckUpgradeResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.buildLogUri, forKey: .buildLogUri)
-    try container.encode(self.containsPypiModulesConflict, forKey: .containsPypiModulesConflict)
-    try container.encode(self.pypiConflictBuildLogExtract, forKey: .pypiConflictBuildLogExtract)
-    try container.encode(self.imageVersion, forKey: .imageVersion)
-    try container.encode(self.pypiDependencies, forKey: .pypiDependencies)
+    if !self.buildLogUri.isEmpty {
+      try container.encode(self.buildLogUri, forKey: .buildLogUri)
+    }
+    if self.containsPypiModulesConflict != CheckUpgradeResponse.ConflictResult() {
+      try container.encode(self.containsPypiModulesConflict, forKey: .containsPypiModulesConflict)
+    }
+    if !self.pypiConflictBuildLogExtract.isEmpty {
+      try container.encode(self.pypiConflictBuildLogExtract, forKey: .pypiConflictBuildLogExtract)
+    }
+    if !self.imageVersion.isEmpty {
+      try container.encode(self.imageVersion, forKey: .imageVersion)
+    }
+    if !self.pypiDependencies.isEmpty {
+      try container.encode(self.pypiDependencies, forKey: .pypiDependencies)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

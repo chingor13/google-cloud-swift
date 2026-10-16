@@ -111,11 +111,17 @@ public struct ConnectorTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.connection, forKey: .connection)
+    if !self.connection.isEmpty {
+      try container.encode(self.connection, forKey: .connection)
+    }
     try container.encodeIfPresent(self.action, forKey: .action)
     try container.encodeIfPresent(self.authConfig, forKey: .authConfig)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

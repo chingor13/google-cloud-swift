@@ -98,10 +98,16 @@ public struct CreateQuotaPreferenceRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.quotaPreferenceId, forKey: .quotaPreferenceId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.quotaPreferenceId.isEmpty {
+      try container.encode(self.quotaPreferenceId, forKey: .quotaPreferenceId)
+    }
     try container.encodeIfPresent(self.quotaPreference, forKey: .quotaPreference)
-    try container.encode(self.ignoreSafetyChecks, forKey: .ignoreSafetyChecks)
+    if !self.ignoreSafetyChecks.isEmpty {
+      try container.encode(self.ignoreSafetyChecks, forKey: .ignoreSafetyChecks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

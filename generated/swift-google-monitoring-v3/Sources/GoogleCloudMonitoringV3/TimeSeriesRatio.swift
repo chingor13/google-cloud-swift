@@ -100,9 +100,15 @@ public struct TimeSeriesRatio: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.goodServiceFilter, forKey: .goodServiceFilter)
-    try container.encode(self.badServiceFilter, forKey: .badServiceFilter)
-    try container.encode(self.totalServiceFilter, forKey: .totalServiceFilter)
+    if !self.goodServiceFilter.isEmpty {
+      try container.encode(self.goodServiceFilter, forKey: .goodServiceFilter)
+    }
+    if !self.badServiceFilter.isEmpty {
+      try container.encode(self.badServiceFilter, forKey: .badServiceFilter)
+    }
+    if !self.totalServiceFilter.isEmpty {
+      try container.encode(self.totalServiceFilter, forKey: .totalServiceFilter)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

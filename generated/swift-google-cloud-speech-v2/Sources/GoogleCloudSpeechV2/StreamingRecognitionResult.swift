@@ -133,12 +133,22 @@ public struct StreamingRecognitionResult: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.alternatives, forKey: .alternatives)
-    try container.encode(self.isFinal, forKey: .isFinal)
-    try container.encode(self.stability, forKey: .stability)
+    if !self.alternatives.isEmpty {
+      try container.encode(self.alternatives, forKey: .alternatives)
+    }
+    if self.isFinal {
+      try container.encode(self.isFinal, forKey: .isFinal)
+    }
+    if self.stability != 0 {
+      try container.encode(self.stability, forKey: .stability)
+    }
     try container.encodeIfPresent(self.resultEndOffset, forKey: .resultEndOffset)
-    try container.encode(self.channelTag, forKey: .channelTag)
-    try container.encode(self.languageCode, forKey: .languageCode)
+    if self.channelTag != 0 {
+      try container.encode(self.channelTag, forKey: .channelTag)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

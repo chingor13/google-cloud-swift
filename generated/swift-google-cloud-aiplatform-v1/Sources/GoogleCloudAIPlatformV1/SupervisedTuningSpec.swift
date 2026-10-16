@@ -107,10 +107,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trainingDatasetUri, forKey: .trainingDatasetUri)
-      try container.encode(self.validationDatasetUri, forKey: .validationDatasetUri)
+      if !self.trainingDatasetUri.isEmpty {
+        try container.encode(self.trainingDatasetUri, forKey: .trainingDatasetUri)
+      }
+      if !self.validationDatasetUri.isEmpty {
+        try container.encode(self.validationDatasetUri, forKey: .validationDatasetUri)
+      }
       try container.encodeIfPresent(self.hyperParameters, forKey: .hyperParameters)
-      try container.encode(self.exportLastCheckpointOnly, forKey: .exportLastCheckpointOnly)
+      if self.exportLastCheckpointOnly {
+        try container.encode(self.exportLastCheckpointOnly, forKey: .exportLastCheckpointOnly)
+      }
       try container.encodeIfPresent(self.evaluationConfig, forKey: .evaluationConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

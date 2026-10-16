@@ -155,13 +155,23 @@ public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.count, forKey: .count)
-    try container.encode(self.mean, forKey: .mean)
-    try container.encode(self.sumOfSquaredDeviation, forKey: .sumOfSquaredDeviation)
+    if self.count != 0 {
+      try container.encode(self.count, forKey: .count)
+    }
+    if self.mean != 0 {
+      try container.encode(self.mean, forKey: .mean)
+    }
+    if self.sumOfSquaredDeviation != 0 {
+      try container.encode(self.sumOfSquaredDeviation, forKey: .sumOfSquaredDeviation)
+    }
     try container.encodeIfPresent(self.range, forKey: .range)
     try container.encodeIfPresent(self.bucketOptions, forKey: .bucketOptions)
-    try container.encode(self.bucketCounts, forKey: .bucketCounts)
-    try container.encode(self.exemplars, forKey: .exemplars)
+    if !self.bucketCounts.isEmpty {
+      try container.encode(self.bucketCounts, forKey: .bucketCounts)
+    }
+    if !self.exemplars.isEmpty {
+      try container.encode(self.exemplars, forKey: .exemplars)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -227,8 +237,12 @@ public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.min, forKey: .min)
-      try container.encode(self.max, forKey: .max)
+      if self.min != 0 {
+        try container.encode(self.min, forKey: .min)
+      }
+      if self.max != 0 {
+        try container.encode(self.max, forKey: .max)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -443,9 +457,15 @@ public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.numFiniteBuckets, forKey: .numFiniteBuckets)
-        try container.encode(self.width, forKey: .width)
-        try container.encode(self.offset, forKey: .offset)
+        if self.numFiniteBuckets != 0 {
+          try container.encode(self.numFiniteBuckets, forKey: .numFiniteBuckets)
+        }
+        if self.width != 0 {
+          try container.encode(self.width, forKey: .width)
+        }
+        if self.offset != 0 {
+          try container.encode(self.offset, forKey: .offset)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -550,9 +570,15 @@ public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.numFiniteBuckets, forKey: .numFiniteBuckets)
-        try container.encode(self.growthFactor, forKey: .growthFactor)
-        try container.encode(self.scale, forKey: .scale)
+        if self.numFiniteBuckets != 0 {
+          try container.encode(self.numFiniteBuckets, forKey: .numFiniteBuckets)
+        }
+        if self.growthFactor != 0 {
+          try container.encode(self.growthFactor, forKey: .growthFactor)
+        }
+        if self.scale != 0 {
+          try container.encode(self.scale, forKey: .scale)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -642,7 +668,9 @@ public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.bounds, forKey: .bounds)
+        if !self.bounds.isEmpty {
+          try container.encode(self.bounds, forKey: .bounds)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -784,9 +812,13 @@ public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.value, forKey: .value)
+      if self.value != 0 {
+        try container.encode(self.value, forKey: .value)
+      }
       try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
-      try container.encode(self.attachments, forKey: .attachments)
+      if !self.attachments.isEmpty {
+        try container.encode(self.attachments, forKey: .attachments)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

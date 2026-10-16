@@ -77,7 +77,9 @@ public struct Overlay: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.image, forKey: .image)
-    try container.encode(self.animations, forKey: .animations)
+    if !self.animations.isEmpty {
+      try container.encode(self.animations, forKey: .animations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -143,8 +145,12 @@ public struct Overlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.x, forKey: .x)
-      try container.encode(self.y, forKey: .y)
+      if self.x != 0 {
+        try container.encode(self.x, forKey: .x)
+      }
+      if self.y != 0 {
+        try container.encode(self.y, forKey: .y)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -244,9 +250,13 @@ public struct Overlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
       try container.encodeIfPresent(self.resolution, forKey: .resolution)
-      try container.encode(self.alpha, forKey: .alpha)
+      if self.alpha != 0 {
+        try container.encode(self.alpha, forKey: .alpha)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -441,7 +451,9 @@ public struct Overlay: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fadeType, forKey: .fadeType)
+      if self.fadeType != Overlay.FadeType() {
+        try container.encode(self.fadeType, forKey: .fadeType)
+      }
       try container.encodeIfPresent(self.xy, forKey: .xy)
       try container.encodeIfPresent(self.startTimeOffset, forKey: .startTimeOffset)
       try container.encodeIfPresent(self.endTimeOffset, forKey: .endTimeOffset)

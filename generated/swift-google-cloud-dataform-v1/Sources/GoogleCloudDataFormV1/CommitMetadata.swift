@@ -76,7 +76,9 @@ public struct CommitMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.author, forKey: .author)
-    try container.encode(self.commitMessage, forKey: .commitMessage)
+    if !self.commitMessage.isEmpty {
+      try container.encode(self.commitMessage, forKey: .commitMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

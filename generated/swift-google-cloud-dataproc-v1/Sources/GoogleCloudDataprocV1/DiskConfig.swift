@@ -147,14 +147,24 @@ public struct DiskConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bootDiskType, forKey: .bootDiskType)
-    try container.encode(self.bootDiskSizeGb, forKey: .bootDiskSizeGb)
-    try container.encode(self.numLocalSsds, forKey: .numLocalSsds)
-    try container.encode(self.localSsdInterface, forKey: .localSsdInterface)
+    if !self.bootDiskType.isEmpty {
+      try container.encode(self.bootDiskType, forKey: .bootDiskType)
+    }
+    if self.bootDiskSizeGb != 0 {
+      try container.encode(self.bootDiskSizeGb, forKey: .bootDiskSizeGb)
+    }
+    if self.numLocalSsds != 0 {
+      try container.encode(self.numLocalSsds, forKey: .numLocalSsds)
+    }
+    if !self.localSsdInterface.isEmpty {
+      try container.encode(self.localSsdInterface, forKey: .localSsdInterface)
+    }
     try container.encodeIfPresent(self.bootDiskProvisionedIops, forKey: .bootDiskProvisionedIops)
     try container.encodeIfPresent(
       self.bootDiskProvisionedThroughput, forKey: .bootDiskProvisionedThroughput)
-    try container.encode(self.attachedDiskConfigs, forKey: .attachedDiskConfigs)
+    if !self.attachedDiskConfigs.isEmpty {
+      try container.encode(self.attachedDiskConfigs, forKey: .attachedDiskConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

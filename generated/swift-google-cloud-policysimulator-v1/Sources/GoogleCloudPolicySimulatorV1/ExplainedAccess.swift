@@ -106,9 +106,15 @@ public struct ExplainedAccess: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accessState, forKey: .accessState)
-    try container.encode(self.policies, forKey: .policies)
-    try container.encode(self.errors, forKey: .errors)
+    if self.accessState != AccessState() {
+      try container.encode(self.accessState, forKey: .accessState)
+    }
+    if !self.policies.isEmpty {
+      try container.encode(self.policies, forKey: .policies)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

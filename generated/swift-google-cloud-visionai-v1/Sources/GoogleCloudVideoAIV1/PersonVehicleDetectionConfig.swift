@@ -81,8 +81,12 @@ public struct PersonVehicleDetectionConfig: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enablePeopleCounting, forKey: .enablePeopleCounting)
-    try container.encode(self.enableVehicleCounting, forKey: .enableVehicleCounting)
+    if self.enablePeopleCounting {
+      try container.encode(self.enablePeopleCounting, forKey: .enablePeopleCounting)
+    }
+    if self.enableVehicleCounting {
+      try container.encode(self.enableVehicleCounting, forKey: .enableVehicleCounting)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

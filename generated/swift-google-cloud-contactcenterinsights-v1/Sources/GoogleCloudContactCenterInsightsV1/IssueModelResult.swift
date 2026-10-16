@@ -78,8 +78,12 @@ public struct IssueModelResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issueModel, forKey: .issueModel)
-    try container.encode(self.issues, forKey: .issues)
+    if !self.issueModel.isEmpty {
+      try container.encode(self.issueModel, forKey: .issueModel)
+    }
+    if !self.issues.isEmpty {
+      try container.encode(self.issues, forKey: .issues)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

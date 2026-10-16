@@ -188,17 +188,31 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.appliesTo, forKey: .appliesTo)
-      try container.encode(self.allowedStringValues, forKey: .allowedStringValues)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.type != SqlFlagType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.appliesTo.isEmpty {
+        try container.encode(self.appliesTo, forKey: .appliesTo)
+      }
+      if !self.allowedStringValues.isEmpty {
+        try container.encode(self.allowedStringValues, forKey: .allowedStringValues)
+      }
       try container.encodeIfPresent(self.minValue, forKey: .minValue)
       try container.encodeIfPresent(self.maxValue, forKey: .maxValue)
       try container.encodeIfPresent(self.requiresRestart, forKey: .requiresRestart)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       try container.encodeIfPresent(self.inBeta, forKey: .inBeta)
-      try container.encode(self.allowedIntValues, forKey: .allowedIntValues)
-      try container.encode(self.flagScope, forKey: .flagScope)
+      if !self.allowedIntValues.isEmpty {
+        try container.encode(self.allowedIntValues, forKey: .allowedIntValues)
+      }
+      if self.flagScope != SqlFlagScope() {
+        try container.encode(self.flagScope, forKey: .flagScope)
+      }
 
       if let choice = self.recommendedValue {
         switch choice {

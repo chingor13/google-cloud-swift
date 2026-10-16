@@ -100,10 +100,18 @@ public struct SslConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.clientKey, forKey: .clientKey)
-    try container.encode(self.clientCertificate, forKey: .clientCertificate)
-    try container.encode(self.caCertificate, forKey: .caCertificate)
+    if self.type != SslConfig.SslType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.clientKey.isEmpty {
+      try container.encode(self.clientKey, forKey: .clientKey)
+    }
+    if !self.clientCertificate.isEmpty {
+      try container.encode(self.clientCertificate, forKey: .clientCertificate)
+    }
+    if !self.caCertificate.isEmpty {
+      try container.encode(self.caCertificate, forKey: .caCertificate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

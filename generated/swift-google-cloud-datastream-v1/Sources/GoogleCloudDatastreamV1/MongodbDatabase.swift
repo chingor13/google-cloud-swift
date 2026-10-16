@@ -77,8 +77,12 @@ public struct MongodbDatabase: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.collections, forKey: .collections)
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.collections.isEmpty {
+      try container.encode(self.collections, forKey: .collections)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

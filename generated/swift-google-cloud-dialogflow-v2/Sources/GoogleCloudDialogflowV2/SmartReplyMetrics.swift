@@ -90,9 +90,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowlistCoverage, forKey: .allowlistCoverage)
-      try container.encode(self.topNMetrics, forKey: .topNMetrics)
-      try container.encode(self.conversationCount, forKey: .conversationCount)
+      if self.allowlistCoverage != 0 {
+        try container.encode(self.allowlistCoverage, forKey: .allowlistCoverage)
+      }
+      if !self.topNMetrics.isEmpty {
+        try container.encode(self.topNMetrics, forKey: .topNMetrics)
+      }
+      if self.conversationCount != 0 {
+        try container.encode(self.conversationCount, forKey: .conversationCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -163,8 +169,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.n, forKey: .n)
-        try container.encode(self.recall, forKey: .recall)
+        if self.n != 0 {
+          try container.encode(self.n, forKey: .n)
+        }
+        if self.recall != 0 {
+          try container.encode(self.recall, forKey: .recall)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

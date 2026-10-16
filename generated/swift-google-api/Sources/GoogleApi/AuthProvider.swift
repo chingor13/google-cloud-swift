@@ -164,12 +164,24 @@ public struct AuthProvider: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.issuer, forKey: .issuer)
-    try container.encode(self.jwksUri, forKey: .jwksUri)
-    try container.encode(self.audiences, forKey: .audiences)
-    try container.encode(self.authorizationUrl, forKey: .authorizationUrl)
-    try container.encode(self.jwtLocations, forKey: .jwtLocations)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.issuer.isEmpty {
+      try container.encode(self.issuer, forKey: .issuer)
+    }
+    if !self.jwksUri.isEmpty {
+      try container.encode(self.jwksUri, forKey: .jwksUri)
+    }
+    if !self.audiences.isEmpty {
+      try container.encode(self.audiences, forKey: .audiences)
+    }
+    if !self.authorizationUrl.isEmpty {
+      try container.encode(self.authorizationUrl, forKey: .authorizationUrl)
+    }
+    if !self.jwtLocations.isEmpty {
+      try container.encode(self.jwtLocations, forKey: .jwtLocations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

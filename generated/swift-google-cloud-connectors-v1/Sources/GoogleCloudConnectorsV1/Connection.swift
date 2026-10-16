@@ -211,22 +211,44 @@ public struct Connection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.connectorVersion, forKey: .connectorVersion)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.connectorVersion.isEmpty {
+      try container.encode(self.connectorVersion, forKey: .connectorVersion)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.configVariables, forKey: .configVariables)
+    if !self.configVariables.isEmpty {
+      try container.encode(self.configVariables, forKey: .configVariables)
+    }
     try container.encodeIfPresent(self.authConfig, forKey: .authConfig)
     try container.encodeIfPresent(self.lockConfig, forKey: .lockConfig)
-    try container.encode(self.destinationConfigs, forKey: .destinationConfigs)
-    try container.encode(self.imageLocation, forKey: .imageLocation)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.serviceDirectory, forKey: .serviceDirectory)
-    try container.encode(self.envoyImageLocation, forKey: .envoyImageLocation)
-    try container.encode(self.suspended, forKey: .suspended)
+    if !self.destinationConfigs.isEmpty {
+      try container.encode(self.destinationConfigs, forKey: .destinationConfigs)
+    }
+    if !self.imageLocation.isEmpty {
+      try container.encode(self.imageLocation, forKey: .imageLocation)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.serviceDirectory.isEmpty {
+      try container.encode(self.serviceDirectory, forKey: .serviceDirectory)
+    }
+    if !self.envoyImageLocation.isEmpty {
+      try container.encode(self.envoyImageLocation, forKey: .envoyImageLocation)
+    }
+    if self.suspended {
+      try container.encode(self.suspended, forKey: .suspended)
+    }
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
     try container.encodeIfPresent(self.sslConfig, forKey: .sslConfig)
     for (key, value) in self._unknownFields.json {

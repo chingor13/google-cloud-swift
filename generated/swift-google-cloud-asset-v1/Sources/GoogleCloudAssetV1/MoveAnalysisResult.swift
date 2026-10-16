@@ -80,8 +80,12 @@ public struct MoveAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.blockers, forKey: .blockers)
-    try container.encode(self.warnings, forKey: .warnings)
+    if !self.blockers.isEmpty {
+      try container.encode(self.blockers, forKey: .blockers)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

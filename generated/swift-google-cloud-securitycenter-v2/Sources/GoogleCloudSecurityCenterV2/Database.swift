@@ -126,12 +126,24 @@ public struct Database: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.userName, forKey: .userName)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.grantees, forKey: .grantees)
-    try container.encode(self.version, forKey: .version)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.userName.isEmpty {
+      try container.encode(self.userName, forKey: .userName)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.grantees.isEmpty {
+      try container.encode(self.grantees, forKey: .grantees)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

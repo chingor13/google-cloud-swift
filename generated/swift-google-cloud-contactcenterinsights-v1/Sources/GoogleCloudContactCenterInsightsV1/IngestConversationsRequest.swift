@@ -145,7 +145,9 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.conversationConfig, forKey: .conversationConfig)
     try container.encodeIfPresent(self.redactionConfig, forKey: .redactionConfig)
     try container.encodeIfPresent(self.speechConfig, forKey: .speechConfig)
@@ -257,10 +259,16 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.bucketUri, forKey: .bucketUri)
-      try container.encode(self.bucketObjectType, forKey: .bucketObjectType)
+      if !self.bucketUri.isEmpty {
+        try container.encode(self.bucketUri, forKey: .bucketUri)
+      }
+      if self.bucketObjectType != IngestConversationsRequest.GcsSource.BucketObjectType() {
+        try container.encode(self.bucketObjectType, forKey: .bucketObjectType)
+      }
       try container.encodeIfPresent(self.metadataBucketUri, forKey: .metadataBucketUri)
-      try container.encode(self.customMetadataKeys, forKey: .customMetadataKeys)
+      if !self.customMetadataKeys.isEmpty {
+        try container.encode(self.customMetadataKeys, forKey: .customMetadataKeys)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -456,7 +464,9 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.medium, forKey: .medium)
+      if self.medium != Conversation.Medium() {
+        try container.encode(self.medium, forKey: .medium)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -560,9 +570,15 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.agentId, forKey: .agentId)
-      try container.encode(self.agentChannel, forKey: .agentChannel)
-      try container.encode(self.customerChannel, forKey: .customerChannel)
+      if !self.agentId.isEmpty {
+        try container.encode(self.agentId, forKey: .agentId)
+      }
+      if self.agentChannel != 0 {
+        try container.encode(self.agentChannel, forKey: .agentChannel)
+      }
+      if self.customerChannel != 0 {
+        try container.encode(self.customerChannel, forKey: .customerChannel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -149,12 +149,24 @@ public struct ComplianceNote: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.rationale, forKey: .rationale)
-    try container.encode(self.remediation, forKey: .remediation)
-    try container.encode(self.scanInstructions, forKey: .scanInstructions)
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.rationale.isEmpty {
+      try container.encode(self.rationale, forKey: .rationale)
+    }
+    if !self.remediation.isEmpty {
+      try container.encode(self.remediation, forKey: .remediation)
+    }
+    if !self.scanInstructions.isEmpty {
+      try container.encode(self.scanInstructions, forKey: .scanInstructions)
+    }
 
     if let choice = self.complianceType {
       switch choice {
@@ -232,8 +244,12 @@ public struct ComplianceNote: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.profileLevel, forKey: .profileLevel)
-      try container.encode(self.severity, forKey: .severity)
+      if self.profileLevel != 0 {
+        try container.encode(self.profileLevel, forKey: .profileLevel)
+      }
+      if self.severity != Severity() {
+        try container.encode(self.severity, forKey: .severity)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

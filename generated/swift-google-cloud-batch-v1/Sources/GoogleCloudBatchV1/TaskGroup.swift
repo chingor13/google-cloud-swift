@@ -166,16 +166,34 @@ public struct TaskGroup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.taskSpec, forKey: .taskSpec)
-    try container.encode(self.taskCount, forKey: .taskCount)
-    try container.encode(self.parallelism, forKey: .parallelism)
-    try container.encode(self.schedulingPolicy, forKey: .schedulingPolicy)
-    try container.encode(self.taskEnvironments, forKey: .taskEnvironments)
-    try container.encode(self.taskCountPerNode, forKey: .taskCountPerNode)
-    try container.encode(self.requireHostsFile, forKey: .requireHostsFile)
-    try container.encode(self.permissiveSsh, forKey: .permissiveSsh)
-    try container.encode(self.runAsNonRoot, forKey: .runAsNonRoot)
+    if self.taskCount != 0 {
+      try container.encode(self.taskCount, forKey: .taskCount)
+    }
+    if self.parallelism != 0 {
+      try container.encode(self.parallelism, forKey: .parallelism)
+    }
+    if self.schedulingPolicy != TaskGroup.SchedulingPolicy() {
+      try container.encode(self.schedulingPolicy, forKey: .schedulingPolicy)
+    }
+    if !self.taskEnvironments.isEmpty {
+      try container.encode(self.taskEnvironments, forKey: .taskEnvironments)
+    }
+    if self.taskCountPerNode != 0 {
+      try container.encode(self.taskCountPerNode, forKey: .taskCountPerNode)
+    }
+    if self.requireHostsFile {
+      try container.encode(self.requireHostsFile, forKey: .requireHostsFile)
+    }
+    if self.permissiveSsh {
+      try container.encode(self.permissiveSsh, forKey: .permissiveSsh)
+    }
+    if self.runAsNonRoot {
+      try container.encode(self.runAsNonRoot, forKey: .runAsNonRoot)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

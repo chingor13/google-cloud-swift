@@ -449,26 +449,38 @@
       try container.encodeIfPresent(self.adminEnabled, forKey: .adminEnabled)
       try container.encodeIfPresent(
         self.applicationAwareInterconnect, forKey: .applicationAwareInterconnect)
-      try container.encode(self.availableFeatures, forKey: .availableFeatures)
-      try container.encode(self.circuitInfos, forKey: .circuitInfos)
+      if !self.availableFeatures.isEmpty {
+        try container.encode(self.availableFeatures, forKey: .availableFeatures)
+      }
+      if !self.circuitInfos.isEmpty {
+        try container.encode(self.circuitInfos, forKey: .circuitInfos)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.customerName, forKey: .customerName)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.effectiveLocation, forKey: .effectiveLocation)
-      try container.encode(self.expectedOutages, forKey: .expectedOutages)
+      if !self.expectedOutages.isEmpty {
+        try container.encode(self.expectedOutages, forKey: .expectedOutages)
+      }
       try container.encodeIfPresent(self.googleIpAddress, forKey: .googleIpAddress)
       try container.encodeIfPresent(self.googleReferenceId, forKey: .googleReferenceId)
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.interconnectAttachments, forKey: .interconnectAttachments)
-      try container.encode(self.interconnectGroups, forKey: .interconnectGroups)
+      if !self.interconnectAttachments.isEmpty {
+        try container.encode(self.interconnectAttachments, forKey: .interconnectAttachments)
+      }
+      if !self.interconnectGroups.isEmpty {
+        try container.encode(self.interconnectGroups, forKey: .interconnectGroups)
+      }
       try container.encodeIfPresent(self.interconnectType, forKey: .interconnectType)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.linkType, forKey: .linkType)
       try container.encodeIfPresent(self.location, forKey: .location)
       try container.encodeIfPresent(self.macsec, forKey: .macsec)
@@ -480,14 +492,18 @@
       try container.encodeIfPresent(self.peerIpAddress, forKey: .peerIpAddress)
       try container.encodeIfPresent(self.provisionedLinkCount, forKey: .provisionedLinkCount)
       try container.encodeIfPresent(self.remoteLocation, forKey: .remoteLocation)
-      try container.encode(self.requestedFeatures, forKey: .requestedFeatures)
+      if !self.requestedFeatures.isEmpty {
+        try container.encode(self.requestedFeatures, forKey: .requestedFeatures)
+      }
       try container.encodeIfPresent(self.requestedLinkCount, forKey: .requestedLinkCount)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
       try container.encodeIfPresent(self.state, forKey: .state)
       try container.encodeIfPresent(self.subzone, forKey: .subzone)
-      try container.encode(self.wireGroups, forKey: .wireGroups)
+      if !self.wireGroups.isEmpty {
+        try container.encode(self.wireGroups, forKey: .wireGroups)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

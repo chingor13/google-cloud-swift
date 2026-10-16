@@ -130,13 +130,23 @@ public struct RestorePlanBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.restorePlan, forKey: .restorePlan)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.backupPlan, forKey: .backupPlan)
+    if !self.restorePlan.isEmpty {
+      try container.encode(self.restorePlan, forKey: .restorePlan)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.backupPlan.isEmpty {
+      try container.encode(self.backupPlan, forKey: .backupPlan)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

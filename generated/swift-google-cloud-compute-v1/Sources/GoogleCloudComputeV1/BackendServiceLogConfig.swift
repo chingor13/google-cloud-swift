@@ -123,9 +123,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.enable, forKey: .enable)
-      try container.encode(self.loggingHttpRequestHeaders, forKey: .loggingHttpRequestHeaders)
-      try container.encode(self.loggingHttpResponseHeaders, forKey: .loggingHttpResponseHeaders)
-      try container.encode(self.optionalFields, forKey: .optionalFields)
+      if !self.loggingHttpRequestHeaders.isEmpty {
+        try container.encode(self.loggingHttpRequestHeaders, forKey: .loggingHttpRequestHeaders)
+      }
+      if !self.loggingHttpResponseHeaders.isEmpty {
+        try container.encode(self.loggingHttpResponseHeaders, forKey: .loggingHttpResponseHeaders)
+      }
+      if !self.optionalFields.isEmpty {
+        try container.encode(self.optionalFields, forKey: .optionalFields)
+      }
       try container.encodeIfPresent(self.optionalMode, forKey: .optionalMode)
       try container.encodeIfPresent(self.sampleRate, forKey: .sampleRate)
       for (key, value) in self._unknownFields.json {

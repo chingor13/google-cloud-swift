@@ -158,10 +158,18 @@ public struct CmekSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
-    try container.encode(self.serviceAccountId, forKey: .serviceAccountId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if !self.kmsKeyVersionName.isEmpty {
+      try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
+    }
+    if !self.serviceAccountId.isEmpty {
+      try container.encode(self.serviceAccountId, forKey: .serviceAccountId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

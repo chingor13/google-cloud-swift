@@ -99,10 +99,18 @@ public struct BillableSku: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sku, forKey: .sku)
-    try container.encode(self.skuDisplayName, forKey: .skuDisplayName)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.serviceDisplayName, forKey: .serviceDisplayName)
+    if !self.sku.isEmpty {
+      try container.encode(self.sku, forKey: .sku)
+    }
+    if !self.skuDisplayName.isEmpty {
+      try container.encode(self.skuDisplayName, forKey: .skuDisplayName)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.serviceDisplayName.isEmpty {
+      try container.encode(self.serviceDisplayName, forKey: .serviceDisplayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -125,11 +125,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.groundingConfig, forKey: .groundingConfig)
-      try container.encode(self.answerCandidate, forKey: .answerCandidate)
-      try container.encode(self.facts, forKey: .facts)
+      if !self.groundingConfig.isEmpty {
+        try container.encode(self.groundingConfig, forKey: .groundingConfig)
+      }
+      if !self.answerCandidate.isEmpty {
+        try container.encode(self.answerCandidate, forKey: .answerCandidate)
+      }
+      if !self.facts.isEmpty {
+        try container.encode(self.facts, forKey: .facts)
+      }
       try container.encodeIfPresent(self.groundingSpec, forKey: .groundingSpec)
-      try container.encode(self.userLabels, forKey: .userLabels)
+      if !self.userLabels.isEmpty {
+        try container.encode(self.userLabels, forKey: .userLabels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -146,10 +146,18 @@ public struct UserInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.userId, forKey: .userId)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.userAgent, forKey: .userAgent)
-    try container.encode(self.directUserRequest, forKey: .directUserRequest)
+    if !self.userId.isEmpty {
+      try container.encode(self.userId, forKey: .userId)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.userAgent.isEmpty {
+      try container.encode(self.userAgent, forKey: .userAgent)
+    }
+    if self.directUserRequest {
+      try container.encode(self.directUserRequest, forKey: .directUserRequest)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

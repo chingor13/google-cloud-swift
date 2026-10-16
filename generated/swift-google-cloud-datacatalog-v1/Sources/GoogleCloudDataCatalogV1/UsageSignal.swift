@@ -103,8 +103,12 @@ public struct UsageSignal: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.usageWithinTimeRange, forKey: .usageWithinTimeRange)
-    try container.encode(self.commonUsageWithinTimeRange, forKey: .commonUsageWithinTimeRange)
+    if !self.usageWithinTimeRange.isEmpty {
+      try container.encode(self.usageWithinTimeRange, forKey: .usageWithinTimeRange)
+    }
+    if !self.commonUsageWithinTimeRange.isEmpty {
+      try container.encode(self.commonUsageWithinTimeRange, forKey: .commonUsageWithinTimeRange)
+    }
     try container.encodeIfPresent(self.favoriteCount, forKey: .favoriteCount)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

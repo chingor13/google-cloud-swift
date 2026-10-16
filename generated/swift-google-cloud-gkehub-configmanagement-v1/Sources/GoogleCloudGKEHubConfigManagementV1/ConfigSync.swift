@@ -121,11 +121,18 @@ public struct ConfigSync: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.git, forKey: .git)
-    try container.encode(self.sourceFormat, forKey: .sourceFormat)
+    if !self.sourceFormat.isEmpty {
+      try container.encode(self.sourceFormat, forKey: .sourceFormat)
+    }
     try container.encodeIfPresent(self.enabled, forKey: .enabled)
-    try container.encode(self.preventDrift, forKey: .preventDrift)
+    if self.preventDrift {
+      try container.encode(self.preventDrift, forKey: .preventDrift)
+    }
     try container.encodeIfPresent(self.oci, forKey: .oci)
-    try container.encode(self.metricsGcpServiceAccountEmail, forKey: .metricsGcpServiceAccountEmail)
+    if !self.metricsGcpServiceAccountEmail.isEmpty {
+      try container.encode(
+        self.metricsGcpServiceAccountEmail, forKey: .metricsGcpServiceAccountEmail)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

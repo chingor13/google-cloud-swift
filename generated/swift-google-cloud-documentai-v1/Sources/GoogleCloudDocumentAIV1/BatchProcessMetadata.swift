@@ -106,11 +106,17 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
+    if self.state != BatchProcessMetadata.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.individualProcessStatuses, forKey: .individualProcessStatuses)
+    if !self.individualProcessStatuses.isEmpty {
+      try container.encode(self.individualProcessStatuses, forKey: .individualProcessStatuses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -198,9 +204,13 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputGcsSource, forKey: .inputGcsSource)
+      if !self.inputGcsSource.isEmpty {
+        try container.encode(self.inputGcsSource, forKey: .inputGcsSource)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.outputGcsDestination, forKey: .outputGcsDestination)
+      if !self.outputGcsDestination.isEmpty {
+        try container.encode(self.outputGcsDestination, forKey: .outputGcsDestination)
+      }
       try container.encodeIfPresent(self.humanReviewStatus, forKey: .humanReviewStatus)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

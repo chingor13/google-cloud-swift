@@ -165,17 +165,29 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.content, forKey: .content)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
       try container.encodeIfPresent(self.relevanceScore, forKey: .relevanceScore)
       try container.encodeIfPresent(self.documentMetadata, forKey: .documentMetadata)
       try container.encodeIfPresent(self.derivedStructData, forKey: .derivedStructData)
       try container.encodeIfPresent(self.pageSpan, forKey: .pageSpan)
       try container.encodeIfPresent(self.chunkMetadata, forKey: .chunkMetadata)
-      try container.encode(self.dataUrls, forKey: .dataUrls)
-      try container.encode(self.annotationContents, forKey: .annotationContents)
-      try container.encode(self.annotationMetadata, forKey: .annotationMetadata)
+      if !self.dataUrls.isEmpty {
+        try container.encode(self.dataUrls, forKey: .dataUrls)
+      }
+      if !self.annotationContents.isEmpty {
+        try container.encode(self.annotationContents, forKey: .annotationContents)
+      }
+      if !self.annotationMetadata.isEmpty {
+        try container.encode(self.annotationMetadata, forKey: .annotationMetadata)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -254,8 +266,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.title, forKey: .title)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.title.isEmpty {
+          try container.encode(self.title, forKey: .title)
+        }
         try container.encodeIfPresent(self.structData, forKey: .structData)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -344,8 +360,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.pageStart, forKey: .pageStart)
-        try container.encode(self.pageEnd, forKey: .pageEnd)
+        if self.pageStart != 0 {
+          try container.encode(self.pageStart, forKey: .pageStart)
+        }
+        if self.pageEnd != 0 {
+          try container.encode(self.pageEnd, forKey: .pageEnd)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -451,8 +471,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.previousChunks, forKey: .previousChunks)
-        try container.encode(self.nextChunks, forKey: .nextChunks)
+        if !self.previousChunks.isEmpty {
+          try container.encode(self.previousChunks, forKey: .previousChunks)
+        }
+        if !self.nextChunks.isEmpty {
+          try container.encode(self.nextChunks, forKey: .nextChunks)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -542,8 +566,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.structureType, forKey: .structureType)
-        try container.encode(self.content, forKey: .content)
+        if self.structureType != Chunk.StructureType() {
+          try container.encode(self.structureType, forKey: .structureType)
+        }
+        if !self.content.isEmpty {
+          try container.encode(self.content, forKey: .content)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -632,7 +660,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.structuredContent, forKey: .structuredContent)
-        try container.encode(self.imageId, forKey: .imageId)
+        if !self.imageId.isEmpty {
+          try container.encode(self.imageId, forKey: .imageId)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

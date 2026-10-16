@@ -209,22 +209,50 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != Backup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.capacityGb, forKey: .capacityGb)
-    try container.encode(self.storageBytes, forKey: .storageBytes)
-    try container.encode(self.sourceInstance, forKey: .sourceInstance)
-    try container.encode(self.sourceFileShare, forKey: .sourceFileShare)
-    try container.encode(self.sourceInstanceTier, forKey: .sourceInstanceTier)
-    try container.encode(self.downloadBytes, forKey: .downloadBytes)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.capacityGb != 0 {
+      try container.encode(self.capacityGb, forKey: .capacityGb)
+    }
+    if self.storageBytes != 0 {
+      try container.encode(self.storageBytes, forKey: .storageBytes)
+    }
+    if !self.sourceInstance.isEmpty {
+      try container.encode(self.sourceInstance, forKey: .sourceInstance)
+    }
+    if !self.sourceFileShare.isEmpty {
+      try container.encode(self.sourceFileShare, forKey: .sourceFileShare)
+    }
+    if self.sourceInstanceTier != Instance.Tier() {
+      try container.encode(self.sourceInstanceTier, forKey: .sourceInstanceTier)
+    }
+    if self.downloadBytes != 0 {
+      try container.encode(self.downloadBytes, forKey: .downloadBytes)
+    }
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.fileSystemProtocol, forKey: .fileSystemProtocol)
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.fileSystemProtocol != Instance.FileProtocol() {
+      try container.encode(self.fileSystemProtocol, forKey: .fileSystemProtocol)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

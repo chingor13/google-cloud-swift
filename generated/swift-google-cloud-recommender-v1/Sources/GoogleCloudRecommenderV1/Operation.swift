@@ -206,14 +206,30 @@ public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.sourceResource, forKey: .sourceResource)
-    try container.encode(self.sourcePath, forKey: .sourcePath)
-    try container.encode(self.pathFilters, forKey: .pathFilters)
-    try container.encode(self.pathValueMatchers, forKey: .pathValueMatchers)
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.sourceResource.isEmpty {
+      try container.encode(self.sourceResource, forKey: .sourceResource)
+    }
+    if !self.sourcePath.isEmpty {
+      try container.encode(self.sourcePath, forKey: .sourcePath)
+    }
+    if !self.pathFilters.isEmpty {
+      try container.encode(self.pathFilters, forKey: .pathFilters)
+    }
+    if !self.pathValueMatchers.isEmpty {
+      try container.encode(self.pathValueMatchers, forKey: .pathValueMatchers)
+    }
 
     if let choice = self.pathValue {
       switch choice {

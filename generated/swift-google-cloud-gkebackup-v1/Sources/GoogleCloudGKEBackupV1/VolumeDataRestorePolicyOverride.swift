@@ -92,7 +92,9 @@ public struct VolumeDataRestorePolicyOverride: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.policy, forKey: .policy)
+    if self.policy != RestoreConfig.VolumeDataRestorePolicy() {
+      try container.encode(self.policy, forKey: .policy)
+    }
 
     if let choice = self.scope {
       switch choice {

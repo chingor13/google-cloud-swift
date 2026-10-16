@@ -89,9 +89,15 @@ public struct RuntimeActionSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.inputParameters, forKey: .inputParameters)
-    try container.encode(self.resultMetadata, forKey: .resultMetadata)
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.inputParameters.isEmpty {
+      try container.encode(self.inputParameters, forKey: .inputParameters)
+    }
+    if !self.resultMetadata.isEmpty {
+      try container.encode(self.resultMetadata, forKey: .resultMetadata)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -181,10 +187,18 @@ public struct RuntimeActionSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parameter, forKey: .parameter)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.dataType, forKey: .dataType)
-      try container.encode(self.nullable, forKey: .nullable)
+      if !self.parameter.isEmpty {
+        try container.encode(self.parameter, forKey: .parameter)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.dataType != DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
+      if self.nullable {
+        try container.encode(self.nullable, forKey: .nullable)
+      }
       try container.encodeIfPresent(self.defaultValue, forKey: .defaultValue)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -281,9 +295,15 @@ public struct RuntimeActionSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.field, forKey: .field)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.dataType, forKey: .dataType)
+      if !self.field.isEmpty {
+        try container.encode(self.field, forKey: .field)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.dataType != DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

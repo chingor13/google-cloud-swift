@@ -195,13 +195,21 @@ public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.executeNow, forKey: .executeNow)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.executeNow {
+      try container.encode(self.executeNow, forKey: .executeNow)
+    }
     try container.encodeIfPresent(self.executionTime, forKey: .executionTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != Event.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
 
     if let choice = self.task {
@@ -283,7 +291,9 @@ public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputKey, forKey: .inputKey)
+      if !self.inputKey.isEmpty {
+        try container.encode(self.inputKey, forKey: .inputKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -452,7 +462,9 @@ public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.duration, forKey: .duration)
-      try container.encode(self.asset, forKey: .asset)
+      if !self.asset.isEmpty {
+        try container.encode(self.asset, forKey: .asset)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -754,7 +766,9 @@ public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.encryptions, forKey: .encryptions)
+      if !self.encryptions.isEmpty {
+        try container.encode(self.encryptions, forKey: .encryptions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

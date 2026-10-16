@@ -118,8 +118,12 @@ public struct JobConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dryRun, forKey: .dryRun)
-    try container.encode(self.labels, forKey: .labels)
+    if self.dryRun {
+      try container.encode(self.dryRun, forKey: .dryRun)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.configuration {
       switch choice {
@@ -257,16 +261,28 @@ public struct JobConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.query, forKey: .query)
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
       try container.encodeIfPresent(self.destinationTable, forKey: .destinationTable)
-      try container.encode(self.createDisposition, forKey: .createDisposition)
-      try container.encode(self.writeDisposition, forKey: .writeDisposition)
+      if !self.createDisposition.isEmpty {
+        try container.encode(self.createDisposition, forKey: .createDisposition)
+      }
+      if !self.writeDisposition.isEmpty {
+        try container.encode(self.writeDisposition, forKey: .writeDisposition)
+      }
       try container.encodeIfPresent(self.defaultDataset, forKey: .defaultDataset)
-      try container.encode(self.tableDefinitions, forKey: .tableDefinitions)
-      try container.encode(self.queryPriority, forKey: .queryPriority)
+      if !self.tableDefinitions.isEmpty {
+        try container.encode(self.tableDefinitions, forKey: .tableDefinitions)
+      }
+      if !self.queryPriority.isEmpty {
+        try container.encode(self.queryPriority, forKey: .queryPriority)
+      }
       try container.encodeIfPresent(
         self.destinationTableEncryption, forKey: .destinationTableEncryption)
-      try container.encode(self.statementType, forKey: .statementType)
+      if !self.statementType.isEmpty {
+        try container.encode(self.statementType, forKey: .statementType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -389,11 +405,19 @@ public struct JobConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceUris, forKey: .sourceUris)
-      try container.encode(self.schemaJson, forKey: .schemaJson)
+      if !self.sourceUris.isEmpty {
+        try container.encode(self.sourceUris, forKey: .sourceUris)
+      }
+      if !self.schemaJson.isEmpty {
+        try container.encode(self.schemaJson, forKey: .schemaJson)
+      }
       try container.encodeIfPresent(self.destinationTable, forKey: .destinationTable)
-      try container.encode(self.createDisposition, forKey: .createDisposition)
-      try container.encode(self.writeDisposition, forKey: .writeDisposition)
+      if !self.createDisposition.isEmpty {
+        try container.encode(self.createDisposition, forKey: .createDisposition)
+      }
+      if !self.writeDisposition.isEmpty {
+        try container.encode(self.writeDisposition, forKey: .writeDisposition)
+      }
       try container.encodeIfPresent(
         self.destinationTableEncryption, forKey: .destinationTableEncryption)
       for (key, value) in self._unknownFields.json {
@@ -482,7 +506,9 @@ public struct JobConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destinationUris, forKey: .destinationUris)
+      if !self.destinationUris.isEmpty {
+        try container.encode(self.destinationUris, forKey: .destinationUris)
+      }
       try container.encodeIfPresent(self.sourceTable, forKey: .sourceTable)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -596,10 +622,16 @@ public struct JobConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceTables, forKey: .sourceTables)
+      if !self.sourceTables.isEmpty {
+        try container.encode(self.sourceTables, forKey: .sourceTables)
+      }
       try container.encodeIfPresent(self.destinationTable, forKey: .destinationTable)
-      try container.encode(self.createDisposition, forKey: .createDisposition)
-      try container.encode(self.writeDisposition, forKey: .writeDisposition)
+      if !self.createDisposition.isEmpty {
+        try container.encode(self.createDisposition, forKey: .createDisposition)
+      }
+      if !self.writeDisposition.isEmpty {
+        try container.encode(self.writeDisposition, forKey: .writeDisposition)
+      }
       try container.encodeIfPresent(
         self.destinationTableEncryption, forKey: .destinationTableEncryption)
       for (key, value) in self._unknownFields.json {

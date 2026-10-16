@@ -104,7 +104,9 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(
       self.lowLatencyJourneySynthesis, forKey: .lowLatencyJourneySynthesis)
-    try container.encode(self.relaxSafetyFilters, forKey: .relaxSafetyFilters)
+    if self.relaxSafetyFilters {
+      try container.encode(self.relaxSafetyFilters, forKey: .relaxSafetyFilters)
+    }
     try container.encodeIfPresent(self.safetySettings, forKey: .safetySettings)
     try container.encodeIfPresent(self.enableTextnorm, forKey: .enableTextnorm)
     for (key, value) in self._unknownFields.json {
@@ -177,8 +179,12 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.category, forKey: .category)
-      try container.encode(self.threshold, forKey: .threshold)
+      if self.category != AdvancedVoiceOptions.HarmCategory() {
+        try container.encode(self.category, forKey: .category)
+      }
+      if self.threshold != AdvancedVoiceOptions.HarmBlockThreshold() {
+        try container.encode(self.threshold, forKey: .threshold)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -260,7 +266,9 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.settings, forKey: .settings)
+      if !self.settings.isEmpty {
+        try container.encode(self.settings, forKey: .settings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

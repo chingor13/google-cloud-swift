@@ -104,11 +104,19 @@ public struct NetworkUtilization: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.targetSentBytesPerSecond, forKey: .targetSentBytesPerSecond)
-    try container.encode(self.targetSentPacketsPerSecond, forKey: .targetSentPacketsPerSecond)
-    try container.encode(self.targetReceivedBytesPerSecond, forKey: .targetReceivedBytesPerSecond)
-    try container.encode(
-      self.targetReceivedPacketsPerSecond, forKey: .targetReceivedPacketsPerSecond)
+    if self.targetSentBytesPerSecond != 0 {
+      try container.encode(self.targetSentBytesPerSecond, forKey: .targetSentBytesPerSecond)
+    }
+    if self.targetSentPacketsPerSecond != 0 {
+      try container.encode(self.targetSentPacketsPerSecond, forKey: .targetSentPacketsPerSecond)
+    }
+    if self.targetReceivedBytesPerSecond != 0 {
+      try container.encode(self.targetReceivedBytesPerSecond, forKey: .targetReceivedBytesPerSecond)
+    }
+    if self.targetReceivedPacketsPerSecond != 0 {
+      try container.encode(
+        self.targetReceivedPacketsPerSecond, forKey: .targetReceivedPacketsPerSecond)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

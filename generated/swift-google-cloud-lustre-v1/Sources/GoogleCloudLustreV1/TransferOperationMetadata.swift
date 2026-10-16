@@ -140,8 +140,12 @@ public struct TransferOperationMetadata: Codable, Equatable, GoogleWKT._AnyPacka
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.counters, forKey: .counters)
-    try container.encode(self.transferType, forKey: .transferType)
-    try container.encode(self.errorSummaries, forKey: .errorSummaries)
+    if self.transferType != TransferType() {
+      try container.encode(self.transferType, forKey: .transferType)
+    }
+    if !self.errorSummaries.isEmpty {
+      try container.encode(self.errorSummaries, forKey: .errorSummaries)
+    }
 
     if let choice = self.source {
       switch choice {

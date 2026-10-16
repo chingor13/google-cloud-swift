@@ -218,17 +218,33 @@ public struct DataScanEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataSource, forKey: .dataSource)
-    try container.encode(self.jobId, forKey: .jobId)
+    if !self.dataSource.isEmpty {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.specVersion, forKey: .specVersion)
-    try container.encode(self.trigger, forKey: .trigger)
-    try container.encode(self.scope, forKey: .scope)
+    if self.type != DataScanEvent.ScanType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.state != DataScanEvent.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.specVersion.isEmpty {
+      try container.encode(self.specVersion, forKey: .specVersion)
+    }
+    if self.trigger != DataScanEvent.Trigger() {
+      try container.encode(self.trigger, forKey: .trigger)
+    }
+    if self.scope != DataScanEvent.Scope() {
+      try container.encode(self.scope, forKey: .scope)
+    }
     try container.encodeIfPresent(self.postScanActionsResult, forKey: .postScanActionsResult)
     try container.encodeIfPresent(self.catalogPublishingStatus, forKey: .catalogPublishingStatus)
 
@@ -306,7 +322,9 @@ public struct DataScanEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rowCount, forKey: .rowCount)
+      if self.rowCount != 0 {
+        try container.encode(self.rowCount, forKey: .rowCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -448,12 +466,24 @@ public struct DataScanEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rowCount, forKey: .rowCount)
-      try container.encode(self.passed, forKey: .passed)
-      try container.encode(self.dimensionPassed, forKey: .dimensionPassed)
-      try container.encode(self.score, forKey: .score)
-      try container.encode(self.dimensionScore, forKey: .dimensionScore)
-      try container.encode(self.columnScore, forKey: .columnScore)
+      if self.rowCount != 0 {
+        try container.encode(self.rowCount, forKey: .rowCount)
+      }
+      if self.passed {
+        try container.encode(self.passed, forKey: .passed)
+      }
+      if !self.dimensionPassed.isEmpty {
+        try container.encode(self.dimensionPassed, forKey: .dimensionPassed)
+      }
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
+      if !self.dimensionScore.isEmpty {
+        try container.encode(self.dimensionScore, forKey: .dimensionScore)
+      }
+      if !self.columnScore.isEmpty {
+        try container.encode(self.columnScore, forKey: .columnScore)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -553,9 +583,15 @@ public struct DataScanEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.samplingPercent, forKey: .samplingPercent)
-      try container.encode(self.rowFilterApplied, forKey: .rowFilterApplied)
-      try container.encode(self.columnFilterApplied, forKey: .columnFilterApplied)
+      if self.samplingPercent != 0 {
+        try container.encode(self.samplingPercent, forKey: .samplingPercent)
+      }
+      if self.rowFilterApplied {
+        try container.encode(self.rowFilterApplied, forKey: .rowFilterApplied)
+      }
+      if self.columnFilterApplied {
+        try container.encode(self.columnFilterApplied, forKey: .columnFilterApplied)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -646,8 +682,12 @@ public struct DataScanEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.samplingPercent, forKey: .samplingPercent)
-      try container.encode(self.rowFilterApplied, forKey: .rowFilterApplied)
+      if self.samplingPercent != 0 {
+        try container.encode(self.samplingPercent, forKey: .samplingPercent)
+      }
+      if self.rowFilterApplied {
+        try container.encode(self.rowFilterApplied, forKey: .rowFilterApplied)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -796,8 +836,12 @@ public struct DataScanEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.message, forKey: .message)
+        if self.state != DataScanEvent.PostScanActionsResult.BigQueryExportResult.State() {
+          try container.encode(self.state, forKey: .state)
+        }
+        if !self.message.isEmpty {
+          try container.encode(self.message, forKey: .message)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

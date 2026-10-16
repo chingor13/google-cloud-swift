@@ -182,10 +182,14 @@ public struct ManagedZone: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.forwardingConfig, forKey: .forwardingConfig)
     try container.encodeIfPresent(self.id, forKey: .id)
     try container.encodeIfPresent(self.kind, forKey: .kind)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.name, forKey: .name)
     try container.encodeIfPresent(self.nameServerSet, forKey: .nameServerSet)
-    try container.encode(self.nameServers, forKey: .nameServers)
+    if !self.nameServers.isEmpty {
+      try container.encode(self.nameServers, forKey: .nameServers)
+    }
     try container.encodeIfPresent(self.peeringConfig, forKey: .peeringConfig)
     try container.encodeIfPresent(self.privateVisibilityConfig, forKey: .privateVisibilityConfig)
     try container.encodeIfPresent(self.reverseLookupConfig, forKey: .reverseLookupConfig)

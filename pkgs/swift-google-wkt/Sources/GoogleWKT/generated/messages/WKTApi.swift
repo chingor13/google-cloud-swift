@@ -146,13 +146,25 @@ public struct WKTApi: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.methods, forKey: .methods)
-    try container.encode(self.options, forKey: .options)
-    try container.encode(self.version, forKey: .version)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.methods.isEmpty {
+      try container.encode(self.methods, forKey: .methods)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.sourceContext, forKey: .sourceContext)
-    try container.encode(self.mixins, forKey: .mixins)
-    try container.encode(self.syntax, forKey: .syntax)
+    if !self.mixins.isEmpty {
+      try container.encode(self.mixins, forKey: .mixins)
+    }
+    if self.syntax != WKTSyntax() {
+      try container.encode(self.syntax, forKey: .syntax)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -163,17 +163,37 @@ public struct FrameworkComplianceSummary: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.framework, forKey: .framework)
+    if !self.framework.isEmpty {
+      try container.encode(self.framework, forKey: .framework)
+    }
     try container.encodeIfPresent(self.controlAssessmentDetails, forKey: .controlAssessmentDetails)
-    try container.encode(self.frameworkType, forKey: .frameworkType)
-    try container.encode(self.supportedCloudProviders, forKey: .supportedCloudProviders)
-    try container.encode(self.frameworkCategories, forKey: .frameworkCategories)
-    try container.encode(self.frameworkDisplayName, forKey: .frameworkDisplayName)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
-    try container.encode(self.minorRevisionId, forKey: .minorRevisionId)
-    try container.encode(self.targetResourceDetails, forKey: .targetResourceDetails)
-    try container.encode(self.findingCount, forKey: .findingCount)
+    if self.frameworkType != Framework.FrameworkType() {
+      try container.encode(self.frameworkType, forKey: .frameworkType)
+    }
+    if !self.supportedCloudProviders.isEmpty {
+      try container.encode(self.supportedCloudProviders, forKey: .supportedCloudProviders)
+    }
+    if !self.frameworkCategories.isEmpty {
+      try container.encode(self.frameworkCategories, forKey: .frameworkCategories)
+    }
+    if !self.frameworkDisplayName.isEmpty {
+      try container.encode(self.frameworkDisplayName, forKey: .frameworkDisplayName)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.majorRevisionId != 0 {
+      try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    }
+    if self.minorRevisionId != 0 {
+      try container.encode(self.minorRevisionId, forKey: .minorRevisionId)
+    }
+    if !self.targetResourceDetails.isEmpty {
+      try container.encode(self.targetResourceDetails, forKey: .targetResourceDetails)
+    }
+    if self.findingCount != 0 {
+      try container.encode(self.findingCount, forKey: .findingCount)
+    }
     try container.encodeIfPresent(self.controlsPassingTrend, forKey: .controlsPassingTrend)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

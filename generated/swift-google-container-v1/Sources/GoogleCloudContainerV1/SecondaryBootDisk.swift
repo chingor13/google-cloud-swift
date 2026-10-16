@@ -78,8 +78,12 @@ public struct SecondaryBootDisk: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.diskImage, forKey: .diskImage)
+    if self.mode != SecondaryBootDisk.Mode() {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if !self.diskImage.isEmpty {
+      try container.encode(self.diskImage, forKey: .diskImage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

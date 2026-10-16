@@ -72,7 +72,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.channels, forKey: .channels)
+      if !self.channels.isEmpty {
+        try container.encode(self.channels, forKey: .channels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -142,7 +144,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.channels, forKey: .channels)
+        if !self.channels.isEmpty {
+          try container.encode(self.channels, forKey: .channels)
+        }
         try container.encodeIfPresent(self.apiKeyConfig, forKey: .apiKeyConfig)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -215,7 +219,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.channelId, forKey: .channelId)
+          if !self.channelId.isEmpty {
+            try container.encode(self.channelId, forKey: .channelId)
+          }
           try container.encodeIfPresent(self.startTime, forKey: .startTime)
           try container.encodeIfPresent(self.endTime, forKey: .endTime)
           for (key, value) in self._unknownFields.json {

@@ -93,7 +93,9 @@ public struct SchemaConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.compatibility, forKey: .compatibility)
     try container.encodeIfPresent(self.normalize, forKey: .normalize)
-    try container.encode(self.alias, forKey: .alias)
+    if !self.alias.isEmpty {
+      try container.encode(self.alias, forKey: .alias)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

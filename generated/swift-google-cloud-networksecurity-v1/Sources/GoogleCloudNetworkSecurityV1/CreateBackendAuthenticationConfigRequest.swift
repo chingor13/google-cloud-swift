@@ -91,8 +91,13 @@ public struct CreateBackendAuthenticationConfigRequest: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.backendAuthenticationConfigId, forKey: .backendAuthenticationConfigId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.backendAuthenticationConfigId.isEmpty {
+      try container.encode(
+        self.backendAuthenticationConfigId, forKey: .backendAuthenticationConfigId)
+    }
     try container.encodeIfPresent(
       self.backendAuthenticationConfig, forKey: .backendAuthenticationConfig)
     for (key, value) in self._unknownFields.json {

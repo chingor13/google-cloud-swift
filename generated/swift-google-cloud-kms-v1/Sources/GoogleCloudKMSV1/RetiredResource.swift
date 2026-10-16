@@ -106,9 +106,15 @@ public struct RetiredResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.originalResource, forKey: .originalResource)
-    try container.encode(self.resourceType, forKey: .resourceType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.originalResource.isEmpty {
+      try container.encode(self.originalResource, forKey: .originalResource)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

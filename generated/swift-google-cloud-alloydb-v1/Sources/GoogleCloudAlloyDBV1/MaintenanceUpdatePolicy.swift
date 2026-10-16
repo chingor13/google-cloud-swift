@@ -82,8 +82,12 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maintenanceWindows, forKey: .maintenanceWindows)
-    try container.encode(self.denyMaintenancePeriods, forKey: .denyMaintenancePeriods)
+    if !self.maintenanceWindows.isEmpty {
+      try container.encode(self.maintenanceWindows, forKey: .maintenanceWindows)
+    }
+    if !self.denyMaintenancePeriods.isEmpty {
+      try container.encode(self.denyMaintenancePeriods, forKey: .denyMaintenancePeriods)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -148,7 +152,9 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.day, forKey: .day)
+      if self.day != GoogleType.DayOfWeek() {
+        try container.encode(self.day, forKey: .day)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

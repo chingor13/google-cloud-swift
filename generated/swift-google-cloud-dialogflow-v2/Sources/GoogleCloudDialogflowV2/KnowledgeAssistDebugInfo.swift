@@ -136,10 +136,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryGenerationFailureReason, forKey: .queryGenerationFailureReason)
-      try container.encode(
-        self.queryCategorizationFailureReason, forKey: .queryCategorizationFailureReason)
-      try container.encode(self.datastoreResponseReason, forKey: .datastoreResponseReason)
+      if self.queryGenerationFailureReason
+        != KnowledgeAssistDebugInfo.QueryGenerationFailureReason()
+      {
+        try container.encode(
+          self.queryGenerationFailureReason, forKey: .queryGenerationFailureReason)
+      }
+      if self.queryCategorizationFailureReason
+        != KnowledgeAssistDebugInfo.QueryCategorizationFailureReason()
+      {
+        try container.encode(
+          self.queryCategorizationFailureReason, forKey: .queryCategorizationFailureReason)
+      }
+      if self.datastoreResponseReason != DatastoreResponseReason() {
+        try container.encode(self.datastoreResponseReason, forKey: .datastoreResponseReason)
+      }
       try container.encodeIfPresent(self.knowledgeAssistBehavior, forKey: .knowledgeAssistBehavior)
       try container.encodeIfPresent(
         self.ingestedContextReferenceDebugInfo, forKey: .ingestedContextReferenceDebugInfo)
@@ -377,30 +388,66 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.answerGenerationRewriterOn, forKey: .answerGenerationRewriterOn)
-        try container.encode(self.endUserMetadataIncluded, forKey: .endUserMetadataIncluded)
-        try container.encode(self.returnQueryOnly, forKey: .returnQueryOnly)
-        try container.encode(self.usePubsubDelivery, forKey: .usePubsubDelivery)
-        try container.encode(self.disableSyncDelivery, forKey: .disableSyncDelivery)
-        try container.encode(self.previousQueriesIncluded, forKey: .previousQueriesIncluded)
-        try container.encode(self.useTranslatedMessage, forKey: .useTranslatedMessage)
-        try container.encode(self.useCustomSafetyFilterLevel, forKey: .useCustomSafetyFilterLevel)
-        try container.encode(
-          self.conversationTranscriptHasMixedLanguages,
-          forKey: .conversationTranscriptHasMixedLanguages)
-        try container.encode(
-          self.queryGenerationAgentLanguageMismatch, forKey: .queryGenerationAgentLanguageMismatch)
-        try container.encode(
-          self.queryGenerationEndUserLanguageMismatch,
-          forKey: .queryGenerationEndUserLanguageMismatch)
-        try container.encode(self.thirdPartyConnectorAllowed, forKey: .thirdPartyConnectorAllowed)
-        try container.encode(self.multipleQueriesGenerated, forKey: .multipleQueriesGenerated)
-        try container.encode(self.queryContainedSearchContext, forKey: .queryContainedSearchContext)
-        try container.encode(
-          self.invalidItemsQuerySuggestionSkipped, forKey: .invalidItemsQuerySuggestionSkipped)
-        try container.encode(
-          self.primaryQueryRedactedAndReplaced, forKey: .primaryQueryRedactedAndReplaced)
-        try container.encode(self.appendedSearchContextCount, forKey: .appendedSearchContextCount)
+        if self.answerGenerationRewriterOn {
+          try container.encode(self.answerGenerationRewriterOn, forKey: .answerGenerationRewriterOn)
+        }
+        if self.endUserMetadataIncluded {
+          try container.encode(self.endUserMetadataIncluded, forKey: .endUserMetadataIncluded)
+        }
+        if self.returnQueryOnly {
+          try container.encode(self.returnQueryOnly, forKey: .returnQueryOnly)
+        }
+        if self.usePubsubDelivery {
+          try container.encode(self.usePubsubDelivery, forKey: .usePubsubDelivery)
+        }
+        if self.disableSyncDelivery {
+          try container.encode(self.disableSyncDelivery, forKey: .disableSyncDelivery)
+        }
+        if self.previousQueriesIncluded {
+          try container.encode(self.previousQueriesIncluded, forKey: .previousQueriesIncluded)
+        }
+        if self.useTranslatedMessage {
+          try container.encode(self.useTranslatedMessage, forKey: .useTranslatedMessage)
+        }
+        if self.useCustomSafetyFilterLevel {
+          try container.encode(self.useCustomSafetyFilterLevel, forKey: .useCustomSafetyFilterLevel)
+        }
+        if self.conversationTranscriptHasMixedLanguages {
+          try container.encode(
+            self.conversationTranscriptHasMixedLanguages,
+            forKey: .conversationTranscriptHasMixedLanguages)
+        }
+        if self.queryGenerationAgentLanguageMismatch {
+          try container.encode(
+            self.queryGenerationAgentLanguageMismatch, forKey: .queryGenerationAgentLanguageMismatch
+          )
+        }
+        if self.queryGenerationEndUserLanguageMismatch {
+          try container.encode(
+            self.queryGenerationEndUserLanguageMismatch,
+            forKey: .queryGenerationEndUserLanguageMismatch)
+        }
+        if self.thirdPartyConnectorAllowed {
+          try container.encode(self.thirdPartyConnectorAllowed, forKey: .thirdPartyConnectorAllowed)
+        }
+        if self.multipleQueriesGenerated {
+          try container.encode(self.multipleQueriesGenerated, forKey: .multipleQueriesGenerated)
+        }
+        if self.queryContainedSearchContext {
+          try container.encode(
+            self.queryContainedSearchContext, forKey: .queryContainedSearchContext)
+        }
+        if self.invalidItemsQuerySuggestionSkipped {
+          try container.encode(
+            self.invalidItemsQuerySuggestionSkipped, forKey: .invalidItemsQuerySuggestionSkipped)
+        }
+        if self.primaryQueryRedactedAndReplaced {
+          try container.encode(
+            self.primaryQueryRedactedAndReplaced, forKey: .primaryQueryRedactedAndReplaced)
+        }
+        if self.appendedSearchContextCount != 0 {
+          try container.encode(self.appendedSearchContextCount, forKey: .appendedSearchContextCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -540,14 +587,28 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.promptTokenCount, forKey: .promptTokenCount)
-        try container.encode(self.candidatesTokenCount, forKey: .candidatesTokenCount)
-        try container.encode(self.totalTokenCount, forKey: .totalTokenCount)
-        try container.encode(self.thinkingLevel, forKey: .thinkingLevel)
-        try container.encode(self.thinkingBudgetTokens, forKey: .thinkingBudgetTokens)
-        try container.encode(self.similarityToLastQuery, forKey: .similarityToLastQuery)
-        try container.encode(
-          self.similarityToLastQueryThreshold, forKey: .similarityToLastQueryThreshold)
+        if self.promptTokenCount != 0 {
+          try container.encode(self.promptTokenCount, forKey: .promptTokenCount)
+        }
+        if self.candidatesTokenCount != 0 {
+          try container.encode(self.candidatesTokenCount, forKey: .candidatesTokenCount)
+        }
+        if self.totalTokenCount != 0 {
+          try container.encode(self.totalTokenCount, forKey: .totalTokenCount)
+        }
+        if !self.thinkingLevel.isEmpty {
+          try container.encode(self.thinkingLevel, forKey: .thinkingLevel)
+        }
+        if self.thinkingBudgetTokens != 0 {
+          try container.encode(self.thinkingBudgetTokens, forKey: .thinkingBudgetTokens)
+        }
+        if self.similarityToLastQuery != 0 {
+          try container.encode(self.similarityToLastQuery, forKey: .similarityToLastQuery)
+        }
+        if self.similarityToLastQueryThreshold != 0 {
+          try container.encode(
+            self.similarityToLastQueryThreshold, forKey: .similarityToLastQueryThreshold)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

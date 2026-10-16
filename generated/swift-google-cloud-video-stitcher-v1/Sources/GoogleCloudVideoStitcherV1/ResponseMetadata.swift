@@ -105,12 +105,20 @@ public struct ResponseMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.error, forKey: .error)
+    if !self.error.isEmpty {
+      try container.encode(self.error, forKey: .error)
+    }
     try container.encodeIfPresent(self.headers, forKey: .headers)
-    try container.encode(self.statusCode, forKey: .statusCode)
-    try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    if !self.statusCode.isEmpty {
+      try container.encode(self.statusCode, forKey: .statusCode)
+    }
+    if self.sizeBytes != 0 {
+      try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    }
     try container.encodeIfPresent(self.duration, forKey: .duration)
-    try container.encode(self.body, forKey: .body)
+    if !self.body.isEmpty {
+      try container.encode(self.body, forKey: .body)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

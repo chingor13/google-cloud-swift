@@ -263,7 +263,9 @@ public struct Replication: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.replicas, forKey: .replicas)
+      if !self.replicas.isEmpty {
+        try container.encode(self.replicas, forKey: .replicas)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -344,7 +346,9 @@ public struct Replication: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.location, forKey: .location)
+        if !self.location.isEmpty {
+          try container.encode(self.location, forKey: .location)
+        }
         try container.encodeIfPresent(
           self.customerManagedEncryption, forKey: .customerManagedEncryption)
         for (key, value) in self._unknownFields.json {

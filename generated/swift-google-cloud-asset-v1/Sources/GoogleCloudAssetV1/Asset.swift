@@ -225,15 +225,23 @@ public struct Asset: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.assetType, forKey: .assetType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.assetType.isEmpty {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
     try container.encodeIfPresent(self.iamPolicy, forKey: .iamPolicy)
-    try container.encode(self.orgPolicy, forKey: .orgPolicy)
+    if !self.orgPolicy.isEmpty {
+      try container.encode(self.orgPolicy, forKey: .orgPolicy)
+    }
     try container.encodeIfPresent(self.osInventory, forKey: .osInventory)
     try container.encodeIfPresent(self.relatedAssets, forKey: .relatedAssets)
     try container.encodeIfPresent(self.relatedAsset, forKey: .relatedAsset)
-    try container.encode(self.ancestors, forKey: .ancestors)
+    if !self.ancestors.isEmpty {
+      try container.encode(self.ancestors, forKey: .ancestors)
+    }
 
     if let choice = self.accessContextPolicy {
       switch choice {

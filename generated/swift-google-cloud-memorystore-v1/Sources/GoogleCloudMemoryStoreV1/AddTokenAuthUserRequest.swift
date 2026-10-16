@@ -78,8 +78,12 @@ public struct AddTokenAuthUserRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.tokenAuthUser, forKey: .tokenAuthUser)
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.tokenAuthUser.isEmpty {
+      try container.encode(self.tokenAuthUser, forKey: .tokenAuthUser)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

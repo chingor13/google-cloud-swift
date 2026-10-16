@@ -386,33 +386,73 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.manual, forKey: .manual)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.deleteLockDays, forKey: .deleteLockDays)
+    if self.manual {
+      try container.encode(self.manual, forKey: .manual)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.deleteLockDays != 0 {
+      try container.encode(self.deleteLockDays, forKey: .deleteLockDays)
+    }
     try container.encodeIfPresent(self.deleteLockExpireTime, forKey: .deleteLockExpireTime)
-    try container.encode(self.retainDays, forKey: .retainDays)
+    if self.retainDays != 0 {
+      try container.encode(self.retainDays, forKey: .retainDays)
+    }
     try container.encodeIfPresent(self.retainExpireTime, forKey: .retainExpireTime)
     try container.encodeIfPresent(self.encryptionKey, forKey: .encryptionKey)
-    try container.encode(self.containsVolumeData, forKey: .containsVolumeData)
-    try container.encode(self.containsSecrets, forKey: .containsSecrets)
+    if self.containsVolumeData {
+      try container.encode(self.containsVolumeData, forKey: .containsVolumeData)
+    }
+    if self.containsSecrets {
+      try container.encode(self.containsSecrets, forKey: .containsSecrets)
+    }
     try container.encodeIfPresent(self.clusterMetadata, forKey: .clusterMetadata)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateReason, forKey: .stateReason)
+    if self.state != Backup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateReason.isEmpty {
+      try container.encode(self.stateReason, forKey: .stateReason)
+    }
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
-    try container.encode(self.resourceCount, forKey: .resourceCount)
-    try container.encode(self.volumeCount, forKey: .volumeCount)
-    try container.encode(self.sizeBytes, forKey: .sizeBytes)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.podCount, forKey: .podCount)
-    try container.encode(self.configBackupSizeBytes, forKey: .configBackupSizeBytes)
-    try container.encode(self.permissiveMode, forKey: .permissiveMode)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    if self.resourceCount != 0 {
+      try container.encode(self.resourceCount, forKey: .resourceCount)
+    }
+    if self.volumeCount != 0 {
+      try container.encode(self.volumeCount, forKey: .volumeCount)
+    }
+    if self.sizeBytes != 0 {
+      try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.podCount != 0 {
+      try container.encode(self.podCount, forKey: .podCount)
+    }
+    if self.configBackupSizeBytes != 0 {
+      try container.encode(self.configBackupSizeBytes, forKey: .configBackupSizeBytes)
+    }
+    if self.permissiveMode {
+      try container.encode(self.permissiveMode, forKey: .permissiveMode)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
 
     if let choice = self.backupScope {
       switch choice {
@@ -536,9 +576,15 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cluster, forKey: .cluster)
-      try container.encode(self.k8SVersion, forKey: .k8SVersion)
-      try container.encode(self.backupCrdVersions, forKey: .backupCrdVersions)
+      if !self.cluster.isEmpty {
+        try container.encode(self.cluster, forKey: .cluster)
+      }
+      if !self.k8SVersion.isEmpty {
+        try container.encode(self.k8SVersion, forKey: .k8SVersion)
+      }
+      if !self.backupCrdVersions.isEmpty {
+        try container.encode(self.backupCrdVersions, forKey: .backupCrdVersions)
+      }
 
       if let choice = self.platformVersion {
         switch choice {

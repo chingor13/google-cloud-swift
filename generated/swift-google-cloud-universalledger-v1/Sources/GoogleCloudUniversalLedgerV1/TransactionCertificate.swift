@@ -117,13 +117,24 @@ public struct TransactionCertificate: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.transactionDigestHex, forKey: .transactionDigestHex)
-    try container.encode(self.roundId, forKey: .roundId)
+    if !self.transactionDigestHex.isEmpty {
+      try container.encode(self.transactionDigestHex, forKey: .transactionDigestHex)
+    }
+    if self.roundId != 0 {
+      try container.encode(self.roundId, forKey: .roundId)
+    }
     try container.encodeIfPresent(self.transactionEffects, forKey: .transactionEffects)
-    try container.encode(self.events, forKey: .events)
-    try container.encode(
-      self.transactionEffectsStateChecksumHex, forKey: .transactionEffectsStateChecksumHex)
-    try container.encode(self.certificationResultsDigestHex, forKey: .certificationResultsDigestHex)
+    if !self.events.isEmpty {
+      try container.encode(self.events, forKey: .events)
+    }
+    if !self.transactionEffectsStateChecksumHex.isEmpty {
+      try container.encode(
+        self.transactionEffectsStateChecksumHex, forKey: .transactionEffectsStateChecksumHex)
+    }
+    if !self.certificationResultsDigestHex.isEmpty {
+      try container.encode(
+        self.certificationResultsDigestHex, forKey: .certificationResultsDigestHex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

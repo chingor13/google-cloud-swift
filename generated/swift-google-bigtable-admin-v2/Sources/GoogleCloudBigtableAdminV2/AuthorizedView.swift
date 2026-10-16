@@ -115,9 +115,15 @@ public struct AuthorizedView: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.deletionProtection, forKey: .deletionProtection)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.deletionProtection {
+      try container.encode(self.deletionProtection, forKey: .deletionProtection)
+    }
 
     if let choice = self.authorizedView {
       switch choice {
@@ -196,8 +202,12 @@ public struct AuthorizedView: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.qualifiers, forKey: .qualifiers)
-      try container.encode(self.qualifierPrefixes, forKey: .qualifierPrefixes)
+      if !self.qualifiers.isEmpty {
+        try container.encode(self.qualifiers, forKey: .qualifiers)
+      }
+      if !self.qualifierPrefixes.isEmpty {
+        try container.encode(self.qualifierPrefixes, forKey: .qualifierPrefixes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -289,8 +299,12 @@ public struct AuthorizedView: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rowPrefixes, forKey: .rowPrefixes)
-      try container.encode(self.familySubsets, forKey: .familySubsets)
+      if !self.rowPrefixes.isEmpty {
+        try container.encode(self.rowPrefixes, forKey: .rowPrefixes)
+      }
+      if !self.familySubsets.isEmpty {
+        try container.encode(self.familySubsets, forKey: .familySubsets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -143,12 +143,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.actions, forKey: .actions)
+      if !self.actions.isEmpty {
+        try container.encode(self.actions, forKey: .actions)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
       try container.encodeIfPresent(self.inputParameters, forKey: .inputParameters)
       try container.encodeIfPresent(self.outputParameters, forKey: .outputParameters)
-      try container.encode(self.endState, forKey: .endState)
+      if self.endState != OutputState() {
+        try container.encode(self.endState, forKey: .endState)
+      }
 
       if let choice = self.traceMetadata {
         switch choice {

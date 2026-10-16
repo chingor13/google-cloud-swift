@@ -163,18 +163,36 @@ public struct GitRepositoryLink: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.cloneUri, forKey: .cloneUri)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.cloneUri.isEmpty {
+      try container.encode(self.cloneUri, forKey: .cloneUri)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.webhookId, forKey: .webhookId)
-    try container.encode(self.gitProxyUri, forKey: .gitProxyUri)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.webhookId.isEmpty {
+      try container.encode(self.webhookId, forKey: .webhookId)
+    }
+    if !self.gitProxyUri.isEmpty {
+      try container.encode(self.gitProxyUri, forKey: .gitProxyUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

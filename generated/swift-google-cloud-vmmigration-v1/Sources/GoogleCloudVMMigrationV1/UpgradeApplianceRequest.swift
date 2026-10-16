@@ -89,8 +89,12 @@ public struct UpgradeApplianceRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.datacenterConnector, forKey: .datacenterConnector)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.datacenterConnector.isEmpty {
+      try container.encode(self.datacenterConnector, forKey: .datacenterConnector)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

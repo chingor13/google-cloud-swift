@@ -112,12 +112,24 @@ public struct GcpMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.projectDisplayName, forKey: .projectDisplayName)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.parentDisplayName, forKey: .parentDisplayName)
-    try container.encode(self.folders, forKey: .folders)
-    try container.encode(self.organization, forKey: .organization)
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.projectDisplayName.isEmpty {
+      try container.encode(self.projectDisplayName, forKey: .projectDisplayName)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.parentDisplayName.isEmpty {
+      try container.encode(self.parentDisplayName, forKey: .parentDisplayName)
+    }
+    if !self.folders.isEmpty {
+      try container.encode(self.folders, forKey: .folders)
+    }
+    if !self.organization.isEmpty {
+      try container.encode(self.organization, forKey: .organization)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

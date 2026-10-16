@@ -181,18 +181,30 @@ public struct Registration: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.domainName, forKey: .domainName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.domainName.isEmpty {
+      try container.encode(self.domainName, forKey: .domainName)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.issues, forKey: .issues)
-    try container.encode(self.labels, forKey: .labels)
+    if self.state != Registration.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.issues.isEmpty {
+      try container.encode(self.issues, forKey: .issues)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.managementSettings, forKey: .managementSettings)
     try container.encodeIfPresent(self.dnsSettings, forKey: .dnsSettings)
     try container.encodeIfPresent(self.contactSettings, forKey: .contactSettings)
     try container.encodeIfPresent(self.pendingContactSettings, forKey: .pendingContactSettings)
-    try container.encode(self.supportedPrivacy, forKey: .supportedPrivacy)
+    if !self.supportedPrivacy.isEmpty {
+      try container.encode(self.supportedPrivacy, forKey: .supportedPrivacy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -121,11 +121,21 @@ public struct Partner: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.skus, forKey: .skus)
-    try container.encode(self.ekmSolutions, forKey: .ekmSolutions)
-    try container.encode(self.operatedCloudRegions, forKey: .operatedCloudRegions)
-    try container.encode(self.partnerProjectId, forKey: .partnerProjectId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.skus.isEmpty {
+      try container.encode(self.skus, forKey: .skus)
+    }
+    if !self.ekmSolutions.isEmpty {
+      try container.encode(self.ekmSolutions, forKey: .ekmSolutions)
+    }
+    if !self.operatedCloudRegions.isEmpty {
+      try container.encode(self.operatedCloudRegions, forKey: .operatedCloudRegions)
+    }
+    if !self.partnerProjectId.isEmpty {
+      try container.encode(self.partnerProjectId, forKey: .partnerProjectId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

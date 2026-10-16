@@ -95,7 +95,9 @@ public struct ExportTrustedKeyWrappedCryptoKeyVersionResponse: Codable, Equatabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.wrappedKey, forKey: .wrappedKey)
+    if !self.wrappedKey.isEmpty {
+      try container.encode(self.wrappedKey, forKey: .wrappedKey)
+    }
     try container.encodeIfPresent(self.wrappedKeyCrc32C, forKey: .wrappedKeyCrc32C)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

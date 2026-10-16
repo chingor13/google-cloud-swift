@@ -86,8 +86,12 @@ public struct OntapSource: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.storagePool, forKey: .storagePool)
-    try container.encode(self.volumeUuid, forKey: .volumeUuid)
-    try container.encode(self.snapshotUuid, forKey: .snapshotUuid)
+    if !self.volumeUuid.isEmpty {
+      try container.encode(self.volumeUuid, forKey: .volumeUuid)
+    }
+    if !self.snapshotUuid.isEmpty {
+      try container.encode(self.snapshotUuid, forKey: .snapshotUuid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

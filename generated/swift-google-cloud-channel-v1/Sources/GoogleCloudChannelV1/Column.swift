@@ -94,9 +94,15 @@ public struct Column: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.columnId, forKey: .columnId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.dataType, forKey: .dataType)
+    if !self.columnId.isEmpty {
+      try container.encode(self.columnId, forKey: .columnId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.dataType != Column.DataType() {
+      try container.encode(self.dataType, forKey: .dataType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

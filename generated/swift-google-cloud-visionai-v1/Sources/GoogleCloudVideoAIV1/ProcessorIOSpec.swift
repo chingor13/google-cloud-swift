@@ -111,12 +111,20 @@ public struct ProcessorIOSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.graphInputChannelSpecs, forKey: .graphInputChannelSpecs)
-    try container.encode(self.graphOutputChannelSpecs, forKey: .graphOutputChannelSpecs)
-    try container.encode(
-      self.instanceResourceInputBindingSpecs, forKey: .instanceResourceInputBindingSpecs)
-    try container.encode(
-      self.instanceResourceOutputBindingSpecs, forKey: .instanceResourceOutputBindingSpecs)
+    if !self.graphInputChannelSpecs.isEmpty {
+      try container.encode(self.graphInputChannelSpecs, forKey: .graphInputChannelSpecs)
+    }
+    if !self.graphOutputChannelSpecs.isEmpty {
+      try container.encode(self.graphOutputChannelSpecs, forKey: .graphOutputChannelSpecs)
+    }
+    if !self.instanceResourceInputBindingSpecs.isEmpty {
+      try container.encode(
+        self.instanceResourceInputBindingSpecs, forKey: .instanceResourceInputBindingSpecs)
+    }
+    if !self.instanceResourceOutputBindingSpecs.isEmpty {
+      try container.encode(
+        self.instanceResourceOutputBindingSpecs, forKey: .instanceResourceOutputBindingSpecs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -219,11 +227,21 @@ public struct ProcessorIOSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.dataType, forKey: .dataType)
-      try container.encode(self.acceptedDataTypeUris, forKey: .acceptedDataTypeUris)
-      try container.encode(self.`required`, forKey: .`required`)
-      try container.encode(self.maxConnectionAllowed, forKey: .maxConnectionAllowed)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.dataType != GoogleCloudVideoAIV1.DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
+      if !self.acceptedDataTypeUris.isEmpty {
+        try container.encode(self.acceptedDataTypeUris, forKey: .acceptedDataTypeUris)
+      }
+      if self.`required` {
+        try container.encode(self.`required`, forKey: .`required`)
+      }
+      if self.maxConnectionAllowed != 0 {
+        try container.encode(self.maxConnectionAllowed, forKey: .maxConnectionAllowed)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -320,9 +338,15 @@ public struct ProcessorIOSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.dataType, forKey: .dataType)
-      try container.encode(self.dataTypeUri, forKey: .dataTypeUri)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.dataType != GoogleCloudVideoAIV1.DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
+      if !self.dataTypeUri.isEmpty {
+        try container.encode(self.dataTypeUri, forKey: .dataTypeUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -433,7 +457,9 @@ public struct ProcessorIOSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
 
       if let choice = self.resourceType {
         switch choice {
@@ -548,9 +574,15 @@ public struct ProcessorIOSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.resourceTypeUri, forKey: .resourceTypeUri)
-      try container.encode(self.explicit, forKey: .explicit)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.resourceTypeUri.isEmpty {
+        try container.encode(self.resourceTypeUri, forKey: .resourceTypeUri)
+      }
+      if self.explicit {
+        try container.encode(self.explicit, forKey: .explicit)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

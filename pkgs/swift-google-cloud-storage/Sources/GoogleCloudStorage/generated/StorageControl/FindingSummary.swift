@@ -121,13 +121,23 @@ public struct FindingSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.targetResource, forKey: .targetResource)
+    if self.type != FindingType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.category != FindingCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.targetResource.isEmpty {
+      try container.encode(self.targetResource, forKey: .targetResource)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.summaryDetails, forKey: .summaryDetails)
+    if self.severity != FindingSeverity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.summaryDetails.isEmpty {
+      try container.encode(self.summaryDetails, forKey: .summaryDetails)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -221,8 +231,12 @@ public struct FindingSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceType, forKey: .resourceType)
-      try container.encode(self.description, forKey: .description)
+      if self.resourceType != FindingSummary.SummaryDetails.ResourceType() {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
 
       if let choice = self.magnitude {
         switch choice {

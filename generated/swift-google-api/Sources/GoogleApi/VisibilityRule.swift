@@ -97,8 +97,12 @@ public struct VisibilityRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
-    try container.encode(self.restriction, forKey: .restriction)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
+    if !self.restriction.isEmpty {
+      try container.encode(self.restriction, forKey: .restriction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

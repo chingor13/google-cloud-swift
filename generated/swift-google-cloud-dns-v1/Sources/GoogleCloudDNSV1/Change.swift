@@ -106,8 +106,12 @@ public struct Change: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.additions, forKey: .additions)
-    try container.encode(self.deletions, forKey: .deletions)
+    if !self.additions.isEmpty {
+      try container.encode(self.additions, forKey: .additions)
+    }
+    if !self.deletions.isEmpty {
+      try container.encode(self.deletions, forKey: .deletions)
+    }
     try container.encodeIfPresent(self.id, forKey: .id)
     try container.encodeIfPresent(self.isServing, forKey: .isServing)
     try container.encodeIfPresent(self.kind, forKey: .kind)

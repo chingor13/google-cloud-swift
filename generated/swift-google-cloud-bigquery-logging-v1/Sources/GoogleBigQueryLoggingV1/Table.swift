@@ -131,7 +131,9 @@ public struct Table: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.tableName, forKey: .tableName)
     try container.encodeIfPresent(self.info, forKey: .info)
-    try container.encode(self.schemaJson, forKey: .schemaJson)
+    if !self.schemaJson.isEmpty {
+      try container.encode(self.schemaJson, forKey: .schemaJson)
+    }
     try container.encodeIfPresent(self.view, forKey: .view)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)

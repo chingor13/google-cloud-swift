@@ -103,10 +103,18 @@ public struct TrellixLocalAuthentication: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
-    try container.encode(self.tokenHeader, forKey: .tokenHeader)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.tokenEndpoint.isEmpty {
+      try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
+    }
+    if !self.tokenHeader.isEmpty {
+      try container.encode(self.tokenHeader, forKey: .tokenHeader)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

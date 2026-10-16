@@ -87,8 +87,12 @@ public struct OktaUserContextSettings: Codable, Equatable, GoogleWKT._AnyPackabl
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.managerIdReferenceField, forKey: .managerIdReferenceField)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.managerIdReferenceField.isEmpty {
+      try container.encode(self.managerIdReferenceField, forKey: .managerIdReferenceField)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

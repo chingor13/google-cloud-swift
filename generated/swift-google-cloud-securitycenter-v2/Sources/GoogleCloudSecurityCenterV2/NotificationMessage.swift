@@ -97,7 +97,9 @@ public struct NotificationMessage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.notificationConfigName, forKey: .notificationConfigName)
+    if !self.notificationConfigName.isEmpty {
+      try container.encode(self.notificationConfigName, forKey: .notificationConfigName)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
 
     if let choice = self.event {

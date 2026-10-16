@@ -106,10 +106,18 @@ public struct ListServicesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.producerProjectId, forKey: .producerProjectId)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.consumerId, forKey: .consumerId)
+    if !self.producerProjectId.isEmpty {
+      try container.encode(self.producerProjectId, forKey: .producerProjectId)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.consumerId.isEmpty {
+      try container.encode(self.consumerId, forKey: .consumerId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -119,8 +119,12 @@ public struct Volume: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mountPath, forKey: .mountPath)
-    try container.encode(self.mountOptions, forKey: .mountOptions)
+    if !self.mountPath.isEmpty {
+      try container.encode(self.mountPath, forKey: .mountPath)
+    }
+    if !self.mountOptions.isEmpty {
+      try container.encode(self.mountOptions, forKey: .mountOptions)
+    }
 
     if let choice = self.source {
       switch choice {

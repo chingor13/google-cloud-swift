@@ -81,8 +81,12 @@ public struct SearchHashesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hashPrefix, forKey: .hashPrefix)
-    try container.encode(self.threatTypes, forKey: .threatTypes)
+    if !self.hashPrefix.isEmpty {
+      try container.encode(self.hashPrefix, forKey: .hashPrefix)
+    }
+    if !self.threatTypes.isEmpty {
+      try container.encode(self.threatTypes, forKey: .threatTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

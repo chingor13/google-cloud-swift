@@ -103,11 +103,21 @@ public struct ReleaseNotificationEvent: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.pipelineUid, forKey: .pipelineUid)
-    try container.encode(self.releaseUid, forKey: .releaseUid)
-    try container.encode(self.release, forKey: .release)
-    try container.encode(self.type, forKey: .type)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.pipelineUid.isEmpty {
+      try container.encode(self.pipelineUid, forKey: .pipelineUid)
+    }
+    if !self.releaseUid.isEmpty {
+      try container.encode(self.releaseUid, forKey: .releaseUid)
+    }
+    if !self.release.isEmpty {
+      try container.encode(self.release, forKey: .release)
+    }
+    if self.type != GoogleCloudDeployV1.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -136,10 +136,18 @@ public struct TrinoJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.continueOnFailure, forKey: .continueOnFailure)
-    try container.encode(self.outputFormat, forKey: .outputFormat)
-    try container.encode(self.clientTags, forKey: .clientTags)
-    try container.encode(self.properties, forKey: .properties)
+    if self.continueOnFailure {
+      try container.encode(self.continueOnFailure, forKey: .continueOnFailure)
+    }
+    if !self.outputFormat.isEmpty {
+      try container.encode(self.outputFormat, forKey: .outputFormat)
+    }
+    if !self.clientTags.isEmpty {
+      try container.encode(self.clientTags, forKey: .clientTags)
+    }
+    if !self.properties.isEmpty {
+      try container.encode(self.properties, forKey: .properties)
+    }
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
 
     if let choice = self.queries {

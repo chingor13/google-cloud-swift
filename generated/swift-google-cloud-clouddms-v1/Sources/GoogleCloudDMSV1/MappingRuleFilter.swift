@@ -112,11 +112,21 @@ public struct MappingRuleFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parentEntity, forKey: .parentEntity)
-    try container.encode(self.entityNamePrefix, forKey: .entityNamePrefix)
-    try container.encode(self.entityNameSuffix, forKey: .entityNameSuffix)
-    try container.encode(self.entityNameContains, forKey: .entityNameContains)
-    try container.encode(self.entities, forKey: .entities)
+    if !self.parentEntity.isEmpty {
+      try container.encode(self.parentEntity, forKey: .parentEntity)
+    }
+    if !self.entityNamePrefix.isEmpty {
+      try container.encode(self.entityNamePrefix, forKey: .entityNamePrefix)
+    }
+    if !self.entityNameSuffix.isEmpty {
+      try container.encode(self.entityNameSuffix, forKey: .entityNameSuffix)
+    }
+    if !self.entityNameContains.isEmpty {
+      try container.encode(self.entityNameContains, forKey: .entityNameContains)
+    }
+    if !self.entities.isEmpty {
+      try container.encode(self.entities, forKey: .entities)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

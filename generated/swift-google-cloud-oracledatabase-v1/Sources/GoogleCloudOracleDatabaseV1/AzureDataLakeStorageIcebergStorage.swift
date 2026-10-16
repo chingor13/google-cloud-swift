@@ -93,10 +93,18 @@ public struct AzureDataLakeStorageIcebergStorage: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.azureAccount, forKey: .azureAccount)
-    try container.encode(self.container, forKey: .container)
-    try container.encode(self.accountKeySecret, forKey: .accountKeySecret)
-    try container.encode(self.endpoint, forKey: .endpoint)
+    if !self.azureAccount.isEmpty {
+      try container.encode(self.azureAccount, forKey: .azureAccount)
+    }
+    if !self.container.isEmpty {
+      try container.encode(self.container, forKey: .container)
+    }
+    if !self.accountKeySecret.isEmpty {
+      try container.encode(self.accountKeySecret, forKey: .accountKeySecret)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

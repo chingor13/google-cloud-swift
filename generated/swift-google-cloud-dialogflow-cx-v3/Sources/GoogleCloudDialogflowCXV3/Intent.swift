@@ -179,15 +179,33 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.trainingPhrases, forKey: .trainingPhrases)
-      try container.encode(self.parameters, forKey: .parameters)
-      try container.encode(self.priority, forKey: .priority)
-      try container.encode(self.isFallback, forKey: .isFallback)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.dtmfPattern, forKey: .dtmfPattern)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.trainingPhrases.isEmpty {
+        try container.encode(self.trainingPhrases, forKey: .trainingPhrases)
+      }
+      if !self.parameters.isEmpty {
+        try container.encode(self.parameters, forKey: .parameters)
+      }
+      if self.priority != 0 {
+        try container.encode(self.priority, forKey: .priority)
+      }
+      if self.isFallback {
+        try container.encode(self.isFallback, forKey: .isFallback)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.dtmfPattern.isEmpty {
+        try container.encode(self.dtmfPattern, forKey: .dtmfPattern)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -284,9 +302,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.parts, forKey: .parts)
-        try container.encode(self.repeatCount, forKey: .repeatCount)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if !self.parts.isEmpty {
+          try container.encode(self.parts, forKey: .parts)
+        }
+        if self.repeatCount != 0 {
+          try container.encode(self.repeatCount, forKey: .repeatCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -356,8 +380,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
-          try container.encode(self.parameterId, forKey: .parameterId)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
+          if !self.parameterId.isEmpty {
+            try container.encode(self.parameterId, forKey: .parameterId)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -502,10 +530,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.entityType, forKey: .entityType)
-        try container.encode(self.isList, forKey: .isList)
-        try container.encode(self.redact, forKey: .redact)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if !self.entityType.isEmpty {
+          try container.encode(self.entityType, forKey: .entityType)
+        }
+        if self.isList {
+          try container.encode(self.isList, forKey: .isList)
+        }
+        if self.redact {
+          try container.encode(self.redact, forKey: .redact)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

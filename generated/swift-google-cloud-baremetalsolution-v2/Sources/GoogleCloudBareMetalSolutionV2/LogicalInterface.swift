@@ -101,9 +101,15 @@ public struct LogicalInterface: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.logicalNetworkInterfaces, forKey: .logicalNetworkInterfaces)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.interfaceIndex, forKey: .interfaceIndex)
+    if !self.logicalNetworkInterfaces.isEmpty {
+      try container.encode(self.logicalNetworkInterfaces, forKey: .logicalNetworkInterfaces)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.interfaceIndex != 0 {
+      try container.encode(self.interfaceIndex, forKey: .interfaceIndex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -194,11 +200,21 @@ public struct LogicalInterface: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.ipAddress, forKey: .ipAddress)
-      try container.encode(self.defaultGateway, forKey: .defaultGateway)
-      try container.encode(self.networkType, forKey: .networkType)
-      try container.encode(self.id, forKey: .id)
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.ipAddress.isEmpty {
+        try container.encode(self.ipAddress, forKey: .ipAddress)
+      }
+      if self.defaultGateway {
+        try container.encode(self.defaultGateway, forKey: .defaultGateway)
+      }
+      if self.networkType != Network.Type_() {
+        try container.encode(self.networkType, forKey: .networkType)
+      }
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -184,17 +184,29 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.state, forKey: .state)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if self.state != FeatureOnlineStore.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(
         self.dedicatedServingEndpoint, forKey: .dedicatedServingEndpoint)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      if self.satisfiesPzs {
+        try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+      }
+      if self.satisfiesPzi {
+        try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      }
 
       if let choice = self.storageType {
         switch choice {
@@ -289,9 +301,13 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.autoScaling, forKey: .autoScaling)
-        try container.encode(self.enableDirectBigtableAccess, forKey: .enableDirectBigtableAccess)
+        if self.enableDirectBigtableAccess {
+          try container.encode(self.enableDirectBigtableAccess, forKey: .enableDirectBigtableAccess)
+        }
         try container.encodeIfPresent(self.bigtableMetadata, forKey: .bigtableMetadata)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -373,9 +389,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.minNodeCount, forKey: .minNodeCount)
-          try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
-          try container.encode(self.cpuUtilizationTarget, forKey: .cpuUtilizationTarget)
+          if self.minNodeCount != 0 {
+            try container.encode(self.minNodeCount, forKey: .minNodeCount)
+          }
+          if self.maxNodeCount != 0 {
+            try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
+          }
+          if self.cpuUtilizationTarget != 0 {
+            try container.encode(self.cpuUtilizationTarget, forKey: .cpuUtilizationTarget)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -474,9 +496,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.tenantProjectId, forKey: .tenantProjectId)
-          try container.encode(self.instanceId, forKey: .instanceId)
-          try container.encode(self.tableId, forKey: .tableId)
+          if !self.tenantProjectId.isEmpty {
+            try container.encode(self.tenantProjectId, forKey: .tenantProjectId)
+          }
+          if !self.instanceId.isEmpty {
+            try container.encode(self.instanceId, forKey: .instanceId)
+          }
+          if !self.tableId.isEmpty {
+            try container.encode(self.tableId, forKey: .tableId)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -678,10 +706,14 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.publicEndpointDomainName, forKey: .publicEndpointDomainName)
+        if !self.publicEndpointDomainName.isEmpty {
+          try container.encode(self.publicEndpointDomainName, forKey: .publicEndpointDomainName)
+        }
         try container.encodeIfPresent(
           self.privateServiceConnectConfig, forKey: .privateServiceConnectConfig)
-        try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+        if !self.serviceAttachment.isEmpty {
+          try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

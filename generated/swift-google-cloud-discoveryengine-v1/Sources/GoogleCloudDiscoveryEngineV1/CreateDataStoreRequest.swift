@@ -160,11 +160,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.dataStore, forKey: .dataStore)
-      try container.encode(self.dataStoreId, forKey: .dataStoreId)
-      try container.encode(self.createAdvancedSiteSearch, forKey: .createAdvancedSiteSearch)
-      try container.encode(self.skipDefaultSchemaCreation, forKey: .skipDefaultSchemaCreation)
+      if !self.dataStoreId.isEmpty {
+        try container.encode(self.dataStoreId, forKey: .dataStoreId)
+      }
+      if self.createAdvancedSiteSearch {
+        try container.encode(self.createAdvancedSiteSearch, forKey: .createAdvancedSiteSearch)
+      }
+      if self.skipDefaultSchemaCreation {
+        try container.encode(self.skipDefaultSchemaCreation, forKey: .skipDefaultSchemaCreation)
+      }
 
       if let choice = self.cmekOptions {
         switch choice {

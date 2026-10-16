@@ -114,10 +114,18 @@ public struct SetDefaultBranchRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.catalog, forKey: .catalog)
-    try container.encode(self.branchId, forKey: .branchId)
-    try container.encode(self.note, forKey: .note)
-    try container.encode(self.force, forKey: .force)
+    if !self.catalog.isEmpty {
+      try container.encode(self.catalog, forKey: .catalog)
+    }
+    if !self.branchId.isEmpty {
+      try container.encode(self.branchId, forKey: .branchId)
+    }
+    if !self.note.isEmpty {
+      try container.encode(self.note, forKey: .note)
+    }
+    if self.force {
+      try container.encode(self.force, forKey: .force)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

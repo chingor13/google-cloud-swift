@@ -159,15 +159,33 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.preference, forKey: .preference)
-    try container.encode(self.months, forKey: .months)
-    try container.encode(self.weeksOfMonth, forKey: .weeksOfMonth)
-    try container.encode(self.daysOfWeek, forKey: .daysOfWeek)
-    try container.encode(self.hoursOfDay, forKey: .hoursOfDay)
-    try container.encode(self.leadTimeWeek, forKey: .leadTimeWeek)
-    try container.encode(self.patchingMode, forKey: .patchingMode)
-    try container.encode(self.customActionTimeoutMins, forKey: .customActionTimeoutMins)
-    try container.encode(self.isCustomActionTimeoutEnabled, forKey: .isCustomActionTimeoutEnabled)
+    if self.preference != MaintenanceWindow.MaintenanceWindowPreference() {
+      try container.encode(self.preference, forKey: .preference)
+    }
+    if !self.months.isEmpty {
+      try container.encode(self.months, forKey: .months)
+    }
+    if !self.weeksOfMonth.isEmpty {
+      try container.encode(self.weeksOfMonth, forKey: .weeksOfMonth)
+    }
+    if !self.daysOfWeek.isEmpty {
+      try container.encode(self.daysOfWeek, forKey: .daysOfWeek)
+    }
+    if !self.hoursOfDay.isEmpty {
+      try container.encode(self.hoursOfDay, forKey: .hoursOfDay)
+    }
+    if self.leadTimeWeek != 0 {
+      try container.encode(self.leadTimeWeek, forKey: .leadTimeWeek)
+    }
+    if self.patchingMode != MaintenanceWindow.PatchingMode() {
+      try container.encode(self.patchingMode, forKey: .patchingMode)
+    }
+    if self.customActionTimeoutMins != 0 {
+      try container.encode(self.customActionTimeoutMins, forKey: .customActionTimeoutMins)
+    }
+    if self.isCustomActionTimeoutEnabled {
+      try container.encode(self.isCustomActionTimeoutEnabled, forKey: .isCustomActionTimeoutEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

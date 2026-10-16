@@ -123,13 +123,27 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.chunkText, forKey: .chunkText)
-      try container.encode(self.source, forKey: .source)
-      try container.encode(self.index, forKey: .index)
-      try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.domain, forKey: .domain)
+      if !self.chunkText.isEmpty {
+        try container.encode(self.chunkText, forKey: .chunkText)
+      }
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
+      if self.index != 0 {
+        try container.encode(self.index, forKey: .index)
+      }
+      if !self.sourceMetadata.isEmpty {
+        try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.domain.isEmpty {
+        try container.encode(self.domain, forKey: .domain)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

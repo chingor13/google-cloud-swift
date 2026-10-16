@@ -80,8 +80,12 @@ public struct Asset: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.assetName, forKey: .assetName)
-    try container.encode(self.assetType, forKey: .assetType)
+    if !self.assetName.isEmpty {
+      try container.encode(self.assetName, forKey: .assetName)
+    }
+    if !self.assetType.isEmpty {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

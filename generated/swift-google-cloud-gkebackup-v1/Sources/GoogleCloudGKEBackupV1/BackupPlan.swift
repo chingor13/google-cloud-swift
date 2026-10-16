@@ -245,24 +245,50 @@ public struct BackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.cluster, forKey: .cluster)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
     try container.encodeIfPresent(self.retentionPolicy, forKey: .retentionPolicy)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.backupSchedule, forKey: .backupSchedule)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.deactivated, forKey: .deactivated)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.deactivated {
+      try container.encode(self.deactivated, forKey: .deactivated)
+    }
     try container.encodeIfPresent(self.backupConfig, forKey: .backupConfig)
-    try container.encode(self.protectedPodCount, forKey: .protectedPodCount)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateReason, forKey: .stateReason)
-    try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
-    try container.encode(self.rpoRiskReason, forKey: .rpoRiskReason)
-    try container.encode(self.backupChannel, forKey: .backupChannel)
+    if self.protectedPodCount != 0 {
+      try container.encode(self.protectedPodCount, forKey: .protectedPodCount)
+    }
+    if self.state != BackupPlan.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateReason.isEmpty {
+      try container.encode(self.stateReason, forKey: .stateReason)
+    }
+    if self.rpoRiskLevel != 0 {
+      try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
+    }
+    if !self.rpoRiskReason.isEmpty {
+      try container.encode(self.rpoRiskReason, forKey: .rpoRiskReason)
+    }
+    if !self.backupChannel.isEmpty {
+      try container.encode(self.backupChannel, forKey: .backupChannel)
+    }
     try container.encodeIfPresent(self.lastSuccessfulBackupTime, forKey: .lastSuccessfulBackupTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -372,9 +398,15 @@ public struct BackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backupDeleteLockDays, forKey: .backupDeleteLockDays)
-      try container.encode(self.backupRetainDays, forKey: .backupRetainDays)
-      try container.encode(self.locked, forKey: .locked)
+      if self.backupDeleteLockDays != 0 {
+        try container.encode(self.backupDeleteLockDays, forKey: .backupDeleteLockDays)
+      }
+      if self.backupRetainDays != 0 {
+        try container.encode(self.backupRetainDays, forKey: .backupRetainDays)
+      }
+      if self.locked {
+        try container.encode(self.locked, forKey: .locked)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -503,8 +535,12 @@ public struct BackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cronSchedule, forKey: .cronSchedule)
-      try container.encode(self.paused, forKey: .paused)
+      if !self.cronSchedule.isEmpty {
+        try container.encode(self.cronSchedule, forKey: .cronSchedule)
+      }
+      if self.paused {
+        try container.encode(self.paused, forKey: .paused)
+      }
       try container.encodeIfPresent(self.rpoConfig, forKey: .rpoConfig)
       try container.encodeIfPresent(self.nextScheduledBackupTime, forKey: .nextScheduledBackupTime)
       for (key, value) in self._unknownFields.json {
@@ -660,10 +696,16 @@ public struct BackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.includeVolumeData, forKey: .includeVolumeData)
-      try container.encode(self.includeSecrets, forKey: .includeSecrets)
+      if self.includeVolumeData {
+        try container.encode(self.includeVolumeData, forKey: .includeVolumeData)
+      }
+      if self.includeSecrets {
+        try container.encode(self.includeSecrets, forKey: .includeSecrets)
+      }
       try container.encodeIfPresent(self.encryptionKey, forKey: .encryptionKey)
-      try container.encode(self.permissiveMode, forKey: .permissiveMode)
+      if self.permissiveMode {
+        try container.encode(self.permissiveMode, forKey: .permissiveMode)
+      }
 
       if let choice = self.backupScope {
         switch choice {

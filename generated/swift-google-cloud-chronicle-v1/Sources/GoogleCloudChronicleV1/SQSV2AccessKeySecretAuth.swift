@@ -77,8 +77,12 @@ public struct SQSV2AccessKeySecretAuth: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accessKeyId, forKey: .accessKeyId)
-    try container.encode(self.secretAccessKey, forKey: .secretAccessKey)
+    if !self.accessKeyId.isEmpty {
+      try container.encode(self.accessKeyId, forKey: .accessKeyId)
+    }
+    if !self.secretAccessKey.isEmpty {
+      try container.encode(self.secretAccessKey, forKey: .secretAccessKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

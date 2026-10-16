@@ -105,10 +105,18 @@ public struct GkeCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.internalIp, forKey: .internalIp)
-    try container.encode(self.proxyUrl, forKey: .proxyUrl)
-    try container.encode(self.dnsEndpoint, forKey: .dnsEndpoint)
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if self.internalIp {
+      try container.encode(self.internalIp, forKey: .internalIp)
+    }
+    if !self.proxyUrl.isEmpty {
+      try container.encode(self.proxyUrl, forKey: .proxyUrl)
+    }
+    if self.dnsEndpoint {
+      try container.encode(self.dnsEndpoint, forKey: .dnsEndpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -102,11 +102,19 @@ public struct ReceiveTriggerWebhookRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.body, forKey: .body)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.trigger, forKey: .trigger)
-    try container.encode(self.secret, forKey: .secret)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.trigger.isEmpty {
+      try container.encode(self.trigger, forKey: .trigger)
+    }
+    if !self.secret.isEmpty {
+      try container.encode(self.secret, forKey: .secret)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

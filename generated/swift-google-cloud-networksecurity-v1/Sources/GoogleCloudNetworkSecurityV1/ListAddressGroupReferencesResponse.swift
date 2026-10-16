@@ -83,8 +83,12 @@ public struct ListAddressGroupReferencesResponse: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.addressGroupReferences, forKey: .addressGroupReferences)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.addressGroupReferences.isEmpty {
+      try container.encode(self.addressGroupReferences, forKey: .addressGroupReferences)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -158,9 +162,15 @@ public struct ListAddressGroupReferencesResponse: Codable, Equatable, GoogleWKT.
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.firewallPolicy, forKey: .firewallPolicy)
-      try container.encode(self.securityPolicy, forKey: .securityPolicy)
-      try container.encode(self.rulePriority, forKey: .rulePriority)
+      if !self.firewallPolicy.isEmpty {
+        try container.encode(self.firewallPolicy, forKey: .firewallPolicy)
+      }
+      if !self.securityPolicy.isEmpty {
+        try container.encode(self.securityPolicy, forKey: .securityPolicy)
+      }
+      if self.rulePriority != 0 {
+        try container.encode(self.rulePriority, forKey: .rulePriority)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

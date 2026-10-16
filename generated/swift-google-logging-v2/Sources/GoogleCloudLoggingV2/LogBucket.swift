@@ -176,16 +176,32 @@ public struct LogBucket: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.retentionDays, forKey: .retentionDays)
-    try container.encode(self.locked, forKey: .locked)
-    try container.encode(self.lifecycleState, forKey: .lifecycleState)
-    try container.encode(self.analyticsEnabled, forKey: .analyticsEnabled)
-    try container.encode(self.restrictedFields, forKey: .restrictedFields)
-    try container.encode(self.indexConfigs, forKey: .indexConfigs)
+    if self.retentionDays != 0 {
+      try container.encode(self.retentionDays, forKey: .retentionDays)
+    }
+    if self.locked {
+      try container.encode(self.locked, forKey: .locked)
+    }
+    if self.lifecycleState != LifecycleState() {
+      try container.encode(self.lifecycleState, forKey: .lifecycleState)
+    }
+    if self.analyticsEnabled {
+      try container.encode(self.analyticsEnabled, forKey: .analyticsEnabled)
+    }
+    if !self.restrictedFields.isEmpty {
+      try container.encode(self.restrictedFields, forKey: .restrictedFields)
+    }
+    if !self.indexConfigs.isEmpty {
+      try container.encode(self.indexConfigs, forKey: .indexConfigs)
+    }
     try container.encodeIfPresent(self.cmekSettings, forKey: .cmekSettings)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

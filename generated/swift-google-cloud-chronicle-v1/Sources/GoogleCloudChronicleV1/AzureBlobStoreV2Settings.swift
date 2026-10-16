@@ -112,12 +112,22 @@ public struct AzureBlobStoreV2Settings: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.azureUri, forKey: .azureUri)
+    if !self.azureUri.isEmpty {
+      try container.encode(self.azureUri, forKey: .azureUri)
+    }
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.sourceDeletionOption, forKey: .sourceDeletionOption)
-    try container.encode(self.maxLookbackDays, forKey: .maxLookbackDays)
-    try container.encode(self.chronicleServiceAccount, forKey: .chronicleServiceAccount)
-    try container.encode(self.includePrefixes, forKey: .includePrefixes)
+    if self.sourceDeletionOption != SourceDeletionOptionV2() {
+      try container.encode(self.sourceDeletionOption, forKey: .sourceDeletionOption)
+    }
+    if self.maxLookbackDays != 0 {
+      try container.encode(self.maxLookbackDays, forKey: .maxLookbackDays)
+    }
+    if !self.chronicleServiceAccount.isEmpty {
+      try container.encode(self.chronicleServiceAccount, forKey: .chronicleServiceAccount)
+    }
+    if !self.includePrefixes.isEmpty {
+      try container.encode(self.includePrefixes, forKey: .includePrefixes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

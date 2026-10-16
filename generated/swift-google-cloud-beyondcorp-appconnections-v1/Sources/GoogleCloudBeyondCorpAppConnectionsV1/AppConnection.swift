@@ -165,16 +165,30 @@ public struct AppConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.type, forKey: .type)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.type != AppConnection.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.applicationEndpoint, forKey: .applicationEndpoint)
-    try container.encode(self.connectors, forKey: .connectors)
-    try container.encode(self.state, forKey: .state)
+    if !self.connectors.isEmpty {
+      try container.encode(self.connectors, forKey: .connectors)
+    }
+    if self.state != AppConnection.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.gateway, forKey: .gateway)
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
     try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
@@ -243,8 +257,12 @@ public struct AppConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.host, forKey: .host)
-      try container.encode(self.port, forKey: .port)
+      if !self.host.isEmpty {
+        try container.encode(self.host, forKey: .host)
+      }
+      if self.port != 0 {
+        try container.encode(self.port, forKey: .port)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -361,11 +379,21 @@ public struct AppConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.ingressPort, forKey: .ingressPort)
-      try container.encode(self.appGateway, forKey: .appGateway)
-      try container.encode(self.l7Psc, forKey: .l7Psc)
+      if self.type != AppConnection.Gateway.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if self.ingressPort != 0 {
+        try container.encode(self.ingressPort, forKey: .ingressPort)
+      }
+      if !self.appGateway.isEmpty {
+        try container.encode(self.appGateway, forKey: .appGateway)
+      }
+      if !self.l7Psc.isEmpty {
+        try container.encode(self.l7Psc, forKey: .l7Psc)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -87,8 +87,12 @@ public struct AutoscalingMetricSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metricName, forKey: .metricName)
-    try container.encode(self.target, forKey: .target)
+    if !self.metricName.isEmpty {
+      try container.encode(self.metricName, forKey: .metricName)
+    }
+    if self.target != 0 {
+      try container.encode(self.target, forKey: .target)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

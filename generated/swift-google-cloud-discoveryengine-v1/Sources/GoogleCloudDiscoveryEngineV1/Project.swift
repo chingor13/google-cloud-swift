@@ -102,10 +102,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.provisionCompletionTime, forKey: .provisionCompletionTime)
-      try container.encode(self.serviceTermsMap, forKey: .serviceTermsMap)
+      if !self.serviceTermsMap.isEmpty {
+        try container.encode(self.serviceTermsMap, forKey: .serviceTermsMap)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -210,9 +214,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.version, forKey: .version)
-        try container.encode(self.state, forKey: .state)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if !self.version.isEmpty {
+          try container.encode(self.version, forKey: .version)
+        }
+        if self.state != Project.ServiceTerms.State() {
+          try container.encode(self.state, forKey: .state)
+        }
         try container.encodeIfPresent(self.acceptTime, forKey: .acceptTime)
         try container.encodeIfPresent(self.declineTime, forKey: .declineTime)
         for (key, value) in self._unknownFields.json {

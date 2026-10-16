@@ -70,7 +70,9 @@ public struct TagFilters: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.tagFilters, forKey: .tagFilters)
+    if !self.tagFilters.isEmpty {
+      try container.encode(self.tagFilters, forKey: .tagFilters)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

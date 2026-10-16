@@ -301,25 +301,41 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.description, forKey: .description)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.enforcedRetentionEndTime, forKey: .enforcedRetentionEndTime)
     try container.encodeIfPresent(
       self.backupRetentionInheritance, forKey: .backupRetentionInheritance)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     try container.encodeIfPresent(self.consistencyTime, forKey: .consistencyTime)
     try container.encodeIfPresent(self.etag, forKey: .etag)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.serviceLocks, forKey: .serviceLocks)
-    try container.encode(self.backupApplianceLocks, forKey: .backupApplianceLocks)
-    try container.encode(self.backupType, forKey: .backupType)
-    try container.encode(self.resourceSizeBytes, forKey: .resourceSizeBytes)
+    if self.state != Backup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.serviceLocks.isEmpty {
+      try container.encode(self.serviceLocks, forKey: .serviceLocks)
+    }
+    if !self.backupApplianceLocks.isEmpty {
+      try container.encode(self.backupApplianceLocks, forKey: .backupApplianceLocks)
+    }
+    if self.backupType != Backup.BackupType() {
+      try container.encode(self.backupType, forKey: .backupType)
+    }
+    if self.resourceSizeBytes != 0 {
+      try container.encode(self.resourceSizeBytes, forKey: .resourceSizeBytes)
+    }
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
     try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
-    try container.encode(self.kmsKeyVersions, forKey: .kmsKeyVersions)
+    if !self.kmsKeyVersions.isEmpty {
+      try container.encode(self.kmsKeyVersions, forKey: .kmsKeyVersions)
+    }
 
     if let choice = self.backupProperties {
       switch choice {
@@ -442,10 +458,18 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backupPlan, forKey: .backupPlan)
-      try container.encode(self.backupPlanRuleId, forKey: .backupPlanRuleId)
-      try container.encode(self.backupPlanRevisionName, forKey: .backupPlanRevisionName)
-      try container.encode(self.backupPlanRevisionId, forKey: .backupPlanRevisionId)
+      if !self.backupPlan.isEmpty {
+        try container.encode(self.backupPlan, forKey: .backupPlan)
+      }
+      if !self.backupPlanRuleId.isEmpty {
+        try container.encode(self.backupPlanRuleId, forKey: .backupPlanRuleId)
+      }
+      if !self.backupPlanRevisionName.isEmpty {
+        try container.encode(self.backupPlanRevisionName, forKey: .backupPlanRevisionName)
+      }
+      if !self.backupPlanRevisionId.isEmpty {
+        try container.encode(self.backupPlanRevisionId, forKey: .backupPlanRevisionId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

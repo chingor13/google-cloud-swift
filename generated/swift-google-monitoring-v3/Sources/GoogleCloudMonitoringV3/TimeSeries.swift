@@ -168,11 +168,21 @@ public struct TimeSeries: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.metric, forKey: .metric)
     try container.encodeIfPresent(self.resource, forKey: .resource)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.metricKind, forKey: .metricKind)
-    try container.encode(self.valueType, forKey: .valueType)
-    try container.encode(self.points, forKey: .points)
-    try container.encode(self.unit, forKey: .unit)
-    try container.encode(self.description, forKey: .description)
+    if self.metricKind != GoogleApi.MetricDescriptor.MetricKind() {
+      try container.encode(self.metricKind, forKey: .metricKind)
+    }
+    if self.valueType != GoogleApi.MetricDescriptor.ValueType() {
+      try container.encode(self.valueType, forKey: .valueType)
+    }
+    if !self.points.isEmpty {
+      try container.encode(self.points, forKey: .points)
+    }
+    if !self.unit.isEmpty {
+      try container.encode(self.unit, forKey: .unit)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

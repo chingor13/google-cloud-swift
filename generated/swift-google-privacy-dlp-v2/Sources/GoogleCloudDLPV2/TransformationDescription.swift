@@ -104,9 +104,15 @@ public struct TransformationDescription: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.condition, forKey: .condition)
+    if self.type != TransformationType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.condition.isEmpty {
+      try container.encode(self.condition, forKey: .condition)
+    }
     try container.encodeIfPresent(self.infoType, forKey: .infoType)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

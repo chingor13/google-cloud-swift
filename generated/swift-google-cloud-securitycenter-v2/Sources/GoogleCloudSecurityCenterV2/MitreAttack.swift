@@ -114,11 +114,21 @@ public struct MitreAttack: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primaryTactic, forKey: .primaryTactic)
-    try container.encode(self.primaryTechniques, forKey: .primaryTechniques)
-    try container.encode(self.additionalTactics, forKey: .additionalTactics)
-    try container.encode(self.additionalTechniques, forKey: .additionalTechniques)
-    try container.encode(self.version, forKey: .version)
+    if self.primaryTactic != MitreAttack.Tactic() {
+      try container.encode(self.primaryTactic, forKey: .primaryTactic)
+    }
+    if !self.primaryTechniques.isEmpty {
+      try container.encode(self.primaryTechniques, forKey: .primaryTechniques)
+    }
+    if !self.additionalTactics.isEmpty {
+      try container.encode(self.additionalTactics, forKey: .additionalTactics)
+    }
+    if !self.additionalTechniques.isEmpty {
+      try container.encode(self.additionalTechniques, forKey: .additionalTechniques)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

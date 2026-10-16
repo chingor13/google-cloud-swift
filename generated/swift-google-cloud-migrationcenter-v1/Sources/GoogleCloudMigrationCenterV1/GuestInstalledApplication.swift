@@ -100,11 +100,19 @@ public struct GuestInstalledApplication: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.applicationName, forKey: .applicationName)
-    try container.encode(self.vendor, forKey: .vendor)
+    if !self.applicationName.isEmpty {
+      try container.encode(self.applicationName, forKey: .applicationName)
+    }
+    if !self.vendor.isEmpty {
+      try container.encode(self.vendor, forKey: .vendor)
+    }
     try container.encodeIfPresent(self.installTime, forKey: .installTime)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.version, forKey: .version)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

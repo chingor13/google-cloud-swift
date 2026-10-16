@@ -112,10 +112,18 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.dataset, forKey: .dataset)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.mimeType, forKey: .mimeType)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
     try container.encodeIfPresent(self.referenceSentenceConfig, forKey: .referenceSentenceConfig)
     try container.encodeIfPresent(self.glossaryConfig, forKey: .glossaryConfig)
     for (key, value) in self._unknownFields.json {
@@ -183,8 +191,12 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceSentence, forKey: .sourceSentence)
-      try container.encode(self.targetSentence, forKey: .targetSentence)
+      if !self.sourceSentence.isEmpty {
+        try container.encode(self.sourceSentence, forKey: .sourceSentence)
+      }
+      if !self.targetSentence.isEmpty {
+        try container.encode(self.targetSentence, forKey: .targetSentence)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -267,7 +279,9 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.referenceSentencePairs, forKey: .referenceSentencePairs)
+      if !self.referenceSentencePairs.isEmpty {
+        try container.encode(self.referenceSentencePairs, forKey: .referenceSentencePairs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -371,9 +385,15 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.referenceSentencePairLists, forKey: .referenceSentencePairLists)
-      try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
-      try container.encode(self.targetLanguageCode, forKey: .targetLanguageCode)
+      if !self.referenceSentencePairLists.isEmpty {
+        try container.encode(self.referenceSentencePairLists, forKey: .referenceSentencePairLists)
+      }
+      if !self.sourceLanguageCode.isEmpty {
+        try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
+      }
+      if !self.targetLanguageCode.isEmpty {
+        try container.encode(self.targetLanguageCode, forKey: .targetLanguageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -482,9 +502,16 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.glossary, forKey: .glossary)
-      try container.encode(self.ignoreCase, forKey: .ignoreCase)
-      try container.encode(self.contextualTranslationEnabled, forKey: .contextualTranslationEnabled)
+      if !self.glossary.isEmpty {
+        try container.encode(self.glossary, forKey: .glossary)
+      }
+      if self.ignoreCase {
+        try container.encode(self.ignoreCase, forKey: .ignoreCase)
+      }
+      if self.contextualTranslationEnabled {
+        try container.encode(
+          self.contextualTranslationEnabled, forKey: .contextualTranslationEnabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

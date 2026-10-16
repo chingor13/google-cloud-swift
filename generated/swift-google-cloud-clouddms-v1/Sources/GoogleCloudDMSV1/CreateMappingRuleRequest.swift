@@ -99,10 +99,16 @@ public struct CreateMappingRuleRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.mappingRuleId, forKey: .mappingRuleId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.mappingRuleId.isEmpty {
+      try container.encode(self.mappingRuleId, forKey: .mappingRuleId)
+    }
     try container.encodeIfPresent(self.mappingRule, forKey: .mappingRule)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

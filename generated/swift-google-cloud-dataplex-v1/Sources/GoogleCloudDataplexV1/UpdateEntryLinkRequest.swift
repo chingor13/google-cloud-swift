@@ -90,8 +90,12 @@ public struct UpdateEntryLinkRequest: Codable, Equatable, GoogleWKT._AnyPackable
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.entryLink, forKey: .entryLink)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if !self.aspectKeys.isEmpty {
+      try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

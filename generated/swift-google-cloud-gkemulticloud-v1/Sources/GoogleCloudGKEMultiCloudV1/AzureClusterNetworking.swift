@@ -125,10 +125,18 @@ public struct AzureClusterNetworking: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.virtualNetworkId, forKey: .virtualNetworkId)
-    try container.encode(self.podAddressCidrBlocks, forKey: .podAddressCidrBlocks)
-    try container.encode(self.serviceAddressCidrBlocks, forKey: .serviceAddressCidrBlocks)
-    try container.encode(self.serviceLoadBalancerSubnetId, forKey: .serviceLoadBalancerSubnetId)
+    if !self.virtualNetworkId.isEmpty {
+      try container.encode(self.virtualNetworkId, forKey: .virtualNetworkId)
+    }
+    if !self.podAddressCidrBlocks.isEmpty {
+      try container.encode(self.podAddressCidrBlocks, forKey: .podAddressCidrBlocks)
+    }
+    if !self.serviceAddressCidrBlocks.isEmpty {
+      try container.encode(self.serviceAddressCidrBlocks, forKey: .serviceAddressCidrBlocks)
+    }
+    if !self.serviceLoadBalancerSubnetId.isEmpty {
+      try container.encode(self.serviceLoadBalancerSubnetId, forKey: .serviceLoadBalancerSubnetId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

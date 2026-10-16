@@ -129,11 +129,9 @@
       public func rawPredict(
         request: RawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleApi.HttpBody {
-        let (path, query, configure, omitted) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void,
-            [Swift.String]
-          ) in
+        let (path, query, configure) = try {
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
               let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
@@ -152,7 +150,7 @@
             ]
             return (path, query)
           }() {
-            return (candidate.0, candidate.1, { $0.setMethod(.POST) }, ["endpoint"])
+            return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
@@ -172,7 +170,7 @@
             ]
             return (path, query)
           }() {
-            return (candidate.0, candidate.1, { $0.setMethod(.POST) }, ["endpoint"])
+            return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
           var paths: [GoogleGax.PathMismatch] = []
           do {
@@ -207,7 +205,9 @@
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
         req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
-        try req.setBody(json: request, omitting: omitted)
+        if let body = request.httpBody {
+          try req.setBody(json: body)
+        }
         return try await req.rpc(
           GoogleApi.HttpBody.self, timeout: options.attemptTimeout
         ).get()

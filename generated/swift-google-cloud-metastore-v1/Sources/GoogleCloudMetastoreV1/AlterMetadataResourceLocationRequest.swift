@@ -97,9 +97,15 @@ public struct AlterMetadataResourceLocationRequest: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.locationUri, forKey: .locationUri)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.locationUri.isEmpty {
+      try container.encode(self.locationUri, forKey: .locationUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

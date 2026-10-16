@@ -101,9 +101,15 @@ public struct CreateCustomClassRequest: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.customClass, forKey: .customClass)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.customClassId, forKey: .customClassId)
-    try container.encode(self.parent, forKey: .parent)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.customClassId.isEmpty {
+      try container.encode(self.customClassId, forKey: .customClassId)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

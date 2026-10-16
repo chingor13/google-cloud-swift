@@ -641,69 +641,135 @@ public struct Finding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.canonicalName, forKey: .canonicalName)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.externalUri, forKey: .externalUri)
-    try container.encode(self.sourceProperties, forKey: .sourceProperties)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.canonicalName.isEmpty {
+      try container.encode(self.canonicalName, forKey: .canonicalName)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if self.state != Finding.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.category.isEmpty {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.externalUri.isEmpty {
+      try container.encode(self.externalUri, forKey: .externalUri)
+    }
+    if !self.sourceProperties.isEmpty {
+      try container.encode(self.sourceProperties, forKey: .sourceProperties)
+    }
     try container.encodeIfPresent(self.securityMarks, forKey: .securityMarks)
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.mute, forKey: .mute)
+    if self.severity != Finding.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if self.mute != Finding.Mute() {
+      try container.encode(self.mute, forKey: .mute)
+    }
     try container.encodeIfPresent(self.muteInfo, forKey: .muteInfo)
-    try container.encode(self.findingClass, forKey: .findingClass)
+    if self.findingClass != Finding.FindingClass() {
+      try container.encode(self.findingClass, forKey: .findingClass)
+    }
     try container.encodeIfPresent(self.indicator, forKey: .indicator)
     try container.encodeIfPresent(self.vulnerability, forKey: .vulnerability)
     try container.encodeIfPresent(self.muteUpdateTime, forKey: .muteUpdateTime)
-    try container.encode(self.externalSystems, forKey: .externalSystems)
+    if !self.externalSystems.isEmpty {
+      try container.encode(self.externalSystems, forKey: .externalSystems)
+    }
     try container.encodeIfPresent(self.mitreAttack, forKey: .mitreAttack)
     try container.encodeIfPresent(self.access, forKey: .access)
-    try container.encode(self.connections, forKey: .connections)
-    try container.encode(self.muteInitiator, forKey: .muteInitiator)
-    try container.encode(self.processes, forKey: .processes)
-    try container.encode(self.contacts, forKey: .contacts)
-    try container.encode(self.compliances, forKey: .compliances)
-    try container.encode(self.parentDisplayName, forKey: .parentDisplayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.connections.isEmpty {
+      try container.encode(self.connections, forKey: .connections)
+    }
+    if !self.muteInitiator.isEmpty {
+      try container.encode(self.muteInitiator, forKey: .muteInitiator)
+    }
+    if !self.processes.isEmpty {
+      try container.encode(self.processes, forKey: .processes)
+    }
+    if !self.contacts.isEmpty {
+      try container.encode(self.contacts, forKey: .contacts)
+    }
+    if !self.compliances.isEmpty {
+      try container.encode(self.compliances, forKey: .compliances)
+    }
+    if !self.parentDisplayName.isEmpty {
+      try container.encode(self.parentDisplayName, forKey: .parentDisplayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.exfiltration, forKey: .exfiltration)
-    try container.encode(self.iamBindings, forKey: .iamBindings)
-    try container.encode(self.nextSteps, forKey: .nextSteps)
-    try container.encode(self.moduleName, forKey: .moduleName)
-    try container.encode(self.containers, forKey: .containers)
+    if !self.iamBindings.isEmpty {
+      try container.encode(self.iamBindings, forKey: .iamBindings)
+    }
+    if !self.nextSteps.isEmpty {
+      try container.encode(self.nextSteps, forKey: .nextSteps)
+    }
+    if !self.moduleName.isEmpty {
+      try container.encode(self.moduleName, forKey: .moduleName)
+    }
+    if !self.containers.isEmpty {
+      try container.encode(self.containers, forKey: .containers)
+    }
     try container.encodeIfPresent(self.kubernetes, forKey: .kubernetes)
     try container.encodeIfPresent(self.database, forKey: .database)
     try container.encodeIfPresent(self.attackExposure, forKey: .attackExposure)
-    try container.encode(self.files, forKey: .files)
+    if !self.files.isEmpty {
+      try container.encode(self.files, forKey: .files)
+    }
     try container.encodeIfPresent(self.cloudDlpInspection, forKey: .cloudDlpInspection)
     try container.encodeIfPresent(self.cloudDlpDataProfile, forKey: .cloudDlpDataProfile)
     try container.encodeIfPresent(self.kernelRootkit, forKey: .kernelRootkit)
-    try container.encode(self.orgPolicies, forKey: .orgPolicies)
+    if !self.orgPolicies.isEmpty {
+      try container.encode(self.orgPolicies, forKey: .orgPolicies)
+    }
     try container.encodeIfPresent(self.job, forKey: .job)
     try container.encodeIfPresent(self.application, forKey: .application)
     try container.encodeIfPresent(self.ipRules, forKey: .ipRules)
     try container.encodeIfPresent(self.backupDisasterRecovery, forKey: .backupDisasterRecovery)
     try container.encodeIfPresent(self.securityPosture, forKey: .securityPosture)
-    try container.encode(self.logEntries, forKey: .logEntries)
-    try container.encode(self.loadBalancers, forKey: .loadBalancers)
+    if !self.logEntries.isEmpty {
+      try container.encode(self.logEntries, forKey: .logEntries)
+    }
+    if !self.loadBalancers.isEmpty {
+      try container.encode(self.loadBalancers, forKey: .loadBalancers)
+    }
     try container.encodeIfPresent(self.cloudArmor, forKey: .cloudArmor)
     try container.encodeIfPresent(self.notebook, forKey: .notebook)
     try container.encodeIfPresent(self.toxicCombination, forKey: .toxicCombination)
-    try container.encode(self.groupMemberships, forKey: .groupMemberships)
+    if !self.groupMemberships.isEmpty {
+      try container.encode(self.groupMemberships, forKey: .groupMemberships)
+    }
     try container.encodeIfPresent(self.disk, forKey: .disk)
-    try container.encode(self.dataAccessEvents, forKey: .dataAccessEvents)
-    try container.encode(self.dataFlowEvents, forKey: .dataFlowEvents)
-    try container.encode(self.networks, forKey: .networks)
-    try container.encode(self.dataRetentionDeletionEvents, forKey: .dataRetentionDeletionEvents)
+    if !self.dataAccessEvents.isEmpty {
+      try container.encode(self.dataAccessEvents, forKey: .dataAccessEvents)
+    }
+    if !self.dataFlowEvents.isEmpty {
+      try container.encode(self.dataFlowEvents, forKey: .dataFlowEvents)
+    }
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
+    if !self.dataRetentionDeletionEvents.isEmpty {
+      try container.encode(self.dataRetentionDeletionEvents, forKey: .dataRetentionDeletionEvents)
+    }
     try container.encodeIfPresent(self.affectedResources, forKey: .affectedResources)
     try container.encodeIfPresent(self.aiModel, forKey: .aiModel)
     try container.encodeIfPresent(self.chokepoint, forKey: .chokepoint)
     try container.encodeIfPresent(self.vertexAi, forKey: .vertexAi)
     try container.encodeIfPresent(self.agent, forKey: .agent)
-    try container.encode(self.agentSessions, forKey: .agentSessions)
+    if !self.agentSessions.isEmpty {
+      try container.encode(self.agentSessions, forKey: .agentSessions)
+    }
     try container.encodeIfPresent(self.agentAnomaly, forKey: .agentAnomaly)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -774,7 +840,9 @@ public struct Finding: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.staticMute, forKey: .staticMute)
-      try container.encode(self.dynamicMuteRecords, forKey: .dynamicMuteRecords)
+      if !self.dynamicMuteRecords.isEmpty {
+        try container.encode(self.dynamicMuteRecords, forKey: .dynamicMuteRecords)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -842,7 +910,9 @@ public struct Finding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.state, forKey: .state)
+        if self.state != Finding.Mute() {
+          try container.encode(self.state, forKey: .state)
+        }
         try container.encodeIfPresent(self.applyTime, forKey: .applyTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -933,7 +1003,9 @@ public struct Finding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.muteConfig, forKey: .muteConfig)
+        if !self.muteConfig.isEmpty {
+          try container.encode(self.muteConfig, forKey: .muteConfig)
+        }
         try container.encodeIfPresent(self.matchTime, forKey: .matchTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

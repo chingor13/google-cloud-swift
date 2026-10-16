@@ -169,16 +169,30 @@ public struct Destination: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.ipPrefix, forKey: .ipPrefix)
-    try container.encode(self.endpoints, forKey: .endpoints)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.ipPrefix.isEmpty {
+      try container.encode(self.ipPrefix, forKey: .ipPrefix)
+    }
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
     try container.encodeIfPresent(self.stateTimeline, forKey: .stateTimeline)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -262,9 +276,15 @@ public struct Destination: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asn, forKey: .asn)
-      try container.encode(self.csp, forKey: .csp)
-      try container.encode(self.state, forKey: .state)
+      if self.asn != 0 {
+        try container.encode(self.asn, forKey: .asn)
+      }
+      if !self.csp.isEmpty {
+        try container.encode(self.csp, forKey: .csp)
+      }
+      if self.state != Destination.DestinationEndpoint.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

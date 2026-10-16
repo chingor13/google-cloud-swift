@@ -137,15 +137,33 @@ public struct FeedPack: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.icon, forKey: .icon)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.packType, forKey: .packType)
-    try container.encode(self.packLogTypes, forKey: .packLogTypes)
-    try container.encode(self.hidden, forKey: .hidden)
-    try container.encode(self.packDocumentation, forKey: .packDocumentation)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.icon.isEmpty {
+      try container.encode(self.icon, forKey: .icon)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if self.packType != FeedPack.PackType() {
+      try container.encode(self.packType, forKey: .packType)
+    }
+    if !self.packLogTypes.isEmpty {
+      try container.encode(self.packLogTypes, forKey: .packLogTypes)
+    }
+    if self.hidden {
+      try container.encode(self.hidden, forKey: .hidden)
+    }
+    if !self.packDocumentation.isEmpty {
+      try container.encode(self.packDocumentation, forKey: .packDocumentation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -151,16 +151,26 @@ public struct Dependency: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.consumer, forKey: .consumer)
     try container.encodeIfPresent(self.supplier, forKey: .supplier)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.discoveryMode, forKey: .discoveryMode)
+    if self.state != Dependency.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.discoveryMode != Dependency.DiscoveryMode() {
+      try container.encode(self.discoveryMode, forKey: .discoveryMode)
+    }
     try container.encodeIfPresent(self.errorDetail, forKey: .errorDetail)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -145,15 +145,27 @@ public struct Violation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.beginTime, forKey: .beginTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.resolveTime, forKey: .resolveTime)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.nonCompliantOrgPolicy, forKey: .nonCompliantOrgPolicy)
-    try container.encode(self.folderId, forKey: .folderId)
+    if !self.category.isEmpty {
+      try container.encode(self.category, forKey: .category)
+    }
+    if self.state != Violation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.nonCompliantOrgPolicy.isEmpty {
+      try container.encode(self.nonCompliantOrgPolicy, forKey: .nonCompliantOrgPolicy)
+    }
+    if self.folderId != 0 {
+      try container.encode(self.folderId, forKey: .folderId)
+    }
     try container.encodeIfPresent(self.remediation, forKey: .remediation)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -235,8 +247,12 @@ public struct Violation: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.instructions, forKey: .instructions)
-      try container.encode(self.compliantValues, forKey: .compliantValues)
-      try container.encode(self.remediationType, forKey: .remediationType)
+      if !self.compliantValues.isEmpty {
+        try container.encode(self.compliantValues, forKey: .compliantValues)
+      }
+      if self.remediationType != Violation.Remediation.RemediationType() {
+        try container.encode(self.remediationType, forKey: .remediationType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -378,9 +394,15 @@ public struct Violation: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.gcloudCommands, forKey: .gcloudCommands)
-          try container.encode(self.steps, forKey: .steps)
-          try container.encode(self.additionalLinks, forKey: .additionalLinks)
+          if !self.gcloudCommands.isEmpty {
+            try container.encode(self.gcloudCommands, forKey: .gcloudCommands)
+          }
+          if !self.steps.isEmpty {
+            try container.encode(self.steps, forKey: .steps)
+          }
+          if !self.additionalLinks.isEmpty {
+            try container.encode(self.additionalLinks, forKey: .additionalLinks)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -479,9 +501,15 @@ public struct Violation: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.consoleUris, forKey: .consoleUris)
-          try container.encode(self.steps, forKey: .steps)
-          try container.encode(self.additionalLinks, forKey: .additionalLinks)
+          if !self.consoleUris.isEmpty {
+            try container.encode(self.consoleUris, forKey: .consoleUris)
+          }
+          if !self.steps.isEmpty {
+            try container.encode(self.steps, forKey: .steps)
+          }
+          if !self.additionalLinks.isEmpty {
+            try container.encode(self.additionalLinks, forKey: .additionalLinks)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

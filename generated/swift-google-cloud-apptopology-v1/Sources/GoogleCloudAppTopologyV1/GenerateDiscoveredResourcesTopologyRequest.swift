@@ -104,8 +104,12 @@ public struct GenerateDiscoveredResourcesTopologyRequest: Codable, Equatable, Go
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.topologyDomains, forKey: .topologyDomains)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.topologyDomains.isEmpty {
+      try container.encode(self.topologyDomains, forKey: .topologyDomains)
+    }
 
     if let choice = self.query {
       switch choice {

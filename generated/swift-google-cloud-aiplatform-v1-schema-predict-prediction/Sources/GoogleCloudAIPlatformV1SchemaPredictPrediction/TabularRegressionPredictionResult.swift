@@ -85,9 +85,15 @@ public struct TabularRegressionPredictionResult: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.value, forKey: .value)
-    try container.encode(self.lowerBound, forKey: .lowerBound)
-    try container.encode(self.upperBound, forKey: .upperBound)
+    if self.value != 0 {
+      try container.encode(self.value, forKey: .value)
+    }
+    if self.lowerBound != 0 {
+      try container.encode(self.lowerBound, forKey: .lowerBound)
+    }
+    if self.upperBound != 0 {
+      try container.encode(self.upperBound, forKey: .upperBound)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

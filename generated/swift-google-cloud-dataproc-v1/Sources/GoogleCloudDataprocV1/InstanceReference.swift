@@ -93,10 +93,18 @@ public struct InstanceReference: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceName, forKey: .instanceName)
-    try container.encode(self.instanceId, forKey: .instanceId)
-    try container.encode(self.publicKey, forKey: .publicKey)
-    try container.encode(self.publicEciesKey, forKey: .publicEciesKey)
+    if !self.instanceName.isEmpty {
+      try container.encode(self.instanceName, forKey: .instanceName)
+    }
+    if !self.instanceId.isEmpty {
+      try container.encode(self.instanceId, forKey: .instanceId)
+    }
+    if !self.publicKey.isEmpty {
+      try container.encode(self.publicKey, forKey: .publicKey)
+    }
+    if !self.publicEciesKey.isEmpty {
+      try container.encode(self.publicEciesKey, forKey: .publicEciesKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

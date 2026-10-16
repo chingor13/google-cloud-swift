@@ -69,7 +69,9 @@ public struct CommitRepositoryChangesResponse: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.commitSha, forKey: .commitSha)
+    if !self.commitSha.isEmpty {
+      try container.encode(self.commitSha, forKey: .commitSha)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

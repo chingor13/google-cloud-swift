@@ -91,9 +91,15 @@ public struct ClientCertificateSettings: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.tlsCertificate, forKey: .tlsCertificate)
-    try container.encode(self.privateKey, forKey: .privateKey)
-    try container.encode(self.passphrase, forKey: .passphrase)
+    if !self.tlsCertificate.isEmpty {
+      try container.encode(self.tlsCertificate, forKey: .tlsCertificate)
+    }
+    if !self.privateKey.isEmpty {
+      try container.encode(self.privateKey, forKey: .privateKey)
+    }
+    if !self.passphrase.isEmpty {
+      try container.encode(self.passphrase, forKey: .passphrase)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

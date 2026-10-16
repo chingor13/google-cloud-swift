@@ -130,10 +130,18 @@ public struct DataTableColumnInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.columnIndex, forKey: .columnIndex)
-    try container.encode(self.originalColumn, forKey: .originalColumn)
-    try container.encode(self.keyColumn, forKey: .keyColumn)
-    try container.encode(self.repeatedValues, forKey: .repeatedValues)
+    if self.columnIndex != 0 {
+      try container.encode(self.columnIndex, forKey: .columnIndex)
+    }
+    if !self.originalColumn.isEmpty {
+      try container.encode(self.originalColumn, forKey: .originalColumn)
+    }
+    if self.keyColumn {
+      try container.encode(self.keyColumn, forKey: .keyColumn)
+    }
+    if self.repeatedValues {
+      try container.encode(self.repeatedValues, forKey: .repeatedValues)
+    }
 
     if let choice = self.pathOrType {
       switch choice {

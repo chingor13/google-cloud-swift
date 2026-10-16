@@ -160,12 +160,24 @@ public struct OracleConnectionProfile: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.passwordSet, forKey: .passwordSet)
-    try container.encode(self.databaseService, forKey: .databaseService)
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if self.passwordSet {
+      try container.encode(self.passwordSet, forKey: .passwordSet)
+    }
+    if !self.databaseService.isEmpty {
+      try container.encode(self.databaseService, forKey: .databaseService)
+    }
     try container.encodeIfPresent(self.ssl, forKey: .ssl)
 
     if let choice = self.connectivity {

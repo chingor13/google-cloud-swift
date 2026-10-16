@@ -156,11 +156,15 @@
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.quotaStatusWarning, forKey: .quotaStatusWarning)
-      try container.encode(self.quotas, forKey: .quotas)
+      if !self.quotas.isEmpty {
+        try container.encode(self.quotas, forKey: .quotas)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.supportsPzs, forKey: .supportsPzs)
-      try container.encode(self.zones, forKey: .zones)
+      if !self.zones.isEmpty {
+        try container.encode(self.zones, forKey: .zones)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -245,7 +249,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.code, forKey: .code)
-        try container.encode(self.data, forKey: .data)
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         try container.encodeIfPresent(self.message, forKey: .message)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -145,15 +145,25 @@ public struct DataProfileFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.quote, forKey: .quote)
+    if !self.quote.isEmpty {
+      try container.encode(self.quote, forKey: .quote)
+    }
     try container.encodeIfPresent(self.infotype, forKey: .infotype)
     try container.encodeIfPresent(self.quoteInfo, forKey: .quoteInfo)
-    try container.encode(self.dataProfileResourceName, forKey: .dataProfileResourceName)
-    try container.encode(self.findingId, forKey: .findingId)
+    if !self.dataProfileResourceName.isEmpty {
+      try container.encode(self.dataProfileResourceName, forKey: .dataProfileResourceName)
+    }
+    if !self.findingId.isEmpty {
+      try container.encode(self.findingId, forKey: .findingId)
+    }
     try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
     try container.encodeIfPresent(self.location, forKey: .location)
-    try container.encode(self.resourceVisibility, forKey: .resourceVisibility)
-    try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    if self.resourceVisibility != ResourceVisibility() {
+      try container.encode(self.resourceVisibility, forKey: .resourceVisibility)
+    }
+    if !self.fullResourceName.isEmpty {
+      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    }
     try container.encodeIfPresent(self.dataSourceType, forKey: .dataSourceType)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

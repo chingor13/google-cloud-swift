@@ -91,9 +91,15 @@ public struct SpellingCorrection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.corrected, forKey: .corrected)
-    try container.encode(self.correctedText, forKey: .correctedText)
-    try container.encode(self.correctedHtml, forKey: .correctedHtml)
+    if self.corrected {
+      try container.encode(self.corrected, forKey: .corrected)
+    }
+    if !self.correctedText.isEmpty {
+      try container.encode(self.correctedText, forKey: .correctedText)
+    }
+    if !self.correctedHtml.isEmpty {
+      try container.encode(self.correctedHtml, forKey: .correctedHtml)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

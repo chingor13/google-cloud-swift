@@ -111,10 +111,18 @@ public struct TextStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.codec, forKey: .codec)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.mapping, forKey: .mapping)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.codec.isEmpty {
+      try container.encode(self.codec, forKey: .codec)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.mapping.isEmpty {
+      try container.encode(self.mapping, forKey: .mapping)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -203,9 +211,15 @@ public struct TextStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.atomKey, forKey: .atomKey)
-      try container.encode(self.inputKey, forKey: .inputKey)
-      try container.encode(self.inputTrack, forKey: .inputTrack)
+      if !self.atomKey.isEmpty {
+        try container.encode(self.atomKey, forKey: .atomKey)
+      }
+      if !self.inputKey.isEmpty {
+        try container.encode(self.inputKey, forKey: .inputKey)
+      }
+      if self.inputTrack != 0 {
+        try container.encode(self.inputTrack, forKey: .inputTrack)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

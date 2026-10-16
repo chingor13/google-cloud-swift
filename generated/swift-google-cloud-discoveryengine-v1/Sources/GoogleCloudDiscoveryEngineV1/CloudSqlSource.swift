@@ -122,12 +122,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.instanceId, forKey: .instanceId)
-      try container.encode(self.databaseId, forKey: .databaseId)
-      try container.encode(self.tableId, forKey: .tableId)
-      try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
-      try container.encode(self.offload, forKey: .offload)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.instanceId.isEmpty {
+        try container.encode(self.instanceId, forKey: .instanceId)
+      }
+      if !self.databaseId.isEmpty {
+        try container.encode(self.databaseId, forKey: .databaseId)
+      }
+      if !self.tableId.isEmpty {
+        try container.encode(self.tableId, forKey: .tableId)
+      }
+      if !self.gcsStagingDir.isEmpty {
+        try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
+      }
+      if self.offload {
+        try container.encode(self.offload, forKey: .offload)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

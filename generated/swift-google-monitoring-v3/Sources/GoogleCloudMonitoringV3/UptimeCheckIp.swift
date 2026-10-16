@@ -92,9 +92,15 @@ public struct UptimeCheckIp: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
+    if self.region != UptimeCheckRegion() {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

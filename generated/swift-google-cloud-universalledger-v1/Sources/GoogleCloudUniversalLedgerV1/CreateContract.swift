@@ -89,9 +89,15 @@ public struct CreateContract: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.contractBytes, forKey: .contractBytes)
-    try container.encode(self.initArguments, forKey: .initArguments)
-    try container.encode(self.contractComment, forKey: .contractComment)
+    if !self.contractBytes.isEmpty {
+      try container.encode(self.contractBytes, forKey: .contractBytes)
+    }
+    if !self.initArguments.isEmpty {
+      try container.encode(self.initArguments, forKey: .initArguments)
+    }
+    if !self.contractComment.isEmpty {
+      try container.encode(self.contractComment, forKey: .contractComment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

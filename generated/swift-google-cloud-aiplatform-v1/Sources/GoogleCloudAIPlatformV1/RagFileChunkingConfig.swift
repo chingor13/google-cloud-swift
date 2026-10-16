@@ -156,8 +156,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.chunkSize, forKey: .chunkSize)
-        try container.encode(self.chunkOverlap, forKey: .chunkOverlap)
+        if self.chunkSize != 0 {
+          try container.encode(self.chunkSize, forKey: .chunkSize)
+        }
+        if self.chunkOverlap != 0 {
+          try container.encode(self.chunkOverlap, forKey: .chunkOverlap)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -147,11 +147,21 @@ public struct Tag: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.template, forKey: .template)
-    try container.encode(self.templateDisplayName, forKey: .templateDisplayName)
-    try container.encode(self.fields, forKey: .fields)
-    try container.encode(self.dataplexTransferStatus, forKey: .dataplexTransferStatus)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.template.isEmpty {
+      try container.encode(self.template, forKey: .template)
+    }
+    if !self.templateDisplayName.isEmpty {
+      try container.encode(self.templateDisplayName, forKey: .templateDisplayName)
+    }
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
+    if self.dataplexTransferStatus != TagTemplate.DataplexTransferStatus() {
+      try container.encode(self.dataplexTransferStatus, forKey: .dataplexTransferStatus)
+    }
 
     if let choice = self.scope {
       switch choice {

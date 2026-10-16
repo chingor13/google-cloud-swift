@@ -132,12 +132,22 @@ public struct Condition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ipSubnetworks, forKey: .ipSubnetworks)
+    if !self.ipSubnetworks.isEmpty {
+      try container.encode(self.ipSubnetworks, forKey: .ipSubnetworks)
+    }
     try container.encodeIfPresent(self.devicePolicy, forKey: .devicePolicy)
-    try container.encode(self.requiredAccessLevels, forKey: .requiredAccessLevels)
-    try container.encode(self.negate, forKey: .negate)
-    try container.encode(self.members, forKey: .members)
-    try container.encode(self.regions, forKey: .regions)
+    if !self.requiredAccessLevels.isEmpty {
+      try container.encode(self.requiredAccessLevels, forKey: .requiredAccessLevels)
+    }
+    if self.negate {
+      try container.encode(self.negate, forKey: .negate)
+    }
+    if !self.members.isEmpty {
+      try container.encode(self.members, forKey: .members)
+    }
+    if !self.regions.isEmpty {
+      try container.encode(self.regions, forKey: .regions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

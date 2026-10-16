@@ -87,7 +87,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.message, forKey: .message)
       try container.encodeIfPresent(self.messageType, forKey: .messageType)
-      try container.encode(self.actionsRequired, forKey: .actionsRequired)
+      if !self.actionsRequired.isEmpty {
+        try container.encode(self.actionsRequired, forKey: .actionsRequired)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

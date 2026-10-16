@@ -329,19 +329,43 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
-      try container.encode(self.supportedLanguageCodes, forKey: .supportedLanguageCodes)
-      try container.encode(self.timeZone, forKey: .timeZone)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.avatarUri, forKey: .avatarUri)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.defaultLanguageCode.isEmpty {
+        try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
+      }
+      if !self.supportedLanguageCodes.isEmpty {
+        try container.encode(self.supportedLanguageCodes, forKey: .supportedLanguageCodes)
+      }
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.avatarUri.isEmpty {
+        try container.encode(self.avatarUri, forKey: .avatarUri)
+      }
       try container.encodeIfPresent(self.speechToTextSettings, forKey: .speechToTextSettings)
-      try container.encode(self.securitySettings, forKey: .securitySettings)
-      try container.encode(self.enableStackdriverLogging, forKey: .enableStackdriverLogging)
-      try container.encode(self.enableSpellCorrection, forKey: .enableSpellCorrection)
-      try container.encode(self.enableMultiLanguageTraining, forKey: .enableMultiLanguageTraining)
-      try container.encode(self.locked, forKey: .locked)
+      if !self.securitySettings.isEmpty {
+        try container.encode(self.securitySettings, forKey: .securitySettings)
+      }
+      if self.enableStackdriverLogging {
+        try container.encode(self.enableStackdriverLogging, forKey: .enableStackdriverLogging)
+      }
+      if self.enableSpellCorrection {
+        try container.encode(self.enableSpellCorrection, forKey: .enableSpellCorrection)
+      }
+      if self.enableMultiLanguageTraining {
+        try container.encode(self.enableMultiLanguageTraining, forKey: .enableMultiLanguageTraining)
+      }
+      if self.locked {
+        try container.encode(self.locked, forKey: .locked)
+      }
       try container.encodeIfPresent(self.advancedSettings, forKey: .advancedSettings)
       try container.encodeIfPresent(self.gitIntegrationSettings, forKey: .gitIntegrationSettings)
       try container.encodeIfPresent(self.textToSpeechSettings, forKey: .textToSpeechSettings)
@@ -529,11 +553,21 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.displayName, forKey: .displayName)
-          try container.encode(self.repositoryUri, forKey: .repositoryUri)
-          try container.encode(self.trackingBranch, forKey: .trackingBranch)
-          try container.encode(self.accessToken, forKey: .accessToken)
-          try container.encode(self.branches, forKey: .branches)
+          if !self.displayName.isEmpty {
+            try container.encode(self.displayName, forKey: .displayName)
+          }
+          if !self.repositoryUri.isEmpty {
+            try container.encode(self.repositoryUri, forKey: .repositoryUri)
+          }
+          if !self.trackingBranch.isEmpty {
+            try container.encode(self.trackingBranch, forKey: .trackingBranch)
+          }
+          if !self.accessToken.isEmpty {
+            try container.encode(self.accessToken, forKey: .accessToken)
+          }
+          if !self.branches.isEmpty {
+            try container.encode(self.branches, forKey: .branches)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -644,7 +678,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.engine, forKey: .engine)
+        if !self.engine.isEmpty {
+          try container.encode(self.engine, forKey: .engine)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -730,7 +766,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableAnswerFeedback, forKey: .enableAnswerFeedback)
+        if self.enableAnswerFeedback {
+          try container.encode(self.enableAnswerFeedback, forKey: .enableAnswerFeedback)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -921,9 +959,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.sslCertificate, forKey: .sslCertificate)
-        try container.encode(self.privateKey, forKey: .privateKey)
-        try container.encode(self.passphrase, forKey: .passphrase)
+        if !self.sslCertificate.isEmpty {
+          try container.encode(self.sslCertificate, forKey: .sslCertificate)
+        }
+        if !self.privateKey.isEmpty {
+          try container.encode(self.privateKey, forKey: .privateKey)
+        }
+        if !self.passphrase.isEmpty {
+          try container.encode(self.passphrase, forKey: .passphrase)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

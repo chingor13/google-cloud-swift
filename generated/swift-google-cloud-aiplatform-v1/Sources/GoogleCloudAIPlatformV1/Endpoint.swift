@@ -334,31 +334,62 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.deployedModels, forKey: .deployedModels)
-      try container.encode(self.trafficSplit, forKey: .trafficSplit)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.deployedModels.isEmpty {
+        try container.encode(self.deployedModels, forKey: .deployedModels)
+      }
+      if !self.trafficSplit.isEmpty {
+        try container.encode(self.trafficSplit, forKey: .trafficSplit)
+      }
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.enablePrivateServiceConnect, forKey: .enablePrivateServiceConnect)
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if self.enablePrivateServiceConnect {
+        try container.encode(self.enablePrivateServiceConnect, forKey: .enablePrivateServiceConnect)
+      }
       try container.encodeIfPresent(
         self.privateServiceConnectConfig, forKey: .privateServiceConnectConfig)
-      try container.encode(self.modelDeploymentMonitoringJob, forKey: .modelDeploymentMonitoringJob)
+      if !self.modelDeploymentMonitoringJob.isEmpty {
+        try container.encode(
+          self.modelDeploymentMonitoringJob, forKey: .modelDeploymentMonitoringJob)
+      }
       try container.encodeIfPresent(
         self.predictRequestResponseLoggingConfig, forKey: .predictRequestResponseLoggingConfig)
-      try container.encode(self.dedicatedEndpointEnabled, forKey: .dedicatedEndpointEnabled)
-      try container.encode(self.dedicatedEndpointDns, forKey: .dedicatedEndpointDns)
+      if self.dedicatedEndpointEnabled {
+        try container.encode(self.dedicatedEndpointEnabled, forKey: .dedicatedEndpointEnabled)
+      }
+      if !self.dedicatedEndpointDns.isEmpty {
+        try container.encode(self.dedicatedEndpointDns, forKey: .dedicatedEndpointDns)
+      }
       try container.encodeIfPresent(self.clientConnectionConfig, forKey: .clientConnectionConfig)
-      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      if self.satisfiesPzs {
+        try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+      }
+      if self.satisfiesPzi {
+        try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      }
       try container.encodeIfPresent(
         self.genAiAdvancedFeaturesConfig, forKey: .genAiAdvancedFeaturesConfig)
-      try container.encode(self.privateModelServerEnabled, forKey: .privateModelServerEnabled)
+      if self.privateModelServerEnabled {
+        try container.encode(self.privateModelServerEnabled, forKey: .privateModelServerEnabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -154,13 +154,21 @@ public struct ImportProductsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
     try container.encodeIfPresent(self.errorsConfig, forKey: .errorsConfig)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.reconciliationMode, forKey: .reconciliationMode)
-    try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    if self.reconciliationMode != ImportProductsRequest.ReconciliationMode() {
+      try container.encode(self.reconciliationMode, forKey: .reconciliationMode)
+    }
+    if !self.notificationPubsubTopic.isEmpty {
+      try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

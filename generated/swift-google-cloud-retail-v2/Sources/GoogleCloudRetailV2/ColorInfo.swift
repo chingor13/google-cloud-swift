@@ -106,8 +106,12 @@ public struct ColorInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.colorFamilies, forKey: .colorFamilies)
-    try container.encode(self.colors, forKey: .colors)
+    if !self.colorFamilies.isEmpty {
+      try container.encode(self.colorFamilies, forKey: .colorFamilies)
+    }
+    if !self.colors.isEmpty {
+      try container.encode(self.colors, forKey: .colors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

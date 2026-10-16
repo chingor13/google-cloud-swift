@@ -92,9 +92,15 @@ public struct AutomationRolloutMetadata: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.promoteAutomationRun, forKey: .promoteAutomationRun)
-    try container.encode(self.advanceAutomationRuns, forKey: .advanceAutomationRuns)
-    try container.encode(self.repairAutomationRuns, forKey: .repairAutomationRuns)
+    if !self.promoteAutomationRun.isEmpty {
+      try container.encode(self.promoteAutomationRun, forKey: .promoteAutomationRun)
+    }
+    if !self.advanceAutomationRuns.isEmpty {
+      try container.encode(self.advanceAutomationRuns, forKey: .advanceAutomationRuns)
+    }
+    if !self.repairAutomationRuns.isEmpty {
+      try container.encode(self.repairAutomationRuns, forKey: .repairAutomationRuns)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

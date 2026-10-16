@@ -144,10 +144,18 @@ public struct GitFileSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.repoType, forKey: .repoType)
-    try container.encode(self.revision, forKey: .revision)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.repoType != GitFileSource.RepoType() {
+      try container.encode(self.repoType, forKey: .repoType)
+    }
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
 
     if let choice = self.source {
       switch choice {

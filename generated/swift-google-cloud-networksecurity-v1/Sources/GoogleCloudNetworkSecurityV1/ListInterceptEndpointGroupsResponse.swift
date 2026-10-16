@@ -82,8 +82,12 @@ public struct ListInterceptEndpointGroupsResponse: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.interceptEndpointGroups, forKey: .interceptEndpointGroups)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.interceptEndpointGroups.isEmpty {
+      try container.encode(self.interceptEndpointGroups, forKey: .interceptEndpointGroups)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -152,17 +152,39 @@ public struct PosixAccount: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primary, forKey: .primary)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.gid, forKey: .gid)
-    try container.encode(self.homeDirectory, forKey: .homeDirectory)
-    try container.encode(self.shell, forKey: .shell)
-    try container.encode(self.gecos, forKey: .gecos)
-    try container.encode(self.systemId, forKey: .systemId)
-    try container.encode(self.accountId, forKey: .accountId)
-    try container.encode(self.operatingSystemType, forKey: .operatingSystemType)
-    try container.encode(self.name, forKey: .name)
+    if self.primary {
+      try container.encode(self.primary, forKey: .primary)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if self.uid != 0 {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.gid != 0 {
+      try container.encode(self.gid, forKey: .gid)
+    }
+    if !self.homeDirectory.isEmpty {
+      try container.encode(self.homeDirectory, forKey: .homeDirectory)
+    }
+    if !self.shell.isEmpty {
+      try container.encode(self.shell, forKey: .shell)
+    }
+    if !self.gecos.isEmpty {
+      try container.encode(self.gecos, forKey: .gecos)
+    }
+    if !self.systemId.isEmpty {
+      try container.encode(self.systemId, forKey: .systemId)
+    }
+    if !self.accountId.isEmpty {
+      try container.encode(self.accountId, forKey: .accountId)
+    }
+    if self.operatingSystemType != OperatingSystemType() {
+      try container.encode(self.operatingSystemType, forKey: .operatingSystemType)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

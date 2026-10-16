@@ -90,7 +90,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryId, forKey: .queryId)
+      if !self.queryId.isEmpty {
+        try container.encode(self.queryId, forKey: .queryId)
+      }
 
       if let choice = self.content {
         switch choice {

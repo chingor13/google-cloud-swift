@@ -214,7 +214,7 @@
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.dnsVerificationIp, forKey: .dnsVerificationIp)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -225,7 +225,9 @@
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.pdpScope, forKey: .pdpScope)
-      try container.encode(self.publicDelegatedPrefixs, forKey: .publicDelegatedPrefixs)
+      if !self.publicDelegatedPrefixs.isEmpty {
+        try container.encode(self.publicDelegatedPrefixs, forKey: .publicDelegatedPrefixs)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.sharedSecret, forKey: .sharedSecret)
       try container.encodeIfPresent(self.status, forKey: .status)

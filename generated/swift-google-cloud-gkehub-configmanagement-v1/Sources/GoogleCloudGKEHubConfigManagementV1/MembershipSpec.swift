@@ -117,9 +117,15 @@ public struct MembershipSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.configSync, forKey: .configSync)
     try container.encodeIfPresent(self.policyController, forKey: .policyController)
     try container.encodeIfPresent(self.hierarchyController, forKey: .hierarchyController)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.management, forKey: .management)
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if self.management != MembershipSpec.Management() {
+      try container.encode(self.management, forKey: .management)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -103,10 +103,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.columns, forKey: .columns)
-      try container.encode(self.rows, forKey: .rows)
-      try container.encode(self.message, forKey: .message)
-      try container.encode(self.partialResult, forKey: .partialResult)
+      if !self.columns.isEmpty {
+        try container.encode(self.columns, forKey: .columns)
+      }
+      if !self.rows.isEmpty {
+        try container.encode(self.rows, forKey: .rows)
+      }
+      if !self.message.isEmpty {
+        try container.encode(self.message, forKey: .message)
+      }
+      if self.partialResult {
+        try container.encode(self.partialResult, forKey: .partialResult)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

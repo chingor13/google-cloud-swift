@@ -210,20 +210,48 @@ public struct CloudControlReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudControl, forKey: .cloudControl)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.similarControls, forKey: .similarControls)
-    try container.encode(self.cloudControlType, forKey: .cloudControlType)
-    try container.encode(self.findingCategory, forKey: .findingCategory)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.findingSeverity, forKey: .findingSeverity)
-    try container.encode(self.enforcementMode, forKey: .enforcementMode)
-    try container.encode(self.cloudControlDeployment, forKey: .cloudControlDeployment)
-    try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
-    try container.encode(self.minorRevisionId, forKey: .minorRevisionId)
-    try container.encode(self.frameworkMajorRevisionIds, forKey: .frameworkMajorRevisionIds)
+    if !self.cloudControl.isEmpty {
+      try container.encode(self.cloudControl, forKey: .cloudControl)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.similarControls.isEmpty {
+      try container.encode(self.similarControls, forKey: .similarControls)
+    }
+    if self.cloudControlType != CloudControl.Type_() {
+      try container.encode(self.cloudControlType, forKey: .cloudControlType)
+    }
+    if !self.findingCategory.isEmpty {
+      try container.encode(self.findingCategory, forKey: .findingCategory)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if self.findingSeverity != Severity() {
+      try container.encode(self.findingSeverity, forKey: .findingSeverity)
+    }
+    if self.enforcementMode != EnforcementMode() {
+      try container.encode(self.enforcementMode, forKey: .enforcementMode)
+    }
+    if !self.cloudControlDeployment.isEmpty {
+      try container.encode(self.cloudControlDeployment, forKey: .cloudControlDeployment)
+    }
+    if self.majorRevisionId != 0 {
+      try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    }
+    if self.minorRevisionId != 0 {
+      try container.encode(self.minorRevisionId, forKey: .minorRevisionId)
+    }
+    if !self.frameworkMajorRevisionIds.isEmpty {
+      try container.encode(self.frameworkMajorRevisionIds, forKey: .frameworkMajorRevisionIds)
+    }
 
     if let choice = self.assessmentDetails {
       switch choice {

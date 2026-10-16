@@ -184,16 +184,32 @@ public struct ServiceAccountKey: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.privateKeyType, forKey: .privateKeyType)
-    try container.encode(self.keyAlgorithm, forKey: .keyAlgorithm)
-    try container.encode(self.privateKeyData, forKey: .privateKeyData)
-    try container.encode(self.publicKeyData, forKey: .publicKeyData)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.privateKeyType != ServiceAccountPrivateKeyType() {
+      try container.encode(self.privateKeyType, forKey: .privateKeyType)
+    }
+    if self.keyAlgorithm != ServiceAccountKeyAlgorithm() {
+      try container.encode(self.keyAlgorithm, forKey: .keyAlgorithm)
+    }
+    if !self.privateKeyData.isEmpty {
+      try container.encode(self.privateKeyData, forKey: .privateKeyData)
+    }
+    if !self.publicKeyData.isEmpty {
+      try container.encode(self.publicKeyData, forKey: .publicKeyData)
+    }
     try container.encodeIfPresent(self.validAfterTime, forKey: .validAfterTime)
     try container.encodeIfPresent(self.validBeforeTime, forKey: .validBeforeTime)
-    try container.encode(self.keyOrigin, forKey: .keyOrigin)
-    try container.encode(self.keyType, forKey: .keyType)
-    try container.encode(self.disabled, forKey: .disabled)
+    if self.keyOrigin != ServiceAccountKeyOrigin() {
+      try container.encode(self.keyOrigin, forKey: .keyOrigin)
+    }
+    if self.keyType != ListServiceAccountKeysRequest.KeyType() {
+      try container.encode(self.keyType, forKey: .keyType)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -79,8 +79,12 @@ public struct GoogleArtifactRegistry: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.artifactRegistryPackage, forKey: .artifactRegistryPackage)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.artifactRegistryPackage.isEmpty {
+      try container.encode(self.artifactRegistryPackage, forKey: .artifactRegistryPackage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

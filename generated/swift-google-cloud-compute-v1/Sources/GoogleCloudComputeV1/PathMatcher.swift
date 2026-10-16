@@ -241,8 +241,12 @@
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.headerAction, forKey: .headerAction)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.pathRules, forKey: .pathRules)
-      try container.encode(self.routeRules, forKey: .routeRules)
+      if !self.pathRules.isEmpty {
+        try container.encode(self.pathRules, forKey: .pathRules)
+      }
+      if !self.routeRules.isEmpty {
+        try container.encode(self.routeRules, forKey: .routeRules)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

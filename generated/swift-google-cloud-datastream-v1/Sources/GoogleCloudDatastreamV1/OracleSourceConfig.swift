@@ -153,8 +153,12 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.includeObjects, forKey: .includeObjects)
     try container.encodeIfPresent(self.excludeObjects, forKey: .excludeObjects)
-    try container.encode(self.maxConcurrentCdcTasks, forKey: .maxConcurrentCdcTasks)
-    try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    if self.maxConcurrentCdcTasks != 0 {
+      try container.encode(self.maxConcurrentCdcTasks, forKey: .maxConcurrentCdcTasks)
+    }
+    if self.maxConcurrentBackfillTasks != 0 {
+      try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    }
 
     if let choice = self.largeObjectsHandling {
       switch choice {
@@ -606,8 +610,12 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.onlineLogDirectory, forKey: .onlineLogDirectory)
-        try container.encode(self.archivedLogDirectory, forKey: .archivedLogDirectory)
+        if !self.onlineLogDirectory.isEmpty {
+          try container.encode(self.onlineLogDirectory, forKey: .onlineLogDirectory)
+        }
+        if !self.archivedLogDirectory.isEmpty {
+          try container.encode(self.archivedLogDirectory, forKey: .archivedLogDirectory)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

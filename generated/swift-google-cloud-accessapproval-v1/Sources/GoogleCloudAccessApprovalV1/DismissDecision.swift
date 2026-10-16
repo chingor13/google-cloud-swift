@@ -79,7 +79,9 @@ public struct DismissDecision: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.dismissTime, forKey: .dismissTime)
-    try container.encode(self.implicit, forKey: .implicit)
+    if self.implicit {
+      try container.encode(self.implicit, forKey: .implicit)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

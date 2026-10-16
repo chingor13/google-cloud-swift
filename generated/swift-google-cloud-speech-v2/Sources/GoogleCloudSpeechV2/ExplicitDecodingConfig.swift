@@ -96,9 +96,15 @@ public struct ExplicitDecodingConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.encoding, forKey: .encoding)
-    try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
-    try container.encode(self.audioChannelCount, forKey: .audioChannelCount)
+    if self.encoding != ExplicitDecodingConfig.AudioEncoding() {
+      try container.encode(self.encoding, forKey: .encoding)
+    }
+    if self.sampleRateHertz != 0 {
+      try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
+    }
+    if self.audioChannelCount != 0 {
+      try container.encode(self.audioChannelCount, forKey: .audioChannelCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

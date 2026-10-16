@@ -93,8 +93,12 @@ public struct AttachedOidcConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issuerUrl, forKey: .issuerUrl)
-    try container.encode(self.jwks, forKey: .jwks)
+    if !self.issuerUrl.isEmpty {
+      try container.encode(self.issuerUrl, forKey: .issuerUrl)
+    }
+    if !self.jwks.isEmpty {
+      try container.encode(self.jwks, forKey: .jwks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

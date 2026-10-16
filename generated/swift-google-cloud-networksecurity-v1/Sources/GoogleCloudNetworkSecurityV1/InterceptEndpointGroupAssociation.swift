@@ -186,17 +186,35 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleWKT._
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.interceptEndpointGroup, forKey: .interceptEndpointGroup)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.locationsDetails, forKey: .locationsDetails)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.locations, forKey: .locations)
-    try container.encode(self.networkCookie, forKey: .networkCookie)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.interceptEndpointGroup.isEmpty {
+      try container.encode(self.interceptEndpointGroup, forKey: .interceptEndpointGroup)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.locationsDetails.isEmpty {
+      try container.encode(self.locationsDetails, forKey: .locationsDetails)
+    }
+    if self.state != InterceptEndpointGroupAssociation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
+    if self.networkCookie != 0 {
+      try container.encode(self.networkCookie, forKey: .networkCookie)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -266,8 +284,12 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.state, forKey: .state)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if self.state != InterceptEndpointGroupAssociation.LocationDetails.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

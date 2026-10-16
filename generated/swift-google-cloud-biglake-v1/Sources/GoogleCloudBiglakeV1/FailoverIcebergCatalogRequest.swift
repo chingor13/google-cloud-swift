@@ -104,9 +104,15 @@ public struct FailoverIcebergCatalogRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.primaryReplica, forKey: .primaryReplica)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.primaryReplica.isEmpty {
+      try container.encode(self.primaryReplica, forKey: .primaryReplica)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     try container.encodeIfPresent(
       self.conditionalFailoverReplicationTime, forKey: .conditionalFailoverReplicationTime)
     for (key, value) in self._unknownFields.json {

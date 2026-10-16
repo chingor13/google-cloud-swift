@@ -88,9 +88,15 @@ public struct PolicyViolationDetails: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.policy, forKey: .policy)
-    try container.encode(self.ruleId, forKey: .ruleId)
-    try container.encode(self.failureMessage, forKey: .failureMessage)
+    if !self.policy.isEmpty {
+      try container.encode(self.policy, forKey: .policy)
+    }
+    if !self.ruleId.isEmpty {
+      try container.encode(self.ruleId, forKey: .ruleId)
+    }
+    if !self.failureMessage.isEmpty {
+      try container.encode(self.failureMessage, forKey: .failureMessage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

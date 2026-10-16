@@ -248,23 +248,49 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destAddressGroups, forKey: .destAddressGroups)
-      try container.encode(self.destFqdns, forKey: .destFqdns)
-      try container.encode(self.destIpRanges, forKey: .destIpRanges)
+      if !self.destAddressGroups.isEmpty {
+        try container.encode(self.destAddressGroups, forKey: .destAddressGroups)
+      }
+      if !self.destFqdns.isEmpty {
+        try container.encode(self.destFqdns, forKey: .destFqdns)
+      }
+      if !self.destIpRanges.isEmpty {
+        try container.encode(self.destIpRanges, forKey: .destIpRanges)
+      }
       try container.encodeIfPresent(self.destNetworkContext, forKey: .destNetworkContext)
       try container.encodeIfPresent(self.destNetworkType, forKey: .destNetworkType)
-      try container.encode(self.destRegionCodes, forKey: .destRegionCodes)
-      try container.encode(self.destThreatIntelligences, forKey: .destThreatIntelligences)
-      try container.encode(self.layer4Configs, forKey: .layer4Configs)
-      try container.encode(self.srcAddressGroups, forKey: .srcAddressGroups)
-      try container.encode(self.srcFqdns, forKey: .srcFqdns)
-      try container.encode(self.srcIpRanges, forKey: .srcIpRanges)
+      if !self.destRegionCodes.isEmpty {
+        try container.encode(self.destRegionCodes, forKey: .destRegionCodes)
+      }
+      if !self.destThreatIntelligences.isEmpty {
+        try container.encode(self.destThreatIntelligences, forKey: .destThreatIntelligences)
+      }
+      if !self.layer4Configs.isEmpty {
+        try container.encode(self.layer4Configs, forKey: .layer4Configs)
+      }
+      if !self.srcAddressGroups.isEmpty {
+        try container.encode(self.srcAddressGroups, forKey: .srcAddressGroups)
+      }
+      if !self.srcFqdns.isEmpty {
+        try container.encode(self.srcFqdns, forKey: .srcFqdns)
+      }
+      if !self.srcIpRanges.isEmpty {
+        try container.encode(self.srcIpRanges, forKey: .srcIpRanges)
+      }
       try container.encodeIfPresent(self.srcNetworkContext, forKey: .srcNetworkContext)
       try container.encodeIfPresent(self.srcNetworkType, forKey: .srcNetworkType)
-      try container.encode(self.srcNetworks, forKey: .srcNetworks)
-      try container.encode(self.srcRegionCodes, forKey: .srcRegionCodes)
-      try container.encode(self.srcSecureTags, forKey: .srcSecureTags)
-      try container.encode(self.srcThreatIntelligences, forKey: .srcThreatIntelligences)
+      if !self.srcNetworks.isEmpty {
+        try container.encode(self.srcNetworks, forKey: .srcNetworks)
+      }
+      if !self.srcRegionCodes.isEmpty {
+        try container.encode(self.srcRegionCodes, forKey: .srcRegionCodes)
+      }
+      if !self.srcSecureTags.isEmpty {
+        try container.encode(self.srcSecureTags, forKey: .srcSecureTags)
+      }
+      if !self.srcThreatIntelligences.isEmpty {
+        try container.encode(self.srcThreatIntelligences, forKey: .srcThreatIntelligences)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

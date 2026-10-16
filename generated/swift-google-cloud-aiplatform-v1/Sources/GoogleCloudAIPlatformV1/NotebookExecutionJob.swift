@@ -308,16 +308,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.executionTimeout, forKey: .executionTimeout)
-      try container.encode(self.scheduleResourceName, forKey: .scheduleResourceName)
-      try container.encode(self.jobState, forKey: .jobState)
+      if !self.scheduleResourceName.isEmpty {
+        try container.encode(self.scheduleResourceName, forKey: .scheduleResourceName)
+      }
+      if self.jobState != JobState() {
+        try container.encode(self.jobState, forKey: .jobState)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.kernelName, forKey: .kernelName)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.kernelName.isEmpty {
+        try container.encode(self.kernelName, forKey: .kernelName)
+      }
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
 
       if let choice = self.notebookSource {
@@ -432,9 +444,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.dataformRepositoryResourceName, forKey: .dataformRepositoryResourceName)
-        try container.encode(self.commitSha, forKey: .commitSha)
+        if !self.dataformRepositoryResourceName.isEmpty {
+          try container.encode(
+            self.dataformRepositoryResourceName, forKey: .dataformRepositoryResourceName)
+        }
+        if !self.commitSha.isEmpty {
+          try container.encode(self.commitSha, forKey: .commitSha)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -526,8 +542,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.generation, forKey: .generation)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.generation.isEmpty {
+          try container.encode(self.generation, forKey: .generation)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -608,7 +628,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.content, forKey: .content)
+        if !self.content.isEmpty {
+          try container.encode(self.content, forKey: .content)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

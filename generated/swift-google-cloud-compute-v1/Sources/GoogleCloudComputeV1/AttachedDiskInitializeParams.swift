@@ -340,14 +340,24 @@
       try container.encodeIfPresent(self.diskType, forKey: .diskType)
       try container.encodeIfPresent(
         self.enableConfidentialCompute, forKey: .enableConfidentialCompute)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.licenses, forKey: .licenses)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.licenses.isEmpty {
+        try container.encode(self.licenses, forKey: .licenses)
+      }
       try container.encodeIfPresent(self.onUpdateAction, forKey: .onUpdateAction)
       try container.encodeIfPresent(self.provisionedIops, forKey: .provisionedIops)
       try container.encodeIfPresent(self.provisionedThroughput, forKey: .provisionedThroughput)
-      try container.encode(self.replicaZones, forKey: .replicaZones)
-      try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
-      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      if !self.replicaZones.isEmpty {
+        try container.encode(self.replicaZones, forKey: .replicaZones)
+      }
+      if !self.resourceManagerTags.isEmpty {
+        try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+      }
+      if !self.resourcePolicies.isEmpty {
+        try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      }
       try container.encodeIfPresent(self.sourceImage, forKey: .sourceImage)
       try container.encodeIfPresent(
         self.sourceImageEncryptionKey, forKey: .sourceImageEncryptionKey)

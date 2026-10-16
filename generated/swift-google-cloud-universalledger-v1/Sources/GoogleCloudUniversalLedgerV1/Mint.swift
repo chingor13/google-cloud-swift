@@ -81,7 +81,9 @@ public struct Mint: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.mintAmount, forKey: .mintAmount)
-    try container.encode(self.beneficiaryId, forKey: .beneficiaryId)
+    if !self.beneficiaryId.isEmpty {
+      try container.encode(self.beneficiaryId, forKey: .beneficiaryId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

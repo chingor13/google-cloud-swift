@@ -102,11 +102,21 @@ public struct GKEMasterInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterUri, forKey: .clusterUri)
-    try container.encode(self.clusterNetworkUri, forKey: .clusterNetworkUri)
-    try container.encode(self.internalIp, forKey: .internalIp)
-    try container.encode(self.externalIp, forKey: .externalIp)
-    try container.encode(self.dnsEndpoint, forKey: .dnsEndpoint)
+    if !self.clusterUri.isEmpty {
+      try container.encode(self.clusterUri, forKey: .clusterUri)
+    }
+    if !self.clusterNetworkUri.isEmpty {
+      try container.encode(self.clusterNetworkUri, forKey: .clusterNetworkUri)
+    }
+    if !self.internalIp.isEmpty {
+      try container.encode(self.internalIp, forKey: .internalIp)
+    }
+    if !self.externalIp.isEmpty {
+      try container.encode(self.externalIp, forKey: .externalIp)
+    }
+    if !self.dnsEndpoint.isEmpty {
+      try container.encode(self.dnsEndpoint, forKey: .dnsEndpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

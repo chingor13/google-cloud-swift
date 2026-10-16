@@ -123,8 +123,12 @@ public struct MysqlSourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.includeObjects, forKey: .includeObjects)
     try container.encodeIfPresent(self.excludeObjects, forKey: .excludeObjects)
-    try container.encode(self.maxConcurrentCdcTasks, forKey: .maxConcurrentCdcTasks)
-    try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    if self.maxConcurrentCdcTasks != 0 {
+      try container.encode(self.maxConcurrentCdcTasks, forKey: .maxConcurrentCdcTasks)
+    }
+    if self.maxConcurrentBackfillTasks != 0 {
+      try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    }
 
     if let choice = self.cdcMethod {
       switch choice {

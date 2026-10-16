@@ -177,13 +177,27 @@ public struct DateTime: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.year, forKey: .year)
-    try container.encode(self.month, forKey: .month)
-    try container.encode(self.day, forKey: .day)
-    try container.encode(self.hours, forKey: .hours)
-    try container.encode(self.minutes, forKey: .minutes)
-    try container.encode(self.seconds, forKey: .seconds)
-    try container.encode(self.nanos, forKey: .nanos)
+    if self.year != 0 {
+      try container.encode(self.year, forKey: .year)
+    }
+    if self.month != 0 {
+      try container.encode(self.month, forKey: .month)
+    }
+    if self.day != 0 {
+      try container.encode(self.day, forKey: .day)
+    }
+    if self.hours != 0 {
+      try container.encode(self.hours, forKey: .hours)
+    }
+    if self.minutes != 0 {
+      try container.encode(self.minutes, forKey: .minutes)
+    }
+    if self.seconds != 0 {
+      try container.encode(self.seconds, forKey: .seconds)
+    }
+    if self.nanos != 0 {
+      try container.encode(self.nanos, forKey: .nanos)
+    }
 
     if let choice = self.timeOffset {
       switch choice {

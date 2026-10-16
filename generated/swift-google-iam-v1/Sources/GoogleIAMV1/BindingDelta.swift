@@ -98,9 +98,15 @@ public struct BindingDelta: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.role, forKey: .role)
-    try container.encode(self.member, forKey: .member)
+    if self.action != BindingDelta.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.role.isEmpty {
+      try container.encode(self.role, forKey: .role)
+    }
+    if !self.member.isEmpty {
+      try container.encode(self.member, forKey: .member)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

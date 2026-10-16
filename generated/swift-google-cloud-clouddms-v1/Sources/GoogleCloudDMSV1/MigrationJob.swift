@@ -282,26 +282,48 @@ public struct MigrationJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.phase, forKey: .phase)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.dumpPath, forKey: .dumpPath)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.state != MigrationJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.phase != MigrationJob.Phase() {
+      try container.encode(self.phase, forKey: .phase)
+    }
+    if self.type != MigrationJob.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.dumpPath.isEmpty {
+      try container.encode(self.dumpPath, forKey: .dumpPath)
+    }
     try container.encodeIfPresent(self.dumpFlags, forKey: .dumpFlags)
-    try container.encode(self.source, forKey: .source)
-    try container.encode(self.destination, forKey: .destination)
+    if !self.source.isEmpty {
+      try container.encode(self.source, forKey: .source)
+    }
+    if !self.destination.isEmpty {
+      try container.encode(self.destination, forKey: .destination)
+    }
     try container.encodeIfPresent(self.duration, forKey: .duration)
     try container.encodeIfPresent(self.error, forKey: .error)
     try container.encodeIfPresent(self.sourceDatabase, forKey: .sourceDatabase)
     try container.encodeIfPresent(self.destinationDatabase, forKey: .destinationDatabase)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.conversionWorkspace, forKey: .conversionWorkspace)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.cmekKeyName, forKey: .cmekKeyName)
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if !self.cmekKeyName.isEmpty {
+      try container.encode(self.cmekKeyName, forKey: .cmekKeyName)
+    }
     try container.encodeIfPresent(self.performanceConfig, forKey: .performanceConfig)
 
     if let choice = self.connectivity {
@@ -379,8 +401,12 @@ public struct MigrationJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.value, forKey: .value)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -461,7 +487,9 @@ public struct MigrationJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dumpFlags, forKey: .dumpFlags)
+      if !self.dumpFlags.isEmpty {
+        try container.encode(self.dumpFlags, forKey: .dumpFlags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -544,7 +572,9 @@ public struct MigrationJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dumpParallelLevel, forKey: .dumpParallelLevel)
+      if self.dumpParallelLevel != MigrationJob.PerformanceConfig.DumpParallelLevel() {
+        try container.encode(self.dumpParallelLevel, forKey: .dumpParallelLevel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

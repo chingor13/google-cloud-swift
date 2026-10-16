@@ -97,10 +97,18 @@ public struct NameMappingValue: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.schema, forKey: .schema)
-    try container.encode(self.relation, forKey: .relation)
-    try container.encode(self.attribute, forKey: .attribute)
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.schema.isEmpty {
+      try container.encode(self.schema, forKey: .schema)
+    }
+    if !self.relation.isEmpty {
+      try container.encode(self.relation, forKey: .relation)
+    }
+    if !self.attribute.isEmpty {
+      try container.encode(self.attribute, forKey: .attribute)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

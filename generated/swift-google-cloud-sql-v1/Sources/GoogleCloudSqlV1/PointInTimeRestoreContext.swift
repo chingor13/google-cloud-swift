@@ -159,8 +159,11 @@
       try container.encodeIfPresent(self.preferredZone, forKey: .preferredZone)
       try container.encodeIfPresent(self.preferredSecondaryZone, forKey: .preferredSecondaryZone)
       try container.encodeIfPresent(self.targetInstanceSettings, forKey: .targetInstanceSettings)
-      try container.encode(
-        self.targetInstanceClearSettingsFieldNames, forKey: .targetInstanceClearSettingsFieldNames)
+      if !self.targetInstanceClearSettingsFieldNames.isEmpty {
+        try container.encode(
+          self.targetInstanceClearSettingsFieldNames, forKey: .targetInstanceClearSettingsFieldNames
+        )
+      }
       try container.encodeIfPresent(self.region, forKey: .region)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

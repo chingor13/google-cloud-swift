@@ -118,7 +118,9 @@ public struct CompensationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.entries, forKey: .entries)
+    if !self.entries.isEmpty {
+      try container.encode(self.entries, forKey: .entries)
+    }
     try container.encodeIfPresent(
       self.annualizedBaseCompensationRange, forKey: .annualizedBaseCompensationRange)
     try container.encodeIfPresent(
@@ -277,9 +279,15 @@ public struct CompensationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.unit, forKey: .unit)
-      try container.encode(self.description, forKey: .description)
+      if self.type != CompensationInfo.CompensationType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.unit != CompensationInfo.CompensationUnit() {
+        try container.encode(self.unit, forKey: .unit)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.expectedUnitsPerYear, forKey: .expectedUnitsPerYear)
 
       if let choice = self.compensationAmount {

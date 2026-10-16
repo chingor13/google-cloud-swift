@@ -128,10 +128,16 @@ public struct CreateVmwareEngineNetworkRequest: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.vmwareEngineNetworkId, forKey: .vmwareEngineNetworkId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.vmwareEngineNetworkId.isEmpty {
+      try container.encode(self.vmwareEngineNetworkId, forKey: .vmwareEngineNetworkId)
+    }
     try container.encodeIfPresent(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

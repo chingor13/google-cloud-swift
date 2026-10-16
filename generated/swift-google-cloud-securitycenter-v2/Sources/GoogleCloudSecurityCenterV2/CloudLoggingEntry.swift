@@ -96,9 +96,15 @@ public struct CloudLoggingEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.insertId, forKey: .insertId)
-    try container.encode(self.logId, forKey: .logId)
-    try container.encode(self.resourceContainer, forKey: .resourceContainer)
+    if !self.insertId.isEmpty {
+      try container.encode(self.insertId, forKey: .insertId)
+    }
+    if !self.logId.isEmpty {
+      try container.encode(self.logId, forKey: .logId)
+    }
+    if !self.resourceContainer.isEmpty {
+      try container.encode(self.resourceContainer, forKey: .resourceContainer)
+    }
     try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

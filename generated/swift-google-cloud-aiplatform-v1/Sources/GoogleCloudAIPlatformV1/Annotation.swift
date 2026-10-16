@@ -160,14 +160,22 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.payloadSchemaUri, forKey: .payloadSchemaUri)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.payloadSchemaUri.isEmpty {
+        try container.encode(self.payloadSchemaUri, forKey: .payloadSchemaUri)
+      }
       try container.encodeIfPresent(self.payload, forKey: .payload)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.etag, forKey: .etag)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
       try container.encodeIfPresent(self.annotationSource, forKey: .annotationSource)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

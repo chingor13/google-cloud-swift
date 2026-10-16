@@ -79,8 +79,12 @@ public struct NetworkUsageSample: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.averageIngressBps, forKey: .averageIngressBps)
-    try container.encode(self.averageEgressBps, forKey: .averageEgressBps)
+    if self.averageIngressBps != 0 {
+      try container.encode(self.averageIngressBps, forKey: .averageIngressBps)
+    }
+    if self.averageEgressBps != 0 {
+      try container.encode(self.averageEgressBps, forKey: .averageEgressBps)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

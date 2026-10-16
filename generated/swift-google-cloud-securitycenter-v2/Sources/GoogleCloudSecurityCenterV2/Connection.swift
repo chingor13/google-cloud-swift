@@ -103,11 +103,21 @@ public struct Connection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.destinationIp, forKey: .destinationIp)
-    try container.encode(self.destinationPort, forKey: .destinationPort)
-    try container.encode(self.sourceIp, forKey: .sourceIp)
-    try container.encode(self.sourcePort, forKey: .sourcePort)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
+    if !self.destinationIp.isEmpty {
+      try container.encode(self.destinationIp, forKey: .destinationIp)
+    }
+    if self.destinationPort != 0 {
+      try container.encode(self.destinationPort, forKey: .destinationPort)
+    }
+    if !self.sourceIp.isEmpty {
+      try container.encode(self.sourceIp, forKey: .sourceIp)
+    }
+    if self.sourcePort != 0 {
+      try container.encode(self.sourcePort, forKey: .sourcePort)
+    }
+    if self.`protocol` != Connection.Protocol_() {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

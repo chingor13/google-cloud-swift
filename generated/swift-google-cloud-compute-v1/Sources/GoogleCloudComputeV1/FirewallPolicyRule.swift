@@ -239,10 +239,18 @@
       try container.encodeIfPresent(self.ruleName, forKey: .ruleName)
       try container.encodeIfPresent(self.ruleTupleCount, forKey: .ruleTupleCount)
       try container.encodeIfPresent(self.securityProfileGroup, forKey: .securityProfileGroup)
-      try container.encode(self.targetForwardingRules, forKey: .targetForwardingRules)
-      try container.encode(self.targetResources, forKey: .targetResources)
-      try container.encode(self.targetSecureTags, forKey: .targetSecureTags)
-      try container.encode(self.targetServiceAccounts, forKey: .targetServiceAccounts)
+      if !self.targetForwardingRules.isEmpty {
+        try container.encode(self.targetForwardingRules, forKey: .targetForwardingRules)
+      }
+      if !self.targetResources.isEmpty {
+        try container.encode(self.targetResources, forKey: .targetResources)
+      }
+      if !self.targetSecureTags.isEmpty {
+        try container.encode(self.targetSecureTags, forKey: .targetSecureTags)
+      }
+      if !self.targetServiceAccounts.isEmpty {
+        try container.encode(self.targetServiceAccounts, forKey: .targetServiceAccounts)
+      }
       try container.encodeIfPresent(self.targetType, forKey: .targetType)
       try container.encodeIfPresent(self.tlsInspect, forKey: .tlsInspect)
       for (key, value) in self._unknownFields.json {

@@ -89,9 +89,15 @@ public struct SearchAssetsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.searchResultItems, forKey: .searchResultItems)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.facetResults, forKey: .facetResults)
+    if !self.searchResultItems.isEmpty {
+      try container.encode(self.searchResultItems, forKey: .searchResultItems)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.facetResults.isEmpty {
+      try container.encode(self.facetResults, forKey: .facetResults)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

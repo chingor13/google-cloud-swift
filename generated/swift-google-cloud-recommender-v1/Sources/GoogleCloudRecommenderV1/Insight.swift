@@ -159,18 +159,34 @@ public struct Insight: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.targetResources, forKey: .targetResources)
-    try container.encode(self.insightSubtype, forKey: .insightSubtype)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.targetResources.isEmpty {
+      try container.encode(self.targetResources, forKey: .targetResources)
+    }
+    if !self.insightSubtype.isEmpty {
+      try container.encode(self.insightSubtype, forKey: .insightSubtype)
+    }
     try container.encodeIfPresent(self.content, forKey: .content)
     try container.encodeIfPresent(self.lastRefreshTime, forKey: .lastRefreshTime)
     try container.encodeIfPresent(self.observationPeriod, forKey: .observationPeriod)
     try container.encodeIfPresent(self.stateInfo, forKey: .stateInfo)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.associatedRecommendations, forKey: .associatedRecommendations)
+    if self.category != Insight.Category() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if self.severity != Insight.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.associatedRecommendations.isEmpty {
+      try container.encode(self.associatedRecommendations, forKey: .associatedRecommendations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -229,7 +245,9 @@ public struct Insight: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.recommendation, forKey: .recommendation)
+      if !self.recommendation.isEmpty {
+        try container.encode(self.recommendation, forKey: .recommendation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

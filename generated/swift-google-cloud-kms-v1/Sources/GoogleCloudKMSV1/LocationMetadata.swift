@@ -110,9 +110,15 @@ public struct LocationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hsmAvailable, forKey: .hsmAvailable)
-    try container.encode(self.ekmAvailable, forKey: .ekmAvailable)
-    try container.encode(self.hsmSingleTenantAvailable, forKey: .hsmSingleTenantAvailable)
+    if self.hsmAvailable {
+      try container.encode(self.hsmAvailable, forKey: .hsmAvailable)
+    }
+    if self.ekmAvailable {
+      try container.encode(self.ekmAvailable, forKey: .ekmAvailable)
+    }
+    if self.hsmSingleTenantAvailable {
+      try container.encode(self.hsmSingleTenantAvailable, forKey: .hsmSingleTenantAvailable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

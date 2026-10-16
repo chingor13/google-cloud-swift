@@ -82,8 +82,12 @@ public struct ListAssignmentsResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.assignments, forKey: .assignments)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.assignments.isEmpty {
+      try container.encode(self.assignments, forKey: .assignments)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

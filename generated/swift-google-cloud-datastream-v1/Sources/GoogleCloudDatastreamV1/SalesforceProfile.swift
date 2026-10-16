@@ -98,7 +98,9 @@ public struct SalesforceProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.domain, forKey: .domain)
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
 
     if let choice = self.credentials {
       switch choice {
@@ -209,12 +211,22 @@ public struct SalesforceProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.username, forKey: .username)
-      try container.encode(self.password, forKey: .password)
-      try container.encode(self.securityToken, forKey: .securityToken)
-      try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
-      try container.encode(
-        self.secretManagerStoredSecurityToken, forKey: .secretManagerStoredSecurityToken)
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
+      if !self.securityToken.isEmpty {
+        try container.encode(self.securityToken, forKey: .securityToken)
+      }
+      if !self.secretManagerStoredPassword.isEmpty {
+        try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+      }
+      if !self.secretManagerStoredSecurityToken.isEmpty {
+        try container.encode(
+          self.secretManagerStoredSecurityToken, forKey: .secretManagerStoredSecurityToken)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -316,10 +328,16 @@ public struct SalesforceProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clientId, forKey: .clientId)
-      try container.encode(self.clientSecret, forKey: .clientSecret)
-      try container.encode(
-        self.secretManagerStoredClientSecret, forKey: .secretManagerStoredClientSecret)
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
+      if !self.clientSecret.isEmpty {
+        try container.encode(self.clientSecret, forKey: .clientSecret)
+      }
+      if !self.secretManagerStoredClientSecret.isEmpty {
+        try container.encode(
+          self.secretManagerStoredClientSecret, forKey: .secretManagerStoredClientSecret)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

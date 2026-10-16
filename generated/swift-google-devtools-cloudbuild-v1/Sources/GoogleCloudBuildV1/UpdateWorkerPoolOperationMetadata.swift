@@ -85,7 +85,9 @@ public struct UpdateWorkerPoolOperationMetadata: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.workerPool, forKey: .workerPool)
+    if !self.workerPool.isEmpty {
+      try container.encode(self.workerPool, forKey: .workerPool)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
     for (key, value) in self._unknownFields.json {

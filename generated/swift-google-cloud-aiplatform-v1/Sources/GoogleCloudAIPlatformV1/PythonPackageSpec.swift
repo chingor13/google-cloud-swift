@@ -110,11 +110,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.executorImageUri, forKey: .executorImageUri)
-      try container.encode(self.packageUris, forKey: .packageUris)
-      try container.encode(self.pythonModule, forKey: .pythonModule)
-      try container.encode(self.args, forKey: .args)
-      try container.encode(self.env, forKey: .env)
+      if !self.executorImageUri.isEmpty {
+        try container.encode(self.executorImageUri, forKey: .executorImageUri)
+      }
+      if !self.packageUris.isEmpty {
+        try container.encode(self.packageUris, forKey: .packageUris)
+      }
+      if !self.pythonModule.isEmpty {
+        try container.encode(self.pythonModule, forKey: .pythonModule)
+      }
+      if !self.args.isEmpty {
+        try container.encode(self.args, forKey: .args)
+      }
+      if !self.env.isEmpty {
+        try container.encode(self.env, forKey: .env)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

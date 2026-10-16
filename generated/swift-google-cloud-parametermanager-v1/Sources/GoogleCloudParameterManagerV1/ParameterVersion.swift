@@ -120,10 +120,14 @@ public struct ParameterVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.disabled, forKey: .disabled)
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
     try container.encodeIfPresent(self.payload, forKey: .payload)
     try container.encodeIfPresent(self.kmsKeyVersion, forKey: .kmsKeyVersion)
     try container.encodeIfPresent(self.checksumSource, forKey: .checksumSource)

@@ -117,12 +117,24 @@ public struct SdpRedactResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.executionState, forKey: .executionState)
-    try container.encode(self.messageItems, forKey: .messageItems)
-    try container.encode(self.matchState, forKey: .matchState)
-    try container.encode(self.redactedImage, forKey: .redactedImage)
-    try container.encode(self.findings, forKey: .findings)
-    try container.encode(self.extractedImageText, forKey: .extractedImageText)
+    if self.executionState != FilterExecutionState() {
+      try container.encode(self.executionState, forKey: .executionState)
+    }
+    if !self.messageItems.isEmpty {
+      try container.encode(self.messageItems, forKey: .messageItems)
+    }
+    if self.matchState != FilterMatchState() {
+      try container.encode(self.matchState, forKey: .matchState)
+    }
+    if !self.redactedImage.isEmpty {
+      try container.encode(self.redactedImage, forKey: .redactedImage)
+    }
+    if !self.findings.isEmpty {
+      try container.encode(self.findings, forKey: .findings)
+    }
+    if !self.extractedImageText.isEmpty {
+      try container.encode(self.extractedImageText, forKey: .extractedImageText)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -162,15 +162,31 @@ public struct RuleDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.alerting, forKey: .alerting)
-    try container.encode(self.archived, forKey: .archived)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.alerting {
+      try container.encode(self.alerting, forKey: .alerting)
+    }
+    if self.archived {
+      try container.encode(self.archived, forKey: .archived)
+    }
     try container.encodeIfPresent(self.archiveTime, forKey: .archiveTime)
-    try container.encode(self.runFrequency, forKey: .runFrequency)
-    try container.encode(self.executionState, forKey: .executionState)
-    try container.encode(self.producerRules, forKey: .producerRules)
-    try container.encode(self.consumerRules, forKey: .consumerRules)
+    if self.runFrequency != RunFrequency() {
+      try container.encode(self.runFrequency, forKey: .runFrequency)
+    }
+    if self.executionState != RuleDeployment.ExecutionState() {
+      try container.encode(self.executionState, forKey: .executionState)
+    }
+    if !self.producerRules.isEmpty {
+      try container.encode(self.producerRules, forKey: .producerRules)
+    }
+    if !self.consumerRules.isEmpty {
+      try container.encode(self.consumerRules, forKey: .consumerRules)
+    }
     try container.encodeIfPresent(
       self.lastAlertStatusChangeTime, forKey: .lastAlertStatusChangeTime)
     for (key, value) in self._unknownFields.json {

@@ -91,9 +91,15 @@ public struct CustomTargetSkaffoldActions: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.renderAction, forKey: .renderAction)
-    try container.encode(self.deployAction, forKey: .deployAction)
-    try container.encode(self.includeSkaffoldModules, forKey: .includeSkaffoldModules)
+    if !self.renderAction.isEmpty {
+      try container.encode(self.renderAction, forKey: .renderAction)
+    }
+    if !self.deployAction.isEmpty {
+      try container.encode(self.deployAction, forKey: .deployAction)
+    }
+    if !self.includeSkaffoldModules.isEmpty {
+      try container.encode(self.includeSkaffoldModules, forKey: .includeSkaffoldModules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

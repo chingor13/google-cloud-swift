@@ -86,9 +86,15 @@ public struct Schema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.schemaType, forKey: .schemaType)
-    try container.encode(self.schemaPayload, forKey: .schemaPayload)
-    try container.encode(self.references, forKey: .references)
+    if self.schemaType != Schema.SchemaType() {
+      try container.encode(self.schemaType, forKey: .schemaType)
+    }
+    if !self.schemaPayload.isEmpty {
+      try container.encode(self.schemaPayload, forKey: .schemaPayload)
+    }
+    if !self.references.isEmpty {
+      try container.encode(self.references, forKey: .references)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -162,9 +168,15 @@ public struct Schema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.subject, forKey: .subject)
-      try container.encode(self.version, forKey: .version)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.subject.isEmpty {
+        try container.encode(self.subject, forKey: .subject)
+      }
+      if self.version != 0 {
+        try container.encode(self.version, forKey: .version)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

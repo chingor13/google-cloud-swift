@@ -83,8 +83,12 @@ public struct MachineDiskDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalCapacityBytes, forKey: .totalCapacityBytes)
-    try container.encode(self.totalFreeBytes, forKey: .totalFreeBytes)
+    if self.totalCapacityBytes != 0 {
+      try container.encode(self.totalCapacityBytes, forKey: .totalCapacityBytes)
+    }
+    if self.totalFreeBytes != 0 {
+      try container.encode(self.totalFreeBytes, forKey: .totalFreeBytes)
+    }
     try container.encodeIfPresent(self.disks, forKey: .disks)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

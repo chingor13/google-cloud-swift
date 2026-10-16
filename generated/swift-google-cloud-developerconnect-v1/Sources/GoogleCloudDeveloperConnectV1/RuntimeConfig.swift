@@ -135,8 +135,12 @@ public struct RuntimeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.state, forKey: .state)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.state != RuntimeConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
 
     if let choice = self.runtime {
       switch choice {

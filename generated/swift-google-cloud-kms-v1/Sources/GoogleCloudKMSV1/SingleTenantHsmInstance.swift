@@ -166,15 +166,21 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != SingleTenantHsmInstance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.quorumAuth, forKey: .quorumAuth)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(
       self.unrefreshedDurationUntilDisable, forKey: .unrefreshedDurationUntilDisable)
     try container.encodeIfPresent(self.disableTime, forKey: .disableTime)
-    try container.encode(self.keyPortabilityEnabled, forKey: .keyPortabilityEnabled)
+    if self.keyPortabilityEnabled {
+      try container.encode(self.keyPortabilityEnabled, forKey: .keyPortabilityEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -260,9 +266,15 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.totalApproverCount, forKey: .totalApproverCount)
-      try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
-      try container.encode(self.twoFactorPublicKeyPems, forKey: .twoFactorPublicKeyPems)
+      if self.totalApproverCount != 0 {
+        try container.encode(self.totalApproverCount, forKey: .totalApproverCount)
+      }
+      if self.requiredApproverCount != 0 {
+        try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
+      }
+      if !self.twoFactorPublicKeyPems.isEmpty {
+        try container.encode(self.twoFactorPublicKeyPems, forKey: .twoFactorPublicKeyPems)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

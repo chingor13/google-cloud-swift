@@ -102,10 +102,18 @@ public struct TransactionEffect: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.oldVal, forKey: .oldVal)
-    try container.encode(self.newVal, forKey: .newVal)
-    try container.encode(self.deltaVal, forKey: .deltaVal)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.oldVal.isEmpty {
+      try container.encode(self.oldVal, forKey: .oldVal)
+    }
+    if !self.newVal.isEmpty {
+      try container.encode(self.newVal, forKey: .newVal)
+    }
+    if self.deltaVal != 0 {
+      try container.encode(self.deltaVal, forKey: .deltaVal)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -85,8 +85,12 @@ public struct Pubsub: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.topic, forKey: .topic)
-    try container.encode(self.subscription, forKey: .subscription)
+    if !self.topic.isEmpty {
+      try container.encode(self.topic, forKey: .topic)
+    }
+    if !self.subscription.isEmpty {
+      try container.encode(self.subscription, forKey: .subscription)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

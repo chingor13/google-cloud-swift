@@ -98,10 +98,16 @@ public struct CompilationDiagnostic: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     try container.encodeIfPresent(self.position, forKey: .position)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.uri, forKey: .uri)
+    if self.severity != CompilationDiagnostic.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

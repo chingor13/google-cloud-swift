@@ -83,7 +83,9 @@ public struct ObjectCustomContextPayload: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.value, forKey: .value)
+    if !self.value.isEmpty {
+      try container.encode(self.value, forKey: .value)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

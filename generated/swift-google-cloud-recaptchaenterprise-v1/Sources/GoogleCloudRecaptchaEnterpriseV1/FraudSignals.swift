@@ -147,8 +147,12 @@ public struct FraudSignals: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.activeDaysLowerBound, forKey: .activeDaysLowerBound)
-      try container.encode(self.syntheticRisk, forKey: .syntheticRisk)
+      if self.activeDaysLowerBound != 0 {
+        try container.encode(self.activeDaysLowerBound, forKey: .activeDaysLowerBound)
+      }
+      if self.syntheticRisk != 0 {
+        try container.encode(self.syntheticRisk, forKey: .syntheticRisk)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -230,7 +234,9 @@ public struct FraudSignals: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cardLabels, forKey: .cardLabels)
+      if !self.cardLabels.isEmpty {
+        try container.encode(self.cardLabels, forKey: .cardLabels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

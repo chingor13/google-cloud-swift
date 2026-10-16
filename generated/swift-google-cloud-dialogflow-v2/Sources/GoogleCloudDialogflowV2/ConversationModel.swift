@@ -162,12 +162,22 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.datasets, forKey: .datasets)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.datasets.isEmpty {
+        try container.encode(self.datasets, forKey: .datasets)
+      }
+      if self.state != ConversationModel.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
       try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
 

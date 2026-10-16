@@ -82,8 +82,12 @@ public struct DailyMaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.startTime, forKey: .startTime)
-    try container.encode(self.duration, forKey: .duration)
+    if !self.startTime.isEmpty {
+      try container.encode(self.startTime, forKey: .startTime)
+    }
+    if !self.duration.isEmpty {
+      try container.encode(self.duration, forKey: .duration)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

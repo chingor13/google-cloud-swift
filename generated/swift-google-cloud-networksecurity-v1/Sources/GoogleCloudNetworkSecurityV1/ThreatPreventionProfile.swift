@@ -92,9 +92,15 @@ public struct ThreatPreventionProfile: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.severityOverrides, forKey: .severityOverrides)
-    try container.encode(self.threatOverrides, forKey: .threatOverrides)
-    try container.encode(self.antivirusOverrides, forKey: .antivirusOverrides)
+    if !self.severityOverrides.isEmpty {
+      try container.encode(self.severityOverrides, forKey: .severityOverrides)
+    }
+    if !self.threatOverrides.isEmpty {
+      try container.encode(self.threatOverrides, forKey: .threatOverrides)
+    }
+    if !self.antivirusOverrides.isEmpty {
+      try container.encode(self.antivirusOverrides, forKey: .antivirusOverrides)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

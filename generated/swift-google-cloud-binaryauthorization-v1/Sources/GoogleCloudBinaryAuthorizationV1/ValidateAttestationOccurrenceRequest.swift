@@ -109,10 +109,16 @@ public struct ValidateAttestationOccurrenceRequest: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attestor, forKey: .attestor)
+    if !self.attestor.isEmpty {
+      try container.encode(self.attestor, forKey: .attestor)
+    }
     try container.encodeIfPresent(self.attestation, forKey: .attestation)
-    try container.encode(self.occurrenceNote, forKey: .occurrenceNote)
-    try container.encode(self.occurrenceResourceUri, forKey: .occurrenceResourceUri)
+    if !self.occurrenceNote.isEmpty {
+      try container.encode(self.occurrenceNote, forKey: .occurrenceNote)
+    }
+    if !self.occurrenceResourceUri.isEmpty {
+      try container.encode(self.occurrenceResourceUri, forKey: .occurrenceResourceUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

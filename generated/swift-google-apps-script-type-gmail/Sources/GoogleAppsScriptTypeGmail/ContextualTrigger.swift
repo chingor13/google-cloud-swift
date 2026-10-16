@@ -95,7 +95,9 @@ public struct ContextualTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.onTriggerFunction, forKey: .onTriggerFunction)
+    if !self.onTriggerFunction.isEmpty {
+      try container.encode(self.onTriggerFunction, forKey: .onTriggerFunction)
+    }
 
     if let choice = self.trigger {
       switch choice {

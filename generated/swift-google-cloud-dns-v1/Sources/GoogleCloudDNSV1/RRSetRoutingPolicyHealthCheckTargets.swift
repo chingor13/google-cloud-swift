@@ -79,8 +79,12 @@ public struct RRSetRoutingPolicyHealthCheckTargets: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.externalEndpoints, forKey: .externalEndpoints)
-    try container.encode(self.internalLoadBalancers, forKey: .internalLoadBalancers)
+    if !self.externalEndpoints.isEmpty {
+      try container.encode(self.externalEndpoints, forKey: .externalEndpoints)
+    }
+    if !self.internalLoadBalancers.isEmpty {
+      try container.encode(self.internalLoadBalancers, forKey: .internalLoadBalancers)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

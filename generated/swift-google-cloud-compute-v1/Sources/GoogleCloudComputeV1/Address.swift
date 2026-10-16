@@ -320,12 +320,14 @@
       try container.encodeIfPresent(self.ipVersion, forKey: .ipVersion)
       try container.encodeIfPresent(self.ipv6EndpointType, forKey: .ipv6EndpointType)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(self.networkTier, forKey: .networkTier)
@@ -335,7 +337,9 @@
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.subnetwork, forKey: .subnetwork)
-      try container.encode(self.users, forKey: .users)
+      if !self.users.isEmpty {
+        try container.encode(self.users, forKey: .users)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

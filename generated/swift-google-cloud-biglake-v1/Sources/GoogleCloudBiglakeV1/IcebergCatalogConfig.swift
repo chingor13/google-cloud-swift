@@ -92,9 +92,15 @@ public struct IcebergCatalogConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.overrides, forKey: .overrides)
-    try container.encode(self.defaults, forKey: .defaults)
-    try container.encode(self.endpoints, forKey: .endpoints)
+    if !self.overrides.isEmpty {
+      try container.encode(self.overrides, forKey: .overrides)
+    }
+    if !self.defaults.isEmpty {
+      try container.encode(self.defaults, forKey: .defaults)
+    }
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

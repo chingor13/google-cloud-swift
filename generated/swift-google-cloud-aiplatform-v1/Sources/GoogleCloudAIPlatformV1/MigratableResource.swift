@@ -209,8 +209,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.endpoint, forKey: .endpoint)
-        try container.encode(self.version, forKey: .version)
+        if !self.endpoint.isEmpty {
+          try container.encode(self.endpoint, forKey: .endpoint)
+        }
+        if !self.version.isEmpty {
+          try container.encode(self.version, forKey: .version)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -301,8 +305,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.model, forKey: .model)
-        try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+        if !self.model.isEmpty {
+          try container.encode(self.model, forKey: .model)
+        }
+        if !self.modelDisplayName.isEmpty {
+          try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -393,8 +401,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataset, forKey: .dataset)
-        try container.encode(self.datasetDisplayName, forKey: .datasetDisplayName)
+        if !self.dataset.isEmpty {
+          try container.encode(self.dataset, forKey: .dataset)
+        }
+        if !self.datasetDisplayName.isEmpty {
+          try container.encode(self.datasetDisplayName, forKey: .datasetDisplayName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -499,10 +511,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataset, forKey: .dataset)
-        try container.encode(self.datasetDisplayName, forKey: .datasetDisplayName)
-        try container.encode(
-          self.dataLabelingAnnotatedDatasets, forKey: .dataLabelingAnnotatedDatasets)
+        if !self.dataset.isEmpty {
+          try container.encode(self.dataset, forKey: .dataset)
+        }
+        if !self.datasetDisplayName.isEmpty {
+          try container.encode(self.datasetDisplayName, forKey: .datasetDisplayName)
+        }
+        if !self.dataLabelingAnnotatedDatasets.isEmpty {
+          try container.encode(
+            self.dataLabelingAnnotatedDatasets, forKey: .dataLabelingAnnotatedDatasets)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -574,9 +592,13 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.annotatedDataset, forKey: .annotatedDataset)
-          try container.encode(
-            self.annotatedDatasetDisplayName, forKey: .annotatedDatasetDisplayName)
+          if !self.annotatedDataset.isEmpty {
+            try container.encode(self.annotatedDataset, forKey: .annotatedDataset)
+          }
+          if !self.annotatedDatasetDisplayName.isEmpty {
+            try container.encode(
+              self.annotatedDatasetDisplayName, forKey: .annotatedDatasetDisplayName)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

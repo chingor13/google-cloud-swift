@@ -131,12 +131,24 @@ public struct StartOAuthResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ticket, forKey: .ticket)
-    try container.encode(self.codeChallenge, forKey: .codeChallenge)
-    try container.encode(self.codeChallengeMethod, forKey: .codeChallengeMethod)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.scopes, forKey: .scopes)
-    try container.encode(self.authUri, forKey: .authUri)
+    if !self.ticket.isEmpty {
+      try container.encode(self.ticket, forKey: .ticket)
+    }
+    if !self.codeChallenge.isEmpty {
+      try container.encode(self.codeChallenge, forKey: .codeChallenge)
+    }
+    if !self.codeChallengeMethod.isEmpty {
+      try container.encode(self.codeChallengeMethod, forKey: .codeChallengeMethod)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.scopes.isEmpty {
+      try container.encode(self.scopes, forKey: .scopes)
+    }
+    if !self.authUri.isEmpty {
+      try container.encode(self.authUri, forKey: .authUri)
+    }
 
     if let choice = self.id {
       switch choice {

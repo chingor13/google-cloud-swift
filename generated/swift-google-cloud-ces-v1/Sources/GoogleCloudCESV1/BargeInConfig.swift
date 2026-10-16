@@ -94,8 +94,12 @@ public struct BargeInConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.disableBargeIn, forKey: .disableBargeIn)
-    try container.encode(self.bargeInAwareness, forKey: .bargeInAwareness)
+    if self.disableBargeIn {
+      try container.encode(self.disableBargeIn, forKey: .disableBargeIn)
+    }
+    if self.bargeInAwareness {
+      try container.encode(self.bargeInAwareness, forKey: .bargeInAwareness)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

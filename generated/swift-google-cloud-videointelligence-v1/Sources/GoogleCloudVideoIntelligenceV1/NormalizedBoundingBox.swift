@@ -95,10 +95,18 @@ public struct NormalizedBoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`left`, forKey: .`left`)
-    try container.encode(self.top, forKey: .top)
-    try container.encode(self.`right`, forKey: .`right`)
-    try container.encode(self.bottom, forKey: .bottom)
+    if self.`left` != 0 {
+      try container.encode(self.`left`, forKey: .`left`)
+    }
+    if self.top != 0 {
+      try container.encode(self.top, forKey: .top)
+    }
+    if self.`right` != 0 {
+      try container.encode(self.`right`, forKey: .`right`)
+    }
+    if self.bottom != 0 {
+      try container.encode(self.bottom, forKey: .bottom)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

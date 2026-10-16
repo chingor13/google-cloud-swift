@@ -112,10 +112,14 @@ public struct Location: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.locationType, forKey: .locationType)
+    if self.locationType != GoogleCloudTalentV4.Location.LocationType() {
+      try container.encode(self.locationType, forKey: .locationType)
+    }
     try container.encodeIfPresent(self.postalAddress, forKey: .postalAddress)
     try container.encodeIfPresent(self.latLng, forKey: .latLng)
-    try container.encode(self.radiusMiles, forKey: .radiusMiles)
+    if self.radiusMiles != 0 {
+      try container.encode(self.radiusMiles, forKey: .radiusMiles)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

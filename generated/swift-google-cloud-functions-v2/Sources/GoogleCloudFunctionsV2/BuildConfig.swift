@@ -219,16 +219,32 @@ public struct BuildConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.build, forKey: .build)
-    try container.encode(self.runtime, forKey: .runtime)
-    try container.encode(self.entryPoint, forKey: .entryPoint)
+    if !self.build.isEmpty {
+      try container.encode(self.build, forKey: .build)
+    }
+    if !self.runtime.isEmpty {
+      try container.encode(self.runtime, forKey: .runtime)
+    }
+    if !self.entryPoint.isEmpty {
+      try container.encode(self.entryPoint, forKey: .entryPoint)
+    }
     try container.encodeIfPresent(self.source, forKey: .source)
     try container.encodeIfPresent(self.sourceProvenance, forKey: .sourceProvenance)
-    try container.encode(self.workerPool, forKey: .workerPool)
-    try container.encode(self.environmentVariables, forKey: .environmentVariables)
-    try container.encode(self.dockerRegistry, forKey: .dockerRegistry)
-    try container.encode(self.dockerRepository, forKey: .dockerRepository)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.workerPool.isEmpty {
+      try container.encode(self.workerPool, forKey: .workerPool)
+    }
+    if !self.environmentVariables.isEmpty {
+      try container.encode(self.environmentVariables, forKey: .environmentVariables)
+    }
+    if self.dockerRegistry != BuildConfig.DockerRegistry() {
+      try container.encode(self.dockerRegistry, forKey: .dockerRegistry)
+    }
+    if !self.dockerRepository.isEmpty {
+      try container.encode(self.dockerRepository, forKey: .dockerRepository)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
 
     if let choice = self.runtimeUpdatePolicy {
       switch choice {

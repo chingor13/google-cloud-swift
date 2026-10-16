@@ -139,13 +139,21 @@ public struct DiskMigrationJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.targetDetails, forKey: .targetDetails)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.errors, forKey: .errors)
-    try container.encode(self.steps, forKey: .steps)
+    if self.state != DiskMigrationJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
 
     if let choice = self.sourceDiskDetails {
       switch choice {

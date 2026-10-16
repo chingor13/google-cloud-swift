@@ -101,7 +101,9 @@ public struct MaintenanceSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.canReschedule, forKey: .canReschedule)
+    if self.canReschedule {
+      try container.encode(self.canReschedule, forKey: .canReschedule)
+    }
     try container.encodeIfPresent(self.scheduleDeadlineTime, forKey: .scheduleDeadlineTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

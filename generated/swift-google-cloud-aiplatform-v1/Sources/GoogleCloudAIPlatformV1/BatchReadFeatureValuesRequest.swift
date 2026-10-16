@@ -146,10 +146,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.featurestore, forKey: .featurestore)
+      if !self.featurestore.isEmpty {
+        try container.encode(self.featurestore, forKey: .featurestore)
+      }
       try container.encodeIfPresent(self.destination, forKey: .destination)
-      try container.encode(self.passThroughFields, forKey: .passThroughFields)
-      try container.encode(self.entityTypeSpecs, forKey: .entityTypeSpecs)
+      if !self.passThroughFields.isEmpty {
+        try container.encode(self.passThroughFields, forKey: .passThroughFields)
+      }
+      if !self.entityTypeSpecs.isEmpty {
+        try container.encode(self.entityTypeSpecs, forKey: .entityTypeSpecs)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
 
       if let choice = self.readOption {
@@ -221,7 +227,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.fieldName, forKey: .fieldName)
+        if !self.fieldName.isEmpty {
+          try container.encode(self.fieldName, forKey: .fieldName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -326,9 +334,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.entityTypeId, forKey: .entityTypeId)
+        if !self.entityTypeId.isEmpty {
+          try container.encode(self.entityTypeId, forKey: .entityTypeId)
+        }
         try container.encodeIfPresent(self.featureSelector, forKey: .featureSelector)
-        try container.encode(self.settings, forKey: .settings)
+        if !self.settings.isEmpty {
+          try container.encode(self.settings, forKey: .settings)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

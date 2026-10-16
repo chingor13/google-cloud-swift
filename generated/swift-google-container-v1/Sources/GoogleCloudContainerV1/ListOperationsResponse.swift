@@ -78,8 +78,12 @@ public struct ListOperationsResponse: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.operations, forKey: .operations)
-    try container.encode(self.missingZones, forKey: .missingZones)
+    if !self.operations.isEmpty {
+      try container.encode(self.operations, forKey: .operations)
+    }
+    if !self.missingZones.isEmpty {
+      try container.encode(self.missingZones, forKey: .missingZones)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

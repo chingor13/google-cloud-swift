@@ -129,14 +129,28 @@ public struct MachineArchitectureDetails: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpuArchitecture, forKey: .cpuArchitecture)
-    try container.encode(self.cpuName, forKey: .cpuName)
-    try container.encode(self.vendor, forKey: .vendor)
-    try container.encode(self.cpuThreadCount, forKey: .cpuThreadCount)
-    try container.encode(self.cpuSocketCount, forKey: .cpuSocketCount)
+    if !self.cpuArchitecture.isEmpty {
+      try container.encode(self.cpuArchitecture, forKey: .cpuArchitecture)
+    }
+    if !self.cpuName.isEmpty {
+      try container.encode(self.cpuName, forKey: .cpuName)
+    }
+    if !self.vendor.isEmpty {
+      try container.encode(self.vendor, forKey: .vendor)
+    }
+    if self.cpuThreadCount != 0 {
+      try container.encode(self.cpuThreadCount, forKey: .cpuThreadCount)
+    }
+    if self.cpuSocketCount != 0 {
+      try container.encode(self.cpuSocketCount, forKey: .cpuSocketCount)
+    }
     try container.encodeIfPresent(self.bios, forKey: .bios)
-    try container.encode(self.firmwareType, forKey: .firmwareType)
-    try container.encode(self.hyperthreading, forKey: .hyperthreading)
+    if self.firmwareType != MachineArchitectureDetails.FirmwareType() {
+      try container.encode(self.firmwareType, forKey: .firmwareType)
+    }
+    if self.hyperthreading != MachineArchitectureDetails.CpuHyperThreading() {
+      try container.encode(self.hyperthreading, forKey: .hyperthreading)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

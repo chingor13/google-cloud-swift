@@ -125,12 +125,20 @@ public struct GcsIngestWithDocAiProcessorsPipeline: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputPath, forKey: .inputPath)
+    if !self.inputPath.isEmpty {
+      try container.encode(self.inputPath, forKey: .inputPath)
+    }
     try container.encodeIfPresent(
       self.splitClassifyProcessorInfo, forKey: .splitClassifyProcessorInfo)
-    try container.encode(self.extractProcessorInfos, forKey: .extractProcessorInfos)
-    try container.encode(self.processorResultsFolderPath, forKey: .processorResultsFolderPath)
-    try container.encode(self.skipIngestedDocuments, forKey: .skipIngestedDocuments)
+    if !self.extractProcessorInfos.isEmpty {
+      try container.encode(self.extractProcessorInfos, forKey: .extractProcessorInfos)
+    }
+    if !self.processorResultsFolderPath.isEmpty {
+      try container.encode(self.processorResultsFolderPath, forKey: .processorResultsFolderPath)
+    }
+    if self.skipIngestedDocuments {
+      try container.encode(self.skipIngestedDocuments, forKey: .skipIngestedDocuments)
+    }
     try container.encodeIfPresent(self.pipelineConfig, forKey: .pipelineConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

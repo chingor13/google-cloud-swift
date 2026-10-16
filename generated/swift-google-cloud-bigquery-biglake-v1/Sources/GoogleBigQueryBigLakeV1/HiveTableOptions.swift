@@ -86,8 +86,12 @@ public struct HiveTableOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parameters, forKey: .parameters)
-    try container.encode(self.tableType, forKey: .tableType)
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
+    if !self.tableType.isEmpty {
+      try container.encode(self.tableType, forKey: .tableType)
+    }
     try container.encodeIfPresent(self.storageDescriptor, forKey: .storageDescriptor)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -146,7 +150,9 @@ public struct HiveTableOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serializationLib, forKey: .serializationLib)
+      if !self.serializationLib.isEmpty {
+        try container.encode(self.serializationLib, forKey: .serializationLib)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -250,9 +256,15 @@ public struct HiveTableOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.locationUri, forKey: .locationUri)
-      try container.encode(self.inputFormat, forKey: .inputFormat)
-      try container.encode(self.outputFormat, forKey: .outputFormat)
+      if !self.locationUri.isEmpty {
+        try container.encode(self.locationUri, forKey: .locationUri)
+      }
+      if !self.inputFormat.isEmpty {
+        try container.encode(self.inputFormat, forKey: .inputFormat)
+      }
+      if !self.outputFormat.isEmpty {
+        try container.encode(self.outputFormat, forKey: .outputFormat)
+      }
       try container.encodeIfPresent(self.serdeInfo, forKey: .serdeInfo)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -126,14 +126,26 @@ public struct SessionOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.session, forKey: .session)
-    try container.encode(self.sessionUuid, forKey: .sessionUuid)
+    if !self.session.isEmpty {
+      try container.encode(self.session, forKey: .session)
+    }
+    if !self.sessionUuid.isEmpty {
+      try container.encode(self.sessionUuid, forKey: .sessionUuid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.doneTime, forKey: .doneTime)
-    try container.encode(self.operationType, forKey: .operationType)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.warnings, forKey: .warnings)
+    if self.operationType != SessionOperationMetadata.SessionOperationType() {
+      try container.encode(self.operationType, forKey: .operationType)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

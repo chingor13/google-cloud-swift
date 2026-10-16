@@ -79,7 +79,9 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleWKT._An
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.currentTime, forKey: .currentTime)
-    try container.encode(self.identifiedBoxes, forKey: .identifiedBoxes)
+    if !self.identifiedBoxes.isEmpty {
+      try container.encode(self.identifiedBoxes, forKey: .identifiedBoxes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -145,8 +147,12 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labelId, forKey: .labelId)
-      try container.encode(self.labelString, forKey: .labelString)
+      if self.labelId != 0 {
+        try container.encode(self.labelId, forKey: .labelId)
+      }
+      if !self.labelString.isEmpty {
+        try container.encode(self.labelString, forKey: .labelString)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -250,9 +256,13 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.boxId, forKey: .boxId)
+      if self.boxId != 0 {
+        try container.encode(self.boxId, forKey: .boxId)
+      }
       try container.encodeIfPresent(self.normalizedBoundingBox, forKey: .normalizedBoundingBox)
-      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+      if self.confidenceScore != 0 {
+        try container.encode(self.confidenceScore, forKey: .confidenceScore)
+      }
       try container.encodeIfPresent(self.entity, forKey: .entity)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -335,10 +345,18 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleWKT._An
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.xmin, forKey: .xmin)
-        try container.encode(self.ymin, forKey: .ymin)
-        try container.encode(self.width, forKey: .width)
-        try container.encode(self.height, forKey: .height)
+        if self.xmin != 0 {
+          try container.encode(self.xmin, forKey: .xmin)
+        }
+        if self.ymin != 0 {
+          try container.encode(self.ymin, forKey: .ymin)
+        }
+        if self.width != 0 {
+          try container.encode(self.width, forKey: .width)
+        }
+        if self.height != 0 {
+          try container.encode(self.height, forKey: .height)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -462,40 +462,90 @@ public struct Version: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.inboundServices, forKey: .inboundServices)
-    try container.encode(self.instanceClass, forKey: .instanceClass)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.inboundServices.isEmpty {
+      try container.encode(self.inboundServices, forKey: .inboundServices)
+    }
+    if !self.instanceClass.isEmpty {
+      try container.encode(self.instanceClass, forKey: .instanceClass)
+    }
     try container.encodeIfPresent(self.network, forKey: .network)
-    try container.encode(self.zones, forKey: .zones)
+    if !self.zones.isEmpty {
+      try container.encode(self.zones, forKey: .zones)
+    }
     try container.encodeIfPresent(self.resources, forKey: .resources)
-    try container.encode(self.runtime, forKey: .runtime)
-    try container.encode(self.runtimeChannel, forKey: .runtimeChannel)
-    try container.encode(self.threadsafe, forKey: .threadsafe)
-    try container.encode(self.vm, forKey: .vm)
-    try container.encode(self.appEngineApis, forKey: .appEngineApis)
-    try container.encode(self.betaSettings, forKey: .betaSettings)
-    try container.encode(self.env, forKey: .env)
-    try container.encode(self.servingStatus, forKey: .servingStatus)
-    try container.encode(self.createdBy, forKey: .createdBy)
+    if !self.runtime.isEmpty {
+      try container.encode(self.runtime, forKey: .runtime)
+    }
+    if !self.runtimeChannel.isEmpty {
+      try container.encode(self.runtimeChannel, forKey: .runtimeChannel)
+    }
+    if self.threadsafe {
+      try container.encode(self.threadsafe, forKey: .threadsafe)
+    }
+    if self.vm {
+      try container.encode(self.vm, forKey: .vm)
+    }
+    if self.appEngineApis {
+      try container.encode(self.appEngineApis, forKey: .appEngineApis)
+    }
+    if !self.betaSettings.isEmpty {
+      try container.encode(self.betaSettings, forKey: .betaSettings)
+    }
+    if !self.env.isEmpty {
+      try container.encode(self.env, forKey: .env)
+    }
+    if self.servingStatus != GoogleAppEngineV1.ServingStatus() {
+      try container.encode(self.servingStatus, forKey: .servingStatus)
+    }
+    if !self.createdBy.isEmpty {
+      try container.encode(self.createdBy, forKey: .createdBy)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.diskUsageBytes, forKey: .diskUsageBytes)
-    try container.encode(self.runtimeApiVersion, forKey: .runtimeApiVersion)
-    try container.encode(self.runtimeMainExecutablePath, forKey: .runtimeMainExecutablePath)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.handlers, forKey: .handlers)
-    try container.encode(self.errorHandlers, forKey: .errorHandlers)
-    try container.encode(self.libraries, forKey: .libraries)
+    if self.diskUsageBytes != 0 {
+      try container.encode(self.diskUsageBytes, forKey: .diskUsageBytes)
+    }
+    if !self.runtimeApiVersion.isEmpty {
+      try container.encode(self.runtimeApiVersion, forKey: .runtimeApiVersion)
+    }
+    if !self.runtimeMainExecutablePath.isEmpty {
+      try container.encode(self.runtimeMainExecutablePath, forKey: .runtimeMainExecutablePath)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.handlers.isEmpty {
+      try container.encode(self.handlers, forKey: .handlers)
+    }
+    if !self.errorHandlers.isEmpty {
+      try container.encode(self.errorHandlers, forKey: .errorHandlers)
+    }
+    if !self.libraries.isEmpty {
+      try container.encode(self.libraries, forKey: .libraries)
+    }
     try container.encodeIfPresent(self.apiConfig, forKey: .apiConfig)
-    try container.encode(self.envVariables, forKey: .envVariables)
-    try container.encode(self.buildEnvVariables, forKey: .buildEnvVariables)
+    if !self.envVariables.isEmpty {
+      try container.encode(self.envVariables, forKey: .envVariables)
+    }
+    if !self.buildEnvVariables.isEmpty {
+      try container.encode(self.buildEnvVariables, forKey: .buildEnvVariables)
+    }
     try container.encodeIfPresent(self.defaultExpiration, forKey: .defaultExpiration)
     try container.encodeIfPresent(self.healthCheck, forKey: .healthCheck)
     try container.encodeIfPresent(self.readinessCheck, forKey: .readinessCheck)
     try container.encodeIfPresent(self.livenessCheck, forKey: .livenessCheck)
-    try container.encode(self.nobuildFilesRegex, forKey: .nobuildFilesRegex)
+    if !self.nobuildFilesRegex.isEmpty {
+      try container.encode(self.nobuildFilesRegex, forKey: .nobuildFilesRegex)
+    }
     try container.encodeIfPresent(self.deployment, forKey: .deployment)
-    try container.encode(self.versionUrl, forKey: .versionUrl)
+    if !self.versionUrl.isEmpty {
+      try container.encode(self.versionUrl, forKey: .versionUrl)
+    }
     try container.encodeIfPresent(self.endpointsApiService, forKey: .endpointsApiService)
     try container.encodeIfPresent(self.entrypoint, forKey: .entrypoint)
     try container.encodeIfPresent(self.vpcAccessConnector, forKey: .vpcAccessConnector)

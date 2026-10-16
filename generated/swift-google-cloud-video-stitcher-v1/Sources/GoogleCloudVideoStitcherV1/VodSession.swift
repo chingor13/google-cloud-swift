@@ -170,17 +170,33 @@ public struct VodSession: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.interstitials, forKey: .interstitials)
-    try container.encode(self.playUri, forKey: .playUri)
-    try container.encode(self.sourceUri, forKey: .sourceUri)
-    try container.encode(self.adTagUri, forKey: .adTagUri)
-    try container.encode(self.adTagMacroMap, forKey: .adTagMacroMap)
+    if !self.playUri.isEmpty {
+      try container.encode(self.playUri, forKey: .playUri)
+    }
+    if !self.sourceUri.isEmpty {
+      try container.encode(self.sourceUri, forKey: .sourceUri)
+    }
+    if !self.adTagUri.isEmpty {
+      try container.encode(self.adTagUri, forKey: .adTagUri)
+    }
+    if !self.adTagMacroMap.isEmpty {
+      try container.encode(self.adTagMacroMap, forKey: .adTagMacroMap)
+    }
     try container.encodeIfPresent(self.manifestOptions, forKey: .manifestOptions)
-    try container.encode(self.assetId, forKey: .assetId)
-    try container.encode(self.adTracking, forKey: .adTracking)
+    if !self.assetId.isEmpty {
+      try container.encode(self.assetId, forKey: .assetId)
+    }
+    if self.adTracking != AdTracking() {
+      try container.encode(self.adTracking, forKey: .adTracking)
+    }
     try container.encodeIfPresent(self.gamSettings, forKey: .gamSettings)
-    try container.encode(self.vodConfig, forKey: .vodConfig)
+    if !self.vodConfig.isEmpty {
+      try container.encode(self.vodConfig, forKey: .vodConfig)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -247,8 +263,12 @@ public struct VodSession: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkCode, forKey: .networkCode)
-      try container.encode(self.streamId, forKey: .streamId)
+      if !self.networkCode.isEmpty {
+        try container.encode(self.networkCode, forKey: .networkCode)
+      }
+      if !self.streamId.isEmpty {
+        try container.encode(self.streamId, forKey: .streamId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

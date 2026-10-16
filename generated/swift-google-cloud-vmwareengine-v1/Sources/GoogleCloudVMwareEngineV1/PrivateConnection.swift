@@ -198,19 +198,41 @@ public struct PrivateConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
-    try container.encode(self.vmwareEngineNetworkCanonical, forKey: .vmwareEngineNetworkCanonical)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.peeringId, forKey: .peeringId)
-    try container.encode(self.routingMode, forKey: .routingMode)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.serviceNetwork, forKey: .serviceNetwork)
-    try container.encode(self.peeringState, forKey: .peeringState)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != PrivateConnection.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.vmwareEngineNetwork.isEmpty {
+      try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
+    }
+    if !self.vmwareEngineNetworkCanonical.isEmpty {
+      try container.encode(self.vmwareEngineNetworkCanonical, forKey: .vmwareEngineNetworkCanonical)
+    }
+    if self.type != PrivateConnection.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.peeringId.isEmpty {
+      try container.encode(self.peeringId, forKey: .peeringId)
+    }
+    if self.routingMode != PrivateConnection.RoutingMode() {
+      try container.encode(self.routingMode, forKey: .routingMode)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.serviceNetwork.isEmpty {
+      try container.encode(self.serviceNetwork, forKey: .serviceNetwork)
+    }
+    if self.peeringState != PrivateConnection.PeeringState() {
+      try container.encode(self.peeringState, forKey: .peeringState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

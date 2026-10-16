@@ -218,13 +218,25 @@ public struct MappingRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.ruleScope, forKey: .ruleScope)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.state != MappingRule.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.ruleScope != DatabaseEntityType() {
+      try container.encode(self.ruleScope, forKey: .ruleScope)
+    }
     try container.encodeIfPresent(self.filter, forKey: .filter)
-    try container.encode(self.ruleOrder, forKey: .ruleOrder)
-    try container.encode(self.revisionId, forKey: .revisionId)
+    if self.ruleOrder != 0 {
+      try container.encode(self.ruleOrder, forKey: .ruleOrder)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
 
     if let choice = self.details {

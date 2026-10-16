@@ -89,7 +89,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.embedding, forKey: .embedding)
       try container.encodeIfPresent(self.usageMetadata, forKey: .usageMetadata)
-      try container.encode(self.truncated, forKey: .truncated)
+      if self.truncated {
+        try container.encode(self.truncated, forKey: .truncated)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -147,7 +149,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.values, forKey: .values)
+        if !self.values.isEmpty {
+          try container.encode(self.values, forKey: .values)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

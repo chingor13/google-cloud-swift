@@ -89,9 +89,15 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.appConnectionDetails, forKey: .appConnectionDetails)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.appConnectionDetails.isEmpty {
+      try container.encode(self.appConnectionDetails, forKey: .appConnectionDetails)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -157,7 +163,9 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleWKT._AnyP
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.appConnection, forKey: .appConnection)
-      try container.encode(self.recentMigVms, forKey: .recentMigVms)
+      if !self.recentMigVms.isEmpty {
+        try container.encode(self.recentMigVms, forKey: .recentMigVms)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

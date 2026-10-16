@@ -110,9 +110,15 @@ public struct AdmissionRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.evaluationMode, forKey: .evaluationMode)
-    try container.encode(self.requireAttestationsBy, forKey: .requireAttestationsBy)
-    try container.encode(self.enforcementMode, forKey: .enforcementMode)
+    if self.evaluationMode != AdmissionRule.EvaluationMode() {
+      try container.encode(self.evaluationMode, forKey: .evaluationMode)
+    }
+    if !self.requireAttestationsBy.isEmpty {
+      try container.encode(self.requireAttestationsBy, forKey: .requireAttestationsBy)
+    }
+    if self.enforcementMode != AdmissionRule.EnforcementMode() {
+      try container.encode(self.enforcementMode, forKey: .enforcementMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

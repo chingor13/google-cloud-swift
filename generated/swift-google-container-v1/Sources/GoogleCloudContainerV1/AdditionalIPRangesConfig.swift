@@ -94,9 +94,15 @@ public struct AdditionalIPRangesConfig: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.podIpv4RangeNames, forKey: .podIpv4RangeNames)
-    try container.encode(self.status, forKey: .status)
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if !self.podIpv4RangeNames.isEmpty {
+      try container.encode(self.podIpv4RangeNames, forKey: .podIpv4RangeNames)
+    }
+    if self.status != AdditionalIPRangesConfig.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

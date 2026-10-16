@@ -90,9 +90,15 @@ public struct FileInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceUrl, forKey: .sourceUrl)
-    try container.encode(self.sha1Sum, forKey: .sha1Sum)
-    try container.encode(self.mimeType, forKey: .mimeType)
+    if !self.sourceUrl.isEmpty {
+      try container.encode(self.sourceUrl, forKey: .sourceUrl)
+    }
+    if !self.sha1Sum.isEmpty {
+      try container.encode(self.sha1Sum, forKey: .sha1Sum)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

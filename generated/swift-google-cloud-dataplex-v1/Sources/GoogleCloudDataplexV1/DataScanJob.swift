@@ -219,15 +219,27 @@ public struct DataScanJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.partialFailureMessage, forKey: .partialFailureMessage)
+    if !self.partialFailureMessage.isEmpty {
+      try container.encode(self.partialFailureMessage, forKey: .partialFailureMessage)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.type, forKey: .type)
+    if self.state != DataScanJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if self.type != DataScanType() {
+      try container.encode(self.type, forKey: .type)
+    }
 
     if let choice = self.spec {
       switch choice {

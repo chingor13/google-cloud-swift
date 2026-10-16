@@ -268,18 +268,24 @@
       try container.encodeIfPresent(self.topK, forKey: .topK)
       try container.encodeIfPresent(self.candidateCount, forKey: .candidateCount)
       try container.encodeIfPresent(self.maxOutputTokens, forKey: .maxOutputTokens)
-      try container.encode(self.stopSequences, forKey: .stopSequences)
+      if !self.stopSequences.isEmpty {
+        try container.encode(self.stopSequences, forKey: .stopSequences)
+      }
       try container.encodeIfPresent(self.responseLogprobs, forKey: .responseLogprobs)
       try container.encodeIfPresent(self.logprobs, forKey: .logprobs)
       try container.encodeIfPresent(self.presencePenalty, forKey: .presencePenalty)
       try container.encodeIfPresent(self.frequencyPenalty, forKey: .frequencyPenalty)
       try container.encodeIfPresent(self.seed, forKey: .seed)
-      try container.encode(self.responseMimeType, forKey: .responseMimeType)
+      if !self.responseMimeType.isEmpty {
+        try container.encode(self.responseMimeType, forKey: .responseMimeType)
+      }
       try container.encodeIfPresent(self.responseSchema, forKey: .responseSchema)
       try container.encodeIfPresent(self.responseJsonSchema, forKey: .responseJsonSchema)
       try container.encodeIfPresent(self.routingConfig, forKey: .routingConfig)
       try container.encodeIfPresent(self.audioTimestamp, forKey: .audioTimestamp)
-      try container.encode(self.responseModalities, forKey: .responseModalities)
+      if !self.responseModalities.isEmpty {
+        try container.encode(self.responseModalities, forKey: .responseModalities)
+      }
       try container.encodeIfPresent(self.mediaResolution, forKey: .mediaResolution)
       try container.encodeIfPresent(self.speechConfig, forKey: .speechConfig)
       try container.encodeIfPresent(self.thinkingConfig, forKey: .thinkingConfig)

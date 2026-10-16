@@ -170,13 +170,23 @@ public struct Runnable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.ignoreExitStatus, forKey: .ignoreExitStatus)
-    try container.encode(self.background, forKey: .background)
-    try container.encode(self.alwaysRun, forKey: .alwaysRun)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.ignoreExitStatus {
+      try container.encode(self.ignoreExitStatus, forKey: .ignoreExitStatus)
+    }
+    if self.background {
+      try container.encode(self.background, forKey: .background)
+    }
+    if self.alwaysRun {
+      try container.encode(self.alwaysRun, forKey: .alwaysRun)
+    }
     try container.encodeIfPresent(self.environment, forKey: .environment)
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.executable {
       switch choice {
@@ -374,15 +384,33 @@ public struct Runnable: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.imageUri, forKey: .imageUri)
-      try container.encode(self.commands, forKey: .commands)
-      try container.encode(self.entrypoint, forKey: .entrypoint)
-      try container.encode(self.volumes, forKey: .volumes)
-      try container.encode(self.options, forKey: .options)
-      try container.encode(self.blockExternalNetwork, forKey: .blockExternalNetwork)
-      try container.encode(self.username, forKey: .username)
-      try container.encode(self.password, forKey: .password)
-      try container.encode(self.enableImageStreaming, forKey: .enableImageStreaming)
+      if !self.imageUri.isEmpty {
+        try container.encode(self.imageUri, forKey: .imageUri)
+      }
+      if !self.commands.isEmpty {
+        try container.encode(self.commands, forKey: .commands)
+      }
+      if !self.entrypoint.isEmpty {
+        try container.encode(self.entrypoint, forKey: .entrypoint)
+      }
+      if !self.volumes.isEmpty {
+        try container.encode(self.volumes, forKey: .volumes)
+      }
+      if !self.options.isEmpty {
+        try container.encode(self.options, forKey: .options)
+      }
+      if self.blockExternalNetwork {
+        try container.encode(self.blockExternalNetwork, forKey: .blockExternalNetwork)
+      }
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
+      if self.enableImageStreaming {
+        try container.encode(self.enableImageStreaming, forKey: .enableImageStreaming)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -593,7 +621,9 @@ public struct Runnable: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

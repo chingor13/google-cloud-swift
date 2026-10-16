@@ -145,15 +145,25 @@ public struct ServiceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.apis, forKey: .apis)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.apis.isEmpty {
+      try container.encode(self.apis, forKey: .apis)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
     try container.encodeIfPresent(self.quota, forKey: .quota)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
     try container.encodeIfPresent(self.usage, forKey: .usage)
-    try container.encode(self.endpoints, forKey: .endpoints)
-    try container.encode(self.monitoredResources, forKey: .monitoredResources)
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
+    if !self.monitoredResources.isEmpty {
+      try container.encode(self.monitoredResources, forKey: .monitoredResources)
+    }
     try container.encodeIfPresent(self.monitoring, forKey: .monitoring)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

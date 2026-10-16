@@ -236,10 +236,18 @@ public struct ProcessOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.chunkingConfig, forKey: .chunkingConfig)
-      try container.encode(self.returnImages, forKey: .returnImages)
-      try container.encode(self.returnBoundingBoxes, forKey: .returnBoundingBoxes)
-      try container.encode(self.enableImageAnnotation, forKey: .enableImageAnnotation)
-      try container.encode(self.enableTableAnnotation, forKey: .enableTableAnnotation)
+      if self.returnImages {
+        try container.encode(self.returnImages, forKey: .returnImages)
+      }
+      if self.returnBoundingBoxes {
+        try container.encode(self.returnBoundingBoxes, forKey: .returnBoundingBoxes)
+      }
+      if self.enableImageAnnotation {
+        try container.encode(self.enableImageAnnotation, forKey: .enableImageAnnotation)
+      }
+      if self.enableTableAnnotation {
+        try container.encode(self.enableTableAnnotation, forKey: .enableTableAnnotation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -308,8 +316,12 @@ public struct ProcessOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.chunkSize, forKey: .chunkSize)
-        try container.encode(self.includeAncestorHeadings, forKey: .includeAncestorHeadings)
+        if self.chunkSize != 0 {
+          try container.encode(self.chunkSize, forKey: .chunkSize)
+        }
+        if self.includeAncestorHeadings {
+          try container.encode(self.includeAncestorHeadings, forKey: .includeAncestorHeadings)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -412,7 +424,9 @@ public struct ProcessOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pages, forKey: .pages)
+      if !self.pages.isEmpty {
+        try container.encode(self.pages, forKey: .pages)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

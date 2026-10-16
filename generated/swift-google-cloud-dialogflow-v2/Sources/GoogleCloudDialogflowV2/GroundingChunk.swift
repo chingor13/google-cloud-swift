@@ -178,9 +178,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.title, forKey: .title)
-        try container.encode(self.domain, forKey: .domain)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.title.isEmpty {
+          try container.encode(self.title, forKey: .title)
+        }
+        if !self.domain.isEmpty {
+          try container.encode(self.domain, forKey: .domain)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -278,9 +284,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.title, forKey: .title)
-        try container.encode(self.text, forKey: .text)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.title.isEmpty {
+          try container.encode(self.title, forKey: .title)
+        }
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

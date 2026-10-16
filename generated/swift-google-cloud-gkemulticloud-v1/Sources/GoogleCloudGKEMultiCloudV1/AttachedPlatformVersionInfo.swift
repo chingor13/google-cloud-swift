@@ -104,9 +104,15 @@ public struct AttachedPlatformVersionInfo: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.endOfLife, forKey: .endOfLife)
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.endOfLife {
+      try container.encode(self.endOfLife, forKey: .endOfLife)
+    }
     try container.encodeIfPresent(self.endOfLifeDate, forKey: .endOfLifeDate)
     try container.encodeIfPresent(self.releaseDate, forKey: .releaseDate)
     for (key, value) in self._unknownFields.json {

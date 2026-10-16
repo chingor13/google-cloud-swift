@@ -100,9 +100,13 @@ public struct FrameworkDeploymentReference: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.frameworkDeployment, forKey: .frameworkDeployment)
+    if !self.frameworkDeployment.isEmpty {
+      try container.encode(self.frameworkDeployment, forKey: .frameworkDeployment)
+    }
     try container.encodeIfPresent(self.frameworkReference, forKey: .frameworkReference)
-    try container.encode(self.frameworkDisplayName, forKey: .frameworkDisplayName)
+    if !self.frameworkDisplayName.isEmpty {
+      try container.encode(self.frameworkDisplayName, forKey: .frameworkDisplayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -265,11 +265,21 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.method, forKey: .method)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
-    try container.encode(self.progressPercent, forKey: .progressPercent)
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.method.isEmpty {
+      try container.encode(self.method, forKey: .method)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if !self.kmsKeyVersionName.isEmpty {
+      try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
+    }
+    if self.progressPercent != 0 {
+      try container.encode(self.progressPercent, forKey: .progressPercent)
+    }
 
     if let choice = self.request {
       switch choice {

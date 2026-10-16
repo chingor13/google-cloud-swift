@@ -124,7 +124,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sampleStrategy, forKey: .sampleStrategy)
+      if self.sampleStrategy != SampleConfig.SampleStrategy() {
+        try container.encode(self.sampleStrategy, forKey: .sampleStrategy)
+      }
 
       if let choice = self.initialBatchSampleSize {
         switch choice {

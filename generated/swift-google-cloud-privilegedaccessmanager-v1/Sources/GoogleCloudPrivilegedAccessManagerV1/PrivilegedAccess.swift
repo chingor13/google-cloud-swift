@@ -166,9 +166,15 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceType, forKey: .resourceType)
-      try container.encode(self.resource, forKey: .resource)
-      try container.encode(self.roleBindings, forKey: .roleBindings)
+      if !self.resourceType.isEmpty {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
+      if !self.resource.isEmpty {
+        try container.encode(self.resource, forKey: .resource)
+      }
+      if !self.roleBindings.isEmpty {
+        try container.encode(self.roleBindings, forKey: .roleBindings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -244,8 +250,12 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.role, forKey: .role)
-        try container.encode(self.conditionExpression, forKey: .conditionExpression)
+        if !self.role.isEmpty {
+          try container.encode(self.role, forKey: .role)
+        }
+        if !self.conditionExpression.isEmpty {
+          try container.encode(self.conditionExpression, forKey: .conditionExpression)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

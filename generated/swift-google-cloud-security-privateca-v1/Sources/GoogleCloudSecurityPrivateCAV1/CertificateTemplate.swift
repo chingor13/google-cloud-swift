@@ -206,15 +206,21 @@ public struct CertificateTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.maximumLifetime, forKey: .maximumLifetime)
     try container.encodeIfPresent(self.predefinedValues, forKey: .predefinedValues)
     try container.encodeIfPresent(self.identityConstraints, forKey: .identityConstraints)
     try container.encodeIfPresent(self.passthroughExtensions, forKey: .passthroughExtensions)
-    try container.encode(self.description, forKey: .description)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -154,9 +154,15 @@ public struct RateLimits: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maxDispatchesPerSecond, forKey: .maxDispatchesPerSecond)
-    try container.encode(self.maxBurstSize, forKey: .maxBurstSize)
-    try container.encode(self.maxConcurrentDispatches, forKey: .maxConcurrentDispatches)
+    if self.maxDispatchesPerSecond != 0 {
+      try container.encode(self.maxDispatchesPerSecond, forKey: .maxDispatchesPerSecond)
+    }
+    if self.maxBurstSize != 0 {
+      try container.encode(self.maxBurstSize, forKey: .maxBurstSize)
+    }
+    if self.maxConcurrentDispatches != 0 {
+      try container.encode(self.maxConcurrentDispatches, forKey: .maxConcurrentDispatches)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

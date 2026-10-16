@@ -139,14 +139,26 @@ public struct InvocationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.includedTargets, forKey: .includedTargets)
-    try container.encode(self.includedTags, forKey: .includedTags)
-    try container.encode(
-      self.transitiveDependenciesIncluded, forKey: .transitiveDependenciesIncluded)
-    try container.encode(self.transitiveDependentsIncluded, forKey: .transitiveDependentsIncluded)
-    try container.encode(
-      self.fullyRefreshIncrementalTablesEnabled, forKey: .fullyRefreshIncrementalTablesEnabled)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.includedTargets.isEmpty {
+      try container.encode(self.includedTargets, forKey: .includedTargets)
+    }
+    if !self.includedTags.isEmpty {
+      try container.encode(self.includedTags, forKey: .includedTags)
+    }
+    if self.transitiveDependenciesIncluded {
+      try container.encode(
+        self.transitiveDependenciesIncluded, forKey: .transitiveDependenciesIncluded)
+    }
+    if self.transitiveDependentsIncluded {
+      try container.encode(self.transitiveDependentsIncluded, forKey: .transitiveDependentsIncluded)
+    }
+    if self.fullyRefreshIncrementalTablesEnabled {
+      try container.encode(
+        self.fullyRefreshIncrementalTablesEnabled, forKey: .fullyRefreshIncrementalTablesEnabled)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.endUserAuthConfig, forKey: .endUserAuthConfig)
     try container.encodeIfPresent(self.queryPriority, forKey: .queryPriority)
     for (key, value) in self._unknownFields.json {
@@ -212,7 +224,9 @@ public struct InvocationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.userEmail, forKey: .userEmail)
+      if !self.userEmail.isEmpty {
+        try container.encode(self.userEmail, forKey: .userEmail)
+      }
       try container.encodeIfPresent(self.oauthConfig, forKey: .oauthConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

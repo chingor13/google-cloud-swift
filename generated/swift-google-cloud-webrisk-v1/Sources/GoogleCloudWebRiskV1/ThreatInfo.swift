@@ -84,7 +84,9 @@ public struct ThreatInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.abuseType, forKey: .abuseType)
+    if self.abuseType != ThreatInfo.AbuseType() {
+      try container.encode(self.abuseType, forKey: .abuseType)
+    }
     try container.encodeIfPresent(self.threatConfidence, forKey: .threatConfidence)
     try container.encodeIfPresent(self.threatJustification, forKey: .threatJustification)
     for (key, value) in self._unknownFields.json {
@@ -393,8 +395,12 @@ public struct ThreatInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.comments, forKey: .comments)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.comments.isEmpty {
+        try container.encode(self.comments, forKey: .comments)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

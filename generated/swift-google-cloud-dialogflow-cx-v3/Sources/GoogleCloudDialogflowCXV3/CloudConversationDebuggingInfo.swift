@@ -226,24 +226,47 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.audioDataChunks, forKey: .audioDataChunks)
+      if self.audioDataChunks != 0 {
+        try container.encode(self.audioDataChunks, forKey: .audioDataChunks)
+      }
       try container.encodeIfPresent(self.resultEndTimeOffset, forKey: .resultEndTimeOffset)
       try container.encodeIfPresent(self.firstAudioDuration, forKey: .firstAudioDuration)
-      try container.encode(self.singleUtterance, forKey: .singleUtterance)
-      try container.encode(self.speechPartialResultsEndTimes, forKey: .speechPartialResultsEndTimes)
-      try container.encode(self.speechFinalResultsEndTimes, forKey: .speechFinalResultsEndTimes)
-      try container.encode(self.partialResponses, forKey: .partialResponses)
-      try container.encode(
-        self.speakerIdPassiveLatencyMsOffset, forKey: .speakerIdPassiveLatencyMsOffset)
-      try container.encode(self.bargeinEventTriggered, forKey: .bargeinEventTriggered)
-      try container.encode(self.speechSingleUtterance, forKey: .speechSingleUtterance)
-      try container.encode(self.dtmfPartialResultsTimes, forKey: .dtmfPartialResultsTimes)
-      try container.encode(self.dtmfFinalResultsTimes, forKey: .dtmfFinalResultsTimes)
+      if self.singleUtterance {
+        try container.encode(self.singleUtterance, forKey: .singleUtterance)
+      }
+      if !self.speechPartialResultsEndTimes.isEmpty {
+        try container.encode(
+          self.speechPartialResultsEndTimes, forKey: .speechPartialResultsEndTimes)
+      }
+      if !self.speechFinalResultsEndTimes.isEmpty {
+        try container.encode(self.speechFinalResultsEndTimes, forKey: .speechFinalResultsEndTimes)
+      }
+      if self.partialResponses != 0 {
+        try container.encode(self.partialResponses, forKey: .partialResponses)
+      }
+      if self.speakerIdPassiveLatencyMsOffset != 0 {
+        try container.encode(
+          self.speakerIdPassiveLatencyMsOffset, forKey: .speakerIdPassiveLatencyMsOffset)
+      }
+      if self.bargeinEventTriggered {
+        try container.encode(self.bargeinEventTriggered, forKey: .bargeinEventTriggered)
+      }
+      if self.speechSingleUtterance {
+        try container.encode(self.speechSingleUtterance, forKey: .speechSingleUtterance)
+      }
+      if !self.dtmfPartialResultsTimes.isEmpty {
+        try container.encode(self.dtmfPartialResultsTimes, forKey: .dtmfPartialResultsTimes)
+      }
+      if !self.dtmfFinalResultsTimes.isEmpty {
+        try container.encode(self.dtmfFinalResultsTimes, forKey: .dtmfFinalResultsTimes)
+      }
       try container.encodeIfPresent(
         self.singleUtteranceEndTimeOffset, forKey: .singleUtteranceEndTimeOffset)
       try container.encodeIfPresent(self.noSpeechTimeout, forKey: .noSpeechTimeout)
       try container.encodeIfPresent(self.endpointingTimeout, forKey: .endpointingTimeout)
-      try container.encode(self.isInputText, forKey: .isInputText)
+      if self.isInputText {
+        try container.encode(self.isInputText, forKey: .isInputText)
+      }
       try container.encodeIfPresent(
         self.clientHalfCloseTimeOffset, forKey: .clientHalfCloseTimeOffset)
       try container.encodeIfPresent(

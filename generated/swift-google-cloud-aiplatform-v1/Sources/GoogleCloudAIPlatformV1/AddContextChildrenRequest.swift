@@ -84,8 +84,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.context, forKey: .context)
-      try container.encode(self.childContexts, forKey: .childContexts)
+      if !self.context.isEmpty {
+        try container.encode(self.context, forKey: .context)
+      }
+      if !self.childContexts.isEmpty {
+        try container.encode(self.childContexts, forKey: .childContexts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

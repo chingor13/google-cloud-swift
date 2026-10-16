@@ -92,9 +92,15 @@ public struct RawDocument: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.mimeType, forKey: .mimeType)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -277,11 +277,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accessConfigs, forKey: .accessConfigs)
-      try container.encode(self.aliasIpRanges, forKey: .aliasIpRanges)
-      try container.encode(self.aliasIpv6Ranges, forKey: .aliasIpv6Ranges)
+      if !self.accessConfigs.isEmpty {
+        try container.encode(self.accessConfigs, forKey: .accessConfigs)
+      }
+      if !self.aliasIpRanges.isEmpty {
+        try container.encode(self.aliasIpRanges, forKey: .aliasIpRanges)
+      }
+      if !self.aliasIpv6Ranges.isEmpty {
+        try container.encode(self.aliasIpv6Ranges, forKey: .aliasIpv6Ranges)
+      }
       try container.encodeIfPresent(self.enableVpcScopedDns, forKey: .enableVpcScopedDns)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -289,7 +295,9 @@
       try container.encodeIfPresent(self.igmpQuery, forKey: .igmpQuery)
       try container.encodeIfPresent(
         self.internalIpv6PrefixLength, forKey: .internalIpv6PrefixLength)
-      try container.encode(self.ipv6AccessConfigs, forKey: .ipv6AccessConfigs)
+      if !self.ipv6AccessConfigs.isEmpty {
+        try container.encode(self.ipv6AccessConfigs, forKey: .ipv6AccessConfigs)
+      }
       try container.encodeIfPresent(self.ipv6AccessType, forKey: .ipv6AccessType)
       try container.encodeIfPresent(self.ipv6Address, forKey: .ipv6Address)
       try container.encodeIfPresent(self.kind, forKey: .kind)

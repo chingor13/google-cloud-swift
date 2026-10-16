@@ -118,13 +118,21 @@ public struct DataObject: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dataObjectId, forKey: .dataObjectId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.dataObjectId.isEmpty {
+      try container.encode(self.dataObjectId, forKey: .dataObjectId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.data, forKey: .data)
-    try container.encode(self.vectors, forKey: .vectors)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.vectors.isEmpty {
+      try container.encode(self.vectors, forKey: .vectors)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

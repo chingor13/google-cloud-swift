@@ -207,10 +207,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.mainJob, forKey: .mainJob)
-        try container.encode(self.preCachingCheckJob, forKey: .preCachingCheckJob)
-        try container.encode(self.failedMainJobs, forKey: .failedMainJobs)
-        try container.encode(self.failedPreCachingCheckJobs, forKey: .failedPreCachingCheckJobs)
+        if !self.mainJob.isEmpty {
+          try container.encode(self.mainJob, forKey: .mainJob)
+        }
+        if !self.preCachingCheckJob.isEmpty {
+          try container.encode(self.preCachingCheckJob, forKey: .preCachingCheckJob)
+        }
+        if !self.failedMainJobs.isEmpty {
+          try container.encode(self.failedMainJobs, forKey: .failedMainJobs)
+        }
+        if !self.failedPreCachingCheckJobs.isEmpty {
+          try container.encode(self.failedPreCachingCheckJobs, forKey: .failedPreCachingCheckJobs)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -306,8 +314,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.job, forKey: .job)
-        try container.encode(self.failedJobs, forKey: .failedJobs)
+        if !self.job.isEmpty {
+          try container.encode(self.job, forKey: .job)
+        }
+        if !self.failedJobs.isEmpty {
+          try container.encode(self.failedJobs, forKey: .failedJobs)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

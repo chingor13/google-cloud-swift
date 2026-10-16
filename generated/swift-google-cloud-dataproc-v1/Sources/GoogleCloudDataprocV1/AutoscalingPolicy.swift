@@ -153,12 +153,20 @@ public struct AutoscalingPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.name, forKey: .name)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.workerConfig, forKey: .workerConfig)
     try container.encodeIfPresent(self.secondaryWorkerConfig, forKey: .secondaryWorkerConfig)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.clusterType, forKey: .clusterType)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.clusterType != AutoscalingPolicy.ClusterType() {
+      try container.encode(self.clusterType, forKey: .clusterType)
+    }
 
     if let choice = self.algorithm {
       switch choice {

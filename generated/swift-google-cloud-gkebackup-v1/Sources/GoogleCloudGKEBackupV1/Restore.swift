@@ -258,26 +258,54 @@ public struct Restore: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.backup, forKey: .backup)
-    try container.encode(self.cluster, forKey: .cluster)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.backup.isEmpty {
+      try container.encode(self.backup, forKey: .backup)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
     try container.encodeIfPresent(self.restoreConfig, forKey: .restoreConfig)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateReason, forKey: .stateReason)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Restore.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateReason.isEmpty {
+      try container.encode(self.stateReason, forKey: .stateReason)
+    }
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
-    try container.encode(self.resourcesRestoredCount, forKey: .resourcesRestoredCount)
-    try container.encode(self.resourcesExcludedCount, forKey: .resourcesExcludedCount)
-    try container.encode(self.resourcesFailedCount, forKey: .resourcesFailedCount)
-    try container.encode(self.volumesRestoredCount, forKey: .volumesRestoredCount)
-    try container.encode(self.etag, forKey: .etag)
+    if self.resourcesRestoredCount != 0 {
+      try container.encode(self.resourcesRestoredCount, forKey: .resourcesRestoredCount)
+    }
+    if self.resourcesExcludedCount != 0 {
+      try container.encode(self.resourcesExcludedCount, forKey: .resourcesExcludedCount)
+    }
+    if self.resourcesFailedCount != 0 {
+      try container.encode(self.resourcesFailedCount, forKey: .resourcesFailedCount)
+    }
+    if self.volumesRestoredCount != 0 {
+      try container.encode(self.volumesRestoredCount, forKey: .volumesRestoredCount)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.filter, forKey: .filter)
-    try container.encode(
-      self.volumeDataRestorePolicyOverrides, forKey: .volumeDataRestorePolicyOverrides)
+    if !self.volumeDataRestorePolicyOverrides.isEmpty {
+      try container.encode(
+        self.volumeDataRestorePolicyOverrides, forKey: .volumeDataRestorePolicyOverrides)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -356,8 +384,12 @@ public struct Restore: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inclusionFilters, forKey: .inclusionFilters)
-      try container.encode(self.exclusionFilters, forKey: .exclusionFilters)
+      if !self.inclusionFilters.isEmpty {
+        try container.encode(self.inclusionFilters, forKey: .inclusionFilters)
+      }
+      if !self.exclusionFilters.isEmpty {
+        try container.encode(self.exclusionFilters, forKey: .exclusionFilters)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -136,13 +136,21 @@ public struct CommonAddOnManifest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.logoUrl, forKey: .logoUrl)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.logoUrl.isEmpty {
+      try container.encode(self.logoUrl, forKey: .logoUrl)
+    }
     try container.encodeIfPresent(self.layoutProperties, forKey: .layoutProperties)
     try container.encodeIfPresent(self.addOnWidgetSet, forKey: .addOnWidgetSet)
-    try container.encode(self.useLocaleFromApp, forKey: .useLocaleFromApp)
+    if self.useLocaleFromApp {
+      try container.encode(self.useLocaleFromApp, forKey: .useLocaleFromApp)
+    }
     try container.encodeIfPresent(self.homepageTrigger, forKey: .homepageTrigger)
-    try container.encode(self.universalActions, forKey: .universalActions)
+    if !self.universalActions.isEmpty {
+      try container.encode(self.universalActions, forKey: .universalActions)
+    }
     try container.encodeIfPresent(self.openLinkUrlPrefixes, forKey: .openLinkUrlPrefixes)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

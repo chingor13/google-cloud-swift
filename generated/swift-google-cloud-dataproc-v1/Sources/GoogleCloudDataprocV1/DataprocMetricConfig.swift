@@ -71,7 +71,9 @@ public struct DataprocMetricConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metrics, forKey: .metrics)
+    if !self.metrics.isEmpty {
+      try container.encode(self.metrics, forKey: .metrics)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -170,8 +172,12 @@ public struct DataprocMetricConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.metricSource, forKey: .metricSource)
-      try container.encode(self.metricOverrides, forKey: .metricOverrides)
+      if self.metricSource != DataprocMetricConfig.MetricSource() {
+        try container.encode(self.metricSource, forKey: .metricSource)
+      }
+      if !self.metricOverrides.isEmpty {
+        try container.encode(self.metricOverrides, forKey: .metricOverrides)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

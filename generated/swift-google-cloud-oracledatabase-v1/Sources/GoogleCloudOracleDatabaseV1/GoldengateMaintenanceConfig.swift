@@ -129,15 +129,26 @@ public struct GoldengateMaintenanceConfig: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.isInterimReleaseAutoUpgradeEnabled, forKey: .isInterimReleaseAutoUpgradeEnabled)
-    try container.encode(
-      self.interimReleaseUpgradePeriodDays, forKey: .interimReleaseUpgradePeriodDays)
-    try container.encode(
-      self.bundleReleaseUpgradePeriodDays, forKey: .bundleReleaseUpgradePeriodDays)
-    try container.encode(self.majorReleaseUpgradePeriodDays, forKey: .majorReleaseUpgradePeriodDays)
-    try container.encode(
-      self.securityPatchUpgradePeriodDays, forKey: .securityPatchUpgradePeriodDays)
+    if self.isInterimReleaseAutoUpgradeEnabled {
+      try container.encode(
+        self.isInterimReleaseAutoUpgradeEnabled, forKey: .isInterimReleaseAutoUpgradeEnabled)
+    }
+    if self.interimReleaseUpgradePeriodDays != 0 {
+      try container.encode(
+        self.interimReleaseUpgradePeriodDays, forKey: .interimReleaseUpgradePeriodDays)
+    }
+    if self.bundleReleaseUpgradePeriodDays != 0 {
+      try container.encode(
+        self.bundleReleaseUpgradePeriodDays, forKey: .bundleReleaseUpgradePeriodDays)
+    }
+    if self.majorReleaseUpgradePeriodDays != 0 {
+      try container.encode(
+        self.majorReleaseUpgradePeriodDays, forKey: .majorReleaseUpgradePeriodDays)
+    }
+    if self.securityPatchUpgradePeriodDays != 0 {
+      try container.encode(
+        self.securityPatchUpgradePeriodDays, forKey: .securityPatchUpgradePeriodDays)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

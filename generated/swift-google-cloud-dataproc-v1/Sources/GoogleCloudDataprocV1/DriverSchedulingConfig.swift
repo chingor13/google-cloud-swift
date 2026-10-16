@@ -77,8 +77,12 @@ public struct DriverSchedulingConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
-    try container.encode(self.vcores, forKey: .vcores)
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
+    if self.vcores != 0 {
+      try container.encode(self.vcores, forKey: .vcores)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -103,11 +103,19 @@ public struct CloudSqlConnectionProfile: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudSqlId, forKey: .cloudSqlId)
+    if !self.cloudSqlId.isEmpty {
+      try container.encode(self.cloudSqlId, forKey: .cloudSqlId)
+    }
     try container.encodeIfPresent(self.settings, forKey: .settings)
-    try container.encode(self.privateIp, forKey: .privateIp)
-    try container.encode(self.publicIp, forKey: .publicIp)
-    try container.encode(self.additionalPublicIp, forKey: .additionalPublicIp)
+    if !self.privateIp.isEmpty {
+      try container.encode(self.privateIp, forKey: .privateIp)
+    }
+    if !self.publicIp.isEmpty {
+      try container.encode(self.publicIp, forKey: .publicIp)
+    }
+    if !self.additionalPublicIp.isEmpty {
+      try container.encode(self.additionalPublicIp, forKey: .additionalPublicIp)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

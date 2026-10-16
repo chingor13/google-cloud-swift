@@ -195,22 +195,54 @@ public struct DailyScheduleComplianceReportLog: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.backupRulePolicyName, forKey: .backupRulePolicyName)
-    try container.encode(self.backupPlanPolicyTemplate, forKey: .backupPlanPolicyTemplate)
-    try container.encode(self.hostName, forKey: .hostName)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.date, forKey: .date)
-    try container.encode(self.backupWindowStartTime, forKey: .backupWindowStartTime)
-    try container.encode(self.jobType, forKey: .jobType)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.comment, forKey: .comment)
-    try container.encode(self.resourceId, forKey: .resourceId)
-    try container.encode(self.hostId, forKey: .hostId)
-    try container.encode(self.backupPlanPolicyTemplateId, forKey: .backupPlanPolicyTemplateId)
-    try container.encode(self.backupRulePolicyId, forKey: .backupRulePolicyId)
-    try container.encode(self.applianceId, forKey: .applianceId)
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.backupRulePolicyName.isEmpty {
+      try container.encode(self.backupRulePolicyName, forKey: .backupRulePolicyName)
+    }
+    if !self.backupPlanPolicyTemplate.isEmpty {
+      try container.encode(self.backupPlanPolicyTemplate, forKey: .backupPlanPolicyTemplate)
+    }
+    if !self.hostName.isEmpty {
+      try container.encode(self.hostName, forKey: .hostName)
+    }
+    if !self.applianceName.isEmpty {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.date.isEmpty {
+      try container.encode(self.date, forKey: .date)
+    }
+    if !self.backupWindowStartTime.isEmpty {
+      try container.encode(self.backupWindowStartTime, forKey: .backupWindowStartTime)
+    }
+    if !self.jobType.isEmpty {
+      try container.encode(self.jobType, forKey: .jobType)
+    }
+    if !self.status.isEmpty {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.comment.isEmpty {
+      try container.encode(self.comment, forKey: .comment)
+    }
+    if !self.resourceId.isEmpty {
+      try container.encode(self.resourceId, forKey: .resourceId)
+    }
+    if !self.hostId.isEmpty {
+      try container.encode(self.hostId, forKey: .hostId)
+    }
+    if !self.backupPlanPolicyTemplateId.isEmpty {
+      try container.encode(self.backupPlanPolicyTemplateId, forKey: .backupPlanPolicyTemplateId)
+    }
+    if !self.backupRulePolicyId.isEmpty {
+      try container.encode(self.backupRulePolicyId, forKey: .backupRulePolicyId)
+    }
+    if !self.applianceId.isEmpty {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

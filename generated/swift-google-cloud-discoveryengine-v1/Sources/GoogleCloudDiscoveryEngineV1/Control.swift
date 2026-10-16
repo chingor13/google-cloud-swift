@@ -194,12 +194,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.associatedServingConfigIds, forKey: .associatedServingConfigIds)
-      try container.encode(self.solutionType, forKey: .solutionType)
-      try container.encode(self.useCases, forKey: .useCases)
-      try container.encode(self.conditions, forKey: .conditions)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.associatedServingConfigIds.isEmpty {
+        try container.encode(self.associatedServingConfigIds, forKey: .associatedServingConfigIds)
+      }
+      if self.solutionType != SolutionType() {
+        try container.encode(self.solutionType, forKey: .solutionType)
+      }
+      if !self.useCases.isEmpty {
+        try container.encode(self.useCases, forKey: .useCases)
+      }
+      if !self.conditions.isEmpty {
+        try container.encode(self.conditions, forKey: .conditions)
+      }
 
       if let choice = self.action {
         switch choice {
@@ -331,9 +343,15 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.boost, forKey: .boost)
-        try container.encode(self.filter, forKey: .filter)
-        try container.encode(self.dataStore, forKey: .dataStore)
+        if self.boost != 0 {
+          try container.encode(self.boost, forKey: .boost)
+        }
+        if !self.filter.isEmpty {
+          try container.encode(self.filter, forKey: .filter)
+        }
+        if !self.dataStore.isEmpty {
+          try container.encode(self.dataStore, forKey: .dataStore)
+        }
 
         if let choice = self.boostSpec {
           switch choice {
@@ -443,10 +461,20 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.fieldName, forKey: .fieldName)
-          try container.encode(self.attributeType, forKey: .attributeType)
-          try container.encode(self.interpolationType, forKey: .interpolationType)
-          try container.encode(self.controlPoints, forKey: .controlPoints)
+          if !self.fieldName.isEmpty {
+            try container.encode(self.fieldName, forKey: .fieldName)
+          }
+          if self.attributeType != Control.BoostAction.InterpolationBoostSpec.AttributeType() {
+            try container.encode(self.attributeType, forKey: .attributeType)
+          }
+          if self.interpolationType
+            != Control.BoostAction.InterpolationBoostSpec.InterpolationType()
+          {
+            try container.encode(self.interpolationType, forKey: .interpolationType)
+          }
+          if !self.controlPoints.isEmpty {
+            try container.encode(self.controlPoints, forKey: .controlPoints)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -521,8 +549,12 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.attributeValue, forKey: .attributeValue)
-            try container.encode(self.boostAmount, forKey: .boostAmount)
+            if !self.attributeValue.isEmpty {
+              try container.encode(self.attributeValue, forKey: .attributeValue)
+            }
+            if self.boostAmount != 0 {
+              try container.encode(self.boostAmount, forKey: .boostAmount)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -913,8 +945,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.filter, forKey: .filter)
-        try container.encode(self.dataStore, forKey: .dataStore)
+        if !self.filter.isEmpty {
+          try container.encode(self.filter, forKey: .filter)
+        }
+        if !self.dataStore.isEmpty {
+          try container.encode(self.dataStore, forKey: .dataStore)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -998,7 +1034,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.redirectUri, forKey: .redirectUri)
+        if !self.redirectUri.isEmpty {
+          try container.encode(self.redirectUri, forKey: .redirectUri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1084,7 +1122,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.synonyms, forKey: .synonyms)
+        if !self.synonyms.isEmpty {
+          try container.encode(self.synonyms, forKey: .synonyms)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1174,7 +1214,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataStore, forKey: .dataStore)
+        if !self.dataStore.isEmpty {
+          try container.encode(self.dataStore, forKey: .dataStore)
+        }
         try container.encodeIfPresent(self.searchLinkPromotion, forKey: .searchLinkPromotion)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

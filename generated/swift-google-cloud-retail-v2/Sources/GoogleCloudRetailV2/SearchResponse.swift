@@ -215,18 +215,38 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.results, forKey: .results)
-    try container.encode(self.facets, forKey: .facets)
-    try container.encode(self.totalSize, forKey: .totalSize)
-    try container.encode(self.correctedQuery, forKey: .correctedQuery)
-    try container.encode(self.attributionToken, forKey: .attributionToken)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.results.isEmpty {
+      try container.encode(self.results, forKey: .results)
+    }
+    if !self.facets.isEmpty {
+      try container.encode(self.facets, forKey: .facets)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
+    if !self.correctedQuery.isEmpty {
+      try container.encode(self.correctedQuery, forKey: .correctedQuery)
+    }
+    if !self.attributionToken.isEmpty {
+      try container.encode(self.attributionToken, forKey: .attributionToken)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     try container.encodeIfPresent(self.queryExpansionInfo, forKey: .queryExpansionInfo)
-    try container.encode(self.redirectUri, forKey: .redirectUri)
-    try container.encode(self.appliedControls, forKey: .appliedControls)
+    if !self.redirectUri.isEmpty {
+      try container.encode(self.redirectUri, forKey: .redirectUri)
+    }
+    if !self.appliedControls.isEmpty {
+      try container.encode(self.appliedControls, forKey: .appliedControls)
+    }
     try container.encodeIfPresent(self.pinControlMetadata, forKey: .pinControlMetadata)
-    try container.encode(self.invalidConditionBoostSpecs, forKey: .invalidConditionBoostSpecs)
-    try container.encode(self.experimentInfo, forKey: .experimentInfo)
+    if !self.invalidConditionBoostSpecs.isEmpty {
+      try container.encode(self.invalidConditionBoostSpecs, forKey: .invalidConditionBoostSpecs)
+    }
+    if !self.experimentInfo.isEmpty {
+      try container.encode(self.experimentInfo, forKey: .experimentInfo)
+    }
     try container.encodeIfPresent(
       self.conversationalSearchResult, forKey: .conversationalSearchResult)
     try container.encodeIfPresent(self.tileNavigationResult, forKey: .tileNavigationResult)
@@ -436,13 +456,25 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       try container.encodeIfPresent(self.product, forKey: .product)
-      try container.encode(self.matchingVariantCount, forKey: .matchingVariantCount)
-      try container.encode(self.matchingVariantFields, forKey: .matchingVariantFields)
-      try container.encode(self.variantRollupValues, forKey: .variantRollupValues)
-      try container.encode(self.personalLabels, forKey: .personalLabels)
-      try container.encode(self.modelScores, forKey: .modelScores)
+      if self.matchingVariantCount != 0 {
+        try container.encode(self.matchingVariantCount, forKey: .matchingVariantCount)
+      }
+      if !self.matchingVariantFields.isEmpty {
+        try container.encode(self.matchingVariantFields, forKey: .matchingVariantFields)
+      }
+      if !self.variantRollupValues.isEmpty {
+        try container.encode(self.variantRollupValues, forKey: .variantRollupValues)
+      }
+      if !self.personalLabels.isEmpty {
+        try container.encode(self.personalLabels, forKey: .personalLabels)
+      }
+      if !self.modelScores.isEmpty {
+        try container.encode(self.modelScores, forKey: .modelScores)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -541,9 +573,15 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
-      try container.encode(self.values, forKey: .values)
-      try container.encode(self.dynamicFacet, forKey: .dynamicFacet)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
+      if !self.values.isEmpty {
+        try container.encode(self.values, forKey: .values)
+      }
+      if self.dynamicFacet {
+        try container.encode(self.dynamicFacet, forKey: .dynamicFacet)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -656,9 +694,15 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.count, forKey: .count)
-        try container.encode(self.minValue, forKey: .minValue)
-        try container.encode(self.maxValue, forKey: .maxValue)
+        if self.count != 0 {
+          try container.encode(self.count, forKey: .count)
+        }
+        if self.minValue != 0 {
+          try container.encode(self.minValue, forKey: .minValue)
+        }
+        if self.maxValue != 0 {
+          try container.encode(self.maxValue, forKey: .maxValue)
+        }
 
         if let choice = self.facetValue {
           switch choice {
@@ -791,8 +835,12 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.expandedQuery, forKey: .expandedQuery)
-      try container.encode(self.pinnedResultCount, forKey: .pinnedResultCount)
+      if self.expandedQuery {
+        try container.encode(self.expandedQuery, forKey: .expandedQuery)
+      }
+      if self.pinnedResultCount != 0 {
+        try container.encode(self.pinnedResultCount, forKey: .pinnedResultCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -948,11 +996,21 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conversationId, forKey: .conversationId)
-      try container.encode(self.refinedQuery, forKey: .refinedQuery)
-      try container.encode(self.additionalFilters, forKey: .additionalFilters)
-      try container.encode(self.followupQuestion, forKey: .followupQuestion)
-      try container.encode(self.suggestedAnswers, forKey: .suggestedAnswers)
+      if !self.conversationId.isEmpty {
+        try container.encode(self.conversationId, forKey: .conversationId)
+      }
+      if !self.refinedQuery.isEmpty {
+        try container.encode(self.refinedQuery, forKey: .refinedQuery)
+      }
+      if !self.additionalFilters.isEmpty {
+        try container.encode(self.additionalFilters, forKey: .additionalFilters)
+      }
+      if !self.followupQuestion.isEmpty {
+        try container.encode(self.followupQuestion, forKey: .followupQuestion)
+      }
+      if !self.suggestedAnswers.isEmpty {
+        try container.encode(self.suggestedAnswers, forKey: .suggestedAnswers)
+      }
       try container.encodeIfPresent(self.additionalFilter, forKey: .additionalFilter)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1197,7 +1255,9 @@ public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tiles, forKey: .tiles)
+      if !self.tiles.isEmpty {
+        try container.encode(self.tiles, forKey: .tiles)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -80,8 +80,12 @@ public struct RouterApplianceInstance: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.virtualMachine, forKey: .virtualMachine)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
+    if !self.virtualMachine.isEmpty {
+      try container.encode(self.virtualMachine, forKey: .virtualMachine)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

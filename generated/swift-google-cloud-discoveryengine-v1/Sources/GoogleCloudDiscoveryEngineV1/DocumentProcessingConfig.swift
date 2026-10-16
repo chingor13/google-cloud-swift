@@ -121,10 +121,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.chunkingConfig, forKey: .chunkingConfig)
       try container.encodeIfPresent(self.defaultParsingConfig, forKey: .defaultParsingConfig)
-      try container.encode(self.parsingConfigOverrides, forKey: .parsingConfigOverrides)
+      if !self.parsingConfigOverrides.isEmpty {
+        try container.encode(self.parsingConfigOverrides, forKey: .parsingConfigOverrides)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -277,8 +281,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.chunkSize, forKey: .chunkSize)
-          try container.encode(self.includeAncestorHeadings, forKey: .includeAncestorHeadings)
+          if self.chunkSize != 0 {
+            try container.encode(self.chunkSize, forKey: .chunkSize)
+          }
+          if self.includeAncestorHeadings {
+            try container.encode(self.includeAncestorHeadings, forKey: .includeAncestorHeadings)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -576,8 +584,12 @@
         #endif
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.enhancedDocumentElements, forKey: .enhancedDocumentElements)
-          try container.encode(self.useNativeText, forKey: .useNativeText)
+          if !self.enhancedDocumentElements.isEmpty {
+            try container.encode(self.enhancedDocumentElements, forKey: .enhancedDocumentElements)
+          }
+          if self.useNativeText {
+            try container.encode(self.useNativeText, forKey: .useNativeText)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -714,12 +726,24 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.enableTableAnnotation, forKey: .enableTableAnnotation)
-          try container.encode(self.enableImageAnnotation, forKey: .enableImageAnnotation)
-          try container.encode(self.structuredContentTypes, forKey: .structuredContentTypes)
-          try container.encode(self.excludeHtmlElements, forKey: .excludeHtmlElements)
-          try container.encode(self.excludeHtmlClasses, forKey: .excludeHtmlClasses)
-          try container.encode(self.excludeHtmlIds, forKey: .excludeHtmlIds)
+          if self.enableTableAnnotation {
+            try container.encode(self.enableTableAnnotation, forKey: .enableTableAnnotation)
+          }
+          if self.enableImageAnnotation {
+            try container.encode(self.enableImageAnnotation, forKey: .enableImageAnnotation)
+          }
+          if !self.structuredContentTypes.isEmpty {
+            try container.encode(self.structuredContentTypes, forKey: .structuredContentTypes)
+          }
+          if !self.excludeHtmlElements.isEmpty {
+            try container.encode(self.excludeHtmlElements, forKey: .excludeHtmlElements)
+          }
+          if !self.excludeHtmlClasses.isEmpty {
+            try container.encode(self.excludeHtmlClasses, forKey: .excludeHtmlClasses)
+          }
+          if !self.excludeHtmlIds.isEmpty {
+            try container.encode(self.excludeHtmlIds, forKey: .excludeHtmlIds)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

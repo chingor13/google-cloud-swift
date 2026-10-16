@@ -362,8 +362,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.treeDepth, forKey: .treeDepth)
-          try container.encode(self.leafCount, forKey: .leafCount)
+          if self.treeDepth != 0 {
+            try container.encode(self.treeDepth, forKey: .treeDepth)
+          }
+          if self.leafCount != 0 {
+            try container.encode(self.leafCount, forKey: .leafCount)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -476,7 +480,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.indexName, forKey: .indexName)
+        if !self.indexName.isEmpty {
+          try container.encode(self.indexName, forKey: .indexName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -568,8 +574,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.indexEndpoint, forKey: .indexEndpoint)
-        try container.encode(self.index, forKey: .index)
+        if !self.indexEndpoint.isEmpty {
+          try container.encode(self.indexEndpoint, forKey: .indexEndpoint)
+        }
+        if !self.index.isEmpty {
+          try container.encode(self.index, forKey: .index)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

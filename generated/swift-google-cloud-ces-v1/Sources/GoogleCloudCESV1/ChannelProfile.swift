@@ -137,13 +137,23 @@ public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.profileId, forKey: .profileId)
-    try container.encode(self.channelType, forKey: .channelType)
+    if !self.profileId.isEmpty {
+      try container.encode(self.profileId, forKey: .profileId)
+    }
+    if self.channelType != ChannelProfile.ChannelType() {
+      try container.encode(self.channelType, forKey: .channelType)
+    }
     try container.encodeIfPresent(self.personaProperty, forKey: .personaProperty)
-    try container.encode(self.disableDtmf, forKey: .disableDtmf)
-    try container.encode(self.disableBargeInControl, forKey: .disableBargeInControl)
+    if self.disableDtmf {
+      try container.encode(self.disableDtmf, forKey: .disableDtmf)
+    }
+    if self.disableBargeInControl {
+      try container.encode(self.disableBargeInControl, forKey: .disableBargeInControl)
+    }
     try container.encodeIfPresent(self.webWidgetConfig, forKey: .webWidgetConfig)
-    try container.encode(self.noiseSuppressionLevel, forKey: .noiseSuppressionLevel)
+    if !self.noiseSuppressionLevel.isEmpty {
+      try container.encode(self.noiseSuppressionLevel, forKey: .noiseSuppressionLevel)
+    }
     try container.encodeIfPresent(self.whatsappConfig, forKey: .whatsappConfig)
     try container.encodeIfPresent(self.instagramConfig, forKey: .instagramConfig)
     for (key, value) in self._unknownFields.json {
@@ -206,7 +216,9 @@ public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.persona, forKey: .persona)
+      if self.persona != ChannelProfile.PersonaProperty.Persona() {
+        try container.encode(self.persona, forKey: .persona)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -431,9 +443,15 @@ public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.modality, forKey: .modality)
-      try container.encode(self.theme, forKey: .theme)
-      try container.encode(self.webWidgetTitle, forKey: .webWidgetTitle)
+      if self.modality != ChannelProfile.WebWidgetConfig.Modality() {
+        try container.encode(self.modality, forKey: .modality)
+      }
+      if self.theme != ChannelProfile.WebWidgetConfig.Theme() {
+        try container.encode(self.theme, forKey: .theme)
+      }
+      if !self.webWidgetTitle.isEmpty {
+        try container.encode(self.webWidgetTitle, forKey: .webWidgetTitle)
+      }
       try container.encodeIfPresent(self.securitySettings, forKey: .securitySettings)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -526,10 +544,18 @@ public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enablePublicAccess, forKey: .enablePublicAccess)
-        try container.encode(self.enableOriginCheck, forKey: .enableOriginCheck)
-        try container.encode(self.allowedOrigins, forKey: .allowedOrigins)
-        try container.encode(self.enableRecaptcha, forKey: .enableRecaptcha)
+        if self.enablePublicAccess {
+          try container.encode(self.enablePublicAccess, forKey: .enablePublicAccess)
+        }
+        if self.enableOriginCheck {
+          try container.encode(self.enableOriginCheck, forKey: .enableOriginCheck)
+        }
+        if !self.allowedOrigins.isEmpty {
+          try container.encode(self.allowedOrigins, forKey: .allowedOrigins)
+        }
+        if self.enableRecaptcha {
+          try container.encode(self.enableRecaptcha, forKey: .enableRecaptcha)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -920,12 +946,24 @@ public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.wabaId, forKey: .wabaId)
-      try container.encode(self.phoneNumberId, forKey: .phoneNumberId)
-      try container.encode(self.phoneNumber, forKey: .phoneNumber)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.thumbnailUrl, forKey: .thumbnailUrl)
-      try container.encode(self.description, forKey: .description)
+      if !self.wabaId.isEmpty {
+        try container.encode(self.wabaId, forKey: .wabaId)
+      }
+      if !self.phoneNumberId.isEmpty {
+        try container.encode(self.phoneNumberId, forKey: .phoneNumberId)
+      }
+      if !self.phoneNumber.isEmpty {
+        try container.encode(self.phoneNumber, forKey: .phoneNumber)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.thumbnailUrl.isEmpty {
+        try container.encode(self.thumbnailUrl, forKey: .thumbnailUrl)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1029,10 +1067,18 @@ public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instagramAccountId, forKey: .instagramAccountId)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.thumbnailUrl, forKey: .thumbnailUrl)
-      try container.encode(self.description, forKey: .description)
+      if !self.instagramAccountId.isEmpty {
+        try container.encode(self.instagramAccountId, forKey: .instagramAccountId)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.thumbnailUrl.isEmpty {
+        try container.encode(self.thumbnailUrl, forKey: .thumbnailUrl)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

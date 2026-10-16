@@ -155,18 +155,30 @@ public struct ProbingDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.result, forKey: .result)
+    if self.result != ProbingDetails.ProbingResult() {
+      try container.encode(self.result, forKey: .result)
+    }
     try container.encodeIfPresent(self.verifyTime, forKey: .verifyTime)
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.abortCause, forKey: .abortCause)
-    try container.encode(self.sentProbeCount, forKey: .sentProbeCount)
-    try container.encode(self.successfulProbeCount, forKey: .successfulProbeCount)
+    if self.abortCause != ProbingDetails.ProbingAbortCause() {
+      try container.encode(self.abortCause, forKey: .abortCause)
+    }
+    if self.sentProbeCount != 0 {
+      try container.encode(self.sentProbeCount, forKey: .sentProbeCount)
+    }
+    if self.successfulProbeCount != 0 {
+      try container.encode(self.successfulProbeCount, forKey: .successfulProbeCount)
+    }
     try container.encodeIfPresent(self.endpointInfo, forKey: .endpointInfo)
     try container.encodeIfPresent(self.probingLatency, forKey: .probingLatency)
     try container.encodeIfPresent(
       self.destinationEgressLocation, forKey: .destinationEgressLocation)
-    try container.encode(self.edgeResponses, forKey: .edgeResponses)
-    try container.encode(self.probedAllDevices, forKey: .probedAllDevices)
+    if !self.edgeResponses.isEmpty {
+      try container.encode(self.edgeResponses, forKey: .edgeResponses)
+    }
+    if self.probedAllDevices {
+      try container.encode(self.probedAllDevices, forKey: .probedAllDevices)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -225,7 +237,9 @@ public struct ProbingDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.metropolitanArea, forKey: .metropolitanArea)
+      if !self.metropolitanArea.isEmpty {
+        try container.encode(self.metropolitanArea, forKey: .metropolitanArea)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -353,13 +367,21 @@ public struct ProbingDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.result, forKey: .result)
-      try container.encode(self.sentProbeCount, forKey: .sentProbeCount)
-      try container.encode(self.successfulProbeCount, forKey: .successfulProbeCount)
+      if self.result != ProbingDetails.ProbingResult() {
+        try container.encode(self.result, forKey: .result)
+      }
+      if self.sentProbeCount != 0 {
+        try container.encode(self.sentProbeCount, forKey: .sentProbeCount)
+      }
+      if self.successfulProbeCount != 0 {
+        try container.encode(self.successfulProbeCount, forKey: .successfulProbeCount)
+      }
       try container.encodeIfPresent(self.probingLatency, forKey: .probingLatency)
       try container.encodeIfPresent(
         self.destinationEgressLocation, forKey: .destinationEgressLocation)
-      try container.encode(self.destinationRouter, forKey: .destinationRouter)
+      if !self.destinationRouter.isEmpty {
+        try container.encode(self.destinationRouter, forKey: .destinationRouter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

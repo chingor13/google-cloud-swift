@@ -123,13 +123,25 @@ public struct LoadSnapshotRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.environment, forKey: .environment)
-    try container.encode(self.snapshotPath, forKey: .snapshotPath)
-    try container.encode(self.skipPypiPackagesInstallation, forKey: .skipPypiPackagesInstallation)
-    try container.encode(
-      self.skipEnvironmentVariablesSetting, forKey: .skipEnvironmentVariablesSetting)
-    try container.encode(self.skipAirflowOverridesSetting, forKey: .skipAirflowOverridesSetting)
-    try container.encode(self.skipGcsDataCopying, forKey: .skipGcsDataCopying)
+    if !self.environment.isEmpty {
+      try container.encode(self.environment, forKey: .environment)
+    }
+    if !self.snapshotPath.isEmpty {
+      try container.encode(self.snapshotPath, forKey: .snapshotPath)
+    }
+    if self.skipPypiPackagesInstallation {
+      try container.encode(self.skipPypiPackagesInstallation, forKey: .skipPypiPackagesInstallation)
+    }
+    if self.skipEnvironmentVariablesSetting {
+      try container.encode(
+        self.skipEnvironmentVariablesSetting, forKey: .skipEnvironmentVariablesSetting)
+    }
+    if self.skipAirflowOverridesSetting {
+      try container.encode(self.skipAirflowOverridesSetting, forKey: .skipAirflowOverridesSetting)
+    }
+    if self.skipGcsDataCopying {
+      try container.encode(self.skipGcsDataCopying, forKey: .skipGcsDataCopying)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

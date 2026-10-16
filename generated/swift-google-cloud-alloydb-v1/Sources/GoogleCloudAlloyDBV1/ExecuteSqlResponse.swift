@@ -76,7 +76,9 @@ public struct ExecuteSqlResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sqlResults, forKey: .sqlResults)
+    if !self.sqlResults.isEmpty {
+      try container.encode(self.sqlResults, forKey: .sqlResults)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

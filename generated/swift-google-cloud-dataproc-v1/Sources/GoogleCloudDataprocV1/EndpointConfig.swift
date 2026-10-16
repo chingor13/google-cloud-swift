@@ -81,8 +81,12 @@ public struct EndpointConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.httpPorts, forKey: .httpPorts)
-    try container.encode(self.enableHttpPortAccess, forKey: .enableHttpPortAccess)
+    if !self.httpPorts.isEmpty {
+      try container.encode(self.httpPorts, forKey: .httpPorts)
+    }
+    if self.enableHttpPortAccess {
+      try container.encode(self.enableHttpPortAccess, forKey: .enableHttpPortAccess)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

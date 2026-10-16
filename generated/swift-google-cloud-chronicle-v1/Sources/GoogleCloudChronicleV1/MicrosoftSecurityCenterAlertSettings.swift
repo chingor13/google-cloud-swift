@@ -101,10 +101,18 @@ public struct MicrosoftSecurityCenterAlertSettings: Codable, Equatable, GoogleWK
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.subscriptionId, forKey: .subscriptionId)
-    try container.encode(self.tenantId, forKey: .tenantId)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.authEndpoint, forKey: .authEndpoint)
+    if !self.subscriptionId.isEmpty {
+      try container.encode(self.subscriptionId, forKey: .subscriptionId)
+    }
+    if !self.tenantId.isEmpty {
+      try container.encode(self.tenantId, forKey: .tenantId)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.authEndpoint.isEmpty {
+      try container.encode(self.authEndpoint, forKey: .authEndpoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

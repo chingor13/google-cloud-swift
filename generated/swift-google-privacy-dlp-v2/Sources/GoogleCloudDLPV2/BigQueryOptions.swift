@@ -141,12 +141,24 @@ public struct BigQueryOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.tableReference, forKey: .tableReference)
-    try container.encode(self.identifyingFields, forKey: .identifyingFields)
-    try container.encode(self.rowsLimit, forKey: .rowsLimit)
-    try container.encode(self.rowsLimitPercent, forKey: .rowsLimitPercent)
-    try container.encode(self.sampleMethod, forKey: .sampleMethod)
-    try container.encode(self.excludedFields, forKey: .excludedFields)
-    try container.encode(self.includedFields, forKey: .includedFields)
+    if !self.identifyingFields.isEmpty {
+      try container.encode(self.identifyingFields, forKey: .identifyingFields)
+    }
+    if self.rowsLimit != 0 {
+      try container.encode(self.rowsLimit, forKey: .rowsLimit)
+    }
+    if self.rowsLimitPercent != 0 {
+      try container.encode(self.rowsLimitPercent, forKey: .rowsLimitPercent)
+    }
+    if self.sampleMethod != BigQueryOptions.SampleMethod() {
+      try container.encode(self.sampleMethod, forKey: .sampleMethod)
+    }
+    if !self.excludedFields.isEmpty {
+      try container.encode(self.excludedFields, forKey: .excludedFields)
+    }
+    if !self.includedFields.isEmpty {
+      try container.encode(self.includedFields, forKey: .includedFields)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

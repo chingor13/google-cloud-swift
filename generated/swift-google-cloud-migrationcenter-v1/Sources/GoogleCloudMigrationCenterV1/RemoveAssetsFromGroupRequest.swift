@@ -109,10 +109,16 @@ public struct RemoveAssetsFromGroupRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.group, forKey: .group)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.group.isEmpty {
+      try container.encode(self.group, forKey: .group)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     try container.encodeIfPresent(self.assets, forKey: .assets)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

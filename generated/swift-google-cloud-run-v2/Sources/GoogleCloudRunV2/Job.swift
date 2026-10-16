@@ -342,30 +342,62 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.lastModifier, forKey: .lastModifier)
-    try container.encode(self.client, forKey: .client)
-    try container.encode(self.clientVersion, forKey: .clientVersion)
-    try container.encode(self.launchStage, forKey: .launchStage)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.lastModifier.isEmpty {
+      try container.encode(self.lastModifier, forKey: .lastModifier)
+    }
+    if !self.client.isEmpty {
+      try container.encode(self.client, forKey: .client)
+    }
+    if !self.clientVersion.isEmpty {
+      try container.encode(self.clientVersion, forKey: .clientVersion)
+    }
+    if self.launchStage != GoogleApi.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
     try container.encodeIfPresent(self.binaryAuthorization, forKey: .binaryAuthorization)
     try container.encodeIfPresent(self.template, forKey: .template)
-    try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    if self.observedGeneration != 0 {
+      try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    }
     try container.encodeIfPresent(self.terminalCondition, forKey: .terminalCondition)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.executionCount, forKey: .executionCount)
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if self.executionCount != 0 {
+      try container.encode(self.executionCount, forKey: .executionCount)
+    }
     try container.encodeIfPresent(self.latestCreatedExecution, forKey: .latestCreatedExecution)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.etag, forKey: .etag)
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
 
     if let choice = self.createExecution {
       switch choice {

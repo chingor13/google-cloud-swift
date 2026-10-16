@@ -132,12 +132,24 @@ public struct CloudSpannerProperties: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.useParallelism, forKey: .useParallelism)
-    try container.encode(self.maxParallelism, forKey: .maxParallelism)
-    try container.encode(self.useServerlessAnalytics, forKey: .useServerlessAnalytics)
-    try container.encode(self.useDataBoost, forKey: .useDataBoost)
-    try container.encode(self.databaseRole, forKey: .databaseRole)
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if self.useParallelism {
+      try container.encode(self.useParallelism, forKey: .useParallelism)
+    }
+    if self.maxParallelism != 0 {
+      try container.encode(self.maxParallelism, forKey: .maxParallelism)
+    }
+    if self.useServerlessAnalytics {
+      try container.encode(self.useServerlessAnalytics, forKey: .useServerlessAnalytics)
+    }
+    if self.useDataBoost {
+      try container.encode(self.useDataBoost, forKey: .useDataBoost)
+    }
+    if !self.databaseRole.isEmpty {
+      try container.encode(self.databaseRole, forKey: .databaseRole)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

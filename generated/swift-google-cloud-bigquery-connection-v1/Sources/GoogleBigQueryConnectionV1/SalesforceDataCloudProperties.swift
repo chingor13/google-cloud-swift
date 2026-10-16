@@ -87,9 +87,15 @@ public struct SalesforceDataCloudProperties: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceUri, forKey: .instanceUri)
-    try container.encode(self.identity, forKey: .identity)
-    try container.encode(self.tenantId, forKey: .tenantId)
+    if !self.instanceUri.isEmpty {
+      try container.encode(self.instanceUri, forKey: .instanceUri)
+    }
+    if !self.identity.isEmpty {
+      try container.encode(self.identity, forKey: .identity)
+    }
+    if !self.tenantId.isEmpty {
+      try container.encode(self.tenantId, forKey: .tenantId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

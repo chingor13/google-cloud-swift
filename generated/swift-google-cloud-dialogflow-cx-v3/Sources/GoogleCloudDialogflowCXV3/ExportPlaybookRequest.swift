@@ -103,9 +103,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.playbookUri, forKey: .playbookUri)
-      try container.encode(self.dataFormat, forKey: .dataFormat)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.playbookUri.isEmpty {
+        try container.encode(self.playbookUri, forKey: .playbookUri)
+      }
+      if self.dataFormat != ExportPlaybookRequest.DataFormat() {
+        try container.encode(self.dataFormat, forKey: .dataFormat)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

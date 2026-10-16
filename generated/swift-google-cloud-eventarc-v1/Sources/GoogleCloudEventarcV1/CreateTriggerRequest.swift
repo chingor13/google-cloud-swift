@@ -92,10 +92,16 @@ public struct CreateTriggerRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.trigger, forKey: .trigger)
-    try container.encode(self.triggerId, forKey: .triggerId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.triggerId.isEmpty {
+      try container.encode(self.triggerId, forKey: .triggerId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

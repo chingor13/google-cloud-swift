@@ -248,13 +248,23 @@ public struct Table: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.clusterStates, forKey: .clusterStates)
-    try container.encode(self.columnFamilies, forKey: .columnFamilies)
-    try container.encode(self.granularity, forKey: .granularity)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.clusterStates.isEmpty {
+      try container.encode(self.clusterStates, forKey: .clusterStates)
+    }
+    if !self.columnFamilies.isEmpty {
+      try container.encode(self.columnFamilies, forKey: .columnFamilies)
+    }
+    if self.granularity != Table.TimestampGranularity() {
+      try container.encode(self.granularity, forKey: .granularity)
+    }
     try container.encodeIfPresent(self.restoreInfo, forKey: .restoreInfo)
     try container.encodeIfPresent(self.changeStreamConfig, forKey: .changeStreamConfig)
-    try container.encode(self.deletionProtection, forKey: .deletionProtection)
+    if self.deletionProtection {
+      try container.encode(self.deletionProtection, forKey: .deletionProtection)
+    }
     try container.encodeIfPresent(
       self.effectiveAutomatedBackupPolicy, forKey: .effectiveAutomatedBackupPolicy)
     try container.encodeIfPresent(self.tieredStorageConfig, forKey: .tieredStorageConfig)
@@ -338,8 +348,12 @@ public struct Table: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.replicationState, forKey: .replicationState)
-      try container.encode(self.encryptionInfo, forKey: .encryptionInfo)
+      if self.replicationState != Table.ClusterState.ReplicationState() {
+        try container.encode(self.replicationState, forKey: .replicationState)
+      }
+      if !self.encryptionInfo.isEmpty {
+        try container.encode(self.encryptionInfo, forKey: .encryptionInfo)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -609,9 +623,13 @@ public struct Table: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.retentionPeriod, forKey: .retentionPeriod)
       try container.encodeIfPresent(self.frequency, forKey: .frequency)
-      try container.encode(self.locations, forKey: .locations)
+      if !self.locations.isEmpty {
+        try container.encode(self.locations, forKey: .locations)
+      }
       try container.encodeIfPresent(self.keepHotDuration, forKey: .keepHotDuration)
-      try container.encode(self.disabled, forKey: .disabled)
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

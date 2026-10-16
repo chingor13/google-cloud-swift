@@ -150,14 +150,30 @@ public struct DashboardFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.dataSource, forKey: .dataSource)
-    try container.encode(self.fieldPath, forKey: .fieldPath)
-    try container.encode(self.filterOperatorAndFieldValues, forKey: .filterOperatorAndFieldValues)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.chartIds, forKey: .chartIds)
-    try container.encode(self.isStandardTimeRangeFilter, forKey: .isStandardTimeRangeFilter)
-    try container.encode(self.isMandatory, forKey: .isMandatory)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.dataSource != DataSource() {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
+    if !self.fieldPath.isEmpty {
+      try container.encode(self.fieldPath, forKey: .fieldPath)
+    }
+    if !self.filterOperatorAndFieldValues.isEmpty {
+      try container.encode(self.filterOperatorAndFieldValues, forKey: .filterOperatorAndFieldValues)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.chartIds.isEmpty {
+      try container.encode(self.chartIds, forKey: .chartIds)
+    }
+    if self.isStandardTimeRangeFilter {
+      try container.encode(self.isStandardTimeRangeFilter, forKey: .isStandardTimeRangeFilter)
+    }
+    if self.isMandatory {
+      try container.encode(self.isMandatory, forKey: .isMandatory)
+    }
     try container.encodeIfPresent(
       self.isStandardTimeRangeFilterEnabled, forKey: .isStandardTimeRangeFilterEnabled)
     try container.encodeIfPresent(self.advancedFilterConfig, forKey: .advancedFilterConfig)

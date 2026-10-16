@@ -145,16 +145,30 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.nativeDashboard, forKey: .nativeDashboard)
-    try container.encode(self.tileType, forKey: .tileType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.nativeDashboard.isEmpty {
+      try container.encode(self.nativeDashboard, forKey: .nativeDashboard)
+    }
+    if self.tileType != TileType() {
+      try container.encode(self.tileType, forKey: .tileType)
+    }
     try container.encodeIfPresent(self.chartDatasource, forKey: .chartDatasource)
     try container.encodeIfPresent(self.visualization, forKey: .visualization)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.drillDownConfig, forKey: .drillDownConfig)
-    try container.encode(self.tokens, forKey: .tokens)
+    if !self.tokens.isEmpty {
+      try container.encode(self.tokens, forKey: .tokens)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -220,8 +234,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dashboardQuery, forKey: .dashboardQuery)
-      try container.encode(self.dataSources, forKey: .dataSources)
+      if !self.dashboardQuery.isEmpty {
+        try container.encode(self.dashboardQuery, forKey: .dashboardQuery)
+      }
+      if !self.dataSources.isEmpty {
+        try container.encode(self.dataSources, forKey: .dataSources)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -410,20 +428,38 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.xAxes, forKey: .xAxes)
-      try container.encode(self.yAxes, forKey: .yAxes)
-      try container.encode(self.series, forKey: .series)
+      if !self.xAxes.isEmpty {
+        try container.encode(self.xAxes, forKey: .xAxes)
+      }
+      if !self.yAxes.isEmpty {
+        try container.encode(self.yAxes, forKey: .yAxes)
+      }
+      if !self.series.isEmpty {
+        try container.encode(self.series, forKey: .series)
+      }
       try container.encodeIfPresent(self.tooltip, forKey: .tooltip)
-      try container.encode(self.legends, forKey: .legends)
-      try container.encode(self.columnDefs, forKey: .columnDefs)
+      if !self.legends.isEmpty {
+        try container.encode(self.legends, forKey: .legends)
+      }
+      if !self.columnDefs.isEmpty {
+        try container.encode(self.columnDefs, forKey: .columnDefs)
+      }
       try container.encodeIfPresent(self.tableConfig, forKey: .tableConfig)
       try container.encodeIfPresent(self.button, forKey: .button)
       try container.encodeIfPresent(self.markdown, forKey: .markdown)
-      try container.encode(self.seriesColumn, forKey: .seriesColumn)
-      try container.encode(self.groupingType, forKey: .groupingType)
+      if !self.seriesColumn.isEmpty {
+        try container.encode(self.seriesColumn, forKey: .seriesColumn)
+      }
+      if !self.groupingType.isEmpty {
+        try container.encode(self.groupingType, forKey: .groupingType)
+      }
       try container.encodeIfPresent(self.googleMapsConfig, forKey: .googleMapsConfig)
-      try container.encode(self.thresholdColoringEnabled, forKey: .thresholdColoringEnabled)
-      try container.encode(self.visualMaps, forKey: .visualMaps)
+      if self.thresholdColoringEnabled {
+        try container.encode(self.thresholdColoringEnabled, forKey: .thresholdColoringEnabled)
+      }
+      if !self.visualMaps.isEmpty {
+        try container.encode(self.visualMaps, forKey: .visualMaps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -500,8 +536,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.axisType, forKey: .axisType)
-        try container.encode(self.displayName, forKey: .displayName)
+        if self.axisType != AxisType() {
+          try container.encode(self.axisType, forKey: .axisType)
+        }
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
         try container.encodeIfPresent(self.min, forKey: .min)
         try container.encodeIfPresent(self.max, forKey: .max)
         for (key, value) in self._unknownFields.json {
@@ -699,19 +739,39 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.seriesType, forKey: .seriesType)
-        try container.encode(self.seriesName, forKey: .seriesName)
-        try container.encode(self.showSymbol, forKey: .showSymbol)
-        try container.encode(self.showBackground, forKey: .showBackground)
-        try container.encode(self.stack, forKey: .stack)
-        try container.encode(self.seriesStackStrategy, forKey: .seriesStackStrategy)
+        if self.seriesType != SeriesType() {
+          try container.encode(self.seriesType, forKey: .seriesType)
+        }
+        if !self.seriesName.isEmpty {
+          try container.encode(self.seriesName, forKey: .seriesName)
+        }
+        if self.showSymbol {
+          try container.encode(self.showSymbol, forKey: .showSymbol)
+        }
+        if self.showBackground {
+          try container.encode(self.showBackground, forKey: .showBackground)
+        }
+        if !self.stack.isEmpty {
+          try container.encode(self.stack, forKey: .stack)
+        }
+        if self.seriesStackStrategy != SeriesStackStrategy() {
+          try container.encode(self.seriesStackStrategy, forKey: .seriesStackStrategy)
+        }
         try container.encodeIfPresent(self.encode, forKey: .encode)
-        try container.encode(self.label, forKey: .label)
-        try container.encode(self.field, forKey: .field)
+        if !self.label.isEmpty {
+          try container.encode(self.label, forKey: .label)
+        }
+        if !self.field.isEmpty {
+          try container.encode(self.field, forKey: .field)
+        }
         try container.encodeIfPresent(self.dataLabel, forKey: .dataLabel)
-        try container.encode(self.radius, forKey: .radius)
+        if !self.radius.isEmpty {
+          try container.encode(self.radius, forKey: .radius)
+        }
         try container.encodeIfPresent(self.itemStyle, forKey: .itemStyle)
-        try container.encode(self.seriesUniqueValue, forKey: .seriesUniqueValue)
+        if !self.seriesUniqueValue.isEmpty {
+          try container.encode(self.seriesUniqueValue, forKey: .seriesUniqueValue)
+        }
         try container.encodeIfPresent(self.areaStyle, forKey: .areaStyle)
         try container.encodeIfPresent(self.itemColors, forKey: .itemColors)
         try container.encodeIfPresent(self.gaugeConfig, forKey: .gaugeConfig)
@@ -796,10 +856,18 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.x, forKey: .x)
-          try container.encode(self.y, forKey: .y)
-          try container.encode(self.value, forKey: .value)
-          try container.encode(self.itemName, forKey: .itemName)
+          if !self.x.isEmpty {
+            try container.encode(self.x, forKey: .x)
+          }
+          if !self.y.isEmpty {
+            try container.encode(self.y, forKey: .y)
+          }
+          if !self.value.isEmpty {
+            try container.encode(self.value, forKey: .value)
+          }
+          if !self.itemName.isEmpty {
+            try container.encode(self.itemName, forKey: .itemName)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -880,7 +948,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.show, forKey: .show)
+          if self.show {
+            try container.encode(self.show, forKey: .show)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -977,9 +1047,15 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.borderWidth, forKey: .borderWidth)
-          try container.encode(self.borderColor, forKey: .borderColor)
-          try container.encode(self.color, forKey: .color)
+          if self.borderWidth != 0 {
+            try container.encode(self.borderWidth, forKey: .borderWidth)
+          }
+          if !self.borderColor.isEmpty {
+            try container.encode(self.borderColor, forKey: .borderColor)
+          }
+          if !self.color.isEmpty {
+            try container.encode(self.color, forKey: .color)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1108,13 +1184,27 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.color, forKey: .color)
-          try container.encode(self.origin, forKey: .origin)
-          try container.encode(self.shadowBlur, forKey: .shadowBlur)
-          try container.encode(self.shadowColor, forKey: .shadowColor)
-          try container.encode(self.shadowOffsetX, forKey: .shadowOffsetX)
-          try container.encode(self.shadowOffsetY, forKey: .shadowOffsetY)
-          try container.encode(self.opacity, forKey: .opacity)
+          if !self.color.isEmpty {
+            try container.encode(self.color, forKey: .color)
+          }
+          if !self.origin.isEmpty {
+            try container.encode(self.origin, forKey: .origin)
+          }
+          if self.shadowBlur != 0 {
+            try container.encode(self.shadowBlur, forKey: .shadowBlur)
+          }
+          if !self.shadowColor.isEmpty {
+            try container.encode(self.shadowColor, forKey: .shadowColor)
+          }
+          if self.shadowOffsetX != 0 {
+            try container.encode(self.shadowOffsetX, forKey: .shadowOffsetX)
+          }
+          if self.shadowOffsetY != 0 {
+            try container.encode(self.shadowOffsetY, forKey: .shadowOffsetY)
+          }
+          if self.opacity != 0 {
+            try container.encode(self.opacity, forKey: .opacity)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1203,8 +1293,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.color, forKey: .color)
-          try container.encode(self.label, forKey: .label)
+          if !self.color.isEmpty {
+            try container.encode(self.color, forKey: .color)
+          }
+          if !self.label.isEmpty {
+            try container.encode(self.label, forKey: .label)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1292,7 +1386,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.key, forKey: .key)
+          if !self.key.isEmpty {
+            try container.encode(self.key, forKey: .key)
+          }
           try container.encodeIfPresent(self.value, forKey: .value)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1376,7 +1472,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.colors, forKey: .colors)
+          if !self.colors.isEmpty {
+            try container.encode(self.colors, forKey: .colors)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1465,8 +1563,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.value, forKey: .value)
-          try container.encode(self.color, forKey: .color)
+          if self.value != 0 {
+            try container.encode(self.value, forKey: .value)
+          }
+          if !self.color.isEmpty {
+            try container.encode(self.color, forKey: .color)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1565,7 +1667,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.baseValue, forKey: .baseValue)
           try container.encodeIfPresent(self.limitValue, forKey: .limitValue)
-          try container.encode(self.thresholdValues, forKey: .thresholdValues)
+          if !self.thresholdValues.isEmpty {
+            try container.encode(self.thresholdValues, forKey: .thresholdValues)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1676,10 +1780,18 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.metricFormat, forKey: .metricFormat)
-          try container.encode(self.showMetricTrend, forKey: .showMetricTrend)
-          try container.encode(self.metricDisplayTrend, forKey: .metricDisplayTrend)
-          try container.encode(self.metricTrendType, forKey: .metricTrendType)
+          if self.metricFormat != MetricFormat() {
+            try container.encode(self.metricFormat, forKey: .metricFormat)
+          }
+          if self.showMetricTrend {
+            try container.encode(self.showMetricTrend, forKey: .showMetricTrend)
+          }
+          if self.metricDisplayTrend != MetricDisplayTrend() {
+            try container.encode(self.metricDisplayTrend, forKey: .metricDisplayTrend)
+          }
+          if self.metricTrendType != MetricTrendType() {
+            try container.encode(self.metricTrendType, forKey: .metricTrendType)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1787,8 +1899,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.show, forKey: .show)
-        try container.encode(self.tooltipTrigger, forKey: .tooltipTrigger)
+        if self.show {
+          try container.encode(self.show, forKey: .show)
+        }
+        if self.tooltipTrigger != ToolTipTrigger() {
+          try container.encode(self.tooltipTrigger, forKey: .tooltipTrigger)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1936,17 +2052,39 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.show, forKey: .show)
-        try container.encode(self.zLevel, forKey: .zLevel)
-        try container.encode(self.z, forKey: .z)
-        try container.encode(self.`left`, forKey: .`left`)
-        try container.encode(self.top, forKey: .top)
-        try container.encode(self.`right`, forKey: .`right`)
-        try container.encode(self.bottom, forKey: .bottom)
-        try container.encode(self.legendOrient, forKey: .legendOrient)
-        try container.encode(self.legendAlign, forKey: .legendAlign)
-        try container.encode(self.padding, forKey: .padding)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if self.show {
+          try container.encode(self.show, forKey: .show)
+        }
+        if self.zLevel != 0 {
+          try container.encode(self.zLevel, forKey: .zLevel)
+        }
+        if self.z != 0 {
+          try container.encode(self.z, forKey: .z)
+        }
+        if self.`left` != 0 {
+          try container.encode(self.`left`, forKey: .`left`)
+        }
+        if self.top != 0 {
+          try container.encode(self.top, forKey: .top)
+        }
+        if self.`right` != 0 {
+          try container.encode(self.`right`, forKey: .`right`)
+        }
+        if self.bottom != 0 {
+          try container.encode(self.bottom, forKey: .bottom)
+        }
+        if self.legendOrient != LegendOrient() {
+          try container.encode(self.legendOrient, forKey: .legendOrient)
+        }
+        if self.legendAlign != LegendAlign() {
+          try container.encode(self.legendAlign, forKey: .legendAlign)
+        }
+        if !self.padding.isEmpty {
+          try container.encode(self.padding, forKey: .padding)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2034,8 +2172,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.field, forKey: .field)
-        try container.encode(self.header, forKey: .header)
+        if !self.field.isEmpty {
+          try container.encode(self.field, forKey: .field)
+        }
+        if !self.header.isEmpty {
+          try container.encode(self.header, forKey: .header)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2125,8 +2267,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.field, forKey: .field)
-        try container.encode(self.columnRenderType, forKey: .columnRenderType)
+        if !self.field.isEmpty {
+          try container.encode(self.field, forKey: .field)
+        }
+        if self.columnRenderType != RenderType() {
+          try container.encode(self.columnRenderType, forKey: .columnRenderType)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2224,9 +2370,15 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.field, forKey: .field)
-        try container.encode(self.headerTooltipText, forKey: .headerTooltipText)
-        try container.encode(self.cellTooltipText, forKey: .cellTooltipText)
+        if !self.field.isEmpty {
+          try container.encode(self.field, forKey: .field)
+        }
+        if !self.headerTooltipText.isEmpty {
+          try container.encode(self.headerTooltipText, forKey: .headerTooltipText)
+        }
+        if !self.cellTooltipText.isEmpty {
+          try container.encode(self.cellTooltipText, forKey: .cellTooltipText)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2329,9 +2481,15 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableTextWrap, forKey: .enableTextWrap)
-        try container.encode(self.columnRenderTypeSettings, forKey: .columnRenderTypeSettings)
-        try container.encode(self.columnTooltipSettings, forKey: .columnTooltipSettings)
+        if self.enableTextWrap {
+          try container.encode(self.enableTextWrap, forKey: .enableTextWrap)
+        }
+        if !self.columnRenderTypeSettings.isEmpty {
+          try container.encode(self.columnRenderTypeSettings, forKey: .columnRenderTypeSettings)
+        }
+        if !self.columnTooltipSettings.isEmpty {
+          try container.encode(self.columnTooltipSettings, forKey: .columnTooltipSettings)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2435,7 +2593,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.dataSettings, forKey: .dataSettings)
-        try container.encode(self.plotMode, forKey: .plotMode)
+        if self.plotMode != PlotMode() {
+          try container.encode(self.plotMode, forKey: .plotMode)
+        }
         try container.encodeIfPresent(self.mapPosition, forKey: .mapPosition)
         try container.encodeIfPresent(self.pointSettings, forKey: .pointSettings)
         for (key, value) in self._unknownFields.json {
@@ -2512,9 +2672,15 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.latitudeColumn, forKey: .latitudeColumn)
-          try container.encode(self.longitudeColumn, forKey: .longitudeColumn)
-          try container.encode(self.countColumn, forKey: .countColumn)
+          if !self.latitudeColumn.isEmpty {
+            try container.encode(self.latitudeColumn, forKey: .latitudeColumn)
+          }
+          if !self.longitudeColumn.isEmpty {
+            try container.encode(self.longitudeColumn, forKey: .longitudeColumn)
+          }
+          if !self.countColumn.isEmpty {
+            try container.encode(self.countColumn, forKey: .countColumn)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2621,10 +2787,18 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.fitData, forKey: .fitData)
-          try container.encode(self.latitudeValue, forKey: .latitudeValue)
-          try container.encode(self.longitudeValue, forKey: .longitudeValue)
-          try container.encode(self.zoomScaleValue, forKey: .zoomScaleValue)
+          if self.fitData {
+            try container.encode(self.fitData, forKey: .fitData)
+          }
+          if self.latitudeValue != 0 {
+            try container.encode(self.latitudeValue, forKey: .latitudeValue)
+          }
+          if self.longitudeValue != 0 {
+            try container.encode(self.longitudeValue, forKey: .longitudeValue)
+          }
+          if self.zoomScaleValue != 0 {
+            try container.encode(self.zoomScaleValue, forKey: .zoomScaleValue)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2714,8 +2888,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.pointSizeType, forKey: .pointSizeType)
-          try container.encode(self.color, forKey: .color)
+          if self.pointSizeType != PointSizeType() {
+            try container.encode(self.pointSizeType, forKey: .pointSizeType)
+          }
+          if !self.color.isEmpty {
+            try container.encode(self.color, forKey: .color)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2831,8 +3009,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.visualMapType, forKey: .visualMapType)
-        try container.encode(self.pieces, forKey: .pieces)
+        if self.visualMapType != VisualMapType() {
+          try container.encode(self.visualMapType, forKey: .visualMapType)
+        }
+        if !self.pieces.isEmpty {
+          try container.encode(self.pieces, forKey: .pieces)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2914,8 +3096,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.min, forKey: .min)
           try container.encodeIfPresent(self.max, forKey: .max)
-          try container.encode(self.color, forKey: .color)
-          try container.encode(self.label, forKey: .label)
+          if !self.color.isEmpty {
+            try container.encode(self.color, forKey: .color)
+          }
+          if !self.label.isEmpty {
+            try container.encode(self.label, forKey: .label)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -3053,8 +3239,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.leftDrillDowns, forKey: .leftDrillDowns)
-      try container.encode(self.rightDrillDowns, forKey: .rightDrillDowns)
+      if !self.leftDrillDowns.isEmpty {
+        try container.encode(self.leftDrillDowns, forKey: .leftDrillDowns)
+      }
+      if !self.rightDrillDowns.isEmpty {
+        try container.encode(self.rightDrillDowns, forKey: .rightDrillDowns)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -3151,8 +3341,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.displayName, forKey: .displayName)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
 
         if let choice = self.settings {
           switch choice {
@@ -3219,7 +3413,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.enabled, forKey: .enabled)
+          if self.enabled {
+            try container.encode(self.enabled, forKey: .enabled)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -3349,8 +3545,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.newTab, forKey: .newTab)
-          try container.encode(self.leftClickColumn, forKey: .leftClickColumn)
+          if self.newTab {
+            try container.encode(self.newTab, forKey: .newTab)
+          }
+          if !self.leftClickColumn.isEmpty {
+            try container.encode(self.leftClickColumn, forKey: .leftClickColumn)
+          }
 
           if let choice = self.action {
             switch choice {
@@ -3419,7 +3619,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.query, forKey: .query)
+            if !self.query.isEmpty {
+              try container.encode(self.query, forKey: .query)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -3507,7 +3709,9 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.dashboardFilters, forKey: .dashboardFilters)
+            if !self.dashboardFilters.isEmpty {
+              try container.encode(self.dashboardFilters, forKey: .dashboardFilters)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -3579,8 +3783,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
             public func encode(to encoder: any Encoder) throws {
               var container = encoder.container(keyedBy: CodingKeys.self)
-              try container.encode(self.dashboardFilterId, forKey: .dashboardFilterId)
-              try container.encode(self.filterOperatorAndValues, forKey: .filterOperatorAndValues)
+              if !self.dashboardFilterId.isEmpty {
+                try container.encode(self.dashboardFilterId, forKey: .dashboardFilterId)
+              }
+              if !self.filterOperatorAndValues.isEmpty {
+                try container.encode(self.filterOperatorAndValues, forKey: .filterOperatorAndValues)
+              }
               for (key, value) in self._unknownFields.json {
                 try container.encode(value, forKey: CodingKeys(stringValue: key))
               }
@@ -3692,8 +3900,12 @@ public struct DashboardChart: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.link, forKey: .link)
-            try container.encode(self.description, forKey: .description)
+            if !self.link.isEmpty {
+              try container.encode(self.link, forKey: .link)
+            }
+            if !self.description.isEmpty {
+              try container.encode(self.description, forKey: .description)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }

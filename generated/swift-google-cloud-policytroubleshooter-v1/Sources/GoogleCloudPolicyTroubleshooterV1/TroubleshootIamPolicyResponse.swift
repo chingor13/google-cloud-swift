@@ -100,9 +100,15 @@ public struct TroubleshootIamPolicyResponse: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.access, forKey: .access)
-    try container.encode(self.explainedPolicies, forKey: .explainedPolicies)
-    try container.encode(self.errors, forKey: .errors)
+    if self.access != AccessState() {
+      try container.encode(self.access, forKey: .access)
+    }
+    if !self.explainedPolicies.isEmpty {
+      try container.encode(self.explainedPolicies, forKey: .explainedPolicies)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

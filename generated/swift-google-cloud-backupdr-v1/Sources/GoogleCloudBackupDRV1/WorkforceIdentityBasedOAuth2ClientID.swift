@@ -81,8 +81,12 @@ public struct WorkforceIdentityBasedOAuth2ClientID: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.firstPartyOauth2ClientId, forKey: .firstPartyOauth2ClientId)
-    try container.encode(self.thirdPartyOauth2ClientId, forKey: .thirdPartyOauth2ClientId)
+    if !self.firstPartyOauth2ClientId.isEmpty {
+      try container.encode(self.firstPartyOauth2ClientId, forKey: .firstPartyOauth2ClientId)
+    }
+    if !self.thirdPartyOauth2ClientId.isEmpty {
+      try container.encode(self.thirdPartyOauth2ClientId, forKey: .thirdPartyOauth2ClientId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

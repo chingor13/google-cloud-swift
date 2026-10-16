@@ -134,15 +134,25 @@ public struct ClusterAutoscaling: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enableNodeAutoprovisioning, forKey: .enableNodeAutoprovisioning)
-    try container.encode(self.resourceLimits, forKey: .resourceLimits)
-    try container.encode(self.autoscalingProfile, forKey: .autoscalingProfile)
+    if self.enableNodeAutoprovisioning {
+      try container.encode(self.enableNodeAutoprovisioning, forKey: .enableNodeAutoprovisioning)
+    }
+    if !self.resourceLimits.isEmpty {
+      try container.encode(self.resourceLimits, forKey: .resourceLimits)
+    }
+    if self.autoscalingProfile != ClusterAutoscaling.AutoscalingProfile() {
+      try container.encode(self.autoscalingProfile, forKey: .autoscalingProfile)
+    }
     try container.encodeIfPresent(
       self.autoprovisioningNodePoolDefaults, forKey: .autoprovisioningNodePoolDefaults)
-    try container.encode(self.autoprovisioningLocations, forKey: .autoprovisioningLocations)
+    if !self.autoprovisioningLocations.isEmpty {
+      try container.encode(self.autoprovisioningLocations, forKey: .autoprovisioningLocations)
+    }
     try container.encodeIfPresent(
       self.defaultComputeClassConfig, forKey: .defaultComputeClassConfig)
-    try container.encode(self.autopilotGeneralProfile, forKey: .autopilotGeneralProfile)
+    if self.autopilotGeneralProfile != ClusterAutoscaling.AutopilotGeneralProfile() {
+      try container.encode(self.autopilotGeneralProfile, forKey: .autopilotGeneralProfile)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

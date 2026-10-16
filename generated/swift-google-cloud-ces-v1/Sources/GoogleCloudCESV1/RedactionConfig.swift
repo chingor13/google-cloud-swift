@@ -94,9 +94,15 @@ public struct RedactionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enableRedaction, forKey: .enableRedaction)
-    try container.encode(self.inspectTemplate, forKey: .inspectTemplate)
-    try container.encode(self.deidentifyTemplate, forKey: .deidentifyTemplate)
+    if self.enableRedaction {
+      try container.encode(self.enableRedaction, forKey: .enableRedaction)
+    }
+    if !self.inspectTemplate.isEmpty {
+      try container.encode(self.inspectTemplate, forKey: .inspectTemplate)
+    }
+    if !self.deidentifyTemplate.isEmpty {
+      try container.encode(self.deidentifyTemplate, forKey: .deidentifyTemplate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

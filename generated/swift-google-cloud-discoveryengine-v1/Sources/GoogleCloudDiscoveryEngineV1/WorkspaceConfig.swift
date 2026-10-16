@@ -102,10 +102,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.dasherCustomerId, forKey: .dasherCustomerId)
-      try container.encode(self.superAdminServiceAccount, forKey: .superAdminServiceAccount)
-      try container.encode(self.superAdminEmailAddress, forKey: .superAdminEmailAddress)
+      if self.type != WorkspaceConfig.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.dasherCustomerId.isEmpty {
+        try container.encode(self.dasherCustomerId, forKey: .dasherCustomerId)
+      }
+      if !self.superAdminServiceAccount.isEmpty {
+        try container.encode(self.superAdminServiceAccount, forKey: .superAdminServiceAccount)
+      }
+      if !self.superAdminEmailAddress.isEmpty {
+        try container.encode(self.superAdminEmailAddress, forKey: .superAdminEmailAddress)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

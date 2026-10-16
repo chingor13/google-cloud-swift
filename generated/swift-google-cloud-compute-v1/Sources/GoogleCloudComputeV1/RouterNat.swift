@@ -326,28 +326,40 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.autoNetworkTier, forKey: .autoNetworkTier)
-      try container.encode(self.drainNatIps, forKey: .drainNatIps)
+      if !self.drainNatIps.isEmpty {
+        try container.encode(self.drainNatIps, forKey: .drainNatIps)
+      }
       try container.encodeIfPresent(
         self.effectiveTcpTimeWaitTimeoutSec, forKey: .effectiveTcpTimeWaitTimeoutSec)
       try container.encodeIfPresent(
         self.enableDynamicPortAllocation, forKey: .enableDynamicPortAllocation)
       try container.encodeIfPresent(
         self.enableEndpointIndependentMapping, forKey: .enableEndpointIndependentMapping)
-      try container.encode(self.endpointTypes, forKey: .endpointTypes)
+      if !self.endpointTypes.isEmpty {
+        try container.encode(self.endpointTypes, forKey: .endpointTypes)
+      }
       try container.encodeIfPresent(self.icmpIdleTimeoutSec, forKey: .icmpIdleTimeoutSec)
       try container.encodeIfPresent(self.logConfig, forKey: .logConfig)
       try container.encodeIfPresent(self.maxPortsPerVm, forKey: .maxPortsPerVm)
       try container.encodeIfPresent(self.minPortsPerVm, forKey: .minPortsPerVm)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.nat64Subnetworks, forKey: .nat64Subnetworks)
+      if !self.nat64Subnetworks.isEmpty {
+        try container.encode(self.nat64Subnetworks, forKey: .nat64Subnetworks)
+      }
       try container.encodeIfPresent(self.natIpAllocateOption, forKey: .natIpAllocateOption)
-      try container.encode(self.natIps, forKey: .natIps)
-      try container.encode(self.rules, forKey: .rules)
+      if !self.natIps.isEmpty {
+        try container.encode(self.natIps, forKey: .natIps)
+      }
+      if !self.rules.isEmpty {
+        try container.encode(self.rules, forKey: .rules)
+      }
       try container.encodeIfPresent(
         self.sourceSubnetworkIpRangesToNat, forKey: .sourceSubnetworkIpRangesToNat)
       try container.encodeIfPresent(
         self.sourceSubnetworkIpRangesToNat64, forKey: .sourceSubnetworkIpRangesToNat64)
-      try container.encode(self.subnetworks, forKey: .subnetworks)
+      if !self.subnetworks.isEmpty {
+        try container.encode(self.subnetworks, forKey: .subnetworks)
+      }
       try container.encodeIfPresent(
         self.tcpEstablishedIdleTimeoutSec, forKey: .tcpEstablishedIdleTimeoutSec)
       try container.encodeIfPresent(self.tcpTimeWaitTimeoutSec, forKey: .tcpTimeWaitTimeoutSec)

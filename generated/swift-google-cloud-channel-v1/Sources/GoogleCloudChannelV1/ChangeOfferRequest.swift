@@ -145,13 +145,27 @@ public struct ChangeOfferRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.offer, forKey: .offer)
-    try container.encode(self.parameters, forKey: .parameters)
-    try container.encode(self.purchaseOrderId, forKey: .purchaseOrderId)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.billingAccount, forKey: .billingAccount)
-    try container.encode(self.priceReferenceId, forKey: .priceReferenceId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.offer.isEmpty {
+      try container.encode(self.offer, forKey: .offer)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
+    if !self.purchaseOrderId.isEmpty {
+      try container.encode(self.purchaseOrderId, forKey: .purchaseOrderId)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if !self.billingAccount.isEmpty {
+      try container.encode(self.billingAccount, forKey: .billingAccount)
+    }
+    if !self.priceReferenceId.isEmpty {
+      try container.encode(self.priceReferenceId, forKey: .priceReferenceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

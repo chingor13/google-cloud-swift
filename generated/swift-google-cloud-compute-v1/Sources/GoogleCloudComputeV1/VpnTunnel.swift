@@ -342,13 +342,17 @@
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.ikeVersion, forKey: .ikeVersion)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.localTrafficSelector, forKey: .localTrafficSelector)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.localTrafficSelector.isEmpty {
+        try container.encode(self.localTrafficSelector, forKey: .localTrafficSelector)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.peerExternalGateway, forKey: .peerExternalGateway)
@@ -357,7 +361,9 @@
       try container.encodeIfPresent(self.peerGcpGateway, forKey: .peerGcpGateway)
       try container.encodeIfPresent(self.peerIp, forKey: .peerIp)
       try container.encodeIfPresent(self.region, forKey: .region)
-      try container.encode(self.remoteTrafficSelector, forKey: .remoteTrafficSelector)
+      if !self.remoteTrafficSelector.isEmpty {
+        try container.encode(self.remoteTrafficSelector, forKey: .remoteTrafficSelector)
+      }
       try container.encodeIfPresent(self.router, forKey: .router)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.sharedSecret, forKey: .sharedSecret)

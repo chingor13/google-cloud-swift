@@ -294,28 +294,56 @@ public struct Deployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.latestRevision, forKey: .latestRevision)
-    try container.encode(self.stateDetail, forKey: .stateDetail)
-    try container.encode(self.errorCode, forKey: .errorCode)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Deployment.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.latestRevision.isEmpty {
+      try container.encode(self.latestRevision, forKey: .latestRevision)
+    }
+    if !self.stateDetail.isEmpty {
+      try container.encode(self.stateDetail, forKey: .stateDetail)
+    }
+    if self.errorCode != Deployment.ErrorCode() {
+      try container.encode(self.errorCode, forKey: .errorCode)
+    }
     try container.encodeIfPresent(self.deleteResults, forKey: .deleteResults)
-    try container.encode(self.deleteBuild, forKey: .deleteBuild)
-    try container.encode(self.deleteLogs, forKey: .deleteLogs)
-    try container.encode(self.tfErrors, forKey: .tfErrors)
-    try container.encode(self.errorLogs, forKey: .errorLogs)
+    if !self.deleteBuild.isEmpty {
+      try container.encode(self.deleteBuild, forKey: .deleteBuild)
+    }
+    if !self.deleteLogs.isEmpty {
+      try container.encode(self.deleteLogs, forKey: .deleteLogs)
+    }
+    if !self.tfErrors.isEmpty {
+      try container.encode(self.tfErrors, forKey: .tfErrors)
+    }
+    if !self.errorLogs.isEmpty {
+      try container.encode(self.errorLogs, forKey: .errorLogs)
+    }
     try container.encodeIfPresent(self.artifactsGcsBucket, forKey: .artifactsGcsBucket)
     try container.encodeIfPresent(self.serviceAccount, forKey: .serviceAccount)
     try container.encodeIfPresent(self.importExistingResources, forKey: .importExistingResources)
     try container.encodeIfPresent(self.workerPool, forKey: .workerPool)
-    try container.encode(self.lockState, forKey: .lockState)
+    if self.lockState != Deployment.LockState() {
+      try container.encode(self.lockState, forKey: .lockState)
+    }
     try container.encodeIfPresent(self.tfVersionConstraint, forKey: .tfVersionConstraint)
-    try container.encode(self.tfVersion, forKey: .tfVersion)
-    try container.encode(self.quotaValidation, forKey: .quotaValidation)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.tfVersion.isEmpty {
+      try container.encode(self.tfVersion, forKey: .tfVersion)
+    }
+    if self.quotaValidation != QuotaValidation() {
+      try container.encode(self.quotaValidation, forKey: .quotaValidation)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.providerConfig, forKey: .providerConfig)
 
     if let choice = self.blueprint {

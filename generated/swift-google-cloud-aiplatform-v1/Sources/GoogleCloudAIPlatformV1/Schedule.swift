@@ -278,22 +278,40 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
-      try container.encode(self.maxRunCount, forKey: .maxRunCount)
-      try container.encode(self.startedRunCount, forKey: .startedRunCount)
-      try container.encode(self.state, forKey: .state)
+      if self.maxRunCount != 0 {
+        try container.encode(self.maxRunCount, forKey: .maxRunCount)
+      }
+      if self.startedRunCount != 0 {
+        try container.encode(self.startedRunCount, forKey: .startedRunCount)
+      }
+      if self.state != Schedule.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.nextRunTime, forKey: .nextRunTime)
       try container.encodeIfPresent(self.lastPauseTime, forKey: .lastPauseTime)
       try container.encodeIfPresent(self.lastResumeTime, forKey: .lastResumeTime)
-      try container.encode(self.maxConcurrentRunCount, forKey: .maxConcurrentRunCount)
-      try container.encode(self.maxConcurrentActiveRunCount, forKey: .maxConcurrentActiveRunCount)
-      try container.encode(self.allowQueueing, forKey: .allowQueueing)
-      try container.encode(self.catchUp, forKey: .catchUp)
+      if self.maxConcurrentRunCount != 0 {
+        try container.encode(self.maxConcurrentRunCount, forKey: .maxConcurrentRunCount)
+      }
+      if self.maxConcurrentActiveRunCount != 0 {
+        try container.encode(self.maxConcurrentActiveRunCount, forKey: .maxConcurrentActiveRunCount)
+      }
+      if self.allowQueueing {
+        try container.encode(self.allowQueueing, forKey: .allowQueueing)
+      }
+      if self.catchUp {
+        try container.encode(self.catchUp, forKey: .catchUp)
+      }
       try container.encodeIfPresent(
         self.lastScheduledRunResponse, forKey: .lastScheduledRunResponse)
 
@@ -377,7 +395,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.scheduledRunTime, forKey: .scheduledRunTime)
-        try container.encode(self.runResponse, forKey: .runResponse)
+        if !self.runResponse.isEmpty {
+          try container.encode(self.runResponse, forKey: .runResponse)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

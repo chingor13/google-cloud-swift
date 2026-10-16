@@ -99,10 +99,18 @@ public struct ComputeEngineDisk: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.diskId, forKey: .diskId)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.replicaZones, forKey: .replicaZones)
-    try container.encode(self.diskType, forKey: .diskType)
+    if !self.diskId.isEmpty {
+      try container.encode(self.diskId, forKey: .diskId)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.replicaZones.isEmpty {
+      try container.encode(self.replicaZones, forKey: .replicaZones)
+    }
+    if self.diskType != ComputeEngineDiskType() {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

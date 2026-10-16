@@ -95,10 +95,18 @@ public struct CustomTargetTypeNotificationEvent: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.customTargetTypeUid, forKey: .customTargetTypeUid)
-    try container.encode(self.customTargetType, forKey: .customTargetType)
-    try container.encode(self.type, forKey: .type)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.customTargetTypeUid.isEmpty {
+      try container.encode(self.customTargetTypeUid, forKey: .customTargetTypeUid)
+    }
+    if !self.customTargetType.isEmpty {
+      try container.encode(self.customTargetType, forKey: .customTargetType)
+    }
+    if self.type != GoogleCloudDeployV1.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

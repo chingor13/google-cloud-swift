@@ -104,7 +104,9 @@ public struct ExportEntitiesMetadata: Codable, Equatable, GoogleWKT._AnyPackable
     try container.encodeIfPresent(self.progressEntities, forKey: .progressEntities)
     try container.encodeIfPresent(self.progressBytes, forKey: .progressBytes)
     try container.encodeIfPresent(self.entityFilter, forKey: .entityFilter)
-    try container.encode(self.outputUrlPrefix, forKey: .outputUrlPrefix)
+    if !self.outputUrlPrefix.isEmpty {
+      try container.encode(self.outputUrlPrefix, forKey: .outputUrlPrefix)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

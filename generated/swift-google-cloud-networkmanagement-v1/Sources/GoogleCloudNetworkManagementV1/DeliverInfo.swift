@@ -113,12 +113,24 @@ public struct DeliverInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.resourceUri, forKey: .resourceUri)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.storageBucket, forKey: .storageBucket)
-    try container.encode(self.pscGoogleApiTarget, forKey: .pscGoogleApiTarget)
-    try container.encode(self.googleServiceType, forKey: .googleServiceType)
+    if self.target != DeliverInfo.Target() {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.resourceUri.isEmpty {
+      try container.encode(self.resourceUri, forKey: .resourceUri)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.storageBucket.isEmpty {
+      try container.encode(self.storageBucket, forKey: .storageBucket)
+    }
+    if !self.pscGoogleApiTarget.isEmpty {
+      try container.encode(self.pscGoogleApiTarget, forKey: .pscGoogleApiTarget)
+    }
+    if self.googleServiceType != DeliverInfo.GoogleServiceType() {
+      try container.encode(self.googleServiceType, forKey: .googleServiceType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

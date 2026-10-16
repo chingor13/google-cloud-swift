@@ -195,20 +195,46 @@ public struct DisksMigrationVmTargetDefaults: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmName, forKey: .vmName)
-    try container.encode(self.machineTypeSeries, forKey: .machineTypeSeries)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.networkTags, forKey: .networkTags)
-    try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.vmName.isEmpty {
+      try container.encode(self.vmName, forKey: .vmName)
+    }
+    if !self.machineTypeSeries.isEmpty {
+      try container.encode(self.machineTypeSeries, forKey: .machineTypeSeries)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.networkTags.isEmpty {
+      try container.encode(self.networkTags, forKey: .networkTags)
+    }
+    if !self.networkInterfaces.isEmpty {
+      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.computeScheduling, forKey: .computeScheduling)
-    try container.encode(self.secureBoot, forKey: .secureBoot)
-    try container.encode(self.enableVtpm, forKey: .enableVtpm)
-    try container.encode(self.enableIntegrityMonitoring, forKey: .enableIntegrityMonitoring)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.labels, forKey: .labels)
+    if self.secureBoot {
+      try container.encode(self.secureBoot, forKey: .secureBoot)
+    }
+    if self.enableVtpm {
+      try container.encode(self.enableVtpm, forKey: .enableVtpm)
+    }
+    if self.enableIntegrityMonitoring {
+      try container.encode(self.enableIntegrityMonitoring, forKey: .enableIntegrityMonitoring)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.additionalLicenses.isEmpty {
+      try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.bootDiskDefaults, forKey: .bootDiskDefaults)
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
     for (key, value) in self._unknownFields.json {

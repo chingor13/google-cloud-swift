@@ -140,9 +140,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.pscEnabled, forKey: .pscEnabled)
-      try container.encode(self.allowedConsumerProjects, forKey: .allowedConsumerProjects)
-      try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
-      try container.encode(self.networkAttachmentUri, forKey: .networkAttachmentUri)
+      if !self.allowedConsumerProjects.isEmpty {
+        try container.encode(self.allowedConsumerProjects, forKey: .allowedConsumerProjects)
+      }
+      if !self.pscAutoConnections.isEmpty {
+        try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
+      }
+      if !self.networkAttachmentUri.isEmpty {
+        try container.encode(self.networkAttachmentUri, forKey: .networkAttachmentUri)
+      }
       try container.encodeIfPresent(self.pscAutoDnsEnabled, forKey: .pscAutoDnsEnabled)
       try container.encodeIfPresent(
         self.pscWriteEndpointDnsEnabled, forKey: .pscWriteEndpointDnsEnabled)

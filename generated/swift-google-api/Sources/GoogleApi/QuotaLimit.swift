@@ -194,16 +194,36 @@ public struct QuotaLimit: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.defaultLimit, forKey: .defaultLimit)
-    try container.encode(self.maxLimit, forKey: .maxLimit)
-    try container.encode(self.freeTier, forKey: .freeTier)
-    try container.encode(self.duration, forKey: .duration)
-    try container.encode(self.metric, forKey: .metric)
-    try container.encode(self.unit, forKey: .unit)
-    try container.encode(self.values, forKey: .values)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.defaultLimit != 0 {
+      try container.encode(self.defaultLimit, forKey: .defaultLimit)
+    }
+    if self.maxLimit != 0 {
+      try container.encode(self.maxLimit, forKey: .maxLimit)
+    }
+    if self.freeTier != 0 {
+      try container.encode(self.freeTier, forKey: .freeTier)
+    }
+    if !self.duration.isEmpty {
+      try container.encode(self.duration, forKey: .duration)
+    }
+    if !self.metric.isEmpty {
+      try container.encode(self.metric, forKey: .metric)
+    }
+    if !self.unit.isEmpty {
+      try container.encode(self.unit, forKey: .unit)
+    }
+    if !self.values.isEmpty {
+      try container.encode(self.values, forKey: .values)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -235,11 +235,13 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.associations, forKey: .associations)
+      if !self.associations.isEmpty {
+        try container.encode(self.associations, forKey: .associations)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.displayName, forKey: .displayName)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -247,12 +249,16 @@
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.packetMirroringRules, forKey: .packetMirroringRules)
+      if !self.packetMirroringRules.isEmpty {
+        try container.encode(self.packetMirroringRules, forKey: .packetMirroringRules)
+      }
       try container.encodeIfPresent(self.parent, forKey: .parent)
       try container.encodeIfPresent(self.policyType, forKey: .policyType)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.ruleTupleCount, forKey: .ruleTupleCount)
-      try container.encode(self.rules, forKey: .rules)
+      if !self.rules.isEmpty {
+        try container.encode(self.rules, forKey: .rules)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
       try container.encodeIfPresent(self.shortName, forKey: .shortName)

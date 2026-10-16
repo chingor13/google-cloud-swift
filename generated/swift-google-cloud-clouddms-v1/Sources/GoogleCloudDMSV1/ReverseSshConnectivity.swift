@@ -101,10 +101,18 @@ public struct ReverseSshConnectivity: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmIp, forKey: .vmIp)
-    try container.encode(self.vmPort, forKey: .vmPort)
-    try container.encode(self.vm, forKey: .vm)
-    try container.encode(self.vpc, forKey: .vpc)
+    if !self.vmIp.isEmpty {
+      try container.encode(self.vmIp, forKey: .vmIp)
+    }
+    if self.vmPort != 0 {
+      try container.encode(self.vmPort, forKey: .vmPort)
+    }
+    if !self.vm.isEmpty {
+      try container.encode(self.vm, forKey: .vm)
+    }
+    if !self.vpc.isEmpty {
+      try container.encode(self.vpc, forKey: .vpc)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

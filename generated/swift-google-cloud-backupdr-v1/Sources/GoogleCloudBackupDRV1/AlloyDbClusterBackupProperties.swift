@@ -97,9 +97,15 @@ public struct AlloyDbClusterBackupProperties: Codable, Equatable, GoogleWKT._Any
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.description, forKey: .description)
-    try container.encode(self.storedBytes, forKey: .storedBytes)
-    try container.encode(self.chainId, forKey: .chainId)
-    try container.encode(self.databaseVersion, forKey: .databaseVersion)
+    if self.storedBytes != 0 {
+      try container.encode(self.storedBytes, forKey: .storedBytes)
+    }
+    if !self.chainId.isEmpty {
+      try container.encode(self.chainId, forKey: .chainId)
+    }
+    if !self.databaseVersion.isEmpty {
+      try container.encode(self.databaseVersion, forKey: .databaseVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

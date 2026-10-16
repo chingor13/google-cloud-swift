@@ -80,8 +80,12 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.workloads, forKey: .workloads)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.workloads.isEmpty {
+      try container.encode(self.workloads, forKey: .workloads)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -157,8 +161,12 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.type, forKey: .type)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.type != ListWorkloadsResponse.ComposerWorkloadType() {
+        try container.encode(self.type, forKey: .type)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -261,9 +269,15 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.statusMessage, forKey: .statusMessage)
-      try container.encode(self.detailedStatusMessage, forKey: .detailedStatusMessage)
+      if self.state != ListWorkloadsResponse.ComposerWorkloadState() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.statusMessage.isEmpty {
+        try container.encode(self.statusMessage, forKey: .statusMessage)
+      }
+      if !self.detailedStatusMessage.isEmpty {
+        try container.encode(self.detailedStatusMessage, forKey: .detailedStatusMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

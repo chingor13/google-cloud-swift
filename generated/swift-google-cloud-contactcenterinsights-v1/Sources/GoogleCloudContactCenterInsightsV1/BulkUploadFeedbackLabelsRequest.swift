@@ -102,8 +102,12 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
 
     if let choice = self.source {
       switch choice {
@@ -180,8 +184,12 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.format, forKey: .format)
-      try container.encode(self.objectUri, forKey: .objectUri)
+      if self.format != BulkUploadFeedbackLabelsRequest.GcsSource.Format() {
+        try container.encode(self.format, forKey: .format)
+      }
+      if !self.objectUri.isEmpty {
+        try container.encode(self.objectUri, forKey: .objectUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

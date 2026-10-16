@@ -111,11 +111,21 @@ public struct TransferParameters: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.domainName, forKey: .domainName)
-    try container.encode(self.currentRegistrar, forKey: .currentRegistrar)
-    try container.encode(self.nameServers, forKey: .nameServers)
-    try container.encode(self.transferLockState, forKey: .transferLockState)
-    try container.encode(self.supportedPrivacy, forKey: .supportedPrivacy)
+    if !self.domainName.isEmpty {
+      try container.encode(self.domainName, forKey: .domainName)
+    }
+    if !self.currentRegistrar.isEmpty {
+      try container.encode(self.currentRegistrar, forKey: .currentRegistrar)
+    }
+    if !self.nameServers.isEmpty {
+      try container.encode(self.nameServers, forKey: .nameServers)
+    }
+    if self.transferLockState != TransferLockState() {
+      try container.encode(self.transferLockState, forKey: .transferLockState)
+    }
+    if !self.supportedPrivacy.isEmpty {
+      try container.encode(self.supportedPrivacy, forKey: .supportedPrivacy)
+    }
     try container.encodeIfPresent(self.yearlyPrice, forKey: .yearlyPrice)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -87,9 +87,13 @@ public struct CreateDataAccessScopeRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.dataAccessScope, forKey: .dataAccessScope)
-    try container.encode(self.dataAccessScopeId, forKey: .dataAccessScopeId)
+    if !self.dataAccessScopeId.isEmpty {
+      try container.encode(self.dataAccessScopeId, forKey: .dataAccessScopeId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -122,10 +122,18 @@ public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleWKT._A
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.completedAnalysesCount, forKey: .completedAnalysesCount)
-    try container.encode(self.failedAnalysesCount, forKey: .failedAnalysesCount)
-    try container.encode(self.totalRequestedAnalysesCount, forKey: .totalRequestedAnalysesCount)
-    try container.encode(self.partialErrors, forKey: .partialErrors)
+    if self.completedAnalysesCount != 0 {
+      try container.encode(self.completedAnalysesCount, forKey: .completedAnalysesCount)
+    }
+    if self.failedAnalysesCount != 0 {
+      try container.encode(self.failedAnalysesCount, forKey: .failedAnalysesCount)
+    }
+    if self.totalRequestedAnalysesCount != 0 {
+      try container.encode(self.totalRequestedAnalysesCount, forKey: .totalRequestedAnalysesCount)
+    }
+    if !self.partialErrors.isEmpty {
+      try container.encode(self.partialErrors, forKey: .partialErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

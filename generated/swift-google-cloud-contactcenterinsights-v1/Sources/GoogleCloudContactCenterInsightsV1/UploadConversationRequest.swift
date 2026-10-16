@@ -103,9 +103,13 @@ public struct UploadConversationRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.conversation, forKey: .conversation)
-    try container.encode(self.conversationId, forKey: .conversationId)
+    if !self.conversationId.isEmpty {
+      try container.encode(self.conversationId, forKey: .conversationId)
+    }
     try container.encodeIfPresent(self.redactionConfig, forKey: .redactionConfig)
     try container.encodeIfPresent(self.speechConfig, forKey: .speechConfig)
     for (key, value) in self._unknownFields.json {

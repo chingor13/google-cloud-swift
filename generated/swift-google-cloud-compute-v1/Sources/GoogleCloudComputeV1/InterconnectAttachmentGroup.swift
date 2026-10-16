@@ -161,7 +161,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attachments, forKey: .attachments)
+      if !self.attachments.isEmpty {
+        try container.encode(self.attachments, forKey: .attachments)
+      }
       try container.encodeIfPresent(self.configured, forKey: .configured)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)

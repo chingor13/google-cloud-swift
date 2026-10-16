@@ -133,14 +133,28 @@ public struct ParameterSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.isRequired, forKey: .isRequired)
-    try container.encode(self.valueType, forKey: .valueType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.isRequired {
+      try container.encode(self.isRequired, forKey: .isRequired)
+    }
+    if self.valueType != ParameterSpec.ValueType() {
+      try container.encode(self.valueType, forKey: .valueType)
+    }
     try container.encodeIfPresent(self.defaultValue, forKey: .defaultValue)
-    try container.encode(self.substitutionRules, forKey: .substitutionRules)
-    try container.encode(self.subParameters, forKey: .subParameters)
+    if !self.substitutionRules.isEmpty {
+      try container.encode(self.substitutionRules, forKey: .substitutionRules)
+    }
+    if !self.subParameters.isEmpty {
+      try container.encode(self.subParameters, forKey: .subParameters)
+    }
     try container.encodeIfPresent(self.validation, forKey: .validation)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

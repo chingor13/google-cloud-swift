@@ -77,8 +77,12 @@ public struct ServiceAccountCredential: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.keyId, forKey: .keyId)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.keyId.isEmpty {
+      try container.encode(self.keyId, forKey: .keyId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

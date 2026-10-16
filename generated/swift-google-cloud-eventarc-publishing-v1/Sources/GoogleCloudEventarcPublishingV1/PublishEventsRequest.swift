@@ -91,9 +91,15 @@ public struct PublishEventsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.channel, forKey: .channel)
-    try container.encode(self.events, forKey: .events)
-    try container.encode(self.textEvents, forKey: .textEvents)
+    if !self.channel.isEmpty {
+      try container.encode(self.channel, forKey: .channel)
+    }
+    if !self.events.isEmpty {
+      try container.encode(self.events, forKey: .events)
+    }
+    if !self.textEvents.isEmpty {
+      try container.encode(self.textEvents, forKey: .textEvents)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

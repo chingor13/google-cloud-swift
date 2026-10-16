@@ -101,10 +101,18 @@ public struct GitHubEnterpriseSecrets: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.privateKeyVersionName, forKey: .privateKeyVersionName)
-    try container.encode(self.webhookSecretVersionName, forKey: .webhookSecretVersionName)
-    try container.encode(self.oauthSecretVersionName, forKey: .oauthSecretVersionName)
-    try container.encode(self.oauthClientIdVersionName, forKey: .oauthClientIdVersionName)
+    if !self.privateKeyVersionName.isEmpty {
+      try container.encode(self.privateKeyVersionName, forKey: .privateKeyVersionName)
+    }
+    if !self.webhookSecretVersionName.isEmpty {
+      try container.encode(self.webhookSecretVersionName, forKey: .webhookSecretVersionName)
+    }
+    if !self.oauthSecretVersionName.isEmpty {
+      try container.encode(self.oauthSecretVersionName, forKey: .oauthSecretVersionName)
+    }
+    if !self.oauthClientIdVersionName.isEmpty {
+      try container.encode(self.oauthClientIdVersionName, forKey: .oauthClientIdVersionName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

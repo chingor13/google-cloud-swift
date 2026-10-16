@@ -79,8 +79,12 @@ public struct CheckAutopilotCompatibilityResponse: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issues, forKey: .issues)
-    try container.encode(self.summary, forKey: .summary)
+    if !self.issues.isEmpty {
+      try container.encode(self.issues, forKey: .issues)
+    }
+    if !self.summary.isEmpty {
+      try container.encode(self.summary, forKey: .summary)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

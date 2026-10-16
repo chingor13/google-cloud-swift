@@ -199,18 +199,42 @@ public struct JobStatistics: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.totalProcessedBytes, forKey: .totalProcessedBytes)
-    try container.encode(self.totalBilledBytes, forKey: .totalBilledBytes)
-    try container.encode(self.billingTier, forKey: .billingTier)
-    try container.encode(self.totalSlotMs, forKey: .totalSlotMs)
-    try container.encode(self.reservationUsage, forKey: .reservationUsage)
-    try container.encode(self.reservation, forKey: .reservation)
-    try container.encode(self.referencedTables, forKey: .referencedTables)
-    try container.encode(self.totalTablesProcessed, forKey: .totalTablesProcessed)
-    try container.encode(self.referencedViews, forKey: .referencedViews)
-    try container.encode(self.totalViewsProcessed, forKey: .totalViewsProcessed)
-    try container.encode(self.queryOutputRowCount, forKey: .queryOutputRowCount)
-    try container.encode(self.totalLoadOutputBytes, forKey: .totalLoadOutputBytes)
+    if self.totalProcessedBytes != 0 {
+      try container.encode(self.totalProcessedBytes, forKey: .totalProcessedBytes)
+    }
+    if self.totalBilledBytes != 0 {
+      try container.encode(self.totalBilledBytes, forKey: .totalBilledBytes)
+    }
+    if self.billingTier != 0 {
+      try container.encode(self.billingTier, forKey: .billingTier)
+    }
+    if self.totalSlotMs != 0 {
+      try container.encode(self.totalSlotMs, forKey: .totalSlotMs)
+    }
+    if !self.reservationUsage.isEmpty {
+      try container.encode(self.reservationUsage, forKey: .reservationUsage)
+    }
+    if !self.reservation.isEmpty {
+      try container.encode(self.reservation, forKey: .reservation)
+    }
+    if !self.referencedTables.isEmpty {
+      try container.encode(self.referencedTables, forKey: .referencedTables)
+    }
+    if self.totalTablesProcessed != 0 {
+      try container.encode(self.totalTablesProcessed, forKey: .totalTablesProcessed)
+    }
+    if !self.referencedViews.isEmpty {
+      try container.encode(self.referencedViews, forKey: .referencedViews)
+    }
+    if self.totalViewsProcessed != 0 {
+      try container.encode(self.totalViewsProcessed, forKey: .totalViewsProcessed)
+    }
+    if self.queryOutputRowCount != 0 {
+      try container.encode(self.queryOutputRowCount, forKey: .queryOutputRowCount)
+    }
+    if self.totalLoadOutputBytes != 0 {
+      try container.encode(self.totalLoadOutputBytes, forKey: .totalLoadOutputBytes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -276,8 +300,12 @@ public struct JobStatistics: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.slotMs, forKey: .slotMs)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.slotMs != 0 {
+        try container.encode(self.slotMs, forKey: .slotMs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

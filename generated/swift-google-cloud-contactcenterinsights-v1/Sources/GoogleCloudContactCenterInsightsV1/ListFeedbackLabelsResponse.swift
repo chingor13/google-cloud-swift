@@ -78,8 +78,12 @@ public struct ListFeedbackLabelsResponse: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.feedbackLabels, forKey: .feedbackLabels)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.feedbackLabels.isEmpty {
+      try container.encode(self.feedbackLabels, forKey: .feedbackLabels)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

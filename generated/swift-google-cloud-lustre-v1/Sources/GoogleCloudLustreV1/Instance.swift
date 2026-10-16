@@ -279,23 +279,51 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.filesystem, forKey: .filesystem)
-    try container.encode(self.capacityGib, forKey: .capacityGib)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.mountPoint, forKey: .mountPoint)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.filesystem.isEmpty {
+      try container.encode(self.filesystem, forKey: .filesystem)
+    }
+    if self.capacityGib != 0 {
+      try container.encode(self.capacityGib, forKey: .capacityGib)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.mountPoint.isEmpty {
+      try container.encode(self.mountPoint, forKey: .mountPoint)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.perUnitStorageThroughput, forKey: .perUnitStorageThroughput)
-    try container.encode(self.gkeSupportEnabled, forKey: .gkeSupportEnabled)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.stateReason, forKey: .stateReason)
-    try container.encode(self.placementPolicy, forKey: .placementPolicy)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.perUnitStorageThroughput != 0 {
+      try container.encode(self.perUnitStorageThroughput, forKey: .perUnitStorageThroughput)
+    }
+    if self.gkeSupportEnabled {
+      try container.encode(self.gkeSupportEnabled, forKey: .gkeSupportEnabled)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.stateReason.isEmpty {
+      try container.encode(self.stateReason, forKey: .stateReason)
+    }
+    if !self.placementPolicy.isEmpty {
+      try container.encode(self.placementPolicy, forKey: .placementPolicy)
+    }
     try container.encodeIfPresent(self.accessRulesOptions, forKey: .accessRulesOptions)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.maintenancePolicy, forKey: .maintenancePolicy)
     try container.encodeIfPresent(
       self.upcomingMaintenanceSchedule, forKey: .upcomingMaintenanceSchedule)

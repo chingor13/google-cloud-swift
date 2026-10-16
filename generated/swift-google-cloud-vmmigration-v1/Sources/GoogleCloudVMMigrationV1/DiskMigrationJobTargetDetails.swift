@@ -108,8 +108,12 @@ public struct DiskMigrationJobTargetDetails: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.targetProject, forKey: .targetProject)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.targetProject.isEmpty {
+      try container.encode(self.targetProject, forKey: .targetProject)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
 
     if let choice = self.targetStorage {

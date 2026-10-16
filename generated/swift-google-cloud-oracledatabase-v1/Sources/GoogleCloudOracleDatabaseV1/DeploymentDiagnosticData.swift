@@ -110,10 +110,18 @@ public struct DeploymentDiagnosticData: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.namespace, forKey: .namespace)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.object, forKey: .object)
-    try container.encode(self.diagnosticState, forKey: .diagnosticState)
+    if !self.namespace.isEmpty {
+      try container.encode(self.namespace, forKey: .namespace)
+    }
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.object.isEmpty {
+      try container.encode(self.object, forKey: .object)
+    }
+    if self.diagnosticState != DeploymentDiagnosticData.DiagnosticState() {
+      try container.encode(self.diagnosticState, forKey: .diagnosticState)
+    }
     try container.encodeIfPresent(self.diagnosticStartTime, forKey: .diagnosticStartTime)
     try container.encodeIfPresent(self.diagnosticEndTime, forKey: .diagnosticEndTime)
     for (key, value) in self._unknownFields.json {

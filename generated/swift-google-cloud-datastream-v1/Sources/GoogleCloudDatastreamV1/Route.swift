@@ -117,13 +117,23 @@ public struct Route: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.destinationAddress, forKey: .destinationAddress)
-    try container.encode(self.destinationPort, forKey: .destinationPort)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.destinationAddress.isEmpty {
+      try container.encode(self.destinationAddress, forKey: .destinationAddress)
+    }
+    if self.destinationPort != 0 {
+      try container.encode(self.destinationPort, forKey: .destinationPort)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

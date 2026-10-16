@@ -100,8 +100,12 @@ public struct CreateApiOperationRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.apiOperationId, forKey: .apiOperationId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.apiOperationId.isEmpty {
+      try container.encode(self.apiOperationId, forKey: .apiOperationId)
+    }
     try container.encodeIfPresent(self.apiOperation, forKey: .apiOperation)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

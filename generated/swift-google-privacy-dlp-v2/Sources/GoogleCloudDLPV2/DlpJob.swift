@@ -165,16 +165,28 @@ public struct DlpJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.type != DlpJobType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.state != DlpJob.JobState() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.lastModified, forKey: .lastModified)
-    try container.encode(self.jobTriggerName, forKey: .jobTriggerName)
-    try container.encode(self.errors, forKey: .errors)
-    try container.encode(self.actionDetails, forKey: .actionDetails)
+    if !self.jobTriggerName.isEmpty {
+      try container.encode(self.jobTriggerName, forKey: .jobTriggerName)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
+    if !self.actionDetails.isEmpty {
+      try container.encode(self.actionDetails, forKey: .actionDetails)
+    }
 
     if let choice = self.details {
       switch choice {

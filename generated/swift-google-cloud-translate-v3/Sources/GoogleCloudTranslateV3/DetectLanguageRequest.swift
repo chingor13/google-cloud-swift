@@ -141,10 +141,18 @@ public struct DetectLanguageRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.model, forKey: .model)
-    try container.encode(self.mimeType, forKey: .mimeType)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.source {
       switch choice {

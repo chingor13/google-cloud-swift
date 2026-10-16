@@ -111,7 +111,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.conversationContext, forKey: .conversationContext)
-      try container.encode(self.extraInfo, forKey: .extraInfo)
+      if !self.extraInfo.isEmpty {
+        try container.encode(self.extraInfo, forKey: .extraInfo)
+      }
       try container.encodeIfPresent(self.output, forKey: .output)
 
       if let choice = self.instructionList {

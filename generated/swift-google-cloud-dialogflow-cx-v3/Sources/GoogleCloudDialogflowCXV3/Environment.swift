@@ -133,10 +133,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.versionConfigs, forKey: .versionConfigs)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.versionConfigs.isEmpty {
+        try container.encode(self.versionConfigs, forKey: .versionConfigs)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.testCasesConfig, forKey: .testCasesConfig)
       try container.encodeIfPresent(self.webhookConfig, forKey: .webhookConfig)
@@ -203,7 +211,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.version, forKey: .version)
+        if !self.version.isEmpty {
+          try container.encode(self.version, forKey: .version)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -312,9 +322,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.testCases, forKey: .testCases)
-        try container.encode(self.enableContinuousRun, forKey: .enableContinuousRun)
-        try container.encode(self.enablePredeploymentRun, forKey: .enablePredeploymentRun)
+        if !self.testCases.isEmpty {
+          try container.encode(self.testCases, forKey: .testCases)
+        }
+        if self.enableContinuousRun {
+          try container.encode(self.enableContinuousRun, forKey: .enableContinuousRun)
+        }
+        if self.enablePredeploymentRun {
+          try container.encode(self.enablePredeploymentRun, forKey: .enablePredeploymentRun)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -401,7 +417,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.webhookOverrides, forKey: .webhookOverrides)
+        if !self.webhookOverrides.isEmpty {
+          try container.encode(self.webhookOverrides, forKey: .webhookOverrides)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

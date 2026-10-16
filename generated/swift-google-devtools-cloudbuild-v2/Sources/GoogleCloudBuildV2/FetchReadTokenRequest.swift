@@ -70,7 +70,9 @@ public struct FetchReadTokenRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.repository, forKey: .repository)
+    if !self.repository.isEmpty {
+      try container.encode(self.repository, forKey: .repository)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

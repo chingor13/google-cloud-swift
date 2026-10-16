@@ -175,19 +175,45 @@ public struct VmwareVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmId, forKey: .vmId)
-    try container.encode(self.datacenterId, forKey: .datacenterId)
-    try container.encode(self.datacenterDescription, forKey: .datacenterDescription)
-    try container.encode(self.uuid, forKey: .uuid)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.powerState, forKey: .powerState)
-    try container.encode(self.cpuCount, forKey: .cpuCount)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
-    try container.encode(self.diskCount, forKey: .diskCount)
-    try container.encode(self.committedStorageMb, forKey: .committedStorageMb)
-    try container.encode(self.guestDescription, forKey: .guestDescription)
-    try container.encode(self.bootOption, forKey: .bootOption)
-    try container.encode(self.architecture, forKey: .architecture)
+    if !self.vmId.isEmpty {
+      try container.encode(self.vmId, forKey: .vmId)
+    }
+    if !self.datacenterId.isEmpty {
+      try container.encode(self.datacenterId, forKey: .datacenterId)
+    }
+    if !self.datacenterDescription.isEmpty {
+      try container.encode(self.datacenterDescription, forKey: .datacenterDescription)
+    }
+    if !self.uuid.isEmpty {
+      try container.encode(self.uuid, forKey: .uuid)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.powerState != VmwareVmDetails.PowerState() {
+      try container.encode(self.powerState, forKey: .powerState)
+    }
+    if self.cpuCount != 0 {
+      try container.encode(self.cpuCount, forKey: .cpuCount)
+    }
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
+    if self.diskCount != 0 {
+      try container.encode(self.diskCount, forKey: .diskCount)
+    }
+    if self.committedStorageMb != 0 {
+      try container.encode(self.committedStorageMb, forKey: .committedStorageMb)
+    }
+    if !self.guestDescription.isEmpty {
+      try container.encode(self.guestDescription, forKey: .guestDescription)
+    }
+    if self.bootOption != VmwareVmDetails.BootOption() {
+      try container.encode(self.bootOption, forKey: .bootOption)
+    }
+    if self.architecture != VmwareVmDetails.VmArchitecture() {
+      try container.encode(self.architecture, forKey: .architecture)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

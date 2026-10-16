@@ -140,10 +140,18 @@ public struct SupportEventSubscription: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.pubSubTopic, forKey: .pubSubTopic)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureReason, forKey: .failureReason)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.pubSubTopic.isEmpty {
+      try container.encode(self.pubSubTopic, forKey: .pubSubTopic)
+    }
+    if self.state != SupportEventSubscription.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.failureReason != SupportEventSubscription.FailureReason() {
+      try container.encode(self.failureReason, forKey: .failureReason)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)

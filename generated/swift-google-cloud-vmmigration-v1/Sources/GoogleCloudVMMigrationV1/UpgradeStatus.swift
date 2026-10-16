@@ -99,11 +99,17 @@ public struct UpgradeStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.state, forKey: .state)
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.state != UpgradeStatus.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
-    try container.encode(self.previousVersion, forKey: .previousVersion)
+    if !self.previousVersion.isEmpty {
+      try container.encode(self.previousVersion, forKey: .previousVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

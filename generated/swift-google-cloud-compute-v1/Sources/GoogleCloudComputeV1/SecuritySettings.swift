@@ -108,7 +108,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.awsV4Authentication, forKey: .awsV4Authentication)
       try container.encodeIfPresent(self.clientTlsPolicy, forKey: .clientTlsPolicy)
-      try container.encode(self.subjectAltNames, forKey: .subjectAltNames)
+      if !self.subjectAltNames.isEmpty {
+        try container.encode(self.subjectAltNames, forKey: .subjectAltNames)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

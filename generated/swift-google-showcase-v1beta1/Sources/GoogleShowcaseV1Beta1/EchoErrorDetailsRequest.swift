@@ -79,8 +79,12 @@ public struct EchoErrorDetailsRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.singleDetailText, forKey: .singleDetailText)
-    try container.encode(self.multiDetailText, forKey: .multiDetailText)
+    if !self.singleDetailText.isEmpty {
+      try container.encode(self.singleDetailText, forKey: .singleDetailText)
+    }
+    if !self.multiDetailText.isEmpty {
+      try container.encode(self.multiDetailText, forKey: .multiDetailText)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

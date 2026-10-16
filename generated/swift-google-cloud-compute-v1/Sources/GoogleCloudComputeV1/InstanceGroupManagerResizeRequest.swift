@@ -173,7 +173,9 @@
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.instances, forKey: .instances)
+      if !self.instances.isEmpty {
+        try container.encode(self.instances, forKey: .instances)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.region, forKey: .region)

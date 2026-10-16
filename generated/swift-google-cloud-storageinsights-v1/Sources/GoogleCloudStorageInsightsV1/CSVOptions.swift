@@ -85,9 +85,15 @@ public struct CSVOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.recordSeparator, forKey: .recordSeparator)
-    try container.encode(self.delimiter, forKey: .delimiter)
-    try container.encode(self.headerRequired, forKey: .headerRequired)
+    if !self.recordSeparator.isEmpty {
+      try container.encode(self.recordSeparator, forKey: .recordSeparator)
+    }
+    if !self.delimiter.isEmpty {
+      try container.encode(self.delimiter, forKey: .delimiter)
+    }
+    if self.headerRequired {
+      try container.encode(self.headerRequired, forKey: .headerRequired)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

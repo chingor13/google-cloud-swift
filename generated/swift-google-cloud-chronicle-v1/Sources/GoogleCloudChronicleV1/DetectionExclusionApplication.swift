@@ -105,10 +105,18 @@ public struct DetectionExclusionApplication: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.curatedRuleSets, forKey: .curatedRuleSets)
-    try container.encode(self.curatedRules, forKey: .curatedRules)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.deletedCuratedRuleSets, forKey: .deletedCuratedRuleSets)
+    if !self.curatedRuleSets.isEmpty {
+      try container.encode(self.curatedRuleSets, forKey: .curatedRuleSets)
+    }
+    if !self.curatedRules.isEmpty {
+      try container.encode(self.curatedRules, forKey: .curatedRules)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if !self.deletedCuratedRuleSets.isEmpty {
+      try container.encode(self.deletedCuratedRuleSets, forKey: .deletedCuratedRuleSets)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

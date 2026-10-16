@@ -102,9 +102,15 @@ public struct DestinationVolumeParameters: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.storagePool, forKey: .storagePool)
-    try container.encode(self.volumeId, forKey: .volumeId)
-    try container.encode(self.shareName, forKey: .shareName)
+    if !self.storagePool.isEmpty {
+      try container.encode(self.storagePool, forKey: .storagePool)
+    }
+    if !self.volumeId.isEmpty {
+      try container.encode(self.volumeId, forKey: .volumeId)
+    }
+    if !self.shareName.isEmpty {
+      try container.encode(self.shareName, forKey: .shareName)
+    }
     try container.encodeIfPresent(self.description, forKey: .description)
     try container.encodeIfPresent(self.tieringPolicy, forKey: .tieringPolicy)
     for (key, value) in self._unknownFields.json {

@@ -124,13 +124,27 @@ public struct InterconnectAttachmentInfo: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.interconnectUri, forKey: .interconnectUri)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.cloudRouterUri, forKey: .cloudRouterUri)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.l2AttachmentMatchedIpAddress, forKey: .l2AttachmentMatchedIpAddress)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.interconnectUri.isEmpty {
+      try container.encode(self.interconnectUri, forKey: .interconnectUri)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.cloudRouterUri.isEmpty {
+      try container.encode(self.cloudRouterUri, forKey: .cloudRouterUri)
+    }
+    if self.type != InterconnectAttachmentInfo.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.l2AttachmentMatchedIpAddress.isEmpty {
+      try container.encode(self.l2AttachmentMatchedIpAddress, forKey: .l2AttachmentMatchedIpAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

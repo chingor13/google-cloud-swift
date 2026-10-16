@@ -87,8 +87,12 @@ public struct ProvisionDeploymentGroupRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.deploymentSpecs, forKey: .deploymentSpecs)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.deploymentSpecs.isEmpty {
+      try container.encode(self.deploymentSpecs, forKey: .deploymentSpecs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

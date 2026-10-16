@@ -91,9 +91,15 @@ public struct ManagedGroupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceTemplateName, forKey: .instanceTemplateName)
-    try container.encode(self.instanceGroupManagerName, forKey: .instanceGroupManagerName)
-    try container.encode(self.instanceGroupManagerUri, forKey: .instanceGroupManagerUri)
+    if !self.instanceTemplateName.isEmpty {
+      try container.encode(self.instanceTemplateName, forKey: .instanceTemplateName)
+    }
+    if !self.instanceGroupManagerName.isEmpty {
+      try container.encode(self.instanceGroupManagerName, forKey: .instanceGroupManagerName)
+    }
+    if !self.instanceGroupManagerUri.isEmpty {
+      try container.encode(self.instanceGroupManagerUri, forKey: .instanceGroupManagerUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

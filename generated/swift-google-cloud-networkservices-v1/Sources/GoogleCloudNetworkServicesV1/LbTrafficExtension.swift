@@ -173,14 +173,26 @@ public struct LbTrafficExtension: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.forwardingRules, forKey: .forwardingRules)
-    try container.encode(self.extensionChains, forKey: .extensionChains)
-    try container.encode(self.loadBalancingScheme, forKey: .loadBalancingScheme)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.forwardingRules.isEmpty {
+      try container.encode(self.forwardingRules, forKey: .forwardingRules)
+    }
+    if !self.extensionChains.isEmpty {
+      try container.encode(self.extensionChains, forKey: .extensionChains)
+    }
+    if self.loadBalancingScheme != LoadBalancingScheme() {
+      try container.encode(self.loadBalancingScheme, forKey: .loadBalancingScheme)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

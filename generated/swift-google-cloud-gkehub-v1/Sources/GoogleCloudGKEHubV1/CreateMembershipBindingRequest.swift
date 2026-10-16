@@ -86,9 +86,13 @@ public struct CreateMembershipBindingRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.membershipBinding, forKey: .membershipBinding)
-    try container.encode(self.membershipBindingId, forKey: .membershipBindingId)
+    if !self.membershipBindingId.isEmpty {
+      try container.encode(self.membershipBindingId, forKey: .membershipBindingId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

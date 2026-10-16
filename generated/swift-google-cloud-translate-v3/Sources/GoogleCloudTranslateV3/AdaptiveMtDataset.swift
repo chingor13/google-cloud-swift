@@ -118,11 +118,21 @@ public struct AdaptiveMtDataset: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
-    try container.encode(self.targetLanguageCode, forKey: .targetLanguageCode)
-    try container.encode(self.exampleCount, forKey: .exampleCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.sourceLanguageCode.isEmpty {
+      try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
+    }
+    if !self.targetLanguageCode.isEmpty {
+      try container.encode(self.targetLanguageCode, forKey: .targetLanguageCode)
+    }
+    if self.exampleCount != 0 {
+      try container.encode(self.exampleCount, forKey: .exampleCount)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

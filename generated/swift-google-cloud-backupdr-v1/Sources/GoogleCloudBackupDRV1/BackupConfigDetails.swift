@@ -184,16 +184,31 @@ public struct BackupConfigDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupConfigSource, forKey: .backupConfigSource)
-    try container.encode(self.backupConfigSourceDisplayName, forKey: .backupConfigSourceDisplayName)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.state, forKey: .state)
+    if !self.backupConfigSource.isEmpty {
+      try container.encode(self.backupConfigSource, forKey: .backupConfigSource)
+    }
+    if !self.backupConfigSourceDisplayName.isEmpty {
+      try container.encode(
+        self.backupConfigSourceDisplayName, forKey: .backupConfigSourceDisplayName)
+    }
+    if self.type != BackupConfigDetails.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.state != BackupConfigDetails.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.pitrSettings, forKey: .pitrSettings)
     try container.encodeIfPresent(
       self.latestSuccessfulBackupTime, forKey: .latestSuccessfulBackupTime)
-    try container.encode(self.applicableResource, forKey: .applicableResource)
-    try container.encode(self.backupVault, forKey: .backupVault)
-    try container.encode(self.backupLocations, forKey: .backupLocations)
+    if !self.applicableResource.isEmpty {
+      try container.encode(self.applicableResource, forKey: .applicableResource)
+    }
+    if !self.backupVault.isEmpty {
+      try container.encode(self.backupVault, forKey: .backupVault)
+    }
+    if !self.backupLocations.isEmpty {
+      try container.encode(self.backupLocations, forKey: .backupLocations)
+    }
 
     if let choice = self.planSpecificConfig {
       switch choice {

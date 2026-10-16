@@ -94,10 +94,18 @@ public struct CompilationPosition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.startLine, forKey: .startLine)
-    try container.encode(self.startColumn, forKey: .startColumn)
-    try container.encode(self.endLine, forKey: .endLine)
-    try container.encode(self.endColumn, forKey: .endColumn)
+    if self.startLine != 0 {
+      try container.encode(self.startLine, forKey: .startLine)
+    }
+    if self.startColumn != 0 {
+      try container.encode(self.startColumn, forKey: .startColumn)
+    }
+    if self.endLine != 0 {
+      try container.encode(self.endLine, forKey: .endLine)
+    }
+    if self.endColumn != 0 {
+      try container.encode(self.endColumn, forKey: .endColumn)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

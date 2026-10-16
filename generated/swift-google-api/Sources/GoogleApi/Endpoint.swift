@@ -124,10 +124,18 @@ public struct Endpoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.aliases, forKey: .aliases)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.allowCors, forKey: .allowCors)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.aliases.isEmpty {
+      try container.encode(self.aliases, forKey: .aliases)
+    }
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if self.allowCors {
+      try container.encode(self.allowCors, forKey: .allowCors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

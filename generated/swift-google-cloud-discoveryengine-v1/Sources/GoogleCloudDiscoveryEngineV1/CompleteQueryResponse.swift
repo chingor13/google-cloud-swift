@@ -88,8 +88,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.querySuggestions, forKey: .querySuggestions)
-      try container.encode(self.tailMatchTriggered, forKey: .tailMatchTriggered)
+      if !self.querySuggestions.isEmpty {
+        try container.encode(self.querySuggestions, forKey: .querySuggestions)
+      }
+      if self.tailMatchTriggered {
+        try container.encode(self.tailMatchTriggered, forKey: .tailMatchTriggered)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -160,8 +164,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.suggestion, forKey: .suggestion)
-        try container.encode(self.completableFieldPaths, forKey: .completableFieldPaths)
+        if !self.suggestion.isEmpty {
+          try container.encode(self.suggestion, forKey: .suggestion)
+        }
+        if !self.completableFieldPaths.isEmpty {
+          try container.encode(self.completableFieldPaths, forKey: .completableFieldPaths)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

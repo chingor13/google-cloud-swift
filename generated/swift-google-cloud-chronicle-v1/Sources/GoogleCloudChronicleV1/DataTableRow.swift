@@ -102,11 +102,17 @@ public struct DataTableRow: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.values, forKey: .values)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.values.isEmpty {
+      try container.encode(self.values, forKey: .values)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.rowTimeToLive, forKey: .rowTimeToLive)
+    if !self.rowTimeToLive.isEmpty {
+      try container.encode(self.rowTimeToLive, forKey: .rowTimeToLive)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

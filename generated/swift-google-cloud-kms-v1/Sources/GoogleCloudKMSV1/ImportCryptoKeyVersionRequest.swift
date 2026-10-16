@@ -247,12 +247,24 @@ public struct ImportCryptoKeyVersionRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
-    try container.encode(self.algorithm, forKey: .algorithm)
-    try container.encode(self.importJob, forKey: .importJob)
-    try container.encode(self.wrappedKey, forKey: .wrappedKey)
-    try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.cryptoKeyVersion.isEmpty {
+      try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
+    }
+    if self.algorithm != CryptoKeyVersion.CryptoKeyVersionAlgorithm() {
+      try container.encode(self.algorithm, forKey: .algorithm)
+    }
+    if !self.importJob.isEmpty {
+      try container.encode(self.importJob, forKey: .importJob)
+    }
+    if !self.wrappedKey.isEmpty {
+      try container.encode(self.wrappedKey, forKey: .wrappedKey)
+    }
+    if self.trustedWrappingEnabled {
+      try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
+    }
 
     if let choice = self.wrappedKeyMaterial {
       switch choice {

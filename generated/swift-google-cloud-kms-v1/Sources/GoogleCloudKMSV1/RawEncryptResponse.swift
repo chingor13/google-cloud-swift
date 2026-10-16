@@ -238,20 +238,36 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ciphertext, forKey: .ciphertext)
-    try container.encode(self.initializationVector, forKey: .initializationVector)
-    try container.encode(self.tagLength, forKey: .tagLength)
+    if !self.ciphertext.isEmpty {
+      try container.encode(self.ciphertext, forKey: .ciphertext)
+    }
+    if !self.initializationVector.isEmpty {
+      try container.encode(self.initializationVector, forKey: .initializationVector)
+    }
+    if self.tagLength != 0 {
+      try container.encode(self.tagLength, forKey: .tagLength)
+    }
     try container.encodeIfPresent(self.ciphertextCrc32C, forKey: .ciphertextCrc32C)
     try container.encodeIfPresent(
       self.initializationVectorCrc32C, forKey: .initializationVectorCrc32C)
-    try container.encode(self.verifiedPlaintextCrc32C, forKey: .verifiedPlaintextCrc32C)
-    try container.encode(
-      self.verifiedAdditionalAuthenticatedDataCrc32C,
-      forKey: .verifiedAdditionalAuthenticatedDataCrc32C)
-    try container.encode(
-      self.verifiedInitializationVectorCrc32C, forKey: .verifiedInitializationVectorCrc32C)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    if self.verifiedPlaintextCrc32C {
+      try container.encode(self.verifiedPlaintextCrc32C, forKey: .verifiedPlaintextCrc32C)
+    }
+    if self.verifiedAdditionalAuthenticatedDataCrc32C {
+      try container.encode(
+        self.verifiedAdditionalAuthenticatedDataCrc32C,
+        forKey: .verifiedAdditionalAuthenticatedDataCrc32C)
+    }
+    if self.verifiedInitializationVectorCrc32C {
+      try container.encode(
+        self.verifiedInitializationVectorCrc32C, forKey: .verifiedInitializationVectorCrc32C)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

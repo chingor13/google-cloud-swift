@@ -93,8 +93,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conversationProfile, forKey: .conversationProfile)
-      try container.encode(self.participantRole, forKey: .participantRole)
+      if !self.conversationProfile.isEmpty {
+        try container.encode(self.conversationProfile, forKey: .conversationProfile)
+      }
+      if self.participantRole != Participant.Role() {
+        try container.encode(self.participantRole, forKey: .participantRole)
+      }
       try container.encodeIfPresent(self.suggestionFeatureConfig, forKey: .suggestionFeatureConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

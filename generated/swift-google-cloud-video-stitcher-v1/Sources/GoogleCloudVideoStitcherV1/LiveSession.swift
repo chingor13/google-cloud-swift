@@ -134,13 +134,23 @@ public struct LiveSession: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.playUri, forKey: .playUri)
-    try container.encode(self.adTagMacros, forKey: .adTagMacros)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.playUri.isEmpty {
+      try container.encode(self.playUri, forKey: .playUri)
+    }
+    if !self.adTagMacros.isEmpty {
+      try container.encode(self.adTagMacros, forKey: .adTagMacros)
+    }
     try container.encodeIfPresent(self.manifestOptions, forKey: .manifestOptions)
     try container.encodeIfPresent(self.gamSettings, forKey: .gamSettings)
-    try container.encode(self.liveConfig, forKey: .liveConfig)
-    try container.encode(self.adTracking, forKey: .adTracking)
+    if !self.liveConfig.isEmpty {
+      try container.encode(self.liveConfig, forKey: .liveConfig)
+    }
+    if self.adTracking != AdTracking() {
+      try container.encode(self.adTracking, forKey: .adTracking)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -212,8 +222,12 @@ public struct LiveSession: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.streamId, forKey: .streamId)
-      try container.encode(self.targetingParameters, forKey: .targetingParameters)
+      if !self.streamId.isEmpty {
+        try container.encode(self.streamId, forKey: .streamId)
+      }
+      if !self.targetingParameters.isEmpty {
+        try container.encode(self.targetingParameters, forKey: .targetingParameters)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

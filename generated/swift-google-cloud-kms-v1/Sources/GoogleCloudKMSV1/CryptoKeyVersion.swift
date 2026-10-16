@@ -327,26 +327,48 @@ public struct CryptoKeyVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
-    try container.encode(self.algorithm, forKey: .algorithm)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != CryptoKeyVersion.CryptoKeyVersionState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
+    if self.algorithm != CryptoKeyVersion.CryptoKeyVersionAlgorithm() {
+      try container.encode(self.algorithm, forKey: .algorithm)
+    }
     try container.encodeIfPresent(self.attestation, forKey: .attestation)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.generateTime, forKey: .generateTime)
     try container.encodeIfPresent(self.destroyTime, forKey: .destroyTime)
     try container.encodeIfPresent(self.destroyEventTime, forKey: .destroyEventTime)
-    try container.encode(self.importJob, forKey: .importJob)
+    if !self.importJob.isEmpty {
+      try container.encode(self.importJob, forKey: .importJob)
+    }
     try container.encodeIfPresent(self.importTime, forKey: .importTime)
-    try container.encode(self.importFailureReason, forKey: .importFailureReason)
-    try container.encode(self.generationFailureReason, forKey: .generationFailureReason)
-    try container.encode(
-      self.externalDestructionFailureReason, forKey: .externalDestructionFailureReason)
+    if !self.importFailureReason.isEmpty {
+      try container.encode(self.importFailureReason, forKey: .importFailureReason)
+    }
+    if !self.generationFailureReason.isEmpty {
+      try container.encode(self.generationFailureReason, forKey: .generationFailureReason)
+    }
+    if !self.externalDestructionFailureReason.isEmpty {
+      try container.encode(
+        self.externalDestructionFailureReason, forKey: .externalDestructionFailureReason)
+    }
     try container.encodeIfPresent(
       self.externalProtectionLevelOptions, forKey: .externalProtectionLevelOptions)
-    try container.encode(self.reimportEligible, forKey: .reimportEligible)
-    try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
-    try container.encode(self.hsmTrusted, forKey: .hsmTrusted)
+    if self.reimportEligible {
+      try container.encode(self.reimportEligible, forKey: .reimportEligible)
+    }
+    if self.trustedWrappingEnabled {
+      try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
+    }
+    if self.hsmTrusted {
+      try container.encode(self.hsmTrusted, forKey: .hsmTrusted)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

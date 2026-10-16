@@ -230,11 +230,19 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sysctls, forKey: .sysctls)
-    try container.encode(self.cgroupMode, forKey: .cgroupMode)
+    if !self.sysctls.isEmpty {
+      try container.encode(self.sysctls, forKey: .sysctls)
+    }
+    if self.cgroupMode != LinuxNodeConfig.CgroupMode() {
+      try container.encode(self.cgroupMode, forKey: .cgroupMode)
+    }
     try container.encodeIfPresent(self.hugepages, forKey: .hugepages)
-    try container.encode(self.transparentHugepageEnabled, forKey: .transparentHugepageEnabled)
-    try container.encode(self.transparentHugepageDefrag, forKey: .transparentHugepageDefrag)
+    if self.transparentHugepageEnabled != LinuxNodeConfig.TransparentHugepageEnabled() {
+      try container.encode(self.transparentHugepageEnabled, forKey: .transparentHugepageEnabled)
+    }
+    if self.transparentHugepageDefrag != LinuxNodeConfig.TransparentHugepageDefrag() {
+      try container.encode(self.transparentHugepageDefrag, forKey: .transparentHugepageDefrag)
+    }
     try container.encodeIfPresent(self.customNodeInit, forKey: .customNodeInit)
     try container.encodeIfPresent(self.swapConfig, forKey: .swapConfig)
     try container.encodeIfPresent(self.nodeKernelModuleLoading, forKey: .nodeKernelModuleLoading)
@@ -483,10 +491,18 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.gcsUri, forKey: .gcsUri)
-        try container.encode(self.gcsGeneration, forKey: .gcsGeneration)
-        try container.encode(self.args, forKey: .args)
-        try container.encode(self.gcpSecretManagerSecretUri, forKey: .gcpSecretManagerSecretUri)
+        if !self.gcsUri.isEmpty {
+          try container.encode(self.gcsUri, forKey: .gcsUri)
+        }
+        if self.gcsGeneration != 0 {
+          try container.encode(self.gcsGeneration, forKey: .gcsGeneration)
+        }
+        if !self.args.isEmpty {
+          try container.encode(self.args, forKey: .args)
+        }
+        if !self.gcpSecretManagerSecretUri.isEmpty {
+          try container.encode(self.gcpSecretManagerSecretUri, forKey: .gcpSecretManagerSecretUri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1014,7 +1030,9 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.diskCount, forKey: .diskCount)
+        if self.diskCount != 0 {
+          try container.encode(self.diskCount, forKey: .diskCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1131,7 +1149,9 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.policy, forKey: .policy)
+      if self.policy != LinuxNodeConfig.NodeKernelModuleLoading.Policy() {
+        try container.encode(self.policy, forKey: .policy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

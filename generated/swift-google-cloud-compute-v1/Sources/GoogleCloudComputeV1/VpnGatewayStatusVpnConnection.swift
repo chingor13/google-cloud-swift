@@ -101,7 +101,9 @@
       try container.encodeIfPresent(self.peerExternalGateway, forKey: .peerExternalGateway)
       try container.encodeIfPresent(self.peerGcpGateway, forKey: .peerGcpGateway)
       try container.encodeIfPresent(self.state, forKey: .state)
-      try container.encode(self.tunnels, forKey: .tunnels)
+      if !self.tunnels.isEmpty {
+        try container.encode(self.tunnels, forKey: .tunnels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

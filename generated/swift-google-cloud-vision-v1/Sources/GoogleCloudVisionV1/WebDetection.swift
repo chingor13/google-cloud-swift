@@ -125,12 +125,24 @@ public struct WebDetection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.webEntities, forKey: .webEntities)
-    try container.encode(self.fullMatchingImages, forKey: .fullMatchingImages)
-    try container.encode(self.partialMatchingImages, forKey: .partialMatchingImages)
-    try container.encode(self.pagesWithMatchingImages, forKey: .pagesWithMatchingImages)
-    try container.encode(self.visuallySimilarImages, forKey: .visuallySimilarImages)
-    try container.encode(self.bestGuessLabels, forKey: .bestGuessLabels)
+    if !self.webEntities.isEmpty {
+      try container.encode(self.webEntities, forKey: .webEntities)
+    }
+    if !self.fullMatchingImages.isEmpty {
+      try container.encode(self.fullMatchingImages, forKey: .fullMatchingImages)
+    }
+    if !self.partialMatchingImages.isEmpty {
+      try container.encode(self.partialMatchingImages, forKey: .partialMatchingImages)
+    }
+    if !self.pagesWithMatchingImages.isEmpty {
+      try container.encode(self.pagesWithMatchingImages, forKey: .pagesWithMatchingImages)
+    }
+    if !self.visuallySimilarImages.isEmpty {
+      try container.encode(self.visuallySimilarImages, forKey: .visuallySimilarImages)
+    }
+    if !self.bestGuessLabels.isEmpty {
+      try container.encode(self.bestGuessLabels, forKey: .bestGuessLabels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -205,9 +217,15 @@ public struct WebDetection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entityId, forKey: .entityId)
-      try container.encode(self.score, forKey: .score)
-      try container.encode(self.description, forKey: .description)
+      if !self.entityId.isEmpty {
+        try container.encode(self.entityId, forKey: .entityId)
+      }
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -295,8 +313,12 @@ public struct WebDetection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.url, forKey: .url)
-      try container.encode(self.score, forKey: .score)
+      if !self.url.isEmpty {
+        try container.encode(self.url, forKey: .url)
+      }
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -416,11 +438,21 @@ public struct WebDetection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.url, forKey: .url)
-      try container.encode(self.score, forKey: .score)
-      try container.encode(self.pageTitle, forKey: .pageTitle)
-      try container.encode(self.fullMatchingImages, forKey: .fullMatchingImages)
-      try container.encode(self.partialMatchingImages, forKey: .partialMatchingImages)
+      if !self.url.isEmpty {
+        try container.encode(self.url, forKey: .url)
+      }
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
+      if !self.pageTitle.isEmpty {
+        try container.encode(self.pageTitle, forKey: .pageTitle)
+      }
+      if !self.fullMatchingImages.isEmpty {
+        try container.encode(self.fullMatchingImages, forKey: .fullMatchingImages)
+      }
+      if !self.partialMatchingImages.isEmpty {
+        try container.encode(self.partialMatchingImages, forKey: .partialMatchingImages)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -510,8 +542,12 @@ public struct WebDetection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.label, forKey: .label)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.label.isEmpty {
+        try container.encode(self.label, forKey: .label)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

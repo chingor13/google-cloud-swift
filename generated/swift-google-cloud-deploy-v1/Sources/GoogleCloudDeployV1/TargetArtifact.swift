@@ -108,9 +108,15 @@ public struct TargetArtifact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.skaffoldConfigPath, forKey: .skaffoldConfigPath)
-    try container.encode(self.manifestPath, forKey: .manifestPath)
-    try container.encode(self.phaseArtifacts, forKey: .phaseArtifacts)
+    if !self.skaffoldConfigPath.isEmpty {
+      try container.encode(self.skaffoldConfigPath, forKey: .skaffoldConfigPath)
+    }
+    if !self.manifestPath.isEmpty {
+      try container.encode(self.manifestPath, forKey: .manifestPath)
+    }
+    if !self.phaseArtifacts.isEmpty {
+      try container.encode(self.phaseArtifacts, forKey: .phaseArtifacts)
+    }
 
     if let choice = self.uri {
       switch choice {
@@ -193,9 +199,15 @@ public struct TargetArtifact: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.skaffoldConfigPath, forKey: .skaffoldConfigPath)
-      try container.encode(self.manifestPath, forKey: .manifestPath)
-      try container.encode(self.jobManifestsPath, forKey: .jobManifestsPath)
+      if !self.skaffoldConfigPath.isEmpty {
+        try container.encode(self.skaffoldConfigPath, forKey: .skaffoldConfigPath)
+      }
+      if !self.manifestPath.isEmpty {
+        try container.encode(self.manifestPath, forKey: .manifestPath)
+      }
+      if !self.jobManifestsPath.isEmpty {
+        try container.encode(self.jobManifestsPath, forKey: .jobManifestsPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

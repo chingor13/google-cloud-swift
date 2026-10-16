@@ -120,11 +120,21 @@ public struct HealthCheck: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.disableHealthCheck, forKey: .disableHealthCheck)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.healthyThreshold, forKey: .healthyThreshold)
-    try container.encode(self.unhealthyThreshold, forKey: .unhealthyThreshold)
-    try container.encode(self.restartThreshold, forKey: .restartThreshold)
+    if self.disableHealthCheck {
+      try container.encode(self.disableHealthCheck, forKey: .disableHealthCheck)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.healthyThreshold != 0 {
+      try container.encode(self.healthyThreshold, forKey: .healthyThreshold)
+    }
+    if self.unhealthyThreshold != 0 {
+      try container.encode(self.unhealthyThreshold, forKey: .unhealthyThreshold)
+    }
+    if self.restartThreshold != 0 {
+      try container.encode(self.restartThreshold, forKey: .restartThreshold)
+    }
     try container.encodeIfPresent(self.checkInterval, forKey: .checkInterval)
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
     for (key, value) in self._unknownFields.json {

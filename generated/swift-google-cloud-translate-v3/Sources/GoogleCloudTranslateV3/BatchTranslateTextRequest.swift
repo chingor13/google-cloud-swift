@@ -168,14 +168,28 @@ public struct BatchTranslateTextRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
-    try container.encode(self.targetLanguageCodes, forKey: .targetLanguageCodes)
-    try container.encode(self.models, forKey: .models)
-    try container.encode(self.inputConfigs, forKey: .inputConfigs)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.sourceLanguageCode.isEmpty {
+      try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
+    }
+    if !self.targetLanguageCodes.isEmpty {
+      try container.encode(self.targetLanguageCodes, forKey: .targetLanguageCodes)
+    }
+    if !self.models.isEmpty {
+      try container.encode(self.models, forKey: .models)
+    }
+    if !self.inputConfigs.isEmpty {
+      try container.encode(self.inputConfigs, forKey: .inputConfigs)
+    }
     try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
-    try container.encode(self.glossaries, forKey: .glossaries)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.glossaries.isEmpty {
+      try container.encode(self.glossaries, forKey: .glossaries)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

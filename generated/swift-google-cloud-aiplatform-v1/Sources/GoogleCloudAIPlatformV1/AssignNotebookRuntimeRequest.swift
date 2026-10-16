@@ -101,10 +101,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.notebookRuntimeTemplate, forKey: .notebookRuntimeTemplate)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.notebookRuntimeTemplate.isEmpty {
+        try container.encode(self.notebookRuntimeTemplate, forKey: .notebookRuntimeTemplate)
+      }
       try container.encodeIfPresent(self.notebookRuntime, forKey: .notebookRuntime)
-      try container.encode(self.notebookRuntimeId, forKey: .notebookRuntimeId)
+      if !self.notebookRuntimeId.isEmpty {
+        try container.encode(self.notebookRuntimeId, forKey: .notebookRuntimeId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

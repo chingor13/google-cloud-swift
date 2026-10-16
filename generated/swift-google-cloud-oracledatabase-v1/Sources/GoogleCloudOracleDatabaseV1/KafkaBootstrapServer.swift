@@ -92,9 +92,15 @@ public struct KafkaBootstrapServer: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.privateIpAddress, forKey: .privateIpAddress)
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.privateIpAddress.isEmpty {
+      try container.encode(self.privateIpAddress, forKey: .privateIpAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

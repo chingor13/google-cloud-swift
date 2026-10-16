@@ -118,10 +118,18 @@ public struct InstantiateWorkflowTemplateRequest: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.parameters, forKey: .parameters)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.version != 0 {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

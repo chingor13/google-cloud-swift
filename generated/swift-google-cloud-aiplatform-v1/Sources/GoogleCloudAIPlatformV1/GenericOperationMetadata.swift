@@ -92,7 +92,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.partialFailures, forKey: .partialFailures)
+      if !self.partialFailures.isEmpty {
+        try container.encode(self.partialFailures, forKey: .partialFailures)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       for (key, value) in self._unknownFields.json {

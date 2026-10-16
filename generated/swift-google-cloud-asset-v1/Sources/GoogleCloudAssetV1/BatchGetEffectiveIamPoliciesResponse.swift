@@ -83,7 +83,9 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.policyResults, forKey: .policyResults)
+    if !self.policyResults.isEmpty {
+      try container.encode(self.policyResults, forKey: .policyResults)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -183,8 +185,12 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleWK
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fullResourceName, forKey: .fullResourceName)
-      try container.encode(self.policies, forKey: .policies)
+      if !self.fullResourceName.isEmpty {
+        try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      }
+      if !self.policies.isEmpty {
+        try container.encode(self.policies, forKey: .policies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -255,7 +261,9 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleWK
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.attachedResource, forKey: .attachedResource)
+        if !self.attachedResource.isEmpty {
+          try container.encode(self.attachedResource, forKey: .attachedResource)
+        }
         try container.encodeIfPresent(self.policy, forKey: .policy)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

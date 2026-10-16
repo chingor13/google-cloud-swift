@@ -142,15 +142,27 @@ public struct RapidCache: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.cacheType, forKey: .cacheType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.cacheType.isEmpty {
+      try container.encode(self.cacheType, forKey: .cacheType)
+    }
     try container.encodeIfPresent(self.ttl, forKey: .ttl)
-    try container.encode(self.admissionPolicy, forKey: .admissionPolicy)
-    try container.encode(self.state, forKey: .state)
+    if !self.admissionPolicy.isEmpty {
+      try container.encode(self.admissionPolicy, forKey: .admissionPolicy)
+    }
+    if !self.state.isEmpty {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.pendingUpdate, forKey: .pendingUpdate)
+    if self.pendingUpdate {
+      try container.encode(self.pendingUpdate, forKey: .pendingUpdate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

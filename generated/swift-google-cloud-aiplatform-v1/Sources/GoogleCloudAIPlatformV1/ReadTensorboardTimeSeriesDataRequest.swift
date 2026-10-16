@@ -96,9 +96,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tensorboardTimeSeries, forKey: .tensorboardTimeSeries)
-      try container.encode(self.maxDataPoints, forKey: .maxDataPoints)
-      try container.encode(self.filter, forKey: .filter)
+      if !self.tensorboardTimeSeries.isEmpty {
+        try container.encode(self.tensorboardTimeSeries, forKey: .tensorboardTimeSeries)
+      }
+      if self.maxDataPoints != 0 {
+        try container.encode(self.maxDataPoints, forKey: .maxDataPoints)
+      }
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

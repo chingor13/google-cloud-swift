@@ -78,8 +78,12 @@ public struct GeoTaxonomy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.regions, forKey: .regions)
+    if self.type != GeoTaxonomy.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.regions.isEmpty {
+      try container.encode(self.regions, forKey: .regions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

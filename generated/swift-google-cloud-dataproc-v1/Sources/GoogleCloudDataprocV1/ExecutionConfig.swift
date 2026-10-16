@@ -185,14 +185,24 @@ public struct ExecutionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.networkTags, forKey: .networkTags)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.networkTags.isEmpty {
+      try container.encode(self.networkTags, forKey: .networkTags)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
     try container.encodeIfPresent(self.idleTtl, forKey: .idleTtl)
     try container.encodeIfPresent(self.ttl, forKey: .ttl)
-    try container.encode(self.stagingBucket, forKey: .stagingBucket)
+    if !self.stagingBucket.isEmpty {
+      try container.encode(self.stagingBucket, forKey: .stagingBucket)
+    }
     try container.encodeIfPresent(self.authenticationConfig, forKey: .authenticationConfig)
-    try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+    if !self.resourceManagerTags.isEmpty {
+      try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+    }
 
     if let choice = self.network {
       switch choice {

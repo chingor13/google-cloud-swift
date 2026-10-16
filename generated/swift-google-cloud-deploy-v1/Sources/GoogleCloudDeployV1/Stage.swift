@@ -98,10 +98,16 @@ public struct Stage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.targetId, forKey: .targetId)
-    try container.encode(self.profiles, forKey: .profiles)
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
+    if !self.profiles.isEmpty {
+      try container.encode(self.profiles, forKey: .profiles)
+    }
     try container.encodeIfPresent(self.strategy, forKey: .strategy)
-    try container.encode(self.deployParameters, forKey: .deployParameters)
+    if !self.deployParameters.isEmpty {
+      try container.encode(self.deployParameters, forKey: .deployParameters)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -102,11 +102,19 @@ public struct DashboardQuery: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.query, forKey: .query)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
     try container.encodeIfPresent(self.input, forKey: .input)
-    try container.encode(self.dashboardChart, forKey: .dashboardChart)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.dashboardChart.isEmpty {
+      try container.encode(self.dashboardChart, forKey: .dashboardChart)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -256,8 +264,12 @@ public struct DashboardQuery: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.timeUnit, forKey: .timeUnit)
-        try container.encode(self.startTimeVal, forKey: .startTimeVal)
+        if self.timeUnit != TimeUnit() {
+          try container.encode(self.timeUnit, forKey: .timeUnit)
+        }
+        if self.startTimeVal != 0 {
+          try container.encode(self.startTimeVal, forKey: .startTimeVal)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

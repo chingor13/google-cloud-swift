@@ -186,15 +186,25 @@ public struct RawDecryptResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.plaintext, forKey: .plaintext)
+    if !self.plaintext.isEmpty {
+      try container.encode(self.plaintext, forKey: .plaintext)
+    }
     try container.encodeIfPresent(self.plaintextCrc32C, forKey: .plaintextCrc32C)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
-    try container.encode(self.verifiedCiphertextCrc32C, forKey: .verifiedCiphertextCrc32C)
-    try container.encode(
-      self.verifiedAdditionalAuthenticatedDataCrc32C,
-      forKey: .verifiedAdditionalAuthenticatedDataCrc32C)
-    try container.encode(
-      self.verifiedInitializationVectorCrc32C, forKey: .verifiedInitializationVectorCrc32C)
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
+    if self.verifiedCiphertextCrc32C {
+      try container.encode(self.verifiedCiphertextCrc32C, forKey: .verifiedCiphertextCrc32C)
+    }
+    if self.verifiedAdditionalAuthenticatedDataCrc32C {
+      try container.encode(
+        self.verifiedAdditionalAuthenticatedDataCrc32C,
+        forKey: .verifiedAdditionalAuthenticatedDataCrc32C)
+    }
+    if self.verifiedInitializationVectorCrc32C {
+      try container.encode(
+        self.verifiedInitializationVectorCrc32C, forKey: .verifiedInitializationVectorCrc32C)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

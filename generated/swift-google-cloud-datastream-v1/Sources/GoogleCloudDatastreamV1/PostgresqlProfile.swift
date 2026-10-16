@@ -123,12 +123,24 @@ public struct PostgresqlProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.secretManagerStoredPassword.isEmpty {
+      try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+    }
     try container.encodeIfPresent(self.sslConfig, forKey: .sslConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -94,9 +94,15 @@ public struct Notebook: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.lastAuthor, forKey: .lastAuthor)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.lastAuthor.isEmpty {
+      try container.encode(self.lastAuthor, forKey: .lastAuthor)
+    }
     try container.encodeIfPresent(self.notebookUpdateTime, forKey: .notebookUpdateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

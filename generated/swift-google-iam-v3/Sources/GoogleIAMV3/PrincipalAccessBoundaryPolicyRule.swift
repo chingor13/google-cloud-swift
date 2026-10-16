@@ -101,9 +101,15 @@ public struct PrincipalAccessBoundaryPolicyRule: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.resources, forKey: .resources)
-    try container.encode(self.effect, forKey: .effect)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.resources.isEmpty {
+      try container.encode(self.resources, forKey: .resources)
+    }
+    if self.effect != PrincipalAccessBoundaryPolicyRule.Effect() {
+      try container.encode(self.effect, forKey: .effect)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

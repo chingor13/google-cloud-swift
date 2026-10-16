@@ -97,10 +97,18 @@ public struct AndroidDevice: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.androidModelId, forKey: .androidModelId)
-    try container.encode(self.androidVersionId, forKey: .androidVersionId)
-    try container.encode(self.locale, forKey: .locale)
-    try container.encode(self.orientation, forKey: .orientation)
+    if !self.androidModelId.isEmpty {
+      try container.encode(self.androidModelId, forKey: .androidModelId)
+    }
+    if !self.androidVersionId.isEmpty {
+      try container.encode(self.androidVersionId, forKey: .androidVersionId)
+    }
+    if !self.locale.isEmpty {
+      try container.encode(self.locale, forKey: .locale)
+    }
+    if !self.orientation.isEmpty {
+      try container.encode(self.orientation, forKey: .orientation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

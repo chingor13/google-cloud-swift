@@ -104,11 +104,21 @@ public struct User: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.databaseRoles, forKey: .databaseRoles)
-    try container.encode(self.userType, forKey: .userType)
-    try container.encode(self.keepExtraRoles, forKey: .keepExtraRoles)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.databaseRoles.isEmpty {
+      try container.encode(self.databaseRoles, forKey: .databaseRoles)
+    }
+    if self.userType != User.UserType() {
+      try container.encode(self.userType, forKey: .userType)
+    }
+    if self.keepExtraRoles {
+      try container.encode(self.keepExtraRoles, forKey: .keepExtraRoles)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

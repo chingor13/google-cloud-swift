@@ -138,12 +138,22 @@ public struct AzureSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subscriptionId, forKey: .subscriptionId)
-    try container.encode(self.azureLocation, forKey: .azureLocation)
-    try container.encode(self.state, forKey: .state)
+    if !self.subscriptionId.isEmpty {
+      try container.encode(self.subscriptionId, forKey: .subscriptionId)
+    }
+    if !self.azureLocation.isEmpty {
+      try container.encode(self.azureLocation, forKey: .azureLocation)
+    }
+    if self.state != AzureSourceDetails.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.migrationResourcesUserTags, forKey: .migrationResourcesUserTags)
-    try container.encode(self.resourceGroupId, forKey: .resourceGroupId)
+    if !self.migrationResourcesUserTags.isEmpty {
+      try container.encode(self.migrationResourcesUserTags, forKey: .migrationResourcesUserTags)
+    }
+    if !self.resourceGroupId.isEmpty {
+      try container.encode(self.resourceGroupId, forKey: .resourceGroupId)
+    }
 
     if let choice = self.credentialsType {
       switch choice {
@@ -224,9 +234,15 @@ public struct AzureSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tenantId, forKey: .tenantId)
-      try container.encode(self.clientId, forKey: .clientId)
-      try container.encode(self.clientSecret, forKey: .clientSecret)
+      if !self.tenantId.isEmpty {
+        try container.encode(self.tenantId, forKey: .tenantId)
+      }
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
+      if !self.clientSecret.isEmpty {
+        try container.encode(self.clientSecret, forKey: .clientSecret)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

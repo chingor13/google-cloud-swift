@@ -88,9 +88,13 @@ public struct CreateDataTableRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.dataTable, forKey: .dataTable)
-    try container.encode(self.dataTableId, forKey: .dataTableId)
+    if !self.dataTableId.isEmpty {
+      try container.encode(self.dataTableId, forKey: .dataTableId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

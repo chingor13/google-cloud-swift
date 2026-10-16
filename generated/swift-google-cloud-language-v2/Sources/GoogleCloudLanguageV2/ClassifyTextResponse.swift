@@ -90,9 +90,15 @@ public struct ClassifyTextResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.languageSupported, forKey: .languageSupported)
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if self.languageSupported {
+      try container.encode(self.languageSupported, forKey: .languageSupported)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

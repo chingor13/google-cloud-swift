@@ -127,7 +127,9 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.id, forKey: .id)
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.name, forKey: .name)
-    try container.encode(self.networks, forKey: .networks)
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -90,9 +90,13 @@ public struct GetDefaultBranchResponse: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.branch, forKey: .branch)
+    if !self.branch.isEmpty {
+      try container.encode(self.branch, forKey: .branch)
+    }
     try container.encodeIfPresent(self.setTime, forKey: .setTime)
-    try container.encode(self.note, forKey: .note)
+    if !self.note.isEmpty {
+      try container.encode(self.note, forKey: .note)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

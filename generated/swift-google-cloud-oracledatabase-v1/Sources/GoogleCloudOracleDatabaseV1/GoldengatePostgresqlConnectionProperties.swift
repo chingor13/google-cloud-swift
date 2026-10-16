@@ -206,19 +206,47 @@ public struct GoldengatePostgresqlConnectionProperties: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.additionalAttributes, forKey: .additionalAttributes)
-    try container.encode(self.securityProtocol, forKey: .securityProtocol)
-    try container.encode(self.sslMode, forKey: .sslMode)
-    try container.encode(self.sslCaFile, forKey: .sslCaFile)
-    try container.encode(self.sslCrlFile, forKey: .sslCrlFile)
-    try container.encode(self.sslCertFile, forKey: .sslCertFile)
-    try container.encode(self.sslKeyFile, forKey: .sslKeyFile)
-    try container.encode(self.dbSystemId, forKey: .dbSystemId)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.additionalAttributes.isEmpty {
+      try container.encode(self.additionalAttributes, forKey: .additionalAttributes)
+    }
+    if self.securityProtocol
+      != GoldengatePostgresqlConnectionProperties.PostgresqlSecurityProtocol()
+    {
+      try container.encode(self.securityProtocol, forKey: .securityProtocol)
+    }
+    if self.sslMode != GoldengatePostgresqlConnectionProperties.PostgresqlSslMode() {
+      try container.encode(self.sslMode, forKey: .sslMode)
+    }
+    if !self.sslCaFile.isEmpty {
+      try container.encode(self.sslCaFile, forKey: .sslCaFile)
+    }
+    if !self.sslCrlFile.isEmpty {
+      try container.encode(self.sslCrlFile, forKey: .sslCrlFile)
+    }
+    if !self.sslCertFile.isEmpty {
+      try container.encode(self.sslCertFile, forKey: .sslCertFile)
+    }
+    if !self.sslKeyFile.isEmpty {
+      try container.encode(self.sslKeyFile, forKey: .sslKeyFile)
+    }
+    if !self.dbSystemId.isEmpty {
+      try container.encode(self.dbSystemId, forKey: .dbSystemId)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

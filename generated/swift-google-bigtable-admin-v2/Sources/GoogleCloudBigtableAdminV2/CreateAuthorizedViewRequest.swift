@@ -92,8 +92,12 @@ public struct CreateAuthorizedViewRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.authorizedViewId, forKey: .authorizedViewId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.authorizedViewId.isEmpty {
+      try container.encode(self.authorizedViewId, forKey: .authorizedViewId)
+    }
     try container.encodeIfPresent(self.authorizedView, forKey: .authorizedView)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

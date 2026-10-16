@@ -81,8 +81,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.licenseCode, forKey: .licenseCode)
-        try container.encode(self.project, forKey: .project)
+        if !self.licenseCode.isEmpty {
+          try container.encode(self.licenseCode, forKey: .licenseCode)
+        }
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -182,8 +186,12 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(
           self.optionsRequestedPolicyVersion, forKey: .optionsRequestedPolicyVersion)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.resource, forKey: .resource)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.resource.isEmpty {
+          try container.encode(self.resource, forKey: .resource)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -281,8 +289,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.resource, forKey: .resource)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.resource.isEmpty {
+          try container.encode(self.resource, forKey: .resource)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -381,8 +393,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.resource, forKey: .resource)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.resource.isEmpty {
+          try container.encode(self.resource, forKey: .resource)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

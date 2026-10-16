@@ -268,25 +268,45 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.dataSource, forKey: .dataSource)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.agentId, forKey: .agentId)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.agentId.isEmpty {
+      try container.encode(self.agentId, forKey: .agentId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.qualityMetadata, forKey: .qualityMetadata)
-    try container.encode(self.metadataJson, forKey: .metadataJson)
+    if !self.metadataJson.isEmpty {
+      try container.encode(self.metadataJson, forKey: .metadataJson)
+    }
     try container.encodeIfPresent(self.transcript, forKey: .transcript)
-    try container.encode(self.medium, forKey: .medium)
+    if self.medium != Conversation.Medium() {
+      try container.encode(self.medium, forKey: .medium)
+    }
     try container.encodeIfPresent(self.duration, forKey: .duration)
-    try container.encode(self.turnCount, forKey: .turnCount)
+    if self.turnCount != 0 {
+      try container.encode(self.turnCount, forKey: .turnCount)
+    }
     try container.encodeIfPresent(self.latestAnalysis, forKey: .latestAnalysis)
     try container.encodeIfPresent(self.latestSummary, forKey: .latestSummary)
-    try container.encode(self.runtimeAnnotations, forKey: .runtimeAnnotations)
-    try container.encode(self.dialogflowIntents, forKey: .dialogflowIntents)
-    try container.encode(self.obfuscatedUserId, forKey: .obfuscatedUserId)
+    if !self.runtimeAnnotations.isEmpty {
+      try container.encode(self.runtimeAnnotations, forKey: .runtimeAnnotations)
+    }
+    if !self.dialogflowIntents.isEmpty {
+      try container.encode(self.dialogflowIntents, forKey: .dialogflowIntents)
+    }
+    if !self.obfuscatedUserId.isEmpty {
+      try container.encode(self.obfuscatedUserId, forKey: .obfuscatedUserId)
+    }
 
     if let choice = self.metadata {
       switch choice {
@@ -368,8 +388,12 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.customerChannel, forKey: .customerChannel)
-      try container.encode(self.agentChannel, forKey: .agentChannel)
+      if self.customerChannel != 0 {
+        try container.encode(self.customerChannel, forKey: .customerChannel)
+      }
+      if self.agentChannel != 0 {
+        try container.encode(self.agentChannel, forKey: .agentChannel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -476,10 +500,16 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.customerSatisfactionRating, forKey: .customerSatisfactionRating)
+      if self.customerSatisfactionRating != 0 {
+        try container.encode(self.customerSatisfactionRating, forKey: .customerSatisfactionRating)
+      }
       try container.encodeIfPresent(self.waitDuration, forKey: .waitDuration)
-      try container.encode(self.menuPath, forKey: .menuPath)
-      try container.encode(self.agentInfo, forKey: .agentInfo)
+      if !self.menuPath.isEmpty {
+        try container.encode(self.menuPath, forKey: .menuPath)
+      }
+      if !self.agentInfo.isEmpty {
+        try container.encode(self.agentInfo, forKey: .agentInfo)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -572,11 +602,21 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.agentId, forKey: .agentId)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.team, forKey: .team)
-        try container.encode(self.dispositionCode, forKey: .dispositionCode)
-        try container.encode(self.agentType, forKey: .agentType)
+        if !self.agentId.isEmpty {
+          try container.encode(self.agentId, forKey: .agentId)
+        }
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if !self.team.isEmpty {
+          try container.encode(self.team, forKey: .team)
+        }
+        if !self.dispositionCode.isEmpty {
+          try container.encode(self.dispositionCode, forKey: .dispositionCode)
+        }
+        if self.agentType != ConversationParticipant.Role() {
+          try container.encode(self.agentType, forKey: .agentType)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -682,7 +722,9 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.transcriptSegments, forKey: .transcriptSegments)
+      if !self.transcriptSegments.isEmpty {
+        try container.encode(self.transcriptSegments, forKey: .transcriptSegments)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -810,11 +852,21 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.messageTime, forKey: .messageTime)
-        try container.encode(self.text, forKey: .text)
-        try container.encode(self.confidence, forKey: .confidence)
-        try container.encode(self.words, forKey: .words)
-        try container.encode(self.languageCode, forKey: .languageCode)
-        try container.encode(self.channelTag, forKey: .channelTag)
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
+        if self.confidence != 0 {
+          try container.encode(self.confidence, forKey: .confidence)
+        }
+        if !self.words.isEmpty {
+          try container.encode(self.words, forKey: .words)
+        }
+        if !self.languageCode.isEmpty {
+          try container.encode(self.languageCode, forKey: .languageCode)
+        }
+        if self.channelTag != 0 {
+          try container.encode(self.channelTag, forKey: .channelTag)
+        }
         try container.encodeIfPresent(self.segmentParticipant, forKey: .segmentParticipant)
         try container.encodeIfPresent(
           self.dialogflowSegmentMetadata, forKey: .dialogflowSegmentMetadata)
@@ -903,8 +955,12 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.startOffset, forKey: .startOffset)
           try container.encodeIfPresent(self.endOffset, forKey: .endOffset)
-          try container.encode(self.word, forKey: .word)
-          try container.encode(self.confidence, forKey: .confidence)
+          if !self.word.isEmpty {
+            try container.encode(self.word, forKey: .word)
+          }
+          if self.confidence != 0 {
+            try container.encode(self.confidence, forKey: .confidence)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -989,7 +1045,10 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.smartReplyAllowlistCovered, forKey: .smartReplyAllowlistCovered)
+          if self.smartReplyAllowlistCovered {
+            try container.encode(
+              self.smartReplyAllowlistCovered, forKey: .smartReplyAllowlistCovered)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

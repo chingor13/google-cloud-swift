@@ -110,7 +110,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.agent, forKey: .agent)
+      if !self.agent.isEmpty {
+        try container.encode(self.agent, forKey: .agent)
+      }
 
       if let choice = self.coverageType {
         switch choice {

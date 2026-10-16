@@ -97,10 +97,18 @@ public struct AuthorizationCodeLink: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.scopes, forKey: .scopes)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.enablePkce, forKey: .enablePkce)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.scopes.isEmpty {
+      try container.encode(self.scopes, forKey: .scopes)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if self.enablePkce {
+      try container.encode(self.enablePkce, forKey: .enablePkce)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

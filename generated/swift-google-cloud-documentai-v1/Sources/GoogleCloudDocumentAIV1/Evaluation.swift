@@ -118,13 +118,21 @@ public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.documentCounters, forKey: .documentCounters)
     try container.encodeIfPresent(self.allEntitiesMetrics, forKey: .allEntitiesMetrics)
-    try container.encode(self.entityMetrics, forKey: .entityMetrics)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
+    if !self.entityMetrics.isEmpty {
+      try container.encode(self.entityMetrics, forKey: .entityMetrics)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if !self.kmsKeyVersionName.isEmpty {
+      try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -212,10 +220,18 @@ public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputDocumentsCount, forKey: .inputDocumentsCount)
-      try container.encode(self.invalidDocumentsCount, forKey: .invalidDocumentsCount)
-      try container.encode(self.failedDocumentsCount, forKey: .failedDocumentsCount)
-      try container.encode(self.evaluatedDocumentsCount, forKey: .evaluatedDocumentsCount)
+      if self.inputDocumentsCount != 0 {
+        try container.encode(self.inputDocumentsCount, forKey: .inputDocumentsCount)
+      }
+      if self.invalidDocumentsCount != 0 {
+        try container.encode(self.invalidDocumentsCount, forKey: .invalidDocumentsCount)
+      }
+      if self.failedDocumentsCount != 0 {
+        try container.encode(self.failedDocumentsCount, forKey: .failedDocumentsCount)
+      }
+      if self.evaluatedDocumentsCount != 0 {
+        try container.encode(self.evaluatedDocumentsCount, forKey: .evaluatedDocumentsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -384,17 +400,39 @@ public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.precision, forKey: .precision)
-      try container.encode(self.recall, forKey: .recall)
-      try container.encode(self.f1Score, forKey: .f1Score)
-      try container.encode(self.predictedOccurrencesCount, forKey: .predictedOccurrencesCount)
-      try container.encode(self.groundTruthOccurrencesCount, forKey: .groundTruthOccurrencesCount)
-      try container.encode(self.predictedDocumentCount, forKey: .predictedDocumentCount)
-      try container.encode(self.groundTruthDocumentCount, forKey: .groundTruthDocumentCount)
-      try container.encode(self.truePositivesCount, forKey: .truePositivesCount)
-      try container.encode(self.falsePositivesCount, forKey: .falsePositivesCount)
-      try container.encode(self.falseNegativesCount, forKey: .falseNegativesCount)
-      try container.encode(self.totalDocumentsCount, forKey: .totalDocumentsCount)
+      if self.precision != 0 {
+        try container.encode(self.precision, forKey: .precision)
+      }
+      if self.recall != 0 {
+        try container.encode(self.recall, forKey: .recall)
+      }
+      if self.f1Score != 0 {
+        try container.encode(self.f1Score, forKey: .f1Score)
+      }
+      if self.predictedOccurrencesCount != 0 {
+        try container.encode(self.predictedOccurrencesCount, forKey: .predictedOccurrencesCount)
+      }
+      if self.groundTruthOccurrencesCount != 0 {
+        try container.encode(self.groundTruthOccurrencesCount, forKey: .groundTruthOccurrencesCount)
+      }
+      if self.predictedDocumentCount != 0 {
+        try container.encode(self.predictedDocumentCount, forKey: .predictedDocumentCount)
+      }
+      if self.groundTruthDocumentCount != 0 {
+        try container.encode(self.groundTruthDocumentCount, forKey: .groundTruthDocumentCount)
+      }
+      if self.truePositivesCount != 0 {
+        try container.encode(self.truePositivesCount, forKey: .truePositivesCount)
+      }
+      if self.falsePositivesCount != 0 {
+        try container.encode(self.falsePositivesCount, forKey: .falsePositivesCount)
+      }
+      if self.falseNegativesCount != 0 {
+        try container.encode(self.falseNegativesCount, forKey: .falseNegativesCount)
+      }
+      if self.totalDocumentsCount != 0 {
+        try container.encode(self.totalDocumentsCount, forKey: .totalDocumentsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -480,7 +518,9 @@ public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.confidenceLevel, forKey: .confidenceLevel)
+      if self.confidenceLevel != 0 {
+        try container.encode(self.confidenceLevel, forKey: .confidenceLevel)
+      }
       try container.encodeIfPresent(self.metrics, forKey: .metrics)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -626,14 +666,28 @@ public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.confidenceLevelMetrics, forKey: .confidenceLevelMetrics)
-      try container.encode(self.confidenceLevelMetricsExact, forKey: .confidenceLevelMetricsExact)
-      try container.encode(self.auprc, forKey: .auprc)
-      try container.encode(self.estimatedCalibrationError, forKey: .estimatedCalibrationError)
-      try container.encode(self.auprcExact, forKey: .auprcExact)
-      try container.encode(
-        self.estimatedCalibrationErrorExact, forKey: .estimatedCalibrationErrorExact)
-      try container.encode(self.metricsType, forKey: .metricsType)
+      if !self.confidenceLevelMetrics.isEmpty {
+        try container.encode(self.confidenceLevelMetrics, forKey: .confidenceLevelMetrics)
+      }
+      if !self.confidenceLevelMetricsExact.isEmpty {
+        try container.encode(self.confidenceLevelMetricsExact, forKey: .confidenceLevelMetricsExact)
+      }
+      if self.auprc != 0 {
+        try container.encode(self.auprc, forKey: .auprc)
+      }
+      if self.estimatedCalibrationError != 0 {
+        try container.encode(self.estimatedCalibrationError, forKey: .estimatedCalibrationError)
+      }
+      if self.auprcExact != 0 {
+        try container.encode(self.auprcExact, forKey: .auprcExact)
+      }
+      if self.estimatedCalibrationErrorExact != 0 {
+        try container.encode(
+          self.estimatedCalibrationErrorExact, forKey: .estimatedCalibrationErrorExact)
+      }
+      if self.metricsType != Evaluation.MultiConfidenceMetrics.MetricsType() {
+        try container.encode(self.metricsType, forKey: .metricsType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

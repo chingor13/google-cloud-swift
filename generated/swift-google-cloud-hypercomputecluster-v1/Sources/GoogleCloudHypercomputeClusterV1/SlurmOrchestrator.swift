@@ -125,11 +125,21 @@ public struct SlurmOrchestrator: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.loginNodes, forKey: .loginNodes)
-    try container.encode(self.nodeSets, forKey: .nodeSets)
-    try container.encode(self.partitions, forKey: .partitions)
-    try container.encode(self.defaultPartition, forKey: .defaultPartition)
-    try container.encode(self.prologBashScripts, forKey: .prologBashScripts)
-    try container.encode(self.epilogBashScripts, forKey: .epilogBashScripts)
+    if !self.nodeSets.isEmpty {
+      try container.encode(self.nodeSets, forKey: .nodeSets)
+    }
+    if !self.partitions.isEmpty {
+      try container.encode(self.partitions, forKey: .partitions)
+    }
+    if !self.defaultPartition.isEmpty {
+      try container.encode(self.defaultPartition, forKey: .defaultPartition)
+    }
+    if !self.prologBashScripts.isEmpty {
+      try container.encode(self.prologBashScripts, forKey: .prologBashScripts)
+    }
+    if !self.epilogBashScripts.isEmpty {
+      try container.encode(self.epilogBashScripts, forKey: .epilogBashScripts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

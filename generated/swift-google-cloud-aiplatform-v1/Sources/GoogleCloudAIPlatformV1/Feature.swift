@@ -194,17 +194,35 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.valueType, forKey: .valueType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.valueType != GoogleCloudAIPlatformV1.Feature.ValueType() {
+        try container.encode(self.valueType, forKey: .valueType)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.disableMonitoring, forKey: .disableMonitoring)
-      try container.encode(self.monitoringStatsAnomalies, forKey: .monitoringStatsAnomalies)
-      try container.encode(self.versionColumnName, forKey: .versionColumnName)
-      try container.encode(self.pointOfContact, forKey: .pointOfContact)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if self.disableMonitoring {
+        try container.encode(self.disableMonitoring, forKey: .disableMonitoring)
+      }
+      if !self.monitoringStatsAnomalies.isEmpty {
+        try container.encode(self.monitoringStatsAnomalies, forKey: .monitoringStatsAnomalies)
+      }
+      if !self.versionColumnName.isEmpty {
+        try container.encode(self.versionColumnName, forKey: .versionColumnName)
+      }
+      if !self.pointOfContact.isEmpty {
+        try container.encode(self.pointOfContact, forKey: .pointOfContact)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -282,7 +300,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.objective, forKey: .objective)
+        if self.objective != GoogleCloudAIPlatformV1.Feature.MonitoringStatsAnomaly.Objective() {
+          try container.encode(self.objective, forKey: .objective)
+        }
         try container.encodeIfPresent(self.featureStatsAnomaly, forKey: .featureStatsAnomaly)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

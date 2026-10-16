@@ -90,8 +90,12 @@ public struct CreateReservationGroupRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.reservationGroupId, forKey: .reservationGroupId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.reservationGroupId.isEmpty {
+      try container.encode(self.reservationGroupId, forKey: .reservationGroupId)
+    }
     try container.encodeIfPresent(self.reservationGroup, forKey: .reservationGroup)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

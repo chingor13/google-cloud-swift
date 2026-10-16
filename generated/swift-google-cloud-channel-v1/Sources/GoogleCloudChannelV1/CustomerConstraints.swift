@@ -89,9 +89,15 @@ public struct CustomerConstraints: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.allowedRegions, forKey: .allowedRegions)
-    try container.encode(self.allowedCustomerTypes, forKey: .allowedCustomerTypes)
-    try container.encode(self.promotionalOrderTypes, forKey: .promotionalOrderTypes)
+    if !self.allowedRegions.isEmpty {
+      try container.encode(self.allowedRegions, forKey: .allowedRegions)
+    }
+    if !self.allowedCustomerTypes.isEmpty {
+      try container.encode(self.allowedCustomerTypes, forKey: .allowedCustomerTypes)
+    }
+    if !self.promotionalOrderTypes.isEmpty {
+      try container.encode(self.promotionalOrderTypes, forKey: .promotionalOrderTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

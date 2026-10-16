@@ -69,7 +69,9 @@ public struct MultiSpeakerMarkup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.turns, forKey: .turns)
+    if !self.turns.isEmpty {
+      try container.encode(self.turns, forKey: .turns)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -136,8 +138,12 @@ public struct MultiSpeakerMarkup: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.speaker, forKey: .speaker)
-      try container.encode(self.text, forKey: .text)
+      if !self.speaker.isEmpty {
+        try container.encode(self.speaker, forKey: .speaker)
+      }
+      if !self.text.isEmpty {
+        try container.encode(self.text, forKey: .text)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

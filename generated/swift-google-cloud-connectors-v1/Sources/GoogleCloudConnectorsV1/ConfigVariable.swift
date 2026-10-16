@@ -105,7 +105,9 @@ public struct ConfigVariable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
 
     if let choice = self.value {
       switch choice {

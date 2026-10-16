@@ -128,9 +128,15 @@ public struct HttpBody: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.contentType, forKey: .contentType)
-    try container.encode(self.data, forKey: .data)
-    try container.encode(self.extensions, forKey: .extensions)
+    if !self.contentType.isEmpty {
+      try container.encode(self.contentType, forKey: .contentType)
+    }
+    if !self.data.isEmpty {
+      try container.encode(self.data, forKey: .data)
+    }
+    if !self.extensions.isEmpty {
+      try container.encode(self.extensions, forKey: .extensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

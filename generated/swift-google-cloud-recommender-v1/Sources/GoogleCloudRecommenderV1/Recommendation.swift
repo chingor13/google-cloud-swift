@@ -178,19 +178,37 @@ public struct Recommendation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.recommenderSubtype, forKey: .recommenderSubtype)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.recommenderSubtype.isEmpty {
+      try container.encode(self.recommenderSubtype, forKey: .recommenderSubtype)
+    }
     try container.encodeIfPresent(self.lastRefreshTime, forKey: .lastRefreshTime)
     try container.encodeIfPresent(self.primaryImpact, forKey: .primaryImpact)
-    try container.encode(self.additionalImpact, forKey: .additionalImpact)
-    try container.encode(self.priority, forKey: .priority)
+    if !self.additionalImpact.isEmpty {
+      try container.encode(self.additionalImpact, forKey: .additionalImpact)
+    }
+    if self.priority != Recommendation.Priority() {
+      try container.encode(self.priority, forKey: .priority)
+    }
     try container.encodeIfPresent(self.content, forKey: .content)
     try container.encodeIfPresent(self.stateInfo, forKey: .stateInfo)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.associatedInsights, forKey: .associatedInsights)
-    try container.encode(self.xorGroupId, forKey: .xorGroupId)
-    try container.encode(self.targetResources, forKey: .targetResources)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.associatedInsights.isEmpty {
+      try container.encode(self.associatedInsights, forKey: .associatedInsights)
+    }
+    if !self.xorGroupId.isEmpty {
+      try container.encode(self.xorGroupId, forKey: .xorGroupId)
+    }
+    if !self.targetResources.isEmpty {
+      try container.encode(self.targetResources, forKey: .targetResources)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -249,7 +267,9 @@ public struct Recommendation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.insight, forKey: .insight)
+      if !self.insight.isEmpty {
+        try container.encode(self.insight, forKey: .insight)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

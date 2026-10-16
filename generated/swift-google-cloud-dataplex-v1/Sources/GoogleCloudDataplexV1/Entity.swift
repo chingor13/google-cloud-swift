@@ -218,23 +218,47 @@ public struct Entity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.asset, forKey: .asset)
-    try container.encode(self.dataPath, forKey: .dataPath)
-    try container.encode(self.dataPathPattern, forKey: .dataPathPattern)
-    try container.encode(self.catalogEntry, forKey: .catalogEntry)
-    try container.encode(self.system, forKey: .system)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.type != GoogleCloudDataplexV1.Entity.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
+    if !self.dataPath.isEmpty {
+      try container.encode(self.dataPath, forKey: .dataPath)
+    }
+    if !self.dataPathPattern.isEmpty {
+      try container.encode(self.dataPathPattern, forKey: .dataPathPattern)
+    }
+    if !self.catalogEntry.isEmpty {
+      try container.encode(self.catalogEntry, forKey: .catalogEntry)
+    }
+    if self.system != StorageSystem() {
+      try container.encode(self.system, forKey: .system)
+    }
     try container.encodeIfPresent(self.format, forKey: .format)
     try container.encodeIfPresent(self.compatibility, forKey: .compatibility)
     try container.encodeIfPresent(self.access, forKey: .access)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.schema, forKey: .schema)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -368,8 +392,12 @@ public struct Entity: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.compatible, forKey: .compatible)
-        try container.encode(self.reason, forKey: .reason)
+        if self.compatible {
+          try container.encode(self.compatible, forKey: .compatible)
+        }
+        if !self.reason.isEmpty {
+          try container.encode(self.reason, forKey: .reason)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -77,8 +77,12 @@ public struct RangeInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rangeName, forKey: .rangeName)
-    try container.encode(self.utilization, forKey: .utilization)
+    if !self.rangeName.isEmpty {
+      try container.encode(self.rangeName, forKey: .rangeName)
+    }
+    if self.utilization != 0 {
+      try container.encode(self.utilization, forKey: .utilization)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

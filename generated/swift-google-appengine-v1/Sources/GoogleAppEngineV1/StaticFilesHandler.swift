@@ -132,13 +132,25 @@ public struct StaticFilesHandler: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.uploadPathRegex, forKey: .uploadPathRegex)
-    try container.encode(self.httpHeaders, forKey: .httpHeaders)
-    try container.encode(self.mimeType, forKey: .mimeType)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.uploadPathRegex.isEmpty {
+      try container.encode(self.uploadPathRegex, forKey: .uploadPathRegex)
+    }
+    if !self.httpHeaders.isEmpty {
+      try container.encode(self.httpHeaders, forKey: .httpHeaders)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
     try container.encodeIfPresent(self.expiration, forKey: .expiration)
-    try container.encode(self.requireMatchingFile, forKey: .requireMatchingFile)
-    try container.encode(self.applicationReadable, forKey: .applicationReadable)
+    if self.requireMatchingFile {
+      try container.encode(self.requireMatchingFile, forKey: .requireMatchingFile)
+    }
+    if self.applicationReadable {
+      try container.encode(self.applicationReadable, forKey: .applicationReadable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

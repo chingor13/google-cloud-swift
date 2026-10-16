@@ -83,7 +83,9 @@ public struct RecognitionResponseMetadata: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     try container.encodeIfPresent(self.totalBilledDuration, forKey: .totalBilledDuration)
     try container.encodeIfPresent(self.prompt, forKey: .prompt)
     for (key, value) in self._unknownFields.json {

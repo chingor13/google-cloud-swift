@@ -285,27 +285,63 @@ public struct Agent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.modelSettings, forKey: .modelSettings)
-    try container.encode(self.instruction, forKey: .instruction)
-    try container.encode(self.tools, forKey: .tools)
-    try container.encode(self.childAgents, forKey: .childAgents)
-    try container.encode(self.beforeAgentCallbacks, forKey: .beforeAgentCallbacks)
-    try container.encode(self.afterAgentCallbacks, forKey: .afterAgentCallbacks)
-    try container.encode(self.beforeModelCallbacks, forKey: .beforeModelCallbacks)
-    try container.encode(self.afterModelCallbacks, forKey: .afterModelCallbacks)
-    try container.encode(self.beforeToolCallbacks, forKey: .beforeToolCallbacks)
-    try container.encode(self.afterToolCallbacks, forKey: .afterToolCallbacks)
+    if !self.instruction.isEmpty {
+      try container.encode(self.instruction, forKey: .instruction)
+    }
+    if !self.tools.isEmpty {
+      try container.encode(self.tools, forKey: .tools)
+    }
+    if !self.childAgents.isEmpty {
+      try container.encode(self.childAgents, forKey: .childAgents)
+    }
+    if !self.beforeAgentCallbacks.isEmpty {
+      try container.encode(self.beforeAgentCallbacks, forKey: .beforeAgentCallbacks)
+    }
+    if !self.afterAgentCallbacks.isEmpty {
+      try container.encode(self.afterAgentCallbacks, forKey: .afterAgentCallbacks)
+    }
+    if !self.beforeModelCallbacks.isEmpty {
+      try container.encode(self.beforeModelCallbacks, forKey: .beforeModelCallbacks)
+    }
+    if !self.afterModelCallbacks.isEmpty {
+      try container.encode(self.afterModelCallbacks, forKey: .afterModelCallbacks)
+    }
+    if !self.beforeToolCallbacks.isEmpty {
+      try container.encode(self.beforeToolCallbacks, forKey: .beforeToolCallbacks)
+    }
+    if !self.afterToolCallbacks.isEmpty {
+      try container.encode(self.afterToolCallbacks, forKey: .afterToolCallbacks)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.guardrails, forKey: .guardrails)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.toolsets, forKey: .toolsets)
-    try container.encode(self.generatedSummary, forKey: .generatedSummary)
-    try container.encode(self.transferRules, forKey: .transferRules)
-    try container.encode(self.validationErrors, forKey: .validationErrors)
+    if !self.guardrails.isEmpty {
+      try container.encode(self.guardrails, forKey: .guardrails)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.toolsets.isEmpty {
+      try container.encode(self.toolsets, forKey: .toolsets)
+    }
+    if !self.generatedSummary.isEmpty {
+      try container.encode(self.generatedSummary, forKey: .generatedSummary)
+    }
+    if !self.transferRules.isEmpty {
+      try container.encode(self.transferRules, forKey: .transferRules)
+    }
+    if !self.validationErrors.isEmpty {
+      try container.encode(self.validationErrors, forKey: .validationErrors)
+    }
 
     if let choice = self.agentType {
       switch choice {
@@ -520,14 +556,28 @@ public struct Agent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.agent, forKey: .agent)
-      try container.encode(self.flowId, forKey: .flowId)
-      try container.encode(self.environmentId, forKey: .environmentId)
-      try container.encode(self.inputVariableMapping, forKey: .inputVariableMapping)
-      try container.encode(self.outputVariableMapping, forKey: .outputVariableMapping)
-      try container.encode(
-        self.respectResponseInterruptionSettings, forKey: .respectResponseInterruptionSettings)
-      try container.encode(self.languageCodeVariable, forKey: .languageCodeVariable)
+      if !self.agent.isEmpty {
+        try container.encode(self.agent, forKey: .agent)
+      }
+      if !self.flowId.isEmpty {
+        try container.encode(self.flowId, forKey: .flowId)
+      }
+      if !self.environmentId.isEmpty {
+        try container.encode(self.environmentId, forKey: .environmentId)
+      }
+      if !self.inputVariableMapping.isEmpty {
+        try container.encode(self.inputVariableMapping, forKey: .inputVariableMapping)
+      }
+      if !self.outputVariableMapping.isEmpty {
+        try container.encode(self.outputVariableMapping, forKey: .outputVariableMapping)
+      }
+      if self.respectResponseInterruptionSettings {
+        try container.encode(
+          self.respectResponseInterruptionSettings, forKey: .respectResponseInterruptionSettings)
+      }
+      if !self.languageCodeVariable.isEmpty {
+        try container.encode(self.languageCodeVariable, forKey: .languageCodeVariable)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -617,8 +667,12 @@ public struct Agent: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.toolset, forKey: .toolset)
-      try container.encode(self.toolIds, forKey: .toolIds)
+      if !self.toolset.isEmpty {
+        try container.encode(self.toolset, forKey: .toolset)
+      }
+      if !self.toolIds.isEmpty {
+        try container.encode(self.toolIds, forKey: .toolIds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

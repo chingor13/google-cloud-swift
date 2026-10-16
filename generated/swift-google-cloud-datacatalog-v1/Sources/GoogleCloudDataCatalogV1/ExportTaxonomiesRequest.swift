@@ -103,8 +103,12 @@ public struct ExportTaxonomiesRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.taxonomies, forKey: .taxonomies)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.taxonomies.isEmpty {
+      try container.encode(self.taxonomies, forKey: .taxonomies)
+    }
 
     if let choice = self.destination {
       switch choice {

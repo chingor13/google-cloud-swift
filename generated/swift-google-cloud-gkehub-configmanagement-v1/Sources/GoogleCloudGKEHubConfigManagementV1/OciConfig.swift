@@ -105,11 +105,21 @@ public struct OciConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.syncRepo, forKey: .syncRepo)
-    try container.encode(self.policyDir, forKey: .policyDir)
-    try container.encode(self.syncWaitSecs, forKey: .syncWaitSecs)
-    try container.encode(self.secretType, forKey: .secretType)
-    try container.encode(self.gcpServiceAccountEmail, forKey: .gcpServiceAccountEmail)
+    if !self.syncRepo.isEmpty {
+      try container.encode(self.syncRepo, forKey: .syncRepo)
+    }
+    if !self.policyDir.isEmpty {
+      try container.encode(self.policyDir, forKey: .policyDir)
+    }
+    if self.syncWaitSecs != 0 {
+      try container.encode(self.syncWaitSecs, forKey: .syncWaitSecs)
+    }
+    if !self.secretType.isEmpty {
+      try container.encode(self.secretType, forKey: .secretType)
+    }
+    if !self.gcpServiceAccountEmail.isEmpty {
+      try container.encode(self.gcpServiceAccountEmail, forKey: .gcpServiceAccountEmail)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

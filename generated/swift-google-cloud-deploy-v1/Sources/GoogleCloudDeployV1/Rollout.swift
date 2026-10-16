@@ -273,29 +273,63 @@ public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.approveTime, forKey: .approveTime)
     try container.encodeIfPresent(self.enqueueTime, forKey: .enqueueTime)
     try container.encodeIfPresent(self.deployStartTime, forKey: .deployStartTime)
     try container.encodeIfPresent(self.deployEndTime, forKey: .deployEndTime)
-    try container.encode(self.targetId, forKey: .targetId)
-    try container.encode(self.approvalState, forKey: .approvalState)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureReason, forKey: .failureReason)
-    try container.encode(self.deployingBuild, forKey: .deployingBuild)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.deployFailureCause, forKey: .deployFailureCause)
-    try container.encode(self.phases, forKey: .phases)
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
+    if self.approvalState != Rollout.ApprovalState() {
+      try container.encode(self.approvalState, forKey: .approvalState)
+    }
+    if self.state != Rollout.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failureReason.isEmpty {
+      try container.encode(self.failureReason, forKey: .failureReason)
+    }
+    if !self.deployingBuild.isEmpty {
+      try container.encode(self.deployingBuild, forKey: .deployingBuild)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.deployFailureCause != Rollout.FailureCause() {
+      try container.encode(self.deployFailureCause, forKey: .deployFailureCause)
+    }
+    if !self.phases.isEmpty {
+      try container.encode(self.phases, forKey: .phases)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.controllerRollout, forKey: .controllerRollout)
-    try container.encode(self.rollbackOfRollout, forKey: .rollbackOfRollout)
-    try container.encode(self.rolledBackByRollouts, forKey: .rolledBackByRollouts)
-    try container.encode(self.activeRepairAutomationRun, forKey: .activeRepairAutomationRun)
+    if !self.controllerRollout.isEmpty {
+      try container.encode(self.controllerRollout, forKey: .controllerRollout)
+    }
+    if !self.rollbackOfRollout.isEmpty {
+      try container.encode(self.rollbackOfRollout, forKey: .rollbackOfRollout)
+    }
+    if !self.rolledBackByRollouts.isEmpty {
+      try container.encode(self.rolledBackByRollouts, forKey: .rolledBackByRollouts)
+    }
+    if !self.activeRepairAutomationRun.isEmpty {
+      try container.encode(self.activeRepairAutomationRun, forKey: .activeRepairAutomationRun)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

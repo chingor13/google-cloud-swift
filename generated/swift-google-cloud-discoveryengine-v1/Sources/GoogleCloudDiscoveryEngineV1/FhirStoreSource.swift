@@ -112,11 +112,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fhirStore, forKey: .fhirStore)
-      try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
-      try container.encode(self.resourceTypes, forKey: .resourceTypes)
-      try container.encode(
-        self.updateFromLatestPredefinedSchema, forKey: .updateFromLatestPredefinedSchema)
+      if !self.fhirStore.isEmpty {
+        try container.encode(self.fhirStore, forKey: .fhirStore)
+      }
+      if !self.gcsStagingDir.isEmpty {
+        try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
+      }
+      if !self.resourceTypes.isEmpty {
+        try container.encode(self.resourceTypes, forKey: .resourceTypes)
+      }
+      if self.updateFromLatestPredefinedSchema {
+        try container.encode(
+          self.updateFromLatestPredefinedSchema, forKey: .updateFromLatestPredefinedSchema)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

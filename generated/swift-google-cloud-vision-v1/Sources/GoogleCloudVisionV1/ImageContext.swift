@@ -111,7 +111,9 @@ public struct ImageContext: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.latLongRect, forKey: .latLongRect)
-    try container.encode(self.languageHints, forKey: .languageHints)
+    if !self.languageHints.isEmpty {
+      try container.encode(self.languageHints, forKey: .languageHints)
+    }
     try container.encodeIfPresent(self.cropHintsParams, forKey: .cropHintsParams)
     try container.encodeIfPresent(self.productSearchParams, forKey: .productSearchParams)
     try container.encodeIfPresent(self.webDetectionParams, forKey: .webDetectionParams)

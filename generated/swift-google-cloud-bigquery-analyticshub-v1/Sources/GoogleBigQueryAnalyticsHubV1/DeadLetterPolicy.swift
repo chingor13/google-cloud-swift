@@ -101,8 +101,12 @@ public struct DeadLetterPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deadLetterTopic, forKey: .deadLetterTopic)
-    try container.encode(self.maxDeliveryAttempts, forKey: .maxDeliveryAttempts)
+    if !self.deadLetterTopic.isEmpty {
+      try container.encode(self.deadLetterTopic, forKey: .deadLetterTopic)
+    }
+    if self.maxDeliveryAttempts != 0 {
+      try container.encode(self.maxDeliveryAttempts, forKey: .maxDeliveryAttempts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

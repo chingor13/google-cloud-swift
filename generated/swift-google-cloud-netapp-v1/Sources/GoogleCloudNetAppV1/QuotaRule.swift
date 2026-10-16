@@ -137,15 +137,31 @@ public struct QuotaRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.diskLimitMib, forKey: .diskLimitMib)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDetails, forKey: .stateDetails)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if self.type != QuotaRule.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.diskLimitMib != 0 {
+      try container.encode(self.diskLimitMib, forKey: .diskLimitMib)
+    }
+    if self.state != QuotaRule.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDetails.isEmpty {
+      try container.encode(self.stateDetails, forKey: .stateDetails)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

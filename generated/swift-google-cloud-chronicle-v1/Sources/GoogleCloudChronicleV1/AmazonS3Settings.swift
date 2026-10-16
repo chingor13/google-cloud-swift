@@ -94,9 +94,15 @@ public struct AmazonS3Settings: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.s3Uri, forKey: .s3Uri)
-    try container.encode(self.sourceType, forKey: .sourceType)
-    try container.encode(self.sourceDeletionOption, forKey: .sourceDeletionOption)
+    if !self.s3Uri.isEmpty {
+      try container.encode(self.s3Uri, forKey: .s3Uri)
+    }
+    if self.sourceType != URISourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
+    if self.sourceDeletionOption != SourceDeletionOption() {
+      try container.encode(self.sourceDeletionOption, forKey: .sourceDeletionOption)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -82,8 +82,12 @@ public struct SpeechAdaptation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.phraseSets, forKey: .phraseSets)
-    try container.encode(self.customClasses, forKey: .customClasses)
+    if !self.phraseSets.isEmpty {
+      try container.encode(self.phraseSets, forKey: .phraseSets)
+    }
+    if !self.customClasses.isEmpty {
+      try container.encode(self.customClasses, forKey: .customClasses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

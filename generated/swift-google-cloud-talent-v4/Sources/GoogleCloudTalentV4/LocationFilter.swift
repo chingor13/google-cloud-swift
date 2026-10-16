@@ -153,11 +153,19 @@ public struct LocationFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.address, forKey: .address)
-    try container.encode(self.regionCode, forKey: .regionCode)
+    if !self.address.isEmpty {
+      try container.encode(self.address, forKey: .address)
+    }
+    if !self.regionCode.isEmpty {
+      try container.encode(self.regionCode, forKey: .regionCode)
+    }
     try container.encodeIfPresent(self.latLng, forKey: .latLng)
-    try container.encode(self.distanceInMiles, forKey: .distanceInMiles)
-    try container.encode(self.telecommutePreference, forKey: .telecommutePreference)
+    if self.distanceInMiles != 0 {
+      try container.encode(self.distanceInMiles, forKey: .distanceInMiles)
+    }
+    if self.telecommutePreference != LocationFilter.TelecommutePreference() {
+      try container.encode(self.telecommutePreference, forKey: .telecommutePreference)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

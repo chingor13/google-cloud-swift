@@ -90,8 +90,12 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.evaluationMode, forKey: .evaluationMode)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.evaluationMode != BinaryAuthorization.EvaluationMode() {
+      try container.encode(self.evaluationMode, forKey: .evaluationMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

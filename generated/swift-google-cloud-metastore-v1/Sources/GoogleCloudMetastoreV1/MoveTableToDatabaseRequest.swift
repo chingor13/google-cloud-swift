@@ -99,10 +99,18 @@ public struct MoveTableToDatabaseRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.tableName, forKey: .tableName)
-    try container.encode(self.dbName, forKey: .dbName)
-    try container.encode(self.destinationDbName, forKey: .destinationDbName)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.tableName.isEmpty {
+      try container.encode(self.tableName, forKey: .tableName)
+    }
+    if !self.dbName.isEmpty {
+      try container.encode(self.dbName, forKey: .dbName)
+    }
+    if !self.destinationDbName.isEmpty {
+      try container.encode(self.destinationDbName, forKey: .destinationDbName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

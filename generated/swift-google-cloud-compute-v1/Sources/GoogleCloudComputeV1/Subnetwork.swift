@@ -405,7 +405,7 @@
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.enableFlowLogs, forKey: .enableFlowLogs)
       try container.encodeIfPresent(self.externalIpv6Prefix, forKey: .externalIpv6Prefix)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -430,14 +430,20 @@
       try container.encodeIfPresent(self.reservedInternalRange, forKey: .reservedInternalRange)
       try container.encodeIfPresent(self.resolveSubnetMask, forKey: .resolveSubnetMask)
       try container.encodeIfPresent(self.role, forKey: .role)
-      try container.encode(self.secondaryIpRanges, forKey: .secondaryIpRanges)
+      if !self.secondaryIpRanges.isEmpty {
+        try container.encode(self.secondaryIpRanges, forKey: .secondaryIpRanges)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.stackType, forKey: .stackType)
       try container.encodeIfPresent(self.state, forKey: .state)
-      try container.encode(
-        self.systemReservedExternalIpv6Ranges, forKey: .systemReservedExternalIpv6Ranges)
-      try container.encode(
-        self.systemReservedInternalIpv6Ranges, forKey: .systemReservedInternalIpv6Ranges)
+      if !self.systemReservedExternalIpv6Ranges.isEmpty {
+        try container.encode(
+          self.systemReservedExternalIpv6Ranges, forKey: .systemReservedExternalIpv6Ranges)
+      }
+      if !self.systemReservedInternalIpv6Ranges.isEmpty {
+        try container.encode(
+          self.systemReservedInternalIpv6Ranges, forKey: .systemReservedInternalIpv6Ranges)
+      }
       try container.encodeIfPresent(self.utilizationDetails, forKey: .utilizationDetails)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

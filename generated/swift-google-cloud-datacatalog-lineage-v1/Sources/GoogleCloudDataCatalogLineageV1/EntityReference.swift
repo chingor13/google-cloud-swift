@@ -88,8 +88,12 @@ public struct EntityReference: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
-    try container.encode(self.field, forKey: .field)
+    if !self.fullyQualifiedName.isEmpty {
+      try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
+    }
+    if !self.field.isEmpty {
+      try container.encode(self.field, forKey: .field)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

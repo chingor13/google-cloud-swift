@@ -93,9 +93,15 @@ public struct Symptom: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.symptomType, forKey: .symptomType)
-    try container.encode(self.details, forKey: .details)
-    try container.encode(self.workerId, forKey: .workerId)
+    if self.symptomType != Symptom.SymptomType() {
+      try container.encode(self.symptomType, forKey: .symptomType)
+    }
+    if !self.details.isEmpty {
+      try container.encode(self.details, forKey: .details)
+    }
+    if !self.workerId.isEmpty {
+      try container.encode(self.workerId, forKey: .workerId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

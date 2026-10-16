@@ -85,8 +85,12 @@ public struct WorkspaceActivitySettings: Codable, Equatable, GoogleWKT._AnyPacka
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.workspaceCustomerId, forKey: .workspaceCustomerId)
-    try container.encode(self.applications, forKey: .applications)
+    if !self.workspaceCustomerId.isEmpty {
+      try container.encode(self.workspaceCustomerId, forKey: .workspaceCustomerId)
+    }
+    if !self.applications.isEmpty {
+      try container.encode(self.applications, forKey: .applications)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

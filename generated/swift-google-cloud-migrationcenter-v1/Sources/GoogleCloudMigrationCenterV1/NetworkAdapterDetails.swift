@@ -83,8 +83,12 @@ public struct NetworkAdapterDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.adapterType, forKey: .adapterType)
-    try container.encode(self.macAddress, forKey: .macAddress)
+    if !self.adapterType.isEmpty {
+      try container.encode(self.adapterType, forKey: .adapterType)
+    }
+    if !self.macAddress.isEmpty {
+      try container.encode(self.macAddress, forKey: .macAddress)
+    }
     try container.encodeIfPresent(self.addresses, forKey: .addresses)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

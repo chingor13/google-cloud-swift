@@ -96,9 +96,13 @@ public struct CreateSavedQueryRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.savedQuery, forKey: .savedQuery)
-    try container.encode(self.savedQueryId, forKey: .savedQueryId)
+    if !self.savedQueryId.isEmpty {
+      try container.encode(self.savedQueryId, forKey: .savedQueryId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

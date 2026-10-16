@@ -156,17 +156,35 @@ public struct JobConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputs, forKey: .inputs)
-    try container.encode(self.editList, forKey: .editList)
-    try container.encode(self.elementaryStreams, forKey: .elementaryStreams)
-    try container.encode(self.muxStreams, forKey: .muxStreams)
-    try container.encode(self.manifests, forKey: .manifests)
+    if !self.inputs.isEmpty {
+      try container.encode(self.inputs, forKey: .inputs)
+    }
+    if !self.editList.isEmpty {
+      try container.encode(self.editList, forKey: .editList)
+    }
+    if !self.elementaryStreams.isEmpty {
+      try container.encode(self.elementaryStreams, forKey: .elementaryStreams)
+    }
+    if !self.muxStreams.isEmpty {
+      try container.encode(self.muxStreams, forKey: .muxStreams)
+    }
+    if !self.manifests.isEmpty {
+      try container.encode(self.manifests, forKey: .manifests)
+    }
     try container.encodeIfPresent(self.output, forKey: .output)
-    try container.encode(self.adBreaks, forKey: .adBreaks)
+    if !self.adBreaks.isEmpty {
+      try container.encode(self.adBreaks, forKey: .adBreaks)
+    }
     try container.encodeIfPresent(self.pubsubDestination, forKey: .pubsubDestination)
-    try container.encode(self.spriteSheets, forKey: .spriteSheets)
-    try container.encode(self.overlays, forKey: .overlays)
-    try container.encode(self.encryptions, forKey: .encryptions)
+    if !self.spriteSheets.isEmpty {
+      try container.encode(self.spriteSheets, forKey: .spriteSheets)
+    }
+    if !self.overlays.isEmpty {
+      try container.encode(self.overlays, forKey: .overlays)
+    }
+    if !self.encryptions.isEmpty {
+      try container.encode(self.encryptions, forKey: .encryptions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -109,8 +109,12 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.initialUser, forKey: .initialUser)
-    try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.vpcNetwork.isEmpty {
+      try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.primaryInstanceSettings, forKey: .primaryInstanceSettings)
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     for (key, value) in self._unknownFields.json {
@@ -187,9 +191,15 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.user, forKey: .user)
-      try container.encode(self.password, forKey: .password)
-      try container.encode(self.passwordSet, forKey: .passwordSet)
+      if !self.user.isEmpty {
+        try container.encode(self.user, forKey: .user)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
+      if self.passwordSet {
+        try container.encode(self.passwordSet, forKey: .passwordSet)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -310,11 +320,19 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       try container.encodeIfPresent(self.machineConfig, forKey: .machineConfig)
-      try container.encode(self.databaseFlags, forKey: .databaseFlags)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.privateIp, forKey: .privateIp)
+      if !self.databaseFlags.isEmpty {
+        try container.encode(self.databaseFlags, forKey: .databaseFlags)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.privateIp.isEmpty {
+        try container.encode(self.privateIp, forKey: .privateIp)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -372,7 +390,9 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.cpuCount, forKey: .cpuCount)
+        if self.cpuCount != 0 {
+          try container.encode(self.cpuCount, forKey: .cpuCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -478,7 +498,9 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+      if !self.kmsKeyName.isEmpty {
+        try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

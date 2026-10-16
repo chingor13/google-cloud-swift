@@ -164,15 +164,33 @@ public struct SpeechTranscriptionConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.maxAlternatives, forKey: .maxAlternatives)
-    try container.encode(self.filterProfanity, forKey: .filterProfanity)
-    try container.encode(self.speechContexts, forKey: .speechContexts)
-    try container.encode(self.enableAutomaticPunctuation, forKey: .enableAutomaticPunctuation)
-    try container.encode(self.audioTracks, forKey: .audioTracks)
-    try container.encode(self.enableSpeakerDiarization, forKey: .enableSpeakerDiarization)
-    try container.encode(self.diarizationSpeakerCount, forKey: .diarizationSpeakerCount)
-    try container.encode(self.enableWordConfidence, forKey: .enableWordConfidence)
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if self.maxAlternatives != 0 {
+      try container.encode(self.maxAlternatives, forKey: .maxAlternatives)
+    }
+    if self.filterProfanity {
+      try container.encode(self.filterProfanity, forKey: .filterProfanity)
+    }
+    if !self.speechContexts.isEmpty {
+      try container.encode(self.speechContexts, forKey: .speechContexts)
+    }
+    if self.enableAutomaticPunctuation {
+      try container.encode(self.enableAutomaticPunctuation, forKey: .enableAutomaticPunctuation)
+    }
+    if !self.audioTracks.isEmpty {
+      try container.encode(self.audioTracks, forKey: .audioTracks)
+    }
+    if self.enableSpeakerDiarization {
+      try container.encode(self.enableSpeakerDiarization, forKey: .enableSpeakerDiarization)
+    }
+    if self.diarizationSpeakerCount != 0 {
+      try container.encode(self.diarizationSpeakerCount, forKey: .diarizationSpeakerCount)
+    }
+    if self.enableWordConfidence {
+      try container.encode(self.enableWordConfidence, forKey: .enableWordConfidence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

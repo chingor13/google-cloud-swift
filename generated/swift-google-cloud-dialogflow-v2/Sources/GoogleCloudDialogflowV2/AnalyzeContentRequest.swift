@@ -158,12 +158,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.participant, forKey: .participant)
+      if !self.participant.isEmpty {
+        try container.encode(self.participant, forKey: .participant)
+      }
       try container.encodeIfPresent(self.replyAudioConfig, forKey: .replyAudioConfig)
       try container.encodeIfPresent(self.queryParams, forKey: .queryParams)
       try container.encodeIfPresent(self.assistQueryParams, forKey: .assistQueryParams)
       try container.encodeIfPresent(self.cxParameters, forKey: .cxParameters)
-      try container.encode(self.requestId, forKey: .requestId)
+      if !self.requestId.isEmpty {
+        try container.encode(self.requestId, forKey: .requestId)
+      }
 
       if let choice = self.input {
         switch choice {

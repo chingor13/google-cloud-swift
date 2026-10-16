@@ -214,8 +214,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.automatedAgentConfig, forKey: .automatedAgentConfig)
@@ -230,10 +234,16 @@
         self.newRecognitionResultNotificationConfig, forKey: .newRecognitionResultNotificationConfig
       )
       try container.encodeIfPresent(self.sttConfig, forKey: .sttConfig)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       try container.encodeIfPresent(self.sipConfig, forKey: .sipConfig)
-      try container.encode(self.timeZone, forKey: .timeZone)
-      try container.encode(self.securitySettings, forKey: .securitySettings)
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
+      if !self.securitySettings.isEmpty {
+        try container.encode(self.securitySettings, forKey: .securitySettings)
+      }
       try container.encodeIfPresent(self.ttsConfig, forKey: .ttsConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

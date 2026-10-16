@@ -96,8 +96,12 @@ public struct CreateKeyHandleRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.keyHandleId, forKey: .keyHandleId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.keyHandleId.isEmpty {
+      try container.encode(self.keyHandleId, forKey: .keyHandleId)
+    }
     try container.encodeIfPresent(self.keyHandle, forKey: .keyHandle)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

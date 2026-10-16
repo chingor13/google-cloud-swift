@@ -111,9 +111,15 @@ public struct KeyHandle: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.resourceTypeSelector, forKey: .resourceTypeSelector)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.resourceTypeSelector.isEmpty {
+      try container.encode(self.resourceTypeSelector, forKey: .resourceTypeSelector)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

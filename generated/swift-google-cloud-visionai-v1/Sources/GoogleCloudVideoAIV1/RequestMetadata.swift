@@ -110,11 +110,21 @@ public struct RequestMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.stream, forKey: .stream)
-    try container.encode(self.event, forKey: .event)
-    try container.encode(self.series, forKey: .series)
-    try container.encode(self.leaseId, forKey: .leaseId)
-    try container.encode(self.owner, forKey: .owner)
+    if !self.stream.isEmpty {
+      try container.encode(self.stream, forKey: .stream)
+    }
+    if !self.event.isEmpty {
+      try container.encode(self.event, forKey: .event)
+    }
+    if !self.series.isEmpty {
+      try container.encode(self.series, forKey: .series)
+    }
+    if !self.leaseId.isEmpty {
+      try container.encode(self.leaseId, forKey: .leaseId)
+    }
+    if !self.owner.isEmpty {
+      try container.encode(self.owner, forKey: .owner)
+    }
     try container.encodeIfPresent(self.leaseTerm, forKey: .leaseTerm)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

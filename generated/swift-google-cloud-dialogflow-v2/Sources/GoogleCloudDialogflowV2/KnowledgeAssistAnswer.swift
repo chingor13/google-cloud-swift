@@ -97,7 +97,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.suggestedQuery, forKey: .suggestedQuery)
       try container.encodeIfPresent(self.suggestedQueryAnswer, forKey: .suggestedQueryAnswer)
-      try container.encode(self.answerRecord, forKey: .answerRecord)
+      if !self.answerRecord.isEmpty {
+        try container.encode(self.answerRecord, forKey: .answerRecord)
+      }
       try container.encodeIfPresent(
         self.knowledgeAssistDebugInfo, forKey: .knowledgeAssistDebugInfo)
       for (key, value) in self._unknownFields.json {
@@ -167,8 +169,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.queryText, forKey: .queryText)
-        try container.encode(self.searchContexts, forKey: .searchContexts)
+        if !self.queryText.isEmpty {
+          try container.encode(self.queryText, forKey: .queryText)
+        }
+        if !self.searchContexts.isEmpty {
+          try container.encode(self.searchContexts, forKey: .searchContexts)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -240,8 +246,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.key, forKey: .key)
-          try container.encode(self.value, forKey: .value)
+          if !self.key.isEmpty {
+            try container.encode(self.key, forKey: .key)
+          }
+          if !self.value.isEmpty {
+            try container.encode(self.value, forKey: .value)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -354,7 +364,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.suggestedQuery, forKey: .suggestedQuery)
-        try container.encode(self.answerRecord, forKey: .answerRecord)
+        if !self.answerRecord.isEmpty {
+          try container.encode(self.answerRecord, forKey: .answerRecord)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -479,7 +491,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.answerText, forKey: .answerText)
+        if !self.answerText.isEmpty {
+          try container.encode(self.answerText, forKey: .answerText)
+        }
 
         if let choice = self.source {
           switch choice {
@@ -550,7 +564,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.question, forKey: .question)
+          if !self.question.isEmpty {
+            try container.encode(self.question, forKey: .question)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -634,7 +650,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.snippets, forKey: .snippets)
+          if !self.snippets.isEmpty {
+            try container.encode(self.snippets, forKey: .snippets)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -715,9 +733,15 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.uri, forKey: .uri)
-            try container.encode(self.text, forKey: .text)
-            try container.encode(self.title, forKey: .title)
+            if !self.uri.isEmpty {
+              try container.encode(self.uri, forKey: .uri)
+            }
+            if !self.text.isEmpty {
+              try container.encode(self.text, forKey: .text)
+            }
+            if !self.title.isEmpty {
+              try container.encode(self.title, forKey: .title)
+            }
             try container.encodeIfPresent(self.metadata, forKey: .metadata)
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -829,7 +853,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.event, forKey: .event)
+          if !self.event.isEmpty {
+            try container.encode(self.event, forKey: .event)
+          }
           try container.encodeIfPresent(self.snippets, forKey: .snippets)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))

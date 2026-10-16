@@ -131,10 +131,18 @@ public struct AssetFrame: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.reportTime, forKey: .reportTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.performanceSamples, forKey: .performanceSamples)
-    try container.encode(self.traceToken, forKey: .traceToken)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.performanceSamples.isEmpty {
+      try container.encode(self.performanceSamples, forKey: .performanceSamples)
+    }
+    if !self.traceToken.isEmpty {
+      try container.encode(self.traceToken, forKey: .traceToken)
+    }
 
     if let choice = self.frameData {
       switch choice {

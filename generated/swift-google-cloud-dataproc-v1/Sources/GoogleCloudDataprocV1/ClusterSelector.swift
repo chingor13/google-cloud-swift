@@ -84,8 +84,12 @@ public struct ClusterSelector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.clusterLabels, forKey: .clusterLabels)
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.clusterLabels.isEmpty {
+      try container.encode(self.clusterLabels, forKey: .clusterLabels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -122,10 +122,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pageviewId, forKey: .pageviewId)
-      try container.encode(self.pageCategory, forKey: .pageCategory)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.referrerUri, forKey: .referrerUri)
+      if !self.pageviewId.isEmpty {
+        try container.encode(self.pageviewId, forKey: .pageviewId)
+      }
+      if !self.pageCategory.isEmpty {
+        try container.encode(self.pageCategory, forKey: .pageCategory)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.referrerUri.isEmpty {
+        try container.encode(self.referrerUri, forKey: .referrerUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

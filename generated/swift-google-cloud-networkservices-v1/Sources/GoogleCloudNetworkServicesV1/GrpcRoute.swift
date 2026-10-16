@@ -186,16 +186,32 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.selfLink, forKey: .selfLink)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.hostnames, forKey: .hostnames)
-    try container.encode(self.meshes, forKey: .meshes)
-    try container.encode(self.gateways, forKey: .gateways)
-    try container.encode(self.rules, forKey: .rules)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.hostnames.isEmpty {
+      try container.encode(self.hostnames, forKey: .hostnames)
+    }
+    if !self.meshes.isEmpty {
+      try container.encode(self.meshes, forKey: .meshes)
+    }
+    if !self.gateways.isEmpty {
+      try container.encode(self.gateways, forKey: .gateways)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -281,9 +297,15 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.grpcService, forKey: .grpcService)
-      try container.encode(self.grpcMethod, forKey: .grpcMethod)
+      if self.type != GrpcRoute.MethodMatch.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.grpcService.isEmpty {
+        try container.encode(self.grpcService, forKey: .grpcService)
+      }
+      if !self.grpcMethod.isEmpty {
+        try container.encode(self.grpcMethod, forKey: .grpcMethod)
+      }
       try container.encodeIfPresent(self.caseSensitive, forKey: .caseSensitive)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -500,9 +522,15 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.key, forKey: .key)
-      try container.encode(self.value, forKey: .value)
+      if self.type != GrpcRoute.HeaderMatch.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -709,7 +737,9 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.method, forKey: .method)
-      try container.encode(self.headers, forKey: .headers)
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1304,8 +1334,12 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.retryConditions, forKey: .retryConditions)
-      try container.encode(self.numRetries, forKey: .numRetries)
+      if !self.retryConditions.isEmpty {
+        try container.encode(self.retryConditions, forKey: .retryConditions)
+      }
+      if self.numRetries != 0 {
+        try container.encode(self.numRetries, forKey: .numRetries)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1438,7 +1472,9 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destinations, forKey: .destinations)
+      if !self.destinations.isEmpty {
+        try container.encode(self.destinations, forKey: .destinations)
+      }
       try container.encodeIfPresent(self.faultInjectionPolicy, forKey: .faultInjectionPolicy)
       try container.encodeIfPresent(self.timeout, forKey: .timeout)
       try container.encodeIfPresent(self.retryPolicy, forKey: .retryPolicy)
@@ -1533,7 +1569,9 @@ public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matches, forKey: .matches)
+      if !self.matches.isEmpty {
+        try container.encode(self.matches, forKey: .matches)
+      }
       try container.encodeIfPresent(self.action, forKey: .action)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -88,7 +88,9 @@ public struct ContinuousBackupConfig: Codable, Equatable, GoogleWKT._AnyPackable
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.enabled, forKey: .enabled)
-    try container.encode(self.recoveryWindowDays, forKey: .recoveryWindowDays)
+    if self.recoveryWindowDays != 0 {
+      try container.encode(self.recoveryWindowDays, forKey: .recoveryWindowDays)
+    }
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

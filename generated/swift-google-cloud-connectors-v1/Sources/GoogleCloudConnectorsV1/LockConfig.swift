@@ -78,8 +78,12 @@ public struct LockConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.locked, forKey: .locked)
-    try container.encode(self.reason, forKey: .reason)
+    if self.locked {
+      try container.encode(self.locked, forKey: .locked)
+    }
+    if !self.reason.isEmpty {
+      try container.encode(self.reason, forKey: .reason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

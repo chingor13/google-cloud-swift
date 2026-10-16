@@ -195,7 +195,9 @@
       try container.encodeIfPresent(self.cdnPolicy, forKey: .cdnPolicy)
       try container.encodeIfPresent(self.compressionMode, forKey: .compressionMode)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
-      try container.encode(self.customResponseHeaders, forKey: .customResponseHeaders)
+      if !self.customResponseHeaders.isEmpty {
+        try container.encode(self.customResponseHeaders, forKey: .customResponseHeaders)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.edgeSecurityPolicy, forKey: .edgeSecurityPolicy)
       try container.encodeIfPresent(self.enableCdn, forKey: .enableCdn)
@@ -206,7 +208,9 @@
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.usedBy, forKey: .usedBy)
+      if !self.usedBy.isEmpty {
+        try container.encode(self.usedBy, forKey: .usedBy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

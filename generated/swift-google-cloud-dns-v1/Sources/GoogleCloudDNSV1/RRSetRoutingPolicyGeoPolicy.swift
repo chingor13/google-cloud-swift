@@ -83,7 +83,9 @@ public struct RRSetRoutingPolicyGeoPolicy: Codable, Equatable, GoogleWKT._AnyPac
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.enableFencing, forKey: .enableFencing)
-    try container.encode(self.items, forKey: .items)
+    if !self.items.isEmpty {
+      try container.encode(self.items, forKey: .items)
+    }
     try container.encodeIfPresent(self.kind, forKey: .kind)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

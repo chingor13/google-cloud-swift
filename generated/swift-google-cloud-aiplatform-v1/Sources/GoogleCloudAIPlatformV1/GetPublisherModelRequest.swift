@@ -109,11 +109,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.view, forKey: .view)
-      try container.encode(self.isHuggingFaceModel, forKey: .isHuggingFaceModel)
-      try container.encode(self.huggingFaceToken, forKey: .huggingFaceToken)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if self.view != PublisherModelView() {
+        try container.encode(self.view, forKey: .view)
+      }
+      if self.isHuggingFaceModel {
+        try container.encode(self.isHuggingFaceModel, forKey: .isHuggingFaceModel)
+      }
+      if !self.huggingFaceToken.isEmpty {
+        try container.encode(self.huggingFaceToken, forKey: .huggingFaceToken)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

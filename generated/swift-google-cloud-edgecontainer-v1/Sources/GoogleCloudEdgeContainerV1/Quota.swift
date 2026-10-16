@@ -85,9 +85,15 @@ public struct Quota: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metric, forKey: .metric)
-    try container.encode(self.limit, forKey: .limit)
-    try container.encode(self.usage, forKey: .usage)
+    if !self.metric.isEmpty {
+      try container.encode(self.metric, forKey: .metric)
+    }
+    if self.limit != 0 {
+      try container.encode(self.limit, forKey: .limit)
+    }
+    if self.usage != 0 {
+      try container.encode(self.usage, forKey: .usage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

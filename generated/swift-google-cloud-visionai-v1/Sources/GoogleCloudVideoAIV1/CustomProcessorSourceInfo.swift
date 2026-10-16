@@ -121,8 +121,12 @@ public struct CustomProcessorSourceInfo: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceType, forKey: .sourceType)
-    try container.encode(self.additionalInfo, forKey: .additionalInfo)
+    if self.sourceType != CustomProcessorSourceInfo.SourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
+    if !self.additionalInfo.isEmpty {
+      try container.encode(self.additionalInfo, forKey: .additionalInfo)
+    }
     try container.encodeIfPresent(self.modelSchema, forKey: .modelSchema)
 
     if let choice = self.artifactPath {
@@ -204,9 +208,13 @@ public struct CustomProcessorSourceInfo: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.retailProductRecognitionIndex, forKey: .retailProductRecognitionIndex)
-      try container.encode(self.vertexModel, forKey: .vertexModel)
+      if !self.retailProductRecognitionIndex.isEmpty {
+        try container.encode(
+          self.retailProductRecognitionIndex, forKey: .retailProductRecognitionIndex)
+      }
+      if !self.vertexModel.isEmpty {
+        try container.encode(self.vertexModel, forKey: .vertexModel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -84,8 +84,12 @@ public struct CreateWasmPluginRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.wasmPluginId, forKey: .wasmPluginId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.wasmPluginId.isEmpty {
+      try container.encode(self.wasmPluginId, forKey: .wasmPluginId)
+    }
     try container.encodeIfPresent(self.wasmPlugin, forKey: .wasmPlugin)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

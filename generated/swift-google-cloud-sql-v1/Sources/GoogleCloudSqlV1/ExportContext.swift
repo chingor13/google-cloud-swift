@@ -147,12 +147,20 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.databases, forKey: .databases)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.databases.isEmpty {
+        try container.encode(self.databases, forKey: .databases)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       try container.encodeIfPresent(self.sqlExportOptions, forKey: .sqlExportOptions)
       try container.encodeIfPresent(self.csvExportOptions, forKey: .csvExportOptions)
-      try container.encode(self.fileType, forKey: .fileType)
+      if self.fileType != SqlFileType() {
+        try container.encode(self.fileType, forKey: .fileType)
+      }
       try container.encodeIfPresent(self.offload, forKey: .offload)
       try container.encodeIfPresent(self.bakExportOptions, forKey: .bakExportOptions)
       try container.encodeIfPresent(self.tdeExportOptions, forKey: .tdeExportOptions)
@@ -249,11 +257,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.selectQuery, forKey: .selectQuery)
-        try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
-        try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
-        try container.encode(self.fieldsTerminatedBy, forKey: .fieldsTerminatedBy)
-        try container.encode(self.linesTerminatedBy, forKey: .linesTerminatedBy)
+        if !self.selectQuery.isEmpty {
+          try container.encode(self.selectQuery, forKey: .selectQuery)
+        }
+        if !self.escapeCharacter.isEmpty {
+          try container.encode(self.escapeCharacter, forKey: .escapeCharacter)
+        }
+        if !self.quoteCharacter.isEmpty {
+          try container.encode(self.quoteCharacter, forKey: .quoteCharacter)
+        }
+        if !self.fieldsTerminatedBy.isEmpty {
+          try container.encode(self.fieldsTerminatedBy, forKey: .fieldsTerminatedBy)
+        }
+        if !self.linesTerminatedBy.isEmpty {
+          try container.encode(self.linesTerminatedBy, forKey: .linesTerminatedBy)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -367,7 +385,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.tables, forKey: .tables)
+        if !self.tables.isEmpty {
+          try container.encode(self.tables, forKey: .tables)
+        }
         try container.encodeIfPresent(self.schemaOnly, forKey: .schemaOnly)
         try container.encodeIfPresent(self.mysqlExportOptions, forKey: .mysqlExportOptions)
         try container.encodeIfPresent(self.threads, forKey: .threads)
@@ -688,7 +708,9 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.striped, forKey: .striped)
         try container.encodeIfPresent(self.stripeCount, forKey: .stripeCount)
-        try container.encode(self.bakType, forKey: .bakType)
+        if self.bakType != BakType() {
+          try container.encode(self.bakType, forKey: .bakType)
+        }
         try container.encodeIfPresent(self.copyOnly, forKey: .copyOnly)
         try container.encodeIfPresent(self.differentialBase, forKey: .differentialBase)
         try container.encodeIfPresent(self.exportLogStartTime, forKey: .exportLogStartTime)
@@ -803,10 +825,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.certificatePath, forKey: .certificatePath)
-        try container.encode(self.privateKeyPath, forKey: .privateKeyPath)
-        try container.encode(self.privateKeyPassword, forKey: .privateKeyPassword)
-        try container.encode(self.name, forKey: .name)
+        if !self.certificatePath.isEmpty {
+          try container.encode(self.certificatePath, forKey: .certificatePath)
+        }
+        if !self.privateKeyPath.isEmpty {
+          try container.encode(self.privateKeyPath, forKey: .privateKeyPath)
+        }
+        if !self.privateKeyPassword.isEmpty {
+          try container.encode(self.privateKeyPassword, forKey: .privateKeyPassword)
+        }
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

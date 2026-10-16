@@ -174,17 +174,33 @@ public struct TransactionData: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.transactionId, forKey: .transactionId)
-    try container.encode(self.paymentMethod, forKey: .paymentMethod)
-    try container.encode(self.cardBin, forKey: .cardBin)
-    try container.encode(self.cardLastFour, forKey: .cardLastFour)
-    try container.encode(self.currencyCode, forKey: .currencyCode)
-    try container.encode(self.value, forKey: .value)
-    try container.encode(self.shippingValue, forKey: .shippingValue)
+    if !self.paymentMethod.isEmpty {
+      try container.encode(self.paymentMethod, forKey: .paymentMethod)
+    }
+    if !self.cardBin.isEmpty {
+      try container.encode(self.cardBin, forKey: .cardBin)
+    }
+    if !self.cardLastFour.isEmpty {
+      try container.encode(self.cardLastFour, forKey: .cardLastFour)
+    }
+    if !self.currencyCode.isEmpty {
+      try container.encode(self.currencyCode, forKey: .currencyCode)
+    }
+    if self.value != 0 {
+      try container.encode(self.value, forKey: .value)
+    }
+    if self.shippingValue != 0 {
+      try container.encode(self.shippingValue, forKey: .shippingValue)
+    }
     try container.encodeIfPresent(self.shippingAddress, forKey: .shippingAddress)
     try container.encodeIfPresent(self.billingAddress, forKey: .billingAddress)
     try container.encodeIfPresent(self.user, forKey: .user)
-    try container.encode(self.merchants, forKey: .merchants)
-    try container.encode(self.items, forKey: .items)
+    if !self.merchants.isEmpty {
+      try container.encode(self.merchants, forKey: .merchants)
+    }
+    if !self.items.isEmpty {
+      try container.encode(self.items, forKey: .items)
+    }
     try container.encodeIfPresent(self.gatewayInfo, forKey: .gatewayInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -287,12 +303,24 @@ public struct TransactionData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.recipient, forKey: .recipient)
-      try container.encode(self.address, forKey: .address)
-      try container.encode(self.locality, forKey: .locality)
-      try container.encode(self.administrativeArea, forKey: .administrativeArea)
-      try container.encode(self.regionCode, forKey: .regionCode)
-      try container.encode(self.postalCode, forKey: .postalCode)
+      if !self.recipient.isEmpty {
+        try container.encode(self.recipient, forKey: .recipient)
+      }
+      if !self.address.isEmpty {
+        try container.encode(self.address, forKey: .address)
+      }
+      if !self.locality.isEmpty {
+        try container.encode(self.locality, forKey: .locality)
+      }
+      if !self.administrativeArea.isEmpty {
+        try container.encode(self.administrativeArea, forKey: .administrativeArea)
+      }
+      if !self.regionCode.isEmpty {
+        try container.encode(self.regionCode, forKey: .regionCode)
+      }
+      if !self.postalCode.isEmpty {
+        try container.encode(self.postalCode, forKey: .postalCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -416,12 +444,24 @@ public struct TransactionData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accountId, forKey: .accountId)
-      try container.encode(self.creationMs, forKey: .creationMs)
-      try container.encode(self.email, forKey: .email)
-      try container.encode(self.emailVerified, forKey: .emailVerified)
-      try container.encode(self.phoneNumber, forKey: .phoneNumber)
-      try container.encode(self.phoneVerified, forKey: .phoneVerified)
+      if !self.accountId.isEmpty {
+        try container.encode(self.accountId, forKey: .accountId)
+      }
+      if self.creationMs != 0 {
+        try container.encode(self.creationMs, forKey: .creationMs)
+      }
+      if !self.email.isEmpty {
+        try container.encode(self.email, forKey: .email)
+      }
+      if self.emailVerified {
+        try container.encode(self.emailVerified, forKey: .emailVerified)
+      }
+      if !self.phoneNumber.isEmpty {
+        try container.encode(self.phoneNumber, forKey: .phoneNumber)
+      }
+      if self.phoneVerified {
+        try container.encode(self.phoneVerified, forKey: .phoneVerified)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -527,10 +567,18 @@ public struct TransactionData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.value, forKey: .value)
-      try container.encode(self.quantity, forKey: .quantity)
-      try container.encode(self.merchantAccountId, forKey: .merchantAccountId)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.value != 0 {
+        try container.encode(self.value, forKey: .value)
+      }
+      if self.quantity != 0 {
+        try container.encode(self.quantity, forKey: .quantity)
+      }
+      if !self.merchantAccountId.isEmpty {
+        try container.encode(self.merchantAccountId, forKey: .merchantAccountId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -638,10 +686,18 @@ public struct TransactionData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.gatewayResponseCode, forKey: .gatewayResponseCode)
-      try container.encode(self.avsResponseCode, forKey: .avsResponseCode)
-      try container.encode(self.cvvResponseCode, forKey: .cvvResponseCode)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.gatewayResponseCode.isEmpty {
+        try container.encode(self.gatewayResponseCode, forKey: .gatewayResponseCode)
+      }
+      if !self.avsResponseCode.isEmpty {
+        try container.encode(self.avsResponseCode, forKey: .avsResponseCode)
+      }
+      if !self.cvvResponseCode.isEmpty {
+        try container.encode(self.cvvResponseCode, forKey: .cvvResponseCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

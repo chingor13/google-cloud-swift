@@ -136,11 +136,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.content, forKey: .content)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.participant, forKey: .participant)
-      try container.encode(self.participantRole, forKey: .participantRole)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if !self.participant.isEmpty {
+        try container.encode(self.participant, forKey: .participant)
+      }
+      if self.participantRole != Participant.Role() {
+        try container.encode(self.participantRole, forKey: .participantRole)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.sendTime, forKey: .sendTime)
       try container.encodeIfPresent(self.messageAnnotation, forKey: .messageAnnotation)

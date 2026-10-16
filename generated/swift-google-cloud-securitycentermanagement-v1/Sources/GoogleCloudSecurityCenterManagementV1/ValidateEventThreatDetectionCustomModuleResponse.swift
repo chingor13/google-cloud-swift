@@ -78,7 +78,9 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -165,8 +167,12 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.fieldPath, forKey: .fieldPath)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.fieldPath.isEmpty {
+        try container.encode(self.fieldPath, forKey: .fieldPath)
+      }
       try container.encodeIfPresent(self.start, forKey: .start)
       try container.encodeIfPresent(self.end, forKey: .end)
       for (key, value) in self._unknownFields.json {
@@ -257,8 +263,12 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.lineNumber, forKey: .lineNumber)
-      try container.encode(self.columnNumber, forKey: .columnNumber)
+      if self.lineNumber != 0 {
+        try container.encode(self.lineNumber, forKey: .lineNumber)
+      }
+      if self.columnNumber != 0 {
+        try container.encode(self.columnNumber, forKey: .columnNumber)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

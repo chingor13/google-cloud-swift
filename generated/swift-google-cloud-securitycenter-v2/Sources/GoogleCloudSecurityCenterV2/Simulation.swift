@@ -97,10 +97,16 @@ public struct Simulation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.resourceValueConfigsMetadata, forKey: .resourceValueConfigsMetadata)
-    try container.encode(self.cloudProvider, forKey: .cloudProvider)
+    if !self.resourceValueConfigsMetadata.isEmpty {
+      try container.encode(self.resourceValueConfigsMetadata, forKey: .resourceValueConfigsMetadata)
+    }
+    if self.cloudProvider != CloudProvider() {
+      try container.encode(self.cloudProvider, forKey: .cloudProvider)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -110,9 +110,15 @@ public struct SoftwareConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.imageVersion, forKey: .imageVersion)
-    try container.encode(self.properties, forKey: .properties)
-    try container.encode(self.optionalComponents, forKey: .optionalComponents)
+    if !self.imageVersion.isEmpty {
+      try container.encode(self.imageVersion, forKey: .imageVersion)
+    }
+    if !self.properties.isEmpty {
+      try container.encode(self.properties, forKey: .properties)
+    }
+    if !self.optionalComponents.isEmpty {
+      try container.encode(self.optionalComponents, forKey: .optionalComponents)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

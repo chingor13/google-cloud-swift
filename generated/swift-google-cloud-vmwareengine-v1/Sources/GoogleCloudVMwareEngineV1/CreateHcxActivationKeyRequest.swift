@@ -123,10 +123,16 @@ public struct CreateHcxActivationKeyRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.hcxActivationKey, forKey: .hcxActivationKey)
-    try container.encode(self.hcxActivationKeyId, forKey: .hcxActivationKeyId)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.hcxActivationKeyId.isEmpty {
+      try container.encode(self.hcxActivationKeyId, forKey: .hcxActivationKeyId)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -154,9 +154,13 @@ public struct ContentLocation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.containerName, forKey: .containerName)
+    if !self.containerName.isEmpty {
+      try container.encode(self.containerName, forKey: .containerName)
+    }
     try container.encodeIfPresent(self.containerTimestamp, forKey: .containerTimestamp)
-    try container.encode(self.containerVersion, forKey: .containerVersion)
+    if !self.containerVersion.isEmpty {
+      try container.encode(self.containerVersion, forKey: .containerVersion)
+    }
 
     if let choice = self.location {
       switch choice {

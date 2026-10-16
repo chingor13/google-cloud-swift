@@ -108,8 +108,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.knowledgeBase, forKey: .knowledgeBase)
+      if self.state != KnowledgeOperationMetadata.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.knowledgeBase.isEmpty {
+        try container.encode(self.knowledgeBase, forKey: .knowledgeBase)
+      }
       try container.encodeIfPresent(self.doneTime, forKey: .doneTime)
 
       if let choice = self.operationMetadata {

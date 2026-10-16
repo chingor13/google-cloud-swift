@@ -99,7 +99,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datasets, forKey: .datasets)
+      if !self.datasets.isEmpty {
+        try container.encode(self.datasets, forKey: .datasets)
+      }
 
       if let choice = self.modelSpecificConfig {
         switch choice {
@@ -180,8 +182,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.allowlistDocument, forKey: .allowlistDocument)
-        try container.encode(self.maxResultCount, forKey: .maxResultCount)
+        if !self.allowlistDocument.isEmpty {
+          try container.encode(self.allowlistDocument, forKey: .allowlistDocument)
+        }
+        if self.maxResultCount != 0 {
+          try container.encode(self.maxResultCount, forKey: .maxResultCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -275,8 +281,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.allowlistDocument, forKey: .allowlistDocument)
-        try container.encode(self.maxResultCount, forKey: .maxResultCount)
+        if !self.allowlistDocument.isEmpty {
+          try container.encode(self.allowlistDocument, forKey: .allowlistDocument)
+        }
+        if self.maxResultCount != 0 {
+          try container.encode(self.maxResultCount, forKey: .maxResultCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

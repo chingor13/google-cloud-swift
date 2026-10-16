@@ -439,41 +439,103 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.locationId, forKey: .locationId)
-    try container.encode(self.alternativeLocationId, forKey: .alternativeLocationId)
-    try container.encode(self.redisVersion, forKey: .redisVersion)
-    try container.encode(self.reservedIpRange, forKey: .reservedIpRange)
-    try container.encode(self.secondaryIpRange, forKey: .secondaryIpRange)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.currentLocationId, forKey: .currentLocationId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.locationId.isEmpty {
+      try container.encode(self.locationId, forKey: .locationId)
+    }
+    if !self.alternativeLocationId.isEmpty {
+      try container.encode(self.alternativeLocationId, forKey: .alternativeLocationId)
+    }
+    if !self.redisVersion.isEmpty {
+      try container.encode(self.redisVersion, forKey: .redisVersion)
+    }
+    if !self.reservedIpRange.isEmpty {
+      try container.encode(self.reservedIpRange, forKey: .reservedIpRange)
+    }
+    if !self.secondaryIpRange.isEmpty {
+      try container.encode(self.secondaryIpRange, forKey: .secondaryIpRange)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.currentLocationId.isEmpty {
+      try container.encode(self.currentLocationId, forKey: .currentLocationId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.redisConfigs, forKey: .redisConfigs)
-    try container.encode(self.tier, forKey: .tier)
-    try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
-    try container.encode(self.authorizedNetwork, forKey: .authorizedNetwork)
-    try container.encode(self.persistenceIamIdentity, forKey: .persistenceIamIdentity)
-    try container.encode(self.connectMode, forKey: .connectMode)
-    try container.encode(self.authEnabled, forKey: .authEnabled)
-    try container.encode(self.serverCaCerts, forKey: .serverCaCerts)
-    try container.encode(self.transitEncryptionMode, forKey: .transitEncryptionMode)
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if !self.redisConfigs.isEmpty {
+      try container.encode(self.redisConfigs, forKey: .redisConfigs)
+    }
+    if self.tier != Instance.Tier() {
+      try container.encode(self.tier, forKey: .tier)
+    }
+    if self.memorySizeGb != 0 {
+      try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
+    }
+    if !self.authorizedNetwork.isEmpty {
+      try container.encode(self.authorizedNetwork, forKey: .authorizedNetwork)
+    }
+    if !self.persistenceIamIdentity.isEmpty {
+      try container.encode(self.persistenceIamIdentity, forKey: .persistenceIamIdentity)
+    }
+    if self.connectMode != Instance.ConnectMode() {
+      try container.encode(self.connectMode, forKey: .connectMode)
+    }
+    if self.authEnabled {
+      try container.encode(self.authEnabled, forKey: .authEnabled)
+    }
+    if !self.serverCaCerts.isEmpty {
+      try container.encode(self.serverCaCerts, forKey: .serverCaCerts)
+    }
+    if self.transitEncryptionMode != Instance.TransitEncryptionMode() {
+      try container.encode(self.transitEncryptionMode, forKey: .transitEncryptionMode)
+    }
     try container.encodeIfPresent(self.maintenancePolicy, forKey: .maintenancePolicy)
     try container.encodeIfPresent(self.maintenanceSchedule, forKey: .maintenanceSchedule)
-    try container.encode(self.replicaCount, forKey: .replicaCount)
-    try container.encode(self.nodes, forKey: .nodes)
-    try container.encode(self.readEndpoint, forKey: .readEndpoint)
-    try container.encode(self.readEndpointPort, forKey: .readEndpointPort)
-    try container.encode(self.readReplicasMode, forKey: .readReplicasMode)
-    try container.encode(self.customerManagedKey, forKey: .customerManagedKey)
+    if self.replicaCount != 0 {
+      try container.encode(self.replicaCount, forKey: .replicaCount)
+    }
+    if !self.nodes.isEmpty {
+      try container.encode(self.nodes, forKey: .nodes)
+    }
+    if !self.readEndpoint.isEmpty {
+      try container.encode(self.readEndpoint, forKey: .readEndpoint)
+    }
+    if self.readEndpointPort != 0 {
+      try container.encode(self.readEndpointPort, forKey: .readEndpointPort)
+    }
+    if self.readReplicasMode != Instance.ReadReplicasMode() {
+      try container.encode(self.readReplicasMode, forKey: .readReplicasMode)
+    }
+    if !self.customerManagedKey.isEmpty {
+      try container.encode(self.customerManagedKey, forKey: .customerManagedKey)
+    }
     try container.encodeIfPresent(self.persistenceConfig, forKey: .persistenceConfig)
-    try container.encode(self.suspensionReasons, forKey: .suspensionReasons)
-    try container.encode(self.maintenanceVersion, forKey: .maintenanceVersion)
-    try container.encode(self.availableMaintenanceVersions, forKey: .availableMaintenanceVersions)
+    if !self.suspensionReasons.isEmpty {
+      try container.encode(self.suspensionReasons, forKey: .suspensionReasons)
+    }
+    if !self.maintenanceVersion.isEmpty {
+      try container.encode(self.maintenanceVersion, forKey: .maintenanceVersion)
+    }
+    if !self.availableMaintenanceVersions.isEmpty {
+      try container.encode(self.availableMaintenanceVersions, forKey: .availableMaintenanceVersions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

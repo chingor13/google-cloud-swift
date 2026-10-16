@@ -105,9 +105,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.supportScore, forKey: .supportScore)
-      try container.encode(self.citedChunks, forKey: .citedChunks)
-      try container.encode(self.citedFacts, forKey: .citedFacts)
-      try container.encode(self.claims, forKey: .claims)
+      if !self.citedChunks.isEmpty {
+        try container.encode(self.citedChunks, forKey: .citedChunks)
+      }
+      if !self.citedFacts.isEmpty {
+        try container.encode(self.citedFacts, forKey: .citedFacts)
+      }
+      if !self.claims.isEmpty {
+        try container.encode(self.claims, forKey: .claims)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -165,7 +171,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.chunkText, forKey: .chunkText)
+        if !self.chunkText.isEmpty {
+          try container.encode(self.chunkText, forKey: .chunkText)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -307,8 +315,12 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.startPos, forKey: .startPos)
         try container.encodeIfPresent(self.endPos, forKey: .endPos)
-        try container.encode(self.claimText, forKey: .claimText)
-        try container.encode(self.citationIndices, forKey: .citationIndices)
+        if !self.claimText.isEmpty {
+          try container.encode(self.claimText, forKey: .claimText)
+        }
+        if !self.citationIndices.isEmpty {
+          try container.encode(self.citationIndices, forKey: .citationIndices)
+        }
         try container.encodeIfPresent(self.groundingCheckRequired, forKey: .groundingCheckRequired)
         try container.encodeIfPresent(self.score, forKey: .score)
         for (key, value) in self._unknownFields.json {

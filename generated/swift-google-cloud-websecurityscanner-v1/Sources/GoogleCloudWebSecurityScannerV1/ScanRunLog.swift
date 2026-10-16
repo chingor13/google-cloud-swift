@@ -125,13 +125,27 @@ public struct ScanRunLog: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.summary, forKey: .summary)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.executionState, forKey: .executionState)
-    try container.encode(self.resultState, forKey: .resultState)
-    try container.encode(self.urlsCrawledCount, forKey: .urlsCrawledCount)
-    try container.encode(self.urlsTestedCount, forKey: .urlsTestedCount)
-    try container.encode(self.hasFindings, forKey: .hasFindings)
+    if !self.summary.isEmpty {
+      try container.encode(self.summary, forKey: .summary)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.executionState != ScanRun.ExecutionState() {
+      try container.encode(self.executionState, forKey: .executionState)
+    }
+    if self.resultState != ScanRun.ResultState() {
+      try container.encode(self.resultState, forKey: .resultState)
+    }
+    if self.urlsCrawledCount != 0 {
+      try container.encode(self.urlsCrawledCount, forKey: .urlsCrawledCount)
+    }
+    if self.urlsTestedCount != 0 {
+      try container.encode(self.urlsTestedCount, forKey: .urlsTestedCount)
+    }
+    if self.hasFindings {
+      try container.encode(self.hasFindings, forKey: .hasFindings)
+    }
     try container.encodeIfPresent(self.errorTrace, forKey: .errorTrace)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

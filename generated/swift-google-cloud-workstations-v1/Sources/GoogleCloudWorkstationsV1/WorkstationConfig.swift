@@ -399,33 +399,69 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.idleTimeout, forKey: .idleTimeout)
     try container.encodeIfPresent(self.runningTimeout, forKey: .runningTimeout)
-    try container.encode(self.maxUsableWorkstations, forKey: .maxUsableWorkstations)
+    if self.maxUsableWorkstations != 0 {
+      try container.encode(self.maxUsableWorkstations, forKey: .maxUsableWorkstations)
+    }
     try container.encodeIfPresent(self.host, forKey: .host)
-    try container.encode(self.persistentDirectories, forKey: .persistentDirectories)
-    try container.encode(self.ephemeralDirectories, forKey: .ephemeralDirectories)
+    if !self.persistentDirectories.isEmpty {
+      try container.encode(self.persistentDirectories, forKey: .persistentDirectories)
+    }
+    if !self.ephemeralDirectories.isEmpty {
+      try container.encode(self.ephemeralDirectories, forKey: .ephemeralDirectories)
+    }
     try container.encodeIfPresent(self.container, forKey: .container)
     try container.encodeIfPresent(self.encryptionKey, forKey: .encryptionKey)
-    try container.encode(self.readinessChecks, forKey: .readinessChecks)
-    try container.encode(self.replicaZones, forKey: .replicaZones)
-    try container.encode(self.degraded, forKey: .degraded)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.enableAuditAgent, forKey: .enableAuditAgent)
-    try container.encode(self.disableTcpConnections, forKey: .disableTcpConnections)
-    try container.encode(self.allowedPorts, forKey: .allowedPorts)
-    try container.encode(
-      self.grantWorkstationAdminRoleOnCreate, forKey: .grantWorkstationAdminRoleOnCreate)
+    if !self.readinessChecks.isEmpty {
+      try container.encode(self.readinessChecks, forKey: .readinessChecks)
+    }
+    if !self.replicaZones.isEmpty {
+      try container.encode(self.replicaZones, forKey: .replicaZones)
+    }
+    if self.degraded {
+      try container.encode(self.degraded, forKey: .degraded)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if self.enableAuditAgent {
+      try container.encode(self.enableAuditAgent, forKey: .enableAuditAgent)
+    }
+    if self.disableTcpConnections {
+      try container.encode(self.disableTcpConnections, forKey: .disableTcpConnections)
+    }
+    if !self.allowedPorts.isEmpty {
+      try container.encode(self.allowedPorts, forKey: .allowedPorts)
+    }
+    if self.grantWorkstationAdminRoleOnCreate {
+      try container.encode(
+        self.grantWorkstationAdminRoleOnCreate, forKey: .grantWorkstationAdminRoleOnCreate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -794,24 +830,54 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.machineType, forKey: .machineType)
-        try container.encode(self.serviceAccount, forKey: .serviceAccount)
-        try container.encode(self.serviceAccountScopes, forKey: .serviceAccountScopes)
-        try container.encode(self.tags, forKey: .tags)
-        try container.encode(self.poolSize, forKey: .poolSize)
-        try container.encode(self.pooledInstances, forKey: .pooledInstances)
-        try container.encode(self.disablePublicIpAddresses, forKey: .disablePublicIpAddresses)
-        try container.encode(self.enableNestedVirtualization, forKey: .enableNestedVirtualization)
+        if !self.machineType.isEmpty {
+          try container.encode(self.machineType, forKey: .machineType)
+        }
+        if !self.serviceAccount.isEmpty {
+          try container.encode(self.serviceAccount, forKey: .serviceAccount)
+        }
+        if !self.serviceAccountScopes.isEmpty {
+          try container.encode(self.serviceAccountScopes, forKey: .serviceAccountScopes)
+        }
+        if !self.tags.isEmpty {
+          try container.encode(self.tags, forKey: .tags)
+        }
+        if self.poolSize != 0 {
+          try container.encode(self.poolSize, forKey: .poolSize)
+        }
+        if self.pooledInstances != 0 {
+          try container.encode(self.pooledInstances, forKey: .pooledInstances)
+        }
+        if self.disablePublicIpAddresses {
+          try container.encode(self.disablePublicIpAddresses, forKey: .disablePublicIpAddresses)
+        }
+        if self.enableNestedVirtualization {
+          try container.encode(self.enableNestedVirtualization, forKey: .enableNestedVirtualization)
+        }
         try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
         try container.encodeIfPresent(
           self.confidentialInstanceConfig, forKey: .confidentialInstanceConfig)
-        try container.encode(self.bootDiskSizeGb, forKey: .bootDiskSizeGb)
-        try container.encode(self.accelerators, forKey: .accelerators)
-        try container.encode(self.boostConfigs, forKey: .boostConfigs)
-        try container.encode(self.disableSsh, forKey: .disableSsh)
-        try container.encode(self.vmTags, forKey: .vmTags)
-        try container.encode(self.startupScriptUri, forKey: .startupScriptUri)
-        try container.encode(self.instanceMetadata, forKey: .instanceMetadata)
+        if self.bootDiskSizeGb != 0 {
+          try container.encode(self.bootDiskSizeGb, forKey: .bootDiskSizeGb)
+        }
+        if !self.accelerators.isEmpty {
+          try container.encode(self.accelerators, forKey: .accelerators)
+        }
+        if !self.boostConfigs.isEmpty {
+          try container.encode(self.boostConfigs, forKey: .boostConfigs)
+        }
+        if self.disableSsh {
+          try container.encode(self.disableSsh, forKey: .disableSsh)
+        }
+        if !self.vmTags.isEmpty {
+          try container.encode(self.vmTags, forKey: .vmTags)
+        }
+        if !self.startupScriptUri.isEmpty {
+          try container.encode(self.startupScriptUri, forKey: .startupScriptUri)
+        }
+        if !self.instanceMetadata.isEmpty {
+          try container.encode(self.instanceMetadata, forKey: .instanceMetadata)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -888,9 +954,15 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.enableSecureBoot, forKey: .enableSecureBoot)
-          try container.encode(self.enableVtpm, forKey: .enableVtpm)
-          try container.encode(self.enableIntegrityMonitoring, forKey: .enableIntegrityMonitoring)
+          if self.enableSecureBoot {
+            try container.encode(self.enableSecureBoot, forKey: .enableSecureBoot)
+          }
+          if self.enableVtpm {
+            try container.encode(self.enableVtpm, forKey: .enableVtpm)
+          }
+          if self.enableIntegrityMonitoring {
+            try container.encode(self.enableIntegrityMonitoring, forKey: .enableIntegrityMonitoring)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -974,7 +1046,9 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.enableConfidentialCompute, forKey: .enableConfidentialCompute)
+          if self.enableConfidentialCompute {
+            try container.encode(self.enableConfidentialCompute, forKey: .enableConfidentialCompute)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1065,8 +1139,12 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.count, forKey: .count)
+          if !self.type.isEmpty {
+            try container.encode(self.type, forKey: .type)
+          }
+          if self.count != 0 {
+            try container.encode(self.count, forKey: .count)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1232,12 +1310,25 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.id, forKey: .id)
-          try container.encode(self.machineType, forKey: .machineType)
-          try container.encode(self.accelerators, forKey: .accelerators)
-          try container.encode(self.bootDiskSizeGb, forKey: .bootDiskSizeGb)
-          try container.encode(self.enableNestedVirtualization, forKey: .enableNestedVirtualization)
-          try container.encode(self.poolSize, forKey: .poolSize)
+          if !self.id.isEmpty {
+            try container.encode(self.id, forKey: .id)
+          }
+          if !self.machineType.isEmpty {
+            try container.encode(self.machineType, forKey: .machineType)
+          }
+          if !self.accelerators.isEmpty {
+            try container.encode(self.accelerators, forKey: .accelerators)
+          }
+          if self.bootDiskSizeGb != 0 {
+            try container.encode(self.bootDiskSizeGb, forKey: .bootDiskSizeGb)
+          }
+          if self.enableNestedVirtualization {
+            try container.encode(
+              self.enableNestedVirtualization, forKey: .enableNestedVirtualization)
+          }
+          if self.poolSize != 0 {
+            try container.encode(self.poolSize, forKey: .poolSize)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1400,7 +1491,9 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.mountPath, forKey: .mountPath)
+      if !self.mountPath.isEmpty {
+        try container.encode(self.mountPath, forKey: .mountPath)
+      }
 
       if let choice = self.directoryType {
         switch choice {
@@ -1568,12 +1661,26 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.sizeGb, forKey: .sizeGb)
-        try container.encode(self.maxSizeGb, forKey: .maxSizeGb)
-        try container.encode(self.fsType, forKey: .fsType)
-        try container.encode(self.diskType, forKey: .diskType)
-        try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
-        try container.encode(self.reclaimPolicy, forKey: .reclaimPolicy)
+        if self.sizeGb != 0 {
+          try container.encode(self.sizeGb, forKey: .sizeGb)
+        }
+        if self.maxSizeGb != 0 {
+          try container.encode(self.maxSizeGb, forKey: .maxSizeGb)
+        }
+        if !self.fsType.isEmpty {
+          try container.encode(self.fsType, forKey: .fsType)
+        }
+        if !self.diskType.isEmpty {
+          try container.encode(self.diskType, forKey: .diskType)
+        }
+        if !self.sourceSnapshot.isEmpty {
+          try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
+        }
+        if self.reclaimPolicy
+          != WorkstationConfig.PersistentDirectory.GceRegionalPersistentDisk.ReclaimPolicy()
+        {
+          try container.encode(self.reclaimPolicy, forKey: .reclaimPolicy)
+        }
         try container.encodeIfPresent(self.archiveTimeout, forKey: .archiveTimeout)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1837,10 +1944,21 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.sizeGb, forKey: .sizeGb)
-        try container.encode(self.maxSizeGb, forKey: .maxSizeGb)
-        try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
-        try container.encode(self.reclaimPolicy, forKey: .reclaimPolicy)
+        if self.sizeGb != 0 {
+          try container.encode(self.sizeGb, forKey: .sizeGb)
+        }
+        if self.maxSizeGb != 0 {
+          try container.encode(self.maxSizeGb, forKey: .maxSizeGb)
+        }
+        if !self.sourceSnapshot.isEmpty {
+          try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
+        }
+        if self.reclaimPolicy
+          != WorkstationConfig.PersistentDirectory.GceHyperdiskBalancedHighAvailability
+          .ReclaimPolicy()
+        {
+          try container.encode(self.reclaimPolicy, forKey: .reclaimPolicy)
+        }
         try container.encodeIfPresent(self.archiveTimeout, forKey: .archiveTimeout)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2097,7 +2215,9 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.mountPath, forKey: .mountPath)
+      if !self.mountPath.isEmpty {
+        try container.encode(self.mountPath, forKey: .mountPath)
+      }
 
       if let choice = self.directoryType {
         switch choice {
@@ -2226,10 +2346,18 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.diskType, forKey: .diskType)
-        try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
-        try container.encode(self.sourceImage, forKey: .sourceImage)
-        try container.encode(self.readOnly, forKey: .readOnly)
+        if !self.diskType.isEmpty {
+          try container.encode(self.diskType, forKey: .diskType)
+        }
+        if !self.sourceSnapshot.isEmpty {
+          try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
+        }
+        if !self.sourceImage.isEmpty {
+          try container.encode(self.sourceImage, forKey: .sourceImage)
+        }
+        if self.readOnly {
+          try container.encode(self.readOnly, forKey: .readOnly)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2395,12 +2523,24 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.image, forKey: .image)
-      try container.encode(self.command, forKey: .command)
-      try container.encode(self.args, forKey: .args)
-      try container.encode(self.env, forKey: .env)
-      try container.encode(self.workingDir, forKey: .workingDir)
-      try container.encode(self.runAsUser, forKey: .runAsUser)
+      if !self.image.isEmpty {
+        try container.encode(self.image, forKey: .image)
+      }
+      if !self.command.isEmpty {
+        try container.encode(self.command, forKey: .command)
+      }
+      if !self.args.isEmpty {
+        try container.encode(self.args, forKey: .args)
+      }
+      if !self.env.isEmpty {
+        try container.encode(self.env, forKey: .env)
+      }
+      if !self.workingDir.isEmpty {
+        try container.encode(self.workingDir, forKey: .workingDir)
+      }
+      if self.runAsUser != 0 {
+        try container.encode(self.runAsUser, forKey: .runAsUser)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2502,8 +2642,12 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kmsKey, forKey: .kmsKey)
-      try container.encode(self.kmsKeyServiceAccount, forKey: .kmsKeyServiceAccount)
+      if !self.kmsKey.isEmpty {
+        try container.encode(self.kmsKey, forKey: .kmsKey)
+      }
+      if !self.kmsKeyServiceAccount.isEmpty {
+        try container.encode(self.kmsKeyServiceAccount, forKey: .kmsKeyServiceAccount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2592,8 +2736,12 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.port, forKey: .port)
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if self.port != 0 {
+        try container.encode(self.port, forKey: .port)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2693,8 +2841,12 @@ public struct WorkstationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.first, forKey: .first)
-      try container.encode(self.last, forKey: .last)
+      if self.first != 0 {
+        try container.encode(self.first, forKey: .first)
+      }
+      if self.last != 0 {
+        try container.encode(self.last, forKey: .last)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

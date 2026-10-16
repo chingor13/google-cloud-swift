@@ -110,12 +110,24 @@ public struct ComputeEngineShapeDescriptor: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
-    try container.encode(self.physicalCoreCount, forKey: .physicalCoreCount)
-    try container.encode(self.logicalCoreCount, forKey: .logicalCoreCount)
-    try container.encode(self.series, forKey: .series)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.storage, forKey: .storage)
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
+    if self.physicalCoreCount != 0 {
+      try container.encode(self.physicalCoreCount, forKey: .physicalCoreCount)
+    }
+    if self.logicalCoreCount != 0 {
+      try container.encode(self.logicalCoreCount, forKey: .logicalCoreCount)
+    }
+    if !self.series.isEmpty {
+      try container.encode(self.series, forKey: .series)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.storage.isEmpty {
+      try container.encode(self.storage, forKey: .storage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

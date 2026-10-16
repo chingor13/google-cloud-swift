@@ -81,8 +81,12 @@ public struct ConfidentialNodes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.confidentialInstanceType, forKey: .confidentialInstanceType)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.confidentialInstanceType != ConfidentialNodes.ConfidentialInstanceType() {
+      try container.encode(self.confidentialInstanceType, forKey: .confidentialInstanceType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

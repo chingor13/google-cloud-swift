@@ -95,10 +95,18 @@ public struct Button: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.hyperlink, forKey: .hyperlink)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.newTab, forKey: .newTab)
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if !self.hyperlink.isEmpty {
+      try container.encode(self.hyperlink, forKey: .hyperlink)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.newTab {
+      try container.encode(self.newTab, forKey: .newTab)
+    }
     try container.encodeIfPresent(self.properties, forKey: .properties)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -162,8 +170,12 @@ public struct Button: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.color, forKey: .color)
-      try container.encode(self.buttonStyle, forKey: .buttonStyle)
+      if !self.color.isEmpty {
+        try container.encode(self.color, forKey: .color)
+      }
+      if self.buttonStyle != ButtonStyle() {
+        try container.encode(self.buttonStyle, forKey: .buttonStyle)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

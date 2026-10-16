@@ -253,25 +253,49 @@ public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.endpointUri, forKey: .endpointUri)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
-    try container.encode(self.artifactGcsUri, forKey: .artifactGcsUri)
-    try container.encode(self.tier, forKey: .tier)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.endpointUri.isEmpty {
+      try container.encode(self.endpointUri, forKey: .endpointUri)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if self.state != Service.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
+    if !self.artifactGcsUri.isEmpty {
+      try container.encode(self.artifactGcsUri, forKey: .artifactGcsUri)
+    }
+    if self.tier != Service.Tier() {
+      try container.encode(self.tier, forKey: .tier)
+    }
     try container.encodeIfPresent(self.maintenanceWindow, forKey: .maintenanceWindow)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(
       self.metadataManagementActivity, forKey: .metadataManagementActivity)
-    try container.encode(self.releaseChannel, forKey: .releaseChannel)
+    if self.releaseChannel != Service.ReleaseChannel() {
+      try container.encode(self.releaseChannel, forKey: .releaseChannel)
+    }
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
-    try container.encode(self.databaseType, forKey: .databaseType)
+    if self.databaseType != Service.DatabaseType() {
+      try container.encode(self.databaseType, forKey: .databaseType)
+    }
     try container.encodeIfPresent(self.telemetryConfig, forKey: .telemetryConfig)
     try container.encodeIfPresent(self.scalingConfig, forKey: .scalingConfig)
 

@@ -94,10 +94,16 @@ public struct ContractDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ownerId, forKey: .ownerId)
-    try container.encode(self.code, forKey: .code)
+    if !self.ownerId.isEmpty {
+      try container.encode(self.ownerId, forKey: .ownerId)
+    }
+    if !self.code.isEmpty {
+      try container.encode(self.code, forKey: .code)
+    }
     try container.encodeIfPresent(self.contractFields, forKey: .contractFields)
-    try container.encode(self.currencyBalances, forKey: .currencyBalances)
+    if !self.currencyBalances.isEmpty {
+      try container.encode(self.currencyBalances, forKey: .currencyBalances)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

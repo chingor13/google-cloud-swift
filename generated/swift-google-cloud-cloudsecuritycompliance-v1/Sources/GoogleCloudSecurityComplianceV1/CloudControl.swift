@@ -204,21 +204,49 @@ public struct CloudControl: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.supportedEnforcementModes, forKey: .supportedEnforcementModes)
-    try container.encode(self.parameterSpec, forKey: .parameterSpec)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.findingCategory, forKey: .findingCategory)
-    try container.encode(self.supportedCloudProviders, forKey: .supportedCloudProviders)
-    try container.encode(self.relatedFrameworks, forKey: .relatedFrameworks)
-    try container.encode(self.remediationSteps, forKey: .remediationSteps)
-    try container.encode(self.categories, forKey: .categories)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.majorRevisionId != 0 {
+      try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.supportedEnforcementModes.isEmpty {
+      try container.encode(self.supportedEnforcementModes, forKey: .supportedEnforcementModes)
+    }
+    if !self.parameterSpec.isEmpty {
+      try container.encode(self.parameterSpec, forKey: .parameterSpec)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if self.severity != Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.findingCategory.isEmpty {
+      try container.encode(self.findingCategory, forKey: .findingCategory)
+    }
+    if !self.supportedCloudProviders.isEmpty {
+      try container.encode(self.supportedCloudProviders, forKey: .supportedCloudProviders)
+    }
+    if !self.relatedFrameworks.isEmpty {
+      try container.encode(self.relatedFrameworks, forKey: .relatedFrameworks)
+    }
+    if !self.remediationSteps.isEmpty {
+      try container.encode(self.remediationSteps, forKey: .remediationSteps)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.supportedTargetResourceTypes, forKey: .supportedTargetResourceTypes)
+    if !self.supportedTargetResourceTypes.isEmpty {
+      try container.encode(self.supportedTargetResourceTypes, forKey: .supportedTargetResourceTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

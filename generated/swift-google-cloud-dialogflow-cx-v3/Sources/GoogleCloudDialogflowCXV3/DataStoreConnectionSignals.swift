@@ -147,13 +147,23 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(
         self.rewriterModelCallSignals, forKey: .rewriterModelCallSignals)
-      try container.encode(self.rewrittenQuery, forKey: .rewrittenQuery)
-      try container.encode(self.searchSnippets, forKey: .searchSnippets)
+      if !self.rewrittenQuery.isEmpty {
+        try container.encode(self.rewrittenQuery, forKey: .rewrittenQuery)
+      }
+      if !self.searchSnippets.isEmpty {
+        try container.encode(self.searchSnippets, forKey: .searchSnippets)
+      }
       try container.encodeIfPresent(
         self.answerGenerationModelCallSignals, forKey: .answerGenerationModelCallSignals)
-      try container.encode(self.answer, forKey: .answer)
-      try container.encode(self.answerParts, forKey: .answerParts)
-      try container.encode(self.citedSnippets, forKey: .citedSnippets)
+      if !self.answer.isEmpty {
+        try container.encode(self.answer, forKey: .answer)
+      }
+      if !self.answerParts.isEmpty {
+        try container.encode(self.answerParts, forKey: .answerParts)
+      }
+      if !self.citedSnippets.isEmpty {
+        try container.encode(self.citedSnippets, forKey: .citedSnippets)
+      }
       try container.encodeIfPresent(self.groundingSignals, forKey: .groundingSignals)
       try container.encodeIfPresent(self.safetySignals, forKey: .safetySignals)
       for (key, value) in self._unknownFields.json {
@@ -230,9 +240,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.renderedPrompt, forKey: .renderedPrompt)
-        try container.encode(self.modelOutput, forKey: .modelOutput)
-        try container.encode(self.model, forKey: .model)
+        if !self.renderedPrompt.isEmpty {
+          try container.encode(self.renderedPrompt, forKey: .renderedPrompt)
+        }
+        if !self.modelOutput.isEmpty {
+          try container.encode(self.modelOutput, forKey: .modelOutput)
+        }
+        if !self.model.isEmpty {
+          try container.encode(self.model, forKey: .model)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -335,9 +351,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.documentTitle, forKey: .documentTitle)
-        try container.encode(self.documentUri, forKey: .documentUri)
-        try container.encode(self.text, forKey: .text)
+        if !self.documentTitle.isEmpty {
+          try container.encode(self.documentTitle, forKey: .documentTitle)
+        }
+        if !self.documentUri.isEmpty {
+          try container.encode(self.documentUri, forKey: .documentUri)
+        }
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
         try container.encodeIfPresent(self.metadata, forKey: .metadata)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -436,9 +458,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.renderedPrompt, forKey: .renderedPrompt)
-        try container.encode(self.modelOutput, forKey: .modelOutput)
-        try container.encode(self.model, forKey: .model)
+        if !self.renderedPrompt.isEmpty {
+          try container.encode(self.renderedPrompt, forKey: .renderedPrompt)
+        }
+        if !self.modelOutput.isEmpty {
+          try container.encode(self.modelOutput, forKey: .modelOutput)
+        }
+        if !self.model.isEmpty {
+          try container.encode(self.model, forKey: .model)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -528,8 +556,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.text, forKey: .text)
-        try container.encode(self.supportingIndices, forKey: .supportingIndices)
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
+        if !self.supportingIndices.isEmpty {
+          try container.encode(self.supportingIndices, forKey: .supportingIndices)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -618,7 +650,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.searchSnippet, forKey: .searchSnippet)
-        try container.encode(self.snippetIndex, forKey: .snippetIndex)
+        if self.snippetIndex != 0 {
+          try container.encode(self.snippetIndex, forKey: .snippetIndex)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -713,8 +747,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.decision, forKey: .decision)
-        try container.encode(self.score, forKey: .score)
+        if self.decision != DataStoreConnectionSignals.GroundingSignals.GroundingDecision() {
+          try container.encode(self.decision, forKey: .decision)
+        }
+        if self.score != DataStoreConnectionSignals.GroundingSignals.GroundingScoreBucket() {
+          try container.encode(self.score, forKey: .score)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1075,9 +1113,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.decision, forKey: .decision)
-        try container.encode(self.bannedPhraseMatch, forKey: .bannedPhraseMatch)
-        try container.encode(self.matchedBannedPhrase, forKey: .matchedBannedPhrase)
+        if self.decision != DataStoreConnectionSignals.SafetySignals.SafetyDecision() {
+          try container.encode(self.decision, forKey: .decision)
+        }
+        if self.bannedPhraseMatch != DataStoreConnectionSignals.SafetySignals.BannedPhraseMatch() {
+          try container.encode(self.bannedPhraseMatch, forKey: .bannedPhraseMatch)
+        }
+        if !self.matchedBannedPhrase.isEmpty {
+          try container.encode(self.matchedBannedPhrase, forKey: .matchedBannedPhrase)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

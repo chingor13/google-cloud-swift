@@ -96,8 +96,12 @@ public struct CanaryDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.percentages, forKey: .percentages)
-    try container.encode(self.verify, forKey: .verify)
+    if !self.percentages.isEmpty {
+      try container.encode(self.percentages, forKey: .percentages)
+    }
+    if self.verify {
+      try container.encode(self.verify, forKey: .verify)
+    }
     try container.encodeIfPresent(self.predeploy, forKey: .predeploy)
     try container.encodeIfPresent(self.postdeploy, forKey: .postdeploy)
     for (key, value) in self._unknownFields.json {

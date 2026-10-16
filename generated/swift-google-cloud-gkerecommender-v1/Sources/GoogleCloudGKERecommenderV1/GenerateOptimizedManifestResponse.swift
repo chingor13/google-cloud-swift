@@ -94,9 +94,15 @@ public struct GenerateOptimizedManifestResponse: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kubernetesManifests, forKey: .kubernetesManifests)
-    try container.encode(self.comments, forKey: .comments)
-    try container.encode(self.manifestVersion, forKey: .manifestVersion)
+    if !self.kubernetesManifests.isEmpty {
+      try container.encode(self.kubernetesManifests, forKey: .kubernetesManifests)
+    }
+    if !self.comments.isEmpty {
+      try container.encode(self.comments, forKey: .comments)
+    }
+    if !self.manifestVersion.isEmpty {
+      try container.encode(self.manifestVersion, forKey: .manifestVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

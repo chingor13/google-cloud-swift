@@ -122,10 +122,18 @@ public struct AccessTuple: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.principal, forKey: .principal)
-    try container.encode(self.fullResourceName, forKey: .fullResourceName)
-    try container.encode(self.permission, forKey: .permission)
-    try container.encode(self.permissionFqdn, forKey: .permissionFqdn)
+    if !self.principal.isEmpty {
+      try container.encode(self.principal, forKey: .principal)
+    }
+    if !self.fullResourceName.isEmpty {
+      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    }
+    if !self.permission.isEmpty {
+      try container.encode(self.permission, forKey: .permission)
+    }
+    if !self.permissionFqdn.isEmpty {
+      try container.encode(self.permissionFqdn, forKey: .permissionFqdn)
+    }
     try container.encodeIfPresent(self.conditionContext, forKey: .conditionContext)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -91,8 +91,12 @@ public struct CreatePatchDeploymentRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.patchDeploymentId, forKey: .patchDeploymentId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.patchDeploymentId.isEmpty {
+      try container.encode(self.patchDeploymentId, forKey: .patchDeploymentId)
+    }
     try container.encodeIfPresent(self.patchDeployment, forKey: .patchDeployment)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

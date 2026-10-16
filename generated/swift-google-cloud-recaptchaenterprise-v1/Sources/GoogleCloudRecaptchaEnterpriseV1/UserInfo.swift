@@ -91,8 +91,12 @@ public struct UserInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createAccountTime, forKey: .createAccountTime)
-    try container.encode(self.accountId, forKey: .accountId)
-    try container.encode(self.userIds, forKey: .userIds)
+    if !self.accountId.isEmpty {
+      try container.encode(self.accountId, forKey: .accountId)
+    }
+    if !self.userIds.isEmpty {
+      try container.encode(self.userIds, forKey: .userIds)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -187,19 +187,33 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.orgConfig, forKey: .orgConfig)
     try container.encodeIfPresent(
       self.otherCloudStartingLocation, forKey: .otherCloudStartingLocation)
-    try container.encode(self.inspectTemplates, forKey: .inspectTemplates)
-    try container.encode(self.actions, forKey: .actions)
-    try container.encode(self.targets, forKey: .targets)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.inspectTemplates.isEmpty {
+      try container.encode(self.inspectTemplates, forKey: .inspectTemplates)
+    }
+    if !self.actions.isEmpty {
+      try container.encode(self.actions, forKey: .actions)
+    }
+    if !self.targets.isEmpty {
+      try container.encode(self.targets, forKey: .targets)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.lastRunTime, forKey: .lastRunTime)
-    try container.encode(self.status, forKey: .status)
+    if self.status != DiscoveryConfig.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.processingLocation, forKey: .processingLocation)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -268,7 +282,9 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.location, forKey: .location)
-      try container.encode(self.projectId, forKey: .projectId)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

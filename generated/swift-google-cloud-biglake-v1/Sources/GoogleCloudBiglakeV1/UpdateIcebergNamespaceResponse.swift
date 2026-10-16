@@ -86,9 +86,15 @@ public struct UpdateIcebergNamespaceResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.removed, forKey: .removed)
-    try container.encode(self.updated, forKey: .updated)
-    try container.encode(self.missing, forKey: .missing)
+    if !self.removed.isEmpty {
+      try container.encode(self.removed, forKey: .removed)
+    }
+    if !self.updated.isEmpty {
+      try container.encode(self.updated, forKey: .updated)
+    }
+    if !self.missing.isEmpty {
+      try container.encode(self.missing, forKey: .missing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

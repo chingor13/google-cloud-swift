@@ -212,10 +212,14 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
     try container.encodeIfPresent(self.maintenance, forKey: .maintenance)
-    try container.encode(self.state, forKey: .state)
+    if self.state != ResourceMaintenance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.maintenanceStartTime, forKey: .maintenanceStartTime)
@@ -225,12 +229,24 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleWKT._AnyPackable,
       self.maintenanceScheduledStartTime, forKey: .maintenanceScheduledStartTime)
     try container.encodeIfPresent(
       self.maintenanceScheduledEndTime, forKey: .maintenanceScheduledEndTime)
-    try container.encode(self.userControllable, forKey: .userControllable)
-    try container.encode(self.controls, forKey: .controls)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.etag, forKey: .etag)
+    if self.userControllable {
+      try container.encode(self.userControllable, forKey: .userControllable)
+    }
+    if !self.controls.isEmpty {
+      try container.encode(self.controls, forKey: .controls)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -312,9 +328,15 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceName, forKey: .resourceName)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.type, forKey: .type)
+      if !self.resourceName.isEmpty {
+        try container.encode(self.resourceName, forKey: .resourceName)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -419,10 +441,18 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maintenanceName, forKey: .maintenanceName)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.category, forKey: .category)
+      if !self.maintenanceName.isEmpty {
+        try container.encode(self.maintenanceName, forKey: .maintenanceName)
+      }
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.category != MaintenanceCategory() {
+        try container.encode(self.category, forKey: .category)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

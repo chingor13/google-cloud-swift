@@ -158,14 +158,30 @@ public struct PscAutoConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pscConnectionId, forKey: .pscConnectionId)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.forwardingRule, forKey: .forwardingRule)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
-    try container.encode(self.pscConnectionStatus, forKey: .pscConnectionStatus)
-    try container.encode(self.connectionType, forKey: .connectionType)
+    if !self.pscConnectionId.isEmpty {
+      try container.encode(self.pscConnectionId, forKey: .pscConnectionId)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.forwardingRule.isEmpty {
+      try container.encode(self.forwardingRule, forKey: .forwardingRule)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.serviceAttachment.isEmpty {
+      try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+    }
+    if self.pscConnectionStatus != PscConnectionStatus() {
+      try container.encode(self.pscConnectionStatus, forKey: .pscConnectionStatus)
+    }
+    if self.connectionType != ConnectionType() {
+      try container.encode(self.connectionType, forKey: .connectionType)
+    }
 
     if let choice = self.ports {
       switch choice {

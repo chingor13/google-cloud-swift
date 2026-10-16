@@ -123,12 +123,22 @@ public struct OSPolicyAssignmentReport: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.osPolicyAssignment, forKey: .osPolicyAssignment)
-    try container.encode(self.osPolicyCompliances, forKey: .osPolicyCompliances)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.osPolicyAssignment.isEmpty {
+      try container.encode(self.osPolicyAssignment, forKey: .osPolicyAssignment)
+    }
+    if !self.osPolicyCompliances.isEmpty {
+      try container.encode(self.osPolicyCompliances, forKey: .osPolicyCompliances)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.lastRunId, forKey: .lastRunId)
+    if !self.lastRunId.isEmpty {
+      try container.encode(self.lastRunId, forKey: .lastRunId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -240,10 +250,18 @@ public struct OSPolicyAssignmentReport: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.osPolicyId, forKey: .osPolicyId)
-      try container.encode(self.complianceState, forKey: .complianceState)
-      try container.encode(self.complianceStateReason, forKey: .complianceStateReason)
-      try container.encode(self.osPolicyResourceCompliances, forKey: .osPolicyResourceCompliances)
+      if !self.osPolicyId.isEmpty {
+        try container.encode(self.osPolicyId, forKey: .osPolicyId)
+      }
+      if self.complianceState != OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState() {
+        try container.encode(self.complianceState, forKey: .complianceState)
+      }
+      if !self.complianceStateReason.isEmpty {
+        try container.encode(self.complianceStateReason, forKey: .complianceStateReason)
+      }
+      if !self.osPolicyResourceCompliances.isEmpty {
+        try container.encode(self.osPolicyResourceCompliances, forKey: .osPolicyResourceCompliances)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -377,10 +395,21 @@ public struct OSPolicyAssignmentReport: Codable, Equatable, GoogleWKT._AnyPackab
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.osPolicyResourceId, forKey: .osPolicyResourceId)
-        try container.encode(self.configSteps, forKey: .configSteps)
-        try container.encode(self.complianceState, forKey: .complianceState)
-        try container.encode(self.complianceStateReason, forKey: .complianceStateReason)
+        if !self.osPolicyResourceId.isEmpty {
+          try container.encode(self.osPolicyResourceId, forKey: .osPolicyResourceId)
+        }
+        if !self.configSteps.isEmpty {
+          try container.encode(self.configSteps, forKey: .configSteps)
+        }
+        if self.complianceState
+          != OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+          .ComplianceState()
+        {
+          try container.encode(self.complianceState, forKey: .complianceState)
+        }
+        if !self.complianceStateReason.isEmpty {
+          try container.encode(self.complianceStateReason, forKey: .complianceStateReason)
+        }
 
         if let choice = self.output {
           switch choice {
@@ -461,8 +490,15 @@ public struct OSPolicyAssignmentReport: Codable, Equatable, GoogleWKT._AnyPackab
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.errorMessage, forKey: .errorMessage)
+          if self.type
+            != OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+            .OSPolicyResourceConfigStep.Type_()
+          {
+            try container.encode(self.type, forKey: .type)
+          }
+          if !self.errorMessage.isEmpty {
+            try container.encode(self.errorMessage, forKey: .errorMessage)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -685,7 +721,9 @@ public struct OSPolicyAssignmentReport: Codable, Equatable, GoogleWKT._AnyPackab
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.enforcementOutput, forKey: .enforcementOutput)
+          if !self.enforcementOutput.isEmpty {
+            try container.encode(self.enforcementOutput, forKey: .enforcementOutput)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

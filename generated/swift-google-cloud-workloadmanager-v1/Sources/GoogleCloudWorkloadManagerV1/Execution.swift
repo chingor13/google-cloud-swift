@@ -164,18 +164,36 @@ public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.inventoryTime, forKey: .inventoryTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.evaluationId, forKey: .evaluationId)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.runType, forKey: .runType)
-    try container.encode(self.ruleResults, forKey: .ruleResults)
-    try container.encode(self.externalDataSources, forKey: .externalDataSources)
-    try container.encode(self.notices, forKey: .notices)
-    try container.encode(self.engine, forKey: .engine)
+    if self.state != Execution.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.evaluationId.isEmpty {
+      try container.encode(self.evaluationId, forKey: .evaluationId)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.runType != Execution.Type_() {
+      try container.encode(self.runType, forKey: .runType)
+    }
+    if !self.ruleResults.isEmpty {
+      try container.encode(self.ruleResults, forKey: .ruleResults)
+    }
+    if !self.externalDataSources.isEmpty {
+      try container.encode(self.externalDataSources, forKey: .externalDataSources)
+    }
+    if !self.notices.isEmpty {
+      try container.encode(self.notices, forKey: .notices)
+    }
+    if self.engine != Execution.Engine() {
+      try container.encode(self.engine, forKey: .engine)
+    }
     try container.encodeIfPresent(self.resultSummary, forKey: .resultSummary)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -266,10 +284,18 @@ public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.assetType, forKey: .assetType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if self.type != Execution.ExternalDataSources.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.assetType.isEmpty {
+        try container.encode(self.assetType, forKey: .assetType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -459,7 +485,9 @@ public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.message, forKey: .message)
+      if !self.message.isEmpty {
+        try container.encode(self.message, forKey: .message)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -555,9 +583,15 @@ public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.failures, forKey: .failures)
-      try container.encode(self.newFailures, forKey: .newFailures)
-      try container.encode(self.newFixes, forKey: .newFixes)
+      if self.failures != 0 {
+        try container.encode(self.failures, forKey: .failures)
+      }
+      if self.newFailures != 0 {
+        try container.encode(self.newFailures, forKey: .newFailures)
+      }
+      if self.newFixes != 0 {
+        try container.encode(self.newFixes, forKey: .newFixes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

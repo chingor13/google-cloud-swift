@@ -79,8 +79,12 @@ public struct GcsSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.audioUri, forKey: .audioUri)
-    try container.encode(self.transcriptUri, forKey: .transcriptUri)
+    if !self.audioUri.isEmpty {
+      try container.encode(self.audioUri, forKey: .audioUri)
+    }
+    if !self.transcriptUri.isEmpty {
+      try container.encode(self.transcriptUri, forKey: .transcriptUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -147,8 +147,12 @@ public struct DedicatedInfrastructure: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.minReplicaCount, forKey: .minReplicaCount)
-      try container.encode(self.maxReplicaCount, forKey: .maxReplicaCount)
+      if self.minReplicaCount != 0 {
+        try container.encode(self.minReplicaCount, forKey: .minReplicaCount)
+      }
+      if self.maxReplicaCount != 0 {
+        try container.encode(self.maxReplicaCount, forKey: .maxReplicaCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

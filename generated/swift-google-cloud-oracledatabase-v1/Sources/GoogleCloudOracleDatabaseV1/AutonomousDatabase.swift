@@ -218,23 +218,49 @@ public struct AutonomousDatabase: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.database, forKey: .database)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.entitlementId, forKey: .entitlementId)
-    try container.encode(self.adminPassword, forKey: .adminPassword)
-    try container.encode(self.adminPasswordSecretVersion, forKey: .adminPasswordSecretVersion)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.database.isEmpty {
+      try container.encode(self.database, forKey: .database)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.entitlementId.isEmpty {
+      try container.encode(self.entitlementId, forKey: .entitlementId)
+    }
+    if !self.adminPassword.isEmpty {
+      try container.encode(self.adminPassword, forKey: .adminPassword)
+    }
+    if !self.adminPasswordSecretVersion.isEmpty {
+      try container.encode(self.adminPasswordSecretVersion, forKey: .adminPasswordSecretVersion)
+    }
     try container.encodeIfPresent(self.properties, forKey: .properties)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.cidr, forKey: .cidr)
-    try container.encode(self.odbNetwork, forKey: .odbNetwork)
-    try container.encode(self.odbSubnet, forKey: .odbSubnet)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.cidr.isEmpty {
+      try container.encode(self.cidr, forKey: .cidr)
+    }
+    if !self.odbNetwork.isEmpty {
+      try container.encode(self.odbNetwork, forKey: .odbNetwork)
+    }
+    if !self.odbSubnet.isEmpty {
+      try container.encode(self.odbSubnet, forKey: .odbSubnet)
+    }
     try container.encodeIfPresent(self.sourceConfig, forKey: .sourceConfig)
-    try container.encode(self.peerAutonomousDatabases, forKey: .peerAutonomousDatabases)
+    if !self.peerAutonomousDatabases.isEmpty {
+      try container.encode(self.peerAutonomousDatabases, forKey: .peerAutonomousDatabases)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(
-      self.disasterRecoverySupportedLocations, forKey: .disasterRecoverySupportedLocations)
+    if !self.disasterRecoverySupportedLocations.isEmpty {
+      try container.encode(
+        self.disasterRecoverySupportedLocations, forKey: .disasterRecoverySupportedLocations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

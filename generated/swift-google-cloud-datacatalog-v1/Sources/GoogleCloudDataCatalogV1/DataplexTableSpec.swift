@@ -88,9 +88,13 @@ public struct DataplexTableSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.externalTables, forKey: .externalTables)
+    if !self.externalTables.isEmpty {
+      try container.encode(self.externalTables, forKey: .externalTables)
+    }
     try container.encodeIfPresent(self.dataplexSpec, forKey: .dataplexSpec)
-    try container.encode(self.userManaged, forKey: .userManaged)
+    if self.userManaged {
+      try container.encode(self.userManaged, forKey: .userManaged)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

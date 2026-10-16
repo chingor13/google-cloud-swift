@@ -105,9 +105,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.detectIntentResponse, forKey: .detectIntentResponse)
-      try container.encode(self.automatedAgentReplyType, forKey: .automatedAgentReplyType)
-      try container.encode(self.allowCancellation, forKey: .allowCancellation)
-      try container.encode(self.cxCurrentPage, forKey: .cxCurrentPage)
+      if self.automatedAgentReplyType != AutomatedAgentReply.AutomatedAgentReplyType() {
+        try container.encode(self.automatedAgentReplyType, forKey: .automatedAgentReplyType)
+      }
+      if self.allowCancellation {
+        try container.encode(self.allowCancellation, forKey: .allowCancellation)
+      }
+      if !self.cxCurrentPage.isEmpty {
+        try container.encode(self.cxCurrentPage, forKey: .cxCurrentPage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

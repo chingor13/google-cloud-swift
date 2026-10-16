@@ -133,11 +133,21 @@ public struct GoldengateGoldengateConnectionProperties: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.goldengateDeploymentId, forKey: .goldengateDeploymentId)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.username, forKey: .username)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.goldengateDeploymentId.isEmpty {
+      try container.encode(self.goldengateDeploymentId, forKey: .goldengateDeploymentId)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

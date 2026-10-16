@@ -176,11 +176,19 @@ public struct CompilationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.codeCompilationConfig, forKey: .codeCompilationConfig)
-    try container.encode(self.resolvedGitCommitSha, forKey: .resolvedGitCommitSha)
-    try container.encode(self.dataformCoreVersion, forKey: .dataformCoreVersion)
-    try container.encode(self.compilationErrors, forKey: .compilationErrors)
+    if !self.resolvedGitCommitSha.isEmpty {
+      try container.encode(self.resolvedGitCommitSha, forKey: .resolvedGitCommitSha)
+    }
+    if !self.dataformCoreVersion.isEmpty {
+      try container.encode(self.dataformCoreVersion, forKey: .dataformCoreVersion)
+    }
+    if !self.compilationErrors.isEmpty {
+      try container.encode(self.compilationErrors, forKey: .compilationErrors)
+    }
     try container.encodeIfPresent(self.dataEncryptionState, forKey: .dataEncryptionState)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)
@@ -279,9 +287,15 @@ public struct CompilationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.message, forKey: .message)
-      try container.encode(self.stack, forKey: .stack)
-      try container.encode(self.path, forKey: .path)
+      if !self.message.isEmpty {
+        try container.encode(self.message, forKey: .message)
+      }
+      if !self.stack.isEmpty {
+        try container.encode(self.stack, forKey: .stack)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
       try container.encodeIfPresent(self.actionTarget, forKey: .actionTarget)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

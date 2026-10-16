@@ -129,7 +129,9 @@ public struct EdgeRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.edgeType, forKey: .edgeType)
+    if !self.edgeType.isEmpty {
+      try container.encode(self.edgeType, forKey: .edgeType)
+    }
 
     if let choice = self.sourceNode {
       switch choice {

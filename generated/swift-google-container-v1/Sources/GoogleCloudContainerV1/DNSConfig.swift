@@ -96,10 +96,18 @@ public struct DNSConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterDns, forKey: .clusterDns)
-    try container.encode(self.clusterDnsScope, forKey: .clusterDnsScope)
-    try container.encode(self.clusterDnsDomain, forKey: .clusterDnsDomain)
-    try container.encode(self.additiveVpcScopeDnsDomain, forKey: .additiveVpcScopeDnsDomain)
+    if self.clusterDns != DNSConfig.Provider() {
+      try container.encode(self.clusterDns, forKey: .clusterDns)
+    }
+    if self.clusterDnsScope != DNSConfig.DNSScope() {
+      try container.encode(self.clusterDnsScope, forKey: .clusterDnsScope)
+    }
+    if !self.clusterDnsDomain.isEmpty {
+      try container.encode(self.clusterDnsDomain, forKey: .clusterDnsDomain)
+    }
+    if !self.additiveVpcScopeDnsDomain.isEmpty {
+      try container.encode(self.additiveVpcScopeDnsDomain, forKey: .additiveVpcScopeDnsDomain)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

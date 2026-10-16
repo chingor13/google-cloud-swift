@@ -165,13 +165,23 @@ public struct CutoverJob: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != CutoverJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.stateTime, forKey: .stateTime)
-    try container.encode(self.progressPercent, forKey: .progressPercent)
+    if self.progressPercent != 0 {
+      try container.encode(self.progressPercent, forKey: .progressPercent)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
-    try container.encode(self.steps, forKey: .steps)
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
 
     if let choice = self.targetVmDetails {
       switch choice {

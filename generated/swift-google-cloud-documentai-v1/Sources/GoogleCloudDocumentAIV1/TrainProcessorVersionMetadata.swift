@@ -175,10 +175,18 @@ public struct TrainProcessorVersionMetadata: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.documentErrorCount, forKey: .documentErrorCount)
-      try container.encode(self.datasetErrorCount, forKey: .datasetErrorCount)
-      try container.encode(self.documentErrors, forKey: .documentErrors)
-      try container.encode(self.datasetErrors, forKey: .datasetErrors)
+      if self.documentErrorCount != 0 {
+        try container.encode(self.documentErrorCount, forKey: .documentErrorCount)
+      }
+      if self.datasetErrorCount != 0 {
+        try container.encode(self.datasetErrorCount, forKey: .datasetErrorCount)
+      }
+      if !self.documentErrors.isEmpty {
+        try container.encode(self.documentErrors, forKey: .documentErrors)
+      }
+      if !self.datasetErrors.isEmpty {
+        try container.encode(self.datasetErrors, forKey: .datasetErrors)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

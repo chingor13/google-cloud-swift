@@ -102,8 +102,12 @@ public struct ManagedFolder: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.metageneration, forKey: .metageneration)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.metageneration != 0 {
+      try container.encode(self.metageneration, forKey: .metageneration)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.rapidCacheConfig, forKey: .rapidCacheConfig)
@@ -172,7 +176,9 @@ public struct ManagedFolder: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.policies, forKey: .policies)
+      if !self.policies.isEmpty {
+        try container.encode(self.policies, forKey: .policies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -242,8 +248,12 @@ public struct ManagedFolder: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.rapidCacheId, forKey: .rapidCacheId)
-        try container.encode(self.ingestOnWrite, forKey: .ingestOnWrite)
+        if !self.rapidCacheId.isEmpty {
+          try container.encode(self.rapidCacheId, forKey: .rapidCacheId)
+        }
+        if self.ingestOnWrite != ManagedFolder.RapidCacheConfig.RapidCachePolicy.IngestOnWrite() {
+          try container.encode(self.ingestOnWrite, forKey: .ingestOnWrite)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

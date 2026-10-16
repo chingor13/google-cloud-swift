@@ -104,7 +104,9 @@ public struct UpdateMulticloudDataTransferConfigRequest: Codable, Equatable, Goo
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(
       self.multicloudDataTransferConfig, forKey: .multicloudDataTransferConfig)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

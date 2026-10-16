@@ -111,11 +111,21 @@ public struct GoldengateBackupSchedule: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.compartmentId, forKey: .compartmentId)
-    try container.encode(self.frequencyBackupScheduled, forKey: .frequencyBackupScheduled)
-    try container.encode(self.metadataOnly, forKey: .metadataOnly)
-    try container.encode(self.namespace, forKey: .namespace)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.compartmentId.isEmpty {
+      try container.encode(self.compartmentId, forKey: .compartmentId)
+    }
+    if self.frequencyBackupScheduled != GoldengateBackupSchedule.FrequencyBackupScheduled() {
+      try container.encode(self.frequencyBackupScheduled, forKey: .frequencyBackupScheduled)
+    }
+    if self.metadataOnly {
+      try container.encode(self.metadataOnly, forKey: .metadataOnly)
+    }
+    if !self.namespace.isEmpty {
+      try container.encode(self.namespace, forKey: .namespace)
+    }
     try container.encodeIfPresent(self.backupScheduledTime, forKey: .backupScheduledTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

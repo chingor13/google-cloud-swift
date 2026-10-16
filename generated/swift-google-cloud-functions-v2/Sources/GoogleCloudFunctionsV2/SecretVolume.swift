@@ -105,10 +105,18 @@ public struct SecretVolume: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mountPath, forKey: .mountPath)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.secret, forKey: .secret)
-    try container.encode(self.versions, forKey: .versions)
+    if !self.mountPath.isEmpty {
+      try container.encode(self.mountPath, forKey: .mountPath)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.secret.isEmpty {
+      try container.encode(self.secret, forKey: .secret)
+    }
+    if !self.versions.isEmpty {
+      try container.encode(self.versions, forKey: .versions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -179,8 +187,12 @@ public struct SecretVolume: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.version, forKey: .version)
-      try container.encode(self.path, forKey: .path)
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

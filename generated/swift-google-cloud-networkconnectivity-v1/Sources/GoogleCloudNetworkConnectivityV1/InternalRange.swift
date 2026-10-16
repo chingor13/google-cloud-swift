@@ -233,23 +233,49 @@ public struct InternalRange: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.usage, forKey: .usage)
-    try container.encode(self.peering, forKey: .peering)
-    try container.encode(self.prefixLength, forKey: .prefixLength)
-    try container.encode(self.targetCidrRange, forKey: .targetCidrRange)
-    try container.encode(self.users, forKey: .users)
-    try container.encode(self.overlaps, forKey: .overlaps)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.ipCidrRange.isEmpty {
+      try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if self.usage != InternalRange.Usage() {
+      try container.encode(self.usage, forKey: .usage)
+    }
+    if self.peering != InternalRange.Peering() {
+      try container.encode(self.peering, forKey: .peering)
+    }
+    if self.prefixLength != 0 {
+      try container.encode(self.prefixLength, forKey: .prefixLength)
+    }
+    if !self.targetCidrRange.isEmpty {
+      try container.encode(self.targetCidrRange, forKey: .targetCidrRange)
+    }
+    if !self.users.isEmpty {
+      try container.encode(self.users, forKey: .users)
+    }
+    if !self.overlaps.isEmpty {
+      try container.encode(self.overlaps, forKey: .overlaps)
+    }
     try container.encodeIfPresent(self.migration, forKey: .migration)
-    try container.encode(self.immutable, forKey: .immutable)
+    if self.immutable {
+      try container.encode(self.immutable, forKey: .immutable)
+    }
     try container.encodeIfPresent(self.allocationOptions, forKey: .allocationOptions)
-    try container.encode(self.excludeCidrRanges, forKey: .excludeCidrRanges)
+    if !self.excludeCidrRanges.isEmpty {
+      try container.encode(self.excludeCidrRanges, forKey: .excludeCidrRanges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -321,8 +347,12 @@ public struct InternalRange: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.source, forKey: .source)
-      try container.encode(self.target, forKey: .target)
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
+      if !self.target.isEmpty {
+        try container.encode(self.target, forKey: .target)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -421,9 +451,13 @@ public struct InternalRange: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allocationStrategy, forKey: .allocationStrategy)
-      try container.encode(
-        self.firstAvailableRangesLookupSize, forKey: .firstAvailableRangesLookupSize)
+      if self.allocationStrategy != InternalRange.AllocationStrategy() {
+        try container.encode(self.allocationStrategy, forKey: .allocationStrategy)
+      }
+      if self.firstAvailableRangesLookupSize != 0 {
+        try container.encode(
+          self.firstAvailableRangesLookupSize, forKey: .firstAvailableRangesLookupSize)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

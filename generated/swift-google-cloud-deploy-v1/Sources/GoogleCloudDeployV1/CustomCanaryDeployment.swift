@@ -73,7 +73,9 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.phaseConfigs, forKey: .phaseConfigs)
+    if !self.phaseConfigs.isEmpty {
+      try container.encode(self.phaseConfigs, forKey: .phaseConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -177,10 +179,18 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.phaseId, forKey: .phaseId)
-      try container.encode(self.percentage, forKey: .percentage)
-      try container.encode(self.profiles, forKey: .profiles)
-      try container.encode(self.verify, forKey: .verify)
+      if !self.phaseId.isEmpty {
+        try container.encode(self.phaseId, forKey: .phaseId)
+      }
+      if self.percentage != 0 {
+        try container.encode(self.percentage, forKey: .percentage)
+      }
+      if !self.profiles.isEmpty {
+        try container.encode(self.profiles, forKey: .profiles)
+      }
+      if self.verify {
+        try container.encode(self.verify, forKey: .verify)
+      }
       try container.encodeIfPresent(self.predeploy, forKey: .predeploy)
       try container.encodeIfPresent(self.postdeploy, forKey: .postdeploy)
       for (key, value) in self._unknownFields.json {

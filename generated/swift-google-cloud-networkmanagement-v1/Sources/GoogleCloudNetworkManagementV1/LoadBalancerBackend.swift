@@ -110,13 +110,23 @@ public struct LoadBalancerBackend: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.healthCheckFirewallState, forKey: .healthCheckFirewallState)
-    try container.encode(
-      self.healthCheckAllowingFirewallRules, forKey: .healthCheckAllowingFirewallRules)
-    try container.encode(
-      self.healthCheckBlockingFirewallRules, forKey: .healthCheckBlockingFirewallRules)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.healthCheckFirewallState != LoadBalancerBackend.HealthCheckFirewallState() {
+      try container.encode(self.healthCheckFirewallState, forKey: .healthCheckFirewallState)
+    }
+    if !self.healthCheckAllowingFirewallRules.isEmpty {
+      try container.encode(
+        self.healthCheckAllowingFirewallRules, forKey: .healthCheckAllowingFirewallRules)
+    }
+    if !self.healthCheckBlockingFirewallRules.isEmpty {
+      try container.encode(
+        self.healthCheckBlockingFirewallRules, forKey: .healthCheckBlockingFirewallRules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

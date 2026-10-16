@@ -120,9 +120,15 @@ public struct InTotoStatement: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.subject, forKey: .subject)
-    try container.encode(self.predicateType, forKey: .predicateType)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.subject.isEmpty {
+      try container.encode(self.subject, forKey: .subject)
+    }
+    if !self.predicateType.isEmpty {
+      try container.encode(self.predicateType, forKey: .predicateType)
+    }
 
     if let choice = self.predicate {
       switch choice {

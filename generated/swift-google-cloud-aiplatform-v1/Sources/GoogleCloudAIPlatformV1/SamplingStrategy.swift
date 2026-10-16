@@ -128,7 +128,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.sampleRate, forKey: .sampleRate)
+        if self.sampleRate != 0 {
+          try container.encode(self.sampleRate, forKey: .sampleRate)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -174,12 +174,20 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.type, forKey: .type)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.type != MetadataJob.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
 
     if let choice = self.spec {
@@ -321,15 +329,31 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.deletedEntries, forKey: .deletedEntries)
-      try container.encode(self.updatedEntries, forKey: .updatedEntries)
-      try container.encode(self.createdEntries, forKey: .createdEntries)
-      try container.encode(self.unchangedEntries, forKey: .unchangedEntries)
-      try container.encode(self.recreatedEntries, forKey: .recreatedEntries)
+      if self.deletedEntries != 0 {
+        try container.encode(self.deletedEntries, forKey: .deletedEntries)
+      }
+      if self.updatedEntries != 0 {
+        try container.encode(self.updatedEntries, forKey: .updatedEntries)
+      }
+      if self.createdEntries != 0 {
+        try container.encode(self.createdEntries, forKey: .createdEntries)
+      }
+      if self.unchangedEntries != 0 {
+        try container.encode(self.unchangedEntries, forKey: .unchangedEntries)
+      }
+      if self.recreatedEntries != 0 {
+        try container.encode(self.recreatedEntries, forKey: .recreatedEntries)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.deletedEntryLinks, forKey: .deletedEntryLinks)
-      try container.encode(self.createdEntryLinks, forKey: .createdEntryLinks)
-      try container.encode(self.unchangedEntryLinks, forKey: .unchangedEntryLinks)
+      if self.deletedEntryLinks != 0 {
+        try container.encode(self.deletedEntryLinks, forKey: .deletedEntryLinks)
+      }
+      if self.createdEntryLinks != 0 {
+        try container.encode(self.createdEntryLinks, forKey: .createdEntryLinks)
+      }
+      if self.unchangedEntryLinks != 0 {
+        try container.encode(self.unchangedEntryLinks, forKey: .unchangedEntryLinks)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -419,8 +443,12 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.exportedEntries, forKey: .exportedEntries)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if self.exportedEntries != 0 {
+        try container.encode(self.exportedEntries, forKey: .exportedEntries)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -582,12 +610,20 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceStorageUri, forKey: .sourceStorageUri)
+      if !self.sourceStorageUri.isEmpty {
+        try container.encode(self.sourceStorageUri, forKey: .sourceStorageUri)
+      }
       try container.encodeIfPresent(self.sourceCreateTime, forKey: .sourceCreateTime)
       try container.encodeIfPresent(self.scope, forKey: .scope)
-      try container.encode(self.entrySyncMode, forKey: .entrySyncMode)
-      try container.encode(self.aspectSyncMode, forKey: .aspectSyncMode)
-      try container.encode(self.logLevel, forKey: .logLevel)
+      if self.entrySyncMode != MetadataJob.ImportJobSpec.SyncMode() {
+        try container.encode(self.entrySyncMode, forKey: .entrySyncMode)
+      }
+      if self.aspectSyncMode != MetadataJob.ImportJobSpec.SyncMode() {
+        try container.encode(self.aspectSyncMode, forKey: .aspectSyncMode)
+      }
+      if self.logLevel != MetadataJob.ImportJobSpec.LogLevel() {
+        try container.encode(self.logLevel, forKey: .logLevel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -743,12 +779,24 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.entryGroups, forKey: .entryGroups)
-        try container.encode(self.entryTypes, forKey: .entryTypes)
-        try container.encode(self.aspectTypes, forKey: .aspectTypes)
-        try container.encode(self.glossaries, forKey: .glossaries)
-        try container.encode(self.entryLinkTypes, forKey: .entryLinkTypes)
-        try container.encode(self.referencedEntryScopes, forKey: .referencedEntryScopes)
+        if !self.entryGroups.isEmpty {
+          try container.encode(self.entryGroups, forKey: .entryGroups)
+        }
+        if !self.entryTypes.isEmpty {
+          try container.encode(self.entryTypes, forKey: .entryTypes)
+        }
+        if !self.aspectTypes.isEmpty {
+          try container.encode(self.aspectTypes, forKey: .aspectTypes)
+        }
+        if !self.glossaries.isEmpty {
+          try container.encode(self.glossaries, forKey: .glossaries)
+        }
+        if !self.entryLinkTypes.isEmpty {
+          try container.encode(self.entryLinkTypes, forKey: .entryLinkTypes)
+        }
+        if !self.referencedEntryScopes.isEmpty {
+          try container.encode(self.referencedEntryScopes, forKey: .referencedEntryScopes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1134,7 +1182,9 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.scope, forKey: .scope)
-      try container.encode(self.outputPath, forKey: .outputPath)
+      if !self.outputPath.isEmpty {
+        try container.encode(self.outputPath, forKey: .outputPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1260,11 +1310,21 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.organizationLevel, forKey: .organizationLevel)
-        try container.encode(self.projects, forKey: .projects)
-        try container.encode(self.entryGroups, forKey: .entryGroups)
-        try container.encode(self.entryTypes, forKey: .entryTypes)
-        try container.encode(self.aspectTypes, forKey: .aspectTypes)
+        if self.organizationLevel {
+          try container.encode(self.organizationLevel, forKey: .organizationLevel)
+        }
+        if !self.projects.isEmpty {
+          try container.encode(self.projects, forKey: .projects)
+        }
+        if !self.entryGroups.isEmpty {
+          try container.encode(self.entryGroups, forKey: .entryGroups)
+        }
+        if !self.entryTypes.isEmpty {
+          try container.encode(self.entryTypes, forKey: .entryTypes)
+        }
+        if !self.aspectTypes.isEmpty {
+          try container.encode(self.aspectTypes, forKey: .aspectTypes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1390,9 +1450,15 @@ public struct MetadataJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.message, forKey: .message)
-      try container.encode(self.completionPercent, forKey: .completionPercent)
+      if self.state != MetadataJob.Status.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.message.isEmpty {
+        try container.encode(self.message, forKey: .message)
+      }
+      if self.completionPercent != 0 {
+        try container.encode(self.completionPercent, forKey: .completionPercent)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

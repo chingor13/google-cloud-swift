@@ -320,20 +320,53 @@ public struct GoldengateJavaMessageServiceConnectionProperties: Codable, Equatab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.useJndi, forKey: .useJndi)
-    try container.encode(self.jndiConnectionFactory, forKey: .jndiConnectionFactory)
-    try container.encode(self.jndiProviderUrl, forKey: .jndiProviderUrl)
-    try container.encode(self.jndiInitialContextFactory, forKey: .jndiInitialContextFactory)
-    try container.encode(self.jndiSecurityPrincipal, forKey: .jndiSecurityPrincipal)
-    try container.encode(self.jndiSecurityCredentialsSecret, forKey: .jndiSecurityCredentialsSecret)
-    try container.encode(self.connectionUrl, forKey: .connectionUrl)
-    try container.encode(self.connectionFactory, forKey: .connectionFactory)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.securityProtocol, forKey: .securityProtocol)
-    try container.encode(self.authenticationType, forKey: .authenticationType)
-    try container.encode(self.trustStoreFile, forKey: .trustStoreFile)
-    try container.encode(self.keyStoreFile, forKey: .keyStoreFile)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if self.useJndi {
+      try container.encode(self.useJndi, forKey: .useJndi)
+    }
+    if !self.jndiConnectionFactory.isEmpty {
+      try container.encode(self.jndiConnectionFactory, forKey: .jndiConnectionFactory)
+    }
+    if !self.jndiProviderUrl.isEmpty {
+      try container.encode(self.jndiProviderUrl, forKey: .jndiProviderUrl)
+    }
+    if !self.jndiInitialContextFactory.isEmpty {
+      try container.encode(self.jndiInitialContextFactory, forKey: .jndiInitialContextFactory)
+    }
+    if !self.jndiSecurityPrincipal.isEmpty {
+      try container.encode(self.jndiSecurityPrincipal, forKey: .jndiSecurityPrincipal)
+    }
+    if !self.jndiSecurityCredentialsSecret.isEmpty {
+      try container.encode(
+        self.jndiSecurityCredentialsSecret, forKey: .jndiSecurityCredentialsSecret)
+    }
+    if !self.connectionUrl.isEmpty {
+      try container.encode(self.connectionUrl, forKey: .connectionUrl)
+    }
+    if !self.connectionFactory.isEmpty {
+      try container.encode(self.connectionFactory, forKey: .connectionFactory)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if self.securityProtocol
+      != GoldengateJavaMessageServiceConnectionProperties.JmsSecurityProtocol()
+    {
+      try container.encode(self.securityProtocol, forKey: .securityProtocol)
+    }
+    if self.authenticationType
+      != GoldengateJavaMessageServiceConnectionProperties.JmsAuthenticationType()
+    {
+      try container.encode(self.authenticationType, forKey: .authenticationType)
+    }
+    if !self.trustStoreFile.isEmpty {
+      try container.encode(self.trustStoreFile, forKey: .trustStoreFile)
+    }
+    if !self.keyStoreFile.isEmpty {
+      try container.encode(self.keyStoreFile, forKey: .keyStoreFile)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

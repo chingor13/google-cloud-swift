@@ -105,8 +105,12 @@ public struct VertexRanker: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.model, forKey: .model)
-    try container.encode(self.topN, forKey: .topN)
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
+    if self.topN != 0 {
+      try container.encode(self.topN, forKey: .topN)
+    }
 
     if let choice = self.recordSpec {
       switch choice {
@@ -187,9 +191,15 @@ public struct VertexRanker: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.query, forKey: .query)
-      try container.encode(self.titleTemplate, forKey: .titleTemplate)
-      try container.encode(self.contentTemplate, forKey: .contentTemplate)
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
+      if !self.titleTemplate.isEmpty {
+        try container.encode(self.titleTemplate, forKey: .titleTemplate)
+      }
+      if !self.contentTemplate.isEmpty {
+        try container.encode(self.contentTemplate, forKey: .contentTemplate)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

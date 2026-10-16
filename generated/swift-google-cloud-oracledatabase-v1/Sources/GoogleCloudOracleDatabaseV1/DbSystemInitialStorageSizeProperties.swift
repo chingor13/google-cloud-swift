@@ -105,11 +105,19 @@ public struct DbSystemInitialStorageSizeProperties: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.storageManagement, forKey: .storageManagement)
-    try container.encode(self.shapeType, forKey: .shapeType)
-    try container.encode(self.storageSizeDetails, forKey: .storageSizeDetails)
-    try container.encode(
-      self.launchFromBackupStorageSizeDetails, forKey: .launchFromBackupStorageSizeDetails)
+    if self.storageManagement != DbSystemInitialStorageSizeProperties.StorageManagement() {
+      try container.encode(self.storageManagement, forKey: .storageManagement)
+    }
+    if self.shapeType != DbSystemInitialStorageSizeProperties.ShapeType() {
+      try container.encode(self.shapeType, forKey: .shapeType)
+    }
+    if !self.storageSizeDetails.isEmpty {
+      try container.encode(self.storageSizeDetails, forKey: .storageSizeDetails)
+    }
+    if !self.launchFromBackupStorageSizeDetails.isEmpty {
+      try container.encode(
+        self.launchFromBackupStorageSizeDetails, forKey: .launchFromBackupStorageSizeDetails)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -105,10 +105,14 @@ public struct Template: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.filterConfig, forKey: .filterConfig)
     try container.encodeIfPresent(self.templateMetadata, forKey: .templateMetadata)
     for (key, value) in self._unknownFields.json {
@@ -265,20 +269,38 @@ public struct Template: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.ignorePartialInvocationFailures, forKey: .ignorePartialInvocationFailures)
-      try container.encode(self.customPromptSafetyErrorCode, forKey: .customPromptSafetyErrorCode)
-      try container.encode(
-        self.customPromptSafetyErrorMessage, forKey: .customPromptSafetyErrorMessage)
-      try container.encode(
-        self.customLlmResponseSafetyErrorCode, forKey: .customLlmResponseSafetyErrorCode)
-      try container.encode(
-        self.customLlmResponseSafetyErrorMessage, forKey: .customLlmResponseSafetyErrorMessage)
-      try container.encode(self.logTemplateOperations, forKey: .logTemplateOperations)
-      try container.encode(self.logSanitizeOperations, forKey: .logSanitizeOperations)
-      try container.encode(self.enforcementType, forKey: .enforcementType)
+      if self.ignorePartialInvocationFailures {
+        try container.encode(
+          self.ignorePartialInvocationFailures, forKey: .ignorePartialInvocationFailures)
+      }
+      if self.customPromptSafetyErrorCode != 0 {
+        try container.encode(self.customPromptSafetyErrorCode, forKey: .customPromptSafetyErrorCode)
+      }
+      if !self.customPromptSafetyErrorMessage.isEmpty {
+        try container.encode(
+          self.customPromptSafetyErrorMessage, forKey: .customPromptSafetyErrorMessage)
+      }
+      if self.customLlmResponseSafetyErrorCode != 0 {
+        try container.encode(
+          self.customLlmResponseSafetyErrorCode, forKey: .customLlmResponseSafetyErrorCode)
+      }
+      if !self.customLlmResponseSafetyErrorMessage.isEmpty {
+        try container.encode(
+          self.customLlmResponseSafetyErrorMessage, forKey: .customLlmResponseSafetyErrorMessage)
+      }
+      if self.logTemplateOperations {
+        try container.encode(self.logTemplateOperations, forKey: .logTemplateOperations)
+      }
+      if self.logSanitizeOperations {
+        try container.encode(self.logSanitizeOperations, forKey: .logSanitizeOperations)
+      }
+      if self.enforcementType != Template.TemplateMetadata.EnforcementType() {
+        try container.encode(self.enforcementType, forKey: .enforcementType)
+      }
       try container.encodeIfPresent(self.multiLanguageDetection, forKey: .multiLanguageDetection)
-      try container.encode(self.modalities, forKey: .modalities)
+      if !self.modalities.isEmpty {
+        try container.encode(self.modalities, forKey: .modalities)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -339,8 +361,10 @@ public struct Template: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.enableMultiLanguageDetection, forKey: .enableMultiLanguageDetection)
+        if self.enableMultiLanguageDetection {
+          try container.encode(
+            self.enableMultiLanguageDetection, forKey: .enableMultiLanguageDetection)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

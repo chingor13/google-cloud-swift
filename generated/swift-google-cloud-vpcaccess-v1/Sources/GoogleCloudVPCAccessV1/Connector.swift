@@ -148,17 +148,37 @@ public struct Connector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.minThroughput, forKey: .minThroughput)
-    try container.encode(self.maxThroughput, forKey: .maxThroughput)
-    try container.encode(self.connectedProjects, forKey: .connectedProjects)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.ipCidrRange.isEmpty {
+      try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
+    }
+    if self.state != Connector.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.minThroughput != 0 {
+      try container.encode(self.minThroughput, forKey: .minThroughput)
+    }
+    if self.maxThroughput != 0 {
+      try container.encode(self.maxThroughput, forKey: .maxThroughput)
+    }
+    if !self.connectedProjects.isEmpty {
+      try container.encode(self.connectedProjects, forKey: .connectedProjects)
+    }
     try container.encodeIfPresent(self.subnet, forKey: .subnet)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.minInstances, forKey: .minInstances)
-    try container.encode(self.maxInstances, forKey: .maxInstances)
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if self.minInstances != 0 {
+      try container.encode(self.minInstances, forKey: .minInstances)
+    }
+    if self.maxInstances != 0 {
+      try container.encode(self.maxInstances, forKey: .maxInstances)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -229,8 +249,12 @@ public struct Connector: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.projectId, forKey: .projectId)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

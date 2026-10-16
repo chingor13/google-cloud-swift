@@ -113,9 +113,15 @@ public struct EnrollResourceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.destinations, forKey: .destinations)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.destinations.isEmpty {
+      try container.encode(self.destinations, forKey: .destinations)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

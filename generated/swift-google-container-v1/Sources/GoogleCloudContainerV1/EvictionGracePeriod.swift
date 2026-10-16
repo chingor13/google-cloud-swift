@@ -121,12 +121,24 @@ public struct EvictionGracePeriod: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.memoryAvailable, forKey: .memoryAvailable)
-    try container.encode(self.nodefsAvailable, forKey: .nodefsAvailable)
-    try container.encode(self.nodefsInodesFree, forKey: .nodefsInodesFree)
-    try container.encode(self.imagefsAvailable, forKey: .imagefsAvailable)
-    try container.encode(self.imagefsInodesFree, forKey: .imagefsInodesFree)
-    try container.encode(self.pidAvailable, forKey: .pidAvailable)
+    if !self.memoryAvailable.isEmpty {
+      try container.encode(self.memoryAvailable, forKey: .memoryAvailable)
+    }
+    if !self.nodefsAvailable.isEmpty {
+      try container.encode(self.nodefsAvailable, forKey: .nodefsAvailable)
+    }
+    if !self.nodefsInodesFree.isEmpty {
+      try container.encode(self.nodefsInodesFree, forKey: .nodefsInodesFree)
+    }
+    if !self.imagefsAvailable.isEmpty {
+      try container.encode(self.imagefsAvailable, forKey: .imagefsAvailable)
+    }
+    if !self.imagefsInodesFree.isEmpty {
+      try container.encode(self.imagefsInodesFree, forKey: .imagefsInodesFree)
+    }
+    if !self.pidAvailable.isEmpty {
+      try container.encode(self.pidAvailable, forKey: .pidAvailable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

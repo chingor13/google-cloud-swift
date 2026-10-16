@@ -96,8 +96,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.dataItem, forKey: .dataItem)
-      try container.encode(self.annotations, forKey: .annotations)
-      try container.encode(self.hasTruncatedAnnotations, forKey: .hasTruncatedAnnotations)
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
+      if self.hasTruncatedAnnotations {
+        try container.encode(self.hasTruncatedAnnotations, forKey: .hasTruncatedAnnotations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

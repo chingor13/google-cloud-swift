@@ -239,7 +239,9 @@ public struct BDRBackupRestoreJobLog: Codable, Equatable, GoogleWKT._AnyPackable
     try container.encodeIfPresent(self.sourceResourceLocation, forKey: .sourceResourceLocation)
     try container.encodeIfPresent(self.restoreResourceLocation, forKey: .restoreResourceLocation)
     try container.encodeIfPresent(self.recoveryPointTime, forKey: .recoveryPointTime)
-    try container.encode(self.dataSourceName, forKey: .dataSourceName)
+    if !self.dataSourceName.isEmpty {
+      try container.encode(self.dataSourceName, forKey: .dataSourceName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

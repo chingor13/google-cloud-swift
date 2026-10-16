@@ -95,8 +95,12 @@ public struct CreateTagTemplateFieldRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.tagTemplateFieldId, forKey: .tagTemplateFieldId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.tagTemplateFieldId.isEmpty {
+      try container.encode(self.tagTemplateFieldId, forKey: .tagTemplateFieldId)
+    }
     try container.encodeIfPresent(self.tagTemplateField, forKey: .tagTemplateField)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

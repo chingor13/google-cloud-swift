@@ -164,9 +164,15 @@ public struct AppProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
 
     if let choice = self.routingPolicy {
       switch choice {
@@ -278,7 +284,9 @@ public struct AppProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clusterIds, forKey: .clusterIds)
+      if !self.clusterIds.isEmpty {
+        try container.encode(self.clusterIds, forKey: .clusterIds)
+      }
 
       if let choice = self.affinity {
         switch choice {
@@ -471,8 +479,12 @@ public struct AppProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clusterId, forKey: .clusterId)
-      try container.encode(self.allowTransactionalWrites, forKey: .allowTransactionalWrites)
+      if !self.clusterId.isEmpty {
+        try container.encode(self.clusterId, forKey: .clusterId)
+      }
+      if self.allowTransactionalWrites {
+        try container.encode(self.allowTransactionalWrites, forKey: .allowTransactionalWrites)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -561,7 +573,9 @@ public struct AppProfile: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.priority, forKey: .priority)
+      if self.priority != AppProfile.Priority() {
+        try container.encode(self.priority, forKey: .priority)
+      }
       try container.encodeIfPresent(self.memoryConfig, forKey: .memoryConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

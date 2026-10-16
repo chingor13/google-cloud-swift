@@ -89,9 +89,13 @@ public struct TextDetectionParams: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.enableTextDetectionConfidenceScore, forKey: .enableTextDetectionConfidenceScore)
-    try container.encode(self.advancedOcrOptions, forKey: .advancedOcrOptions)
+    if self.enableTextDetectionConfidenceScore {
+      try container.encode(
+        self.enableTextDetectionConfidenceScore, forKey: .enableTextDetectionConfidenceScore)
+    }
+    if !self.advancedOcrOptions.isEmpty {
+      try container.encode(self.advancedOcrOptions, forKey: .advancedOcrOptions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

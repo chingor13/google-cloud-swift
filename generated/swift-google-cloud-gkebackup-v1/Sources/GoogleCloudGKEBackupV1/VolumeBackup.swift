@@ -199,21 +199,43 @@ public struct VolumeBackup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.sourcePvc, forKey: .sourcePvc)
-    try container.encode(self.volumeBackupHandle, forKey: .volumeBackupHandle)
-    try container.encode(self.format, forKey: .format)
-    try container.encode(self.storageBytes, forKey: .storageBytes)
-    try container.encode(self.diskSizeBytes, forKey: .diskSizeBytes)
+    if !self.volumeBackupHandle.isEmpty {
+      try container.encode(self.volumeBackupHandle, forKey: .volumeBackupHandle)
+    }
+    if self.format != VolumeBackup.VolumeBackupFormat() {
+      try container.encode(self.format, forKey: .format)
+    }
+    if self.storageBytes != 0 {
+      try container.encode(self.storageBytes, forKey: .storageBytes)
+    }
+    if self.diskSizeBytes != 0 {
+      try container.encode(self.diskSizeBytes, forKey: .diskSizeBytes)
+    }
     try container.encodeIfPresent(self.completeTime, forKey: .completeTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    if self.state != VolumeBackup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

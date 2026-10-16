@@ -102,9 +102,15 @@ public struct AttributesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.catalogAttributes, forKey: .catalogAttributes)
-    try container.encode(self.attributeConfigLevel, forKey: .attributeConfigLevel)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.catalogAttributes.isEmpty {
+      try container.encode(self.catalogAttributes, forKey: .catalogAttributes)
+    }
+    if self.attributeConfigLevel != AttributeConfigLevel() {
+      try container.encode(self.attributeConfigLevel, forKey: .attributeConfigLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

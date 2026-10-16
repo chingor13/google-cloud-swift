@@ -87,7 +87,9 @@ public struct TlsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.trustConfig, forKey: .trustConfig)
-    try container.encode(self.sslPrincipalMappingRules, forKey: .sslPrincipalMappingRules)
+    if !self.sslPrincipalMappingRules.isEmpty {
+      try container.encode(self.sslPrincipalMappingRules, forKey: .sslPrincipalMappingRules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

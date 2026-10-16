@@ -595,34 +595,84 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.assetType, forKey: .assetType)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.folders, forKey: .folders)
-    try container.encode(self.organization, forKey: .organization)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.networkTags, forKey: .networkTags)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.kmsKeys, forKey: .kmsKeys)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.assetType.isEmpty {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.folders.isEmpty {
+      try container.encode(self.folders, forKey: .folders)
+    }
+    if !self.organization.isEmpty {
+      try container.encode(self.organization, forKey: .organization)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.networkTags.isEmpty {
+      try container.encode(self.networkTags, forKey: .networkTags)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.kmsKeys.isEmpty {
+      try container.encode(self.kmsKeys, forKey: .kmsKeys)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.state, forKey: .state)
+    if !self.state.isEmpty {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.additionalAttributes, forKey: .additionalAttributes)
-    try container.encode(self.parentFullResourceName, forKey: .parentFullResourceName)
-    try container.encode(self.versionedResources, forKey: .versionedResources)
-    try container.encode(self.attachedResources, forKey: .attachedResources)
-    try container.encode(self.relationships, forKey: .relationships)
-    try container.encode(self.tagKeys, forKey: .tagKeys)
-    try container.encode(self.tagValues, forKey: .tagValues)
-    try container.encode(self.tagValueIds, forKey: .tagValueIds)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.effectiveTags, forKey: .effectiveTags)
-    try container.encode(self.enrichments, forKey: .enrichments)
-    try container.encode(self.parentAssetType, forKey: .parentAssetType)
-    try container.encode(self.sccSecurityMarks, forKey: .sccSecurityMarks)
+    if !self.parentFullResourceName.isEmpty {
+      try container.encode(self.parentFullResourceName, forKey: .parentFullResourceName)
+    }
+    if !self.versionedResources.isEmpty {
+      try container.encode(self.versionedResources, forKey: .versionedResources)
+    }
+    if !self.attachedResources.isEmpty {
+      try container.encode(self.attachedResources, forKey: .attachedResources)
+    }
+    if !self.relationships.isEmpty {
+      try container.encode(self.relationships, forKey: .relationships)
+    }
+    if !self.tagKeys.isEmpty {
+      try container.encode(self.tagKeys, forKey: .tagKeys)
+    }
+    if !self.tagValues.isEmpty {
+      try container.encode(self.tagValues, forKey: .tagValues)
+    }
+    if !self.tagValueIds.isEmpty {
+      try container.encode(self.tagValueIds, forKey: .tagValueIds)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.effectiveTags.isEmpty {
+      try container.encode(self.effectiveTags, forKey: .effectiveTags)
+    }
+    if !self.enrichments.isEmpty {
+      try container.encode(self.enrichments, forKey: .enrichments)
+    }
+    if !self.parentAssetType.isEmpty {
+      try container.encode(self.parentAssetType, forKey: .parentAssetType)
+    }
+    if !self.sccSecurityMarks.isEmpty {
+      try container.encode(self.sccSecurityMarks, forKey: .sccSecurityMarks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

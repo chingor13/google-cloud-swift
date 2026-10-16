@@ -123,7 +123,9 @@ public struct StreamingRecognizeRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.recognizer, forKey: .recognizer)
+    if !self.recognizer.isEmpty {
+      try container.encode(self.recognizer, forKey: .recognizer)
+    }
 
     if let choice = self.streamingRequest {
       switch choice {

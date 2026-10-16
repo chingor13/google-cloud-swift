@@ -186,11 +186,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.schemaId, forKey: .schemaId)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.schemaId.isEmpty {
+        try container.encode(self.schemaId, forKey: .schemaId)
+      }
       try container.encodeIfPresent(self.content, forKey: .content)
-      try container.encode(self.parentDocumentId, forKey: .parentDocumentId)
+      if !self.parentDocumentId.isEmpty {
+        try container.encode(self.parentDocumentId, forKey: .parentDocumentId)
+      }
       try container.encodeIfPresent(self.derivedStructData, forKey: .derivedStructData)
       try container.encodeIfPresent(self.aclInfo, forKey: .aclInfo)
       try container.encodeIfPresent(self.indexTime, forKey: .indexTime)
@@ -308,7 +316,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.mimeType, forKey: .mimeType)
+        if !self.mimeType.isEmpty {
+          try container.encode(self.mimeType, forKey: .mimeType)
+        }
 
         if let choice = self.content {
           switch choice {
@@ -416,7 +426,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.readers, forKey: .readers)
+        if !self.readers.isEmpty {
+          try container.encode(self.readers, forKey: .readers)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -540,8 +552,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.principals, forKey: .principals)
-          try container.encode(self.idpWide, forKey: .idpWide)
+          if !self.principals.isEmpty {
+            try container.encode(self.principals, forKey: .principals)
+          }
+          if self.idpWide {
+            try container.encode(self.idpWide, forKey: .idpWide)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -664,8 +680,12 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.indexTime, forKey: .indexTime)
-        try container.encode(self.errorSamples, forKey: .errorSamples)
-        try container.encode(self.pendingMessage, forKey: .pendingMessage)
+        if !self.errorSamples.isEmpty {
+          try container.encode(self.errorSamples, forKey: .errorSamples)
+        }
+        if !self.pendingMessage.isEmpty {
+          try container.encode(self.pendingMessage, forKey: .pendingMessage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

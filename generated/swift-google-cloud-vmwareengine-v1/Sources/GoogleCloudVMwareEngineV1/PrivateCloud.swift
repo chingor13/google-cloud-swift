@@ -172,20 +172,30 @@ public struct PrivateCloud: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != PrivateCloud.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
     try container.encodeIfPresent(self.managementCluster, forKey: .managementCluster)
-    try container.encode(self.description, forKey: .description)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.hcx, forKey: .hcx)
     try container.encodeIfPresent(self.nsx, forKey: .nsx)
     try container.encodeIfPresent(self.vcenter, forKey: .vcenter)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.type, forKey: .type)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.type != PrivateCloud.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -270,8 +280,12 @@ public struct PrivateCloud: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clusterId, forKey: .clusterId)
-      try container.encode(self.nodeTypeConfigs, forKey: .nodeTypeConfigs)
+      if !self.clusterId.isEmpty {
+        try container.encode(self.clusterId, forKey: .clusterId)
+      }
+      if !self.nodeTypeConfigs.isEmpty {
+        try container.encode(self.nodeTypeConfigs, forKey: .nodeTypeConfigs)
+      }
       try container.encodeIfPresent(self.stretchedClusterConfig, forKey: .stretchedClusterConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

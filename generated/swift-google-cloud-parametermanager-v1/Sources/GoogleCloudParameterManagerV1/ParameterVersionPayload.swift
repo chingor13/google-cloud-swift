@@ -77,7 +77,9 @@ public struct ParameterVersionPayload: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.data, forKey: .data)
+    if !self.data.isEmpty {
+      try container.encode(self.data, forKey: .data)
+    }
     try container.encodeIfPresent(self.dataCrc32C, forKey: .dataCrc32C)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

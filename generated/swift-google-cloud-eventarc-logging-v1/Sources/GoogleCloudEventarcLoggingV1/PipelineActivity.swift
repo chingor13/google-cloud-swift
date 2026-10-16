@@ -138,8 +138,12 @@ public struct PipelineActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.messageUid, forKey: .messageUid)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.messageUid.isEmpty {
+      try container.encode(self.messageUid, forKey: .messageUid)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     try container.encodeIfPresent(self.activityTime, forKey: .activityTime)
 
     if let choice = self.activity {
@@ -231,8 +235,12 @@ public struct PipelineActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
-      try container.encode(self.inputPayloadFormat, forKey: .inputPayloadFormat)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
+      if self.inputPayloadFormat != PipelineActivity.PayloadFormat() {
+        try container.encode(self.inputPayloadFormat, forKey: .inputPayloadFormat)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -320,7 +328,9 @@ public struct PipelineActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -430,9 +440,15 @@ public struct PipelineActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
-      try container.encode(self.inputPayloadFormat, forKey: .inputPayloadFormat)
-      try container.encode(self.outputPayloadFormat, forKey: .outputPayloadFormat)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
+      if self.inputPayloadFormat != PipelineActivity.PayloadFormat() {
+        try container.encode(self.inputPayloadFormat, forKey: .inputPayloadFormat)
+      }
+      if self.outputPayloadFormat != PipelineActivity.PayloadFormat() {
+        try container.encode(self.outputPayloadFormat, forKey: .outputPayloadFormat)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -530,8 +546,12 @@ public struct PipelineActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
-      try container.encode(self.destination, forKey: .destination)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
+      if !self.destination.isEmpty {
+        try container.encode(self.destination, forKey: .destination)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -649,10 +669,16 @@ public struct PipelineActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
-      try container.encode(self.retryStatus, forKey: .retryStatus)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
+      if self.retryStatus != PipelineActivity.MessageResponseReceived.RetryStatus() {
+        try container.encode(self.retryStatus, forKey: .retryStatus)
+      }
       try container.encodeIfPresent(self.retryTime, forKey: .retryTime)
-      try container.encode(self.httpResponseCode, forKey: .httpResponseCode)
+      if self.httpResponseCode != 0 {
+        try container.encode(self.httpResponseCode, forKey: .httpResponseCode)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

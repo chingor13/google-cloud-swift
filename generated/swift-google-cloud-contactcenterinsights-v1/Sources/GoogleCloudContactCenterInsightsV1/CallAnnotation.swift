@@ -150,7 +150,9 @@ public struct CallAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.channelTag, forKey: .channelTag)
+    if self.channelTag != 0 {
+      try container.encode(self.channelTag, forKey: .channelTag)
+    }
     try container.encodeIfPresent(self.annotationStartBoundary, forKey: .annotationStartBoundary)
     try container.encodeIfPresent(self.annotationEndBoundary, forKey: .annotationEndBoundary)
 

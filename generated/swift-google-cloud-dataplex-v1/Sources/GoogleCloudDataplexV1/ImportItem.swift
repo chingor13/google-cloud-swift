@@ -139,7 +139,9 @@ public struct ImportItem: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.entry, forKey: .entry)
     try container.encodeIfPresent(self.entryLink, forKey: .entryLink)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    if !self.aspectKeys.isEmpty {
+      try container.encode(self.aspectKeys, forKey: .aspectKeys)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

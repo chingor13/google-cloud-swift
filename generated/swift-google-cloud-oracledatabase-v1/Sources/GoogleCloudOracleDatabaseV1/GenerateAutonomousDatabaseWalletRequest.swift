@@ -97,10 +97,18 @@ public struct GenerateAutonomousDatabaseWalletRequest: Codable, Equatable, Googl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.isRegional, forKey: .isRegional)
-    try container.encode(self.password, forKey: .password)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.type != GenerateType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.isRegional {
+      try container.encode(self.isRegional, forKey: .isRegional)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

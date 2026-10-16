@@ -107,11 +107,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.logSource, forKey: .logSource)
-      try container.encode(self.logType, forKey: .logType)
-      try container.encode(self.bigqueryTablePath, forKey: .bigqueryTablePath)
-      try container.encode(
-        self.requestResponseLoggingSchemaVersion, forKey: .requestResponseLoggingSchemaVersion)
+      if self.logSource != ModelDeploymentMonitoringBigQueryTable.LogSource() {
+        try container.encode(self.logSource, forKey: .logSource)
+      }
+      if self.logType != ModelDeploymentMonitoringBigQueryTable.LogType() {
+        try container.encode(self.logType, forKey: .logType)
+      }
+      if !self.bigqueryTablePath.isEmpty {
+        try container.encode(self.bigqueryTablePath, forKey: .bigqueryTablePath)
+      }
+      if !self.requestResponseLoggingSchemaVersion.isEmpty {
+        try container.encode(
+          self.requestResponseLoggingSchemaVersion, forKey: .requestResponseLoggingSchemaVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

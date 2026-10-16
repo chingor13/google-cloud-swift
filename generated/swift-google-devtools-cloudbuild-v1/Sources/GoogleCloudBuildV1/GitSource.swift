@@ -100,9 +100,15 @@ public struct GitSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.url, forKey: .url)
-    try container.encode(self.dir, forKey: .dir)
-    try container.encode(self.revision, forKey: .revision)
+    if !self.url.isEmpty {
+      try container.encode(self.url, forKey: .url)
+    }
+    if !self.dir.isEmpty {
+      try container.encode(self.dir, forKey: .dir)
+    }
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

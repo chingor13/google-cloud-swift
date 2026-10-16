@@ -114,9 +114,15 @@ public struct GenerateSshScriptRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.migrationJob, forKey: .migrationJob)
-    try container.encode(self.vm, forKey: .vm)
-    try container.encode(self.vmPort, forKey: .vmPort)
+    if !self.migrationJob.isEmpty {
+      try container.encode(self.migrationJob, forKey: .migrationJob)
+    }
+    if !self.vm.isEmpty {
+      try container.encode(self.vm, forKey: .vm)
+    }
+    if self.vmPort != 0 {
+      try container.encode(self.vmPort, forKey: .vmPort)
+    }
 
     if let choice = self.vmConfig {
       switch choice {

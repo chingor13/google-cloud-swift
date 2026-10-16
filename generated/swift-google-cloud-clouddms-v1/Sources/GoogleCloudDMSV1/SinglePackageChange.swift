@@ -82,8 +82,12 @@ public struct SinglePackageChange: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.packageDescription, forKey: .packageDescription)
-    try container.encode(self.packageBody, forKey: .packageBody)
+    if !self.packageDescription.isEmpty {
+      try container.encode(self.packageDescription, forKey: .packageDescription)
+    }
+    if !self.packageBody.isEmpty {
+      try container.encode(self.packageBody, forKey: .packageBody)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

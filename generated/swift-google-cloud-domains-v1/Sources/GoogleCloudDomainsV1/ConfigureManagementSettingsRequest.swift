@@ -86,7 +86,9 @@ public struct ConfigureManagementSettingsRequest: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.registration, forKey: .registration)
+    if !self.registration.isEmpty {
+      try container.encode(self.registration, forKey: .registration)
+    }
     try container.encodeIfPresent(self.managementSettings, forKey: .managementSettings)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

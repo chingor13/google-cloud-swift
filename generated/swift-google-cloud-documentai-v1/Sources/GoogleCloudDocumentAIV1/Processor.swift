@@ -160,17 +160,37 @@ public struct Processor: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.defaultProcessorVersion, forKey: .defaultProcessorVersion)
-    try container.encode(self.processorVersionAliases, forKey: .processorVersionAliases)
-    try container.encode(self.processEndpoint, forKey: .processEndpoint)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.state != Processor.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.defaultProcessorVersion.isEmpty {
+      try container.encode(self.defaultProcessorVersion, forKey: .defaultProcessorVersion)
+    }
+    if !self.processorVersionAliases.isEmpty {
+      try container.encode(self.processorVersionAliases, forKey: .processorVersionAliases)
+    }
+    if !self.processEndpoint.isEmpty {
+      try container.encode(self.processEndpoint, forKey: .processEndpoint)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

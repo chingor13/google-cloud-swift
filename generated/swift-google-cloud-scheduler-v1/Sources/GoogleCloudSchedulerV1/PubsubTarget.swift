@@ -100,9 +100,15 @@ public struct PubsubTarget: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.topicName, forKey: .topicName)
-    try container.encode(self.data, forKey: .data)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.topicName.isEmpty {
+      try container.encode(self.topicName, forKey: .topicName)
+    }
+    if !self.data.isEmpty {
+      try container.encode(self.data, forKey: .data)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

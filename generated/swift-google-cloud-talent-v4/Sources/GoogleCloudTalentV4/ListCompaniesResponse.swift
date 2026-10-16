@@ -85,8 +85,12 @@ public struct ListCompaniesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.companies, forKey: .companies)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.companies.isEmpty {
+      try container.encode(self.companies, forKey: .companies)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

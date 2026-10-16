@@ -87,9 +87,15 @@ public struct IssueAssignment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issue, forKey: .issue)
-    try container.encode(self.score, forKey: .score)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.issue.isEmpty {
+      try container.encode(self.issue, forKey: .issue)
+    }
+    if self.score != 0 {
+      try container.encode(self.score, forKey: .score)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

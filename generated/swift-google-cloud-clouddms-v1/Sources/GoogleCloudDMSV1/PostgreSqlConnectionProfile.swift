@@ -164,14 +164,28 @@ public struct PostgreSqlConnectionProfile: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.passwordSet, forKey: .passwordSet)
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if self.passwordSet {
+      try container.encode(self.passwordSet, forKey: .passwordSet)
+    }
     try container.encodeIfPresent(self.ssl, forKey: .ssl)
-    try container.encode(self.cloudSqlId, forKey: .cloudSqlId)
-    try container.encode(self.networkArchitecture, forKey: .networkArchitecture)
+    if !self.cloudSqlId.isEmpty {
+      try container.encode(self.cloudSqlId, forKey: .cloudSqlId)
+    }
+    if self.networkArchitecture != NetworkArchitecture() {
+      try container.encode(self.networkArchitecture, forKey: .networkArchitecture)
+    }
 
     if let choice = self.connectivity {
       switch choice {

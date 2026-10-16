@@ -107,11 +107,21 @@ public struct NetworkInterface: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.internalIp, forKey: .internalIp)
-    try container.encode(self.externalIp, forKey: .externalIp)
-    try container.encode(self.networkTier, forKey: .networkTier)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if !self.internalIp.isEmpty {
+      try container.encode(self.internalIp, forKey: .internalIp)
+    }
+    if !self.externalIp.isEmpty {
+      try container.encode(self.externalIp, forKey: .externalIp)
+    }
+    if self.networkTier != ComputeEngineNetworkTier() {
+      try container.encode(self.networkTier, forKey: .networkTier)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

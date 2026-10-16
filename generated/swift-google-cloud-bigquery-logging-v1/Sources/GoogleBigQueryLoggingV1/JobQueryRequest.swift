@@ -99,11 +99,19 @@ public struct JobQueryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.maxResults, forKey: .maxResults)
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if self.maxResults != 0 {
+      try container.encode(self.maxResults, forKey: .maxResults)
+    }
     try container.encodeIfPresent(self.defaultDataset, forKey: .defaultDataset)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.dryRun, forKey: .dryRun)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if self.dryRun {
+      try container.encode(self.dryRun, forKey: .dryRun)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

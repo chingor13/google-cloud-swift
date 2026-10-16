@@ -77,7 +77,9 @@ public struct RollbackTargetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.rollout, forKey: .rollout)
-    try container.encode(self.startingPhaseId, forKey: .startingPhaseId)
+    if !self.startingPhaseId.isEmpty {
+      try container.encode(self.startingPhaseId, forKey: .startingPhaseId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -159,14 +159,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.description, forKey: .description)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.sourceInstance, forKey: .sourceInstance)
-      try container.encode(self.switchoverTargetInstance, forKey: .switchoverTargetInstance)
-      try container.encode(self.errorDetail, forKey: .errorDetail)
-      try container.encode(self.deploymentMappings, forKey: .deploymentMappings)
+      if self.state != BlueGreenDeployment.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.sourceInstance.isEmpty {
+        try container.encode(self.sourceInstance, forKey: .sourceInstance)
+      }
+      if !self.switchoverTargetInstance.isEmpty {
+        try container.encode(self.switchoverTargetInstance, forKey: .switchoverTargetInstance)
+      }
+      if !self.errorDetail.isEmpty {
+        try container.encode(self.errorDetail, forKey: .errorDetail)
+      }
+      if !self.deploymentMappings.isEmpty {
+        try container.encode(self.deploymentMappings, forKey: .deploymentMappings)
+      }
       try container.encodeIfPresent(self.deploymentTasks, forKey: .deploymentTasks)
       try container.encodeIfPresent(self.requestedConfig, forKey: .requestedConfig)
       for (key, value) in self._unknownFields.json {
@@ -228,7 +242,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.databaseVersion, forKey: .databaseVersion)
+        if !self.databaseVersion.isEmpty {
+          try container.encode(self.databaseVersion, forKey: .databaseVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -311,7 +327,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.task, forKey: .task)
+        if !self.task.isEmpty {
+          try container.encode(self.task, forKey: .task)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -424,8 +442,12 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.source, forKey: .source)
         try container.encodeIfPresent(self.target, forKey: .target)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.diffs, forKey: .diffs)
+        if self.state != BlueGreenDeployment.SourceTargetPairedNode.State() {
+          try container.encode(self.state, forKey: .state)
+        }
+        if !self.diffs.isEmpty {
+          try container.encode(self.diffs, forKey: .diffs)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -501,9 +523,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.field, forKey: .field)
-          try container.encode(self.sourceValue, forKey: .sourceValue)
-          try container.encode(self.targetValue, forKey: .targetValue)
+          if !self.field.isEmpty {
+            try container.encode(self.field, forKey: .field)
+          }
+          if !self.sourceValue.isEmpty {
+            try container.encode(self.sourceValue, forKey: .sourceValue)
+          }
+          if !self.targetValue.isEmpty {
+            try container.encode(self.targetValue, forKey: .targetValue)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -609,10 +637,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.instance, forKey: .instance)
-          try container.encode(self.connection, forKey: .connection)
-          try container.encode(self.dns, forKey: .dns)
-          try container.encode(self.ipMappings, forKey: .ipMappings)
+          if !self.instance.isEmpty {
+            try container.encode(self.instance, forKey: .instance)
+          }
+          if !self.connection.isEmpty {
+            try container.encode(self.connection, forKey: .connection)
+          }
+          if !self.dns.isEmpty {
+            try container.encode(self.dns, forKey: .dns)
+          }
+          if !self.ipMappings.isEmpty {
+            try container.encode(self.ipMappings, forKey: .ipMappings)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -730,11 +766,17 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.state, forKey: .state)
+          if self.type != BlueGreenDeployment.SourceTargetPairedNode.DeploymentTask.Type_() {
+            try container.encode(self.type, forKey: .type)
+          }
+          if self.state != BlueGreenDeployment.SourceTargetPairedNode.DeploymentTask.State() {
+            try container.encode(self.state, forKey: .state)
+          }
           try container.encodeIfPresent(self.startTime, forKey: .startTime)
           try container.encodeIfPresent(self.endTime, forKey: .endTime)
-          try container.encode(self.errorMessage, forKey: .errorMessage)
+          if !self.errorMessage.isEmpty {
+            try container.encode(self.errorMessage, forKey: .errorMessage)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

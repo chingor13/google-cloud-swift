@@ -102,10 +102,18 @@ public struct ExportToCdwPipeline: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.documents, forKey: .documents)
-    try container.encode(self.exportFolderPath, forKey: .exportFolderPath)
-    try container.encode(self.docAiDataset, forKey: .docAiDataset)
-    try container.encode(self.trainingSplitRatio, forKey: .trainingSplitRatio)
+    if !self.documents.isEmpty {
+      try container.encode(self.documents, forKey: .documents)
+    }
+    if !self.exportFolderPath.isEmpty {
+      try container.encode(self.exportFolderPath, forKey: .exportFolderPath)
+    }
+    if !self.docAiDataset.isEmpty {
+      try container.encode(self.docAiDataset, forKey: .docAiDataset)
+    }
+    if self.trainingSplitRatio != 0 {
+      try container.encode(self.trainingSplitRatio, forKey: .trainingSplitRatio)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

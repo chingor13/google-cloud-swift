@@ -87,9 +87,13 @@ public struct CreateWorkloadRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.workload, forKey: .workload)
-    try container.encode(self.externalId, forKey: .externalId)
+    if !self.externalId.isEmpty {
+      try container.encode(self.externalId, forKey: .externalId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

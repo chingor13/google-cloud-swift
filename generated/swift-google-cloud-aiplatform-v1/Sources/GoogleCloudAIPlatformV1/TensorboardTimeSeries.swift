@@ -146,15 +146,29 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.valueType, forKey: .valueType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.valueType != TensorboardTimeSeries.ValueType() {
+        try container.encode(self.valueType, forKey: .valueType)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.pluginName, forKey: .pluginName)
-      try container.encode(self.pluginData, forKey: .pluginData)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.pluginName.isEmpty {
+        try container.encode(self.pluginName, forKey: .pluginName)
+      }
+      if !self.pluginData.isEmpty {
+        try container.encode(self.pluginData, forKey: .pluginData)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -233,9 +247,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.maxStep, forKey: .maxStep)
+        if self.maxStep != 0 {
+          try container.encode(self.maxStep, forKey: .maxStep)
+        }
         try container.encodeIfPresent(self.maxWallTime, forKey: .maxWallTime)
-        try container.encode(self.maxBlobSequenceLength, forKey: .maxBlobSequenceLength)
+        if self.maxBlobSequenceLength != 0 {
+          try container.encode(self.maxBlobSequenceLength, forKey: .maxBlobSequenceLength)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -90,9 +90,15 @@ public struct VolumeMount: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.mountPath, forKey: .mountPath)
-    try container.encode(self.subPath, forKey: .subPath)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.mountPath.isEmpty {
+      try container.encode(self.mountPath, forKey: .mountPath)
+    }
+    if !self.subPath.isEmpty {
+      try container.encode(self.subPath, forKey: .subPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

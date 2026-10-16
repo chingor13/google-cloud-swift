@@ -151,12 +151,18 @@ public struct CaPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.tier, forKey: .tier)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.tier != CaPool.Tier() {
+      try container.encode(self.tier, forKey: .tier)
+    }
     try container.encodeIfPresent(self.issuancePolicy, forKey: .issuancePolicy)
     try container.encodeIfPresent(self.publishingOptions, forKey: .publishingOptions)
     try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -268,9 +274,15 @@ public struct CaPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.publishCaCert, forKey: .publishCaCert)
-      try container.encode(self.publishCrl, forKey: .publishCrl)
-      try container.encode(self.encodingFormat, forKey: .encodingFormat)
+      if self.publishCaCert {
+        try container.encode(self.publishCaCert, forKey: .publishCaCert)
+      }
+      if self.publishCrl {
+        try container.encode(self.publishCrl, forKey: .publishCrl)
+      }
+      if self.encodingFormat != CaPool.PublishingOptions.EncodingFormat() {
+        try container.encode(self.encodingFormat, forKey: .encodingFormat)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -622,10 +634,14 @@ public struct CaPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedKeyTypes, forKey: .allowedKeyTypes)
+      if !self.allowedKeyTypes.isEmpty {
+        try container.encode(self.allowedKeyTypes, forKey: .allowedKeyTypes)
+      }
       try container.encodeIfPresent(self.backdateDuration, forKey: .backdateDuration)
-      try container.encode(
-        self.allowRequesterSpecifiedNotBeforeTime, forKey: .allowRequesterSpecifiedNotBeforeTime)
+      if self.allowRequesterSpecifiedNotBeforeTime {
+        try container.encode(
+          self.allowRequesterSpecifiedNotBeforeTime, forKey: .allowRequesterSpecifiedNotBeforeTime)
+      }
       try container.encodeIfPresent(self.maximumLifetime, forKey: .maximumLifetime)
       try container.encodeIfPresent(self.allowedIssuanceModes, forKey: .allowedIssuanceModes)
       try container.encodeIfPresent(self.baselineValues, forKey: .baselineValues)
@@ -800,8 +816,12 @@ public struct CaPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.minModulusSize, forKey: .minModulusSize)
-          try container.encode(self.maxModulusSize, forKey: .maxModulusSize)
+          if self.minModulusSize != 0 {
+            try container.encode(self.minModulusSize, forKey: .minModulusSize)
+          }
+          if self.maxModulusSize != 0 {
+            try container.encode(self.maxModulusSize, forKey: .maxModulusSize)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -893,7 +913,11 @@ public struct CaPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.signatureAlgorithm, forKey: .signatureAlgorithm)
+          if self.signatureAlgorithm
+            != CaPool.IssuancePolicy.AllowedKeyType.EcKeyType.EcSignatureAlgorithm()
+          {
+            try container.encode(self.signatureAlgorithm, forKey: .signatureAlgorithm)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1166,8 +1190,12 @@ public struct CaPool: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.allowCsrBasedIssuance, forKey: .allowCsrBasedIssuance)
-        try container.encode(self.allowConfigBasedIssuance, forKey: .allowConfigBasedIssuance)
+        if self.allowCsrBasedIssuance {
+          try container.encode(self.allowCsrBasedIssuance, forKey: .allowCsrBasedIssuance)
+        }
+        if self.allowConfigBasedIssuance {
+          try container.encode(self.allowConfigBasedIssuance, forKey: .allowConfigBasedIssuance)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -92,8 +92,12 @@ public struct MultiEntityRename: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.newNamePattern, forKey: .newNamePattern)
-    try container.encode(self.sourceNameTransformation, forKey: .sourceNameTransformation)
+    if !self.newNamePattern.isEmpty {
+      try container.encode(self.newNamePattern, forKey: .newNamePattern)
+    }
+    if self.sourceNameTransformation != EntityNameTransformation() {
+      try container.encode(self.sourceNameTransformation, forKey: .sourceNameTransformation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

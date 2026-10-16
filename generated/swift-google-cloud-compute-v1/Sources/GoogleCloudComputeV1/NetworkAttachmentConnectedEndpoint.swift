@@ -127,7 +127,9 @@
       try container.encodeIfPresent(self.ipAddress, forKey: .ipAddress)
       try container.encodeIfPresent(self.ipv6Address, forKey: .ipv6Address)
       try container.encodeIfPresent(self.projectIdOrNum, forKey: .projectIdOrNum)
-      try container.encode(self.secondaryIpCidrRanges, forKey: .secondaryIpCidrRanges)
+      if !self.secondaryIpCidrRanges.isEmpty {
+        try container.encode(self.secondaryIpCidrRanges, forKey: .secondaryIpCidrRanges)
+      }
       try container.encodeIfPresent(self.serviceClassId, forKey: .serviceClassId)
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.subnetwork, forKey: .subnetwork)

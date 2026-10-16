@@ -92,9 +92,13 @@ public struct CreateOSPolicyAssignmentRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.osPolicyAssignment, forKey: .osPolicyAssignment)
-    try container.encode(self.osPolicyAssignmentId, forKey: .osPolicyAssignmentId)
+    if !self.osPolicyAssignmentId.isEmpty {
+      try container.encode(self.osPolicyAssignmentId, forKey: .osPolicyAssignmentId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

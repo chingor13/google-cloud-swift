@@ -107,10 +107,16 @@ public struct CreateOrchestrationClusterRequest: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.orchestrationClusterId, forKey: .orchestrationClusterId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.orchestrationClusterId.isEmpty {
+      try container.encode(self.orchestrationClusterId, forKey: .orchestrationClusterId)
+    }
     try container.encodeIfPresent(self.orchestrationCluster, forKey: .orchestrationCluster)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -149,16 +149,32 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.instanceType, forKey: .instanceType)
-    try container.encode(self.inputResources, forKey: .inputResources)
-    try container.encode(self.outputResources, forKey: .outputResources)
-    try container.encode(self.state, forKey: .state)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.instanceType != Instance.InstanceType() {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
+    if !self.inputResources.isEmpty {
+      try container.encode(self.inputResources, forKey: .inputResources)
+    }
+    if !self.outputResources.isEmpty {
+      try container.encode(self.outputResources, forKey: .outputResources)
+    }
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -282,9 +298,15 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataType, forKey: .dataType)
-      try container.encode(self.consumerNode, forKey: .consumerNode)
-      try container.encode(self.inputResourceBinding, forKey: .inputResourceBinding)
+      if self.dataType != GoogleCloudVideoAIV1.DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
+      if !self.consumerNode.isEmpty {
+        try container.encode(self.consumerNode, forKey: .consumerNode)
+      }
+      if !self.inputResourceBinding.isEmpty {
+        try container.encode(self.inputResourceBinding, forKey: .inputResourceBinding)
+      }
       try container.encodeIfPresent(self.annotations, forKey: .annotations)
 
       if let choice = self.inputResourceInformation {
@@ -431,11 +453,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.outputResource, forKey: .outputResource)
-      try container.encode(self.producerNode, forKey: .producerNode)
-      try container.encode(self.outputResourceBinding, forKey: .outputResourceBinding)
-      try container.encode(self.isTemporary, forKey: .isTemporary)
-      try container.encode(self.autogen, forKey: .autogen)
+      if !self.outputResource.isEmpty {
+        try container.encode(self.outputResource, forKey: .outputResource)
+      }
+      if !self.producerNode.isEmpty {
+        try container.encode(self.producerNode, forKey: .producerNode)
+      }
+      if !self.outputResourceBinding.isEmpty {
+        try container.encode(self.outputResourceBinding, forKey: .outputResourceBinding)
+      }
+      if self.isTemporary {
+        try container.encode(self.isTemporary, forKey: .isTemporary)
+      }
+      if self.autogen {
+        try container.encode(self.autogen, forKey: .autogen)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

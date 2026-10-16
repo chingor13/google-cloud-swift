@@ -457,36 +457,74 @@ public struct Vehicle: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.travelMode, forKey: .travelMode)
+    if self.travelMode != Vehicle.TravelMode() {
+      try container.encode(self.travelMode, forKey: .travelMode)
+    }
     try container.encodeIfPresent(self.routeModifiers, forKey: .routeModifiers)
     try container.encodeIfPresent(self.startLocation, forKey: .startLocation)
     try container.encodeIfPresent(self.startWaypoint, forKey: .startWaypoint)
     try container.encodeIfPresent(self.endLocation, forKey: .endLocation)
     try container.encodeIfPresent(self.endWaypoint, forKey: .endWaypoint)
-    try container.encode(self.startTags, forKey: .startTags)
-    try container.encode(self.endTags, forKey: .endTags)
-    try container.encode(self.startTimeWindows, forKey: .startTimeWindows)
-    try container.encode(self.endTimeWindows, forKey: .endTimeWindows)
+    if !self.startTags.isEmpty {
+      try container.encode(self.startTags, forKey: .startTags)
+    }
+    if !self.endTags.isEmpty {
+      try container.encode(self.endTags, forKey: .endTags)
+    }
+    if !self.startTimeWindows.isEmpty {
+      try container.encode(self.startTimeWindows, forKey: .startTimeWindows)
+    }
+    if !self.endTimeWindows.isEmpty {
+      try container.encode(self.endTimeWindows, forKey: .endTimeWindows)
+    }
     try container.encodeIfPresent(self.travelDurationMultiple, forKey: .travelDurationMultiple)
-    try container.encode(self.unloadingPolicy, forKey: .unloadingPolicy)
-    try container.encode(self.loadLimits, forKey: .loadLimits)
-    try container.encode(self.costPerHour, forKey: .costPerHour)
-    try container.encode(self.costPerTraveledHour, forKey: .costPerTraveledHour)
-    try container.encode(self.costPerKilometer, forKey: .costPerKilometer)
-    try container.encode(self.fixedCost, forKey: .fixedCost)
-    try container.encode(self.usedIfRouteIsEmpty, forKey: .usedIfRouteIsEmpty)
+    if self.unloadingPolicy != Vehicle.UnloadingPolicy() {
+      try container.encode(self.unloadingPolicy, forKey: .unloadingPolicy)
+    }
+    if !self.loadLimits.isEmpty {
+      try container.encode(self.loadLimits, forKey: .loadLimits)
+    }
+    if self.costPerHour != 0 {
+      try container.encode(self.costPerHour, forKey: .costPerHour)
+    }
+    if self.costPerTraveledHour != 0 {
+      try container.encode(self.costPerTraveledHour, forKey: .costPerTraveledHour)
+    }
+    if self.costPerKilometer != 0 {
+      try container.encode(self.costPerKilometer, forKey: .costPerKilometer)
+    }
+    if self.fixedCost != 0 {
+      try container.encode(self.fixedCost, forKey: .fixedCost)
+    }
+    if self.usedIfRouteIsEmpty {
+      try container.encode(self.usedIfRouteIsEmpty, forKey: .usedIfRouteIsEmpty)
+    }
     try container.encodeIfPresent(self.routeDurationLimit, forKey: .routeDurationLimit)
     try container.encodeIfPresent(self.travelDurationLimit, forKey: .travelDurationLimit)
     try container.encodeIfPresent(self.routeDistanceLimit, forKey: .routeDistanceLimit)
-    try container.encode(
-      self.extraVisitDurationForVisitType, forKey: .extraVisitDurationForVisitType)
+    if !self.extraVisitDurationForVisitType.isEmpty {
+      try container.encode(
+        self.extraVisitDurationForVisitType, forKey: .extraVisitDurationForVisitType)
+    }
     try container.encodeIfPresent(self.breakRule, forKey: .breakRule)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.ignore, forKey: .ignore)
-    try container.encode(self.breakRuleIndices, forKey: .breakRuleIndices)
-    try container.encode(self.capacities, forKey: .capacities)
-    try container.encode(self.startLoadIntervals, forKey: .startLoadIntervals)
-    try container.encode(self.endLoadIntervals, forKey: .endLoadIntervals)
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if self.ignore {
+      try container.encode(self.ignore, forKey: .ignore)
+    }
+    if !self.breakRuleIndices.isEmpty {
+      try container.encode(self.breakRuleIndices, forKey: .breakRuleIndices)
+    }
+    if !self.capacities.isEmpty {
+      try container.encode(self.capacities, forKey: .capacities)
+    }
+    if !self.startLoadIntervals.isEmpty {
+      try container.encode(self.startLoadIntervals, forKey: .startLoadIntervals)
+    }
+    if !self.endLoadIntervals.isEmpty {
+      try container.encode(self.endLoadIntervals, forKey: .endLoadIntervals)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -593,8 +631,12 @@ public struct Vehicle: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.maxLoad, forKey: .maxLoad)
-      try container.encode(self.softMaxLoad, forKey: .softMaxLoad)
-      try container.encode(self.costPerUnitAboveSoftMax, forKey: .costPerUnitAboveSoftMax)
+      if self.softMaxLoad != 0 {
+        try container.encode(self.softMaxLoad, forKey: .softMaxLoad)
+      }
+      if self.costPerUnitAboveSoftMax != 0 {
+        try container.encode(self.costPerUnitAboveSoftMax, forKey: .costPerUnitAboveSoftMax)
+      }
       try container.encodeIfPresent(self.startLoadInterval, forKey: .startLoadInterval)
       try container.encodeIfPresent(self.endLoadInterval, forKey: .endLoadInterval)
       for (key, value) in self._unknownFields.json {
@@ -675,7 +717,9 @@ public struct Vehicle: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.min, forKey: .min)
+        if self.min != 0 {
+          try container.encode(self.min, forKey: .min)
+        }
         try container.encodeIfPresent(self.max, forKey: .max)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -103,10 +103,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.databaseId, forKey: .databaseId)
-      try container.encode(self.collectionId, forKey: .collectionId)
-      try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.databaseId.isEmpty {
+        try container.encode(self.databaseId, forKey: .databaseId)
+      }
+      if !self.collectionId.isEmpty {
+        try container.encode(self.collectionId, forKey: .collectionId)
+      }
+      if !self.gcsStagingDir.isEmpty {
+        try container.encode(self.gcsStagingDir, forKey: .gcsStagingDir)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -97,10 +97,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.errorSamples, forKey: .errorSamples)
+      if !self.errorSamples.isEmpty {
+        try container.encode(self.errorSamples, forKey: .errorSamples)
+      }
       try container.encodeIfPresent(self.errorConfig, forKey: .errorConfig)
-      try container.encode(self.joinedEventsCount, forKey: .joinedEventsCount)
-      try container.encode(self.unjoinedEventsCount, forKey: .unjoinedEventsCount)
+      if self.joinedEventsCount != 0 {
+        try container.encode(self.joinedEventsCount, forKey: .joinedEventsCount)
+      }
+      if self.unjoinedEventsCount != 0 {
+        try container.encode(self.unjoinedEventsCount, forKey: .unjoinedEventsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

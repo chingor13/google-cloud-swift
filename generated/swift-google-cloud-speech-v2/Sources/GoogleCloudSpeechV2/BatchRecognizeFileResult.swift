@@ -124,7 +124,9 @@ public struct BatchRecognizeFileResult: Codable, Equatable, GoogleWKT._AnyPackab
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.error, forKey: .error)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.uri, forKey: .uri)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
     try container.encodeIfPresent(self.transcript, forKey: .transcript)
 
     if let choice = self.result {

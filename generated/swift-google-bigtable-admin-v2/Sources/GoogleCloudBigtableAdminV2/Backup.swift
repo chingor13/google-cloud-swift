@@ -176,16 +176,28 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sourceTable, forKey: .sourceTable)
-    try container.encode(self.sourceBackup, forKey: .sourceBackup)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.sourceTable.isEmpty {
+      try container.encode(self.sourceTable, forKey: .sourceTable)
+    }
+    if !self.sourceBackup.isEmpty {
+      try container.encode(self.sourceBackup, forKey: .sourceBackup)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.sizeBytes, forKey: .sizeBytes)
-    try container.encode(self.state, forKey: .state)
+    if self.sizeBytes != 0 {
+      try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    }
+    if self.state != Backup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.encryptionInfo, forKey: .encryptionInfo)
-    try container.encode(self.backupType, forKey: .backupType)
+    if self.backupType != Backup.BackupType() {
+      try container.encode(self.backupType, forKey: .backupType)
+    }
     try container.encodeIfPresent(self.hotToStandardTime, forKey: .hotToStandardTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

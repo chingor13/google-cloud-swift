@@ -90,8 +90,12 @@ public struct CreateGatewaySecurityPolicyRequest: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.gatewaySecurityPolicyId, forKey: .gatewaySecurityPolicyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.gatewaySecurityPolicyId.isEmpty {
+      try container.encode(self.gatewaySecurityPolicyId, forKey: .gatewaySecurityPolicyId)
+    }
     try container.encodeIfPresent(self.gatewaySecurityPolicy, forKey: .gatewaySecurityPolicy)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -95,10 +95,18 @@ public struct AutoscalerStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.details, forKey: .details)
-    try container.encode(self.updateClusterOperationId, forKey: .updateClusterOperationId)
-    try container.encode(self.error, forKey: .error)
+    if self.state != AutoscalerState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.details.isEmpty {
+      try container.encode(self.details, forKey: .details)
+    }
+    if !self.updateClusterOperationId.isEmpty {
+      try container.encode(self.updateClusterOperationId, forKey: .updateClusterOperationId)
+    }
+    if !self.error.isEmpty {
+      try container.encode(self.error, forKey: .error)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

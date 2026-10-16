@@ -85,9 +85,15 @@ public struct SyncError: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.code, forKey: .code)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
-    try container.encode(self.errorResources, forKey: .errorResources)
+    if !self.code.isEmpty {
+      try container.encode(self.code, forKey: .code)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
+    if !self.errorResources.isEmpty {
+      try container.encode(self.errorResources, forKey: .errorResources)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

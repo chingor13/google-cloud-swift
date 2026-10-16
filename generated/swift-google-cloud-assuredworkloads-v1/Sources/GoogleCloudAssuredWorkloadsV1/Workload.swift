@@ -244,23 +244,49 @@ public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.resources, forKey: .resources)
-    try container.encode(self.complianceRegime, forKey: .complianceRegime)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.resources.isEmpty {
+      try container.encode(self.resources, forKey: .resources)
+    }
+    if self.complianceRegime != Workload.ComplianceRegime() {
+      try container.encode(self.complianceRegime, forKey: .complianceRegime)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.billingAccount, forKey: .billingAccount)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.provisionedResourcesParent, forKey: .provisionedResourcesParent)
+    if !self.billingAccount.isEmpty {
+      try container.encode(self.billingAccount, forKey: .billingAccount)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.provisionedResourcesParent.isEmpty {
+      try container.encode(self.provisionedResourcesParent, forKey: .provisionedResourcesParent)
+    }
     try container.encodeIfPresent(self.kmsSettings, forKey: .kmsSettings)
-    try container.encode(self.resourceSettings, forKey: .resourceSettings)
-    try container.encode(self.kajEnrollmentState, forKey: .kajEnrollmentState)
-    try container.encode(self.enableSovereignControls, forKey: .enableSovereignControls)
+    if !self.resourceSettings.isEmpty {
+      try container.encode(self.resourceSettings, forKey: .resourceSettings)
+    }
+    if self.kajEnrollmentState != Workload.KajEnrollmentState() {
+      try container.encode(self.kajEnrollmentState, forKey: .kajEnrollmentState)
+    }
+    if self.enableSovereignControls {
+      try container.encode(self.enableSovereignControls, forKey: .enableSovereignControls)
+    }
     try container.encodeIfPresent(self.saaEnrollmentResponse, forKey: .saaEnrollmentResponse)
-    try container.encode(
-      self.compliantButDisallowedServices, forKey: .compliantButDisallowedServices)
-    try container.encode(self.partner, forKey: .partner)
+    if !self.compliantButDisallowedServices.isEmpty {
+      try container.encode(
+        self.compliantButDisallowedServices, forKey: .compliantButDisallowedServices)
+    }
+    if self.partner != Workload.Partner() {
+      try container.encode(self.partner, forKey: .partner)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -330,8 +356,12 @@ public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceId, forKey: .resourceId)
-      try container.encode(self.resourceType, forKey: .resourceType)
+      if self.resourceId != 0 {
+        try container.encode(self.resourceId, forKey: .resourceId)
+      }
+      if self.resourceType != Workload.ResourceInfo.ResourceType() {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -674,9 +704,15 @@ public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceId, forKey: .resourceId)
-      try container.encode(self.resourceType, forKey: .resourceType)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.resourceId.isEmpty {
+        try container.encode(self.resourceId, forKey: .resourceId)
+      }
+      if self.resourceType != Workload.ResourceInfo.ResourceType() {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -766,7 +802,9 @@ public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.setupStatus, forKey: .setupStatus)
-      try container.encode(self.setupErrors, forKey: .setupErrors)
+      if !self.setupErrors.isEmpty {
+        try container.encode(self.setupErrors, forKey: .setupErrors)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

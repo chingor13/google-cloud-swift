@@ -72,7 +72,9 @@ public struct BadRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fieldViolations, forKey: .fieldViolations)
+    if !self.fieldViolations.isEmpty {
+      try container.encode(self.fieldViolations, forKey: .fieldViolations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -195,9 +197,15 @@ public struct BadRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.field, forKey: .field)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.reason, forKey: .reason)
+      if !self.field.isEmpty {
+        try container.encode(self.field, forKey: .field)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.reason.isEmpty {
+        try container.encode(self.reason, forKey: .reason)
+      }
       try container.encodeIfPresent(self.localizedMessage, forKey: .localizedMessage)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

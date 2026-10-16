@@ -173,14 +173,26 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.state != GoogleCloudDataplexV1.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.triggerSpec, forKey: .triggerSpec)
     try container.encodeIfPresent(self.executionSpec, forKey: .executionSpec)
     try container.encodeIfPresent(self.executionStatus, forKey: .executionStatus)
@@ -397,8 +409,12 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.executorsCount, forKey: .executorsCount)
-        try container.encode(self.maxExecutorsCount, forKey: .maxExecutorsCount)
+        if self.executorsCount != 0 {
+          try container.encode(self.executorsCount, forKey: .executorsCount)
+        }
+        if self.maxExecutorsCount != 0 {
+          try container.encode(self.maxExecutorsCount, forKey: .maxExecutorsCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -513,10 +529,18 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.image, forKey: .image)
-        try container.encode(self.javaJars, forKey: .javaJars)
-        try container.encode(self.pythonPackages, forKey: .pythonPackages)
-        try container.encode(self.properties, forKey: .properties)
+        if !self.image.isEmpty {
+          try container.encode(self.image, forKey: .image)
+        }
+        if !self.javaJars.isEmpty {
+          try container.encode(self.javaJars, forKey: .javaJars)
+        }
+        if !self.pythonPackages.isEmpty {
+          try container.encode(self.pythonPackages, forKey: .pythonPackages)
+        }
+        if !self.properties.isEmpty {
+          try container.encode(self.properties, forKey: .properties)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -622,7 +646,9 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.networkTags, forKey: .networkTags)
+        if !self.networkTags.isEmpty {
+          try container.encode(self.networkTags, forKey: .networkTags)
+        }
 
         if let choice = self.networkName {
           switch choice {
@@ -808,10 +834,16 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
+      if self.type != Task.TriggerSpec.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.maxRetries, forKey: .maxRetries)
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if self.maxRetries != 0 {
+        try container.encode(self.maxRetries, forKey: .maxRetries)
+      }
 
       if let choice = self.trigger {
         switch choice {
@@ -1078,11 +1110,19 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.args, forKey: .args)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
-      try container.encode(self.project, forKey: .project)
+      if !self.args.isEmpty {
+        try container.encode(self.args, forKey: .args)
+      }
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.maxJobExecutionLifetime, forKey: .maxJobExecutionLifetime)
-      try container.encode(self.kmsKey, forKey: .kmsKey)
+      if !self.kmsKey.isEmpty {
+        try container.encode(self.kmsKey, forKey: .kmsKey)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1228,8 +1268,12 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fileUris, forKey: .fileUris)
-      try container.encode(self.archiveUris, forKey: .archiveUris)
+      if !self.fileUris.isEmpty {
+        try container.encode(self.fileUris, forKey: .fileUris)
+      }
+      if !self.archiveUris.isEmpty {
+        try container.encode(self.archiveUris, forKey: .archiveUris)
+      }
       try container.encodeIfPresent(self.infrastructureSpec, forKey: .infrastructureSpec)
 
       if let choice = self.driver {
@@ -1382,10 +1426,16 @@ public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.notebook, forKey: .notebook)
+      if !self.notebook.isEmpty {
+        try container.encode(self.notebook, forKey: .notebook)
+      }
       try container.encodeIfPresent(self.infrastructureSpec, forKey: .infrastructureSpec)
-      try container.encode(self.fileUris, forKey: .fileUris)
-      try container.encode(self.archiveUris, forKey: .archiveUris)
+      if !self.fileUris.isEmpty {
+        try container.encode(self.fileUris, forKey: .fileUris)
+      }
+      if !self.archiveUris.isEmpty {
+        try container.encode(self.archiveUris, forKey: .archiveUris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -162,7 +162,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.accountNumber, forKey: .accountNumber)
+        if !self.accountNumber.isEmpty {
+          try container.encode(self.accountNumber, forKey: .accountNumber)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -270,10 +272,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.organizationId, forKey: .organizationId)
-        try container.encode(self.deploymentId, forKey: .deploymentId)
-        try container.encode(self.buttonId, forKey: .buttonId)
-        try container.encode(self.endpointDomain, forKey: .endpointDomain)
+        if !self.organizationId.isEmpty {
+          try container.encode(self.organizationId, forKey: .organizationId)
+        }
+        if !self.deploymentId.isEmpty {
+          try container.encode(self.deploymentId, forKey: .deploymentId)
+        }
+        if !self.buttonId.isEmpty {
+          try container.encode(self.buttonId, forKey: .buttonId)
+        }
+        if !self.endpointDomain.isEmpty {
+          try container.encode(self.endpointDomain, forKey: .endpointDomain)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

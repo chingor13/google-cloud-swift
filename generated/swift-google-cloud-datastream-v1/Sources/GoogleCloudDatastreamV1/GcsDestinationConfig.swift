@@ -115,8 +115,12 @@ public struct GcsDestinationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.fileRotationMb, forKey: .fileRotationMb)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if self.fileRotationMb != 0 {
+      try container.encode(self.fileRotationMb, forKey: .fileRotationMb)
+    }
     try container.encodeIfPresent(self.fileRotationInterval, forKey: .fileRotationInterval)
 
     if let choice = self.fileFormat {

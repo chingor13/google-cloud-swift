@@ -107,12 +107,22 @@ public struct WKTEnum: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.enumvalue, forKey: .enumvalue)
-    try container.encode(self.options, forKey: .options)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.enumvalue.isEmpty {
+      try container.encode(self.enumvalue, forKey: .enumvalue)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
     try container.encodeIfPresent(self.sourceContext, forKey: .sourceContext)
-    try container.encode(self.syntax, forKey: .syntax)
-    try container.encode(self.edition, forKey: .edition)
+    if self.syntax != WKTSyntax() {
+      try container.encode(self.syntax, forKey: .syntax)
+    }
+    if !self.edition.isEmpty {
+      try container.encode(self.edition, forKey: .edition)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

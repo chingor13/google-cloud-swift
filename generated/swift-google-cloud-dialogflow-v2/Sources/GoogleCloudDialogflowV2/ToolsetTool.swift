@@ -92,9 +92,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.toolset, forKey: .toolset)
-      try container.encode(self.operationId, forKey: .operationId)
-      try container.encode(self.confirmationRequirement, forKey: .confirmationRequirement)
+      if !self.toolset.isEmpty {
+        try container.encode(self.toolset, forKey: .toolset)
+      }
+      if !self.operationId.isEmpty {
+        try container.encode(self.operationId, forKey: .operationId)
+      }
+      if self.confirmationRequirement != Tool.ConfirmationRequirement() {
+        try container.encode(self.confirmationRequirement, forKey: .confirmationRequirement)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

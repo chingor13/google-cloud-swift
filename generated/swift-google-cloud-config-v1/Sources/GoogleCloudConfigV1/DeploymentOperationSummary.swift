@@ -107,11 +107,21 @@ public struct DeploymentOperationSummary: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deploymentStep, forKey: .deploymentStep)
-    try container.encode(self.build, forKey: .build)
-    try container.encode(self.logs, forKey: .logs)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.artifacts, forKey: .artifacts)
+    if self.deploymentStep != DeploymentOperationMetadata.DeploymentStep() {
+      try container.encode(self.deploymentStep, forKey: .deploymentStep)
+    }
+    if !self.build.isEmpty {
+      try container.encode(self.build, forKey: .build)
+    }
+    if !self.logs.isEmpty {
+      try container.encode(self.logs, forKey: .logs)
+    }
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if !self.artifacts.isEmpty {
+      try container.encode(self.artifacts, forKey: .artifacts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

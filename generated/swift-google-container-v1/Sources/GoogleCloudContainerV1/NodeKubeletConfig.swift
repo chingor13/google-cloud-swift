@@ -369,27 +369,51 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpuManagerPolicy, forKey: .cpuManagerPolicy)
+    if !self.cpuManagerPolicy.isEmpty {
+      try container.encode(self.cpuManagerPolicy, forKey: .cpuManagerPolicy)
+    }
     try container.encodeIfPresent(self.topologyManager, forKey: .topologyManager)
     try container.encodeIfPresent(self.memoryManager, forKey: .memoryManager)
     try container.encodeIfPresent(self.cpuCfsQuota, forKey: .cpuCfsQuota)
-    try container.encode(self.cpuCfsQuotaPeriod, forKey: .cpuCfsQuotaPeriod)
-    try container.encode(self.podPidsLimit, forKey: .podPidsLimit)
+    if !self.cpuCfsQuotaPeriod.isEmpty {
+      try container.encode(self.cpuCfsQuotaPeriod, forKey: .cpuCfsQuotaPeriod)
+    }
+    if self.podPidsLimit != 0 {
+      try container.encode(self.podPidsLimit, forKey: .podPidsLimit)
+    }
     try container.encodeIfPresent(
       self.insecureKubeletReadonlyPortEnabled, forKey: .insecureKubeletReadonlyPortEnabled)
-    try container.encode(self.imageGcLowThresholdPercent, forKey: .imageGcLowThresholdPercent)
-    try container.encode(self.imageGcHighThresholdPercent, forKey: .imageGcHighThresholdPercent)
-    try container.encode(self.imageMinimumGcAge, forKey: .imageMinimumGcAge)
-    try container.encode(self.imageMaximumGcAge, forKey: .imageMaximumGcAge)
-    try container.encode(self.containerLogMaxSize, forKey: .containerLogMaxSize)
-    try container.encode(self.containerLogMaxFiles, forKey: .containerLogMaxFiles)
-    try container.encode(self.allowedUnsafeSysctls, forKey: .allowedUnsafeSysctls)
+    if self.imageGcLowThresholdPercent != 0 {
+      try container.encode(self.imageGcLowThresholdPercent, forKey: .imageGcLowThresholdPercent)
+    }
+    if self.imageGcHighThresholdPercent != 0 {
+      try container.encode(self.imageGcHighThresholdPercent, forKey: .imageGcHighThresholdPercent)
+    }
+    if !self.imageMinimumGcAge.isEmpty {
+      try container.encode(self.imageMinimumGcAge, forKey: .imageMinimumGcAge)
+    }
+    if !self.imageMaximumGcAge.isEmpty {
+      try container.encode(self.imageMaximumGcAge, forKey: .imageMaximumGcAge)
+    }
+    if !self.containerLogMaxSize.isEmpty {
+      try container.encode(self.containerLogMaxSize, forKey: .containerLogMaxSize)
+    }
+    if self.containerLogMaxFiles != 0 {
+      try container.encode(self.containerLogMaxFiles, forKey: .containerLogMaxFiles)
+    }
+    if !self.allowedUnsafeSysctls.isEmpty {
+      try container.encode(self.allowedUnsafeSysctls, forKey: .allowedUnsafeSysctls)
+    }
     try container.encodeIfPresent(self.evictionSoft, forKey: .evictionSoft)
     try container.encodeIfPresent(self.evictionSoftGracePeriod, forKey: .evictionSoftGracePeriod)
     try container.encodeIfPresent(self.evictionMinimumReclaim, forKey: .evictionMinimumReclaim)
-    try container.encode(
-      self.evictionMaxPodGracePeriodSeconds, forKey: .evictionMaxPodGracePeriodSeconds)
-    try container.encode(self.maxParallelImagePulls, forKey: .maxParallelImagePulls)
+    if self.evictionMaxPodGracePeriodSeconds != 0 {
+      try container.encode(
+        self.evictionMaxPodGracePeriodSeconds, forKey: .evictionMaxPodGracePeriodSeconds)
+    }
+    if self.maxParallelImagePulls != 0 {
+      try container.encode(self.maxParallelImagePulls, forKey: .maxParallelImagePulls)
+    }
     try container.encodeIfPresent(self.singleProcessOomKill, forKey: .singleProcessOomKill)
     try container.encodeIfPresent(self.crashLoopBackOff, forKey: .crashLoopBackOff)
     try container.encodeIfPresent(
@@ -466,7 +490,9 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxContainerRestartPeriod, forKey: .maxContainerRestartPeriod)
+      if !self.maxContainerRestartPeriod.isEmpty {
+        try container.encode(self.maxContainerRestartPeriod, forKey: .maxContainerRestartPeriod)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

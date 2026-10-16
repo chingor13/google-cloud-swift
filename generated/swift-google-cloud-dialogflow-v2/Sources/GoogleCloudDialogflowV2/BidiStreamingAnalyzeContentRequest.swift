@@ -199,7 +199,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.participant, forKey: .participant)
+        if !self.participant.isEmpty {
+          try container.encode(self.participant, forKey: .participant)
+        }
         try container.encodeIfPresent(
           self.initialVirtualAgentParameters, forKey: .initialVirtualAgentParameters)
         try container.encodeIfPresent(
@@ -342,13 +344,26 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.inputAudioEncoding, forKey: .inputAudioEncoding)
-          try container.encode(self.inputAudioSampleRateHertz, forKey: .inputAudioSampleRateHertz)
-          try container.encode(self.outputAudioEncoding, forKey: .outputAudioEncoding)
-          try container.encode(self.outputAudioSampleRateHertz, forKey: .outputAudioSampleRateHertz)
-          try container.encode(
-            self.enableCxProactiveProcessing, forKey: .enableCxProactiveProcessing)
-          try container.encode(self.enableStreamingSynthesize, forKey: .enableStreamingSynthesize)
+          if self.inputAudioEncoding != AudioEncoding() {
+            try container.encode(self.inputAudioEncoding, forKey: .inputAudioEncoding)
+          }
+          if self.inputAudioSampleRateHertz != 0 {
+            try container.encode(self.inputAudioSampleRateHertz, forKey: .inputAudioSampleRateHertz)
+          }
+          if self.outputAudioEncoding != OutputAudioEncoding() {
+            try container.encode(self.outputAudioEncoding, forKey: .outputAudioEncoding)
+          }
+          if self.outputAudioSampleRateHertz != 0 {
+            try container.encode(
+              self.outputAudioSampleRateHertz, forKey: .outputAudioSampleRateHertz)
+          }
+          if self.enableCxProactiveProcessing {
+            try container.encode(
+              self.enableCxProactiveProcessing, forKey: .enableCxProactiveProcessing)
+          }
+          if self.enableStreamingSynthesize {
+            try container.encode(self.enableStreamingSynthesize, forKey: .enableStreamingSynthesize)
+          }
           try container.encodeIfPresent(self.geminiAsrConfig, forKey: .geminiAsrConfig)
           try container.encodeIfPresent(self.useGeminiAsr, forKey: .useGeminiAsr)
           for (key, value) in self._unknownFields.json {

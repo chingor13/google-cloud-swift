@@ -137,14 +137,30 @@ public struct LinkedProducerVpcNetwork: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.serviceConsumerVpcSpoke, forKey: .serviceConsumerVpcSpoke)
-    try container.encode(self.peering, forKey: .peering)
-    try container.encode(self.producerNetwork, forKey: .producerNetwork)
-    try container.encode(self.excludeExportRanges, forKey: .excludeExportRanges)
-    try container.encode(self.includeExportRanges, forKey: .includeExportRanges)
-    try container.encode(self.proposedIncludeExportRanges, forKey: .proposedIncludeExportRanges)
-    try container.encode(self.proposedExcludeExportRanges, forKey: .proposedExcludeExportRanges)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.serviceConsumerVpcSpoke.isEmpty {
+      try container.encode(self.serviceConsumerVpcSpoke, forKey: .serviceConsumerVpcSpoke)
+    }
+    if !self.peering.isEmpty {
+      try container.encode(self.peering, forKey: .peering)
+    }
+    if !self.producerNetwork.isEmpty {
+      try container.encode(self.producerNetwork, forKey: .producerNetwork)
+    }
+    if !self.excludeExportRanges.isEmpty {
+      try container.encode(self.excludeExportRanges, forKey: .excludeExportRanges)
+    }
+    if !self.includeExportRanges.isEmpty {
+      try container.encode(self.includeExportRanges, forKey: .includeExportRanges)
+    }
+    if !self.proposedIncludeExportRanges.isEmpty {
+      try container.encode(self.proposedIncludeExportRanges, forKey: .proposedIncludeExportRanges)
+    }
+    if !self.proposedExcludeExportRanges.isEmpty {
+      try container.encode(self.proposedExcludeExportRanges, forKey: .proposedExcludeExportRanges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

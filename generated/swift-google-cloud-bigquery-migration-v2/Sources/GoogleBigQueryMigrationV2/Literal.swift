@@ -96,7 +96,9 @@ public struct Literal: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.relativePath, forKey: .relativePath)
+    if !self.relativePath.isEmpty {
+      try container.encode(self.relativePath, forKey: .relativePath)
+    }
 
     if let choice = self.literalData {
       switch choice {

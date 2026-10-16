@@ -81,7 +81,9 @@ public struct UpdateLogMetricRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metricName, forKey: .metricName)
+    if !self.metricName.isEmpty {
+      try container.encode(self.metricName, forKey: .metricName)
+    }
     try container.encodeIfPresent(self.metric, forKey: .metric)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

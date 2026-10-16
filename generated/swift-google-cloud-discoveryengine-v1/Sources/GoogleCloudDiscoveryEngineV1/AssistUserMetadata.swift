@@ -82,8 +82,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.timeZone, forKey: .timeZone)
-      try container.encode(self.preferredLanguageCode, forKey: .preferredLanguageCode)
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
+      if !self.preferredLanguageCode.isEmpty {
+        try container.encode(self.preferredLanguageCode, forKey: .preferredLanguageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

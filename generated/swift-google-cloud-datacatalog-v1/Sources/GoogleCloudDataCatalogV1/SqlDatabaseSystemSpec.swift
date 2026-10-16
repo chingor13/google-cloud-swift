@@ -102,9 +102,15 @@ public struct SqlDatabaseSystemSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sqlEngine, forKey: .sqlEngine)
-    try container.encode(self.databaseVersion, forKey: .databaseVersion)
-    try container.encode(self.instanceHost, forKey: .instanceHost)
+    if !self.sqlEngine.isEmpty {
+      try container.encode(self.sqlEngine, forKey: .sqlEngine)
+    }
+    if !self.databaseVersion.isEmpty {
+      try container.encode(self.databaseVersion, forKey: .databaseVersion)
+    }
+    if !self.instanceHost.isEmpty {
+      try container.encode(self.instanceHost, forKey: .instanceHost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -109,9 +109,15 @@ public struct DashboardFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labelKey, forKey: .labelKey)
-    try container.encode(self.templateVariable, forKey: .templateVariable)
-    try container.encode(self.filterType, forKey: .filterType)
+    if !self.labelKey.isEmpty {
+      try container.encode(self.labelKey, forKey: .labelKey)
+    }
+    if !self.templateVariable.isEmpty {
+      try container.encode(self.templateVariable, forKey: .templateVariable)
+    }
+    if self.filterType != DashboardFilter.FilterType() {
+      try container.encode(self.filterType, forKey: .filterType)
+    }
 
     if let choice = self.defaultValue {
       switch choice {

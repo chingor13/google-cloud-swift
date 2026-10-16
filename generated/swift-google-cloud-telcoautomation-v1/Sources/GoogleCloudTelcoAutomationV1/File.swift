@@ -95,10 +95,18 @@ public struct File: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.deleted, forKey: .deleted)
-    try container.encode(self.editable, forKey: .editable)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if self.deleted {
+      try container.encode(self.deleted, forKey: .deleted)
+    }
+    if self.editable {
+      try container.encode(self.editable, forKey: .editable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

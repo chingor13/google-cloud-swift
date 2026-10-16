@@ -91,7 +91,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       try container.encodeIfPresent(self.operation, forKey: .operation)
       try container.encodeIfPresent(self.serverCaCert, forKey: .serverCaCert)
       try container.encodeIfPresent(self.clientCert, forKey: .clientCert)

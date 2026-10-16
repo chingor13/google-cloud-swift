@@ -218,10 +218,14 @@ public struct NetworkPeering: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.peerNetwork, forKey: .peerNetwork)
+    if !self.peerNetwork.isEmpty {
+      try container.encode(self.peerNetwork, forKey: .peerNetwork)
+    }
     try container.encodeIfPresent(self.exportCustomRoutes, forKey: .exportCustomRoutes)
     try container.encodeIfPresent(self.importCustomRoutes, forKey: .importCustomRoutes)
     try container.encodeIfPresent(self.exchangeSubnetRoutes, forKey: .exchangeSubnetRoutes)
@@ -229,13 +233,27 @@ public struct NetworkPeering: Codable, Equatable, GoogleWKT._AnyPackable,
       self.exportCustomRoutesWithPublicIp, forKey: .exportCustomRoutesWithPublicIp)
     try container.encodeIfPresent(
       self.importCustomRoutesWithPublicIp, forKey: .importCustomRoutesWithPublicIp)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDetails, forKey: .stateDetails)
-    try container.encode(self.peerMtu, forKey: .peerMtu)
-    try container.encode(self.peerNetworkType, forKey: .peerNetworkType)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
-    try container.encode(self.description, forKey: .description)
+    if self.state != NetworkPeering.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDetails.isEmpty {
+      try container.encode(self.stateDetails, forKey: .stateDetails)
+    }
+    if self.peerMtu != 0 {
+      try container.encode(self.peerMtu, forKey: .peerMtu)
+    }
+    if self.peerNetworkType != NetworkPeering.PeerNetworkType() {
+      try container.encode(self.peerNetworkType, forKey: .peerNetworkType)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.vmwareEngineNetwork.isEmpty {
+      try container.encode(self.vmwareEngineNetwork, forKey: .vmwareEngineNetwork)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

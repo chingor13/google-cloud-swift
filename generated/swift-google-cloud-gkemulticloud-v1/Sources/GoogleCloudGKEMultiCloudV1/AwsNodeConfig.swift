@@ -191,15 +191,29 @@ public struct AwsNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceType, forKey: .instanceType)
+    if !self.instanceType.isEmpty {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
     try container.encodeIfPresent(self.rootVolume, forKey: .rootVolume)
-    try container.encode(self.taints, forKey: .taints)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.iamInstanceProfile, forKey: .iamInstanceProfile)
-    try container.encode(self.imageType, forKey: .imageType)
+    if !self.taints.isEmpty {
+      try container.encode(self.taints, forKey: .taints)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.iamInstanceProfile.isEmpty {
+      try container.encode(self.iamInstanceProfile, forKey: .iamInstanceProfile)
+    }
+    if !self.imageType.isEmpty {
+      try container.encode(self.imageType, forKey: .imageType)
+    }
     try container.encodeIfPresent(self.sshConfig, forKey: .sshConfig)
-    try container.encode(self.securityGroupIds, forKey: .securityGroupIds)
+    if !self.securityGroupIds.isEmpty {
+      try container.encode(self.securityGroupIds, forKey: .securityGroupIds)
+    }
     try container.encodeIfPresent(self.proxyConfig, forKey: .proxyConfig)
     try container.encodeIfPresent(self.configEncryption, forKey: .configEncryption)
     try container.encodeIfPresent(self.instancePlacement, forKey: .instancePlacement)

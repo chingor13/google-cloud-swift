@@ -109,11 +109,21 @@ public struct LookupEntryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.view, forKey: .view)
-    try container.encode(self.aspectTypes, forKey: .aspectTypes)
-    try container.encode(self.paths, forKey: .paths)
-    try container.encode(self.entry, forKey: .entry)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.view != EntryView() {
+      try container.encode(self.view, forKey: .view)
+    }
+    if !self.aspectTypes.isEmpty {
+      try container.encode(self.aspectTypes, forKey: .aspectTypes)
+    }
+    if !self.paths.isEmpty {
+      try container.encode(self.paths, forKey: .paths)
+    }
+    if !self.entry.isEmpty {
+      try container.encode(self.entry, forKey: .entry)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -96,10 +96,18 @@ public struct ExascaleConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalStorageSizeGb, forKey: .totalStorageSizeGb)
-    try container.encode(self.availableStorageSizeGb, forKey: .availableStorageSizeGb)
-    try container.encode(self.totalVmStorageSizeGb, forKey: .totalVmStorageSizeGb)
-    try container.encode(self.availableVmStorageSizeGb, forKey: .availableVmStorageSizeGb)
+    if self.totalStorageSizeGb != 0 {
+      try container.encode(self.totalStorageSizeGb, forKey: .totalStorageSizeGb)
+    }
+    if self.availableStorageSizeGb != 0 {
+      try container.encode(self.availableStorageSizeGb, forKey: .availableStorageSizeGb)
+    }
+    if self.totalVmStorageSizeGb != 0 {
+      try container.encode(self.totalVmStorageSizeGb, forKey: .totalVmStorageSizeGb)
+    }
+    if self.availableVmStorageSizeGb != 0 {
+      try container.encode(self.availableVmStorageSizeGb, forKey: .availableVmStorageSizeGb)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

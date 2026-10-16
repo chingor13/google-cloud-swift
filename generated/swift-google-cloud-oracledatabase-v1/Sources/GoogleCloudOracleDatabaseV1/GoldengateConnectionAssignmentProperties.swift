@@ -110,11 +110,21 @@ public struct GoldengateConnectionAssignmentProperties: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.goldengateConnection, forKey: .goldengateConnection)
-    try container.encode(self.goldengateDeployment, forKey: .goldengateDeployment)
-    try container.encode(self.alias, forKey: .alias)
-    try container.encode(self.state, forKey: .state)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if !self.goldengateConnection.isEmpty {
+      try container.encode(self.goldengateConnection, forKey: .goldengateConnection)
+    }
+    if !self.goldengateDeployment.isEmpty {
+      try container.encode(self.goldengateDeployment, forKey: .goldengateDeployment)
+    }
+    if !self.alias.isEmpty {
+      try container.encode(self.alias, forKey: .alias)
+    }
+    if self.state != GoldengateConnectionAssignmentProperties.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

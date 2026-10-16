@@ -120,9 +120,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.documentTemplate, forKey: .documentTemplate)
-      try container.encode(self.importGcsCustomMetadata, forKey: .importGcsCustomMetadata)
+      if self.importGcsCustomMetadata {
+        try container.encode(self.importGcsCustomMetadata, forKey: .importGcsCustomMetadata)
+      }
 
       if let choice = self.source {
         switch choice {

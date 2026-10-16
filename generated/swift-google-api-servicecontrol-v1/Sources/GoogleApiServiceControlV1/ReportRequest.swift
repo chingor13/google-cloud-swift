@@ -106,9 +106,15 @@ public struct ReportRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceName, forKey: .serviceName)
-    try container.encode(self.operations, forKey: .operations)
-    try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
+    if !self.serviceName.isEmpty {
+      try container.encode(self.serviceName, forKey: .serviceName)
+    }
+    if !self.operations.isEmpty {
+      try container.encode(self.operations, forKey: .operations)
+    }
+    if !self.serviceConfigId.isEmpty {
+      try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

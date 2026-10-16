@@ -80,8 +80,12 @@ public struct NodeTypeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
-    try container.encode(self.customCoreCount, forKey: .customCoreCount)
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
+    if self.customCoreCount != 0 {
+      try container.encode(self.customCoreCount, forKey: .customCoreCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

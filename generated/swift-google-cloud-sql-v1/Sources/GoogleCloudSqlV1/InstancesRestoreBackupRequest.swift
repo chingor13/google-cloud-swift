@@ -128,13 +128,21 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.restoreBackupContext, forKey: .restoreBackupContext)
-      try container.encode(self.backup, forKey: .backup)
-      try container.encode(self.backupdrBackup, forKey: .backupdrBackup)
+      if !self.backup.isEmpty {
+        try container.encode(self.backup, forKey: .backup)
+      }
+      if !self.backupdrBackup.isEmpty {
+        try container.encode(self.backupdrBackup, forKey: .backupdrBackup)
+      }
       try container.encodeIfPresent(self.restoreInstanceSettings, forKey: .restoreInstanceSettings)
-      try container.encode(
-        self.restoreInstanceClearOverridesFieldNames,
-        forKey: .restoreInstanceClearOverridesFieldNames)
-      try container.encode(self.ignoreMaintenanceVersion, forKey: .ignoreMaintenanceVersion)
+      if !self.restoreInstanceClearOverridesFieldNames.isEmpty {
+        try container.encode(
+          self.restoreInstanceClearOverridesFieldNames,
+          forKey: .restoreInstanceClearOverridesFieldNames)
+      }
+      if self.ignoreMaintenanceVersion {
+        try container.encode(self.ignoreMaintenanceVersion, forKey: .ignoreMaintenanceVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

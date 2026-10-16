@@ -101,10 +101,14 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.word, forKey: .word)
+      if !self.word.isEmpty {
+        try container.encode(self.word, forKey: .word)
+      }
       try container.encodeIfPresent(self.startOffset, forKey: .startOffset)
       try container.encodeIfPresent(self.endOffset, forKey: .endOffset)
-      try container.encode(self.confidence, forKey: .confidence)
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

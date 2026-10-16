@@ -123,12 +123,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.displayDetails, forKey: .displayDetails)
-      try container.encode(self.condition, forKey: .condition)
-      try container.encode(self.actions, forKey: .actions)
-      try container.encode(self.triggerEvent, forKey: .triggerEvent)
-      try container.encode(self.disableSuggestedReply, forKey: .disableSuggestedReply)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.displayDetails.isEmpty {
+        try container.encode(self.displayDetails, forKey: .displayDetails)
+      }
+      if !self.condition.isEmpty {
+        try container.encode(self.condition, forKey: .condition)
+      }
+      if !self.actions.isEmpty {
+        try container.encode(self.actions, forKey: .actions)
+      }
+      if self.triggerEvent != CompanionAgent.TriggerEvent() {
+        try container.encode(self.triggerEvent, forKey: .triggerEvent)
+      }
+      if self.disableSuggestedReply {
+        try container.encode(self.disableSuggestedReply, forKey: .disableSuggestedReply)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -188,7 +200,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.description, forKey: .description)
+        if !self.description.isEmpty {
+          try container.encode(self.description, forKey: .description)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -246,17 +246,29 @@ public struct ClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterType, forKey: .clusterType)
-    try container.encode(self.clusterTier, forKey: .clusterTier)
-    try container.encode(self.engine, forKey: .engine)
-    try container.encode(self.configBucket, forKey: .configBucket)
-    try container.encode(self.tempBucket, forKey: .tempBucket)
+    if self.clusterType != ClusterConfig.ClusterType() {
+      try container.encode(self.clusterType, forKey: .clusterType)
+    }
+    if self.clusterTier != ClusterConfig.ClusterTier() {
+      try container.encode(self.clusterTier, forKey: .clusterTier)
+    }
+    if self.engine != ClusterConfig.Engine() {
+      try container.encode(self.engine, forKey: .engine)
+    }
+    if !self.configBucket.isEmpty {
+      try container.encode(self.configBucket, forKey: .configBucket)
+    }
+    if !self.tempBucket.isEmpty {
+      try container.encode(self.tempBucket, forKey: .tempBucket)
+    }
     try container.encodeIfPresent(self.gceClusterConfig, forKey: .gceClusterConfig)
     try container.encodeIfPresent(self.masterConfig, forKey: .masterConfig)
     try container.encodeIfPresent(self.workerConfig, forKey: .workerConfig)
     try container.encodeIfPresent(self.secondaryWorkerConfig, forKey: .secondaryWorkerConfig)
     try container.encodeIfPresent(self.softwareConfig, forKey: .softwareConfig)
-    try container.encode(self.initializationActions, forKey: .initializationActions)
+    if !self.initializationActions.isEmpty {
+      try container.encode(self.initializationActions, forKey: .initializationActions)
+    }
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     try container.encodeIfPresent(self.autoscalingConfig, forKey: .autoscalingConfig)
     try container.encodeIfPresent(self.securityConfig, forKey: .securityConfig)
@@ -264,7 +276,9 @@ public struct ClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.endpointConfig, forKey: .endpointConfig)
     try container.encodeIfPresent(self.metastoreConfig, forKey: .metastoreConfig)
     try container.encodeIfPresent(self.dataprocMetricConfig, forKey: .dataprocMetricConfig)
-    try container.encode(self.auxiliaryNodeGroups, forKey: .auxiliaryNodeGroups)
+    if !self.auxiliaryNodeGroups.isEmpty {
+      try container.encode(self.auxiliaryNodeGroups, forKey: .auxiliaryNodeGroups)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

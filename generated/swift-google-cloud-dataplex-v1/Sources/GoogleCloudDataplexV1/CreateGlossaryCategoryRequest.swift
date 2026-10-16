@@ -86,8 +86,12 @@ public struct CreateGlossaryCategoryRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.categoryId, forKey: .categoryId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.categoryId.isEmpty {
+      try container.encode(self.categoryId, forKey: .categoryId)
+    }
     try container.encodeIfPresent(self.category, forKey: .category)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

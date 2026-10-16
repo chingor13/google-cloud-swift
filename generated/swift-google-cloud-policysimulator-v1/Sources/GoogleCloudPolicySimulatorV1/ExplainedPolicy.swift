@@ -142,11 +142,19 @@ public struct ExplainedPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.access, forKey: .access)
-    try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    if self.access != AccessState() {
+      try container.encode(self.access, forKey: .access)
+    }
+    if !self.fullResourceName.isEmpty {
+      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    }
     try container.encodeIfPresent(self.policy, forKey: .policy)
-    try container.encode(self.bindingExplanations, forKey: .bindingExplanations)
-    try container.encode(self.relevance, forKey: .relevance)
+    if !self.bindingExplanations.isEmpty {
+      try container.encode(self.bindingExplanations, forKey: .bindingExplanations)
+    }
+    if self.relevance != HeuristicRelevance() {
+      try container.encode(self.relevance, forKey: .relevance)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

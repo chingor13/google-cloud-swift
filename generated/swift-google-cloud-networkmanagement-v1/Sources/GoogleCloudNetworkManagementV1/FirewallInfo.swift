@@ -181,19 +181,45 @@ public struct FirewallInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.direction, forKey: .direction)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.targetTags, forKey: .targetTags)
-    try container.encode(self.targetServiceAccounts, forKey: .targetServiceAccounts)
-    try container.encode(self.policy, forKey: .policy)
-    try container.encode(self.policyUri, forKey: .policyUri)
-    try container.encode(self.firewallRuleType, forKey: .firewallRuleType)
-    try container.encode(self.policyPriority, forKey: .policyPriority)
-    try container.encode(self.targetType, forKey: .targetType)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.direction.isEmpty {
+      try container.encode(self.direction, forKey: .direction)
+    }
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
+    if self.priority != 0 {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.targetTags.isEmpty {
+      try container.encode(self.targetTags, forKey: .targetTags)
+    }
+    if !self.targetServiceAccounts.isEmpty {
+      try container.encode(self.targetServiceAccounts, forKey: .targetServiceAccounts)
+    }
+    if !self.policy.isEmpty {
+      try container.encode(self.policy, forKey: .policy)
+    }
+    if !self.policyUri.isEmpty {
+      try container.encode(self.policyUri, forKey: .policyUri)
+    }
+    if self.firewallRuleType != FirewallInfo.FirewallRuleType() {
+      try container.encode(self.firewallRuleType, forKey: .firewallRuleType)
+    }
+    if self.policyPriority != 0 {
+      try container.encode(self.policyPriority, forKey: .policyPriority)
+    }
+    if self.targetType != FirewallInfo.TargetType() {
+      try container.encode(self.targetType, forKey: .targetType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

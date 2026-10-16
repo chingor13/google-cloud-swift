@@ -94,10 +94,18 @@ public struct FileDiff: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.sha, forKey: .sha)
-    try container.encode(self.patch, forKey: .patch)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.action != FileDiff.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.sha.isEmpty {
+      try container.encode(self.sha, forKey: .sha)
+    }
+    if !self.patch.isEmpty {
+      try container.encode(self.patch, forKey: .patch)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

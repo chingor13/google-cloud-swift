@@ -119,10 +119,18 @@ public struct QueryMetricsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.timeGranularity, forKey: .timeGranularity)
-    try container.encode(self.dimensions, forKey: .dimensions)
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if self.timeGranularity != QueryMetricsRequest.TimeGranularity() {
+      try container.encode(self.timeGranularity, forKey: .timeGranularity)
+    }
+    if !self.dimensions.isEmpty {
+      try container.encode(self.dimensions, forKey: .dimensions)
+    }
     try container.encodeIfPresent(self.measureMask, forKey: .measureMask)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

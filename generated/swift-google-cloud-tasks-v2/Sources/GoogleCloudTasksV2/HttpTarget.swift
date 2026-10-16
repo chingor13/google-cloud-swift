@@ -170,8 +170,12 @@ public struct HttpTarget: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.uriOverride, forKey: .uriOverride)
-    try container.encode(self.httpMethod, forKey: .httpMethod)
-    try container.encode(self.headerOverrides, forKey: .headerOverrides)
+    if self.httpMethod != HttpMethod() {
+      try container.encode(self.httpMethod, forKey: .httpMethod)
+    }
+    if !self.headerOverrides.isEmpty {
+      try container.encode(self.headerOverrides, forKey: .headerOverrides)
+    }
 
     if let choice = self.authorizationHeader {
       switch choice {
@@ -246,8 +250,12 @@ public struct HttpTarget: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
-      try container.encode(self.value, forKey: .value)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

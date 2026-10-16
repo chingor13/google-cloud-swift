@@ -101,10 +101,18 @@ public struct YumSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.security, forKey: .security)
-    try container.encode(self.minimal, forKey: .minimal)
-    try container.encode(self.excludes, forKey: .excludes)
-    try container.encode(self.exclusivePackages, forKey: .exclusivePackages)
+    if self.security {
+      try container.encode(self.security, forKey: .security)
+    }
+    if self.minimal {
+      try container.encode(self.minimal, forKey: .minimal)
+    }
+    if !self.excludes.isEmpty {
+      try container.encode(self.excludes, forKey: .excludes)
+    }
+    if !self.exclusivePackages.isEmpty {
+      try container.encode(self.exclusivePackages, forKey: .exclusivePackages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

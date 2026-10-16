@@ -93,7 +93,9 @@ public struct InTotoProvenance: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.builderConfig, forKey: .builderConfig)
     try container.encodeIfPresent(self.recipe, forKey: .recipe)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.materials, forKey: .materials)
+    if !self.materials.isEmpty {
+      try container.encode(self.materials, forKey: .materials)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

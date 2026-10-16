@@ -198,19 +198,23 @@
       try container.encodeIfPresent(self.gatewayIpVersion, forKey: .gatewayIpVersion)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.stackType, forKey: .stackType)
-      try container.encode(self.vpnInterfaces, forKey: .vpnInterfaces)
+      if !self.vpnInterfaces.isEmpty {
+        try container.encode(self.vpnInterfaces, forKey: .vpnInterfaces)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

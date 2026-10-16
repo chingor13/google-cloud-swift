@@ -93,9 +93,15 @@ public struct ClusterOperationStatus: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.innerState, forKey: .innerState)
-    try container.encode(self.details, forKey: .details)
+    if self.state != ClusterOperationStatus.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.innerState.isEmpty {
+      try container.encode(self.innerState, forKey: .innerState)
+    }
+    if !self.details.isEmpty {
+      try container.encode(self.details, forKey: .details)
+    }
     try container.encodeIfPresent(self.stateStartTime, forKey: .stateStartTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

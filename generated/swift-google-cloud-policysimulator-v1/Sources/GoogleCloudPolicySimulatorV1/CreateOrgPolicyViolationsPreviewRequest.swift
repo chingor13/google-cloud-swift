@@ -104,10 +104,14 @@ public struct CreateOrgPolicyViolationsPreviewRequest: Codable, Equatable, Googl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(
       self.orgPolicyViolationsPreview, forKey: .orgPolicyViolationsPreview)
-    try container.encode(self.orgPolicyViolationsPreviewId, forKey: .orgPolicyViolationsPreviewId)
+    if !self.orgPolicyViolationsPreviewId.isEmpty {
+      try container.encode(self.orgPolicyViolationsPreviewId, forKey: .orgPolicyViolationsPreviewId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

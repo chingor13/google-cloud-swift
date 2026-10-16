@@ -118,7 +118,9 @@ public struct AmbientSoundConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.volumeGainDb, forKey: .volumeGainDb)
+    if self.volumeGainDb != 0 {
+      try container.encode(self.volumeGainDb, forKey: .volumeGainDb)
+    }
 
     if let choice = self.source {
       switch choice {

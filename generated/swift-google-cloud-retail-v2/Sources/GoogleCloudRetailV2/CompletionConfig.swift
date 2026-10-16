@@ -191,18 +191,34 @@ public struct CompletionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.matchingOrder, forKey: .matchingOrder)
-    try container.encode(self.maxSuggestions, forKey: .maxSuggestions)
-    try container.encode(self.minPrefixLength, forKey: .minPrefixLength)
-    try container.encode(self.autoLearning, forKey: .autoLearning)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.matchingOrder.isEmpty {
+      try container.encode(self.matchingOrder, forKey: .matchingOrder)
+    }
+    if self.maxSuggestions != 0 {
+      try container.encode(self.maxSuggestions, forKey: .maxSuggestions)
+    }
+    if self.minPrefixLength != 0 {
+      try container.encode(self.minPrefixLength, forKey: .minPrefixLength)
+    }
+    if self.autoLearning {
+      try container.encode(self.autoLearning, forKey: .autoLearning)
+    }
     try container.encodeIfPresent(self.suggestionsInputConfig, forKey: .suggestionsInputConfig)
-    try container.encode(
-      self.lastSuggestionsImportOperation, forKey: .lastSuggestionsImportOperation)
+    if !self.lastSuggestionsImportOperation.isEmpty {
+      try container.encode(
+        self.lastSuggestionsImportOperation, forKey: .lastSuggestionsImportOperation)
+    }
     try container.encodeIfPresent(self.denylistInputConfig, forKey: .denylistInputConfig)
-    try container.encode(self.lastDenylistImportOperation, forKey: .lastDenylistImportOperation)
+    if !self.lastDenylistImportOperation.isEmpty {
+      try container.encode(self.lastDenylistImportOperation, forKey: .lastDenylistImportOperation)
+    }
     try container.encodeIfPresent(self.allowlistInputConfig, forKey: .allowlistInputConfig)
-    try container.encode(self.lastAllowlistImportOperation, forKey: .lastAllowlistImportOperation)
+    if !self.lastAllowlistImportOperation.isEmpty {
+      try container.encode(self.lastAllowlistImportOperation, forKey: .lastAllowlistImportOperation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -87,9 +87,15 @@ public struct ListValuedResourcesResponse: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.valuedResources, forKey: .valuedResources)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.totalSize, forKey: .totalSize)
+    if !self.valuedResources.isEmpty {
+      try container.encode(self.valuedResources, forKey: .valuedResources)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

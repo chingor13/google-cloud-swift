@@ -75,7 +75,9 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.transformations, forKey: .transformations)
+    if !self.transformations.isEmpty {
+      try container.encode(self.transformations, forKey: .transformations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -143,7 +145,9 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.infoTypes, forKey: .infoTypes)
+      if !self.infoTypes.isEmpty {
+        try container.encode(self.infoTypes, forKey: .infoTypes)
+      }
       try container.encodeIfPresent(self.primitiveTransformation, forKey: .primitiveTransformation)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -142,9 +142,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataItemLabels, forKey: .dataItemLabels)
-      try container.encode(self.annotationLabels, forKey: .annotationLabels)
-      try container.encode(self.importSchemaUri, forKey: .importSchemaUri)
+      if !self.dataItemLabels.isEmpty {
+        try container.encode(self.dataItemLabels, forKey: .dataItemLabels)
+      }
+      if !self.annotationLabels.isEmpty {
+        try container.encode(self.annotationLabels, forKey: .annotationLabels)
+      }
+      if !self.importSchemaUri.isEmpty {
+        try container.encode(self.importSchemaUri, forKey: .importSchemaUri)
+      }
 
       if let choice = self.source {
         switch choice {

@@ -95,8 +95,12 @@ public struct PurgeProductsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.successCount, forKey: .successCount)
-    try container.encode(self.failureCount, forKey: .failureCount)
+    if self.successCount != 0 {
+      try container.encode(self.successCount, forKey: .successCount)
+    }
+    if self.failureCount != 0 {
+      try container.encode(self.failureCount, forKey: .failureCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

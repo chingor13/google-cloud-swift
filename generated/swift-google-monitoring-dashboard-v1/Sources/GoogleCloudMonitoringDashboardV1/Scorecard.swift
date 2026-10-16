@@ -149,7 +149,9 @@ public struct Scorecard: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.timeSeriesQuery, forKey: .timeSeriesQuery)
-    try container.encode(self.thresholds, forKey: .thresholds)
+    if !self.thresholds.isEmpty {
+      try container.encode(self.thresholds, forKey: .thresholds)
+    }
 
     if let choice = self.dataView {
       switch choice {
@@ -230,8 +232,12 @@ public struct Scorecard: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.lowerBound, forKey: .lowerBound)
-      try container.encode(self.upperBound, forKey: .upperBound)
+      if self.lowerBound != 0 {
+        try container.encode(self.lowerBound, forKey: .lowerBound)
+      }
+      if self.upperBound != 0 {
+        try container.encode(self.upperBound, forKey: .upperBound)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -325,7 +331,9 @@ public struct Scorecard: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sparkChartType, forKey: .sparkChartType)
+      if self.sparkChartType != SparkChartType() {
+        try container.encode(self.sparkChartType, forKey: .sparkChartType)
+      }
       try container.encodeIfPresent(self.minAlignmentPeriod, forKey: .minAlignmentPeriod)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

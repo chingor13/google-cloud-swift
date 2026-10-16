@@ -183,12 +183,24 @@ public struct Documentation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.summary, forKey: .summary)
-    try container.encode(self.pages, forKey: .pages)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.documentationRootUrl, forKey: .documentationRootUrl)
-    try container.encode(self.serviceRootUrl, forKey: .serviceRootUrl)
-    try container.encode(self.overview, forKey: .overview)
+    if !self.summary.isEmpty {
+      try container.encode(self.summary, forKey: .summary)
+    }
+    if !self.pages.isEmpty {
+      try container.encode(self.pages, forKey: .pages)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if !self.documentationRootUrl.isEmpty {
+      try container.encode(self.documentationRootUrl, forKey: .documentationRootUrl)
+    }
+    if !self.serviceRootUrl.isEmpty {
+      try container.encode(self.serviceRootUrl, forKey: .serviceRootUrl)
+    }
+    if !self.overview.isEmpty {
+      try container.encode(self.overview, forKey: .overview)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

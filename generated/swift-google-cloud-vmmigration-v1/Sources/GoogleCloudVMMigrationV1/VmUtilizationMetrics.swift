@@ -132,14 +132,30 @@ public struct VmUtilizationMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpuMaxPercent, forKey: .cpuMaxPercent)
-    try container.encode(self.cpuAveragePercent, forKey: .cpuAveragePercent)
-    try container.encode(self.memoryMaxPercent, forKey: .memoryMaxPercent)
-    try container.encode(self.memoryAveragePercent, forKey: .memoryAveragePercent)
-    try container.encode(self.diskIoRateMaxKbps, forKey: .diskIoRateMaxKbps)
-    try container.encode(self.diskIoRateAverageKbps, forKey: .diskIoRateAverageKbps)
-    try container.encode(self.networkThroughputMaxKbps, forKey: .networkThroughputMaxKbps)
-    try container.encode(self.networkThroughputAverageKbps, forKey: .networkThroughputAverageKbps)
+    if self.cpuMaxPercent != 0 {
+      try container.encode(self.cpuMaxPercent, forKey: .cpuMaxPercent)
+    }
+    if self.cpuAveragePercent != 0 {
+      try container.encode(self.cpuAveragePercent, forKey: .cpuAveragePercent)
+    }
+    if self.memoryMaxPercent != 0 {
+      try container.encode(self.memoryMaxPercent, forKey: .memoryMaxPercent)
+    }
+    if self.memoryAveragePercent != 0 {
+      try container.encode(self.memoryAveragePercent, forKey: .memoryAveragePercent)
+    }
+    if self.diskIoRateMaxKbps != 0 {
+      try container.encode(self.diskIoRateMaxKbps, forKey: .diskIoRateMaxKbps)
+    }
+    if self.diskIoRateAverageKbps != 0 {
+      try container.encode(self.diskIoRateAverageKbps, forKey: .diskIoRateAverageKbps)
+    }
+    if self.networkThroughputMaxKbps != 0 {
+      try container.encode(self.networkThroughputMaxKbps, forKey: .networkThroughputMaxKbps)
+    }
+    if self.networkThroughputAverageKbps != 0 {
+      try container.encode(self.networkThroughputAverageKbps, forKey: .networkThroughputAverageKbps)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -82,7 +82,7 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      if let v = content {
+      if let v = self.content {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .content
         )

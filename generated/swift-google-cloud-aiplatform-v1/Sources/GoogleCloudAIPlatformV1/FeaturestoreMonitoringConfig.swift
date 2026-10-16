@@ -199,9 +199,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.disabled, forKey: .disabled)
-        try container.encode(self.monitoringIntervalDays, forKey: .monitoringIntervalDays)
-        try container.encode(self.stalenessDays, forKey: .stalenessDays)
+        if self.disabled {
+          try container.encode(self.disabled, forKey: .disabled)
+        }
+        if self.monitoringIntervalDays != 0 {
+          try container.encode(self.monitoringIntervalDays, forKey: .monitoringIntervalDays)
+        }
+        if self.stalenessDays != 0 {
+          try container.encode(self.stalenessDays, forKey: .stalenessDays)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -306,8 +312,14 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.anomalyDetectionBaseline, forKey: .anomalyDetectionBaseline)
+        if self.state != FeaturestoreMonitoringConfig.ImportFeaturesAnalysis.State() {
+          try container.encode(self.state, forKey: .state)
+        }
+        if self.anomalyDetectionBaseline
+          != FeaturestoreMonitoringConfig.ImportFeaturesAnalysis.Baseline()
+        {
+          try container.encode(self.anomalyDetectionBaseline, forKey: .anomalyDetectionBaseline)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

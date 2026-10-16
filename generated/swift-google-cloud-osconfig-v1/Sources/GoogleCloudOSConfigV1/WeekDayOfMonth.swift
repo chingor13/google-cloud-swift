@@ -93,9 +93,15 @@ public struct WeekDayOfMonth: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.weekOrdinal, forKey: .weekOrdinal)
-    try container.encode(self.dayOfWeek, forKey: .dayOfWeek)
-    try container.encode(self.dayOffset, forKey: .dayOffset)
+    if self.weekOrdinal != 0 {
+      try container.encode(self.weekOrdinal, forKey: .weekOrdinal)
+    }
+    if self.dayOfWeek != GoogleType.DayOfWeek() {
+      try container.encode(self.dayOfWeek, forKey: .dayOfWeek)
+    }
+    if self.dayOffset != 0 {
+      try container.encode(self.dayOffset, forKey: .dayOffset)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

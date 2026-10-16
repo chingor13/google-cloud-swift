@@ -134,15 +134,25 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.webSearchQueries, forKey: .webSearchQueries)
+      if !self.webSearchQueries.isEmpty {
+        try container.encode(self.webSearchQueries, forKey: .webSearchQueries)
+      }
       try container.encodeIfPresent(self.searchEntryPoint, forKey: .searchEntryPoint)
-      try container.encode(self.retrievalQueries, forKey: .retrievalQueries)
-      try container.encode(self.groundingChunks, forKey: .groundingChunks)
-      try container.encode(self.groundingSupports, forKey: .groundingSupports)
+      if !self.retrievalQueries.isEmpty {
+        try container.encode(self.retrievalQueries, forKey: .retrievalQueries)
+      }
+      if !self.groundingChunks.isEmpty {
+        try container.encode(self.groundingChunks, forKey: .groundingChunks)
+      }
+      if !self.groundingSupports.isEmpty {
+        try container.encode(self.groundingSupports, forKey: .groundingSupports)
+      }
       try container.encodeIfPresent(self.retrievalMetadata, forKey: .retrievalMetadata)
       try container.encodeIfPresent(
         self.googleMapsWidgetContextToken, forKey: .googleMapsWidgetContextToken)
-      try container.encode(self.sourceFlaggingUris, forKey: .sourceFlaggingUris)
+      if !self.sourceFlaggingUris.isEmpty {
+        try container.encode(self.sourceFlaggingUris, forKey: .sourceFlaggingUris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -212,8 +222,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.sourceId, forKey: .sourceId)
-        try container.encode(self.flagContentUri, forKey: .flagContentUri)
+        if !self.sourceId.isEmpty {
+          try container.encode(self.sourceId, forKey: .sourceId)
+        }
+        if !self.flagContentUri.isEmpty {
+          try container.encode(self.flagContentUri, forKey: .flagContentUri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

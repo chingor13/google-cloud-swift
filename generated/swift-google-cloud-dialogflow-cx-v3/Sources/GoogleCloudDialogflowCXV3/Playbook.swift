@@ -221,23 +221,47 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.goal, forKey: .goal)
-      try container.encode(self.inputParameterDefinitions, forKey: .inputParameterDefinitions)
-      try container.encode(self.outputParameterDefinitions, forKey: .outputParameterDefinitions)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.goal.isEmpty {
+        try container.encode(self.goal, forKey: .goal)
+      }
+      if !self.inputParameterDefinitions.isEmpty {
+        try container.encode(self.inputParameterDefinitions, forKey: .inputParameterDefinitions)
+      }
+      if !self.outputParameterDefinitions.isEmpty {
+        try container.encode(self.outputParameterDefinitions, forKey: .outputParameterDefinitions)
+      }
       try container.encodeIfPresent(self.instruction, forKey: .instruction)
-      try container.encode(self.tokenCount, forKey: .tokenCount)
+      if self.tokenCount != 0 {
+        try container.encode(self.tokenCount, forKey: .tokenCount)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.referencedPlaybooks, forKey: .referencedPlaybooks)
-      try container.encode(self.referencedFlows, forKey: .referencedFlows)
-      try container.encode(self.referencedTools, forKey: .referencedTools)
-      try container.encode(self.inlineActions, forKey: .inlineActions)
+      if !self.referencedPlaybooks.isEmpty {
+        try container.encode(self.referencedPlaybooks, forKey: .referencedPlaybooks)
+      }
+      if !self.referencedFlows.isEmpty {
+        try container.encode(self.referencedFlows, forKey: .referencedFlows)
+      }
+      if !self.referencedTools.isEmpty {
+        try container.encode(self.referencedTools, forKey: .referencedTools)
+      }
+      if !self.inlineActions.isEmpty {
+        try container.encode(self.inlineActions, forKey: .inlineActions)
+      }
       try container.encodeIfPresent(self.codeBlock, forKey: .codeBlock)
       try container.encodeIfPresent(self.llmModelSettings, forKey: .llmModelSettings)
-      try container.encode(self.handlers, forKey: .handlers)
-      try container.encode(self.playbookType, forKey: .playbookType)
+      if !self.handlers.isEmpty {
+        try container.encode(self.handlers, forKey: .handlers)
+      }
+      if self.playbookType != Playbook.PlaybookType() {
+        try container.encode(self.playbookType, forKey: .playbookType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -315,7 +339,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.steps, forKey: .steps)
+        if !self.steps.isEmpty {
+          try container.encode(self.steps, forKey: .steps)
+        }
 
         if let choice = self.instruction {
           switch choice {
@@ -419,8 +445,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.guidelines, forKey: .guidelines)
-        try container.encode(self.steps, forKey: .steps)
+        if !self.guidelines.isEmpty {
+          try container.encode(self.guidelines, forKey: .guidelines)
+        }
+        if !self.steps.isEmpty {
+          try container.encode(self.steps, forKey: .steps)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

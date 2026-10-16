@@ -129,13 +129,21 @@ public struct BitbucketDataCenterConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostUri, forKey: .hostUri)
-    try container.encode(self.webhookSecretSecretVersion, forKey: .webhookSecretSecretVersion)
+    if !self.hostUri.isEmpty {
+      try container.encode(self.hostUri, forKey: .hostUri)
+    }
+    if !self.webhookSecretSecretVersion.isEmpty {
+      try container.encode(self.webhookSecretSecretVersion, forKey: .webhookSecretSecretVersion)
+    }
     try container.encodeIfPresent(self.readAuthorizerCredential, forKey: .readAuthorizerCredential)
     try container.encodeIfPresent(self.authorizerCredential, forKey: .authorizerCredential)
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
-    try container.encode(self.sslCaCertificate, forKey: .sslCaCertificate)
-    try container.encode(self.serverVersion, forKey: .serverVersion)
+    if !self.sslCaCertificate.isEmpty {
+      try container.encode(self.sslCaCertificate, forKey: .sslCaCertificate)
+    }
+    if !self.serverVersion.isEmpty {
+      try container.encode(self.serverVersion, forKey: .serverVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

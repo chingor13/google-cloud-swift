@@ -158,14 +158,30 @@ public struct AudioStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.codec, forKey: .codec)
-    try container.encode(self.bitrateBps, forKey: .bitrateBps)
-    try container.encode(self.channelCount, forKey: .channelCount)
-    try container.encode(self.channelLayout, forKey: .channelLayout)
-    try container.encode(self.mapping, forKey: .mapping)
-    try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.codec.isEmpty {
+      try container.encode(self.codec, forKey: .codec)
+    }
+    if self.bitrateBps != 0 {
+      try container.encode(self.bitrateBps, forKey: .bitrateBps)
+    }
+    if self.channelCount != 0 {
+      try container.encode(self.channelCount, forKey: .channelCount)
+    }
+    if !self.channelLayout.isEmpty {
+      try container.encode(self.channelLayout, forKey: .channelLayout)
+    }
+    if !self.mapping.isEmpty {
+      try container.encode(self.mapping, forKey: .mapping)
+    }
+    if self.sampleRateHertz != 0 {
+      try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -279,12 +295,24 @@ public struct AudioStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.atomKey, forKey: .atomKey)
-      try container.encode(self.inputKey, forKey: .inputKey)
-      try container.encode(self.inputTrack, forKey: .inputTrack)
-      try container.encode(self.inputChannel, forKey: .inputChannel)
-      try container.encode(self.outputChannel, forKey: .outputChannel)
-      try container.encode(self.gainDb, forKey: .gainDb)
+      if !self.atomKey.isEmpty {
+        try container.encode(self.atomKey, forKey: .atomKey)
+      }
+      if !self.inputKey.isEmpty {
+        try container.encode(self.inputKey, forKey: .inputKey)
+      }
+      if self.inputTrack != 0 {
+        try container.encode(self.inputTrack, forKey: .inputTrack)
+      }
+      if self.inputChannel != 0 {
+        try container.encode(self.inputChannel, forKey: .inputChannel)
+      }
+      if self.outputChannel != 0 {
+        try container.encode(self.outputChannel, forKey: .outputChannel)
+      }
+      if self.gainDb != 0 {
+        try container.encode(self.gainDb, forKey: .gainDb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

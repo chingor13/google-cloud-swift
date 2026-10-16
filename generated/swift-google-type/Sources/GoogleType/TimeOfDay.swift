@@ -104,10 +104,18 @@ public struct TimeOfDay: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hours, forKey: .hours)
-    try container.encode(self.minutes, forKey: .minutes)
-    try container.encode(self.seconds, forKey: .seconds)
-    try container.encode(self.nanos, forKey: .nanos)
+    if self.hours != 0 {
+      try container.encode(self.hours, forKey: .hours)
+    }
+    if self.minutes != 0 {
+      try container.encode(self.minutes, forKey: .minutes)
+    }
+    if self.seconds != 0 {
+      try container.encode(self.seconds, forKey: .seconds)
+    }
+    if self.nanos != 0 {
+      try container.encode(self.nanos, forKey: .nanos)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

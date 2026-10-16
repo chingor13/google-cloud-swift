@@ -100,9 +100,15 @@ public struct Attributes: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.criticality, forKey: .criticality)
     try container.encodeIfPresent(self.environment, forKey: .environment)
-    try container.encode(self.developerOwners, forKey: .developerOwners)
-    try container.encode(self.operatorOwners, forKey: .operatorOwners)
-    try container.encode(self.businessOwners, forKey: .businessOwners)
+    if !self.developerOwners.isEmpty {
+      try container.encode(self.developerOwners, forKey: .developerOwners)
+    }
+    if !self.operatorOwners.isEmpty {
+      try container.encode(self.operatorOwners, forKey: .operatorOwners)
+    }
+    if !self.businessOwners.isEmpty {
+      try container.encode(self.businessOwners, forKey: .businessOwners)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

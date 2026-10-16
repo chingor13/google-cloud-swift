@@ -134,12 +134,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.autoExpansionMode, forKey: .autoExpansionMode)
-      try container.encode(self.entities, forKey: .entities)
-      try container.encode(self.enableFuzzyExtraction, forKey: .enableFuzzyExtraction)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.kind != EntityType.Kind() {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.autoExpansionMode != EntityType.AutoExpansionMode() {
+        try container.encode(self.autoExpansionMode, forKey: .autoExpansionMode)
+      }
+      if !self.entities.isEmpty {
+        try container.encode(self.entities, forKey: .entities)
+      }
+      if self.enableFuzzyExtraction {
+        try container.encode(self.enableFuzzyExtraction, forKey: .enableFuzzyExtraction)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -222,8 +234,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.value, forKey: .value)
-        try container.encode(self.synonyms, forKey: .synonyms)
+        if !self.value.isEmpty {
+          try container.encode(self.value, forKey: .value)
+        }
+        if !self.synonyms.isEmpty {
+          try container.encode(self.synonyms, forKey: .synonyms)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -406,47 +406,127 @@ public struct BackupRecoveryJobReportLog: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.jobName, forKey: .jobName)
-    try container.encode(self.jobCategory, forKey: .jobCategory)
-    try container.encode(self.jobType, forKey: .jobType)
-    try container.encode(self.logBackup, forKey: .logBackup)
-    try container.encode(self.jobStatus, forKey: .jobStatus)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.errorCode, forKey: .errorCode)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
-    try container.encode(self.jobInitiationFailureReason, forKey: .jobInitiationFailureReason)
-    try container.encode(self.jobStartTime, forKey: .jobStartTime)
-    try container.encode(self.jobEndTime, forKey: .jobEndTime)
-    try container.encode(self.jobQueuedTime, forKey: .jobQueuedTime)
-    try container.encode(self.jobDurationInHours, forKey: .jobDurationInHours)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.backupRulePolicyName, forKey: .backupRulePolicyName)
-    try container.encode(self.backupPlanPolicyTemplate, forKey: .backupPlanPolicyTemplate)
-    try container.encode(self.backupType, forKey: .backupType)
-    try container.encode(self.recoveryPoint, forKey: .recoveryPoint)
-    try container.encode(self.backupConsistency, forKey: .backupConsistency)
-    try container.encode(self.targetHostName, forKey: .targetHostName)
-    try container.encode(self.targetApplianceName, forKey: .targetApplianceName)
-    try container.encode(self.targetPoolName, forKey: .targetPoolName)
-    try container.encode(self.resourceDataSizeInGib, forKey: .resourceDataSizeInGib)
-    try container.encode(self.dataCopiedInGib, forKey: .dataCopiedInGib)
-    try container.encode(
-      self.onvaultPoolStorageConsumedInGib, forKey: .onvaultPoolStorageConsumedInGib)
-    try container.encode(self.preCompressInGib, forKey: .preCompressInGib)
-    try container.encode(self.compressionRatio, forKey: .compressionRatio)
-    try container.encode(self.dataChangeRate, forKey: .dataChangeRate)
-    try container.encode(self.snapshotDiskSizeInGib, forKey: .snapshotDiskSizeInGib)
-    try container.encode(self.dataWrittenInGib, forKey: .dataWrittenInGib)
-    try container.encode(self.dataSentInGib, forKey: .dataSentInGib)
-    try container.encode(self.jobId, forKey: .jobId)
-    try container.encode(self.hostId, forKey: .hostId)
-    try container.encode(self.backupRulePolicyId, forKey: .backupRulePolicyId)
-    try container.encode(self.resourceId, forKey: .resourceId)
-    try container.encode(self.targetPoolId, forKey: .targetPoolId)
-    try container.encode(self.targetHostId, forKey: .targetHostId)
-    try container.encode(self.targetApplianceId, forKey: .targetApplianceId)
+    if !self.jobName.isEmpty {
+      try container.encode(self.jobName, forKey: .jobName)
+    }
+    if !self.jobCategory.isEmpty {
+      try container.encode(self.jobCategory, forKey: .jobCategory)
+    }
+    if !self.jobType.isEmpty {
+      try container.encode(self.jobType, forKey: .jobType)
+    }
+    if !self.logBackup.isEmpty {
+      try container.encode(self.logBackup, forKey: .logBackup)
+    }
+    if !self.jobStatus.isEmpty {
+      try container.encode(self.jobStatus, forKey: .jobStatus)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if self.errorCode != 0 {
+      try container.encode(self.errorCode, forKey: .errorCode)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
+    if !self.jobInitiationFailureReason.isEmpty {
+      try container.encode(self.jobInitiationFailureReason, forKey: .jobInitiationFailureReason)
+    }
+    if !self.jobStartTime.isEmpty {
+      try container.encode(self.jobStartTime, forKey: .jobStartTime)
+    }
+    if !self.jobEndTime.isEmpty {
+      try container.encode(self.jobEndTime, forKey: .jobEndTime)
+    }
+    if !self.jobQueuedTime.isEmpty {
+      try container.encode(self.jobQueuedTime, forKey: .jobQueuedTime)
+    }
+    if self.jobDurationInHours != 0 {
+      try container.encode(self.jobDurationInHours, forKey: .jobDurationInHours)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.applianceName.isEmpty {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.backupRulePolicyName.isEmpty {
+      try container.encode(self.backupRulePolicyName, forKey: .backupRulePolicyName)
+    }
+    if !self.backupPlanPolicyTemplate.isEmpty {
+      try container.encode(self.backupPlanPolicyTemplate, forKey: .backupPlanPolicyTemplate)
+    }
+    if !self.backupType.isEmpty {
+      try container.encode(self.backupType, forKey: .backupType)
+    }
+    if !self.recoveryPoint.isEmpty {
+      try container.encode(self.recoveryPoint, forKey: .recoveryPoint)
+    }
+    if !self.backupConsistency.isEmpty {
+      try container.encode(self.backupConsistency, forKey: .backupConsistency)
+    }
+    if !self.targetHostName.isEmpty {
+      try container.encode(self.targetHostName, forKey: .targetHostName)
+    }
+    if !self.targetApplianceName.isEmpty {
+      try container.encode(self.targetApplianceName, forKey: .targetApplianceName)
+    }
+    if !self.targetPoolName.isEmpty {
+      try container.encode(self.targetPoolName, forKey: .targetPoolName)
+    }
+    if self.resourceDataSizeInGib != 0 {
+      try container.encode(self.resourceDataSizeInGib, forKey: .resourceDataSizeInGib)
+    }
+    if self.dataCopiedInGib != 0 {
+      try container.encode(self.dataCopiedInGib, forKey: .dataCopiedInGib)
+    }
+    if self.onvaultPoolStorageConsumedInGib != 0 {
+      try container.encode(
+        self.onvaultPoolStorageConsumedInGib, forKey: .onvaultPoolStorageConsumedInGib)
+    }
+    if self.preCompressInGib != 0 {
+      try container.encode(self.preCompressInGib, forKey: .preCompressInGib)
+    }
+    if self.compressionRatio != 0 {
+      try container.encode(self.compressionRatio, forKey: .compressionRatio)
+    }
+    if self.dataChangeRate != 0 {
+      try container.encode(self.dataChangeRate, forKey: .dataChangeRate)
+    }
+    if self.snapshotDiskSizeInGib != 0 {
+      try container.encode(self.snapshotDiskSizeInGib, forKey: .snapshotDiskSizeInGib)
+    }
+    if self.dataWrittenInGib != 0 {
+      try container.encode(self.dataWrittenInGib, forKey: .dataWrittenInGib)
+    }
+    if self.dataSentInGib != 0 {
+      try container.encode(self.dataSentInGib, forKey: .dataSentInGib)
+    }
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
+    if !self.hostId.isEmpty {
+      try container.encode(self.hostId, forKey: .hostId)
+    }
+    if !self.backupRulePolicyId.isEmpty {
+      try container.encode(self.backupRulePolicyId, forKey: .backupRulePolicyId)
+    }
+    if !self.resourceId.isEmpty {
+      try container.encode(self.resourceId, forKey: .resourceId)
+    }
+    if !self.targetPoolId.isEmpty {
+      try container.encode(self.targetPoolId, forKey: .targetPoolId)
+    }
+    if !self.targetHostId.isEmpty {
+      try container.encode(self.targetHostId, forKey: .targetHostId)
+    }
+    if !self.targetApplianceId.isEmpty {
+      try container.encode(self.targetApplianceId, forKey: .targetApplianceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

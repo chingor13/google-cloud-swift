@@ -78,8 +78,12 @@ public struct MerkleTree: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rootDigestHex, forKey: .rootDigestHex)
-    try container.encode(self.numTransactions, forKey: .numTransactions)
+    if !self.rootDigestHex.isEmpty {
+      try container.encode(self.rootDigestHex, forKey: .rootDigestHex)
+    }
+    if self.numTransactions != 0 {
+      try container.encode(self.numTransactions, forKey: .numTransactions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -101,11 +101,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.playbook, forKey: .playbook)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.playbook.isEmpty {
+        try container.encode(self.playbook, forKey: .playbook)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.playbookInput, forKey: .playbookInput)
       try container.encodeIfPresent(self.playbookOutput, forKey: .playbookOutput)
-      try container.encode(self.playbookState, forKey: .playbookState)
+      if self.playbookState != OutputState() {
+        try container.encode(self.playbookState, forKey: .playbookState)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

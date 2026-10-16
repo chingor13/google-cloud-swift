@@ -202,22 +202,50 @@ public struct HttpRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.requestMethod, forKey: .requestMethod)
-    try container.encode(self.requestUrl, forKey: .requestUrl)
-    try container.encode(self.requestSize, forKey: .requestSize)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.responseSize, forKey: .responseSize)
-    try container.encode(self.userAgent, forKey: .userAgent)
-    try container.encode(self.remoteIp, forKey: .remoteIp)
-    try container.encode(self.serverIp, forKey: .serverIp)
-    try container.encode(self.referer, forKey: .referer)
+    if !self.requestMethod.isEmpty {
+      try container.encode(self.requestMethod, forKey: .requestMethod)
+    }
+    if !self.requestUrl.isEmpty {
+      try container.encode(self.requestUrl, forKey: .requestUrl)
+    }
+    if self.requestSize != 0 {
+      try container.encode(self.requestSize, forKey: .requestSize)
+    }
+    if self.status != 0 {
+      try container.encode(self.status, forKey: .status)
+    }
+    if self.responseSize != 0 {
+      try container.encode(self.responseSize, forKey: .responseSize)
+    }
+    if !self.userAgent.isEmpty {
+      try container.encode(self.userAgent, forKey: .userAgent)
+    }
+    if !self.remoteIp.isEmpty {
+      try container.encode(self.remoteIp, forKey: .remoteIp)
+    }
+    if !self.serverIp.isEmpty {
+      try container.encode(self.serverIp, forKey: .serverIp)
+    }
+    if !self.referer.isEmpty {
+      try container.encode(self.referer, forKey: .referer)
+    }
     try container.encodeIfPresent(self.latency, forKey: .latency)
-    try container.encode(self.cacheLookup, forKey: .cacheLookup)
-    try container.encode(self.cacheHit, forKey: .cacheHit)
-    try container.encode(
-      self.cacheValidatedWithOriginServer, forKey: .cacheValidatedWithOriginServer)
-    try container.encode(self.cacheFillBytes, forKey: .cacheFillBytes)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
+    if self.cacheLookup {
+      try container.encode(self.cacheLookup, forKey: .cacheLookup)
+    }
+    if self.cacheHit {
+      try container.encode(self.cacheHit, forKey: .cacheHit)
+    }
+    if self.cacheValidatedWithOriginServer {
+      try container.encode(
+        self.cacheValidatedWithOriginServer, forKey: .cacheValidatedWithOriginServer)
+    }
+    if self.cacheFillBytes != 0 {
+      try container.encode(self.cacheFillBytes, forKey: .cacheFillBytes)
+    }
+    if !self.`protocol`.isEmpty {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

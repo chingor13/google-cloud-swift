@@ -132,9 +132,13 @@ public struct MethodSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
     try container.encodeIfPresent(self.longRunning, forKey: .longRunning)
-    try container.encode(self.autoPopulatedFields, forKey: .autoPopulatedFields)
+    if !self.autoPopulatedFields.isEmpty {
+      try container.encode(self.autoPopulatedFields, forKey: .autoPopulatedFields)
+    }
     try container.encodeIfPresent(self.batching, forKey: .batching)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -224,7 +228,9 @@ public struct MethodSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.initialPollDelay, forKey: .initialPollDelay)
-      try container.encode(self.pollDelayMultiplier, forKey: .pollDelayMultiplier)
+      if self.pollDelayMultiplier != 0 {
+        try container.encode(self.pollDelayMultiplier, forKey: .pollDelayMultiplier)
+      }
       try container.encodeIfPresent(self.maxPollDelay, forKey: .maxPollDelay)
       try container.encodeIfPresent(self.totalPollTimeout, forKey: .totalPollTimeout)
       for (key, value) in self._unknownFields.json {

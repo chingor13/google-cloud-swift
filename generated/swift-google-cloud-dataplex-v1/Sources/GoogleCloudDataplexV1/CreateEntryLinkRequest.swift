@@ -89,8 +89,12 @@ public struct CreateEntryLinkRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.entryLinkId, forKey: .entryLinkId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.entryLinkId.isEmpty {
+      try container.encode(self.entryLinkId, forKey: .entryLinkId)
+    }
     try container.encodeIfPresent(self.entryLink, forKey: .entryLink)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

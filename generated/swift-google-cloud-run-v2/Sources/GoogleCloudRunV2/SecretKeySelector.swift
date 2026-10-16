@@ -82,8 +82,12 @@ public struct SecretKeySelector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.secret, forKey: .secret)
-    try container.encode(self.version, forKey: .version)
+    if !self.secret.isEmpty {
+      try container.encode(self.secret, forKey: .secret)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

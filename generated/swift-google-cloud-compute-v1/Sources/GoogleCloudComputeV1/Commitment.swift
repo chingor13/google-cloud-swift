@@ -294,18 +294,26 @@
       try container.encodeIfPresent(self.customEndTimestamp, forKey: .customEndTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.endTimestamp, forKey: .endTimestamp)
-      try container.encode(self.existingReservations, forKey: .existingReservations)
+      if !self.existingReservations.isEmpty {
+        try container.encode(self.existingReservations, forKey: .existingReservations)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.licenseResource, forKey: .licenseResource)
-      try container.encode(self.mergeSourceCommitments, forKey: .mergeSourceCommitments)
+      if !self.mergeSourceCommitments.isEmpty {
+        try container.encode(self.mergeSourceCommitments, forKey: .mergeSourceCommitments)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.plan, forKey: .plan)
       try container.encodeIfPresent(self.region, forKey: .region)
-      try container.encode(self.reservations, forKey: .reservations)
+      if !self.reservations.isEmpty {
+        try container.encode(self.reservations, forKey: .reservations)
+      }
       try container.encodeIfPresent(self.resourceStatus, forKey: .resourceStatus)
-      try container.encode(self.resources, forKey: .resources)
+      if !self.resources.isEmpty {
+        try container.encode(self.resources, forKey: .resources)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.splitSourceCommitment, forKey: .splitSourceCommitment)
       try container.encodeIfPresent(self.startTimestamp, forKey: .startTimestamp)

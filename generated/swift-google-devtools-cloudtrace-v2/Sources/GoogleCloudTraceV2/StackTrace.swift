@@ -85,7 +85,9 @@ public struct StackTrace: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.stackFrames, forKey: .stackFrames)
-    try container.encode(self.stackTraceHashId, forKey: .stackTraceHashId)
+    if self.stackTraceHashId != 0 {
+      try container.encode(self.stackTraceHashId, forKey: .stackTraceHashId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -193,8 +195,12 @@ public struct StackTrace: Codable, Equatable, GoogleWKT._AnyPackable,
       try container.encodeIfPresent(self.functionName, forKey: .functionName)
       try container.encodeIfPresent(self.originalFunctionName, forKey: .originalFunctionName)
       try container.encodeIfPresent(self.fileName, forKey: .fileName)
-      try container.encode(self.lineNumber, forKey: .lineNumber)
-      try container.encode(self.columnNumber, forKey: .columnNumber)
+      if self.lineNumber != 0 {
+        try container.encode(self.lineNumber, forKey: .lineNumber)
+      }
+      if self.columnNumber != 0 {
+        try container.encode(self.columnNumber, forKey: .columnNumber)
+      }
       try container.encodeIfPresent(self.loadModule, forKey: .loadModule)
       try container.encodeIfPresent(self.sourceVersion, forKey: .sourceVersion)
       for (key, value) in self._unknownFields.json {
@@ -286,8 +292,12 @@ public struct StackTrace: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.frame, forKey: .frame)
-      try container.encode(self.droppedFramesCount, forKey: .droppedFramesCount)
+      if !self.frame.isEmpty {
+        try container.encode(self.frame, forKey: .frame)
+      }
+      if self.droppedFramesCount != 0 {
+        try container.encode(self.droppedFramesCount, forKey: .droppedFramesCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

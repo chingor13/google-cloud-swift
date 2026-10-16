@@ -81,8 +81,12 @@ public struct AwsNodePoolAutoscaling: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.minNodeCount, forKey: .minNodeCount)
-    try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
+    if self.minNodeCount != 0 {
+      try container.encode(self.minNodeCount, forKey: .minNodeCount)
+    }
+    if self.maxNodeCount != 0 {
+      try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -107,10 +107,16 @@ public struct Source: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.artifactStorageSourceUri, forKey: .artifactStorageSourceUri)
-    try container.encode(self.fileHashes, forKey: .fileHashes)
+    if !self.artifactStorageSourceUri.isEmpty {
+      try container.encode(self.artifactStorageSourceUri, forKey: .artifactStorageSourceUri)
+    }
+    if !self.fileHashes.isEmpty {
+      try container.encode(self.fileHashes, forKey: .fileHashes)
+    }
     try container.encodeIfPresent(self.context, forKey: .context)
-    try container.encode(self.additionalContexts, forKey: .additionalContexts)
+    if !self.additionalContexts.isEmpty {
+      try container.encode(self.additionalContexts, forKey: .additionalContexts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

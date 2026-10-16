@@ -134,15 +134,33 @@ public struct UnprotectedResourceReportLog: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostName, forKey: .hostName)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.instanceName, forKey: .instanceName)
-    try container.encode(self.discoveredOn, forKey: .discoveredOn)
-    try container.encode(self.discoveredBy, forKey: .discoveredBy)
-    try container.encode(self.applianceId, forKey: .applianceId)
-    try container.encode(self.resourceId, forKey: .resourceId)
-    try container.encode(self.hostId, forKey: .hostId)
+    if !self.hostName.isEmpty {
+      try container.encode(self.hostName, forKey: .hostName)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.instanceName.isEmpty {
+      try container.encode(self.instanceName, forKey: .instanceName)
+    }
+    if !self.discoveredOn.isEmpty {
+      try container.encode(self.discoveredOn, forKey: .discoveredOn)
+    }
+    if !self.discoveredBy.isEmpty {
+      try container.encode(self.discoveredBy, forKey: .discoveredBy)
+    }
+    if !self.applianceId.isEmpty {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
+    if !self.resourceId.isEmpty {
+      try container.encode(self.resourceId, forKey: .resourceId)
+    }
+    if !self.hostId.isEmpty {
+      try container.encode(self.hostId, forKey: .hostId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -103,10 +103,18 @@ public struct PlaceOrderRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.lineItemInfo, forKey: .lineItemInfo)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.lineItemInfo.isEmpty {
+      try container.encode(self.lineItemInfo, forKey: .lineItemInfo)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

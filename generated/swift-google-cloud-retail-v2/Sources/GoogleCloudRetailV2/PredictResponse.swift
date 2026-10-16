@@ -101,10 +101,18 @@ public struct PredictResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.results, forKey: .results)
-    try container.encode(self.attributionToken, forKey: .attributionToken)
-    try container.encode(self.missingIds, forKey: .missingIds)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.results.isEmpty {
+      try container.encode(self.results, forKey: .results)
+    }
+    if !self.attributionToken.isEmpty {
+      try container.encode(self.attributionToken, forKey: .attributionToken)
+    }
+    if !self.missingIds.isEmpty {
+      try container.encode(self.missingIds, forKey: .missingIds)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -179,8 +187,12 @@ public struct PredictResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.metadata, forKey: .metadata)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.metadata.isEmpty {
+        try container.encode(self.metadata, forKey: .metadata)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

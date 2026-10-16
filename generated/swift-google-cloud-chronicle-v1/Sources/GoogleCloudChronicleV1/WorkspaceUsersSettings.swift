@@ -88,8 +88,12 @@ public struct WorkspaceUsersSettings: Codable, Equatable, GoogleWKT._AnyPackable
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.workspaceCustomerId, forKey: .workspaceCustomerId)
-    try container.encode(self.projectionType, forKey: .projectionType)
+    if !self.workspaceCustomerId.isEmpty {
+      try container.encode(self.workspaceCustomerId, forKey: .workspaceCustomerId)
+    }
+    if self.projectionType != WorkspaceUsersSettings.ProjectionType() {
+      try container.encode(self.projectionType, forKey: .projectionType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

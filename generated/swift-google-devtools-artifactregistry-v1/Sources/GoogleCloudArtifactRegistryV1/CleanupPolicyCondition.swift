@@ -109,9 +109,15 @@ public struct CleanupPolicyCondition: Codable, Equatable, GoogleWKT._AnyPackable
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.tagState, forKey: .tagState)
-    try container.encode(self.tagPrefixes, forKey: .tagPrefixes)
-    try container.encode(self.versionNamePrefixes, forKey: .versionNamePrefixes)
-    try container.encode(self.packageNamePrefixes, forKey: .packageNamePrefixes)
+    if !self.tagPrefixes.isEmpty {
+      try container.encode(self.tagPrefixes, forKey: .tagPrefixes)
+    }
+    if !self.versionNamePrefixes.isEmpty {
+      try container.encode(self.versionNamePrefixes, forKey: .versionNamePrefixes)
+    }
+    if !self.packageNamePrefixes.isEmpty {
+      try container.encode(self.packageNamePrefixes, forKey: .packageNamePrefixes)
+    }
     try container.encodeIfPresent(self.olderThan, forKey: .olderThan)
     try container.encodeIfPresent(self.newerThan, forKey: .newerThan)
     for (key, value) in self._unknownFields.json {

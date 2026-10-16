@@ -120,12 +120,22 @@ public struct Contact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.email, forKey: .email)
-    try container.encode(
-      self.notificationCategorySubscriptions, forKey: .notificationCategorySubscriptions)
-    try container.encode(self.languageTag, forKey: .languageTag)
-    try container.encode(self.validationState, forKey: .validationState)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
+    if !self.notificationCategorySubscriptions.isEmpty {
+      try container.encode(
+        self.notificationCategorySubscriptions, forKey: .notificationCategorySubscriptions)
+    }
+    if !self.languageTag.isEmpty {
+      try container.encode(self.languageTag, forKey: .languageTag)
+    }
+    if self.validationState != ValidationState() {
+      try container.encode(self.validationState, forKey: .validationState)
+    }
     try container.encodeIfPresent(self.validateTime, forKey: .validateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

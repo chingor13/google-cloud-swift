@@ -121,10 +121,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.count, forKey: .count)
-      try container.encode(self.outputFieldSpecs, forKey: .outputFieldSpecs)
-      try container.encode(self.examples, forKey: .examples)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
+      if !self.outputFieldSpecs.isEmpty {
+        try container.encode(self.outputFieldSpecs, forKey: .outputFieldSpecs)
+      }
+      if !self.examples.isEmpty {
+        try container.encode(self.examples, forKey: .examples)
+      }
 
       if let choice = self.strategy {
         switch choice {

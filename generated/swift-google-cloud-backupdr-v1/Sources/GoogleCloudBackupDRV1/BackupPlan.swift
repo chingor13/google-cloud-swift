@@ -214,21 +214,47 @@ public struct BackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.backupRules, forKey: .backupRules)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.backupVault, forKey: .backupVault)
-    try container.encode(self.backupVaultServiceAccount, forKey: .backupVaultServiceAccount)
-    try container.encode(self.logRetentionDays, forKey: .logRetentionDays)
-    try container.encode(self.supportedResourceTypes, forKey: .supportedResourceTypes)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.revisionName, forKey: .revisionName)
+    if !self.backupRules.isEmpty {
+      try container.encode(self.backupRules, forKey: .backupRules)
+    }
+    if self.state != BackupPlan.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.backupVault.isEmpty {
+      try container.encode(self.backupVault, forKey: .backupVault)
+    }
+    if !self.backupVaultServiceAccount.isEmpty {
+      try container.encode(self.backupVaultServiceAccount, forKey: .backupVaultServiceAccount)
+    }
+    if self.logRetentionDays != 0 {
+      try container.encode(self.logRetentionDays, forKey: .logRetentionDays)
+    }
+    if !self.supportedResourceTypes.isEmpty {
+      try container.encode(self.supportedResourceTypes, forKey: .supportedResourceTypes)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.revisionName.isEmpty {
+      try container.encode(self.revisionName, forKey: .revisionName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -128,14 +128,28 @@ public struct UpgradeEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.operation, forKey: .operation)
+    if self.resourceType != UpgradeResourceType() {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.operation.isEmpty {
+      try container.encode(self.operation, forKey: .operation)
+    }
     try container.encodeIfPresent(self.operationStartTime, forKey: .operationStartTime)
-    try container.encode(self.currentVersion, forKey: .currentVersion)
-    try container.encode(self.targetVersion, forKey: .targetVersion)
-    try container.encode(self.currentEmulatedVersion, forKey: .currentEmulatedVersion)
-    try container.encode(self.targetEmulatedVersion, forKey: .targetEmulatedVersion)
-    try container.encode(self.resource, forKey: .resource)
+    if !self.currentVersion.isEmpty {
+      try container.encode(self.currentVersion, forKey: .currentVersion)
+    }
+    if !self.targetVersion.isEmpty {
+      try container.encode(self.targetVersion, forKey: .targetVersion)
+    }
+    if !self.currentEmulatedVersion.isEmpty {
+      try container.encode(self.currentEmulatedVersion, forKey: .currentEmulatedVersion)
+    }
+    if !self.targetEmulatedVersion.isEmpty {
+      try container.encode(self.targetEmulatedVersion, forKey: .targetEmulatedVersion)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

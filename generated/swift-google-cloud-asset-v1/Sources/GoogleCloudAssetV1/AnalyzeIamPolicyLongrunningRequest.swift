@@ -103,7 +103,9 @@ public struct AnalyzeIamPolicyLongrunningRequest: Codable, Equatable, GoogleWKT.
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.analysisQuery, forKey: .analysisQuery)
-    try container.encode(self.savedAnalysisQuery, forKey: .savedAnalysisQuery)
+    if !self.savedAnalysisQuery.isEmpty {
+      try container.encode(self.savedAnalysisQuery, forKey: .savedAnalysisQuery)
+    }
     try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

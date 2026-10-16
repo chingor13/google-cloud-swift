@@ -193,9 +193,15 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.spanId, forKey: .spanId)
-    try container.encode(self.parentSpanId, forKey: .parentSpanId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.spanId.isEmpty {
+      try container.encode(self.spanId, forKey: .spanId)
+    }
+    if !self.parentSpanId.isEmpty {
+      try container.encode(self.parentSpanId, forKey: .parentSpanId)
+    }
     try container.encodeIfPresent(self.displayName, forKey: .displayName)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
@@ -206,7 +212,9 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.status, forKey: .status)
     try container.encodeIfPresent(self.sameProcessAsParentSpan, forKey: .sameProcessAsParentSpan)
     try container.encodeIfPresent(self.childSpanCount, forKey: .childSpanCount)
-    try container.encode(self.spanKind, forKey: .spanKind)
+    if self.spanKind != Span.SpanKind() {
+      try container.encode(self.spanKind, forKey: .spanKind)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -284,8 +292,12 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attributeMap, forKey: .attributeMap)
-      try container.encode(self.droppedAttributesCount, forKey: .droppedAttributesCount)
+      if !self.attributeMap.isEmpty {
+        try container.encode(self.attributeMap, forKey: .attributeMap)
+      }
+      if self.droppedAttributesCount != 0 {
+        try container.encode(self.droppedAttributesCount, forKey: .droppedAttributesCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -581,10 +593,18 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.uncompressedSizeBytes, forKey: .uncompressedSizeBytes)
-        try container.encode(self.compressedSizeBytes, forKey: .compressedSizeBytes)
+        if self.type != Span.TimeEvent.MessageEvent.Type_() {
+          try container.encode(self.type, forKey: .type)
+        }
+        if self.id != 0 {
+          try container.encode(self.id, forKey: .id)
+        }
+        if self.uncompressedSizeBytes != 0 {
+          try container.encode(self.uncompressedSizeBytes, forKey: .uncompressedSizeBytes)
+        }
+        if self.compressedSizeBytes != 0 {
+          try container.encode(self.compressedSizeBytes, forKey: .compressedSizeBytes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -836,9 +856,15 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.timeEvent, forKey: .timeEvent)
-      try container.encode(self.droppedAnnotationsCount, forKey: .droppedAnnotationsCount)
-      try container.encode(self.droppedMessageEventsCount, forKey: .droppedMessageEventsCount)
+      if !self.timeEvent.isEmpty {
+        try container.encode(self.timeEvent, forKey: .timeEvent)
+      }
+      if self.droppedAnnotationsCount != 0 {
+        try container.encode(self.droppedAnnotationsCount, forKey: .droppedAnnotationsCount)
+      }
+      if self.droppedMessageEventsCount != 0 {
+        try container.encode(self.droppedMessageEventsCount, forKey: .droppedMessageEventsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -944,9 +970,15 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.traceId, forKey: .traceId)
-      try container.encode(self.spanId, forKey: .spanId)
-      try container.encode(self.type, forKey: .type)
+      if !self.traceId.isEmpty {
+        try container.encode(self.traceId, forKey: .traceId)
+      }
+      if !self.spanId.isEmpty {
+        try container.encode(self.spanId, forKey: .spanId)
+      }
+      if self.type != Span.Link.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
       try container.encodeIfPresent(self.attributes, forKey: .attributes)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1155,8 +1187,12 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.link, forKey: .link)
-      try container.encode(self.droppedLinksCount, forKey: .droppedLinksCount)
+      if !self.link.isEmpty {
+        try container.encode(self.link, forKey: .link)
+      }
+      if self.droppedLinksCount != 0 {
+        try container.encode(self.droppedLinksCount, forKey: .droppedLinksCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

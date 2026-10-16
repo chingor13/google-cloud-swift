@@ -113,7 +113,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matchResponseCodes, forKey: .matchResponseCodes)
+      if !self.matchResponseCodes.isEmpty {
+        try container.encode(self.matchResponseCodes, forKey: .matchResponseCodes)
+      }
       try container.encodeIfPresent(self.overrideResponseCode, forKey: .overrideResponseCode)
       try container.encodeIfPresent(self.path, forKey: .path)
       for (key, value) in self._unknownFields.json {

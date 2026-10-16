@@ -90,9 +90,15 @@ public struct AwsCrossAccountRole: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.iamRoleId, forKey: .iamRoleId)
-    try container.encode(self.iamUserId, forKey: .iamUserId)
-    try container.encode(self.externalId, forKey: .externalId)
+    if !self.iamRoleId.isEmpty {
+      try container.encode(self.iamRoleId, forKey: .iamRoleId)
+    }
+    if !self.iamUserId.isEmpty {
+      try container.encode(self.iamUserId, forKey: .iamUserId)
+    }
+    if !self.externalId.isEmpty {
+      try container.encode(self.externalId, forKey: .externalId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

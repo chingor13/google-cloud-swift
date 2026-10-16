@@ -77,7 +77,9 @@ public struct QueryError: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.locator, forKey: .locator)
-    try container.encode(self.message, forKey: .message)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

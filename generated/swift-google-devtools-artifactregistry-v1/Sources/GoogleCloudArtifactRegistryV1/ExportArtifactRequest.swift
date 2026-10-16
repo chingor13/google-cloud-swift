@@ -116,7 +116,9 @@ public struct ExportArtifactRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.repository, forKey: .repository)
+    if !self.repository.isEmpty {
+      try container.encode(self.repository, forKey: .repository)
+    }
 
     if let choice = self.sourceArtifact {
       switch choice {

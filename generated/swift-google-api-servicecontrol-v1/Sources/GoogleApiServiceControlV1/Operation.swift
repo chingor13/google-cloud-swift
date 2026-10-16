@@ -202,17 +202,35 @@ public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.operationId, forKey: .operationId)
-    try container.encode(self.operationName, forKey: .operationName)
-    try container.encode(self.consumerId, forKey: .consumerId)
+    if !self.operationId.isEmpty {
+      try container.encode(self.operationId, forKey: .operationId)
+    }
+    if !self.operationName.isEmpty {
+      try container.encode(self.operationName, forKey: .operationName)
+    }
+    if !self.consumerId.isEmpty {
+      try container.encode(self.consumerId, forKey: .consumerId)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.metricValueSets, forKey: .metricValueSets)
-    try container.encode(self.logEntries, forKey: .logEntries)
-    try container.encode(self.importance, forKey: .importance)
-    try container.encode(self.userLabels, forKey: .userLabels)
-    try container.encode(self.extensions, forKey: .extensions)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.metricValueSets.isEmpty {
+      try container.encode(self.metricValueSets, forKey: .metricValueSets)
+    }
+    if !self.logEntries.isEmpty {
+      try container.encode(self.logEntries, forKey: .logEntries)
+    }
+    if self.importance != Operation.Importance() {
+      try container.encode(self.importance, forKey: .importance)
+    }
+    if !self.userLabels.isEmpty {
+      try container.encode(self.userLabels, forKey: .userLabels)
+    }
+    if !self.extensions.isEmpty {
+      try container.encode(self.extensions, forKey: .extensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

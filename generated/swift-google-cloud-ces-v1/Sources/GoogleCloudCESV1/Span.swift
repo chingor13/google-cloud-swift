@@ -101,12 +101,16 @@ public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.duration, forKey: .duration)
     try container.encodeIfPresent(self.attributes, forKey: .attributes)
-    try container.encode(self.childSpans, forKey: .childSpans)
+    if !self.childSpans.isEmpty {
+      try container.encode(self.childSpans, forKey: .childSpans)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

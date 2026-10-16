@@ -168,7 +168,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.functionDeclarations, forKey: .functionDeclarations)
+      if !self.functionDeclarations.isEmpty {
+        try container.encode(self.functionDeclarations, forKey: .functionDeclarations)
+      }
       try container.encodeIfPresent(self.retrieval, forKey: .retrieval)
       try container.encodeIfPresent(self.googleSearch, forKey: .googleSearch)
       try container.encodeIfPresent(self.googleSearchRetrieval, forKey: .googleSearchRetrieval)
@@ -247,7 +249,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.excludeDomains, forKey: .excludeDomains)
+        if !self.excludeDomains.isEmpty {
+          try container.encode(self.excludeDomains, forKey: .excludeDomains)
+        }
         try container.encodeIfPresent(self.blockingConfidence, forKey: .blockingConfidence)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -370,8 +374,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.apiKey, forKey: .apiKey)
-        try container.encode(self.enableZeroDataRetention, forKey: .enableZeroDataRetention)
+        if !self.apiKey.isEmpty {
+          try container.encode(self.apiKey, forKey: .apiKey)
+        }
+        if self.enableZeroDataRetention {
+          try container.encode(self.enableZeroDataRetention, forKey: .enableZeroDataRetention)
+        }
         try container.encodeIfPresent(self.customConfigs, forKey: .customConfigs)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -461,7 +469,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.apiKey, forKey: .apiKey)
+        if !self.apiKey.isEmpty {
+          try container.encode(self.apiKey, forKey: .apiKey)
+        }
         try container.encodeIfPresent(self.customConfigs, forKey: .customConfigs)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -633,8 +643,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.environment, forKey: .environment)
-        try container.encode(self.excludedPredefinedFunctions, forKey: .excludedPredefinedFunctions)
+        if self.environment != Tool.ComputerUse.Environment() {
+          try container.encode(self.environment, forKey: .environment)
+        }
+        if !self.excludedPredefinedFunctions.isEmpty {
+          try container.encode(
+            self.excludedPredefinedFunctions, forKey: .excludedPredefinedFunctions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

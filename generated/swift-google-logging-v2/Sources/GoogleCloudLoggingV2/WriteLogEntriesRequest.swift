@@ -173,12 +173,22 @@ public struct WriteLogEntriesRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.logName, forKey: .logName)
+    if !self.logName.isEmpty {
+      try container.encode(self.logName, forKey: .logName)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.entries, forKey: .entries)
-    try container.encode(self.partialSuccess, forKey: .partialSuccess)
-    try container.encode(self.dryRun, forKey: .dryRun)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.entries.isEmpty {
+      try container.encode(self.entries, forKey: .entries)
+    }
+    if self.partialSuccess {
+      try container.encode(self.partialSuccess, forKey: .partialSuccess)
+    }
+    if self.dryRun {
+      try container.encode(self.dryRun, forKey: .dryRun)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

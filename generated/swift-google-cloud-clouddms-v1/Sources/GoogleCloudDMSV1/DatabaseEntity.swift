@@ -205,13 +205,27 @@ public struct DatabaseEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.shortName, forKey: .shortName)
-    try container.encode(self.parentEntity, forKey: .parentEntity)
-    try container.encode(self.tree, forKey: .tree)
-    try container.encode(self.entityType, forKey: .entityType)
-    try container.encode(self.mappings, forKey: .mappings)
-    try container.encode(self.entityDdl, forKey: .entityDdl)
-    try container.encode(self.issues, forKey: .issues)
+    if !self.shortName.isEmpty {
+      try container.encode(self.shortName, forKey: .shortName)
+    }
+    if !self.parentEntity.isEmpty {
+      try container.encode(self.parentEntity, forKey: .parentEntity)
+    }
+    if self.tree != DatabaseEntity.TreeType() {
+      try container.encode(self.tree, forKey: .tree)
+    }
+    if self.entityType != DatabaseEntityType() {
+      try container.encode(self.entityType, forKey: .entityType)
+    }
+    if !self.mappings.isEmpty {
+      try container.encode(self.mappings, forKey: .mappings)
+    }
+    if !self.entityDdl.isEmpty {
+      try container.encode(self.entityDdl, forKey: .entityDdl)
+    }
+    if !self.issues.isEmpty {
+      try container.encode(self.issues, forKey: .issues)
+    }
 
     if let choice = self.entityBody {
       switch choice {

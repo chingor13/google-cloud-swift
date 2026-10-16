@@ -102,11 +102,19 @@ public struct VertexModelSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.versionId, forKey: .versionId)
-    try container.encode(self.versionAliases, forKey: .versionAliases)
-    try container.encode(self.versionDescription, forKey: .versionDescription)
+    if !self.versionId.isEmpty {
+      try container.encode(self.versionId, forKey: .versionId)
+    }
+    if !self.versionAliases.isEmpty {
+      try container.encode(self.versionAliases, forKey: .versionAliases)
+    }
+    if !self.versionDescription.isEmpty {
+      try container.encode(self.versionDescription, forKey: .versionDescription)
+    }
     try container.encodeIfPresent(self.vertexModelSourceInfo, forKey: .vertexModelSourceInfo)
-    try container.encode(self.containerImageUri, forKey: .containerImageUri)
+    if !self.containerImageUri.isEmpty {
+      try container.encode(self.containerImageUri, forKey: .containerImageUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

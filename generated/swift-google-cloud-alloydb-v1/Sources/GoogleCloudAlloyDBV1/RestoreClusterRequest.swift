@@ -144,11 +144,19 @@ public struct RestoreClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.clusterId, forKey: .clusterId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.clusterId.isEmpty {
+      try container.encode(self.clusterId, forKey: .clusterId)
+    }
     try container.encodeIfPresent(self.cluster, forKey: .cluster)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
 
     if let choice = self.source {
       switch choice {

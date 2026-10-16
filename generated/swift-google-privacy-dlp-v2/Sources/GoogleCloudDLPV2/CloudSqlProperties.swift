@@ -127,9 +127,15 @@ public struct CloudSqlProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.connectionName, forKey: .connectionName)
-    try container.encode(self.maxConnections, forKey: .maxConnections)
-    try container.encode(self.databaseEngine, forKey: .databaseEngine)
+    if !self.connectionName.isEmpty {
+      try container.encode(self.connectionName, forKey: .connectionName)
+    }
+    if self.maxConnections != 0 {
+      try container.encode(self.maxConnections, forKey: .maxConnections)
+    }
+    if self.databaseEngine != CloudSqlProperties.DatabaseEngine() {
+      try container.encode(self.databaseEngine, forKey: .databaseEngine)
+    }
 
     if let choice = self.credential {
       switch choice {

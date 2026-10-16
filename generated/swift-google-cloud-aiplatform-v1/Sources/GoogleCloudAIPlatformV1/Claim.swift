@@ -90,7 +90,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.startIndex, forKey: .startIndex)
       try container.encodeIfPresent(self.endIndex, forKey: .endIndex)
-      try container.encode(self.factIndexes, forKey: .factIndexes)
+      if !self.factIndexes.isEmpty {
+        try container.encode(self.factIndexes, forKey: .factIndexes)
+      }
       try container.encodeIfPresent(self.score, forKey: .score)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

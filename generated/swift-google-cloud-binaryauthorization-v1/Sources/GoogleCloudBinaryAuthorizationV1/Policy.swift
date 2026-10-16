@@ -195,20 +195,41 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.globalPolicyEvaluationMode, forKey: .globalPolicyEvaluationMode)
-    try container.encode(self.admissionWhitelistPatterns, forKey: .admissionWhitelistPatterns)
-    try container.encode(self.clusterAdmissionRules, forKey: .clusterAdmissionRules)
-    try container.encode(
-      self.kubernetesNamespaceAdmissionRules, forKey: .kubernetesNamespaceAdmissionRules)
-    try container.encode(
-      self.kubernetesServiceAccountAdmissionRules, forKey: .kubernetesServiceAccountAdmissionRules)
-    try container.encode(
-      self.istioServiceIdentityAdmissionRules, forKey: .istioServiceIdentityAdmissionRules)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.globalPolicyEvaluationMode
+      != GoogleCloudBinaryAuthorizationV1.Policy.GlobalPolicyEvaluationMode()
+    {
+      try container.encode(self.globalPolicyEvaluationMode, forKey: .globalPolicyEvaluationMode)
+    }
+    if !self.admissionWhitelistPatterns.isEmpty {
+      try container.encode(self.admissionWhitelistPatterns, forKey: .admissionWhitelistPatterns)
+    }
+    if !self.clusterAdmissionRules.isEmpty {
+      try container.encode(self.clusterAdmissionRules, forKey: .clusterAdmissionRules)
+    }
+    if !self.kubernetesNamespaceAdmissionRules.isEmpty {
+      try container.encode(
+        self.kubernetesNamespaceAdmissionRules, forKey: .kubernetesNamespaceAdmissionRules)
+    }
+    if !self.kubernetesServiceAccountAdmissionRules.isEmpty {
+      try container.encode(
+        self.kubernetesServiceAccountAdmissionRules, forKey: .kubernetesServiceAccountAdmissionRules
+      )
+    }
+    if !self.istioServiceIdentityAdmissionRules.isEmpty {
+      try container.encode(
+        self.istioServiceIdentityAdmissionRules, forKey: .istioServiceIdentityAdmissionRules)
+    }
     try container.encodeIfPresent(self.defaultAdmissionRule, forKey: .defaultAdmissionRule)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

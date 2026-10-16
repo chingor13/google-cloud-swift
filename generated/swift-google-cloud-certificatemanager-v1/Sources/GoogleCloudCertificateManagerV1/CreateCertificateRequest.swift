@@ -84,8 +84,12 @@ public struct CreateCertificateRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.certificateId, forKey: .certificateId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.certificateId.isEmpty {
+      try container.encode(self.certificateId, forKey: .certificateId)
+    }
     try container.encodeIfPresent(self.certificate, forKey: .certificate)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

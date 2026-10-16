@@ -76,7 +76,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.recommendationsPerSpec, forKey: .recommendationsPerSpec)
+      if !self.recommendationsPerSpec.isEmpty {
+        try container.encode(self.recommendationsPerSpec, forKey: .recommendationsPerSpec)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

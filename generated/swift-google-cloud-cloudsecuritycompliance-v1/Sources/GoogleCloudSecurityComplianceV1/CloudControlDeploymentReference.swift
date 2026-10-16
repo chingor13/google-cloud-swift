@@ -74,7 +74,9 @@ public struct CloudControlDeploymentReference: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudControlDeployment, forKey: .cloudControlDeployment)
+    if !self.cloudControlDeployment.isEmpty {
+      try container.encode(self.cloudControlDeployment, forKey: .cloudControlDeployment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

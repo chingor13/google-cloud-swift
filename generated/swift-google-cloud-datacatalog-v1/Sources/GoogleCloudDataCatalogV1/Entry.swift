@@ -401,16 +401,28 @@ public struct Entry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.linkedResource, forKey: .linkedResource)
-    try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.linkedResource.isEmpty {
+      try container.encode(self.linkedResource, forKey: .linkedResource)
+    }
+    if !self.fullyQualifiedName.isEmpty {
+      try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.businessContext, forKey: .businessContext)
     try container.encodeIfPresent(self.schema, forKey: .schema)
     try container.encodeIfPresent(self.sourceSystemTimestamps, forKey: .sourceSystemTimestamps)
     try container.encodeIfPresent(self.usageSignal, forKey: .usageSignal)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.dataSource, forKey: .dataSource)
     try container.encodeIfPresent(self.personalDetails, forKey: .personalDetails)
 

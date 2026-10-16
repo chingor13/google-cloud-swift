@@ -92,8 +92,12 @@ public struct FoxITStixSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
     try container.encodeIfPresent(self.ssl, forKey: .ssl)
-    try container.encode(self.pollServiceUri, forKey: .pollServiceUri)
-    try container.encode(self.collection, forKey: .collection)
+    if !self.pollServiceUri.isEmpty {
+      try container.encode(self.pollServiceUri, forKey: .pollServiceUri)
+    }
+    if !self.collection.isEmpty {
+      try container.encode(self.collection, forKey: .collection)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

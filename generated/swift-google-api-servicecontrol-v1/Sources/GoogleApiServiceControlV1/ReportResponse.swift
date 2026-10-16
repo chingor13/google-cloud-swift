@@ -101,9 +101,15 @@ public struct ReportResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.reportErrors, forKey: .reportErrors)
-    try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
-    try container.encode(self.serviceRolloutId, forKey: .serviceRolloutId)
+    if !self.reportErrors.isEmpty {
+      try container.encode(self.reportErrors, forKey: .reportErrors)
+    }
+    if !self.serviceConfigId.isEmpty {
+      try container.encode(self.serviceConfigId, forKey: .serviceConfigId)
+    }
+    if !self.serviceRolloutId.isEmpty {
+      try container.encode(self.serviceRolloutId, forKey: .serviceRolloutId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -177,7 +183,9 @@ public struct ReportResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.operationId, forKey: .operationId)
+      if !self.operationId.isEmpty {
+        try container.encode(self.operationId, forKey: .operationId)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -237,7 +237,7 @@
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(
         self.enableEnhancedIpv4Allocation, forKey: .enableEnhancedIpv4Allocation)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -250,7 +250,9 @@
       try container.encodeIfPresent(self.mode, forKey: .mode)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.parentPrefix, forKey: .parentPrefix)
-      try container.encode(self.publicDelegatedSubPrefixs, forKey: .publicDelegatedSubPrefixs)
+      if !self.publicDelegatedSubPrefixs.isEmpty {
+        try container.encode(self.publicDelegatedSubPrefixs, forKey: .publicDelegatedSubPrefixs)
+      }
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.status, forKey: .status)

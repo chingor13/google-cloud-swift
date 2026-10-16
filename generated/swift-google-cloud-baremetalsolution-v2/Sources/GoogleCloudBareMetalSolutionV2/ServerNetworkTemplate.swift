@@ -93,9 +93,15 @@ public struct ServerNetworkTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.applicableInstanceTypes, forKey: .applicableInstanceTypes)
-    try container.encode(self.logicalInterfaces, forKey: .logicalInterfaces)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.applicableInstanceTypes.isEmpty {
+      try container.encode(self.applicableInstanceTypes, forKey: .applicableInstanceTypes)
+    }
+    if !self.logicalInterfaces.isEmpty {
+      try container.encode(self.logicalInterfaces, forKey: .logicalInterfaces)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -176,9 +182,15 @@ public struct ServerNetworkTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.`required`, forKey: .`required`)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.type != ServerNetworkTemplate.LogicalInterface.InterfaceType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.`required` {
+        try container.encode(self.`required`, forKey: .`required`)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

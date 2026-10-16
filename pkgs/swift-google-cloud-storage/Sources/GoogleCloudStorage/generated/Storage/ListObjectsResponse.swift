@@ -88,9 +88,15 @@ public struct ListObjectsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.objects, forKey: .objects)
-    try container.encode(self.prefixes, forKey: .prefixes)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.objects.isEmpty {
+      try container.encode(self.objects, forKey: .objects)
+    }
+    if !self.prefixes.isEmpty {
+      try container.encode(self.prefixes, forKey: .prefixes)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

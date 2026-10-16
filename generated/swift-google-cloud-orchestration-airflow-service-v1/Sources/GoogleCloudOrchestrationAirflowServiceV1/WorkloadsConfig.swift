@@ -189,10 +189,18 @@ public struct WorkloadsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cpu, forKey: .cpu)
-      try container.encode(self.memoryGb, forKey: .memoryGb)
-      try container.encode(self.storageGb, forKey: .storageGb)
-      try container.encode(self.count, forKey: .count)
+      if self.cpu != 0 {
+        try container.encode(self.cpu, forKey: .cpu)
+      }
+      if self.memoryGb != 0 {
+        try container.encode(self.memoryGb, forKey: .memoryGb)
+      }
+      if self.storageGb != 0 {
+        try container.encode(self.storageGb, forKey: .storageGb)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -289,9 +297,15 @@ public struct WorkloadsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cpu, forKey: .cpu)
-      try container.encode(self.memoryGb, forKey: .memoryGb)
-      try container.encode(self.storageGb, forKey: .storageGb)
+      if self.cpu != 0 {
+        try container.encode(self.cpu, forKey: .cpu)
+      }
+      if self.memoryGb != 0 {
+        try container.encode(self.memoryGb, forKey: .memoryGb)
+      }
+      if self.storageGb != 0 {
+        try container.encode(self.storageGb, forKey: .storageGb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -406,11 +420,21 @@ public struct WorkloadsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cpu, forKey: .cpu)
-      try container.encode(self.memoryGb, forKey: .memoryGb)
-      try container.encode(self.storageGb, forKey: .storageGb)
-      try container.encode(self.minCount, forKey: .minCount)
-      try container.encode(self.maxCount, forKey: .maxCount)
+      if self.cpu != 0 {
+        try container.encode(self.cpu, forKey: .cpu)
+      }
+      if self.memoryGb != 0 {
+        try container.encode(self.memoryGb, forKey: .memoryGb)
+      }
+      if self.storageGb != 0 {
+        try container.encode(self.storageGb, forKey: .storageGb)
+      }
+      if self.minCount != 0 {
+        try container.encode(self.minCount, forKey: .minCount)
+      }
+      if self.maxCount != 0 {
+        try container.encode(self.maxCount, forKey: .maxCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -508,9 +532,15 @@ public struct WorkloadsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.count, forKey: .count)
-      try container.encode(self.cpu, forKey: .cpu)
-      try container.encode(self.memoryGb, forKey: .memoryGb)
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
+      if self.cpu != 0 {
+        try container.encode(self.cpu, forKey: .cpu)
+      }
+      if self.memoryGb != 0 {
+        try container.encode(self.memoryGb, forKey: .memoryGb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -622,10 +652,18 @@ public struct WorkloadsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cpu, forKey: .cpu)
-      try container.encode(self.memoryGb, forKey: .memoryGb)
-      try container.encode(self.storageGb, forKey: .storageGb)
-      try container.encode(self.count, forKey: .count)
+      if self.cpu != 0 {
+        try container.encode(self.cpu, forKey: .cpu)
+      }
+      if self.memoryGb != 0 {
+        try container.encode(self.memoryGb, forKey: .memoryGb)
+      }
+      if self.storageGb != 0 {
+        try container.encode(self.storageGb, forKey: .storageGb)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

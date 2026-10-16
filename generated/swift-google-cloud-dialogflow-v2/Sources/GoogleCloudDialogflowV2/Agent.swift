@@ -201,18 +201,42 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
-      try container.encode(self.supportedLanguageCodes, forKey: .supportedLanguageCodes)
-      try container.encode(self.timeZone, forKey: .timeZone)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.avatarUri, forKey: .avatarUri)
-      try container.encode(self.enableLogging, forKey: .enableLogging)
-      try container.encode(self.matchMode, forKey: .matchMode)
-      try container.encode(self.classificationThreshold, forKey: .classificationThreshold)
-      try container.encode(self.apiVersion, forKey: .apiVersion)
-      try container.encode(self.tier, forKey: .tier)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.defaultLanguageCode.isEmpty {
+        try container.encode(self.defaultLanguageCode, forKey: .defaultLanguageCode)
+      }
+      if !self.supportedLanguageCodes.isEmpty {
+        try container.encode(self.supportedLanguageCodes, forKey: .supportedLanguageCodes)
+      }
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.avatarUri.isEmpty {
+        try container.encode(self.avatarUri, forKey: .avatarUri)
+      }
+      if self.enableLogging {
+        try container.encode(self.enableLogging, forKey: .enableLogging)
+      }
+      if self.matchMode != Agent.MatchMode() {
+        try container.encode(self.matchMode, forKey: .matchMode)
+      }
+      if self.classificationThreshold != 0 {
+        try container.encode(self.classificationThreshold, forKey: .classificationThreshold)
+      }
+      if self.apiVersion != Agent.ApiVersion() {
+        try container.encode(self.apiVersion, forKey: .apiVersion)
+      }
+      if self.tier != Agent.Tier() {
+        try container.encode(self.tier, forKey: .tier)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

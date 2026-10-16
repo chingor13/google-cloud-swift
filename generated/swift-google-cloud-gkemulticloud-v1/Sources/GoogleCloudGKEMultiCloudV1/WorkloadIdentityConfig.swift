@@ -86,9 +86,15 @@ public struct WorkloadIdentityConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issuerUri, forKey: .issuerUri)
-    try container.encode(self.workloadPool, forKey: .workloadPool)
-    try container.encode(self.identityProvider, forKey: .identityProvider)
+    if !self.issuerUri.isEmpty {
+      try container.encode(self.issuerUri, forKey: .issuerUri)
+    }
+    if !self.workloadPool.isEmpty {
+      try container.encode(self.workloadPool, forKey: .workloadPool)
+    }
+    if !self.identityProvider.isEmpty {
+      try container.encode(self.identityProvider, forKey: .identityProvider)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -138,15 +138,33 @@ public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.eventTime, forKey: .eventTime)
-    try container.encode(self.srcid, forKey: .srcid)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
-    try container.encode(self.eventId, forKey: .eventId)
-    try container.encode(self.component, forKey: .component)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.appName, forKey: .appName)
-    try container.encode(self.appType, forKey: .appType)
-    try container.encode(self.jobName, forKey: .jobName)
+    if !self.eventTime.isEmpty {
+      try container.encode(self.eventTime, forKey: .eventTime)
+    }
+    if self.srcid != 0 {
+      try container.encode(self.srcid, forKey: .srcid)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
+    if self.eventId != 0 {
+      try container.encode(self.eventId, forKey: .eventId)
+    }
+    if !self.component.isEmpty {
+      try container.encode(self.component, forKey: .component)
+    }
+    if self.applianceName != 0 {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.appName.isEmpty {
+      try container.encode(self.appName, forKey: .appName)
+    }
+    if !self.appType.isEmpty {
+      try container.encode(self.appType, forKey: .appType)
+    }
+    if !self.jobName.isEmpty {
+      try container.encode(self.jobName, forKey: .jobName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

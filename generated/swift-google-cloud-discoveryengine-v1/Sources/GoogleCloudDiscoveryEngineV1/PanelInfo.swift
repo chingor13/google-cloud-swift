@@ -108,11 +108,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.panelId, forKey: .panelId)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.panelId.isEmpty {
+        try container.encode(self.panelId, forKey: .panelId)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.panelPosition, forKey: .panelPosition)
       try container.encodeIfPresent(self.totalPanels, forKey: .totalPanels)
-      try container.encode(self.documents, forKey: .documents)
+      if !self.documents.isEmpty {
+        try container.encode(self.documents, forKey: .documents)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

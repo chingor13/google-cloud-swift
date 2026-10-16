@@ -110,12 +110,22 @@ public struct UserDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accountManagerId, forKey: .accountManagerId)
-    try container.encode(self.tokenManagerId, forKey: .tokenManagerId)
-    try container.encode(self.roles, forKey: .roles)
-    try container.encode(self.accountStatus, forKey: .accountStatus)
+    if !self.accountManagerId.isEmpty {
+      try container.encode(self.accountManagerId, forKey: .accountManagerId)
+    }
+    if !self.tokenManagerId.isEmpty {
+      try container.encode(self.tokenManagerId, forKey: .tokenManagerId)
+    }
+    if !self.roles.isEmpty {
+      try container.encode(self.roles, forKey: .roles)
+    }
+    if self.accountStatus != AccountStatus() {
+      try container.encode(self.accountStatus, forKey: .accountStatus)
+    }
     try container.encodeIfPresent(self.balance, forKey: .balance)
-    try container.encode(self.contractAccountFields, forKey: .contractAccountFields)
+    if !self.contractAccountFields.isEmpty {
+      try container.encode(self.contractAccountFields, forKey: .contractAccountFields)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

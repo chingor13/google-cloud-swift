@@ -361,40 +361,98 @@ public struct StoragePool: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.serviceLevel, forKey: .serviceLevel)
-    try container.encode(self.capacityGib, forKey: .capacityGib)
-    try container.encode(self.volumeCapacityGib, forKey: .volumeCapacityGib)
-    try container.encode(self.volumeCount, forKey: .volumeCount)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDetails, forKey: .stateDetails)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.serviceLevel != ServiceLevel() {
+      try container.encode(self.serviceLevel, forKey: .serviceLevel)
+    }
+    if self.capacityGib != 0 {
+      try container.encode(self.capacityGib, forKey: .capacityGib)
+    }
+    if self.volumeCapacityGib != 0 {
+      try container.encode(self.volumeCapacityGib, forKey: .volumeCapacityGib)
+    }
+    if self.volumeCount != 0 {
+      try container.encode(self.volumeCount, forKey: .volumeCount)
+    }
+    if self.state != StoragePool.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDetails.isEmpty {
+      try container.encode(self.stateDetails, forKey: .stateDetails)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.activeDirectory, forKey: .activeDirectory)
-    try container.encode(self.kmsConfig, forKey: .kmsConfig)
-    try container.encode(self.ldapEnabled, forKey: .ldapEnabled)
-    try container.encode(self.psaRange, forKey: .psaRange)
-    try container.encode(self.encryptionType, forKey: .encryptionType)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.activeDirectory.isEmpty {
+      try container.encode(self.activeDirectory, forKey: .activeDirectory)
+    }
+    if !self.kmsConfig.isEmpty {
+      try container.encode(self.kmsConfig, forKey: .kmsConfig)
+    }
+    if self.ldapEnabled {
+      try container.encode(self.ldapEnabled, forKey: .ldapEnabled)
+    }
+    if !self.psaRange.isEmpty {
+      try container.encode(self.psaRange, forKey: .psaRange)
+    }
+    if self.encryptionType != EncryptionType() {
+      try container.encode(self.encryptionType, forKey: .encryptionType)
+    }
     try container.encodeIfPresent(self.globalAccessAllowed, forKey: .globalAccessAllowed)
-    try container.encode(self.allowAutoTiering, forKey: .allowAutoTiering)
-    try container.encode(self.replicaZone, forKey: .replicaZone)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
-    try container.encode(self.customPerformanceEnabled, forKey: .customPerformanceEnabled)
-    try container.encode(self.totalThroughputMibps, forKey: .totalThroughputMibps)
-    try container.encode(self.totalIops, forKey: .totalIops)
-    try container.encode(self.hotTierSizeGib, forKey: .hotTierSizeGib)
+    if self.allowAutoTiering {
+      try container.encode(self.allowAutoTiering, forKey: .allowAutoTiering)
+    }
+    if !self.replicaZone.isEmpty {
+      try container.encode(self.replicaZone, forKey: .replicaZone)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
+    if self.customPerformanceEnabled {
+      try container.encode(self.customPerformanceEnabled, forKey: .customPerformanceEnabled)
+    }
+    if self.totalThroughputMibps != 0 {
+      try container.encode(self.totalThroughputMibps, forKey: .totalThroughputMibps)
+    }
+    if self.totalIops != 0 {
+      try container.encode(self.totalIops, forKey: .totalIops)
+    }
+    if self.hotTierSizeGib != 0 {
+      try container.encode(self.hotTierSizeGib, forKey: .hotTierSizeGib)
+    }
     try container.encodeIfPresent(self.enableHotTierAutoResize, forKey: .enableHotTierAutoResize)
-    try container.encode(self.qosType, forKey: .qosType)
-    try container.encode(self.availableThroughputMibps, forKey: .availableThroughputMibps)
-    try container.encode(self.coldTierSizeUsedGib, forKey: .coldTierSizeUsedGib)
-    try container.encode(self.hotTierSizeUsedGib, forKey: .hotTierSizeUsedGib)
+    if self.qosType != QosType() {
+      try container.encode(self.qosType, forKey: .qosType)
+    }
+    if self.availableThroughputMibps != 0 {
+      try container.encode(self.availableThroughputMibps, forKey: .availableThroughputMibps)
+    }
+    if self.coldTierSizeUsedGib != 0 {
+      try container.encode(self.coldTierSizeUsedGib, forKey: .coldTierSizeUsedGib)
+    }
+    if self.hotTierSizeUsedGib != 0 {
+      try container.encode(self.hotTierSizeUsedGib, forKey: .hotTierSizeUsedGib)
+    }
     try container.encodeIfPresent(self.type, forKey: .type)
     try container.encodeIfPresent(self.mode, forKey: .mode)
-    try container.encode(self.scaleType, forKey: .scaleType)
+    if self.scaleType != ScaleType() {
+      try container.encode(self.scaleType, forKey: .scaleType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

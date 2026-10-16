@@ -70,7 +70,9 @@ public struct ResetAuthorizationCodeRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.registration, forKey: .registration)
+    if !self.registration.isEmpty {
+      try container.encode(self.registration, forKey: .registration)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

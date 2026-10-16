@@ -102,8 +102,12 @@ public struct CheckUpgradeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.environment, forKey: .environment)
-    try container.encode(self.imageVersion, forKey: .imageVersion)
+    if !self.environment.isEmpty {
+      try container.encode(self.environment, forKey: .environment)
+    }
+    if !self.imageVersion.isEmpty {
+      try container.encode(self.imageVersion, forKey: .imageVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

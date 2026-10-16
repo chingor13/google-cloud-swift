@@ -121,11 +121,21 @@ public struct QueryTeamFolderContentsRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.teamFolder, forKey: .teamFolder)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.orderBy, forKey: .orderBy)
-    try container.encode(self.filter, forKey: .filter)
+    if !self.teamFolder.isEmpty {
+      try container.encode(self.teamFolder, forKey: .teamFolder)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.orderBy.isEmpty {
+      try container.encode(self.orderBy, forKey: .orderBy)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

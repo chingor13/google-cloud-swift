@@ -72,7 +72,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.guidances, forKey: .guidances)
+      if !self.guidances.isEmpty {
+        try container.encode(self.guidances, forKey: .guidances)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -195,15 +197,27 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.suggestedReply, forKey: .suggestedReply)
-        try container.encode(self.suggestedAction, forKey: .suggestedAction)
+        if !self.suggestedReply.isEmpty {
+          try container.encode(self.suggestedReply, forKey: .suggestedReply)
+        }
+        if !self.suggestedAction.isEmpty {
+          try container.encode(self.suggestedAction, forKey: .suggestedAction)
+        }
         try container.encodeIfPresent(self.instructionSource, forKey: .instructionSource)
-        try container.encode(self.knowledgeSources, forKey: .knowledgeSources)
-        try container.encode(self.explanation, forKey: .explanation)
+        if !self.knowledgeSources.isEmpty {
+          try container.encode(self.knowledgeSources, forKey: .knowledgeSources)
+        }
+        if !self.explanation.isEmpty {
+          try container.encode(self.explanation, forKey: .explanation)
+        }
         try container.encodeIfPresent(self.groundingMetadata, forKey: .groundingMetadata)
-        try container.encode(self.toolCalls, forKey: .toolCalls)
-        try container.encode(
-          self.triggeringToolCallAnswerRecords, forKey: .triggeringToolCallAnswerRecords)
+        if !self.toolCalls.isEmpty {
+          try container.encode(self.toolCalls, forKey: .toolCalls)
+        }
+        if !self.triggeringToolCallAnswerRecords.isEmpty {
+          try container.encode(
+            self.triggeringToolCallAnswerRecords, forKey: .triggeringToolCallAnswerRecords)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -282,9 +296,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.knowledgeArticleUrl, forKey: .knowledgeArticleUrl)
-          try container.encode(self.knowledgeArticleTitle, forKey: .knowledgeArticleTitle)
-          try container.encode(self.knowledgeSnippet, forKey: .knowledgeSnippet)
+          if !self.knowledgeArticleUrl.isEmpty {
+            try container.encode(self.knowledgeArticleUrl, forKey: .knowledgeArticleUrl)
+          }
+          if !self.knowledgeArticleTitle.isEmpty {
+            try container.encode(self.knowledgeArticleTitle, forKey: .knowledgeArticleTitle)
+          }
+          if !self.knowledgeSnippet.isEmpty {
+            try container.encode(self.knowledgeSnippet, forKey: .knowledgeSnippet)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

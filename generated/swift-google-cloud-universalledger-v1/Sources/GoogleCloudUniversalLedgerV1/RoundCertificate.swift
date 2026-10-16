@@ -126,13 +126,25 @@ public struct RoundCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.roundId, forKey: .roundId)
-    try container.encode(self.validatorId, forKey: .validatorId)
-    try container.encode(self.roundStateChecksumHex, forKey: .roundStateChecksumHex)
-    try container.encode(self.roundDeltaChecksumHex, forKey: .roundDeltaChecksumHex)
+    if self.roundId != 0 {
+      try container.encode(self.roundId, forKey: .roundId)
+    }
+    if !self.validatorId.isEmpty {
+      try container.encode(self.validatorId, forKey: .validatorId)
+    }
+    if !self.roundStateChecksumHex.isEmpty {
+      try container.encode(self.roundStateChecksumHex, forKey: .roundStateChecksumHex)
+    }
+    if !self.roundDeltaChecksumHex.isEmpty {
+      try container.encode(self.roundDeltaChecksumHex, forKey: .roundDeltaChecksumHex)
+    }
     try container.encodeIfPresent(self.merkleTree, forKey: .merkleTree)
-    try container.encode(self.validatorSignatures, forKey: .validatorSignatures)
-    try container.encode(self.isFinalized, forKey: .isFinalized)
+    if !self.validatorSignatures.isEmpty {
+      try container.encode(self.validatorSignatures, forKey: .validatorSignatures)
+    }
+    if self.isFinalized {
+      try container.encode(self.isFinalized, forKey: .isFinalized)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

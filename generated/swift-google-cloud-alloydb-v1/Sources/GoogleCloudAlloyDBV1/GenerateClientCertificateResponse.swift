@@ -79,8 +79,12 @@ public struct GenerateClientCertificateResponse: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pemCertificateChain, forKey: .pemCertificateChain)
-    try container.encode(self.caCert, forKey: .caCert)
+    if !self.pemCertificateChain.isEmpty {
+      try container.encode(self.pemCertificateChain, forKey: .pemCertificateChain)
+    }
+    if !self.caCert.isEmpty {
+      try container.encode(self.caCert, forKey: .caCert)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

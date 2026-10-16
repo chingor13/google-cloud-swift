@@ -110,9 +110,15 @@ public struct SecretVolumeSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.secret, forKey: .secret)
-    try container.encode(self.items, forKey: .items)
-    try container.encode(self.defaultMode, forKey: .defaultMode)
+    if !self.secret.isEmpty {
+      try container.encode(self.secret, forKey: .secret)
+    }
+    if !self.items.isEmpty {
+      try container.encode(self.items, forKey: .items)
+    }
+    if self.defaultMode != 0 {
+      try container.encode(self.defaultMode, forKey: .defaultMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -142,8 +142,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.consumerProject, forKey: .consumerProject)
-      try container.encode(self.consumerNetwork, forKey: .consumerNetwork)
+      if !self.consumerProject.isEmpty {
+        try container.encode(self.consumerProject, forKey: .consumerProject)
+      }
+      if !self.consumerNetwork.isEmpty {
+        try container.encode(self.consumerNetwork, forKey: .consumerNetwork)
+      }
       try container.encodeIfPresent(self.ipAddress, forKey: .ipAddress)
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.consumerNetworkStatus, forKey: .consumerNetworkStatus)

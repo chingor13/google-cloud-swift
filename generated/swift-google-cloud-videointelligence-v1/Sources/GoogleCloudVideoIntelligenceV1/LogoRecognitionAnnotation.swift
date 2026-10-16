@@ -87,8 +87,12 @@ public struct LogoRecognitionAnnotation: Codable, Equatable, GoogleWKT._AnyPacka
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.entity, forKey: .entity)
-    try container.encode(self.tracks, forKey: .tracks)
-    try container.encode(self.segments, forKey: .segments)
+    if !self.tracks.isEmpty {
+      try container.encode(self.tracks, forKey: .tracks)
+    }
+    if !self.segments.isEmpty {
+      try container.encode(self.segments, forKey: .segments)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

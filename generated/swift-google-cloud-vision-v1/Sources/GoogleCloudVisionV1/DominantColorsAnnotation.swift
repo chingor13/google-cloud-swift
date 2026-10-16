@@ -69,7 +69,9 @@ public struct DominantColorsAnnotation: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.colors, forKey: .colors)
+    if !self.colors.isEmpty {
+      try container.encode(self.colors, forKey: .colors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

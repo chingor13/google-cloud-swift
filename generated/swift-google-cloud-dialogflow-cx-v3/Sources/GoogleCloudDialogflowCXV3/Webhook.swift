@@ -135,10 +135,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.timeout, forKey: .timeout)
-      try container.encode(self.disabled, forKey: .disabled)
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
 
       if let choice = self.webhook {
         switch choice {
@@ -368,23 +374,47 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.password, forKey: .password)
-        try container.encode(
-          self.secretVersionForUsernamePassword, forKey: .secretVersionForUsernamePassword)
-        try container.encode(self.requestHeaders, forKey: .requestHeaders)
-        try container.encode(
-          self.secretVersionsForRequestHeaders, forKey: .secretVersionsForRequestHeaders)
-        try container.encode(self.allowedCaCerts, forKey: .allowedCaCerts)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if !self.password.isEmpty {
+          try container.encode(self.password, forKey: .password)
+        }
+        if !self.secretVersionForUsernamePassword.isEmpty {
+          try container.encode(
+            self.secretVersionForUsernamePassword, forKey: .secretVersionForUsernamePassword)
+        }
+        if !self.requestHeaders.isEmpty {
+          try container.encode(self.requestHeaders, forKey: .requestHeaders)
+        }
+        if !self.secretVersionsForRequestHeaders.isEmpty {
+          try container.encode(
+            self.secretVersionsForRequestHeaders, forKey: .secretVersionsForRequestHeaders)
+        }
+        if !self.allowedCaCerts.isEmpty {
+          try container.encode(self.allowedCaCerts, forKey: .allowedCaCerts)
+        }
         try container.encodeIfPresent(self.oauthConfig, forKey: .oauthConfig)
-        try container.encode(self.serviceAgentAuth, forKey: .serviceAgentAuth)
+        if self.serviceAgentAuth != Webhook.GenericWebService.ServiceAgentAuth() {
+          try container.encode(self.serviceAgentAuth, forKey: .serviceAgentAuth)
+        }
         try container.encodeIfPresent(
           self.serviceAccountAuthConfig, forKey: .serviceAccountAuthConfig)
-        try container.encode(self.webhookType, forKey: .webhookType)
-        try container.encode(self.httpMethod, forKey: .httpMethod)
-        try container.encode(self.requestBody, forKey: .requestBody)
-        try container.encode(self.parameterMapping, forKey: .parameterMapping)
+        if self.webhookType != Webhook.GenericWebService.WebhookType() {
+          try container.encode(self.webhookType, forKey: .webhookType)
+        }
+        if self.httpMethod != Webhook.GenericWebService.HttpMethod() {
+          try container.encode(self.httpMethod, forKey: .httpMethod)
+        }
+        if !self.requestBody.isEmpty {
+          try container.encode(self.requestBody, forKey: .requestBody)
+        }
+        if !self.parameterMapping.isEmpty {
+          try container.encode(self.parameterMapping, forKey: .parameterMapping)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -444,7 +474,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.secretVersion, forKey: .secretVersion)
+          if !self.secretVersion.isEmpty {
+            try container.encode(self.secretVersion, forKey: .secretVersion)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -565,12 +597,22 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.clientId, forKey: .clientId)
-          try container.encode(self.clientSecret, forKey: .clientSecret)
-          try container.encode(
-            self.secretVersionForClientSecret, forKey: .secretVersionForClientSecret)
-          try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
-          try container.encode(self.scopes, forKey: .scopes)
+          if !self.clientId.isEmpty {
+            try container.encode(self.clientId, forKey: .clientId)
+          }
+          if !self.clientSecret.isEmpty {
+            try container.encode(self.clientSecret, forKey: .clientSecret)
+          }
+          if !self.secretVersionForClientSecret.isEmpty {
+            try container.encode(
+              self.secretVersionForClientSecret, forKey: .secretVersionForClientSecret)
+          }
+          if !self.tokenEndpoint.isEmpty {
+            try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
+          }
+          if !self.scopes.isEmpty {
+            try container.encode(self.scopes, forKey: .scopes)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -659,7 +701,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.serviceAccount, forKey: .serviceAccount)
+          if !self.serviceAccount.isEmpty {
+            try container.encode(self.serviceAccount, forKey: .serviceAccount)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1177,7 +1221,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.service, forKey: .service)
+        if !self.service.isEmpty {
+          try container.encode(self.service, forKey: .service)
+        }
         try container.encodeIfPresent(self.genericWebService, forKey: .genericWebService)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -88,9 +88,15 @@ public struct TimeWindows: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.timeZone, forKey: .timeZone)
-    try container.encode(self.oneTimeWindows, forKey: .oneTimeWindows)
-    try container.encode(self.weeklyWindows, forKey: .weeklyWindows)
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
+    if !self.oneTimeWindows.isEmpty {
+      try container.encode(self.oneTimeWindows, forKey: .oneTimeWindows)
+    }
+    if !self.weeklyWindows.isEmpty {
+      try container.encode(self.weeklyWindows, forKey: .weeklyWindows)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

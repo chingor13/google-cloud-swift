@@ -85,7 +85,9 @@ public struct ExportAnalyticsMetricsResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.errorSamples, forKey: .errorSamples)
+    if !self.errorSamples.isEmpty {
+      try container.encode(self.errorSamples, forKey: .errorSamples)
+    }
     try container.encodeIfPresent(self.errorsConfig, forKey: .errorsConfig)
     try container.encodeIfPresent(self.outputResult, forKey: .outputResult)
     for (key, value) in self._unknownFields.json {

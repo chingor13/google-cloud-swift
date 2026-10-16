@@ -115,10 +115,18 @@ public struct CreateAccountManager: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.publicKey, forKey: .publicKey)
-    try container.encode(self.keyFormat, forKey: .keyFormat)
-    try container.encode(self.defaultTokenManagerId, forKey: .defaultTokenManagerId)
-    try container.encode(self.accountComment, forKey: .accountComment)
+    if !self.publicKey.isEmpty {
+      try container.encode(self.publicKey, forKey: .publicKey)
+    }
+    if self.keyFormat != KeyFormat() {
+      try container.encode(self.keyFormat, forKey: .keyFormat)
+    }
+    if !self.defaultTokenManagerId.isEmpty {
+      try container.encode(self.defaultTokenManagerId, forKey: .defaultTokenManagerId)
+    }
+    if !self.accountComment.isEmpty {
+      try container.encode(self.accountComment, forKey: .accountComment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

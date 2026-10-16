@@ -99,10 +99,18 @@ public struct CloudDlpInspection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inspectJob, forKey: .inspectJob)
-    try container.encode(self.infoType, forKey: .infoType)
-    try container.encode(self.infoTypeCount, forKey: .infoTypeCount)
-    try container.encode(self.fullScan, forKey: .fullScan)
+    if !self.inspectJob.isEmpty {
+      try container.encode(self.inspectJob, forKey: .inspectJob)
+    }
+    if !self.infoType.isEmpty {
+      try container.encode(self.infoType, forKey: .infoType)
+    }
+    if self.infoTypeCount != 0 {
+      try container.encode(self.infoTypeCount, forKey: .infoTypeCount)
+    }
+    if self.fullScan {
+      try container.encode(self.fullScan, forKey: .fullScan)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

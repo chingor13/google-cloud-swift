@@ -98,8 +98,12 @@ public struct UpdateConnectionRequest: Codable, Equatable, GoogleWKT._AnyPackabl
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.connection, forKey: .connection)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.etag, forKey: .etag)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

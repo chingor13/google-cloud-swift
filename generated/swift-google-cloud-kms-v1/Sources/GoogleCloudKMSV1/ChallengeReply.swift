@@ -78,8 +78,12 @@ public struct ChallengeReply: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.signedChallenge, forKey: .signedChallenge)
-    try container.encode(self.publicKeyPem, forKey: .publicKeyPem)
+    if !self.signedChallenge.isEmpty {
+      try container.encode(self.signedChallenge, forKey: .signedChallenge)
+    }
+    if !self.publicKeyPem.isEmpty {
+      try container.encode(self.publicKeyPem, forKey: .publicKeyPem)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

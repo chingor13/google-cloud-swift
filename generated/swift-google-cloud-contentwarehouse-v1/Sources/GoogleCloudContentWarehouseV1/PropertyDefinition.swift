@@ -218,15 +218,33 @@ public struct PropertyDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.isRepeatable, forKey: .isRepeatable)
-    try container.encode(self.isFilterable, forKey: .isFilterable)
-    try container.encode(self.isSearchable, forKey: .isSearchable)
-    try container.encode(self.isMetadata, forKey: .isMetadata)
-    try container.encode(self.isRequired, forKey: .isRequired)
-    try container.encode(self.retrievalImportance, forKey: .retrievalImportance)
-    try container.encode(self.schemaSources, forKey: .schemaSources)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.isRepeatable {
+      try container.encode(self.isRepeatable, forKey: .isRepeatable)
+    }
+    if self.isFilterable {
+      try container.encode(self.isFilterable, forKey: .isFilterable)
+    }
+    if self.isSearchable {
+      try container.encode(self.isSearchable, forKey: .isSearchable)
+    }
+    if self.isMetadata {
+      try container.encode(self.isMetadata, forKey: .isMetadata)
+    }
+    if self.isRequired {
+      try container.encode(self.isRequired, forKey: .isRequired)
+    }
+    if self.retrievalImportance != PropertyDefinition.RetrievalImportance() {
+      try container.encode(self.retrievalImportance, forKey: .retrievalImportance)
+    }
+    if !self.schemaSources.isEmpty {
+      try container.encode(self.schemaSources, forKey: .schemaSources)
+    }
 
     if let choice = self.valueTypeOptions {
       switch choice {
@@ -313,8 +331,12 @@ public struct PropertyDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.processorType, forKey: .processorType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.processorType.isEmpty {
+        try container.encode(self.processorType, forKey: .processorType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

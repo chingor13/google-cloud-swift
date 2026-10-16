@@ -114,11 +114,19 @@ public struct WorkloadProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gcpProject, forKey: .gcpProject)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.zone, forKey: .zone)
+    if !self.gcpProject.isEmpty {
+      try container.encode(self.gcpProject, forKey: .gcpProject)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
     try container.encodeIfPresent(self.functionalType, forKey: .functionalType)
-    try container.encode(self.extendedMetadata, forKey: .extendedMetadata)
+    if !self.extendedMetadata.isEmpty {
+      try container.encode(self.extendedMetadata, forKey: .extendedMetadata)
+    }
     try container.encodeIfPresent(self.identity, forKey: .identity)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

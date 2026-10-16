@@ -107,8 +107,12 @@ public struct MessageTransform: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.disabled, forKey: .disabled)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
 
     if let choice = self.transform {
       switch choice {

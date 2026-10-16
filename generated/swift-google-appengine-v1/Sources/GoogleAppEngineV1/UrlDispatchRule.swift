@@ -94,9 +94,15 @@ public struct UrlDispatchRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.domain, forKey: .domain)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.service, forKey: .service)
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

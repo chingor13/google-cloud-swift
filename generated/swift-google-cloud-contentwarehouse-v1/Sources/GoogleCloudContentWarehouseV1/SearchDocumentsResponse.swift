@@ -131,12 +131,22 @@ public struct SearchDocumentsResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.matchingDocuments, forKey: .matchingDocuments)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.totalSize, forKey: .totalSize)
+    if !self.matchingDocuments.isEmpty {
+      try container.encode(self.matchingDocuments, forKey: .matchingDocuments)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.histogramQueryResults, forKey: .histogramQueryResults)
-    try container.encode(self.questionAnswer, forKey: .questionAnswer)
+    if !self.histogramQueryResults.isEmpty {
+      try container.encode(self.histogramQueryResults, forKey: .histogramQueryResults)
+    }
+    if !self.questionAnswer.isEmpty {
+      try container.encode(self.questionAnswer, forKey: .questionAnswer)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -238,9 +248,13 @@ public struct SearchDocumentsResponse: Codable, Equatable, GoogleWKT._AnyPackabl
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.document, forKey: .document)
-      try container.encode(self.searchTextSnippet, forKey: .searchTextSnippet)
+      if !self.searchTextSnippet.isEmpty {
+        try container.encode(self.searchTextSnippet, forKey: .searchTextSnippet)
+      }
       try container.encodeIfPresent(self.qaResult, forKey: .qaResult)
-      try container.encode(self.matchedTokenPageIndices, forKey: .matchedTokenPageIndices)
+      if !self.matchedTokenPageIndices.isEmpty {
+        try container.encode(self.matchedTokenPageIndices, forKey: .matchedTokenPageIndices)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

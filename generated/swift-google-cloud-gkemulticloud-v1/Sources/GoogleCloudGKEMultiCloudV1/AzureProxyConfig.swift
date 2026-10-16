@@ -88,8 +88,12 @@ public struct AzureProxyConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceGroupId, forKey: .resourceGroupId)
-    try container.encode(self.secretId, forKey: .secretId)
+    if !self.resourceGroupId.isEmpty {
+      try container.encode(self.resourceGroupId, forKey: .resourceGroupId)
+    }
+    if !self.secretId.isEmpty {
+      try container.encode(self.secretId, forKey: .secretId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

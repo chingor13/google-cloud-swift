@@ -113,7 +113,9 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.transactionCertificate, forKey: .transactionCertificate)
     try container.encodeIfPresent(self.roundCertificate, forKey: .roundCertificate)
-    try container.encode(self.pathToRoundRoot, forKey: .pathToRoundRoot)
+    if !self.pathToRoundRoot.isEmpty {
+      try container.encode(self.pathToRoundRoot, forKey: .pathToRoundRoot)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -182,8 +184,12 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.leftChildDigestHex, forKey: .leftChildDigestHex)
-      try container.encode(self.rightChildDigestHex, forKey: .rightChildDigestHex)
+      if !self.leftChildDigestHex.isEmpty {
+        try container.encode(self.leftChildDigestHex, forKey: .leftChildDigestHex)
+      }
+      if !self.rightChildDigestHex.isEmpty {
+        try container.encode(self.rightChildDigestHex, forKey: .rightChildDigestHex)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

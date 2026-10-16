@@ -218,8 +218,10 @@
         self.historyListLengthThresholdCount, forKey: .historyListLengthThresholdCount)
       try container.encodeIfPresent(
         self.transactionKillThresholdSeconds, forKey: .transactionKillThresholdSeconds)
-      try container.encode(
-        self.transactionKillExcludedUserHosts, forKey: .transactionKillExcludedUserHosts)
+      if !self.transactionKillExcludedUserHosts.isEmpty {
+        try container.encode(
+          self.transactionKillExcludedUserHosts, forKey: .transactionKillExcludedUserHosts)
+      }
       try container.encodeIfPresent(self.transactionKillType, forKey: .transactionKillType)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -106,9 +106,15 @@ public struct Rating: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ratingCount, forKey: .ratingCount)
-    try container.encode(self.averageRating, forKey: .averageRating)
-    try container.encode(self.ratingHistogram, forKey: .ratingHistogram)
+    if self.ratingCount != 0 {
+      try container.encode(self.ratingCount, forKey: .ratingCount)
+    }
+    if self.averageRating != 0 {
+      try container.encode(self.averageRating, forKey: .averageRating)
+    }
+    if !self.ratingHistogram.isEmpty {
+      try container.encode(self.ratingHistogram, forKey: .ratingHistogram)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -187,17 +187,33 @@ public struct DatacenterConnector: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.registrationId, forKey: .registrationId)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.registrationId.isEmpty {
+      try container.encode(self.registrationId, forKey: .registrationId)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if self.state != DatacenterConnector.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.stateTime, forKey: .stateTime)
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(
-      self.applianceInfrastructureVersion, forKey: .applianceInfrastructureVersion)
-    try container.encode(self.applianceSoftwareVersion, forKey: .applianceSoftwareVersion)
+    if !self.applianceInfrastructureVersion.isEmpty {
+      try container.encode(
+        self.applianceInfrastructureVersion, forKey: .applianceInfrastructureVersion)
+    }
+    if !self.applianceSoftwareVersion.isEmpty {
+      try container.encode(self.applianceSoftwareVersion, forKey: .applianceSoftwareVersion)
+    }
     try container.encodeIfPresent(self.availableVersions, forKey: .availableVersions)
     try container.encodeIfPresent(self.upgradeStatus, forKey: .upgradeStatus)
     for (key, value) in self._unknownFields.json {

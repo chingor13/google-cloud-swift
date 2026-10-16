@@ -90,9 +90,15 @@ public struct ListTlsInspectionPoliciesResponse: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.tlsInspectionPolicies, forKey: .tlsInspectionPolicies)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.unreachable, forKey: .unreachable)
+    if !self.tlsInspectionPolicies.isEmpty {
+      try container.encode(self.tlsInspectionPolicies, forKey: .tlsInspectionPolicies)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.unreachable.isEmpty {
+      try container.encode(self.unreachable, forKey: .unreachable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

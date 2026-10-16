@@ -81,8 +81,12 @@ public struct Folder: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceFolder, forKey: .resourceFolder)
-    try container.encode(self.resourceFolderDisplayName, forKey: .resourceFolderDisplayName)
+    if !self.resourceFolder.isEmpty {
+      try container.encode(self.resourceFolder, forKey: .resourceFolder)
+    }
+    if !self.resourceFolderDisplayName.isEmpty {
+      try container.encode(self.resourceFolderDisplayName, forKey: .resourceFolderDisplayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

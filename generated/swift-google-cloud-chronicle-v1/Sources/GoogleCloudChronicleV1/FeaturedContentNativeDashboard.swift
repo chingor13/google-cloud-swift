@@ -85,7 +85,9 @@ public struct FeaturedContentNativeDashboard: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.contentMetadata, forKey: .contentMetadata)
     try container.encodeIfPresent(self.dashboardContent, forKey: .dashboardContent)
     for (key, value) in self._unknownFields.json {

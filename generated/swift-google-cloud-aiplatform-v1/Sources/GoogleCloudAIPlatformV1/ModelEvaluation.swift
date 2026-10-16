@@ -193,16 +193,30 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.metricsSchemaUri, forKey: .metricsSchemaUri)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.metricsSchemaUri.isEmpty {
+        try container.encode(self.metricsSchemaUri, forKey: .metricsSchemaUri)
+      }
       try container.encodeIfPresent(self.metrics, forKey: .metrics)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
-      try container.encode(self.sliceDimensions, forKey: .sliceDimensions)
-      try container.encode(self.dataItemSchemaUri, forKey: .dataItemSchemaUri)
-      try container.encode(self.annotationSchemaUri, forKey: .annotationSchemaUri)
+      if !self.sliceDimensions.isEmpty {
+        try container.encode(self.sliceDimensions, forKey: .sliceDimensions)
+      }
+      if !self.dataItemSchemaUri.isEmpty {
+        try container.encode(self.dataItemSchemaUri, forKey: .dataItemSchemaUri)
+      }
+      if !self.annotationSchemaUri.isEmpty {
+        try container.encode(self.annotationSchemaUri, forKey: .annotationSchemaUri)
+      }
       try container.encodeIfPresent(self.modelExplanation, forKey: .modelExplanation)
-      try container.encode(self.explanationSpecs, forKey: .explanationSpecs)
+      if !self.explanationSpecs.isEmpty {
+        try container.encode(self.explanationSpecs, forKey: .explanationSpecs)
+      }
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -272,7 +286,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.explanationType, forKey: .explanationType)
+        if !self.explanationType.isEmpty {
+          try container.encode(self.explanationType, forKey: .explanationType)
+        }
         try container.encodeIfPresent(self.explanationSpec, forKey: .explanationSpec)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

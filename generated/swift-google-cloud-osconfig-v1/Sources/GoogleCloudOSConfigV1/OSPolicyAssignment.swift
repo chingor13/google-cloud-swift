@@ -197,19 +197,39 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.osPolicies, forKey: .osPolicies)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.osPolicies.isEmpty {
+      try container.encode(self.osPolicies, forKey: .osPolicies)
+    }
     try container.encodeIfPresent(self.instanceFilter, forKey: .instanceFilter)
     try container.encodeIfPresent(self.rollout, forKey: .rollout)
-    try container.encode(self.revisionId, forKey: .revisionId)
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.rolloutState, forKey: .rolloutState)
-    try container.encode(self.baseline, forKey: .baseline)
-    try container.encode(self.deleted, forKey: .deleted)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.rolloutState != OSPolicyAssignment.RolloutState() {
+      try container.encode(self.rolloutState, forKey: .rolloutState)
+    }
+    if self.baseline {
+      try container.encode(self.baseline, forKey: .baseline)
+    }
+    if self.deleted {
+      try container.encode(self.deleted, forKey: .deleted)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -279,7 +299,9 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -402,10 +424,18 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.all, forKey: .all)
-      try container.encode(self.inclusionLabels, forKey: .inclusionLabels)
-      try container.encode(self.exclusionLabels, forKey: .exclusionLabels)
-      try container.encode(self.inventories, forKey: .inventories)
+      if self.all {
+        try container.encode(self.all, forKey: .all)
+      }
+      if !self.inclusionLabels.isEmpty {
+        try container.encode(self.inclusionLabels, forKey: .inclusionLabels)
+      }
+      if !self.exclusionLabels.isEmpty {
+        try container.encode(self.exclusionLabels, forKey: .exclusionLabels)
+      }
+      if !self.inventories.isEmpty {
+        try container.encode(self.inventories, forKey: .inventories)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -477,8 +507,12 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.osShortName, forKey: .osShortName)
-        try container.encode(self.osVersion, forKey: .osVersion)
+        if !self.osShortName.isEmpty {
+          try container.encode(self.osShortName, forKey: .osShortName)
+        }
+        if !self.osVersion.isEmpty {
+          try container.encode(self.osVersion, forKey: .osVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

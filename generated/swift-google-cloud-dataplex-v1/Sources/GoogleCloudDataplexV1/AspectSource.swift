@@ -87,7 +87,9 @@ public struct AspectSource: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.dataVersion, forKey: .dataVersion)
+    if !self.dataVersion.isEmpty {
+      try container.encode(self.dataVersion, forKey: .dataVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

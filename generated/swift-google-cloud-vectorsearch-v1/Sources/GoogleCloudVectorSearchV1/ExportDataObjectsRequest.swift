@@ -109,7 +109,9 @@ public struct ExportDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.fieldFilter, forKey: .fieldFilter)
 
     if let choice = self.destination {
@@ -187,8 +189,12 @@ public struct ExportDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.exportUri, forKey: .exportUri)
-      try container.encode(self.format, forKey: .format)
+      if !self.exportUri.isEmpty {
+        try container.encode(self.exportUri, forKey: .exportUri)
+      }
+      if self.format != ExportDataObjectsRequest.GcsExportDestination.Format() {
+        try container.encode(self.format, forKey: .format)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -469,7 +475,9 @@ public struct ExportDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.fields, forKey: .fields)
+        if !self.fields.isEmpty {
+          try container.encode(self.fields, forKey: .fields)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

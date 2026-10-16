@@ -85,7 +85,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(
         self.connectionPoolingEnabled, forKey: .connectionPoolingEnabled)
-      try container.encode(self.flags, forKey: .flags)
+      if !self.flags.isEmpty {
+        try container.encode(self.flags, forKey: .flags)
+      }
       try container.encodeIfPresent(self.poolerCount, forKey: .poolerCount)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

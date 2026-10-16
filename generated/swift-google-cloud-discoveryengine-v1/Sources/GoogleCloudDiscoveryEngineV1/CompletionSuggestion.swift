@@ -130,11 +130,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.suggestion, forKey: .suggestion)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.groupId, forKey: .groupId)
-      try container.encode(self.groupScore, forKey: .groupScore)
-      try container.encode(self.alternativePhrases, forKey: .alternativePhrases)
+      if !self.suggestion.isEmpty {
+        try container.encode(self.suggestion, forKey: .suggestion)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if !self.groupId.isEmpty {
+        try container.encode(self.groupId, forKey: .groupId)
+      }
+      if self.groupScore != 0 {
+        try container.encode(self.groupScore, forKey: .groupScore)
+      }
+      if !self.alternativePhrases.isEmpty {
+        try container.encode(self.alternativePhrases, forKey: .alternativePhrases)
+      }
 
       if let choice = self.rankingInfo {
         switch choice {

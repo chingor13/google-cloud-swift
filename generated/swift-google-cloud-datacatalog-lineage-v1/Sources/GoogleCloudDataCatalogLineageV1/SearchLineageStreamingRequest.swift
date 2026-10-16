@@ -111,10 +111,16 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.locations, forKey: .locations)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
     try container.encodeIfPresent(self.rootCriteria, forKey: .rootCriteria)
-    try container.encode(self.direction, forKey: .direction)
+    if self.direction != SearchLineageStreamingRequest.SearchDirection() {
+      try container.encode(self.direction, forKey: .direction)
+    }
     try container.encodeIfPresent(self.filters, forKey: .filters)
     try container.encodeIfPresent(self.limits, forKey: .limits)
     for (key, value) in self._unknownFields.json {
@@ -196,8 +202,12 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyTypes, forKey: .dependencyTypes)
-      try container.encode(self.entitySet, forKey: .entitySet)
+      if !self.dependencyTypes.isEmpty {
+        try container.encode(self.dependencyTypes, forKey: .dependencyTypes)
+      }
+      if self.entitySet != SearchLineageStreamingRequest.EntitySet() {
+        try container.encode(self.entitySet, forKey: .entitySet)
+      }
       try container.encodeIfPresent(self.timeRange, forKey: .timeRange)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -301,9 +311,15 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxDepth, forKey: .maxDepth)
-      try container.encode(self.maxResults, forKey: .maxResults)
-      try container.encode(self.maxProcessPerLink, forKey: .maxProcessPerLink)
+      if self.maxDepth != 0 {
+        try container.encode(self.maxDepth, forKey: .maxDepth)
+      }
+      if self.maxResults != 0 {
+        try container.encode(self.maxResults, forKey: .maxResults)
+      }
+      if self.maxProcessPerLink != 0 {
+        try container.encode(self.maxProcessPerLink, forKey: .maxProcessPerLink)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -88,8 +88,12 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.modelConfigs, forKey: .modelConfigs)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.modelConfigs.isEmpty {
+      try container.encode(self.modelConfigs, forKey: .modelConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -175,10 +179,14 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.inputConfig, forKey: .inputConfig)
       try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
-      try container.encode(self.enableCheckpoints, forKey: .enableCheckpoints)
+      if self.enableCheckpoints {
+        try container.encode(self.enableCheckpoints, forKey: .enableCheckpoints)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

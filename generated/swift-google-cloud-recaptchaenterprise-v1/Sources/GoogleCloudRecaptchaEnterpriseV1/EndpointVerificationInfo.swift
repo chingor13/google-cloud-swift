@@ -102,7 +102,9 @@ public struct EndpointVerificationInfo: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.requestToken, forKey: .requestToken)
+    if !self.requestToken.isEmpty {
+      try container.encode(self.requestToken, forKey: .requestToken)
+    }
     try container.encodeIfPresent(self.lastVerificationTime, forKey: .lastVerificationTime)
 
     if let choice = self.endpoint {

@@ -106,9 +106,15 @@ public struct LustreCsiDriverConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.enableLegacyLustrePort, forKey: .enableLegacyLustrePort)
-    try container.encode(self.disableMultiNic, forKey: .disableMultiNic)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.enableLegacyLustrePort {
+      try container.encode(self.enableLegacyLustrePort, forKey: .enableLegacyLustrePort)
+    }
+    if self.disableMultiNic {
+      try container.encode(self.disableMultiNic, forKey: .disableMultiNic)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

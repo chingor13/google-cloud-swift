@@ -97,10 +97,18 @@ public struct LogEntryOperation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.producer, forKey: .producer)
-    try container.encode(self.first, forKey: .first)
-    try container.encode(self.last, forKey: .last)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.producer.isEmpty {
+      try container.encode(self.producer, forKey: .producer)
+    }
+    if self.first {
+      try container.encode(self.first, forKey: .first)
+    }
+    if self.last {
+      try container.encode(self.last, forKey: .last)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

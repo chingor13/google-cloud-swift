@@ -114,9 +114,15 @@ public struct ExternalProtectionLevelOptions: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.externalKeyUri, forKey: .externalKeyUri)
-    try container.encode(self.ekmConnectionKeyPath, forKey: .ekmConnectionKeyPath)
-    try container.encode(self.ekmConnectionBackendOverride, forKey: .ekmConnectionBackendOverride)
+    if !self.externalKeyUri.isEmpty {
+      try container.encode(self.externalKeyUri, forKey: .externalKeyUri)
+    }
+    if !self.ekmConnectionKeyPath.isEmpty {
+      try container.encode(self.ekmConnectionKeyPath, forKey: .ekmConnectionKeyPath)
+    }
+    if !self.ekmConnectionBackendOverride.isEmpty {
+      try container.encode(self.ekmConnectionBackendOverride, forKey: .ekmConnectionBackendOverride)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

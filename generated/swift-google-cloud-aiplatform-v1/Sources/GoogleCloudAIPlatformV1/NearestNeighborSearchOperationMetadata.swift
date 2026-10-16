@@ -89,8 +89,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.contentValidationStats, forKey: .contentValidationStats)
-      try container.encode(self.dataBytesCount, forKey: .dataBytesCount)
+      if !self.contentValidationStats.isEmpty {
+        try container.encode(self.contentValidationStats, forKey: .contentValidationStats)
+      }
+      if self.dataBytesCount != 0 {
+        try container.encode(self.dataBytesCount, forKey: .dataBytesCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -185,11 +189,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.errorType, forKey: .errorType)
-        try container.encode(self.errorMessage, forKey: .errorMessage)
-        try container.encode(self.sourceGcsUri, forKey: .sourceGcsUri)
-        try container.encode(self.embeddingId, forKey: .embeddingId)
-        try container.encode(self.rawRecord, forKey: .rawRecord)
+        if self.errorType != NearestNeighborSearchOperationMetadata.RecordError.RecordErrorType() {
+          try container.encode(self.errorType, forKey: .errorType)
+        }
+        if !self.errorMessage.isEmpty {
+          try container.encode(self.errorMessage, forKey: .errorMessage)
+        }
+        if !self.sourceGcsUri.isEmpty {
+          try container.encode(self.sourceGcsUri, forKey: .sourceGcsUri)
+        }
+        if !self.embeddingId.isEmpty {
+          try container.encode(self.embeddingId, forKey: .embeddingId)
+        }
+        if !self.rawRecord.isEmpty {
+          try container.encode(self.rawRecord, forKey: .rawRecord)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -540,12 +554,24 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.sourceGcsUri, forKey: .sourceGcsUri)
-        try container.encode(self.validRecordCount, forKey: .validRecordCount)
-        try container.encode(self.invalidRecordCount, forKey: .invalidRecordCount)
-        try container.encode(self.partialErrors, forKey: .partialErrors)
-        try container.encode(self.validSparseRecordCount, forKey: .validSparseRecordCount)
-        try container.encode(self.invalidSparseRecordCount, forKey: .invalidSparseRecordCount)
+        if !self.sourceGcsUri.isEmpty {
+          try container.encode(self.sourceGcsUri, forKey: .sourceGcsUri)
+        }
+        if self.validRecordCount != 0 {
+          try container.encode(self.validRecordCount, forKey: .validRecordCount)
+        }
+        if self.invalidRecordCount != 0 {
+          try container.encode(self.invalidRecordCount, forKey: .invalidRecordCount)
+        }
+        if !self.partialErrors.isEmpty {
+          try container.encode(self.partialErrors, forKey: .partialErrors)
+        }
+        if self.validSparseRecordCount != 0 {
+          try container.encode(self.validSparseRecordCount, forKey: .validSparseRecordCount)
+        }
+        if self.invalidSparseRecordCount != 0 {
+          try container.encode(self.invalidSparseRecordCount, forKey: .invalidSparseRecordCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

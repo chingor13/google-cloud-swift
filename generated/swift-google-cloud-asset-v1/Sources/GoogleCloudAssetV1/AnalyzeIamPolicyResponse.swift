@@ -103,9 +103,13 @@ public struct AnalyzeIamPolicyResponse: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.mainAnalysis, forKey: .mainAnalysis)
-    try container.encode(
-      self.serviceAccountImpersonationAnalysis, forKey: .serviceAccountImpersonationAnalysis)
-    try container.encode(self.fullyExplored, forKey: .fullyExplored)
+    if !self.serviceAccountImpersonationAnalysis.isEmpty {
+      try container.encode(
+        self.serviceAccountImpersonationAnalysis, forKey: .serviceAccountImpersonationAnalysis)
+    }
+    if self.fullyExplored {
+      try container.encode(self.fullyExplored, forKey: .fullyExplored)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -199,9 +203,15 @@ public struct AnalyzeIamPolicyResponse: Codable, Equatable, GoogleWKT._AnyPackab
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.analysisQuery, forKey: .analysisQuery)
-      try container.encode(self.analysisResults, forKey: .analysisResults)
-      try container.encode(self.fullyExplored, forKey: .fullyExplored)
-      try container.encode(self.nonCriticalErrors, forKey: .nonCriticalErrors)
+      if !self.analysisResults.isEmpty {
+        try container.encode(self.analysisResults, forKey: .analysisResults)
+      }
+      if self.fullyExplored {
+        try container.encode(self.fullyExplored, forKey: .fullyExplored)
+      }
+      if !self.nonCriticalErrors.isEmpty {
+        try container.encode(self.nonCriticalErrors, forKey: .nonCriticalErrors)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

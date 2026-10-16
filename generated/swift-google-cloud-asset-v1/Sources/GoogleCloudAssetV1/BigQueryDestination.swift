@@ -155,11 +155,19 @@ public struct BigQueryDestination: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataset, forKey: .dataset)
-    try container.encode(self.table, forKey: .table)
-    try container.encode(self.force, forKey: .force)
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
+    if !self.table.isEmpty {
+      try container.encode(self.table, forKey: .table)
+    }
+    if self.force {
+      try container.encode(self.force, forKey: .force)
+    }
     try container.encodeIfPresent(self.partitionSpec, forKey: .partitionSpec)
-    try container.encode(self.separateTablesPerAssetType, forKey: .separateTablesPerAssetType)
+    if self.separateTablesPerAssetType {
+      try container.encode(self.separateTablesPerAssetType, forKey: .separateTablesPerAssetType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

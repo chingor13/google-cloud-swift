@@ -202,24 +202,44 @@ public struct ManagementServer: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.type, forKey: .type)
+    if self.type != ManagementServer.InstanceType() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.managementUri, forKey: .managementUri)
     try container.encodeIfPresent(
       self.workforceIdentityBasedManagementUri, forKey: .workforceIdentityBasedManagementUri)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.networks, forKey: .networks)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.oauth2ClientId, forKey: .oauth2ClientId)
+    if self.state != ManagementServer.InstanceState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.oauth2ClientId.isEmpty {
+      try container.encode(self.oauth2ClientId, forKey: .oauth2ClientId)
+    }
     try container.encodeIfPresent(
       self.workforceIdentityBasedOauth2ClientId, forKey: .workforceIdentityBasedOauth2ClientId)
-    try container.encode(self.baProxyUri, forKey: .baProxyUri)
+    if !self.baProxyUri.isEmpty {
+      try container.encode(self.baProxyUri, forKey: .baProxyUri)
+    }
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

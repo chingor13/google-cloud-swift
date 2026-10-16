@@ -314,7 +314,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asPaths, forKey: .asPaths)
+      if !self.asPaths.isEmpty {
+        try container.encode(self.asPaths, forKey: .asPaths)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.destRange, forKey: .destRange)
@@ -340,8 +342,12 @@
       try container.encodeIfPresent(self.routeStatus, forKey: .routeStatus)
       try container.encodeIfPresent(self.routeType, forKey: .routeType)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.tags, forKey: .tags)
-      try container.encode(self.warnings, forKey: .warnings)
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
+      if !self.warnings.isEmpty {
+        try container.encode(self.warnings, forKey: .warnings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -423,7 +429,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.code, forKey: .code)
-        try container.encode(self.data, forKey: .data)
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         try container.encodeIfPresent(self.message, forKey: .message)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

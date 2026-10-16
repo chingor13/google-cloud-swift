@@ -180,19 +180,35 @@ public struct Finding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.quote, forKey: .quote)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.quote.isEmpty {
+      try container.encode(self.quote, forKey: .quote)
+    }
     try container.encodeIfPresent(self.infoType, forKey: .infoType)
-    try container.encode(self.likelihood, forKey: .likelihood)
+    if self.likelihood != Likelihood() {
+      try container.encode(self.likelihood, forKey: .likelihood)
+    }
     try container.encodeIfPresent(self.location, forKey: .location)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.quoteInfo, forKey: .quoteInfo)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.triggerName, forKey: .triggerName)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.triggerName.isEmpty {
+      try container.encode(self.triggerName, forKey: .triggerName)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.jobCreateTime, forKey: .jobCreateTime)
-    try container.encode(self.jobName, forKey: .jobName)
-    try container.encode(self.findingId, forKey: .findingId)
+    if !self.jobName.isEmpty {
+      try container.encode(self.jobName, forKey: .jobName)
+    }
+    if !self.findingId.isEmpty {
+      try container.encode(self.findingId, forKey: .findingId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

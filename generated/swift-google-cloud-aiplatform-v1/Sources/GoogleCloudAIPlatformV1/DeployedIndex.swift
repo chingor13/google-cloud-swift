@@ -275,21 +275,40 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.index, forKey: .index)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.index.isEmpty {
+        try container.encode(self.index, forKey: .index)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.privateEndpoints, forKey: .privateEndpoints)
       try container.encodeIfPresent(self.indexSyncTime, forKey: .indexSyncTime)
       try container.encodeIfPresent(self.automaticResources, forKey: .automaticResources)
       try container.encodeIfPresent(self.dedicatedResources, forKey: .dedicatedResources)
-      try container.encode(self.enableAccessLogging, forKey: .enableAccessLogging)
-      try container.encode(self.enableDatapointUpsertLogging, forKey: .enableDatapointUpsertLogging)
+      if self.enableAccessLogging {
+        try container.encode(self.enableAccessLogging, forKey: .enableAccessLogging)
+      }
+      if self.enableDatapointUpsertLogging {
+        try container.encode(
+          self.enableDatapointUpsertLogging, forKey: .enableDatapointUpsertLogging)
+      }
       try container.encodeIfPresent(self.deployedIndexAuthConfig, forKey: .deployedIndexAuthConfig)
-      try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
-      try container.encode(self.deploymentGroup, forKey: .deploymentGroup)
-      try container.encode(self.deploymentTier, forKey: .deploymentTier)
-      try container.encode(self.pscAutomationConfigs, forKey: .pscAutomationConfigs)
+      if !self.reservedIpRanges.isEmpty {
+        try container.encode(self.reservedIpRanges, forKey: .reservedIpRanges)
+      }
+      if !self.deploymentGroup.isEmpty {
+        try container.encode(self.deploymentGroup, forKey: .deploymentGroup)
+      }
+      if self.deploymentTier != DeployedIndex.DeploymentTier() {
+        try container.encode(self.deploymentTier, forKey: .deploymentTier)
+      }
+      if !self.pscAutomationConfigs.isEmpty {
+        try container.encode(self.pscAutomationConfigs, forKey: .pscAutomationConfigs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

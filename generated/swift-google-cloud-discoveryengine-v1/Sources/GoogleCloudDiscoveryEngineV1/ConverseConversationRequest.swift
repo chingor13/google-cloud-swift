@@ -176,14 +176,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.query, forKey: .query)
-      try container.encode(self.servingConfig, forKey: .servingConfig)
+      if !self.servingConfig.isEmpty {
+        try container.encode(self.servingConfig, forKey: .servingConfig)
+      }
       try container.encodeIfPresent(self.conversation, forKey: .conversation)
-      try container.encode(self.safeSearch, forKey: .safeSearch)
-      try container.encode(self.userLabels, forKey: .userLabels)
+      if self.safeSearch {
+        try container.encode(self.safeSearch, forKey: .safeSearch)
+      }
+      if !self.userLabels.isEmpty {
+        try container.encode(self.userLabels, forKey: .userLabels)
+      }
       try container.encodeIfPresent(self.summarySpec, forKey: .summarySpec)
-      try container.encode(self.filter, forKey: .filter)
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
       try container.encodeIfPresent(self.boostSpec, forKey: .boostSpec)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

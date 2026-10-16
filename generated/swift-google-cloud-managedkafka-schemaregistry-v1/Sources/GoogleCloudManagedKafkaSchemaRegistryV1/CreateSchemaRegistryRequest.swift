@@ -89,8 +89,12 @@ public struct CreateSchemaRegistryRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.schemaRegistryId, forKey: .schemaRegistryId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.schemaRegistryId.isEmpty {
+      try container.encode(self.schemaRegistryId, forKey: .schemaRegistryId)
+    }
     try container.encodeIfPresent(self.schemaRegistry, forKey: .schemaRegistry)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

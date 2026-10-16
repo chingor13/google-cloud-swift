@@ -103,8 +103,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.disks, forKey: .disks)
-      try container.encode(self.machineTypes, forKey: .machineTypes)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
+      if !self.machineTypes.isEmpty {
+        try container.encode(self.machineTypes, forKey: .machineTypes)
+      }
       try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)
       try container.encodeIfPresent(self.rank, forKey: .rank)
       for (key, value) in self._unknownFields.json {

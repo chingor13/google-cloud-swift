@@ -83,8 +83,12 @@ public struct SetTablePrimaryKey: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primaryKeyColumns, forKey: .primaryKeyColumns)
-    try container.encode(self.primaryKey, forKey: .primaryKey)
+    if !self.primaryKeyColumns.isEmpty {
+      try container.encode(self.primaryKeyColumns, forKey: .primaryKeyColumns)
+    }
+    if !self.primaryKey.isEmpty {
+      try container.encode(self.primaryKey, forKey: .primaryKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

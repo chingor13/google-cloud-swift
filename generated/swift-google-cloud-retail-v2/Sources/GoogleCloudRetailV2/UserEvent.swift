@@ -425,27 +425,61 @@ public struct UserEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.eventType, forKey: .eventType)
-    try container.encode(self.visitorId, forKey: .visitorId)
-    try container.encode(self.sessionId, forKey: .sessionId)
+    if !self.eventType.isEmpty {
+      try container.encode(self.eventType, forKey: .eventType)
+    }
+    if !self.visitorId.isEmpty {
+      try container.encode(self.visitorId, forKey: .visitorId)
+    }
+    if !self.sessionId.isEmpty {
+      try container.encode(self.sessionId, forKey: .sessionId)
+    }
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
-    try container.encode(self.experimentIds, forKey: .experimentIds)
-    try container.encode(self.attributionToken, forKey: .attributionToken)
-    try container.encode(self.productDetails, forKey: .productDetails)
+    if !self.experimentIds.isEmpty {
+      try container.encode(self.experimentIds, forKey: .experimentIds)
+    }
+    if !self.attributionToken.isEmpty {
+      try container.encode(self.attributionToken, forKey: .attributionToken)
+    }
+    if !self.productDetails.isEmpty {
+      try container.encode(self.productDetails, forKey: .productDetails)
+    }
     try container.encodeIfPresent(self.completionDetail, forKey: .completionDetail)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.cartId, forKey: .cartId)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.cartId.isEmpty {
+      try container.encode(self.cartId, forKey: .cartId)
+    }
     try container.encodeIfPresent(self.purchaseTransaction, forKey: .purchaseTransaction)
-    try container.encode(self.searchQuery, forKey: .searchQuery)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.orderBy, forKey: .orderBy)
-    try container.encode(self.offset, forKey: .offset)
-    try container.encode(self.pageCategories, forKey: .pageCategories)
+    if !self.searchQuery.isEmpty {
+      try container.encode(self.searchQuery, forKey: .searchQuery)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if !self.orderBy.isEmpty {
+      try container.encode(self.orderBy, forKey: .orderBy)
+    }
+    if self.offset != 0 {
+      try container.encode(self.offset, forKey: .offset)
+    }
+    if !self.pageCategories.isEmpty {
+      try container.encode(self.pageCategories, forKey: .pageCategories)
+    }
     try container.encodeIfPresent(self.userInfo, forKey: .userInfo)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.referrerUri, forKey: .referrerUri)
-    try container.encode(self.pageViewId, forKey: .pageViewId)
-    try container.encode(self.entity, forKey: .entity)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.referrerUri.isEmpty {
+      try container.encode(self.referrerUri, forKey: .referrerUri)
+    }
+    if !self.pageViewId.isEmpty {
+      try container.encode(self.pageViewId, forKey: .pageViewId)
+    }
+    if !self.entity.isEmpty {
+      try container.encode(self.entity, forKey: .entity)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

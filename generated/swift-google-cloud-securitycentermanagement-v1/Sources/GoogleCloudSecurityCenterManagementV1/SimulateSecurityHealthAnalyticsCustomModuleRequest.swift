@@ -91,7 +91,9 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.customConfig, forKey: .customConfig)
     try container.encodeIfPresent(self.resource, forKey: .resource)
     for (key, value) in self._unknownFields.json {
@@ -173,7 +175,9 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceType, forKey: .resourceType)
+      if !self.resourceType.isEmpty {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
       try container.encodeIfPresent(self.resourceData, forKey: .resourceData)
       try container.encodeIfPresent(self.iamPolicyData, forKey: .iamPolicyData)
       for (key, value) in self._unknownFields.json {

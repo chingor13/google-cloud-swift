@@ -125,11 +125,19 @@ public struct AnalyzeOrgPolicyGovernedContainersRequest: Codable, Equatable, Goo
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.constraint, forKey: .constraint)
-    try container.encode(self.filter, forKey: .filter)
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.constraint.isEmpty {
+      try container.encode(self.constraint, forKey: .constraint)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     try container.encodeIfPresent(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

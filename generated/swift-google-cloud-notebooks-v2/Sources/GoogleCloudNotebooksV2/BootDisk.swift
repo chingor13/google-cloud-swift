@@ -100,10 +100,18 @@ public struct BootDisk: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
-    try container.encode(self.diskType, forKey: .diskType)
-    try container.encode(self.diskEncryption, forKey: .diskEncryption)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
+    if self.diskType != DiskType() {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
+    if self.diskEncryption != DiskEncryption() {
+      try container.encode(self.diskEncryption, forKey: .diskEncryption)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

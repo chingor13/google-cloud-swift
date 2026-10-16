@@ -85,8 +85,12 @@ public struct StretchedClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.preferredLocation, forKey: .preferredLocation)
-    try container.encode(self.secondaryLocation, forKey: .secondaryLocation)
+    if !self.preferredLocation.isEmpty {
+      try container.encode(self.preferredLocation, forKey: .preferredLocation)
+    }
+    if !self.secondaryLocation.isEmpty {
+      try container.encode(self.secondaryLocation, forKey: .secondaryLocation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

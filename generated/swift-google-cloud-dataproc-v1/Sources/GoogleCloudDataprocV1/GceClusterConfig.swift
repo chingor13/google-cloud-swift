@@ -249,21 +249,39 @@ public struct GceClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.zoneUri, forKey: .zoneUri)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.subnetworkUri, forKey: .subnetworkUri)
+    if !self.zoneUri.isEmpty {
+      try container.encode(self.zoneUri, forKey: .zoneUri)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.subnetworkUri.isEmpty {
+      try container.encode(self.subnetworkUri, forKey: .subnetworkUri)
+    }
     try container.encodeIfPresent(self.internalIpOnly, forKey: .internalIpOnly)
-    try container.encode(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.serviceAccountScopes, forKey: .serviceAccountScopes)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.metadata, forKey: .metadata)
+    if self.privateIpv6GoogleAccess != GceClusterConfig.PrivateIpv6GoogleAccess() {
+      try container.encode(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.serviceAccountScopes.isEmpty {
+      try container.encode(self.serviceAccountScopes, forKey: .serviceAccountScopes)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
     try container.encodeIfPresent(self.reservationAffinity, forKey: .reservationAffinity)
     try container.encodeIfPresent(self.nodeGroupAffinity, forKey: .nodeGroupAffinity)
     try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
     try container.encodeIfPresent(
       self.confidentialInstanceConfig, forKey: .confidentialInstanceConfig)
-    try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+    if !self.resourceManagerTags.isEmpty {
+      try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

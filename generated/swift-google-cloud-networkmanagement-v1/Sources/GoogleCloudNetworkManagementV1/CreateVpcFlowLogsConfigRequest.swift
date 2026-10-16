@@ -90,8 +90,12 @@ public struct CreateVpcFlowLogsConfigRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.vpcFlowLogsConfigId, forKey: .vpcFlowLogsConfigId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.vpcFlowLogsConfigId.isEmpty {
+      try container.encode(self.vpcFlowLogsConfigId, forKey: .vpcFlowLogsConfigId)
+    }
     try container.encodeIfPresent(self.vpcFlowLogsConfig, forKey: .vpcFlowLogsConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

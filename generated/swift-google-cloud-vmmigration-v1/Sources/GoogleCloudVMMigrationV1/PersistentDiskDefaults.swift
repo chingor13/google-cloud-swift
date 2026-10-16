@@ -109,10 +109,18 @@ public struct PersistentDiskDefaults: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceDiskNumber, forKey: .sourceDiskNumber)
-    try container.encode(self.diskName, forKey: .diskName)
-    try container.encode(self.diskType, forKey: .diskType)
-    try container.encode(self.additionalLabels, forKey: .additionalLabels)
+    if self.sourceDiskNumber != 0 {
+      try container.encode(self.sourceDiskNumber, forKey: .sourceDiskNumber)
+    }
+    if !self.diskName.isEmpty {
+      try container.encode(self.diskName, forKey: .diskName)
+    }
+    if self.diskType != ComputeEngineDiskType() {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
+    if !self.additionalLabels.isEmpty {
+      try container.encode(self.additionalLabels, forKey: .additionalLabels)
+    }
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
     try container.encodeIfPresent(self.vmAttachmentDetails, forKey: .vmAttachmentDetails)
     for (key, value) in self._unknownFields.json {

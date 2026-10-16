@@ -192,9 +192,15 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.saturation, forKey: .saturation)
-      try container.encode(self.contrast, forKey: .contrast)
-      try container.encode(self.brightness, forKey: .brightness)
+      if self.saturation != 0 {
+        try container.encode(self.saturation, forKey: .saturation)
+      }
+      if self.contrast != 0 {
+        try container.encode(self.contrast, forKey: .contrast)
+      }
+      if self.brightness != 0 {
+        try container.encode(self.brightness, forKey: .brightness)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -290,8 +296,12 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.strength, forKey: .strength)
-      try container.encode(self.tune, forKey: .tune)
+      if self.strength != 0 {
+        try container.encode(self.strength, forKey: .strength)
+      }
+      if !self.tune.isEmpty {
+        try container.encode(self.tune, forKey: .tune)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -383,8 +393,12 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.strength, forKey: .strength)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.strength != 0 {
+        try container.encode(self.strength, forKey: .strength)
+      }
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -494,9 +508,15 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.lufs, forKey: .lufs)
-      try container.encode(self.highBoost, forKey: .highBoost)
-      try container.encode(self.lowBoost, forKey: .lowBoost)
+      if self.lufs != 0 {
+        try container.encode(self.lufs, forKey: .lufs)
+      }
+      if self.highBoost {
+        try container.encode(self.highBoost, forKey: .highBoost)
+      }
+      if self.lowBoost {
+        try container.encode(self.lowBoost, forKey: .lowBoost)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -601,10 +621,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topPixels, forKey: .topPixels)
-      try container.encode(self.bottomPixels, forKey: .bottomPixels)
-      try container.encode(self.leftPixels, forKey: .leftPixels)
-      try container.encode(self.rightPixels, forKey: .rightPixels)
+      if self.topPixels != 0 {
+        try container.encode(self.topPixels, forKey: .topPixels)
+      }
+      if self.bottomPixels != 0 {
+        try container.encode(self.bottomPixels, forKey: .bottomPixels)
+      }
+      if self.leftPixels != 0 {
+        try container.encode(self.leftPixels, forKey: .leftPixels)
+      }
+      if self.rightPixels != 0 {
+        try container.encode(self.rightPixels, forKey: .rightPixels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -709,10 +737,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topPixels, forKey: .topPixels)
-      try container.encode(self.bottomPixels, forKey: .bottomPixels)
-      try container.encode(self.leftPixels, forKey: .leftPixels)
-      try container.encode(self.rightPixels, forKey: .rightPixels)
+      if self.topPixels != 0 {
+        try container.encode(self.topPixels, forKey: .topPixels)
+      }
+      if self.bottomPixels != 0 {
+        try container.encode(self.bottomPixels, forKey: .bottomPixels)
+      }
+      if self.leftPixels != 0 {
+        try container.encode(self.leftPixels, forKey: .leftPixels)
+      }
+      if self.rightPixels != 0 {
+        try container.encode(self.rightPixels, forKey: .rightPixels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -919,10 +955,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.mode, forKey: .mode)
-        try container.encode(self.disableSpatialInterlacing, forKey: .disableSpatialInterlacing)
-        try container.encode(self.parity, forKey: .parity)
-        try container.encode(self.deinterlaceAllFrames, forKey: .deinterlaceAllFrames)
+        if !self.mode.isEmpty {
+          try container.encode(self.mode, forKey: .mode)
+        }
+        if self.disableSpatialInterlacing {
+          try container.encode(self.disableSpatialInterlacing, forKey: .disableSpatialInterlacing)
+        }
+        if !self.parity.isEmpty {
+          try container.encode(self.parity, forKey: .parity)
+        }
+        if self.deinterlaceAllFrames {
+          try container.encode(self.deinterlaceAllFrames, forKey: .deinterlaceAllFrames)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1032,9 +1076,15 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.mode, forKey: .mode)
-        try container.encode(self.parity, forKey: .parity)
-        try container.encode(self.deinterlaceAllFrames, forKey: .deinterlaceAllFrames)
+        if !self.mode.isEmpty {
+          try container.encode(self.mode, forKey: .mode)
+        }
+        if !self.parity.isEmpty {
+          try container.encode(self.parity, forKey: .parity)
+        }
+        if self.deinterlaceAllFrames {
+          try container.encode(self.deinterlaceAllFrames, forKey: .deinterlaceAllFrames)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

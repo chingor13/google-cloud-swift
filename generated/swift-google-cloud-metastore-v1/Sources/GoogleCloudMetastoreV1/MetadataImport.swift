@@ -129,12 +129,18 @@ public struct MetadataImport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != MetadataImport.State() {
+      try container.encode(self.state, forKey: .state)
+    }
 
     if let choice = self.metadata {
       switch choice {
@@ -237,10 +243,18 @@ public struct MetadataImport: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.databaseType, forKey: .databaseType)
-      try container.encode(self.gcsUri, forKey: .gcsUri)
-      try container.encode(self.sourceDatabase, forKey: .sourceDatabase)
-      try container.encode(self.type, forKey: .type)
+      if self.databaseType != MetadataImport.DatabaseDump.DatabaseType() {
+        try container.encode(self.databaseType, forKey: .databaseType)
+      }
+      if !self.gcsUri.isEmpty {
+        try container.encode(self.gcsUri, forKey: .gcsUri)
+      }
+      if !self.sourceDatabase.isEmpty {
+        try container.encode(self.sourceDatabase, forKey: .sourceDatabase)
+      }
+      if self.type != DatabaseDumpSpec.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

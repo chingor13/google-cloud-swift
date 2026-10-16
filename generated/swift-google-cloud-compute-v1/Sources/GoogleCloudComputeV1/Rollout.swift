@@ -206,7 +206,9 @@
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
       try container.encodeIfPresent(self.state, forKey: .state)
-      try container.encode(self.waveDetails, forKey: .waveDetails)
+      if !self.waveDetails.isEmpty {
+        try container.encode(self.waveDetails, forKey: .waveDetails)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

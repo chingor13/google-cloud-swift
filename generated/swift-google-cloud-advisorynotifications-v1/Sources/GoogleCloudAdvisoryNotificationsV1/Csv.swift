@@ -79,8 +79,12 @@ public struct Csv: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.headers, forKey: .headers)
-    try container.encode(self.dataRows, forKey: .dataRows)
+    if !self.headers.isEmpty {
+      try container.encode(self.headers, forKey: .headers)
+    }
+    if !self.dataRows.isEmpty {
+      try container.encode(self.dataRows, forKey: .dataRows)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -139,7 +143,9 @@ public struct Csv: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entries, forKey: .entries)
+      if !self.entries.isEmpty {
+        try container.encode(self.entries, forKey: .entries)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

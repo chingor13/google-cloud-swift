@@ -103,9 +103,15 @@ public struct AutoMlImageObjectDetectionInputs: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.modelType, forKey: .modelType)
-    try container.encode(self.budgetMilliNodeHours, forKey: .budgetMilliNodeHours)
-    try container.encode(self.disableEarlyStopping, forKey: .disableEarlyStopping)
+    if self.modelType != AutoMlImageObjectDetectionInputs.ModelType() {
+      try container.encode(self.modelType, forKey: .modelType)
+    }
+    if self.budgetMilliNodeHours != 0 {
+      try container.encode(self.budgetMilliNodeHours, forKey: .budgetMilliNodeHours)
+    }
+    if self.disableEarlyStopping {
+      try container.encode(self.disableEarlyStopping, forKey: .disableEarlyStopping)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

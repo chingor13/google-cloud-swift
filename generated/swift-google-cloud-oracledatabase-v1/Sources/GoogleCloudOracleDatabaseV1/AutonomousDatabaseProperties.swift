@@ -709,73 +709,178 @@ public struct AutonomousDatabaseProperties: Codable, Equatable, GoogleWKT._AnyPa
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.computeCount, forKey: .computeCount)
-    try container.encode(self.cpuCoreCount, forKey: .cpuCoreCount)
-    try container.encode(self.dataStorageSizeTb, forKey: .dataStorageSizeTb)
-    try container.encode(self.dataStorageSizeGb, forKey: .dataStorageSizeGb)
-    try container.encode(self.dbWorkload, forKey: .dbWorkload)
-    try container.encode(self.dbEdition, forKey: .dbEdition)
-    try container.encode(self.characterSet, forKey: .characterSet)
-    try container.encode(self.nCharacterSet, forKey: .nCharacterSet)
-    try container.encode(self.privateEndpointIp, forKey: .privateEndpointIp)
-    try container.encode(self.privateEndpointLabel, forKey: .privateEndpointLabel)
-    try container.encode(self.dbVersion, forKey: .dbVersion)
-    try container.encode(self.isAutoScalingEnabled, forKey: .isAutoScalingEnabled)
-    try container.encode(self.isStorageAutoScalingEnabled, forKey: .isStorageAutoScalingEnabled)
-    try container.encode(self.licenseType, forKey: .licenseType)
-    try container.encode(self.customerContacts, forKey: .customerContacts)
-    try container.encode(self.secretId, forKey: .secretId)
-    try container.encode(self.vaultId, forKey: .vaultId)
-    try container.encode(self.maintenanceScheduleType, forKey: .maintenanceScheduleType)
-    try container.encode(self.mtlsConnectionRequired, forKey: .mtlsConnectionRequired)
-    try container.encode(self.backupRetentionPeriodDays, forKey: .backupRetentionPeriodDays)
-    try container.encode(self.actualUsedDataStorageSizeTb, forKey: .actualUsedDataStorageSizeTb)
-    try container.encode(self.allocatedStorageSizeTb, forKey: .allocatedStorageSizeTb)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.computeCount != 0 {
+      try container.encode(self.computeCount, forKey: .computeCount)
+    }
+    if self.cpuCoreCount != 0 {
+      try container.encode(self.cpuCoreCount, forKey: .cpuCoreCount)
+    }
+    if self.dataStorageSizeTb != 0 {
+      try container.encode(self.dataStorageSizeTb, forKey: .dataStorageSizeTb)
+    }
+    if self.dataStorageSizeGb != 0 {
+      try container.encode(self.dataStorageSizeGb, forKey: .dataStorageSizeGb)
+    }
+    if self.dbWorkload != DBWorkload() {
+      try container.encode(self.dbWorkload, forKey: .dbWorkload)
+    }
+    if self.dbEdition != AutonomousDatabaseProperties.DatabaseEdition() {
+      try container.encode(self.dbEdition, forKey: .dbEdition)
+    }
+    if !self.characterSet.isEmpty {
+      try container.encode(self.characterSet, forKey: .characterSet)
+    }
+    if !self.nCharacterSet.isEmpty {
+      try container.encode(self.nCharacterSet, forKey: .nCharacterSet)
+    }
+    if !self.privateEndpointIp.isEmpty {
+      try container.encode(self.privateEndpointIp, forKey: .privateEndpointIp)
+    }
+    if !self.privateEndpointLabel.isEmpty {
+      try container.encode(self.privateEndpointLabel, forKey: .privateEndpointLabel)
+    }
+    if !self.dbVersion.isEmpty {
+      try container.encode(self.dbVersion, forKey: .dbVersion)
+    }
+    if self.isAutoScalingEnabled {
+      try container.encode(self.isAutoScalingEnabled, forKey: .isAutoScalingEnabled)
+    }
+    if self.isStorageAutoScalingEnabled {
+      try container.encode(self.isStorageAutoScalingEnabled, forKey: .isStorageAutoScalingEnabled)
+    }
+    if self.licenseType != AutonomousDatabaseProperties.LicenseType() {
+      try container.encode(self.licenseType, forKey: .licenseType)
+    }
+    if !self.customerContacts.isEmpty {
+      try container.encode(self.customerContacts, forKey: .customerContacts)
+    }
+    if !self.secretId.isEmpty {
+      try container.encode(self.secretId, forKey: .secretId)
+    }
+    if !self.vaultId.isEmpty {
+      try container.encode(self.vaultId, forKey: .vaultId)
+    }
+    if self.maintenanceScheduleType != AutonomousDatabaseProperties.MaintenanceScheduleType() {
+      try container.encode(self.maintenanceScheduleType, forKey: .maintenanceScheduleType)
+    }
+    if self.mtlsConnectionRequired {
+      try container.encode(self.mtlsConnectionRequired, forKey: .mtlsConnectionRequired)
+    }
+    if self.backupRetentionPeriodDays != 0 {
+      try container.encode(self.backupRetentionPeriodDays, forKey: .backupRetentionPeriodDays)
+    }
+    if self.actualUsedDataStorageSizeTb != 0 {
+      try container.encode(self.actualUsedDataStorageSizeTb, forKey: .actualUsedDataStorageSizeTb)
+    }
+    if self.allocatedStorageSizeTb != 0 {
+      try container.encode(self.allocatedStorageSizeTb, forKey: .allocatedStorageSizeTb)
+    }
     try container.encodeIfPresent(self.apexDetails, forKey: .apexDetails)
     try container.encodeIfPresent(
       self.arePrimaryAllowlistedIpsUsed, forKey: .arePrimaryAllowlistedIpsUsed)
-    try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.autonomousContainerDatabaseId, forKey: .autonomousContainerDatabaseId)
-    try container.encode(self.availableUpgradeVersions, forKey: .availableUpgradeVersions)
+    if !self.lifecycleDetails.isEmpty {
+      try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
+    }
+    if self.state != GoogleCloudOracleDatabaseV1.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.autonomousContainerDatabaseId.isEmpty {
+      try container.encode(
+        self.autonomousContainerDatabaseId, forKey: .autonomousContainerDatabaseId)
+    }
+    if !self.availableUpgradeVersions.isEmpty {
+      try container.encode(self.availableUpgradeVersions, forKey: .availableUpgradeVersions)
+    }
     try container.encodeIfPresent(self.connectionStrings, forKey: .connectionStrings)
     try container.encodeIfPresent(self.connectionUrls, forKey: .connectionUrls)
     try container.encodeIfPresent(
       self.failedDataRecoveryDuration, forKey: .failedDataRecoveryDuration)
-    try container.encode(self.memoryTableGbs, forKey: .memoryTableGbs)
-    try container.encode(self.isLocalDataGuardEnabled, forKey: .isLocalDataGuardEnabled)
-    try container.encode(
-      self.localAdgAutoFailoverMaxDataLossLimit, forKey: .localAdgAutoFailoverMaxDataLossLimit)
+    if self.memoryTableGbs != 0 {
+      try container.encode(self.memoryTableGbs, forKey: .memoryTableGbs)
+    }
+    if self.isLocalDataGuardEnabled {
+      try container.encode(self.isLocalDataGuardEnabled, forKey: .isLocalDataGuardEnabled)
+    }
+    if self.localAdgAutoFailoverMaxDataLossLimit != 0 {
+      try container.encode(
+        self.localAdgAutoFailoverMaxDataLossLimit, forKey: .localAdgAutoFailoverMaxDataLossLimit)
+    }
     try container.encodeIfPresent(self.localStandbyDb, forKey: .localStandbyDb)
-    try container.encode(self.memoryPerOracleComputeUnitGbs, forKey: .memoryPerOracleComputeUnitGbs)
-    try container.encode(self.localDisasterRecoveryType, forKey: .localDisasterRecoveryType)
-    try container.encode(self.dataSafeState, forKey: .dataSafeState)
-    try container.encode(self.databaseManagementState, forKey: .databaseManagementState)
-    try container.encode(self.openMode, forKey: .openMode)
-    try container.encode(self.operationsInsightsState, forKey: .operationsInsightsState)
-    try container.encode(self.peerDbIds, forKey: .peerDbIds)
-    try container.encode(self.permissionLevel, forKey: .permissionLevel)
-    try container.encode(self.privateEndpoint, forKey: .privateEndpoint)
-    try container.encode(self.refreshableMode, forKey: .refreshableMode)
-    try container.encode(self.refreshableState, forKey: .refreshableState)
-    try container.encode(self.role, forKey: .role)
-    try container.encode(self.scheduledOperationDetails, forKey: .scheduledOperationDetails)
-    try container.encode(self.sqlWebDeveloperUrl, forKey: .sqlWebDeveloperUrl)
-    try container.encode(self.supportedCloneRegions, forKey: .supportedCloneRegions)
-    try container.encode(self.usedDataStorageSizeTbs, forKey: .usedDataStorageSizeTbs)
-    try container.encode(self.ociUrl, forKey: .ociUrl)
-    try container.encode(self.totalAutoBackupStorageSizeGbs, forKey: .totalAutoBackupStorageSizeGbs)
+    if self.memoryPerOracleComputeUnitGbs != 0 {
+      try container.encode(
+        self.memoryPerOracleComputeUnitGbs, forKey: .memoryPerOracleComputeUnitGbs)
+    }
+    if self.localDisasterRecoveryType != AutonomousDatabaseProperties.LocalDisasterRecoveryType() {
+      try container.encode(self.localDisasterRecoveryType, forKey: .localDisasterRecoveryType)
+    }
+    if self.dataSafeState != AutonomousDatabaseProperties.DataSafeState() {
+      try container.encode(self.dataSafeState, forKey: .dataSafeState)
+    }
+    if self.databaseManagementState != AutonomousDatabaseProperties.DatabaseManagementState() {
+      try container.encode(self.databaseManagementState, forKey: .databaseManagementState)
+    }
+    if self.openMode != AutonomousDatabaseProperties.OpenMode() {
+      try container.encode(self.openMode, forKey: .openMode)
+    }
+    if self.operationsInsightsState != GoogleCloudOracleDatabaseV1.OperationsInsightsState() {
+      try container.encode(self.operationsInsightsState, forKey: .operationsInsightsState)
+    }
+    if !self.peerDbIds.isEmpty {
+      try container.encode(self.peerDbIds, forKey: .peerDbIds)
+    }
+    if self.permissionLevel != AutonomousDatabaseProperties.PermissionLevel() {
+      try container.encode(self.permissionLevel, forKey: .permissionLevel)
+    }
+    if !self.privateEndpoint.isEmpty {
+      try container.encode(self.privateEndpoint, forKey: .privateEndpoint)
+    }
+    if self.refreshableMode != AutonomousDatabaseProperties.RefreshableMode() {
+      try container.encode(self.refreshableMode, forKey: .refreshableMode)
+    }
+    if self.refreshableState != AutonomousDatabaseProperties.RefreshableState() {
+      try container.encode(self.refreshableState, forKey: .refreshableState)
+    }
+    if self.role != AutonomousDatabaseProperties.Role() {
+      try container.encode(self.role, forKey: .role)
+    }
+    if !self.scheduledOperationDetails.isEmpty {
+      try container.encode(self.scheduledOperationDetails, forKey: .scheduledOperationDetails)
+    }
+    if !self.sqlWebDeveloperUrl.isEmpty {
+      try container.encode(self.sqlWebDeveloperUrl, forKey: .sqlWebDeveloperUrl)
+    }
+    if !self.supportedCloneRegions.isEmpty {
+      try container.encode(self.supportedCloneRegions, forKey: .supportedCloneRegions)
+    }
+    if self.usedDataStorageSizeTbs != 0 {
+      try container.encode(self.usedDataStorageSizeTbs, forKey: .usedDataStorageSizeTbs)
+    }
+    if !self.ociUrl.isEmpty {
+      try container.encode(self.ociUrl, forKey: .ociUrl)
+    }
+    if self.totalAutoBackupStorageSizeGbs != 0 {
+      try container.encode(
+        self.totalAutoBackupStorageSizeGbs, forKey: .totalAutoBackupStorageSizeGbs)
+    }
     try container.encodeIfPresent(self.nextLongTermBackupTime, forKey: .nextLongTermBackupTime)
     try container.encodeIfPresent(self.dataGuardRoleChangedTime, forKey: .dataGuardRoleChangedTime)
     try container.encodeIfPresent(
       self.disasterRecoveryRoleChangedTime, forKey: .disasterRecoveryRoleChangedTime)
     try container.encodeIfPresent(self.maintenanceBeginTime, forKey: .maintenanceBeginTime)
     try container.encodeIfPresent(self.maintenanceEndTime, forKey: .maintenanceEndTime)
-    try container.encode(self.allowlistedIps, forKey: .allowlistedIps)
+    if !self.allowlistedIps.isEmpty {
+      try container.encode(self.allowlistedIps, forKey: .allowlistedIps)
+    }
     try container.encodeIfPresent(self.encryptionKey, forKey: .encryptionKey)
-    try container.encode(self.encryptionKeyHistoryEntries, forKey: .encryptionKeyHistoryEntries)
-    try container.encode(self.serviceAgentEmail, forKey: .serviceAgentEmail)
+    if !self.encryptionKeyHistoryEntries.isEmpty {
+      try container.encode(self.encryptionKeyHistoryEntries, forKey: .encryptionKeyHistoryEntries)
+    }
+    if !self.serviceAgentEmail.isEmpty {
+      try container.encode(self.serviceAgentEmail, forKey: .serviceAgentEmail)
+    }
     try container.encodeIfPresent(self.localDataGuardEnabled, forKey: .localDataGuardEnabled)
     try container.encodeIfPresent(
       self.localAdgAutoFailoverMaxDataLossLimitDuration,

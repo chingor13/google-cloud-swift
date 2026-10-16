@@ -81,8 +81,12 @@ public struct GKEWorkload: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.deployment, forKey: .deployment)
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if !self.deployment.isEmpty {
+      try container.encode(self.deployment, forKey: .deployment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

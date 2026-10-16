@@ -150,11 +150,19 @@ public struct AzureBlobStorageData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.storageAccount, forKey: .storageAccount)
+    if !self.storageAccount.isEmpty {
+      try container.encode(self.storageAccount, forKey: .storageAccount)
+    }
     try container.encodeIfPresent(self.azureCredentials, forKey: .azureCredentials)
-    try container.encode(self.container, forKey: .container)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.credentialsSecret, forKey: .credentialsSecret)
+    if !self.container.isEmpty {
+      try container.encode(self.container, forKey: .container)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.credentialsSecret.isEmpty {
+      try container.encode(self.credentialsSecret, forKey: .credentialsSecret)
+    }
     try container.encodeIfPresent(self.federatedIdentityConfig, forKey: .federatedIdentityConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -232,8 +240,12 @@ public struct AzureBlobStorageData: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clientId, forKey: .clientId)
-      try container.encode(self.tenantId, forKey: .tenantId)
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
+      if !self.tenantId.isEmpty {
+        try container.encode(self.tenantId, forKey: .tenantId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

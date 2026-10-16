@@ -99,10 +99,18 @@ public struct RiceDeltaEncoding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.firstValue, forKey: .firstValue)
-    try container.encode(self.riceParameter, forKey: .riceParameter)
-    try container.encode(self.entryCount, forKey: .entryCount)
-    try container.encode(self.encodedData, forKey: .encodedData)
+    if self.firstValue != 0 {
+      try container.encode(self.firstValue, forKey: .firstValue)
+    }
+    if self.riceParameter != 0 {
+      try container.encode(self.riceParameter, forKey: .riceParameter)
+    }
+    if self.entryCount != 0 {
+      try container.encode(self.entryCount, forKey: .entryCount)
+    }
+    if !self.encodedData.isEmpty {
+      try container.encode(self.encodedData, forKey: .encodedData)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

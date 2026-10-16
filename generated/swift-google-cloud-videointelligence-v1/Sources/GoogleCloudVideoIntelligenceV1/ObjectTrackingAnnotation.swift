@@ -121,9 +121,15 @@ public struct ObjectTrackingAnnotation: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.entity, forKey: .entity)
-    try container.encode(self.confidence, forKey: .confidence)
-    try container.encode(self.frames, forKey: .frames)
-    try container.encode(self.version, forKey: .version)
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
+    if !self.frames.isEmpty {
+      try container.encode(self.frames, forKey: .frames)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
 
     if let choice = self.trackInfo {
       switch choice {

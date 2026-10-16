@@ -104,7 +104,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.answer, forKey: .answer)
       try container.encodeIfPresent(self.session, forKey: .session)
-      try container.encode(self.answerQueryToken, forKey: .answerQueryToken)
+      if !self.answerQueryToken.isEmpty {
+        try container.encode(self.answerQueryToken, forKey: .answerQueryToken)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

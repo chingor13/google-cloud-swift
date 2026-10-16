@@ -94,10 +94,16 @@ public struct OracleSslConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.caCertificate, forKey: .caCertificate)
-    try container.encode(self.caCertificateSet, forKey: .caCertificateSet)
-    try container.encode(
-      self.serverCertificateDistinguishedName, forKey: .serverCertificateDistinguishedName)
+    if !self.caCertificate.isEmpty {
+      try container.encode(self.caCertificate, forKey: .caCertificate)
+    }
+    if self.caCertificateSet {
+      try container.encode(self.caCertificateSet, forKey: .caCertificateSet)
+    }
+    if !self.serverCertificateDistinguishedName.isEmpty {
+      try container.encode(
+        self.serverCertificateDistinguishedName, forKey: .serverCertificateDistinguishedName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

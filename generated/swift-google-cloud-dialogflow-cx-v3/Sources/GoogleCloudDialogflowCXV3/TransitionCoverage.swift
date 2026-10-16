@@ -82,8 +82,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.transitions, forKey: .transitions)
-      try container.encode(self.coverageScore, forKey: .coverageScore)
+      if !self.transitions.isEmpty {
+        try container.encode(self.transitions, forKey: .transitions)
+      }
+      if self.coverageScore != 0 {
+        try container.encode(self.coverageScore, forKey: .coverageScore)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -313,9 +317,13 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.source, forKey: .source)
-        try container.encode(self.index, forKey: .index)
+        if self.index != 0 {
+          try container.encode(self.index, forKey: .index)
+        }
         try container.encodeIfPresent(self.target, forKey: .target)
-        try container.encode(self.covered, forKey: .covered)
+        if self.covered {
+          try container.encode(self.covered, forKey: .covered)
+        }
 
         if let choice = self.detail {
           switch choice {

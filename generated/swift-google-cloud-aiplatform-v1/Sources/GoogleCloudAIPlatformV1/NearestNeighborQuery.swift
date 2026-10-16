@@ -138,11 +138,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.neighborCount, forKey: .neighborCount)
-      try container.encode(self.stringFilters, forKey: .stringFilters)
-      try container.encode(self.numericFilters, forKey: .numericFilters)
-      try container.encode(
-        self.perCrowdingAttributeNeighborCount, forKey: .perCrowdingAttributeNeighborCount)
+      if self.neighborCount != 0 {
+        try container.encode(self.neighborCount, forKey: .neighborCount)
+      }
+      if !self.stringFilters.isEmpty {
+        try container.encode(self.stringFilters, forKey: .stringFilters)
+      }
+      if !self.numericFilters.isEmpty {
+        try container.encode(self.numericFilters, forKey: .numericFilters)
+      }
+      if self.perCrowdingAttributeNeighborCount != 0 {
+        try container.encode(
+          self.perCrowdingAttributeNeighborCount, forKey: .perCrowdingAttributeNeighborCount)
+      }
       try container.encodeIfPresent(self.parameters, forKey: .parameters)
 
       if let choice = self.instance {
@@ -210,7 +218,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.value, forKey: .value)
+        if !self.value.isEmpty {
+          try container.encode(self.value, forKey: .value)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -313,9 +323,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.allowTokens, forKey: .allowTokens)
-        try container.encode(self.denyTokens, forKey: .denyTokens)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.allowTokens.isEmpty {
+          try container.encode(self.allowTokens, forKey: .allowTokens)
+        }
+        if !self.denyTokens.isEmpty {
+          try container.encode(self.denyTokens, forKey: .denyTokens)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -442,7 +458,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         try container.encodeIfPresent(self.op, forKey: .op)
 
         if let choice = self.value {
@@ -710,9 +728,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.approximateNeighborCandidates, forKey: .approximateNeighborCandidates)
-        try container.encode(self.leafNodesSearchFraction, forKey: .leafNodesSearchFraction)
+        if self.approximateNeighborCandidates != 0 {
+          try container.encode(
+            self.approximateNeighborCandidates, forKey: .approximateNeighborCandidates)
+        }
+        if self.leafNodesSearchFraction != 0 {
+          try container.encode(self.leafNodesSearchFraction, forKey: .leafNodesSearchFraction)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -70,7 +70,9 @@ public struct ComplianceSuite: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.group, forKey: .group)
+    if !self.group.isEmpty {
+      try container.encode(self.group, forKey: .group)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

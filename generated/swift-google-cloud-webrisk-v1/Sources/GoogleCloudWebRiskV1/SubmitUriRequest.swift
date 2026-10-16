@@ -89,7 +89,9 @@ public struct SubmitUriRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.submission, forKey: .submission)
     try container.encodeIfPresent(self.threatInfo, forKey: .threatInfo)
     try container.encodeIfPresent(self.threatDiscovery, forKey: .threatDiscovery)

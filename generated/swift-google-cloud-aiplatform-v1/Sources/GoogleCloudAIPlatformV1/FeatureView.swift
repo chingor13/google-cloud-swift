@@ -226,18 +226,32 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.etag, forKey: .etag)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.etag.isEmpty {
+        try container.encode(self.etag, forKey: .etag)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.syncConfig, forKey: .syncConfig)
       try container.encodeIfPresent(self.indexConfig, forKey: .indexConfig)
       try container.encodeIfPresent(self.optimizedConfig, forKey: .optimizedConfig)
-      try container.encode(self.serviceAgentType, forKey: .serviceAgentType)
-      try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
-      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      if self.serviceAgentType != FeatureView.ServiceAgentType() {
+        try container.encode(self.serviceAgentType, forKey: .serviceAgentType)
+      }
+      if !self.serviceAccountEmail.isEmpty {
+        try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+      }
+      if self.satisfiesPzs {
+        try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+      }
+      if self.satisfiesPzi {
+        try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      }
       try container.encodeIfPresent(self.bigtableMetadata, forKey: .bigtableMetadata)
 
       if let choice = self.source {
@@ -316,8 +330,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.entityIdColumns, forKey: .entityIdColumns)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.entityIdColumns.isEmpty {
+          try container.encode(self.entityIdColumns, forKey: .entityIdColumns)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -411,8 +429,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.cron, forKey: .cron)
-        try container.encode(self.continuous, forKey: .continuous)
+        if !self.cron.isEmpty {
+          try container.encode(self.cron, forKey: .cron)
+        }
+        if self.continuous {
+          try container.encode(self.continuous, forKey: .continuous)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -571,11 +593,19 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.embeddingColumn, forKey: .embeddingColumn)
-        try container.encode(self.filterColumns, forKey: .filterColumns)
-        try container.encode(self.crowdingColumn, forKey: .crowdingColumn)
+        if !self.embeddingColumn.isEmpty {
+          try container.encode(self.embeddingColumn, forKey: .embeddingColumn)
+        }
+        if !self.filterColumns.isEmpty {
+          try container.encode(self.filterColumns, forKey: .filterColumns)
+        }
+        if !self.crowdingColumn.isEmpty {
+          try container.encode(self.crowdingColumn, forKey: .crowdingColumn)
+        }
         try container.encodeIfPresent(self.embeddingDimension, forKey: .embeddingDimension)
-        try container.encode(self.distanceMeasureType, forKey: .distanceMeasureType)
+        if self.distanceMeasureType != FeatureView.IndexConfig.DistanceMeasureType() {
+          try container.encode(self.distanceMeasureType, forKey: .distanceMeasureType)
+        }
 
         if let choice = self.algorithmConfig {
           switch choice {
@@ -969,7 +999,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.featureGroups, forKey: .featureGroups)
+        if !self.featureGroups.isEmpty {
+          try container.encode(self.featureGroups, forKey: .featureGroups)
+        }
         try container.encodeIfPresent(self.projectNumber, forKey: .projectNumber)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1037,8 +1069,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.featureGroupId, forKey: .featureGroupId)
-          try container.encode(self.featureIds, forKey: .featureIds)
+          if !self.featureGroupId.isEmpty {
+            try container.encode(self.featureGroupId, forKey: .featureGroupId)
+          }
+          if !self.featureIds.isEmpty {
+            try container.encode(self.featureIds, forKey: .featureIds)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1159,8 +1195,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.ragCorpusId, forKey: .ragCorpusId)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if self.ragCorpusId != 0 {
+          try container.encode(self.ragCorpusId, forKey: .ragCorpusId)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1324,7 +1364,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.readAppProfile, forKey: .readAppProfile)
+        if !self.readAppProfile.isEmpty {
+          try container.encode(self.readAppProfile, forKey: .readAppProfile)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -103,7 +103,9 @@ public struct EnableManagedRotationRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
 
     if let choice = self.credentials {
       switch choice {
@@ -186,9 +188,15 @@ public struct EnableManagedRotationRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instanceId, forKey: .instanceId)
-      try container.encode(self.username, forKey: .username)
-      try container.encode(self.password, forKey: .password)
+      if !self.instanceId.isEmpty {
+        try container.encode(self.instanceId, forKey: .instanceId)
+      }
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -95,10 +95,18 @@ public struct ValidationMessage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.level, forKey: .level)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.code, forKey: .code)
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if self.level != ValidationMessage.Level() {
+      try container.encode(self.level, forKey: .level)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.code.isEmpty {
+      try container.encode(self.code, forKey: .code)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

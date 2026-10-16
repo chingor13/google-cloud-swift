@@ -235,23 +235,57 @@ public struct DataSource: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dataSourceId, forKey: .dataSourceId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.scopes, forKey: .scopes)
-    try container.encode(self.transferType, forKey: .transferType)
-    try container.encode(self.supportsMultipleTransfers, forKey: .supportsMultipleTransfers)
-    try container.encode(self.updateDeadlineSeconds, forKey: .updateDeadlineSeconds)
-    try container.encode(self.defaultSchedule, forKey: .defaultSchedule)
-    try container.encode(self.supportsCustomSchedule, forKey: .supportsCustomSchedule)
-    try container.encode(self.parameters, forKey: .parameters)
-    try container.encode(self.helpUrl, forKey: .helpUrl)
-    try container.encode(self.authorizationType, forKey: .authorizationType)
-    try container.encode(self.dataRefreshType, forKey: .dataRefreshType)
-    try container.encode(self.defaultDataRefreshWindowDays, forKey: .defaultDataRefreshWindowDays)
-    try container.encode(self.manualRunsDisabled, forKey: .manualRunsDisabled)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.dataSourceId.isEmpty {
+      try container.encode(self.dataSourceId, forKey: .dataSourceId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.scopes.isEmpty {
+      try container.encode(self.scopes, forKey: .scopes)
+    }
+    if self.transferType != TransferType() {
+      try container.encode(self.transferType, forKey: .transferType)
+    }
+    if self.supportsMultipleTransfers {
+      try container.encode(self.supportsMultipleTransfers, forKey: .supportsMultipleTransfers)
+    }
+    if self.updateDeadlineSeconds != 0 {
+      try container.encode(self.updateDeadlineSeconds, forKey: .updateDeadlineSeconds)
+    }
+    if !self.defaultSchedule.isEmpty {
+      try container.encode(self.defaultSchedule, forKey: .defaultSchedule)
+    }
+    if self.supportsCustomSchedule {
+      try container.encode(self.supportsCustomSchedule, forKey: .supportsCustomSchedule)
+    }
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
+    if !self.helpUrl.isEmpty {
+      try container.encode(self.helpUrl, forKey: .helpUrl)
+    }
+    if self.authorizationType != DataSource.AuthorizationType() {
+      try container.encode(self.authorizationType, forKey: .authorizationType)
+    }
+    if self.dataRefreshType != DataSource.DataRefreshType() {
+      try container.encode(self.dataRefreshType, forKey: .dataRefreshType)
+    }
+    if self.defaultDataRefreshWindowDays != 0 {
+      try container.encode(self.defaultDataRefreshWindowDays, forKey: .defaultDataRefreshWindowDays)
+    }
+    if self.manualRunsDisabled {
+      try container.encode(self.manualRunsDisabled, forKey: .manualRunsDisabled)
+    }
     try container.encodeIfPresent(self.minimumScheduleInterval, forKey: .minimumScheduleInterval)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

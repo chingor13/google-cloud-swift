@@ -130,7 +130,9 @@ public struct PhoneNumber: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`extension`, forKey: .`extension`)
+    if !self.`extension`.isEmpty {
+      try container.encode(self.`extension`, forKey: .`extension`)
+    }
 
     if let choice = self.kind {
       switch choice {
@@ -219,8 +221,12 @@ public struct PhoneNumber: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.regionCode, forKey: .regionCode)
-      try container.encode(self.number, forKey: .number)
+      if !self.regionCode.isEmpty {
+        try container.encode(self.regionCode, forKey: .regionCode)
+      }
+      if !self.number.isEmpty {
+        try container.encode(self.number, forKey: .number)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

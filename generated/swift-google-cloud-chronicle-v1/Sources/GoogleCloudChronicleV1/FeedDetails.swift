@@ -672,11 +672,21 @@ public struct FeedDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.feedSourceType, forKey: .feedSourceType)
-    try container.encode(self.logType, forKey: .logType)
-    try container.encode(self.assetNamespace, forKey: .assetNamespace)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.stsMigrationReadiness, forKey: .stsMigrationReadiness)
+    if self.feedSourceType != FeedDetails.FeedSourceType() {
+      try container.encode(self.feedSourceType, forKey: .feedSourceType)
+    }
+    if !self.logType.isEmpty {
+      try container.encode(self.logType, forKey: .logType)
+    }
+    if !self.assetNamespace.isEmpty {
+      try container.encode(self.assetNamespace, forKey: .assetNamespace)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.stsMigrationReadiness != FeedDetails.STSMigrationReadiness() {
+      try container.encode(self.stsMigrationReadiness, forKey: .stsMigrationReadiness)
+    }
     try container.encodeIfPresent(
       self.lastV2MigrationAttemptTime, forKey: .lastV2MigrationAttemptTime)
 

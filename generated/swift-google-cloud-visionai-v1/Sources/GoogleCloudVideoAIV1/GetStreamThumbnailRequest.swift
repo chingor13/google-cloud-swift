@@ -106,10 +106,18 @@ public struct GetStreamThumbnailRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.stream, forKey: .stream)
-    try container.encode(self.gcsObjectName, forKey: .gcsObjectName)
-    try container.encode(self.event, forKey: .event)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.stream.isEmpty {
+      try container.encode(self.stream, forKey: .stream)
+    }
+    if !self.gcsObjectName.isEmpty {
+      try container.encode(self.gcsObjectName, forKey: .gcsObjectName)
+    }
+    if !self.event.isEmpty {
+      try container.encode(self.event, forKey: .event)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -196,7 +196,9 @@
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.nocContactEmail, forKey: .nocContactEmail)
       try container.encodeIfPresent(self.remoteLocation, forKey: .remoteLocation)
-      try container.encode(self.requestedFeatures, forKey: .requestedFeatures)
+      if !self.requestedFeatures.isEmpty {
+        try container.encode(self.requestedFeatures, forKey: .requestedFeatures)
+      }
       try container.encodeIfPresent(self.requestedLinkCount, forKey: .requestedLinkCount)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -92,9 +92,15 @@ public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clientCertificate, forKey: .clientCertificate)
-    try container.encode(self.clientKey, forKey: .clientKey)
-    try container.encode(self.userId, forKey: .userId)
+    if !self.clientCertificate.isEmpty {
+      try container.encode(self.clientCertificate, forKey: .clientCertificate)
+    }
+    if !self.clientKey.isEmpty {
+      try container.encode(self.clientKey, forKey: .clientKey)
+    }
+    if !self.userId.isEmpty {
+      try container.encode(self.userId, forKey: .userId)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

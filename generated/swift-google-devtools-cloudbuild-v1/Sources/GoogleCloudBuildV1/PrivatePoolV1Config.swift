@@ -166,8 +166,12 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.machineType, forKey: .machineType)
-      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+      if !self.machineType.isEmpty {
+        try container.encode(self.machineType, forKey: .machineType)
+      }
+      if self.diskSizeGb != 0 {
+        try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+      }
       try container.encodeIfPresent(
         self.enableNestedVirtualization, forKey: .enableNestedVirtualization)
       for (key, value) in self._unknownFields.json {
@@ -283,9 +287,15 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.peeredNetwork, forKey: .peeredNetwork)
-      try container.encode(self.egressOption, forKey: .egressOption)
-      try container.encode(self.peeredNetworkIpRange, forKey: .peeredNetworkIpRange)
+      if !self.peeredNetwork.isEmpty {
+        try container.encode(self.peeredNetwork, forKey: .peeredNetwork)
+      }
+      if self.egressOption != PrivatePoolV1Config.NetworkConfig.EgressOption() {
+        try container.encode(self.egressOption, forKey: .egressOption)
+      }
+      if !self.peeredNetworkIpRange.isEmpty {
+        try container.encode(self.peeredNetworkIpRange, forKey: .peeredNetworkIpRange)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -520,9 +530,15 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkAttachment, forKey: .networkAttachment)
-      try container.encode(self.publicIpAddressDisabled, forKey: .publicIpAddressDisabled)
-      try container.encode(self.routeAllTraffic, forKey: .routeAllTraffic)
+      if !self.networkAttachment.isEmpty {
+        try container.encode(self.networkAttachment, forKey: .networkAttachment)
+      }
+      if self.publicIpAddressDisabled {
+        try container.encode(self.publicIpAddressDisabled, forKey: .publicIpAddressDisabled)
+      }
+      if self.routeAllTraffic {
+        try container.encode(self.routeAllTraffic, forKey: .routeAllTraffic)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

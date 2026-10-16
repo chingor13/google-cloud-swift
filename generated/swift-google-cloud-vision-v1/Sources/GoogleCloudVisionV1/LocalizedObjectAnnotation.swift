@@ -101,10 +101,18 @@ public struct LocalizedObjectAnnotation: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mid, forKey: .mid)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.score, forKey: .score)
+    if !self.mid.isEmpty {
+      try container.encode(self.mid, forKey: .mid)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.score != 0 {
+      try container.encode(self.score, forKey: .score)
+    }
     try container.encodeIfPresent(self.boundingPoly, forKey: .boundingPoly)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

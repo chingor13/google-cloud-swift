@@ -102,7 +102,9 @@ public struct Tile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.representativeProductId, forKey: .representativeProductId)
+    if !self.representativeProductId.isEmpty {
+      try container.encode(self.representativeProductId, forKey: .representativeProductId)
+    }
 
     if let choice = self.productAttribute {
       switch choice {

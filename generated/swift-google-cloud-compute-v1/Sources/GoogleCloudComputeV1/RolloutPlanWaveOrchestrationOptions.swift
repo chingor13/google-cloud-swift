@@ -93,7 +93,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.delays, forKey: .delays)
+      if !self.delays.isEmpty {
+        try container.encode(self.delays, forKey: .delays)
+      }
       try container.encodeIfPresent(self.maxConcurrentLocations, forKey: .maxConcurrentLocations)
       try container.encodeIfPresent(
         self.maxConcurrentResourcesPerLocation, forKey: .maxConcurrentResourcesPerLocation)

@@ -90,9 +90,15 @@ public struct BigQueryRegex: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectIdRegex, forKey: .projectIdRegex)
-    try container.encode(self.datasetIdRegex, forKey: .datasetIdRegex)
-    try container.encode(self.tableIdRegex, forKey: .tableIdRegex)
+    if !self.projectIdRegex.isEmpty {
+      try container.encode(self.projectIdRegex, forKey: .projectIdRegex)
+    }
+    if !self.datasetIdRegex.isEmpty {
+      try container.encode(self.datasetIdRegex, forKey: .datasetIdRegex)
+    }
+    if !self.tableIdRegex.isEmpty {
+      try container.encode(self.tableIdRegex, forKey: .tableIdRegex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -112,12 +112,24 @@ public struct ContactInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.firstName, forKey: .firstName)
-    try container.encode(self.lastName, forKey: .lastName)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.email, forKey: .email)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.phone, forKey: .phone)
+    if !self.firstName.isEmpty {
+      try container.encode(self.firstName, forKey: .firstName)
+    }
+    if !self.lastName.isEmpty {
+      try container.encode(self.lastName, forKey: .lastName)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.phone.isEmpty {
+      try container.encode(self.phone, forKey: .phone)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

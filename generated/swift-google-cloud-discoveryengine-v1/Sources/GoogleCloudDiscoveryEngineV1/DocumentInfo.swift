@@ -155,8 +155,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.quantity, forKey: .quantity)
-      try container.encode(self.promotionIds, forKey: .promotionIds)
-      try container.encode(self.joined, forKey: .joined)
+      if !self.promotionIds.isEmpty {
+        try container.encode(self.promotionIds, forKey: .promotionIds)
+      }
+      if self.joined {
+        try container.encode(self.joined, forKey: .joined)
+      }
       try container.encodeIfPresent(self.conversionValue, forKey: .conversionValue)
 
       if let choice = self.documentDescriptor {

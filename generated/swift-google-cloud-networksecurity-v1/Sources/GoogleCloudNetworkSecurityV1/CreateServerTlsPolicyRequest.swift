@@ -88,8 +88,12 @@ public struct CreateServerTlsPolicyRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.serverTlsPolicyId, forKey: .serverTlsPolicyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.serverTlsPolicyId.isEmpty {
+      try container.encode(self.serverTlsPolicyId, forKey: .serverTlsPolicyId)
+    }
     try container.encodeIfPresent(self.serverTlsPolicy, forKey: .serverTlsPolicy)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -107,11 +107,19 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.keyName, forKey: .keyName)
-    try container.encode(self.state, forKey: .state)
+    if !self.keyName.isEmpty {
+      try container.encode(self.keyName, forKey: .keyName)
+    }
+    if self.state != DatabaseEncryption.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.currentState, forKey: .currentState)
-    try container.encode(self.decryptionKeys, forKey: .decryptionKeys)
-    try container.encode(self.lastOperationErrors, forKey: .lastOperationErrors)
+    if !self.decryptionKeys.isEmpty {
+      try container.encode(self.decryptionKeys, forKey: .decryptionKeys)
+    }
+    if !self.lastOperationErrors.isEmpty {
+      try container.encode(self.lastOperationErrors, forKey: .lastOperationErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -185,8 +193,12 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.keyName, forKey: .keyName)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if !self.keyName.isEmpty {
+        try container.encode(self.keyName, forKey: .keyName)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       try container.encodeIfPresent(self.timestamp, forKey: .timestamp)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -92,9 +92,15 @@ public struct InterconnectDiagnostics: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.macAddress, forKey: .macAddress)
-    try container.encode(self.linkLayerAddresses, forKey: .linkLayerAddresses)
-    try container.encode(self.links, forKey: .links)
+    if !self.macAddress.isEmpty {
+      try container.encode(self.macAddress, forKey: .macAddress)
+    }
+    if !self.linkLayerAddresses.isEmpty {
+      try container.encode(self.linkLayerAddresses, forKey: .linkLayerAddresses)
+    }
+    if !self.links.isEmpty {
+      try container.encode(self.links, forKey: .links)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -177,9 +183,13 @@ public struct InterconnectDiagnostics: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.circuitId, forKey: .circuitId)
+      if !self.circuitId.isEmpty {
+        try container.encode(self.circuitId, forKey: .circuitId)
+      }
       try container.encodeIfPresent(self.lacpStatus, forKey: .lacpStatus)
-      try container.encode(self.lldpStatuses, forKey: .lldpStatuses)
+      if !self.lldpStatuses.isEmpty {
+        try container.encode(self.lldpStatuses, forKey: .lldpStatuses)
+      }
       try container.encodeIfPresent(self.packetCounts, forKey: .packetCounts)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -303,12 +313,24 @@ public struct InterconnectDiagnostics: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inboundUnicast, forKey: .inboundUnicast)
-      try container.encode(self.inboundErrors, forKey: .inboundErrors)
-      try container.encode(self.inboundDiscards, forKey: .inboundDiscards)
-      try container.encode(self.outboundUnicast, forKey: .outboundUnicast)
-      try container.encode(self.outboundErrors, forKey: .outboundErrors)
-      try container.encode(self.outboundDiscards, forKey: .outboundDiscards)
+      if self.inboundUnicast != 0 {
+        try container.encode(self.inboundUnicast, forKey: .inboundUnicast)
+      }
+      if self.inboundErrors != 0 {
+        try container.encode(self.inboundErrors, forKey: .inboundErrors)
+      }
+      if self.inboundDiscards != 0 {
+        try container.encode(self.inboundDiscards, forKey: .inboundDiscards)
+      }
+      if self.outboundUnicast != 0 {
+        try container.encode(self.outboundUnicast, forKey: .outboundUnicast)
+      }
+      if self.outboundErrors != 0 {
+        try container.encode(self.outboundErrors, forKey: .outboundErrors)
+      }
+      if self.outboundDiscards != 0 {
+        try container.encode(self.outboundDiscards, forKey: .outboundDiscards)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -435,12 +457,24 @@ public struct InterconnectDiagnostics: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.googleSystemId, forKey: .googleSystemId)
-      try container.encode(self.neighborSystemId, forKey: .neighborSystemId)
-      try container.encode(self.aggregatable, forKey: .aggregatable)
-      try container.encode(self.collecting, forKey: .collecting)
-      try container.encode(self.distributing, forKey: .distributing)
+      if self.state != InterconnectDiagnostics.LinkLACPStatus.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.googleSystemId.isEmpty {
+        try container.encode(self.googleSystemId, forKey: .googleSystemId)
+      }
+      if !self.neighborSystemId.isEmpty {
+        try container.encode(self.neighborSystemId, forKey: .neighborSystemId)
+      }
+      if self.aggregatable {
+        try container.encode(self.aggregatable, forKey: .aggregatable)
+      }
+      if self.collecting {
+        try container.encode(self.collecting, forKey: .collecting)
+      }
+      if self.distributing {
+        try container.encode(self.distributing, forKey: .distributing)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -684,12 +718,24 @@ public struct InterconnectDiagnostics: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.peerSystemName, forKey: .peerSystemName)
-      try container.encode(self.peerSystemDescription, forKey: .peerSystemDescription)
-      try container.encode(self.peerChassisId, forKey: .peerChassisId)
-      try container.encode(self.peerChassisIdType, forKey: .peerChassisIdType)
-      try container.encode(self.peerPortId, forKey: .peerPortId)
-      try container.encode(self.peerPortIdType, forKey: .peerPortIdType)
+      if !self.peerSystemName.isEmpty {
+        try container.encode(self.peerSystemName, forKey: .peerSystemName)
+      }
+      if !self.peerSystemDescription.isEmpty {
+        try container.encode(self.peerSystemDescription, forKey: .peerSystemDescription)
+      }
+      if !self.peerChassisId.isEmpty {
+        try container.encode(self.peerChassisId, forKey: .peerChassisId)
+      }
+      if !self.peerChassisIdType.isEmpty {
+        try container.encode(self.peerChassisIdType, forKey: .peerChassisIdType)
+      }
+      if !self.peerPortId.isEmpty {
+        try container.encode(self.peerPortId, forKey: .peerPortId)
+      }
+      if !self.peerPortIdType.isEmpty {
+        try container.encode(self.peerPortIdType, forKey: .peerPortIdType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

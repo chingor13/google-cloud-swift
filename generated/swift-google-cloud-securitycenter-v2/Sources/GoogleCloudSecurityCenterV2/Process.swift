@@ -151,17 +151,35 @@ public struct Process: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.binary, forKey: .binary)
-    try container.encode(self.libraries, forKey: .libraries)
+    if !self.libraries.isEmpty {
+      try container.encode(self.libraries, forKey: .libraries)
+    }
     try container.encodeIfPresent(self.script, forKey: .script)
-    try container.encode(self.args, forKey: .args)
-    try container.encode(self.argumentsTruncated, forKey: .argumentsTruncated)
-    try container.encode(self.envVariables, forKey: .envVariables)
-    try container.encode(self.envVariablesTruncated, forKey: .envVariablesTruncated)
-    try container.encode(self.pid, forKey: .pid)
-    try container.encode(self.parentPid, forKey: .parentPid)
-    try container.encode(self.userId, forKey: .userId)
+    if !self.args.isEmpty {
+      try container.encode(self.args, forKey: .args)
+    }
+    if self.argumentsTruncated {
+      try container.encode(self.argumentsTruncated, forKey: .argumentsTruncated)
+    }
+    if !self.envVariables.isEmpty {
+      try container.encode(self.envVariables, forKey: .envVariables)
+    }
+    if self.envVariablesTruncated {
+      try container.encode(self.envVariablesTruncated, forKey: .envVariablesTruncated)
+    }
+    if self.pid != 0 {
+      try container.encode(self.pid, forKey: .pid)
+    }
+    if self.parentPid != 0 {
+      try container.encode(self.parentPid, forKey: .parentPid)
+    }
+    if self.userId != 0 {
+      try container.encode(self.userId, forKey: .userId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

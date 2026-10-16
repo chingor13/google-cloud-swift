@@ -128,14 +128,30 @@ public struct EndpointInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceIp, forKey: .sourceIp)
-    try container.encode(self.destinationIp, forKey: .destinationIp)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.sourcePort, forKey: .sourcePort)
-    try container.encode(self.destinationPort, forKey: .destinationPort)
-    try container.encode(self.sourceNetworkUri, forKey: .sourceNetworkUri)
-    try container.encode(self.destinationNetworkUri, forKey: .destinationNetworkUri)
-    try container.encode(self.sourceAgentUri, forKey: .sourceAgentUri)
+    if !self.sourceIp.isEmpty {
+      try container.encode(self.sourceIp, forKey: .sourceIp)
+    }
+    if !self.destinationIp.isEmpty {
+      try container.encode(self.destinationIp, forKey: .destinationIp)
+    }
+    if !self.`protocol`.isEmpty {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if self.sourcePort != 0 {
+      try container.encode(self.sourcePort, forKey: .sourcePort)
+    }
+    if self.destinationPort != 0 {
+      try container.encode(self.destinationPort, forKey: .destinationPort)
+    }
+    if !self.sourceNetworkUri.isEmpty {
+      try container.encode(self.sourceNetworkUri, forKey: .sourceNetworkUri)
+    }
+    if !self.destinationNetworkUri.isEmpty {
+      try container.encode(self.destinationNetworkUri, forKey: .destinationNetworkUri)
+    }
+    if !self.sourceAgentUri.isEmpty {
+      try container.encode(self.sourceAgentUri, forKey: .sourceAgentUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -155,18 +155,34 @@ public struct NativeDashboard: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.definition, forKey: .definition)
-    try container.encode(self.type, forKey: .type)
+    if self.type != DashboardType() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.createUserId, forKey: .createUserId)
-    try container.encode(self.updateUserId, forKey: .updateUserId)
+    if !self.createUserId.isEmpty {
+      try container.encode(self.createUserId, forKey: .createUserId)
+    }
+    if !self.updateUserId.isEmpty {
+      try container.encode(self.updateUserId, forKey: .updateUserId)
+    }
     try container.encodeIfPresent(self.dashboardUserData, forKey: .dashboardUserData)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.access, forKey: .access)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.access != DashboardAccess() {
+      try container.encode(self.access, forKey: .access)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -157,19 +157,33 @@ public struct MaintenanceSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maintenanceName, forKey: .maintenanceName)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.category, forKey: .category)
+    if !self.maintenanceName.isEmpty {
+      try container.encode(self.maintenanceName, forKey: .maintenanceName)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.category != MaintenanceCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
     try container.encodeIfPresent(
       self.maintenanceScheduledStartTime, forKey: .maintenanceScheduledStartTime)
     try container.encodeIfPresent(
       self.maintenanceScheduledEndTime, forKey: .maintenanceScheduledEndTime)
     try container.encodeIfPresent(self.maintenanceStartTime, forKey: .maintenanceStartTime)
     try container.encodeIfPresent(self.maintenanceEndTime, forKey: .maintenanceEndTime)
-    try container.encode(self.userControllable, forKey: .userControllable)
-    try container.encode(self.controls, forKey: .controls)
-    try container.encode(self.stats, forKey: .stats)
+    if self.userControllable {
+      try container.encode(self.userControllable, forKey: .userControllable)
+    }
+    if !self.controls.isEmpty {
+      try container.encode(self.controls, forKey: .controls)
+    }
+    if !self.stats.isEmpty {
+      try container.encode(self.stats, forKey: .stats)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -240,8 +254,12 @@ public struct MaintenanceSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.groupBy, forKey: .groupBy)
-      try container.encode(self.aggregates, forKey: .aggregates)
+      if !self.groupBy.isEmpty {
+        try container.encode(self.groupBy, forKey: .groupBy)
+      }
+      if !self.aggregates.isEmpty {
+        try container.encode(self.aggregates, forKey: .aggregates)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -331,8 +349,12 @@ public struct MaintenanceSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.group, forKey: .group)
-      try container.encode(self.count, forKey: .count)
+      if !self.group.isEmpty {
+        try container.encode(self.group, forKey: .group)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

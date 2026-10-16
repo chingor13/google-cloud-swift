@@ -101,10 +101,14 @@ public struct MigrationError: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.code, forKey: .code)
+    if self.code != MigrationError.ErrorCode() {
+      try container.encode(self.code, forKey: .code)
+    }
     try container.encodeIfPresent(self.errorMessage, forKey: .errorMessage)
     try container.encodeIfPresent(self.actionItem, forKey: .actionItem)
-    try container.encode(self.helpLinks, forKey: .helpLinks)
+    if !self.helpLinks.isEmpty {
+      try container.encode(self.helpLinks, forKey: .helpLinks)
+    }
     try container.encodeIfPresent(self.errorTime, forKey: .errorTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

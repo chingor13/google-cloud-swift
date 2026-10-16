@@ -88,7 +88,9 @@ public struct UpdateFrameworkRequest: Codable, Equatable, GoogleWKT._AnyPackable
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.framework, forKey: .framework)
-    try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    if self.majorRevisionId != 0 {
+      try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

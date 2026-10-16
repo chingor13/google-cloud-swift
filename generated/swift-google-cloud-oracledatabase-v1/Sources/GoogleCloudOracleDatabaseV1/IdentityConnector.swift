@@ -83,8 +83,12 @@ public struct IdentityConnector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAgentEmail, forKey: .serviceAgentEmail)
-    try container.encode(self.connectionState, forKey: .connectionState)
+    if !self.serviceAgentEmail.isEmpty {
+      try container.encode(self.serviceAgentEmail, forKey: .serviceAgentEmail)
+    }
+    if self.connectionState != IdentityConnector.ConnectionState() {
+      try container.encode(self.connectionState, forKey: .connectionState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

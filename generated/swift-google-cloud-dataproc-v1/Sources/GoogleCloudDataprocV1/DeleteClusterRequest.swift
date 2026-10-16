@@ -116,11 +116,21 @@ public struct DeleteClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.clusterName, forKey: .clusterName)
-    try container.encode(self.clusterUuid, forKey: .clusterUuid)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
+    if !self.clusterUuid.isEmpty {
+      try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

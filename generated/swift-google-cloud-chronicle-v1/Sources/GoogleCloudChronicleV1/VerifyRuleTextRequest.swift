@@ -79,8 +79,12 @@ public struct VerifyRuleTextRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.ruleText, forKey: .ruleText)
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.ruleText.isEmpty {
+      try container.encode(self.ruleText, forKey: .ruleText)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

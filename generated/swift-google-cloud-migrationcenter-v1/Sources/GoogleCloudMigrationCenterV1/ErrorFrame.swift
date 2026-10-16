@@ -90,8 +90,12 @@ public struct ErrorFrame: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.violations, forKey: .violations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.violations.isEmpty {
+      try container.encode(self.violations, forKey: .violations)
+    }
     try container.encodeIfPresent(self.originalFrame, forKey: .originalFrame)
     try container.encodeIfPresent(self.ingestionTime, forKey: .ingestionTime)
     for (key, value) in self._unknownFields.json {

@@ -100,10 +100,16 @@ public struct ShipmentTypeRequirement: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.requiredShipmentTypeAlternatives, forKey: .requiredShipmentTypeAlternatives)
-    try container.encode(self.dependentShipmentTypes, forKey: .dependentShipmentTypes)
-    try container.encode(self.requirementMode, forKey: .requirementMode)
+    if !self.requiredShipmentTypeAlternatives.isEmpty {
+      try container.encode(
+        self.requiredShipmentTypeAlternatives, forKey: .requiredShipmentTypeAlternatives)
+    }
+    if !self.dependentShipmentTypes.isEmpty {
+      try container.encode(self.dependentShipmentTypes, forKey: .dependentShipmentTypes)
+    }
+    if self.requirementMode != ShipmentTypeRequirement.RequirementMode() {
+      try container.encode(self.requirementMode, forKey: .requirementMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

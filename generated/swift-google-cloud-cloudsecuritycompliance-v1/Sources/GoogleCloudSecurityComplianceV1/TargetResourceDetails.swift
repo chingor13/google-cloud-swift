@@ -122,13 +122,23 @@ public struct TargetResourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.frameworkDeployment, forKey: .frameworkDeployment)
-    try container.encode(self.targetResourceDisplayName, forKey: .targetResourceDisplayName)
-    try container.encode(self.targetResource, forKey: .targetResource)
+    if !self.frameworkDeployment.isEmpty {
+      try container.encode(self.frameworkDeployment, forKey: .frameworkDeployment)
+    }
+    if !self.targetResourceDisplayName.isEmpty {
+      try container.encode(self.targetResourceDisplayName, forKey: .targetResourceDisplayName)
+    }
+    if !self.targetResource.isEmpty {
+      try container.encode(self.targetResource, forKey: .targetResource)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
-    try container.encode(self.minorRevisionId, forKey: .minorRevisionId)
+    if self.majorRevisionId != 0 {
+      try container.encode(self.majorRevisionId, forKey: .majorRevisionId)
+    }
+    if self.minorRevisionId != 0 {
+      try container.encode(self.minorRevisionId, forKey: .minorRevisionId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -208,8 +208,12 @@ public struct PolicyRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedValues, forKey: .allowedValues)
-      try container.encode(self.deniedValues, forKey: .deniedValues)
+      if !self.allowedValues.isEmpty {
+        try container.encode(self.allowedValues, forKey: .allowedValues)
+      }
+      if !self.deniedValues.isEmpty {
+        try container.encode(self.deniedValues, forKey: .deniedValues)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

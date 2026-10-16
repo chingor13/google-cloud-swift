@@ -122,13 +122,25 @@ public struct OdbNetwork: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.entitlementId, forKey: .entitlementId)
-    try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
+    if self.state != OdbNetwork.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.entitlementId.isEmpty {
+      try container.encode(self.entitlementId, forKey: .entitlementId)
+    }
+    if !self.gcpOracleZone.isEmpty {
+      try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -84,8 +84,12 @@ public struct CreatePostureRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.postureId, forKey: .postureId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.postureId.isEmpty {
+      try container.encode(self.postureId, forKey: .postureId)
+    }
     try container.encodeIfPresent(self.posture, forKey: .posture)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

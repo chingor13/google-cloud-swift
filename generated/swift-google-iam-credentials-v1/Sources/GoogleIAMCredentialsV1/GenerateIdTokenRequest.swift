@@ -106,10 +106,18 @@ public struct GenerateIdTokenRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.delegates, forKey: .delegates)
-    try container.encode(self.audience, forKey: .audience)
-    try container.encode(self.includeEmail, forKey: .includeEmail)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.delegates.isEmpty {
+      try container.encode(self.delegates, forKey: .delegates)
+    }
+    if !self.audience.isEmpty {
+      try container.encode(self.audience, forKey: .audience)
+    }
+    if self.includeEmail {
+      try container.encode(self.includeEmail, forKey: .includeEmail)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

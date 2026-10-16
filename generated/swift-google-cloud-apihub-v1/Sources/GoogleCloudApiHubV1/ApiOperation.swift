@@ -140,13 +140,21 @@ public struct ApiOperation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.spec, forKey: .spec)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.spec.isEmpty {
+      try container.encode(self.spec, forKey: .spec)
+    }
     try container.encodeIfPresent(self.details, forKey: .details)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.sourceMetadata.isEmpty {
+      try container.encode(self.sourceMetadata, forKey: .sourceMetadata)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -145,9 +145,13 @@ public struct ImageImport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.recentImageImportJobs, forKey: .recentImageImportJobs)
+    if !self.recentImageImportJobs.isEmpty {
+      try container.encode(self.recentImageImportJobs, forKey: .recentImageImportJobs)
+    }
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
 
     if let choice = self.source {

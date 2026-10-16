@@ -209,14 +209,28 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.issue, forKey: .issue)
+    if self.category != GoogleCloudDataplexV1.Action.Category() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.issue.isEmpty {
+      try container.encode(self.issue, forKey: .issue)
+    }
     try container.encodeIfPresent(self.detectTime, forKey: .detectTime)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.lake, forKey: .lake)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.asset, forKey: .asset)
-    try container.encode(self.dataLocations, forKey: .dataLocations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.lake.isEmpty {
+      try container.encode(self.lake, forKey: .lake)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
+    if !self.dataLocations.isEmpty {
+      try container.encode(self.dataLocations, forKey: .dataLocations)
+    }
 
     if let choice = self.details {
       switch choice {
@@ -439,7 +453,9 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asset, forKey: .asset)
+      if !self.asset.isEmpty {
+        try container.encode(self.asset, forKey: .asset)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -538,9 +554,15 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sampledDataLocations, forKey: .sampledDataLocations)
-      try container.encode(self.expectedFormat, forKey: .expectedFormat)
-      try container.encode(self.newFormat, forKey: .newFormat)
+      if !self.sampledDataLocations.isEmpty {
+        try container.encode(self.sampledDataLocations, forKey: .sampledDataLocations)
+      }
+      if !self.expectedFormat.isEmpty {
+        try container.encode(self.expectedFormat, forKey: .expectedFormat)
+      }
+      if !self.newFormat.isEmpty {
+        try container.encode(self.newFormat, forKey: .newFormat)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -660,11 +682,21 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.table, forKey: .table)
-      try container.encode(self.existingSchema, forKey: .existingSchema)
-      try container.encode(self.newSchema, forKey: .newSchema)
-      try container.encode(self.sampledDataLocations, forKey: .sampledDataLocations)
-      try container.encode(self.schemaChange, forKey: .schemaChange)
+      if !self.table.isEmpty {
+        try container.encode(self.table, forKey: .table)
+      }
+      if !self.existingSchema.isEmpty {
+        try container.encode(self.existingSchema, forKey: .existingSchema)
+      }
+      if !self.newSchema.isEmpty {
+        try container.encode(self.newSchema, forKey: .newSchema)
+      }
+      if !self.sampledDataLocations.isEmpty {
+        try container.encode(self.sampledDataLocations, forKey: .sampledDataLocations)
+      }
+      if self.schemaChange != GoogleCloudDataplexV1.Action.IncompatibleDataSchema.SchemaChange() {
+        try container.encode(self.schemaChange, forKey: .schemaChange)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -867,7 +899,11 @@ public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.expectedStructure, forKey: .expectedStructure)
+      if self.expectedStructure
+        != GoogleCloudDataplexV1.Action.InvalidDataPartition.PartitionStructure()
+      {
+        try container.encode(self.expectedStructure, forKey: .expectedStructure)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

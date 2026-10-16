@@ -138,15 +138,29 @@ public struct User: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.customerServiceAccount, forKey: .customerServiceAccount)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.userCredentials, forKey: .userCredentials)
-    try container.encode(self.storageDirectoryMappings, forKey: .storageDirectoryMappings)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.customerServiceAccount.isEmpty {
+      try container.encode(self.customerServiceAccount, forKey: .customerServiceAccount)
+    }
+    if self.state != User.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.userCredentials.isEmpty {
+      try container.encode(self.userCredentials, forKey: .userCredentials)
+    }
+    if !self.storageDirectoryMappings.isEmpty {
+      try container.encode(self.storageDirectoryMappings, forKey: .storageDirectoryMappings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

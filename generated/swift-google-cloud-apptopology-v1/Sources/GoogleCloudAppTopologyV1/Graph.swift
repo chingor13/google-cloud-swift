@@ -78,8 +78,12 @@ public struct Graph: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nodes, forKey: .nodes)
-    try container.encode(self.edges, forKey: .edges)
+    if !self.nodes.isEmpty {
+      try container.encode(self.nodes, forKey: .nodes)
+    }
+    if !self.edges.isEmpty {
+      try container.encode(self.edges, forKey: .edges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

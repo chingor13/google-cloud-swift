@@ -103,7 +103,9 @@ public struct UpdateBackupPlanRequest: Codable, Equatable, GoogleWKT._AnyPackabl
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.backupPlan, forKey: .backupPlan)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

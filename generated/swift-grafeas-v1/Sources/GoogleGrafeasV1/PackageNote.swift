@@ -151,17 +151,35 @@ public struct PackageNote: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.distribution, forKey: .distribution)
-    try container.encode(self.packageType, forKey: .packageType)
-    try container.encode(self.cpeUri, forKey: .cpeUri)
-    try container.encode(self.architecture, forKey: .architecture)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.distribution.isEmpty {
+      try container.encode(self.distribution, forKey: .distribution)
+    }
+    if !self.packageType.isEmpty {
+      try container.encode(self.packageType, forKey: .packageType)
+    }
+    if !self.cpeUri.isEmpty {
+      try container.encode(self.cpeUri, forKey: .cpeUri)
+    }
+    if self.architecture != Architecture() {
+      try container.encode(self.architecture, forKey: .architecture)
+    }
     try container.encodeIfPresent(self.version, forKey: .version)
-    try container.encode(self.maintainer, forKey: .maintainer)
-    try container.encode(self.url, forKey: .url)
-    try container.encode(self.description, forKey: .description)
+    if !self.maintainer.isEmpty {
+      try container.encode(self.maintainer, forKey: .maintainer)
+    }
+    if !self.url.isEmpty {
+      try container.encode(self.url, forKey: .url)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.license, forKey: .license)
-    try container.encode(self.digest, forKey: .digest)
+    if !self.digest.isEmpty {
+      try container.encode(self.digest, forKey: .digest)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

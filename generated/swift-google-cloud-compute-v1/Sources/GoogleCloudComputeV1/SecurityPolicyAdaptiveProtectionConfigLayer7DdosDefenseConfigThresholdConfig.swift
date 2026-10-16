@@ -140,7 +140,9 @@
       try container.encodeIfPresent(
         self.detectionRelativeToBaselineQps, forKey: .detectionRelativeToBaselineQps)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.trafficGranularityConfigs, forKey: .trafficGranularityConfigs)
+      if !self.trafficGranularityConfigs.isEmpty {
+        try container.encode(self.trafficGranularityConfigs, forKey: .trafficGranularityConfigs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

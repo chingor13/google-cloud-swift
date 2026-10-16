@@ -132,9 +132,15 @@ public struct RestoreTableMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sourceType, forKey: .sourceType)
-    try container.encode(self.optimizeTableOperationName, forKey: .optimizeTableOperationName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.sourceType != RestoreSourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
+    if !self.optimizeTableOperationName.isEmpty {
+      try container.encode(self.optimizeTableOperationName, forKey: .optimizeTableOperationName)
+    }
     try container.encodeIfPresent(self.progress, forKey: .progress)
 
     if let choice = self.sourceInfo {

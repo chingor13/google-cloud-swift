@@ -105,11 +105,19 @@ public struct ExecuteDashboardQueryRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.query, forKey: .query)
-    try container.encode(self.filters, forKey: .filters)
-    try container.encode(self.clearCache, forKey: .clearCache)
-    try container.encode(self.usePreviousTimeRange, forKey: .usePreviousTimeRange)
+    if !self.filters.isEmpty {
+      try container.encode(self.filters, forKey: .filters)
+    }
+    if self.clearCache {
+      try container.encode(self.clearCache, forKey: .clearCache)
+    }
+    if self.usePreviousTimeRange {
+      try container.encode(self.usePreviousTimeRange, forKey: .usePreviousTimeRange)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

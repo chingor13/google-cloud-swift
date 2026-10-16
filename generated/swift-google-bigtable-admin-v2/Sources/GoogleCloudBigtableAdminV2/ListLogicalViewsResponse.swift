@@ -79,8 +79,12 @@ public struct ListLogicalViewsResponse: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.logicalViews, forKey: .logicalViews)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.logicalViews.isEmpty {
+      try container.encode(self.logicalViews, forKey: .logicalViews)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

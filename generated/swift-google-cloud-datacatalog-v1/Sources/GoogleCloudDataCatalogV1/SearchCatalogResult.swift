@@ -191,14 +191,28 @@ public struct SearchCatalogResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.searchResultType, forKey: .searchResultType)
-    try container.encode(self.searchResultSubtype, forKey: .searchResultSubtype)
-    try container.encode(self.relativeResourceName, forKey: .relativeResourceName)
-    try container.encode(self.linkedResource, forKey: .linkedResource)
+    if self.searchResultType != SearchResultType() {
+      try container.encode(self.searchResultType, forKey: .searchResultType)
+    }
+    if !self.searchResultSubtype.isEmpty {
+      try container.encode(self.searchResultSubtype, forKey: .searchResultSubtype)
+    }
+    if !self.relativeResourceName.isEmpty {
+      try container.encode(self.relativeResourceName, forKey: .relativeResourceName)
+    }
+    if !self.linkedResource.isEmpty {
+      try container.encode(self.linkedResource, forKey: .linkedResource)
+    }
     try container.encodeIfPresent(self.modifyTime, forKey: .modifyTime)
-    try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.fullyQualifiedName.isEmpty {
+      try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
 
     if let choice = self.system {
       switch choice {

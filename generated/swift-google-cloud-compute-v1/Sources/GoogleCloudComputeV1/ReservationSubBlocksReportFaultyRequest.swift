@@ -88,7 +88,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.disruptionSchedule, forKey: .disruptionSchedule)
       try container.encodeIfPresent(self.failureComponent, forKey: .failureComponent)
-      try container.encode(self.faultReasons, forKey: .faultReasons)
+      if !self.faultReasons.isEmpty {
+        try container.encode(self.faultReasons, forKey: .faultReasons)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

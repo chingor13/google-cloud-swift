@@ -94,8 +94,12 @@ public struct LogLine: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.time, forKey: .time)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.logMessage, forKey: .logMessage)
+    if self.severity != GoogleCloudLoggingType.LogSeverity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.logMessage.isEmpty {
+      try container.encode(self.logMessage, forKey: .logMessage)
+    }
     try container.encodeIfPresent(self.sourceLocation, forKey: .sourceLocation)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

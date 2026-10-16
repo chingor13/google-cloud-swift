@@ -108,11 +108,21 @@ public struct PerformanceStats: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.queriesPerSecond, forKey: .queriesPerSecond)
-    try container.encode(self.outputTokensPerSecond, forKey: .outputTokensPerSecond)
-    try container.encode(self.ntpotMilliseconds, forKey: .ntpotMilliseconds)
-    try container.encode(self.ttftMilliseconds, forKey: .ttftMilliseconds)
-    try container.encode(self.cost, forKey: .cost)
+    if self.queriesPerSecond != 0 {
+      try container.encode(self.queriesPerSecond, forKey: .queriesPerSecond)
+    }
+    if self.outputTokensPerSecond != 0 {
+      try container.encode(self.outputTokensPerSecond, forKey: .outputTokensPerSecond)
+    }
+    if self.ntpotMilliseconds != 0 {
+      try container.encode(self.ntpotMilliseconds, forKey: .ntpotMilliseconds)
+    }
+    if self.ttftMilliseconds != 0 {
+      try container.encode(self.ttftMilliseconds, forKey: .ttftMilliseconds)
+    }
+    if !self.cost.isEmpty {
+      try container.encode(self.cost, forKey: .cost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

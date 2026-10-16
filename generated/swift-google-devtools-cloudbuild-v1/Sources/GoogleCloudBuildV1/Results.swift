@@ -154,16 +154,34 @@ public struct Results: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.images, forKey: .images)
-    try container.encode(self.buildStepImages, forKey: .buildStepImages)
-    try container.encode(self.artifactManifest, forKey: .artifactManifest)
-    try container.encode(self.numArtifacts, forKey: .numArtifacts)
-    try container.encode(self.buildStepOutputs, forKey: .buildStepOutputs)
+    if !self.images.isEmpty {
+      try container.encode(self.images, forKey: .images)
+    }
+    if !self.buildStepImages.isEmpty {
+      try container.encode(self.buildStepImages, forKey: .buildStepImages)
+    }
+    if !self.artifactManifest.isEmpty {
+      try container.encode(self.artifactManifest, forKey: .artifactManifest)
+    }
+    if self.numArtifacts != 0 {
+      try container.encode(self.numArtifacts, forKey: .numArtifacts)
+    }
+    if !self.buildStepOutputs.isEmpty {
+      try container.encode(self.buildStepOutputs, forKey: .buildStepOutputs)
+    }
     try container.encodeIfPresent(self.artifactTiming, forKey: .artifactTiming)
-    try container.encode(self.pythonPackages, forKey: .pythonPackages)
-    try container.encode(self.mavenArtifacts, forKey: .mavenArtifacts)
-    try container.encode(self.goModules, forKey: .goModules)
-    try container.encode(self.npmPackages, forKey: .npmPackages)
+    if !self.pythonPackages.isEmpty {
+      try container.encode(self.pythonPackages, forKey: .pythonPackages)
+    }
+    if !self.mavenArtifacts.isEmpty {
+      try container.encode(self.mavenArtifacts, forKey: .mavenArtifacts)
+    }
+    if !self.goModules.isEmpty {
+      try container.encode(self.goModules, forKey: .goModules)
+    }
+    if !self.npmPackages.isEmpty {
+      try container.encode(self.npmPackages, forKey: .npmPackages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

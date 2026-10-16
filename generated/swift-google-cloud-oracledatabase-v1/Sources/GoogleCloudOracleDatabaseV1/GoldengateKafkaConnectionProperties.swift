@@ -282,17 +282,39 @@ public struct GoldengateKafkaConnectionProperties: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.streamPoolId, forKey: .streamPoolId)
-    try container.encode(self.clusterId, forKey: .clusterId)
-    try container.encode(self.bootstrapServers, forKey: .bootstrapServers)
-    try container.encode(self.securityProtocol, forKey: .securityProtocol)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.trustStoreFile, forKey: .trustStoreFile)
-    try container.encode(self.keyStoreFile, forKey: .keyStoreFile)
-    try container.encode(self.consumerPropertiesFile, forKey: .consumerPropertiesFile)
-    try container.encode(self.producerPropertiesFile, forKey: .producerPropertiesFile)
-    try container.encode(self.useResourcePrincipal, forKey: .useResourcePrincipal)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.streamPoolId.isEmpty {
+      try container.encode(self.streamPoolId, forKey: .streamPoolId)
+    }
+    if !self.clusterId.isEmpty {
+      try container.encode(self.clusterId, forKey: .clusterId)
+    }
+    if !self.bootstrapServers.isEmpty {
+      try container.encode(self.bootstrapServers, forKey: .bootstrapServers)
+    }
+    if self.securityProtocol != GoldengateKafkaConnectionProperties.KafkaSecurityProtocol() {
+      try container.encode(self.securityProtocol, forKey: .securityProtocol)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.trustStoreFile.isEmpty {
+      try container.encode(self.trustStoreFile, forKey: .trustStoreFile)
+    }
+    if !self.keyStoreFile.isEmpty {
+      try container.encode(self.keyStoreFile, forKey: .keyStoreFile)
+    }
+    if !self.consumerPropertiesFile.isEmpty {
+      try container.encode(self.consumerPropertiesFile, forKey: .consumerPropertiesFile)
+    }
+    if !self.producerPropertiesFile.isEmpty {
+      try container.encode(self.producerPropertiesFile, forKey: .producerPropertiesFile)
+    }
+    if self.useResourcePrincipal {
+      try container.encode(self.useResourcePrincipal, forKey: .useResourcePrincipal)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

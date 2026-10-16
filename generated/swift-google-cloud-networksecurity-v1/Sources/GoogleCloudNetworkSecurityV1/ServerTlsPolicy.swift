@@ -154,12 +154,20 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.allowOpen, forKey: .allowOpen)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.allowOpen {
+      try container.encode(self.allowOpen, forKey: .allowOpen)
+    }
     try container.encodeIfPresent(self.serverCertificate, forKey: .serverCertificate)
     try container.encodeIfPresent(self.mtlsPolicy, forKey: .mtlsPolicy)
     for (key, value) in self._unknownFields.json {
@@ -258,9 +266,15 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.clientValidationMode, forKey: .clientValidationMode)
-      try container.encode(self.clientValidationCa, forKey: .clientValidationCa)
-      try container.encode(self.clientValidationTrustConfig, forKey: .clientValidationTrustConfig)
+      if self.clientValidationMode != ServerTlsPolicy.MTLSPolicy.ClientValidationMode() {
+        try container.encode(self.clientValidationMode, forKey: .clientValidationMode)
+      }
+      if !self.clientValidationCa.isEmpty {
+        try container.encode(self.clientValidationCa, forKey: .clientValidationCa)
+      }
+      if !self.clientValidationTrustConfig.isEmpty {
+        try container.encode(self.clientValidationTrustConfig, forKey: .clientValidationTrustConfig)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

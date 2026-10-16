@@ -123,10 +123,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataStore, forKey: .dataStore)
-      try container.encode(self.modelType, forKey: .modelType)
+      if !self.dataStore.isEmpty {
+        try container.encode(self.dataStore, forKey: .dataStore)
+      }
+      if !self.modelType.isEmpty {
+        try container.encode(self.modelType, forKey: .modelType)
+      }
       try container.encodeIfPresent(self.errorConfig, forKey: .errorConfig)
-      try container.encode(self.modelId, forKey: .modelId)
+      if !self.modelId.isEmpty {
+        try container.encode(self.modelId, forKey: .modelId)
+      }
 
       if let choice = self.trainingInput {
         switch choice {
@@ -236,10 +242,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.corpusDataPath, forKey: .corpusDataPath)
-        try container.encode(self.queryDataPath, forKey: .queryDataPath)
-        try container.encode(self.trainDataPath, forKey: .trainDataPath)
-        try container.encode(self.testDataPath, forKey: .testDataPath)
+        if !self.corpusDataPath.isEmpty {
+          try container.encode(self.corpusDataPath, forKey: .corpusDataPath)
+        }
+        if !self.queryDataPath.isEmpty {
+          try container.encode(self.queryDataPath, forKey: .queryDataPath)
+        }
+        if !self.trainDataPath.isEmpty {
+          try container.encode(self.trainDataPath, forKey: .trainDataPath)
+        }
+        if !self.testDataPath.isEmpty {
+          try container.encode(self.testDataPath, forKey: .testDataPath)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

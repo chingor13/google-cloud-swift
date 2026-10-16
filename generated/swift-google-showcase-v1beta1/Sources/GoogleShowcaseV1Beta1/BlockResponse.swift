@@ -70,7 +70,9 @@ public struct BlockResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.content, forKey: .content)
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

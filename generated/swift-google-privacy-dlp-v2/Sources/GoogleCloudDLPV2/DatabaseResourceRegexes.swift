@@ -73,7 +73,9 @@ public struct DatabaseResourceRegexes: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.patterns, forKey: .patterns)
+    if !self.patterns.isEmpty {
+      try container.encode(self.patterns, forKey: .patterns)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

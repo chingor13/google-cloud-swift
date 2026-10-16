@@ -89,8 +89,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.generatorSuggestionAnswers, forKey: .generatorSuggestionAnswers)
-      try container.encode(self.latestMessage, forKey: .latestMessage)
+      if !self.generatorSuggestionAnswers.isEmpty {
+        try container.encode(self.generatorSuggestionAnswers, forKey: .generatorSuggestionAnswers)
+      }
+      if !self.latestMessage.isEmpty {
+        try container.encode(self.latestMessage, forKey: .latestMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -167,8 +171,12 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.generatorSuggestion, forKey: .generatorSuggestion)
-        try container.encode(self.sourceGenerator, forKey: .sourceGenerator)
-        try container.encode(self.answerRecord, forKey: .answerRecord)
+        if !self.sourceGenerator.isEmpty {
+          try container.encode(self.sourceGenerator, forKey: .sourceGenerator)
+        }
+        if !self.answerRecord.isEmpty {
+          try container.encode(self.answerRecord, forKey: .answerRecord)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

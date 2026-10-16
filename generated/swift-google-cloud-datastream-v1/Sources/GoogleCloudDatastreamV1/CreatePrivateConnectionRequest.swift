@@ -122,12 +122,22 @@ public struct CreatePrivateConnectionRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.privateConnectionId, forKey: .privateConnectionId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.privateConnectionId.isEmpty {
+      try container.encode(self.privateConnectionId, forKey: .privateConnectionId)
+    }
     try container.encodeIfPresent(self.privateConnection, forKey: .privateConnection)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.force, forKey: .force)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.force {
+      try container.encode(self.force, forKey: .force)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

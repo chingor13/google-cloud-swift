@@ -104,10 +104,18 @@ public struct ResourceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.owner, forKey: .owner)
-    try container.encode(self.description, forKey: .description)
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.owner.isEmpty {
+      try container.encode(self.owner, forKey: .owner)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -120,7 +120,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.applianceMappings, forKey: .applianceMappings)
+      if !self.applianceMappings.isEmpty {
+        try container.encode(self.applianceMappings, forKey: .applianceMappings)
+      }
       try container.encodeIfPresent(
         self.defaultApplianceIpAddress, forKey: .defaultApplianceIpAddress)
       try container.encodeIfPresent(self.geneveHeader, forKey: .geneveHeader)

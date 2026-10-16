@@ -141,9 +141,13 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.challenge, forKey: .challenge)
+    if !self.challenge.isEmpty {
+      try container.encode(self.challenge, forKey: .challenge)
+    }
     try container.encodeIfPresent(self.gcpCredentials, forKey: .gcpCredentials)
-    try container.encode(self.signedEntities, forKey: .signedEntities)
+    if !self.signedEntities.isEmpty {
+      try container.encode(self.signedEntities, forKey: .signedEntities)
+    }
     try container.encodeIfPresent(self.gceShieldedIdentity, forKey: .gceShieldedIdentity)
     try container.encodeIfPresent(self.options, forKey: .options)
     try container.encodeIfPresent(self.nvidiaAttestation, forKey: .nvidiaAttestation)
@@ -263,10 +267,18 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleWKT._Any
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.audience, forKey: .audience)
-      try container.encode(self.tokenProfile, forKey: .tokenProfile)
-      try container.encode(self.nonce, forKey: .nonce)
-      try container.encode(self.signatureType, forKey: .signatureType)
+      if !self.audience.isEmpty {
+        try container.encode(self.audience, forKey: .audience)
+      }
+      if self.tokenProfile != TokenProfile() {
+        try container.encode(self.tokenProfile, forKey: .tokenProfile)
+      }
+      if !self.nonce.isEmpty {
+        try container.encode(self.nonce, forKey: .nonce)
+      }
+      if self.signatureType != SignatureType() {
+        try container.encode(self.signatureType, forKey: .signatureType)
+      }
 
       if let choice = self.tokenProfileOptions {
         switch choice {

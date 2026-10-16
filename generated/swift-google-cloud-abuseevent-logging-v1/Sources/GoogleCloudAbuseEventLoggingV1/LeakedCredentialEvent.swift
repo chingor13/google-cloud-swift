@@ -99,7 +99,9 @@ public struct LeakedCredentialEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.detectedUri, forKey: .detectedUri)
+    if !self.detectedUri.isEmpty {
+      try container.encode(self.detectedUri, forKey: .detectedUri)
+    }
 
     if let choice = self.credentialType {
       switch choice {

@@ -109,12 +109,24 @@ public struct RedisInstanceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.primaryEndpointIp, forKey: .primaryEndpointIp)
-    try container.encode(self.readEndpointIp, forKey: .readEndpointIp)
-    try container.encode(self.region, forKey: .region)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.primaryEndpointIp.isEmpty {
+      try container.encode(self.primaryEndpointIp, forKey: .primaryEndpointIp)
+    }
+    if !self.readEndpointIp.isEmpty {
+      try container.encode(self.readEndpointIp, forKey: .readEndpointIp)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

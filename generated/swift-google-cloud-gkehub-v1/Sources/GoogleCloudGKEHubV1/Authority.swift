@@ -115,10 +115,18 @@ public struct Authority: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issuer, forKey: .issuer)
-    try container.encode(self.workloadIdentityPool, forKey: .workloadIdentityPool)
-    try container.encode(self.identityProvider, forKey: .identityProvider)
-    try container.encode(self.oidcJwks, forKey: .oidcJwks)
+    if !self.issuer.isEmpty {
+      try container.encode(self.issuer, forKey: .issuer)
+    }
+    if !self.workloadIdentityPool.isEmpty {
+      try container.encode(self.workloadIdentityPool, forKey: .workloadIdentityPool)
+    }
+    if !self.identityProvider.isEmpty {
+      try container.encode(self.identityProvider, forKey: .identityProvider)
+    }
+    if !self.oidcJwks.isEmpty {
+      try container.encode(self.oidcJwks, forKey: .oidcJwks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -119,8 +119,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conversation, forKey: .conversation)
-      try container.encode(self.type, forKey: .type)
+      if !self.conversation.isEmpty {
+        try container.encode(self.conversation, forKey: .conversation)
+      }
+      if self.type != ConversationEvent.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
       try container.encodeIfPresent(self.errorStatus, forKey: .errorStatus)
 
       if let choice = self.payload {

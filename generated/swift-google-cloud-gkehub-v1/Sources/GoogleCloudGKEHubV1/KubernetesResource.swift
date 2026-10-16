@@ -116,9 +116,15 @@ public struct KubernetesResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.membershipCrManifest, forKey: .membershipCrManifest)
-    try container.encode(self.membershipResources, forKey: .membershipResources)
-    try container.encode(self.connectResources, forKey: .connectResources)
+    if !self.membershipCrManifest.isEmpty {
+      try container.encode(self.membershipCrManifest, forKey: .membershipCrManifest)
+    }
+    if !self.membershipResources.isEmpty {
+      try container.encode(self.membershipResources, forKey: .membershipResources)
+    }
+    if !self.connectResources.isEmpty {
+      try container.encode(self.connectResources, forKey: .connectResources)
+    }
     try container.encodeIfPresent(self.resourceOptions, forKey: .resourceOptions)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

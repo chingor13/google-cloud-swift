@@ -229,16 +229,32 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.predictionType, forKey: .predictionType)
-    try container.encode(self.targetColumn, forKey: .targetColumn)
-    try container.encode(self.transformations, forKey: .transformations)
-    try container.encode(self.optimizationObjective, forKey: .optimizationObjective)
-    try container.encode(self.trainBudgetMilliNodeHours, forKey: .trainBudgetMilliNodeHours)
-    try container.encode(self.disableEarlyStopping, forKey: .disableEarlyStopping)
-    try container.encode(self.weightColumnName, forKey: .weightColumnName)
+    if !self.predictionType.isEmpty {
+      try container.encode(self.predictionType, forKey: .predictionType)
+    }
+    if !self.targetColumn.isEmpty {
+      try container.encode(self.targetColumn, forKey: .targetColumn)
+    }
+    if !self.transformations.isEmpty {
+      try container.encode(self.transformations, forKey: .transformations)
+    }
+    if !self.optimizationObjective.isEmpty {
+      try container.encode(self.optimizationObjective, forKey: .optimizationObjective)
+    }
+    if self.trainBudgetMilliNodeHours != 0 {
+      try container.encode(self.trainBudgetMilliNodeHours, forKey: .trainBudgetMilliNodeHours)
+    }
+    if self.disableEarlyStopping {
+      try container.encode(self.disableEarlyStopping, forKey: .disableEarlyStopping)
+    }
+    if !self.weightColumnName.isEmpty {
+      try container.encode(self.weightColumnName, forKey: .weightColumnName)
+    }
     try container.encodeIfPresent(
       self.exportEvaluatedDataItemsConfig, forKey: .exportEvaluatedDataItemsConfig)
-    try container.encode(self.additionalExperiments, forKey: .additionalExperiments)
+    if !self.additionalExperiments.isEmpty {
+      try container.encode(self.additionalExperiments, forKey: .additionalExperiments)
+    }
 
     if let choice = self.additionalOptimizationObjectiveConfig {
       switch choice {
@@ -447,7 +463,9 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -548,8 +566,12 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
-        try container.encode(self.invalidValuesAllowed, forKey: .invalidValuesAllowed)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
+        if self.invalidValuesAllowed {
+          try container.encode(self.invalidValuesAllowed, forKey: .invalidValuesAllowed)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -637,7 +659,9 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -753,9 +777,15 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
-        try container.encode(self.timeFormat, forKey: .timeFormat)
-        try container.encode(self.invalidValuesAllowed, forKey: .invalidValuesAllowed)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
+        if !self.timeFormat.isEmpty {
+          try container.encode(self.timeFormat, forKey: .timeFormat)
+        }
+        if self.invalidValuesAllowed {
+          try container.encode(self.invalidValuesAllowed, forKey: .invalidValuesAllowed)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -845,7 +875,9 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -941,8 +973,12 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
-        try container.encode(self.invalidValuesAllowed, forKey: .invalidValuesAllowed)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
+        if self.invalidValuesAllowed {
+          try container.encode(self.invalidValuesAllowed, forKey: .invalidValuesAllowed)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1029,7 +1065,9 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1115,7 +1153,9 @@ public struct AutoMlTablesInputs: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.columnName, forKey: .columnName)
+        if !self.columnName.isEmpty {
+          try container.encode(self.columnName, forKey: .columnName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

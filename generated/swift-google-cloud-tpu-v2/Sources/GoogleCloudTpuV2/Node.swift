@@ -277,31 +277,69 @@ public struct Node: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.acceleratorType, forKey: .acceleratorType)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.healthDescription, forKey: .healthDescription)
-    try container.encode(self.runtimeVersion, forKey: .runtimeVersion)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.acceleratorType.isEmpty {
+      try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    }
+    if self.state != Node.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.healthDescription.isEmpty {
+      try container.encode(self.healthDescription, forKey: .healthDescription)
+    }
+    if !self.runtimeVersion.isEmpty {
+      try container.encode(self.runtimeVersion, forKey: .runtimeVersion)
+    }
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
-    try container.encode(self.networkConfigs, forKey: .networkConfigs)
-    try container.encode(self.cidrBlock, forKey: .cidrBlock)
+    if !self.networkConfigs.isEmpty {
+      try container.encode(self.networkConfigs, forKey: .networkConfigs)
+    }
+    if !self.cidrBlock.isEmpty {
+      try container.encode(self.cidrBlock, forKey: .cidrBlock)
+    }
     try container.encodeIfPresent(self.serviceAccount, forKey: .serviceAccount)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.schedulingConfig, forKey: .schedulingConfig)
-    try container.encode(self.networkEndpoints, forKey: .networkEndpoints)
-    try container.encode(self.health, forKey: .health)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.dataDisks, forKey: .dataDisks)
-    try container.encode(self.apiVersion, forKey: .apiVersion)
-    try container.encode(self.symptoms, forKey: .symptoms)
+    if !self.networkEndpoints.isEmpty {
+      try container.encode(self.networkEndpoints, forKey: .networkEndpoints)
+    }
+    if self.health != Node.Health() {
+      try container.encode(self.health, forKey: .health)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.id != 0 {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.dataDisks.isEmpty {
+      try container.encode(self.dataDisks, forKey: .dataDisks)
+    }
+    if self.apiVersion != Node.ApiVersion() {
+      try container.encode(self.apiVersion, forKey: .apiVersion)
+    }
+    if !self.symptoms.isEmpty {
+      try container.encode(self.symptoms, forKey: .symptoms)
+    }
     try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
     try container.encodeIfPresent(self.acceleratorConfig, forKey: .acceleratorConfig)
-    try container.encode(self.queuedResource, forKey: .queuedResource)
-    try container.encode(self.multisliceNode, forKey: .multisliceNode)
+    if !self.queuedResource.isEmpty {
+      try container.encode(self.queuedResource, forKey: .queuedResource)
+    }
+    if self.multisliceNode {
+      try container.encode(self.multisliceNode, forKey: .multisliceNode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

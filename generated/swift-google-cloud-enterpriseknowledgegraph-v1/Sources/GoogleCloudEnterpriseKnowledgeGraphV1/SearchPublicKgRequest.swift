@@ -107,10 +107,18 @@ public struct SearchPublicKgRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.languages, forKey: .languages)
-    try container.encode(self.types, forKey: .types)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.languages.isEmpty {
+      try container.encode(self.languages, forKey: .languages)
+    }
+    if !self.types.isEmpty {
+      try container.encode(self.types, forKey: .types)
+    }
     try container.encodeIfPresent(self.limit, forKey: .limit)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

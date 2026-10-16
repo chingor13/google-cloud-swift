@@ -98,7 +98,9 @@ public struct LintPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    if !self.fullResourceName.isEmpty {
+      try container.encode(self.fullResourceName, forKey: .fullResourceName)
+    }
 
     if let choice = self.lintObject {
       switch choice {

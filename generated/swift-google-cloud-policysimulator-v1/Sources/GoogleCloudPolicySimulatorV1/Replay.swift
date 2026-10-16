@@ -99,8 +99,12 @@ public struct Replay: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != Replay.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
     try container.encodeIfPresent(self.resultsSummary, forKey: .resultsSummary)
     for (key, value) in self._unknownFields.json {
@@ -198,10 +202,18 @@ public struct Replay: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.logCount, forKey: .logCount)
-      try container.encode(self.unchangedCount, forKey: .unchangedCount)
-      try container.encode(self.differenceCount, forKey: .differenceCount)
-      try container.encode(self.errorCount, forKey: .errorCount)
+      if self.logCount != 0 {
+        try container.encode(self.logCount, forKey: .logCount)
+      }
+      if self.unchangedCount != 0 {
+        try container.encode(self.unchangedCount, forKey: .unchangedCount)
+      }
+      if self.differenceCount != 0 {
+        try container.encode(self.differenceCount, forKey: .differenceCount)
+      }
+      if self.errorCount != 0 {
+        try container.encode(self.errorCount, forKey: .errorCount)
+      }
       try container.encodeIfPresent(self.oldestDate, forKey: .oldestDate)
       try container.encodeIfPresent(self.newestDate, forKey: .newestDate)
       for (key, value) in self._unknownFields.json {

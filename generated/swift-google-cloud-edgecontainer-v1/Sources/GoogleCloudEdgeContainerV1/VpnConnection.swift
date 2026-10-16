@@ -167,17 +167,33 @@ public struct VpnConnection: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.natGatewayIp, forKey: .natGatewayIp)
-    try container.encode(self.bgpRoutingMode, forKey: .bgpRoutingMode)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.vpc, forKey: .vpc)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.natGatewayIp.isEmpty {
+      try container.encode(self.natGatewayIp, forKey: .natGatewayIp)
+    }
+    if self.bgpRoutingMode != VpnConnection.BgpRoutingMode() {
+      try container.encode(self.bgpRoutingMode, forKey: .bgpRoutingMode)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if !self.vpc.isEmpty {
+      try container.encode(self.vpc, forKey: .vpc)
+    }
     try container.encodeIfPresent(self.vpcProject, forKey: .vpcProject)
-    try container.encode(self.enableHighAvailability, forKey: .enableHighAvailability)
-    try container.encode(self.router, forKey: .router)
+    if self.enableHighAvailability {
+      try container.encode(self.enableHighAvailability, forKey: .enableHighAvailability)
+    }
+    if !self.router.isEmpty {
+      try container.encode(self.router, forKey: .router)
+    }
     try container.encodeIfPresent(self.details, forKey: .details)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -252,8 +268,12 @@ public struct VpnConnection: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.projectId, forKey: .projectId)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      if !self.projectId.isEmpty {
+        try container.encode(self.projectId, forKey: .projectId)
+      }
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -359,10 +379,16 @@ public struct VpnConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.error, forKey: .error)
+      if self.state != VpnConnection.Details.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.error.isEmpty {
+        try container.encode(self.error, forKey: .error)
+      }
       try container.encodeIfPresent(self.cloudRouter, forKey: .cloudRouter)
-      try container.encode(self.cloudVpns, forKey: .cloudVpns)
+      if !self.cloudVpns.isEmpty {
+        try container.encode(self.cloudVpns, forKey: .cloudVpns)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -420,7 +446,9 @@ public struct VpnConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -500,7 +528,9 @@ public struct VpnConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.gateway, forKey: .gateway)
+        if !self.gateway.isEmpty {
+          try container.encode(self.gateway, forKey: .gateway)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

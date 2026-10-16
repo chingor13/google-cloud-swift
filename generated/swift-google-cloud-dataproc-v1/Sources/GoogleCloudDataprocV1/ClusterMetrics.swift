@@ -84,8 +84,12 @@ public struct ClusterMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hdfsMetrics, forKey: .hdfsMetrics)
-    try container.encode(self.yarnMetrics, forKey: .yarnMetrics)
+    if !self.hdfsMetrics.isEmpty {
+      try container.encode(self.hdfsMetrics, forKey: .hdfsMetrics)
+    }
+    if !self.yarnMetrics.isEmpty {
+      try container.encode(self.yarnMetrics, forKey: .yarnMetrics)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

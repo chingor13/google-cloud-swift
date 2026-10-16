@@ -168,15 +168,33 @@ public struct BackupDisasterRecovery: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupTemplate, forKey: .backupTemplate)
-    try container.encode(self.policies, forKey: .policies)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.applications, forKey: .applications)
-    try container.encode(self.storagePool, forKey: .storagePool)
-    try container.encode(self.policyOptions, forKey: .policyOptions)
-    try container.encode(self.profile, forKey: .profile)
-    try container.encode(self.appliance, forKey: .appliance)
-    try container.encode(self.backupType, forKey: .backupType)
+    if !self.backupTemplate.isEmpty {
+      try container.encode(self.backupTemplate, forKey: .backupTemplate)
+    }
+    if !self.policies.isEmpty {
+      try container.encode(self.policies, forKey: .policies)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if !self.applications.isEmpty {
+      try container.encode(self.applications, forKey: .applications)
+    }
+    if !self.storagePool.isEmpty {
+      try container.encode(self.storagePool, forKey: .storagePool)
+    }
+    if !self.policyOptions.isEmpty {
+      try container.encode(self.policyOptions, forKey: .policyOptions)
+    }
+    if !self.profile.isEmpty {
+      try container.encode(self.profile, forKey: .profile)
+    }
+    if !self.appliance.isEmpty {
+      try container.encode(self.appliance, forKey: .appliance)
+    }
+    if !self.backupType.isEmpty {
+      try container.encode(self.backupType, forKey: .backupType)
+    }
     try container.encodeIfPresent(self.backupCreateTime, forKey: .backupCreateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

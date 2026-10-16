@@ -202,20 +202,36 @@ public struct Entitlement: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.offer, forKey: .offer)
+    if !self.offer.isEmpty {
+      try container.encode(self.offer, forKey: .offer)
+    }
     try container.encodeIfPresent(self.commitmentSettings, forKey: .commitmentSettings)
-    try container.encode(self.provisioningState, forKey: .provisioningState)
+    if self.provisioningState != Entitlement.ProvisioningState() {
+      try container.encode(self.provisioningState, forKey: .provisioningState)
+    }
     try container.encodeIfPresent(self.provisionedService, forKey: .provisionedService)
-    try container.encode(self.suspensionReasons, forKey: .suspensionReasons)
-    try container.encode(self.purchaseOrderId, forKey: .purchaseOrderId)
+    if !self.suspensionReasons.isEmpty {
+      try container.encode(self.suspensionReasons, forKey: .suspensionReasons)
+    }
+    if !self.purchaseOrderId.isEmpty {
+      try container.encode(self.purchaseOrderId, forKey: .purchaseOrderId)
+    }
     try container.encodeIfPresent(self.trialSettings, forKey: .trialSettings)
     try container.encodeIfPresent(self.associationInfo, forKey: .associationInfo)
-    try container.encode(self.parameters, forKey: .parameters)
-    try container.encode(self.billingAccount, forKey: .billingAccount)
-    try container.encode(self.priceReferenceId, forKey: .priceReferenceId)
+    if !self.parameters.isEmpty {
+      try container.encode(self.parameters, forKey: .parameters)
+    }
+    if !self.billingAccount.isEmpty {
+      try container.encode(self.billingAccount, forKey: .billingAccount)
+    }
+    if !self.priceReferenceId.isEmpty {
+      try container.encode(self.priceReferenceId, forKey: .priceReferenceId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

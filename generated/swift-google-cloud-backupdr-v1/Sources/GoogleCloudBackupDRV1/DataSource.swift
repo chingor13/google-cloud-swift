@@ -186,18 +186,28 @@ public struct DataSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != DataSource.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.backupCount, forKey: .backupCount)
     try container.encodeIfPresent(self.etag, forKey: .etag)
     try container.encodeIfPresent(self.totalStoredBytes, forKey: .totalStoredBytes)
-    try container.encode(self.configState, forKey: .configState)
+    if self.configState != BackupConfigState() {
+      try container.encode(self.configState, forKey: .configState)
+    }
     try container.encodeIfPresent(self.backupConfigInfo, forKey: .backupConfigInfo)
-    try container.encode(
-      self.backupBlockedByVaultAccessRestriction, forKey: .backupBlockedByVaultAccessRestriction)
+    if self.backupBlockedByVaultAccessRestriction {
+      try container.encode(
+        self.backupBlockedByVaultAccessRestriction, forKey: .backupBlockedByVaultAccessRestriction)
+    }
 
     if let choice = self.sourceResource {
       switch choice {

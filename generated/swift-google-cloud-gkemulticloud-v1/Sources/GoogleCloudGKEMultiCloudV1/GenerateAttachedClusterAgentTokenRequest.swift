@@ -132,15 +132,33 @@ public struct GenerateAttachedClusterAgentTokenRequest: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attachedCluster, forKey: .attachedCluster)
-    try container.encode(self.subjectToken, forKey: .subjectToken)
-    try container.encode(self.subjectTokenType, forKey: .subjectTokenType)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.grantType, forKey: .grantType)
-    try container.encode(self.audience, forKey: .audience)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.requestedTokenType, forKey: .requestedTokenType)
-    try container.encode(self.options, forKey: .options)
+    if !self.attachedCluster.isEmpty {
+      try container.encode(self.attachedCluster, forKey: .attachedCluster)
+    }
+    if !self.subjectToken.isEmpty {
+      try container.encode(self.subjectToken, forKey: .subjectToken)
+    }
+    if !self.subjectTokenType.isEmpty {
+      try container.encode(self.subjectTokenType, forKey: .subjectTokenType)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.grantType.isEmpty {
+      try container.encode(self.grantType, forKey: .grantType)
+    }
+    if !self.audience.isEmpty {
+      try container.encode(self.audience, forKey: .audience)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.requestedTokenType.isEmpty {
+      try container.encode(self.requestedTokenType, forKey: .requestedTokenType)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

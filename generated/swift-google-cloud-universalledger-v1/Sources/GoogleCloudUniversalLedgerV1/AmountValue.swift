@@ -76,7 +76,9 @@ public struct AmountValue: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.currency, forKey: .currency)
-    try container.encode(self.amountValue, forKey: .amountValue)
+    if self.amountValue != 0 {
+      try container.encode(self.amountValue, forKey: .amountValue)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

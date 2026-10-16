@@ -83,8 +83,12 @@ public struct AmazonS3BucketConditions: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucketTypes, forKey: .bucketTypes)
-    try container.encode(self.objectStorageClasses, forKey: .objectStorageClasses)
+    if !self.bucketTypes.isEmpty {
+      try container.encode(self.bucketTypes, forKey: .bucketTypes)
+    }
+    if !self.objectStorageClasses.isEmpty {
+      try container.encode(self.objectStorageClasses, forKey: .objectStorageClasses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

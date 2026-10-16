@@ -226,8 +226,12 @@ public struct ObjectConditions: Codable, Equatable, GoogleWKT._AnyPackable,
       self.minTimeElapsedSinceLastModification, forKey: .minTimeElapsedSinceLastModification)
     try container.encodeIfPresent(
       self.maxTimeElapsedSinceLastModification, forKey: .maxTimeElapsedSinceLastModification)
-    try container.encode(self.includePrefixes, forKey: .includePrefixes)
-    try container.encode(self.excludePrefixes, forKey: .excludePrefixes)
+    if !self.includePrefixes.isEmpty {
+      try container.encode(self.includePrefixes, forKey: .includePrefixes)
+    }
+    if !self.excludePrefixes.isEmpty {
+      try container.encode(self.excludePrefixes, forKey: .excludePrefixes)
+    }
     try container.encodeIfPresent(self.lastModifiedSince, forKey: .lastModifiedSince)
     try container.encodeIfPresent(self.lastModifiedBefore, forKey: .lastModifiedBefore)
     for (key, value) in self._unknownFields.json {

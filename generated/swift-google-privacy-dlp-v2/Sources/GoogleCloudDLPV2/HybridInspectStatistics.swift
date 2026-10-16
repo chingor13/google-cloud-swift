@@ -90,9 +90,15 @@ public struct HybridInspectStatistics: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.processedCount, forKey: .processedCount)
-    try container.encode(self.abortedCount, forKey: .abortedCount)
-    try container.encode(self.pendingCount, forKey: .pendingCount)
+    if self.processedCount != 0 {
+      try container.encode(self.processedCount, forKey: .processedCount)
+    }
+    if self.abortedCount != 0 {
+      try container.encode(self.abortedCount, forKey: .abortedCount)
+    }
+    if self.pendingCount != 0 {
+      try container.encode(self.pendingCount, forKey: .pendingCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

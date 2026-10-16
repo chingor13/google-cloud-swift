@@ -86,9 +86,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.namespaceName, forKey: .namespaceName)
-      try container.encode(self.allow, forKey: .allow)
-      try container.encode(self.deny, forKey: .deny)
+      if !self.namespaceName.isEmpty {
+        try container.encode(self.namespaceName, forKey: .namespaceName)
+      }
+      if !self.allow.isEmpty {
+        try container.encode(self.allow, forKey: .allow)
+      }
+      if !self.deny.isEmpty {
+        try container.encode(self.deny, forKey: .deny)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -221,23 +221,49 @@ public struct Workstation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.persistentDirectories, forKey: .persistentDirectories)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.host, forKey: .host)
-    try container.encode(self.env, forKey: .env)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.sourceWorkstation, forKey: .sourceWorkstation)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.persistentDirectories.isEmpty {
+      try container.encode(self.persistentDirectories, forKey: .persistentDirectories)
+    }
+    if self.state != Workstation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.host.isEmpty {
+      try container.encode(self.host, forKey: .host)
+    }
+    if !self.env.isEmpty {
+      try container.encode(self.env, forKey: .env)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.sourceWorkstation.isEmpty {
+      try container.encode(self.sourceWorkstation, forKey: .sourceWorkstation)
+    }
     try container.encodeIfPresent(self.runtimeHost, forKey: .runtimeHost)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -306,8 +332,12 @@ public struct Workstation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.mountPath, forKey: .mountPath)
-      try container.encode(self.sizeGb, forKey: .sizeGb)
+      if !self.mountPath.isEmpty {
+        try container.encode(self.mountPath, forKey: .mountPath)
+      }
+      if self.sizeGb != 0 {
+        try container.encode(self.sizeGb, forKey: .sizeGb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -482,9 +512,15 @@ public struct Workstation: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -116,12 +116,24 @@ public struct LookerSystemSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parentInstanceId, forKey: .parentInstanceId)
-    try container.encode(self.parentInstanceDisplayName, forKey: .parentInstanceDisplayName)
-    try container.encode(self.parentModelId, forKey: .parentModelId)
-    try container.encode(self.parentModelDisplayName, forKey: .parentModelDisplayName)
-    try container.encode(self.parentViewId, forKey: .parentViewId)
-    try container.encode(self.parentViewDisplayName, forKey: .parentViewDisplayName)
+    if !self.parentInstanceId.isEmpty {
+      try container.encode(self.parentInstanceId, forKey: .parentInstanceId)
+    }
+    if !self.parentInstanceDisplayName.isEmpty {
+      try container.encode(self.parentInstanceDisplayName, forKey: .parentInstanceDisplayName)
+    }
+    if !self.parentModelId.isEmpty {
+      try container.encode(self.parentModelId, forKey: .parentModelId)
+    }
+    if !self.parentModelDisplayName.isEmpty {
+      try container.encode(self.parentModelDisplayName, forKey: .parentModelDisplayName)
+    }
+    if !self.parentViewId.isEmpty {
+      try container.encode(self.parentViewId, forKey: .parentViewId)
+    }
+    if !self.parentViewDisplayName.isEmpty {
+      try container.encode(self.parentViewDisplayName, forKey: .parentViewDisplayName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

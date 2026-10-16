@@ -123,12 +123,20 @@ public struct EntryLink: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.entryLinkType, forKey: .entryLinkType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.entryLinkType.isEmpty {
+      try container.encode(self.entryLinkType, forKey: .entryLinkType)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.aspects, forKey: .aspects)
-    try container.encode(self.entryReferences, forKey: .entryReferences)
+    if !self.aspects.isEmpty {
+      try container.encode(self.aspects, forKey: .aspects)
+    }
+    if !self.entryReferences.isEmpty {
+      try container.encode(self.entryReferences, forKey: .entryReferences)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -208,9 +216,15 @@ public struct EntryLink: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.type, forKey: .type)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if self.type != EntryLink.EntryReference.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

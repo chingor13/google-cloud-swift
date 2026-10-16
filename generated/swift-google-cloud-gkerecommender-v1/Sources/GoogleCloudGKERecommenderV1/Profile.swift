@@ -112,11 +112,19 @@ public struct Profile: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.modelServerInfo, forKey: .modelServerInfo)
-    try container.encode(self.acceleratorType, forKey: .acceleratorType)
-    try container.encode(self.tpuTopology, forKey: .tpuTopology)
-    try container.encode(self.instanceType, forKey: .instanceType)
+    if !self.acceleratorType.isEmpty {
+      try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    }
+    if !self.tpuTopology.isEmpty {
+      try container.encode(self.tpuTopology, forKey: .tpuTopology)
+    }
+    if !self.instanceType.isEmpty {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
     try container.encodeIfPresent(self.resourcesUsed, forKey: .resourcesUsed)
-    try container.encode(self.performanceStats, forKey: .performanceStats)
+    if !self.performanceStats.isEmpty {
+      try container.encode(self.performanceStats, forKey: .performanceStats)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

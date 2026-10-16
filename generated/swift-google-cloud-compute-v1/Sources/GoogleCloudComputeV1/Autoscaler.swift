@@ -218,10 +218,14 @@
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.recommendedSize, forKey: .recommendedSize)
       try container.encodeIfPresent(self.region, forKey: .region)
-      try container.encode(self.scalingScheduleStatus, forKey: .scalingScheduleStatus)
+      if !self.scalingScheduleStatus.isEmpty {
+        try container.encode(self.scalingScheduleStatus, forKey: .scalingScheduleStatus)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.statusDetails, forKey: .statusDetails)
+      if !self.statusDetails.isEmpty {
+        try container.encode(self.statusDetails, forKey: .statusDetails)
+      }
       try container.encodeIfPresent(self.target, forKey: .target)
       try container.encodeIfPresent(self.zone, forKey: .zone)
       for (key, value) in self._unknownFields.json {

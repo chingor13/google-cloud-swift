@@ -224,17 +224,39 @@ public struct PostalAddress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.revision, forKey: .revision)
-    try container.encode(self.regionCode, forKey: .regionCode)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.postalCode, forKey: .postalCode)
-    try container.encode(self.sortingCode, forKey: .sortingCode)
-    try container.encode(self.administrativeArea, forKey: .administrativeArea)
-    try container.encode(self.locality, forKey: .locality)
-    try container.encode(self.sublocality, forKey: .sublocality)
-    try container.encode(self.addressLines, forKey: .addressLines)
-    try container.encode(self.recipients, forKey: .recipients)
-    try container.encode(self.organization, forKey: .organization)
+    if self.revision != 0 {
+      try container.encode(self.revision, forKey: .revision)
+    }
+    if !self.regionCode.isEmpty {
+      try container.encode(self.regionCode, forKey: .regionCode)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.postalCode.isEmpty {
+      try container.encode(self.postalCode, forKey: .postalCode)
+    }
+    if !self.sortingCode.isEmpty {
+      try container.encode(self.sortingCode, forKey: .sortingCode)
+    }
+    if !self.administrativeArea.isEmpty {
+      try container.encode(self.administrativeArea, forKey: .administrativeArea)
+    }
+    if !self.locality.isEmpty {
+      try container.encode(self.locality, forKey: .locality)
+    }
+    if !self.sublocality.isEmpty {
+      try container.encode(self.sublocality, forKey: .sublocality)
+    }
+    if !self.addressLines.isEmpty {
+      try container.encode(self.addressLines, forKey: .addressLines)
+    }
+    if !self.recipients.isEmpty {
+      try container.encode(self.recipients, forKey: .recipients)
+    }
+    if !self.organization.isEmpty {
+      try container.encode(self.organization, forKey: .organization)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

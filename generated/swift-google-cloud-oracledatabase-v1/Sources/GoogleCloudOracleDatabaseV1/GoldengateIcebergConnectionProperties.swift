@@ -81,7 +81,9 @@ public struct GoldengateIcebergConnectionProperties: Codable, Equatable, GoogleW
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
     try container.encodeIfPresent(self.catalog, forKey: .catalog)
     try container.encodeIfPresent(self.storage, forKey: .storage)
     for (key, value) in self._unknownFields.json {

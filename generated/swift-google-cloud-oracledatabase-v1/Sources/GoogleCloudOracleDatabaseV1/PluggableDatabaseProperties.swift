@@ -180,19 +180,41 @@ public struct PluggableDatabaseProperties: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.compartmentId, forKey: .compartmentId)
+    if !self.compartmentId.isEmpty {
+      try container.encode(self.compartmentId, forKey: .compartmentId)
+    }
     try container.encodeIfPresent(self.connectionStrings, forKey: .connectionStrings)
-    try container.encode(self.containerDatabaseOcid, forKey: .containerDatabaseOcid)
-    try container.encode(self.definedTags, forKey: .definedTags)
-    try container.encode(self.freeformTags, forKey: .freeformTags)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.isRestricted, forKey: .isRestricted)
-    try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
-    try container.encode(self.lifecycleState, forKey: .lifecycleState)
-    try container.encode(self.pdbName, forKey: .pdbName)
-    try container.encode(self.pdbNodeLevelDetails, forKey: .pdbNodeLevelDetails)
+    if !self.containerDatabaseOcid.isEmpty {
+      try container.encode(self.containerDatabaseOcid, forKey: .containerDatabaseOcid)
+    }
+    if !self.definedTags.isEmpty {
+      try container.encode(self.definedTags, forKey: .definedTags)
+    }
+    if !self.freeformTags.isEmpty {
+      try container.encode(self.freeformTags, forKey: .freeformTags)
+    }
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.isRestricted {
+      try container.encode(self.isRestricted, forKey: .isRestricted)
+    }
+    if !self.lifecycleDetails.isEmpty {
+      try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
+    }
+    if self.lifecycleState != PluggableDatabaseProperties.PluggableDatabaseLifecycleState() {
+      try container.encode(self.lifecycleState, forKey: .lifecycleState)
+    }
+    if !self.pdbName.isEmpty {
+      try container.encode(self.pdbName, forKey: .pdbName)
+    }
+    if !self.pdbNodeLevelDetails.isEmpty {
+      try container.encode(self.pdbNodeLevelDetails, forKey: .pdbNodeLevelDetails)
+    }
     try container.encodeIfPresent(self.databaseManagementConfig, forKey: .databaseManagementConfig)
-    try container.encode(self.operationsInsightsState, forKey: .operationsInsightsState)
+    if self.operationsInsightsState != PluggableDatabaseProperties.OperationsInsightsState() {
+      try container.encode(self.operationsInsightsState, forKey: .operationsInsightsState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -251,7 +273,9 @@ public struct PluggableDatabaseProperties: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

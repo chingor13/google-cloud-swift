@@ -97,8 +97,12 @@ public struct UpdateWorkstationConfigRequest: Codable, Equatable, GoogleWKT._Any
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.workstationConfig, forKey: .workstationConfig)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -170,14 +170,26 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.contents, forKey: .contents)
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.contents.isEmpty {
+        try container.encode(self.contents, forKey: .contents)
+      }
       try container.encodeIfPresent(self.systemInstruction, forKey: .systemInstruction)
-      try container.encode(self.cachedContent, forKey: .cachedContent)
-      try container.encode(self.tools, forKey: .tools)
+      if !self.cachedContent.isEmpty {
+        try container.encode(self.cachedContent, forKey: .cachedContent)
+      }
+      if !self.tools.isEmpty {
+        try container.encode(self.tools, forKey: .tools)
+      }
       try container.encodeIfPresent(self.toolConfig, forKey: .toolConfig)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.safetySettings, forKey: .safetySettings)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.safetySettings.isEmpty {
+        try container.encode(self.safetySettings, forKey: .safetySettings)
+      }
       try container.encodeIfPresent(self.modelArmorConfig, forKey: .modelArmorConfig)
       try container.encodeIfPresent(self.generationConfig, forKey: .generationConfig)
       for (key, value) in self._unknownFields.json {

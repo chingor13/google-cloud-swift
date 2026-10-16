@@ -102,11 +102,21 @@ public struct GoldengateAmazonS3ConnectionProperties: Codable, Equatable, Google
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.accessKeyId, forKey: .accessKeyId)
-    try container.encode(self.secretAccessKeySecret, forKey: .secretAccessKeySecret)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.region, forKey: .region)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.accessKeyId.isEmpty {
+      try container.encode(self.accessKeyId, forKey: .accessKeyId)
+    }
+    if !self.secretAccessKeySecret.isEmpty {
+      try container.encode(self.secretAccessKeySecret, forKey: .secretAccessKeySecret)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

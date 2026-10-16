@@ -220,15 +220,29 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.volumeDataRestorePolicy, forKey: .volumeDataRestorePolicy)
-    try container.encode(self.clusterResourceConflictPolicy, forKey: .clusterResourceConflictPolicy)
-    try container.encode(self.namespacedResourceRestoreMode, forKey: .namespacedResourceRestoreMode)
+    if self.volumeDataRestorePolicy != RestoreConfig.VolumeDataRestorePolicy() {
+      try container.encode(self.volumeDataRestorePolicy, forKey: .volumeDataRestorePolicy)
+    }
+    if self.clusterResourceConflictPolicy != RestoreConfig.ClusterResourceConflictPolicy() {
+      try container.encode(
+        self.clusterResourceConflictPolicy, forKey: .clusterResourceConflictPolicy)
+    }
+    if self.namespacedResourceRestoreMode != RestoreConfig.NamespacedResourceRestoreMode() {
+      try container.encode(
+        self.namespacedResourceRestoreMode, forKey: .namespacedResourceRestoreMode)
+    }
     try container.encodeIfPresent(
       self.clusterResourceRestoreScope, forKey: .clusterResourceRestoreScope)
-    try container.encode(self.substitutionRules, forKey: .substitutionRules)
-    try container.encode(self.transformationRules, forKey: .transformationRules)
-    try container.encode(
-      self.volumeDataRestorePolicyBindings, forKey: .volumeDataRestorePolicyBindings)
+    if !self.substitutionRules.isEmpty {
+      try container.encode(self.substitutionRules, forKey: .substitutionRules)
+    }
+    if !self.transformationRules.isEmpty {
+      try container.encode(self.transformationRules, forKey: .transformationRules)
+    }
+    if !self.volumeDataRestorePolicyBindings.isEmpty {
+      try container.encode(
+        self.volumeDataRestorePolicyBindings, forKey: .volumeDataRestorePolicyBindings)
+    }
     try container.encodeIfPresent(self.restoreOrder, forKey: .restoreOrder)
 
     if let choice = self.namespacedResourceRestoreScope {
@@ -316,8 +330,12 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceGroup, forKey: .resourceGroup)
-      try container.encode(self.resourceKind, forKey: .resourceKind)
+      if !self.resourceGroup.isEmpty {
+        try container.encode(self.resourceGroup, forKey: .resourceGroup)
+      }
+      if !self.resourceKind.isEmpty {
+        try container.encode(self.resourceKind, forKey: .resourceKind)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -452,10 +470,18 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.selectedGroupKinds, forKey: .selectedGroupKinds)
-      try container.encode(self.excludedGroupKinds, forKey: .excludedGroupKinds)
-      try container.encode(self.allGroupKinds, forKey: .allGroupKinds)
-      try container.encode(self.noGroupKinds, forKey: .noGroupKinds)
+      if !self.selectedGroupKinds.isEmpty {
+        try container.encode(self.selectedGroupKinds, forKey: .selectedGroupKinds)
+      }
+      if !self.excludedGroupKinds.isEmpty {
+        try container.encode(self.excludedGroupKinds, forKey: .excludedGroupKinds)
+      }
+      if self.allGroupKinds {
+        try container.encode(self.allGroupKinds, forKey: .allGroupKinds)
+      }
+      if self.noGroupKinds {
+        try container.encode(self.noGroupKinds, forKey: .noGroupKinds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -599,11 +625,21 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.targetNamespaces, forKey: .targetNamespaces)
-      try container.encode(self.targetGroupKinds, forKey: .targetGroupKinds)
-      try container.encode(self.targetJsonPath, forKey: .targetJsonPath)
-      try container.encode(self.originalValuePattern, forKey: .originalValuePattern)
-      try container.encode(self.newValue, forKey: .newValue)
+      if !self.targetNamespaces.isEmpty {
+        try container.encode(self.targetNamespaces, forKey: .targetNamespaces)
+      }
+      if !self.targetGroupKinds.isEmpty {
+        try container.encode(self.targetGroupKinds, forKey: .targetGroupKinds)
+      }
+      if !self.targetJsonPath.isEmpty {
+        try container.encode(self.targetJsonPath, forKey: .targetJsonPath)
+      }
+      if !self.originalValuePattern.isEmpty {
+        try container.encode(self.originalValuePattern, forKey: .originalValuePattern)
+      }
+      if !self.newValue.isEmpty {
+        try container.encode(self.newValue, forKey: .newValue)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -714,10 +750,18 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.op, forKey: .op)
-      try container.encode(self.fromPath, forKey: .fromPath)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.value, forKey: .value)
+      if self.op != RestoreConfig.TransformationRuleAction.Op() {
+        try container.encode(self.op, forKey: .op)
+      }
+      if !self.fromPath.isEmpty {
+        try container.encode(self.fromPath, forKey: .fromPath)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.value.isEmpty {
+        try container.encode(self.value, forKey: .value)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -986,9 +1030,15 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.namespaces, forKey: .namespaces)
-      try container.encode(self.groupKinds, forKey: .groupKinds)
-      try container.encode(self.jsonPath, forKey: .jsonPath)
+      if !self.namespaces.isEmpty {
+        try container.encode(self.namespaces, forKey: .namespaces)
+      }
+      if !self.groupKinds.isEmpty {
+        try container.encode(self.groupKinds, forKey: .groupKinds)
+      }
+      if !self.jsonPath.isEmpty {
+        try container.encode(self.jsonPath, forKey: .jsonPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1094,9 +1144,13 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fieldActions, forKey: .fieldActions)
+      if !self.fieldActions.isEmpty {
+        try container.encode(self.fieldActions, forKey: .fieldActions)
+      }
       try container.encodeIfPresent(self.resourceFilter, forKey: .resourceFilter)
-      try container.encode(self.description, forKey: .description)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1201,7 +1255,9 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.policy, forKey: .policy)
+      if self.policy != RestoreConfig.VolumeDataRestorePolicy() {
+        try container.encode(self.policy, forKey: .policy)
+      }
 
       if let choice = self.scope {
         switch choice {
@@ -1300,7 +1356,9 @@ public struct RestoreConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.groupKindDependencies, forKey: .groupKindDependencies)
+      if !self.groupKindDependencies.isEmpty {
+        try container.encode(self.groupKindDependencies, forKey: .groupKindDependencies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

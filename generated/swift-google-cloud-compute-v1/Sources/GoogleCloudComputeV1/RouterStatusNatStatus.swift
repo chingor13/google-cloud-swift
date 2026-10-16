@@ -150,16 +150,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.autoAllocatedNatIps, forKey: .autoAllocatedNatIps)
-      try container.encode(self.drainAutoAllocatedNatIps, forKey: .drainAutoAllocatedNatIps)
-      try container.encode(self.drainUserAllocatedNatIps, forKey: .drainUserAllocatedNatIps)
+      if !self.autoAllocatedNatIps.isEmpty {
+        try container.encode(self.autoAllocatedNatIps, forKey: .autoAllocatedNatIps)
+      }
+      if !self.drainAutoAllocatedNatIps.isEmpty {
+        try container.encode(self.drainAutoAllocatedNatIps, forKey: .drainAutoAllocatedNatIps)
+      }
+      if !self.drainUserAllocatedNatIps.isEmpty {
+        try container.encode(self.drainUserAllocatedNatIps, forKey: .drainUserAllocatedNatIps)
+      }
       try container.encodeIfPresent(self.minExtraNatIpsNeeded, forKey: .minExtraNatIpsNeeded)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(
         self.numVmEndpointsWithNatMappings, forKey: .numVmEndpointsWithNatMappings)
-      try container.encode(self.ruleStatus, forKey: .ruleStatus)
-      try container.encode(self.userAllocatedNatIpResources, forKey: .userAllocatedNatIpResources)
-      try container.encode(self.userAllocatedNatIps, forKey: .userAllocatedNatIps)
+      if !self.ruleStatus.isEmpty {
+        try container.encode(self.ruleStatus, forKey: .ruleStatus)
+      }
+      if !self.userAllocatedNatIpResources.isEmpty {
+        try container.encode(self.userAllocatedNatIpResources, forKey: .userAllocatedNatIpResources)
+      }
+      if !self.userAllocatedNatIps.isEmpty {
+        try container.encode(self.userAllocatedNatIps, forKey: .userAllocatedNatIps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

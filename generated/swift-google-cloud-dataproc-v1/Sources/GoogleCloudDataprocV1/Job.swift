@@ -244,14 +244,28 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.reference, forKey: .reference)
     try container.encodeIfPresent(self.placement, forKey: .placement)
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.statusHistory, forKey: .statusHistory)
-    try container.encode(self.yarnApplications, forKey: .yarnApplications)
-    try container.encode(self.driverOutputResourceUri, forKey: .driverOutputResourceUri)
-    try container.encode(self.driverControlFilesUri, forKey: .driverControlFilesUri)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.statusHistory.isEmpty {
+      try container.encode(self.statusHistory, forKey: .statusHistory)
+    }
+    if !self.yarnApplications.isEmpty {
+      try container.encode(self.yarnApplications, forKey: .yarnApplications)
+    }
+    if !self.driverOutputResourceUri.isEmpty {
+      try container.encode(self.driverOutputResourceUri, forKey: .driverOutputResourceUri)
+    }
+    if !self.driverControlFilesUri.isEmpty {
+      try container.encode(self.driverControlFilesUri, forKey: .driverControlFilesUri)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
-    try container.encode(self.jobUuid, forKey: .jobUuid)
-    try container.encode(self.done, forKey: .done)
+    if !self.jobUuid.isEmpty {
+      try container.encode(self.jobUuid, forKey: .jobUuid)
+    }
+    if self.done {
+      try container.encode(self.done, forKey: .done)
+    }
     try container.encodeIfPresent(self.driverSchedulingConfig, forKey: .driverSchedulingConfig)
 
     if let choice = self.typeJob {

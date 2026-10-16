@@ -175,22 +175,44 @@ public struct CloudControlGroupAuditDetails: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cloudControlGroupId, forKey: .cloudControlGroupId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.responsibilityType, forKey: .responsibilityType)
-    try container.encode(
-      self.googleResponsibilityDescription, forKey: .googleResponsibilityDescription)
-    try container.encode(
-      self.googleResponsibilityImplementation, forKey: .googleResponsibilityImplementation)
-    try container.encode(
-      self.customerResponsibilityDescription, forKey: .customerResponsibilityDescription)
-    try container.encode(
-      self.customerResponsibilityImplementation, forKey: .customerResponsibilityImplementation)
-    try container.encode(self.complianceState, forKey: .complianceState)
-    try container.encode(self.controlId, forKey: .controlId)
+    if !self.cloudControlGroupId.isEmpty {
+      try container.encode(self.cloudControlGroupId, forKey: .cloudControlGroupId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.responsibilityType.isEmpty {
+      try container.encode(self.responsibilityType, forKey: .responsibilityType)
+    }
+    if !self.googleResponsibilityDescription.isEmpty {
+      try container.encode(
+        self.googleResponsibilityDescription, forKey: .googleResponsibilityDescription)
+    }
+    if !self.googleResponsibilityImplementation.isEmpty {
+      try container.encode(
+        self.googleResponsibilityImplementation, forKey: .googleResponsibilityImplementation)
+    }
+    if !self.customerResponsibilityDescription.isEmpty {
+      try container.encode(
+        self.customerResponsibilityDescription, forKey: .customerResponsibilityDescription)
+    }
+    if !self.customerResponsibilityImplementation.isEmpty {
+      try container.encode(
+        self.customerResponsibilityImplementation, forKey: .customerResponsibilityImplementation)
+    }
+    if self.complianceState != ComplianceState() {
+      try container.encode(self.complianceState, forKey: .complianceState)
+    }
+    if !self.controlId.isEmpty {
+      try container.encode(self.controlId, forKey: .controlId)
+    }
     try container.encodeIfPresent(self.controlFamily, forKey: .controlFamily)
-    try container.encode(self.cloudControlDetails, forKey: .cloudControlDetails)
+    if !self.cloudControlDetails.isEmpty {
+      try container.encode(self.cloudControlDetails, forKey: .cloudControlDetails)
+    }
     try container.encodeIfPresent(self.reportSummary, forKey: .reportSummary)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

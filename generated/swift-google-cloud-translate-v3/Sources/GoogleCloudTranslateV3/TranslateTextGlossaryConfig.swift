@@ -96,9 +96,15 @@ public struct TranslateTextGlossaryConfig: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.glossary, forKey: .glossary)
-    try container.encode(self.ignoreCase, forKey: .ignoreCase)
-    try container.encode(self.contextualTranslationEnabled, forKey: .contextualTranslationEnabled)
+    if !self.glossary.isEmpty {
+      try container.encode(self.glossary, forKey: .glossary)
+    }
+    if self.ignoreCase {
+      try container.encode(self.ignoreCase, forKey: .ignoreCase)
+    }
+    if self.contextualTranslationEnabled {
+      try container.encode(self.contextualTranslationEnabled, forKey: .contextualTranslationEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

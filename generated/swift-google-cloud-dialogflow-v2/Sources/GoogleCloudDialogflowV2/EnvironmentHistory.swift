@@ -101,9 +101,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.entries, forKey: .entries)
-      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.entries.isEmpty {
+        try container.encode(self.entries, forKey: .entries)
+      }
+      if !self.nextPageToken.isEmpty {
+        try container.encode(self.nextPageToken, forKey: .nextPageToken)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -176,8 +182,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.agentVersion, forKey: .agentVersion)
-        try container.encode(self.description, forKey: .description)
+        if !self.agentVersion.isEmpty {
+          try container.encode(self.agentVersion, forKey: .agentVersion)
+        }
+        if !self.description.isEmpty {
+          try container.encode(self.description, forKey: .description)
+        }
         try container.encodeIfPresent(self.createTime, forKey: .createTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

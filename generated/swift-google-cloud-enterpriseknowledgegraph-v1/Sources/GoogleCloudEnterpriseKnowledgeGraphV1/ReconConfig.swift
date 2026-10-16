@@ -179,7 +179,9 @@ public struct ReconConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableGeocodingSeparation, forKey: .enableGeocodingSeparation)
+      if self.enableGeocodingSeparation {
+        try container.encode(self.enableGeocodingSeparation, forKey: .enableGeocodingSeparation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -269,8 +271,12 @@ public struct ReconConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.modelName, forKey: .modelName)
-      try container.encode(self.versionTag, forKey: .versionTag)
+      if !self.modelName.isEmpty {
+        try container.encode(self.modelName, forKey: .modelName)
+      }
+      if !self.versionTag.isEmpty {
+        try container.encode(self.versionTag, forKey: .versionTag)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -106,7 +106,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.samplingCount, forKey: .samplingCount)
       try container.encodeIfPresent(self.flipEnabled, forKey: .flipEnabled)
-      try container.encode(self.autoraterModel, forKey: .autoraterModel)
+      if !self.autoraterModel.isEmpty {
+        try container.encode(self.autoraterModel, forKey: .autoraterModel)
+      }
       try container.encodeIfPresent(self.generationConfig, forKey: .generationConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

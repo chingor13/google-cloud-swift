@@ -79,8 +79,12 @@ public struct CloudStorageDestinationOptions: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.destinationPath, forKey: .destinationPath)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.destinationPath.isEmpty {
+      try container.encode(self.destinationPath, forKey: .destinationPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

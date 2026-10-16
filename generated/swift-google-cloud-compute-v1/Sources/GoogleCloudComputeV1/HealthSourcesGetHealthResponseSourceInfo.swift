@@ -89,7 +89,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backends, forKey: .backends)
+      if !self.backends.isEmpty {
+        try container.encode(self.backends, forKey: .backends)
+      }
       try container.encodeIfPresent(self.forwardingRule, forKey: .forwardingRule)
       try container.encodeIfPresent(self.source, forKey: .source)
       for (key, value) in self._unknownFields.json {

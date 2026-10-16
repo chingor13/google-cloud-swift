@@ -156,7 +156,9 @@ public struct FileLabel: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.guid, forKey: .guid)
+      if !self.guid.isEmpty {
+        try container.encode(self.guid, forKey: .guid)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -248,8 +250,12 @@ public struct FileLabel: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labelId, forKey: .labelId)
-      try container.encode(self.labelFields, forKey: .labelFields)
+      if !self.labelId.isEmpty {
+        try container.encode(self.labelId, forKey: .labelId)
+      }
+      if !self.labelFields.isEmpty {
+        try container.encode(self.labelFields, forKey: .labelFields)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -313,7 +319,9 @@ public struct FileLabel: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
         try container.encodeIfPresent(self.value, forKey: .value)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

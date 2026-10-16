@@ -150,7 +150,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(
         self.customErrorResponsePolicy, forKey: .customErrorResponsePolicy)
-      try container.encode(self.paths, forKey: .paths)
+      if !self.paths.isEmpty {
+        try container.encode(self.paths, forKey: .paths)
+      }
       try container.encodeIfPresent(self.routeAction, forKey: .routeAction)
       try container.encodeIfPresent(self.service, forKey: .service)
       try container.encodeIfPresent(self.urlRedirect, forKey: .urlRedirect)

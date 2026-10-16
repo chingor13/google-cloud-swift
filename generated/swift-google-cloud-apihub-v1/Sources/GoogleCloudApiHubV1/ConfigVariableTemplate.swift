@@ -126,13 +126,27 @@ public struct ConfigVariableTemplate: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.valueType, forKey: .valueType)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.validationRegex, forKey: .validationRegex)
-    try container.encode(self.`required`, forKey: .`required`)
-    try container.encode(self.enumOptions, forKey: .enumOptions)
-    try container.encode(self.multiSelectOptions, forKey: .multiSelectOptions)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.valueType != ConfigVariableTemplate.ValueType() {
+      try container.encode(self.valueType, forKey: .valueType)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.validationRegex.isEmpty {
+      try container.encode(self.validationRegex, forKey: .validationRegex)
+    }
+    if self.`required` {
+      try container.encode(self.`required`, forKey: .`required`)
+    }
+    if !self.enumOptions.isEmpty {
+      try container.encode(self.enumOptions, forKey: .enumOptions)
+    }
+    if !self.multiSelectOptions.isEmpty {
+      try container.encode(self.multiSelectOptions, forKey: .multiSelectOptions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

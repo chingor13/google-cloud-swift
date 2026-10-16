@@ -108,9 +108,15 @@ public struct Date: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.year, forKey: .year)
-    try container.encode(self.month, forKey: .month)
-    try container.encode(self.day, forKey: .day)
+    if self.year != 0 {
+      try container.encode(self.year, forKey: .year)
+    }
+    if self.month != 0 {
+      try container.encode(self.month, forKey: .month)
+    }
+    if self.day != 0 {
+      try container.encode(self.day, forKey: .day)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -122,10 +122,18 @@ public struct AwsS3CompatibleData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucketName, forKey: .bucketName)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.region, forKey: .region)
+    if !self.bucketName.isEmpty {
+      try container.encode(self.bucketName, forKey: .bucketName)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
 
     if let choice = self.dataProvider {
       switch choice {

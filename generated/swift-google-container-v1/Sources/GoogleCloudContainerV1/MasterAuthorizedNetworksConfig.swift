@@ -98,8 +98,12 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.cidrBlocks, forKey: .cidrBlocks)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if !self.cidrBlocks.isEmpty {
+      try container.encode(self.cidrBlocks, forKey: .cidrBlocks)
+    }
     try container.encodeIfPresent(
       self.gcpPublicCidrsAccessEnabled, forKey: .gcpPublicCidrsAccessEnabled)
     try container.encodeIfPresent(
@@ -169,8 +173,12 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleWKT._Any
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.cidrBlock, forKey: .cidrBlock)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.cidrBlock.isEmpty {
+        try container.encode(self.cidrBlock, forKey: .cidrBlock)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

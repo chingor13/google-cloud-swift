@@ -206,20 +206,48 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dtype, forKey: .dtype)
-      try container.encode(self.shape, forKey: .shape)
-      try container.encode(self.boolVal, forKey: .boolVal)
-      try container.encode(self.stringVal, forKey: .stringVal)
-      try container.encode(self.bytesVal, forKey: .bytesVal)
-      try container.encode(self.floatVal, forKey: .floatVal)
-      try container.encode(self.doubleVal, forKey: .doubleVal)
-      try container.encode(self.intVal, forKey: .intVal)
-      try container.encode(self.int64Val, forKey: .int64Val)
-      try container.encode(self.uintVal, forKey: .uintVal)
-      try container.encode(self.uint64Val, forKey: .uint64Val)
-      try container.encode(self.listVal, forKey: .listVal)
-      try container.encode(self.structVal, forKey: .structVal)
-      try container.encode(self.tensorVal, forKey: .tensorVal)
+      if self.dtype != Tensor.DataType() {
+        try container.encode(self.dtype, forKey: .dtype)
+      }
+      if !self.shape.isEmpty {
+        try container.encode(self.shape, forKey: .shape)
+      }
+      if !self.boolVal.isEmpty {
+        try container.encode(self.boolVal, forKey: .boolVal)
+      }
+      if !self.stringVal.isEmpty {
+        try container.encode(self.stringVal, forKey: .stringVal)
+      }
+      if !self.bytesVal.isEmpty {
+        try container.encode(self.bytesVal, forKey: .bytesVal)
+      }
+      if !self.floatVal.isEmpty {
+        try container.encode(self.floatVal, forKey: .floatVal)
+      }
+      if !self.doubleVal.isEmpty {
+        try container.encode(self.doubleVal, forKey: .doubleVal)
+      }
+      if !self.intVal.isEmpty {
+        try container.encode(self.intVal, forKey: .intVal)
+      }
+      if !self.int64Val.isEmpty {
+        try container.encode(self.int64Val, forKey: .int64Val)
+      }
+      if !self.uintVal.isEmpty {
+        try container.encode(self.uintVal, forKey: .uintVal)
+      }
+      if !self.uint64Val.isEmpty {
+        try container.encode(self.uint64Val, forKey: .uint64Val)
+      }
+      if !self.listVal.isEmpty {
+        try container.encode(self.listVal, forKey: .listVal)
+      }
+      if !self.structVal.isEmpty {
+        try container.encode(self.structVal, forKey: .structVal)
+      }
+      if !self.tensorVal.isEmpty {
+        try container.encode(self.tensorVal, forKey: .tensorVal)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -106,9 +106,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.endpoint, forKey: .endpoint)
-      try container.encode(self.checkpoints, forKey: .checkpoints)
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.endpoint.isEmpty {
+        try container.encode(self.endpoint, forKey: .endpoint)
+      }
+      if !self.checkpoints.isEmpty {
+        try container.encode(self.checkpoints, forKey: .checkpoints)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

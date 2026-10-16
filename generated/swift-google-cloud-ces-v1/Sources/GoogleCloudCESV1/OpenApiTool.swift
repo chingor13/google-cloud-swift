@@ -131,14 +131,24 @@ public struct OpenApiTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.openApiSchema, forKey: .openApiSchema)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.openApiSchema.isEmpty {
+      try container.encode(self.openApiSchema, forKey: .openApiSchema)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.apiAuthentication, forKey: .apiAuthentication)
     try container.encodeIfPresent(self.tlsConfig, forKey: .tlsConfig)
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
-    try container.encode(self.ignoreUnknownFields, forKey: .ignoreUnknownFields)
-    try container.encode(self.url, forKey: .url)
+    if self.ignoreUnknownFields {
+      try container.encode(self.ignoreUnknownFields, forKey: .ignoreUnknownFields)
+    }
+    if !self.url.isEmpty {
+      try container.encode(self.url, forKey: .url)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

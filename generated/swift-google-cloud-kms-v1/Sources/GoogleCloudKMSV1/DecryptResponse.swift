@@ -123,10 +123,16 @@ public struct DecryptResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.plaintext, forKey: .plaintext)
+    if !self.plaintext.isEmpty {
+      try container.encode(self.plaintext, forKey: .plaintext)
+    }
     try container.encodeIfPresent(self.plaintextCrc32C, forKey: .plaintextCrc32C)
-    try container.encode(self.usedPrimary, forKey: .usedPrimary)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    if self.usedPrimary {
+      try container.encode(self.usedPrimary, forKey: .usedPrimary)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

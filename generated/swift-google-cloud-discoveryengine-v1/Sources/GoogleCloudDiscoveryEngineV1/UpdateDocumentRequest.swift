@@ -105,7 +105,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.document, forKey: .document)
-      try container.encode(self.allowMissing, forKey: .allowMissing)
+      if self.allowMissing {
+        try container.encode(self.allowMissing, forKey: .allowMissing)
+      }
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -127,8 +127,12 @@ public struct UpdateTransferJobRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.jobName, forKey: .jobName)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.jobName.isEmpty {
+      try container.encode(self.jobName, forKey: .jobName)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
     try container.encodeIfPresent(self.transferJob, forKey: .transferJob)
     try container.encodeIfPresent(
       self.updateTransferJobFieldMask, forKey: .updateTransferJobFieldMask)

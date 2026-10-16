@@ -114,7 +114,9 @@ public struct BuildOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.provenance, forKey: .provenance)
-    try container.encode(self.provenanceBytes, forKey: .provenanceBytes)
+    if !self.provenanceBytes.isEmpty {
+      try container.encode(self.provenanceBytes, forKey: .provenanceBytes)
+    }
     try container.encodeIfPresent(self.intotoProvenance, forKey: .intotoProvenance)
     try container.encodeIfPresent(self.intotoStatement, forKey: .intotoStatement)
     try container.encodeIfPresent(self.inTotoSlsaProvenanceV1, forKey: .inTotoSlsaProvenanceV1)

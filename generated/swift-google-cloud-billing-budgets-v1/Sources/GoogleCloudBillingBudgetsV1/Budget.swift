@@ -129,13 +129,21 @@ public struct Budget: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.budgetFilter, forKey: .budgetFilter)
     try container.encodeIfPresent(self.amount, forKey: .amount)
-    try container.encode(self.thresholdRules, forKey: .thresholdRules)
+    if !self.thresholdRules.isEmpty {
+      try container.encode(self.thresholdRules, forKey: .thresholdRules)
+    }
     try container.encodeIfPresent(self.notificationsRule, forKey: .notificationsRule)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

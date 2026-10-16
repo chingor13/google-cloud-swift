@@ -109,10 +109,16 @@ public struct ListSingleTenantHsmInstanceProposalsResponse: Codable, Equatable, 
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.singleTenantHsmInstanceProposals, forKey: .singleTenantHsmInstanceProposals)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.totalSize, forKey: .totalSize)
+    if !self.singleTenantHsmInstanceProposals.isEmpty {
+      try container.encode(
+        self.singleTenantHsmInstanceProposals, forKey: .singleTenantHsmInstanceProposals)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

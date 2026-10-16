@@ -148,7 +148,9 @@
       try container.encodeIfPresent(
         self.configUpdateTimestampMicros, forKey: .configUpdateTimestampMicros)
       try container.encodeIfPresent(self.controlPacketCounts, forKey: .controlPacketCounts)
-      try container.encode(self.controlPacketIntervals, forKey: .controlPacketIntervals)
+      if !self.controlPacketIntervals.isEmpty {
+        try container.encode(self.controlPacketIntervals, forKey: .controlPacketIntervals)
+      }
       try container.encodeIfPresent(self.localDiagnostic, forKey: .localDiagnostic)
       try container.encodeIfPresent(self.localState, forKey: .localState)
       try container.encodeIfPresent(

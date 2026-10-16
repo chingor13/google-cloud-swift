@@ -89,9 +89,15 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.subject, forKey: .subject)
-    try container.encode(self.predicateType, forKey: .predicateType)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.subject.isEmpty {
+      try container.encode(self.subject, forKey: .subject)
+    }
+    if !self.predicateType.isEmpty {
+      try container.encode(self.predicateType, forKey: .predicateType)
+    }
     try container.encodeIfPresent(self.predicate, forKey: .predicate)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -256,10 +262,14 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.buildType, forKey: .buildType)
+      if !self.buildType.isEmpty {
+        try container.encode(self.buildType, forKey: .buildType)
+      }
       try container.encodeIfPresent(self.externalParameters, forKey: .externalParameters)
       try container.encodeIfPresent(self.internalParameters, forKey: .internalParameters)
-      try container.encode(self.resolvedDependencies, forKey: .resolvedDependencies)
+      if !self.resolvedDependencies.isEmpty {
+        try container.encode(self.resolvedDependencies, forKey: .resolvedDependencies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -383,13 +393,27 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.digest, forKey: .digest)
-      try container.encode(self.content, forKey: .content)
-      try container.encode(self.downloadLocation, forKey: .downloadLocation)
-      try container.encode(self.mediaType, forKey: .mediaType)
-      try container.encode(self.annotations, forKey: .annotations)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.digest.isEmpty {
+        try container.encode(self.digest, forKey: .digest)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
+      if !self.downloadLocation.isEmpty {
+        try container.encode(self.downloadLocation, forKey: .downloadLocation)
+      }
+      if !self.mediaType.isEmpty {
+        try container.encode(self.mediaType, forKey: .mediaType)
+      }
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -483,7 +507,9 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.builder, forKey: .builder)
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
-      try container.encode(self.byproducts, forKey: .byproducts)
+      if !self.byproducts.isEmpty {
+        try container.encode(self.byproducts, forKey: .byproducts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -579,9 +605,15 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.version, forKey: .version)
-      try container.encode(self.builderDependencies, forKey: .builderDependencies)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
+      if !self.builderDependencies.isEmpty {
+        try container.encode(self.builderDependencies, forKey: .builderDependencies)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -671,7 +703,9 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.invocationId, forKey: .invocationId)
+      if !self.invocationId.isEmpty {
+        try container.encode(self.invocationId, forKey: .invocationId)
+      }
       try container.encodeIfPresent(self.startedOn, forKey: .startedOn)
       try container.encodeIfPresent(self.finishedOn, forKey: .finishedOn)
       for (key, value) in self._unknownFields.json {

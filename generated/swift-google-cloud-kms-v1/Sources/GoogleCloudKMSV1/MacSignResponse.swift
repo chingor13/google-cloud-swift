@@ -141,11 +141,19 @@ public struct MacSignResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.mac, forKey: .mac)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.mac.isEmpty {
+      try container.encode(self.mac, forKey: .mac)
+    }
     try container.encodeIfPresent(self.macCrc32C, forKey: .macCrc32C)
-    try container.encode(self.verifiedDataCrc32C, forKey: .verifiedDataCrc32C)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    if self.verifiedDataCrc32C {
+      try container.encode(self.verifiedDataCrc32C, forKey: .verifiedDataCrc32C)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

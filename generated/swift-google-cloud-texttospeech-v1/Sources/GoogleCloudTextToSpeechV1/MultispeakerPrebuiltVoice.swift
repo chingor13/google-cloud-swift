@@ -81,8 +81,12 @@ public struct MultispeakerPrebuiltVoice: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.speakerAlias, forKey: .speakerAlias)
-    try container.encode(self.speakerId, forKey: .speakerId)
+    if !self.speakerAlias.isEmpty {
+      try container.encode(self.speakerAlias, forKey: .speakerAlias)
+    }
+    if !self.speakerId.isEmpty {
+      try container.encode(self.speakerId, forKey: .speakerId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

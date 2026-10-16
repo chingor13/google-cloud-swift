@@ -146,12 +146,22 @@ public struct ExecutionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.usages, forKey: .usages)
-    try container.encode(self.workerPool, forKey: .workerPool)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.artifactStorage, forKey: .artifactStorage)
+    if !self.usages.isEmpty {
+      try container.encode(self.usages, forKey: .usages)
+    }
+    if !self.workerPool.isEmpty {
+      try container.encode(self.workerPool, forKey: .workerPool)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.artifactStorage.isEmpty {
+      try container.encode(self.artifactStorage, forKey: .artifactStorage)
+    }
     try container.encodeIfPresent(self.executionTimeout, forKey: .executionTimeout)
-    try container.encode(self.verbose, forKey: .verbose)
+    if self.verbose {
+      try container.encode(self.verbose, forKey: .verbose)
+    }
 
     if let choice = self.executionEnvironment {
       switch choice {

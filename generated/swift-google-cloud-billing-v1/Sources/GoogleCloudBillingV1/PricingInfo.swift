@@ -111,10 +111,14 @@ public struct PricingInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.effectiveTime, forKey: .effectiveTime)
-    try container.encode(self.summary, forKey: .summary)
+    if !self.summary.isEmpty {
+      try container.encode(self.summary, forKey: .summary)
+    }
     try container.encodeIfPresent(self.pricingExpression, forKey: .pricingExpression)
     try container.encodeIfPresent(self.aggregationInfo, forKey: .aggregationInfo)
-    try container.encode(self.currencyConversionRate, forKey: .currencyConversionRate)
+    if self.currencyConversionRate != 0 {
+      try container.encode(self.currencyConversionRate, forKey: .currencyConversionRate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

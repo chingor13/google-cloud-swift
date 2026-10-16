@@ -79,8 +79,12 @@ public struct ExplicitContentAnnotation: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.frames, forKey: .frames)
-    try container.encode(self.version, forKey: .version)
+    if !self.frames.isEmpty {
+      try container.encode(self.frames, forKey: .frames)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

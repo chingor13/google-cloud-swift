@@ -267,25 +267,53 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.selfLink, forKey: .selfLink)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.location, forKey: .location)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.selfLink.isEmpty {
+        try container.encode(self.selfLink, forKey: .selfLink)
+      }
+      if self.type != Backup.SqlBackupType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
       try container.encodeIfPresent(self.backupInterval, forKey: .backupInterval)
-      try container.encode(self.state, forKey: .state)
+      if self.state != Backup.SqlBackupState() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.kmsKey, forKey: .kmsKey)
-      try container.encode(self.kmsKeyVersion, forKey: .kmsKeyVersion)
-      try container.encode(self.backupKind, forKey: .backupKind)
-      try container.encode(self.timeZone, forKey: .timeZone)
-      try container.encode(self.databaseVersion, forKey: .databaseVersion)
+      if !self.kmsKey.isEmpty {
+        try container.encode(self.kmsKey, forKey: .kmsKey)
+      }
+      if !self.kmsKeyVersion.isEmpty {
+        try container.encode(self.kmsKeyVersion, forKey: .kmsKeyVersion)
+      }
+      if self.backupKind != SqlBackupKind() {
+        try container.encode(self.backupKind, forKey: .backupKind)
+      }
+      if !self.timeZone.isEmpty {
+        try container.encode(self.timeZone, forKey: .timeZone)
+      }
+      if self.databaseVersion != SqlDatabaseVersion() {
+        try container.encode(self.databaseVersion, forKey: .databaseVersion)
+      }
       try container.encodeIfPresent(self.maxChargeableBytes, forKey: .maxChargeableBytes)
       try container.encodeIfPresent(self.instanceDeletionTime, forKey: .instanceDeletionTime)
       try container.encodeIfPresent(self.instanceSettings, forKey: .instanceSettings)
-      try container.encode(self.backupRun, forKey: .backupRun)
+      if !self.backupRun.isEmpty {
+        try container.encode(self.backupRun, forKey: .backupRun)
+      }
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
       try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
 

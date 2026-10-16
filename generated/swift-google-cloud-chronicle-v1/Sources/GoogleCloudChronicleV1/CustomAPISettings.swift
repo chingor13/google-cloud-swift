@@ -133,8 +133,12 @@ public struct CustomAPISettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.baseUrl, forKey: .baseUrl)
-    try container.encode(self.pollingFrequency, forKey: .pollingFrequency)
+    if !self.baseUrl.isEmpty {
+      try container.encode(self.baseUrl, forKey: .baseUrl)
+    }
+    if self.pollingFrequency != 0 {
+      try container.encode(self.pollingFrequency, forKey: .pollingFrequency)
+    }
     try container.encodeIfPresent(self.primaryRequest, forKey: .primaryRequest)
 
     if let choice = self.authentication {

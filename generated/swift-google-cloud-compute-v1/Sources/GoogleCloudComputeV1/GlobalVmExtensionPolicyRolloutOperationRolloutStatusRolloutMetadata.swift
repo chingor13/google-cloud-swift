@@ -103,7 +103,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.locationRolloutStatus, forKey: .locationRolloutStatus)
+      if !self.locationRolloutStatus.isEmpty {
+        try container.encode(self.locationRolloutStatus, forKey: .locationRolloutStatus)
+      }
       try container.encodeIfPresent(self.rollout, forKey: .rollout)
       try container.encodeIfPresent(self.rolloutPlan, forKey: .rolloutPlan)
       try container.encodeIfPresent(self.state, forKey: .state)

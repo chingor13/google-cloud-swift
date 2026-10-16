@@ -81,8 +81,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.timeSeries, forKey: .timeSeries)
-      try container.encode(self.blobIds, forKey: .blobIds)
+      if !self.timeSeries.isEmpty {
+        try container.encode(self.timeSeries, forKey: .timeSeries)
+      }
+      if !self.blobIds.isEmpty {
+        try container.encode(self.blobIds, forKey: .blobIds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

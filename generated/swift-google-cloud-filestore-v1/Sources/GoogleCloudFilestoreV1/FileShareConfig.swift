@@ -112,9 +112,15 @@ public struct FileShareConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.capacityGb, forKey: .capacityGb)
-    try container.encode(self.nfsExportOptions, forKey: .nfsExportOptions)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.capacityGb != 0 {
+      try container.encode(self.capacityGb, forKey: .capacityGb)
+    }
+    if !self.nfsExportOptions.isEmpty {
+      try container.encode(self.nfsExportOptions, forKey: .nfsExportOptions)
+    }
 
     if let choice = self.source {
       switch choice {

@@ -163,16 +163,32 @@ public struct DataAccessScope: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.allowedDataAccessLabels, forKey: .allowedDataAccessLabels)
-    try container.encode(self.deniedDataAccessLabels, forKey: .deniedDataAccessLabels)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.allowedDataAccessLabels.isEmpty {
+      try container.encode(self.allowedDataAccessLabels, forKey: .allowedDataAccessLabels)
+    }
+    if !self.deniedDataAccessLabels.isEmpty {
+      try container.encode(self.deniedDataAccessLabels, forKey: .deniedDataAccessLabels)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.author, forKey: .author)
-    try container.encode(self.lastEditor, forKey: .lastEditor)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.allowAll, forKey: .allowAll)
+    if !self.author.isEmpty {
+      try container.encode(self.author, forKey: .author)
+    }
+    if !self.lastEditor.isEmpty {
+      try container.encode(self.lastEditor, forKey: .lastEditor)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.allowAll {
+      try container.encode(self.allowAll, forKey: .allowAll)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

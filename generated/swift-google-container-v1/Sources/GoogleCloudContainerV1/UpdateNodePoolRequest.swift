@@ -433,16 +433,36 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.clusterId, forKey: .clusterId)
-    try container.encode(self.nodePoolId, forKey: .nodePoolId)
-    try container.encode(self.nodeVersion, forKey: .nodeVersion)
-    try container.encode(self.imageType, forKey: .imageType)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.image, forKey: .image)
-    try container.encode(self.imageProject, forKey: .imageProject)
-    try container.encode(self.locations, forKey: .locations)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.clusterId.isEmpty {
+      try container.encode(self.clusterId, forKey: .clusterId)
+    }
+    if !self.nodePoolId.isEmpty {
+      try container.encode(self.nodePoolId, forKey: .nodePoolId)
+    }
+    if !self.nodeVersion.isEmpty {
+      try container.encode(self.nodeVersion, forKey: .nodeVersion)
+    }
+    if !self.imageType.isEmpty {
+      try container.encode(self.imageType, forKey: .imageType)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.image.isEmpty {
+      try container.encode(self.image, forKey: .image)
+    }
+    if !self.imageProject.isEmpty {
+      try container.encode(self.imageProject, forKey: .imageProject)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
     try container.encodeIfPresent(self.workloadMetadataConfig, forKey: .workloadMetadataConfig)
     try container.encodeIfPresent(self.upgradeSettings, forKey: .upgradeSettings)
     try container.encodeIfPresent(self.tags, forKey: .tags)
@@ -454,19 +474,31 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.gcfsConfig, forKey: .gcfsConfig)
     try container.encodeIfPresent(self.confidentialNodes, forKey: .confidentialNodes)
     try container.encodeIfPresent(self.gvnic, forKey: .gvnic)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.fastSocket, forKey: .fastSocket)
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
     try container.encodeIfPresent(self.resourceLabels, forKey: .resourceLabels)
     try container.encodeIfPresent(self.windowsNodeConfig, forKey: .windowsNodeConfig)
-    try container.encode(self.accelerators, forKey: .accelerators)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.diskType, forKey: .diskType)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    if !self.accelerators.isEmpty {
+      try container.encode(self.accelerators, forKey: .accelerators)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.diskType.isEmpty {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
     try container.encodeIfPresent(self.resourceManagerTags, forKey: .resourceManagerTags)
     try container.encodeIfPresent(self.containerdConfig, forKey: .containerdConfig)
     try container.encodeIfPresent(self.queuedProvisioning, forKey: .queuedProvisioning)
-    try container.encode(self.storagePools, forKey: .storagePools)
+    if !self.storagePools.isEmpty {
+      try container.encode(self.storagePools, forKey: .storagePools)
+    }
     try container.encodeIfPresent(self.maxRunDuration, forKey: .maxRunDuration)
     try container.encodeIfPresent(self.flexStart, forKey: .flexStart)
     try container.encodeIfPresent(self.bootDisk, forKey: .bootDisk)

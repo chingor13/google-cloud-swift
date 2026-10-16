@@ -109,9 +109,15 @@ public struct ForwardSshTunnelConnectivity: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.port, forKey: .port)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
 
     if let choice = self.authenticationMethod {
       switch choice {

@@ -90,8 +90,12 @@ public struct NodeManagement: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.autoUpgrade, forKey: .autoUpgrade)
-    try container.encode(self.autoRepair, forKey: .autoRepair)
+    if self.autoUpgrade {
+      try container.encode(self.autoUpgrade, forKey: .autoUpgrade)
+    }
+    if self.autoRepair {
+      try container.encode(self.autoRepair, forKey: .autoRepair)
+    }
     try container.encodeIfPresent(self.upgradeOptions, forKey: .upgradeOptions)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

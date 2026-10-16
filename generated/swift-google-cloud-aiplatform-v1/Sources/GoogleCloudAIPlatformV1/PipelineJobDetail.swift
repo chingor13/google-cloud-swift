@@ -87,7 +87,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.pipelineContext, forKey: .pipelineContext)
       try container.encodeIfPresent(self.pipelineRunContext, forKey: .pipelineRunContext)
-      try container.encode(self.taskDetails, forKey: .taskDetails)
+      if !self.taskDetails.isEmpty {
+        try container.encode(self.taskDetails, forKey: .taskDetails)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

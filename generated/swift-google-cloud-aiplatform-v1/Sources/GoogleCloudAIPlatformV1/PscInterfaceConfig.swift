@@ -90,8 +90,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkAttachment, forKey: .networkAttachment)
-      try container.encode(self.dnsPeeringConfigs, forKey: .dnsPeeringConfigs)
+      if !self.networkAttachment.isEmpty {
+        try container.encode(self.networkAttachment, forKey: .networkAttachment)
+      }
+      if !self.dnsPeeringConfigs.isEmpty {
+        try container.encode(self.dnsPeeringConfigs, forKey: .dnsPeeringConfigs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

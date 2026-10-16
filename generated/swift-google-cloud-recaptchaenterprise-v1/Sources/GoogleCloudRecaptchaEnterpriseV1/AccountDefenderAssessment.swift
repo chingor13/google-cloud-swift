@@ -78,7 +78,9 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.accountTakeoverVerdict, forKey: .accountTakeoverVerdict)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -162,9 +164,15 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.risk, forKey: .risk)
-      try container.encode(self.riskReasons, forKey: .riskReasons)
-      try container.encode(self.trustReasons, forKey: .trustReasons)
+      if self.risk != 0 {
+        try container.encode(self.risk, forKey: .risk)
+      }
+      if !self.riskReasons.isEmpty {
+        try container.encode(self.riskReasons, forKey: .riskReasons)
+      }
+      if !self.trustReasons.isEmpty {
+        try container.encode(self.trustReasons, forKey: .trustReasons)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -248,7 +256,9 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.reason, forKey: .reason)
+      if self.reason != AccountDefenderAssessment.AccountRiskReason.RiskReason() {
+        try container.encode(self.reason, forKey: .reason)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -474,7 +484,9 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.reason, forKey: .reason)
+      if self.reason != AccountDefenderAssessment.AccountTrustReason.TrustReason() {
+        try container.encode(self.reason, forKey: .reason)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

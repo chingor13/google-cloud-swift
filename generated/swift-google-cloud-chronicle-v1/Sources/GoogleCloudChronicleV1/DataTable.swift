@@ -178,19 +178,39 @@ public struct DataTable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.columnInfo, forKey: .columnInfo)
-    try container.encode(self.dataTableUuid, forKey: .dataTableUuid)
-    try container.encode(self.rules, forKey: .rules)
-    try container.encode(self.ruleAssociationsCount, forKey: .ruleAssociationsCount)
-    try container.encode(self.rowTimeToLive, forKey: .rowTimeToLive)
-    try container.encode(self.approximateRowCount, forKey: .approximateRowCount)
+    if !self.columnInfo.isEmpty {
+      try container.encode(self.columnInfo, forKey: .columnInfo)
+    }
+    if !self.dataTableUuid.isEmpty {
+      try container.encode(self.dataTableUuid, forKey: .dataTableUuid)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
+    if self.ruleAssociationsCount != 0 {
+      try container.encode(self.ruleAssociationsCount, forKey: .ruleAssociationsCount)
+    }
+    if !self.rowTimeToLive.isEmpty {
+      try container.encode(self.rowTimeToLive, forKey: .rowTimeToLive)
+    }
+    if self.approximateRowCount != 0 {
+      try container.encode(self.approximateRowCount, forKey: .approximateRowCount)
+    }
     try container.encodeIfPresent(self.scopeInfo, forKey: .scopeInfo)
-    try container.encode(self.updateSource, forKey: .updateSource)
+    if self.updateSource != DataTableUpdateSource() {
+      try container.encode(self.updateSource, forKey: .updateSource)
+    }
     try container.encodeIfPresent(self.rowTimeToLiveUpdateTime, forKey: .rowTimeToLiveUpdateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -116,7 +116,9 @@ public struct ArtifactConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
 
     if let choice = self.artifactStorage {
       switch choice {

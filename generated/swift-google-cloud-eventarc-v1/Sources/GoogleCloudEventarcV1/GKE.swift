@@ -109,11 +109,21 @@ public struct GKE: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cluster, forKey: .cluster)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.namespace, forKey: .namespace)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.path, forKey: .path)
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.namespace.isEmpty {
+      try container.encode(self.namespace, forKey: .namespace)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

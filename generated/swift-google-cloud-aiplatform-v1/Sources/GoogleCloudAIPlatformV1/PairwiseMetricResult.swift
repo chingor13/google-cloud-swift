@@ -84,8 +84,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pairwiseChoice, forKey: .pairwiseChoice)
-      try container.encode(self.explanation, forKey: .explanation)
+      if self.pairwiseChoice != PairwiseChoice() {
+        try container.encode(self.pairwiseChoice, forKey: .pairwiseChoice)
+      }
+      if !self.explanation.isEmpty {
+        try container.encode(self.explanation, forKey: .explanation)
+      }
       try container.encodeIfPresent(self.customOutput, forKey: .customOutput)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

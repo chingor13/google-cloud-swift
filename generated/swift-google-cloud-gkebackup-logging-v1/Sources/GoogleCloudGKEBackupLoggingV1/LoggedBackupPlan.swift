@@ -134,14 +134,24 @@ public struct LoggedBackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.cluster, forKey: .cluster)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.cluster.isEmpty {
+      try container.encode(self.cluster, forKey: .cluster)
+    }
     try container.encodeIfPresent(self.retentionPolicy, forKey: .retentionPolicy)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.backupSchedule, forKey: .backupSchedule)
-    try container.encode(self.deactivated, forKey: .deactivated)
+    if self.deactivated {
+      try container.encode(self.deactivated, forKey: .deactivated)
+    }
     try container.encodeIfPresent(self.backupConfig, forKey: .backupConfig)
-    try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
+    if self.rpoRiskLevel != 0 {
+      try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -226,9 +236,15 @@ public struct LoggedBackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backupDeleteLockDays, forKey: .backupDeleteLockDays)
-      try container.encode(self.backupRetainDays, forKey: .backupRetainDays)
-      try container.encode(self.locked, forKey: .locked)
+      if self.backupDeleteLockDays != 0 {
+        try container.encode(self.backupDeleteLockDays, forKey: .backupDeleteLockDays)
+      }
+      if self.backupRetainDays != 0 {
+        try container.encode(self.backupRetainDays, forKey: .backupRetainDays)
+      }
+      if self.locked {
+        try container.encode(self.locked, forKey: .locked)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -317,8 +333,12 @@ public struct LoggedBackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cronSchedule, forKey: .cronSchedule)
-      try container.encode(self.paused, forKey: .paused)
+      if !self.cronSchedule.isEmpty {
+        try container.encode(self.cronSchedule, forKey: .cronSchedule)
+      }
+      if self.paused {
+        try container.encode(self.paused, forKey: .paused)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -448,8 +468,12 @@ public struct LoggedBackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.includeVolumeData, forKey: .includeVolumeData)
-      try container.encode(self.includeSecrets, forKey: .includeSecrets)
+      if self.includeVolumeData {
+        try container.encode(self.includeVolumeData, forKey: .includeVolumeData)
+      }
+      if self.includeSecrets {
+        try container.encode(self.includeSecrets, forKey: .includeSecrets)
+      }
       try container.encodeIfPresent(self.encryptionKey, forKey: .encryptionKey)
 
       if let choice = self.backupScope {

@@ -159,14 +159,22 @@ public struct BlockchainNode: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.blockchainType, forKey: .blockchainType)
     try container.encodeIfPresent(self.connectionInfo, forKey: .connectionInfo)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.privateServiceConnectEnabled, forKey: .privateServiceConnectEnabled)
+    if self.state != BlockchainNode.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.privateServiceConnectEnabled {
+      try container.encode(self.privateServiceConnectEnabled, forKey: .privateServiceConnectEnabled)
+    }
 
     if let choice = self.blockchainTypeDetails {
       switch choice {
@@ -243,7 +251,9 @@ public struct BlockchainNode: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.endpointInfo, forKey: .endpointInfo)
-      try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+      if !self.serviceAttachment.isEmpty {
+        try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -313,8 +323,12 @@ public struct BlockchainNode: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.jsonRpcApiEndpoint, forKey: .jsonRpcApiEndpoint)
-        try container.encode(self.websocketsApiEndpoint, forKey: .websocketsApiEndpoint)
+        if !self.jsonRpcApiEndpoint.isEmpty {
+          try container.encode(self.jsonRpcApiEndpoint, forKey: .jsonRpcApiEndpoint)
+        }
+        if !self.websocketsApiEndpoint.isEmpty {
+          try container.encode(self.websocketsApiEndpoint, forKey: .websocketsApiEndpoint)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -799,12 +813,18 @@ public struct BlockchainNode: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.beaconApiEndpoint, forKey: .beaconApiEndpoint)
-        try container.encode(
-          self.beaconPrometheusMetricsApiEndpoint, forKey: .beaconPrometheusMetricsApiEndpoint)
-        try container.encode(
-          self.executionClientPrometheusMetricsApiEndpoint,
-          forKey: .executionClientPrometheusMetricsApiEndpoint)
+        if !self.beaconApiEndpoint.isEmpty {
+          try container.encode(self.beaconApiEndpoint, forKey: .beaconApiEndpoint)
+        }
+        if !self.beaconPrometheusMetricsApiEndpoint.isEmpty {
+          try container.encode(
+            self.beaconPrometheusMetricsApiEndpoint, forKey: .beaconPrometheusMetricsApiEndpoint)
+        }
+        if !self.executionClientPrometheusMetricsApiEndpoint.isEmpty {
+          try container.encode(
+            self.executionClientPrometheusMetricsApiEndpoint,
+            forKey: .executionClientPrometheusMetricsApiEndpoint)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -921,8 +941,12 @@ public struct BlockchainNode: Codable, Equatable, GoogleWKT._AnyPackable,
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.mevRelayUrls, forKey: .mevRelayUrls)
-        try container.encode(self.managedValidatorClient, forKey: .managedValidatorClient)
+        if !self.mevRelayUrls.isEmpty {
+          try container.encode(self.mevRelayUrls, forKey: .mevRelayUrls)
+        }
+        if self.managedValidatorClient {
+          try container.encode(self.managedValidatorClient, forKey: .managedValidatorClient)
+        }
         try container.encodeIfPresent(self.beaconFeeRecipient, forKey: .beaconFeeRecipient)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

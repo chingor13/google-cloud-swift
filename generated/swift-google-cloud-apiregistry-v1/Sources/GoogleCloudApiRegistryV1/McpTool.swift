@@ -137,10 +137,18 @@ public struct McpTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.mcpServerUrls, forKey: .mcpServerUrls)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.mcpServerUrls.isEmpty {
+      try container.encode(self.mcpServerUrls, forKey: .mcpServerUrls)
+    }
     try container.encodeIfPresent(self.inputSchema, forKey: .inputSchema)
     try container.encodeIfPresent(self.outputSchema, forKey: .outputSchema)
     try container.encodeIfPresent(self.annotations, forKey: .annotations)

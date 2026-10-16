@@ -87,8 +87,12 @@ public struct InputAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.input, forKey: .input)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.input.isEmpty {
+      try container.encode(self.input, forKey: .input)
+    }
     try container.encodeIfPresent(self.automaticFailover, forKey: .automaticFailover)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -152,7 +156,9 @@ public struct InputAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputKeys, forKey: .inputKeys)
+      if !self.inputKeys.isEmpty {
+        try container.encode(self.inputKeys, forKey: .inputKeys)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

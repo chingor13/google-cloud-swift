@@ -188,13 +188,27 @@ public struct Filter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projects, forKey: .projects)
-    try container.encode(self.resourceAncestors, forKey: .resourceAncestors)
-    try container.encode(self.creditTypes, forKey: .creditTypes)
-    try container.encode(self.creditTypesTreatment, forKey: .creditTypesTreatment)
-    try container.encode(self.services, forKey: .services)
-    try container.encode(self.subaccounts, forKey: .subaccounts)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.projects.isEmpty {
+      try container.encode(self.projects, forKey: .projects)
+    }
+    if !self.resourceAncestors.isEmpty {
+      try container.encode(self.resourceAncestors, forKey: .resourceAncestors)
+    }
+    if !self.creditTypes.isEmpty {
+      try container.encode(self.creditTypes, forKey: .creditTypes)
+    }
+    if self.creditTypesTreatment != Filter.CreditTypesTreatment() {
+      try container.encode(self.creditTypesTreatment, forKey: .creditTypesTreatment)
+    }
+    if !self.services.isEmpty {
+      try container.encode(self.services, forKey: .services)
+    }
+    if !self.subaccounts.isEmpty {
+      try container.encode(self.subaccounts, forKey: .subaccounts)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.usagePeriod {
       switch choice {

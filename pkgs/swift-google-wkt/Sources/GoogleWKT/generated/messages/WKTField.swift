@@ -142,16 +142,36 @@ public struct WKTField: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kind, forKey: .kind)
-    try container.encode(self.cardinality, forKey: .cardinality)
-    try container.encode(self.number, forKey: .number)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.typeUrl, forKey: .typeUrl)
-    try container.encode(self.oneofIndex, forKey: .oneofIndex)
-    try container.encode(self.packed, forKey: .packed)
-    try container.encode(self.options, forKey: .options)
-    try container.encode(self.jsonName, forKey: .jsonName)
-    try container.encode(self.defaultValue, forKey: .defaultValue)
+    if self.kind != WKTField.Kind() {
+      try container.encode(self.kind, forKey: .kind)
+    }
+    if self.cardinality != WKTField.Cardinality() {
+      try container.encode(self.cardinality, forKey: .cardinality)
+    }
+    if self.number != 0 {
+      try container.encode(self.number, forKey: .number)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.typeUrl.isEmpty {
+      try container.encode(self.typeUrl, forKey: .typeUrl)
+    }
+    if self.oneofIndex != 0 {
+      try container.encode(self.oneofIndex, forKey: .oneofIndex)
+    }
+    if self.packed {
+      try container.encode(self.packed, forKey: .packed)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
+    if !self.jsonName.isEmpty {
+      try container.encode(self.jsonName, forKey: .jsonName)
+    }
+    if !self.defaultValue.isEmpty {
+      try container.encode(self.defaultValue, forKey: .defaultValue)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

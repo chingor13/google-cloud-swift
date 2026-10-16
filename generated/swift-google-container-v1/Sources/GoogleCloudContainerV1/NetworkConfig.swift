@@ -219,17 +219,31 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.enableIntraNodeVisibility, forKey: .enableIntraNodeVisibility)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if self.enableIntraNodeVisibility {
+      try container.encode(self.enableIntraNodeVisibility, forKey: .enableIntraNodeVisibility)
+    }
     try container.encodeIfPresent(self.defaultSnatStatus, forKey: .defaultSnatStatus)
-    try container.encode(self.enableL4IlbSubsetting, forKey: .enableL4IlbSubsetting)
-    try container.encode(self.datapathProvider, forKey: .datapathProvider)
-    try container.encode(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
+    if self.enableL4IlbSubsetting {
+      try container.encode(self.enableL4IlbSubsetting, forKey: .enableL4IlbSubsetting)
+    }
+    if self.datapathProvider != DatapathProvider() {
+      try container.encode(self.datapathProvider, forKey: .datapathProvider)
+    }
+    if self.privateIpv6GoogleAccess != PrivateIPv6GoogleAccess() {
+      try container.encode(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
+    }
     try container.encodeIfPresent(self.dnsConfig, forKey: .dnsConfig)
     try container.encodeIfPresent(self.serviceExternalIpsConfig, forKey: .serviceExternalIpsConfig)
     try container.encodeIfPresent(self.gatewayApiConfig, forKey: .gatewayApiConfig)
-    try container.encode(self.enableMultiNetworking, forKey: .enableMultiNetworking)
+    if self.enableMultiNetworking {
+      try container.encode(self.enableMultiNetworking, forKey: .enableMultiNetworking)
+    }
     try container.encodeIfPresent(self.networkPerformanceConfig, forKey: .networkPerformanceConfig)
     try container.encodeIfPresent(self.enableFqdnNetworkPolicy, forKey: .enableFqdnNetworkPolicy)
     try container.encodeIfPresent(

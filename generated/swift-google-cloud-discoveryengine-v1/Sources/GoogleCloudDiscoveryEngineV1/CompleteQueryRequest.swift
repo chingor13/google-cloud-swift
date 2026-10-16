@@ -147,11 +147,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataStore, forKey: .dataStore)
-      try container.encode(self.query, forKey: .query)
-      try container.encode(self.queryModel, forKey: .queryModel)
-      try container.encode(self.userPseudoId, forKey: .userPseudoId)
-      try container.encode(self.includeTailSuggestions, forKey: .includeTailSuggestions)
+      if !self.dataStore.isEmpty {
+        try container.encode(self.dataStore, forKey: .dataStore)
+      }
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
+      if !self.queryModel.isEmpty {
+        try container.encode(self.queryModel, forKey: .queryModel)
+      }
+      if !self.userPseudoId.isEmpty {
+        try container.encode(self.userPseudoId, forKey: .userPseudoId)
+      }
+      if self.includeTailSuggestions {
+        try container.encode(self.includeTailSuggestions, forKey: .includeTailSuggestions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

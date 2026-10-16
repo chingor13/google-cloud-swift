@@ -175,13 +175,25 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.messageType, forKey: .messageType)
-      try container.encode(self.transcript, forKey: .transcript)
-      try container.encode(self.isFinal, forKey: .isFinal)
-      try container.encode(self.confidence, forKey: .confidence)
-      try container.encode(self.speechWordInfo, forKey: .speechWordInfo)
+      if self.messageType != StreamingRecognitionResult.MessageType() {
+        try container.encode(self.messageType, forKey: .messageType)
+      }
+      if !self.transcript.isEmpty {
+        try container.encode(self.transcript, forKey: .transcript)
+      }
+      if self.isFinal {
+        try container.encode(self.isFinal, forKey: .isFinal)
+      }
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
+      if !self.speechWordInfo.isEmpty {
+        try container.encode(self.speechWordInfo, forKey: .speechWordInfo)
+      }
       try container.encodeIfPresent(self.speechEndOffset, forKey: .speechEndOffset)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

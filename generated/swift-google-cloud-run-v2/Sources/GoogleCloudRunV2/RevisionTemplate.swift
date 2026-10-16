@@ -247,24 +247,50 @@ public struct RevisionTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.revision, forKey: .revision)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.scaling, forKey: .scaling)
     try container.encodeIfPresent(self.vpcAccess, forKey: .vpcAccess)
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.containers, forKey: .containers)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.executionEnvironment, forKey: .executionEnvironment)
-    try container.encode(self.encryptionKey, forKey: .encryptionKey)
-    try container.encode(self.maxInstanceRequestConcurrency, forKey: .maxInstanceRequestConcurrency)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.containers.isEmpty {
+      try container.encode(self.containers, forKey: .containers)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if self.executionEnvironment != ExecutionEnvironment() {
+      try container.encode(self.executionEnvironment, forKey: .executionEnvironment)
+    }
+    if !self.encryptionKey.isEmpty {
+      try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    }
+    if self.maxInstanceRequestConcurrency != 0 {
+      try container.encode(
+        self.maxInstanceRequestConcurrency, forKey: .maxInstanceRequestConcurrency)
+    }
     try container.encodeIfPresent(self.serviceMesh, forKey: .serviceMesh)
-    try container.encode(self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    if self.encryptionKeyRevocationAction != EncryptionKeyRevocationAction() {
+      try container.encode(
+        self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    }
     try container.encodeIfPresent(
       self.encryptionKeyShutdownDuration, forKey: .encryptionKeyShutdownDuration)
-    try container.encode(self.sessionAffinity, forKey: .sessionAffinity)
-    try container.encode(self.healthCheckDisabled, forKey: .healthCheckDisabled)
+    if self.sessionAffinity {
+      try container.encode(self.sessionAffinity, forKey: .sessionAffinity)
+    }
+    if self.healthCheckDisabled {
+      try container.encode(self.healthCheckDisabled, forKey: .healthCheckDisabled)
+    }
     try container.encodeIfPresent(self.nodeSelector, forKey: .nodeSelector)
     try container.encodeIfPresent(
       self.gpuZonalRedundancyDisabled, forKey: .gpuZonalRedundancyDisabled)

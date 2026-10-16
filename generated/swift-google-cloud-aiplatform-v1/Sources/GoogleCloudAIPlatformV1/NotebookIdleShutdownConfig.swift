@@ -81,7 +81,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.idleTimeout, forKey: .idleTimeout)
-      try container.encode(self.idleShutdownDisabled, forKey: .idleShutdownDisabled)
+      if self.idleShutdownDisabled {
+        try container.encode(self.idleShutdownDisabled, forKey: .idleShutdownDisabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

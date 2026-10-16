@@ -170,13 +170,15 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.healthDestination, forKey: .healthDestination)
-      try container.encode(self.healthSources, forKey: .healthSources)
+      if !self.healthSources.isEmpty {
+        try container.encode(self.healthSources, forKey: .healthSources)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)

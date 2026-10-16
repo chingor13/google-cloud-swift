@@ -265,7 +265,9 @@
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(self.sourceRegions, forKey: .sourceRegions)
+      if !self.sourceRegions.isEmpty {
+        try container.encode(self.sourceRegions, forKey: .sourceRegions)
+      }
       try container.encodeIfPresent(self.sslHealthCheck, forKey: .sslHealthCheck)
       try container.encodeIfPresent(self.tcpHealthCheck, forKey: .tcpHealthCheck)
       try container.encodeIfPresent(self.timeoutSec, forKey: .timeoutSec)

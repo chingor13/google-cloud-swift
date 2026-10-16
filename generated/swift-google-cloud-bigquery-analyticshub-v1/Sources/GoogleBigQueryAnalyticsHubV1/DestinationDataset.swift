@@ -118,9 +118,15 @@ public struct DestinationDataset: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.datasetReference, forKey: .datasetReference)
     try container.encodeIfPresent(self.friendlyName, forKey: .friendlyName)
     try container.encodeIfPresent(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.replicaLocations, forKey: .replicaLocations)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.replicaLocations.isEmpty {
+      try container.encode(self.replicaLocations, forKey: .replicaLocations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

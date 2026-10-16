@@ -92,8 +92,12 @@ public struct SetDefaultProcessorVersionRequest: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.processor, forKey: .processor)
-    try container.encode(self.defaultProcessorVersion, forKey: .defaultProcessorVersion)
+    if !self.processor.isEmpty {
+      try container.encode(self.processor, forKey: .processor)
+    }
+    if !self.defaultProcessorVersion.isEmpty {
+      try container.encode(self.defaultProcessorVersion, forKey: .defaultProcessorVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

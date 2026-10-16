@@ -79,8 +79,12 @@ public struct PolicyDelta: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bindingDeltas, forKey: .bindingDeltas)
-    try container.encode(self.auditConfigDeltas, forKey: .auditConfigDeltas)
+    if !self.bindingDeltas.isEmpty {
+      try container.encode(self.bindingDeltas, forKey: .bindingDeltas)
+    }
+    if !self.auditConfigDeltas.isEmpty {
+      try container.encode(self.auditConfigDeltas, forKey: .auditConfigDeltas)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

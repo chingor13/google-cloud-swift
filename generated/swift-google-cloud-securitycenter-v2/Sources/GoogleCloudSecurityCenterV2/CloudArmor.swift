@@ -114,7 +114,9 @@ public struct CloudArmor: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.requests, forKey: .requests)
     try container.encodeIfPresent(self.adaptiveProtection, forKey: .adaptiveProtection)
     try container.encodeIfPresent(self.attack, forKey: .attack)
-    try container.encode(self.threatVector, forKey: .threatVector)
+    if !self.threatVector.isEmpty {
+      try container.encode(self.threatVector, forKey: .threatVector)
+    }
     try container.encodeIfPresent(self.duration, forKey: .duration)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -85,9 +85,15 @@ public struct MoveFolderMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.sourceParent, forKey: .sourceParent)
-    try container.encode(self.destinationParent, forKey: .destinationParent)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.sourceParent.isEmpty {
+      try container.encode(self.sourceParent, forKey: .sourceParent)
+    }
+    if !self.destinationParent.isEmpty {
+      try container.encode(self.destinationParent, forKey: .destinationParent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -77,7 +77,9 @@ public struct ExportBacktestResultMetadataRequest: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backtestResult, forKey: .backtestResult)
+    if !self.backtestResult.isEmpty {
+      try container.encode(self.backtestResult, forKey: .backtestResult)
+    }
     try container.encodeIfPresent(
       self.structuredMetadataDestination, forKey: .structuredMetadataDestination)
     for (key, value) in self._unknownFields.json {

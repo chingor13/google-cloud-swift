@@ -83,8 +83,12 @@ public struct Text: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.content, forKey: .content)
-    try container.encode(self.format, forKey: .format)
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
+    if self.format != Text.Format() {
+      try container.encode(self.format, forKey: .format)
+    }
     try container.encodeIfPresent(self.style, forKey: .style)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -203,13 +207,27 @@ public struct Text: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backgroundColor, forKey: .backgroundColor)
-      try container.encode(self.textColor, forKey: .textColor)
-      try container.encode(self.horizontalAlignment, forKey: .horizontalAlignment)
-      try container.encode(self.verticalAlignment, forKey: .verticalAlignment)
-      try container.encode(self.padding, forKey: .padding)
-      try container.encode(self.fontSize, forKey: .fontSize)
-      try container.encode(self.pointerLocation, forKey: .pointerLocation)
+      if !self.backgroundColor.isEmpty {
+        try container.encode(self.backgroundColor, forKey: .backgroundColor)
+      }
+      if !self.textColor.isEmpty {
+        try container.encode(self.textColor, forKey: .textColor)
+      }
+      if self.horizontalAlignment != Text.TextStyle.HorizontalAlignment() {
+        try container.encode(self.horizontalAlignment, forKey: .horizontalAlignment)
+      }
+      if self.verticalAlignment != Text.TextStyle.VerticalAlignment() {
+        try container.encode(self.verticalAlignment, forKey: .verticalAlignment)
+      }
+      if self.padding != Text.TextStyle.PaddingSize() {
+        try container.encode(self.padding, forKey: .padding)
+      }
+      if self.fontSize != Text.TextStyle.FontSize() {
+        try container.encode(self.fontSize, forKey: .fontSize)
+      }
+      if self.pointerLocation != Text.TextStyle.PointerLocation() {
+        try container.encode(self.pointerLocation, forKey: .pointerLocation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

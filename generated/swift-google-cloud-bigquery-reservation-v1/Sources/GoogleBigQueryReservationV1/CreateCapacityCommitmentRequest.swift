@@ -104,11 +104,17 @@ public struct CreateCapacityCommitmentRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.capacityCommitment, forKey: .capacityCommitment)
-    try container.encode(
-      self.enforceSingleAdminProjectPerOrg, forKey: .enforceSingleAdminProjectPerOrg)
-    try container.encode(self.capacityCommitmentId, forKey: .capacityCommitmentId)
+    if self.enforceSingleAdminProjectPerOrg {
+      try container.encode(
+        self.enforceSingleAdminProjectPerOrg, forKey: .enforceSingleAdminProjectPerOrg)
+    }
+    if !self.capacityCommitmentId.isEmpty {
+      try container.encode(self.capacityCommitmentId, forKey: .capacityCommitmentId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -109,8 +109,12 @@ public struct BackupRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ruleId, forKey: .ruleId)
-    try container.encode(self.backupRetentionDays, forKey: .backupRetentionDays)
+    if !self.ruleId.isEmpty {
+      try container.encode(self.ruleId, forKey: .ruleId)
+    }
+    if self.backupRetentionDays != 0 {
+      try container.encode(self.backupRetentionDays, forKey: .backupRetentionDays)
+    }
 
     if let choice = self.backupScheduleOneof {
       switch choice {

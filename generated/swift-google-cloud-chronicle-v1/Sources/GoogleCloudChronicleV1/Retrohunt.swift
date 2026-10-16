@@ -108,11 +108,17 @@ public struct Retrohunt: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.processInterval, forKey: .processInterval)
     try container.encodeIfPresent(self.executionInterval, forKey: .executionInterval)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.progressPercentage, forKey: .progressPercentage)
+    if self.state != Retrohunt.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.progressPercentage != 0 {
+      try container.encode(self.progressPercentage, forKey: .progressPercentage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

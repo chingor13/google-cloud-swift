@@ -279,23 +279,37 @@
       try container.encodeIfPresent(
         self.confidentialInstanceConfig, forKey: .confidentialInstanceConfig)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.disks, forKey: .disks)
-      try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
+      if !self.guestAccelerators.isEmpty {
+        try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+      }
       try container.encodeIfPresent(self.keyRevocationActionType, forKey: .keyRevocationActionType)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.localSsdEncryptionMode, forKey: .localSsdEncryptionMode)
       try container.encodeIfPresent(self.machineType, forKey: .machineType)
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
       try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)
-      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+      if !self.networkInterfaces.isEmpty {
+        try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+      }
       try container.encodeIfPresent(
         self.networkPerformanceConfig, forKey: .networkPerformanceConfig)
       try container.encodeIfPresent(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
       try container.encodeIfPresent(self.reservationAffinity, forKey: .reservationAffinity)
-      try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
-      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      if !self.resourceManagerTags.isEmpty {
+        try container.encode(self.resourceManagerTags, forKey: .resourceManagerTags)
+      }
+      if !self.resourcePolicies.isEmpty {
+        try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      }
       try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
-      try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+      if !self.serviceAccounts.isEmpty {
+        try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+      }
       try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
       try container.encodeIfPresent(self.tags, forKey: .tags)
       try container.encodeIfPresent(self.workloadIdentityConfig, forKey: .workloadIdentityConfig)

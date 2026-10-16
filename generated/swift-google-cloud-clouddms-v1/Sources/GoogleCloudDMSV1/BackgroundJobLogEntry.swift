@@ -162,13 +162,23 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.jobType, forKey: .jobType)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.jobType != BackgroundJobType() {
+      try container.encode(self.jobType, forKey: .jobType)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.finishTime, forKey: .finishTime)
-    try container.encode(self.completionState, forKey: .completionState)
-    try container.encode(self.completionComment, forKey: .completionComment)
-    try container.encode(self.requestAutocommit, forKey: .requestAutocommit)
+    if self.completionState != BackgroundJobLogEntry.JobCompletionState() {
+      try container.encode(self.completionState, forKey: .completionState)
+    }
+    if !self.completionComment.isEmpty {
+      try container.encode(self.completionComment, forKey: .completionComment)
+    }
+    if self.requestAutocommit {
+      try container.encode(self.requestAutocommit, forKey: .requestAutocommit)
+    }
 
     if let choice = self.jobDetails {
       switch choice {
@@ -239,7 +249,9 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connectionProfile, forKey: .connectionProfile)
+      if !self.connectionProfile.isEmpty {
+        try container.encode(self.connectionProfile, forKey: .connectionProfile)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -328,8 +340,12 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.files, forKey: .files)
-      try container.encode(self.fileFormat, forKey: .fileFormat)
+      if !self.files.isEmpty {
+        try container.encode(self.files, forKey: .files)
+      }
+      if self.fileFormat != ImportRulesFileFormat() {
+        try container.encode(self.fileFormat, forKey: .fileFormat)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -410,7 +426,9 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.filter, forKey: .filter)
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -498,8 +516,12 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connectionProfile, forKey: .connectionProfile)
-      try container.encode(self.filter, forKey: .filter)
+      if !self.connectionProfile.isEmpty {
+        try container.encode(self.connectionProfile, forKey: .connectionProfile)
+      }
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

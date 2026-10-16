@@ -111,10 +111,16 @@ public struct CreateServiceConnectionTokenRequest: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.serviceConnectionTokenId, forKey: .serviceConnectionTokenId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.serviceConnectionTokenId.isEmpty {
+      try container.encode(self.serviceConnectionTokenId, forKey: .serviceConnectionTokenId)
+    }
     try container.encodeIfPresent(self.serviceConnectionToken, forKey: .serviceConnectionToken)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

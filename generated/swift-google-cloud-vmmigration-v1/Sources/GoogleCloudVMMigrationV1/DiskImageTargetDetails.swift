@@ -159,13 +159,27 @@ public struct DiskImageTargetDetails: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.imageName, forKey: .imageName)
-    try container.encode(self.targetProject, forKey: .targetProject)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.familyName, forKey: .familyName)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
-    try container.encode(self.singleRegionStorage, forKey: .singleRegionStorage)
+    if !self.imageName.isEmpty {
+      try container.encode(self.imageName, forKey: .imageName)
+    }
+    if !self.targetProject.isEmpty {
+      try container.encode(self.targetProject, forKey: .targetProject)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.familyName.isEmpty {
+      try container.encode(self.familyName, forKey: .familyName)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.additionalLicenses.isEmpty {
+      try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
+    }
+    if self.singleRegionStorage {
+      try container.encode(self.singleRegionStorage, forKey: .singleRegionStorage)
+    }
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
 
     if let choice = self.osAdaptationConfig {

@@ -91,9 +91,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.errors, forKey: .errors)
-      try container.encode(self.warnings, forKey: .warnings)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.errors.isEmpty {
+        try container.encode(self.errors, forKey: .errors)
+      }
+      if !self.warnings.isEmpty {
+        try container.encode(self.warnings, forKey: .warnings)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -69,7 +69,9 @@ public struct GenerateStreamHlsTokenRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.stream, forKey: .stream)
+    if !self.stream.isEmpty {
+      try container.encode(self.stream, forKey: .stream)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

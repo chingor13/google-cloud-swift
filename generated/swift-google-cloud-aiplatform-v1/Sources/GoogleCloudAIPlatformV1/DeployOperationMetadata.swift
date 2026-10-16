@@ -106,10 +106,18 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.genericMetadata, forKey: .genericMetadata)
-      try container.encode(self.publisherModel, forKey: .publisherModel)
-      try container.encode(self.destination, forKey: .destination)
-      try container.encode(self.projectNumber, forKey: .projectNumber)
-      try container.encode(self.modelId, forKey: .modelId)
+      if !self.publisherModel.isEmpty {
+        try container.encode(self.publisherModel, forKey: .publisherModel)
+      }
+      if !self.destination.isEmpty {
+        try container.encode(self.destination, forKey: .destination)
+      }
+      if self.projectNumber != 0 {
+        try container.encode(self.projectNumber, forKey: .projectNumber)
+      }
+      if !self.modelId.isEmpty {
+        try container.encode(self.modelId, forKey: .modelId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

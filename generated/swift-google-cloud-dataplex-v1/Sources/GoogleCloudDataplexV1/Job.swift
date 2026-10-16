@@ -156,17 +156,35 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.retryCount, forKey: .retryCount)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.serviceJob, forKey: .serviceJob)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.trigger, forKey: .trigger)
+    if self.state != Job.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.retryCount != 0 {
+      try container.encode(self.retryCount, forKey: .retryCount)
+    }
+    if self.service != Job.Service() {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.serviceJob.isEmpty {
+      try container.encode(self.serviceJob, forKey: .serviceJob)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.trigger != Job.Trigger() {
+      try container.encode(self.trigger, forKey: .trigger)
+    }
     try container.encodeIfPresent(self.executionSpec, forKey: .executionSpec)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

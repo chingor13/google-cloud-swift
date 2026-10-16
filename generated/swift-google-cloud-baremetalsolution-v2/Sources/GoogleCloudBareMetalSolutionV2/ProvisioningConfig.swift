@@ -186,20 +186,46 @@ public struct ProvisioningConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.instances, forKey: .instances)
-    try container.encode(self.networks, forKey: .networks)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.ticketId, forKey: .ticketId)
-    try container.encode(self.handoverServiceAccount, forKey: .handoverServiceAccount)
-    try container.encode(self.email, forKey: .email)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.location, forKey: .location)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.instances.isEmpty {
+      try container.encode(self.instances, forKey: .instances)
+    }
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if !self.ticketId.isEmpty {
+      try container.encode(self.ticketId, forKey: .ticketId)
+    }
+    if !self.handoverServiceAccount.isEmpty {
+      try container.encode(self.handoverServiceAccount, forKey: .handoverServiceAccount)
+    }
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
+    if self.state != ProvisioningConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.cloudConsoleUri, forKey: .cloudConsoleUri)
-    try container.encode(self.vpcScEnabled, forKey: .vpcScEnabled)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.customId, forKey: .customId)
+    if !self.cloudConsoleUri.isEmpty {
+      try container.encode(self.cloudConsoleUri, forKey: .cloudConsoleUri)
+    }
+    if self.vpcScEnabled {
+      try container.encode(self.vpcScEnabled, forKey: .vpcScEnabled)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if !self.customId.isEmpty {
+      try container.encode(self.customId, forKey: .customId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

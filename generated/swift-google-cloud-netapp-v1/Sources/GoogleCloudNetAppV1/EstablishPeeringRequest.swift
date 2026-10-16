@@ -106,11 +106,21 @@ public struct EstablishPeeringRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.peerClusterName, forKey: .peerClusterName)
-    try container.encode(self.peerSvmName, forKey: .peerSvmName)
-    try container.encode(self.peerIpAddresses, forKey: .peerIpAddresses)
-    try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.peerClusterName.isEmpty {
+      try container.encode(self.peerClusterName, forKey: .peerClusterName)
+    }
+    if !self.peerSvmName.isEmpty {
+      try container.encode(self.peerSvmName, forKey: .peerSvmName)
+    }
+    if !self.peerIpAddresses.isEmpty {
+      try container.encode(self.peerIpAddresses, forKey: .peerIpAddresses)
+    }
+    if !self.peerVolumeName.isEmpty {
+      try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

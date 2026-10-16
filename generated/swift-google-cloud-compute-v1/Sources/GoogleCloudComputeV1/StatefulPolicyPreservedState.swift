@@ -98,9 +98,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.disks, forKey: .disks)
-      try container.encode(self.externalIps, forKey: .externalIps)
-      try container.encode(self.internalIps, forKey: .internalIps)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
+      if !self.externalIps.isEmpty {
+        try container.encode(self.externalIps, forKey: .externalIps)
+      }
+      if !self.internalIps.isEmpty {
+        try container.encode(self.internalIps, forKey: .internalIps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

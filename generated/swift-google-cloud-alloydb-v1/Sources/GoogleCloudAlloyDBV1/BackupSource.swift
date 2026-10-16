@@ -80,8 +80,12 @@ public struct BackupSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupUid, forKey: .backupUid)
-    try container.encode(self.backupName, forKey: .backupName)
+    if !self.backupUid.isEmpty {
+      try container.encode(self.backupUid, forKey: .backupUid)
+    }
+    if !self.backupName.isEmpty {
+      try container.encode(self.backupName, forKey: .backupName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -79,7 +79,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.config, forKey: .config)
-      try container.encode(self.setDefault, forKey: .setDefault)
+      if self.setDefault {
+        try container.encode(self.setDefault, forKey: .setDefault)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

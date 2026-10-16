@@ -116,8 +116,12 @@ public struct QueryAssetsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.jobReference, forKey: .jobReference)
-    try container.encode(self.done, forKey: .done)
+    if !self.jobReference.isEmpty {
+      try container.encode(self.jobReference, forKey: .jobReference)
+    }
+    if self.done {
+      try container.encode(self.done, forKey: .done)
+    }
 
     if let choice = self.response {
       switch choice {

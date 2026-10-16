@@ -181,8 +181,12 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.enabled, forKey: .enabled)
     try container.encodeIfPresent(self.backupWindow, forKey: .backupWindow)
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.schedule {
       switch choice {
@@ -279,8 +283,12 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.startTimes, forKey: .startTimes)
-      try container.encode(self.daysOfWeek, forKey: .daysOfWeek)
+      if !self.startTimes.isEmpty {
+        try container.encode(self.startTimes, forKey: .startTimes)
+      }
+      if !self.daysOfWeek.isEmpty {
+        try container.encode(self.daysOfWeek, forKey: .daysOfWeek)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -441,7 +449,9 @@ public struct AutomatedBackupPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.count, forKey: .count)
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

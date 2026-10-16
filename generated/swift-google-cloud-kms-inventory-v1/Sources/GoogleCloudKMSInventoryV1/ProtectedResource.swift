@@ -157,15 +157,33 @@ public struct ProtectedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.cloudProduct, forKey: .cloudProduct)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
-    try container.encode(self.cryptoKeyVersions, forKey: .cryptoKeyVersions)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.cloudProduct.isEmpty {
+      try container.encode(self.cloudProduct, forKey: .cloudProduct)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.cryptoKeyVersion.isEmpty {
+      try container.encode(self.cryptoKeyVersion, forKey: .cryptoKeyVersion)
+    }
+    if !self.cryptoKeyVersions.isEmpty {
+      try container.encode(self.cryptoKeyVersions, forKey: .cryptoKeyVersions)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

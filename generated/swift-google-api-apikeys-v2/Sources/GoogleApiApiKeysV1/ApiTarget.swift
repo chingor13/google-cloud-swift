@@ -88,8 +88,12 @@ public struct ApiTarget: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.methods, forKey: .methods)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.methods.isEmpty {
+      try container.encode(self.methods, forKey: .methods)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

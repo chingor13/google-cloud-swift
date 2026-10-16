@@ -79,8 +79,12 @@ public struct ListClustersResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusters, forKey: .clusters)
-    try container.encode(self.missingZones, forKey: .missingZones)
+    if !self.clusters.isEmpty {
+      try container.encode(self.clusters, forKey: .clusters)
+    }
+    if !self.missingZones.isEmpty {
+      try container.encode(self.missingZones, forKey: .missingZones)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -149,16 +149,30 @@ public struct Model: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.engineVersion, forKey: .engineVersion)
-    try container.encode(self.engineConfig, forKey: .engineConfig)
-    try container.encode(self.primaryDataset, forKey: .primaryDataset)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Model.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.engineVersion.isEmpty {
+      try container.encode(self.engineVersion, forKey: .engineVersion)
+    }
+    if !self.engineConfig.isEmpty {
+      try container.encode(self.engineConfig, forKey: .engineConfig)
+    }
+    if !self.primaryDataset.isEmpty {
+      try container.encode(self.primaryDataset, forKey: .primaryDataset)
+    }
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.lineOfBusiness, forKey: .lineOfBusiness)
+    if self.lineOfBusiness != LineOfBusiness() {
+      try container.encode(self.lineOfBusiness, forKey: .lineOfBusiness)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -70,7 +70,9 @@ public struct SecureSourceManagerInstanceConfig: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instance, forKey: .instance)
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

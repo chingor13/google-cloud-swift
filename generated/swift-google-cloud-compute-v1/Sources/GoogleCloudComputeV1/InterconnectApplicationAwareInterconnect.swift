@@ -105,7 +105,9 @@
       try container.encodeIfPresent(
         self.bandwidthPercentagePolicy, forKey: .bandwidthPercentagePolicy)
       try container.encodeIfPresent(self.profileDescription, forKey: .profileDescription)
-      try container.encode(self.shapeAveragePercentages, forKey: .shapeAveragePercentages)
+      if !self.shapeAveragePercentages.isEmpty {
+        try container.encode(self.shapeAveragePercentages, forKey: .shapeAveragePercentages)
+      }
       try container.encodeIfPresent(self.strictPriorityPolicy, forKey: .strictPriorityPolicy)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -104,8 +104,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.activeNatIps, forKey: .activeNatIps)
-      try container.encode(self.drainNatIps, forKey: .drainNatIps)
+      if !self.activeNatIps.isEmpty {
+        try container.encode(self.activeNatIps, forKey: .activeNatIps)
+      }
+      if !self.drainNatIps.isEmpty {
+        try container.encode(self.drainNatIps, forKey: .drainNatIps)
+      }
       try container.encodeIfPresent(self.minExtraIpsNeeded, forKey: .minExtraIpsNeeded)
       try container.encodeIfPresent(
         self.numVmEndpointsWithNatMappings, forKey: .numVmEndpointsWithNatMappings)

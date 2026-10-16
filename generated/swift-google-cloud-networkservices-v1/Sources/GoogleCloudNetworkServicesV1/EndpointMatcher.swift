@@ -192,8 +192,14 @@ public struct EndpointMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.metadataLabelMatchCriteria, forKey: .metadataLabelMatchCriteria)
-      try container.encode(self.metadataLabels, forKey: .metadataLabels)
+      if self.metadataLabelMatchCriteria
+        != EndpointMatcher.MetadataLabelMatcher.MetadataLabelMatchCriteria()
+      {
+        try container.encode(self.metadataLabelMatchCriteria, forKey: .metadataLabelMatchCriteria)
+      }
+      if !self.metadataLabels.isEmpty {
+        try container.encode(self.metadataLabels, forKey: .metadataLabels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -260,8 +266,12 @@ public struct EndpointMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.labelName, forKey: .labelName)
-        try container.encode(self.labelValue, forKey: .labelValue)
+        if !self.labelName.isEmpty {
+          try container.encode(self.labelName, forKey: .labelName)
+        }
+        if !self.labelValue.isEmpty {
+          try container.encode(self.labelValue, forKey: .labelValue)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

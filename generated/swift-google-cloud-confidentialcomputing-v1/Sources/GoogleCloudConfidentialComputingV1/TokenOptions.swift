@@ -110,9 +110,15 @@ public struct TokenOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.audience, forKey: .audience)
-    try container.encode(self.nonce, forKey: .nonce)
-    try container.encode(self.tokenType, forKey: .tokenType)
+    if !self.audience.isEmpty {
+      try container.encode(self.audience, forKey: .audience)
+    }
+    if !self.nonce.isEmpty {
+      try container.encode(self.nonce, forKey: .nonce)
+    }
+    if self.tokenType != TokenType() {
+      try container.encode(self.tokenType, forKey: .tokenType)
+    }
 
     if let choice = self.tokenTypeOptions {
       switch choice {

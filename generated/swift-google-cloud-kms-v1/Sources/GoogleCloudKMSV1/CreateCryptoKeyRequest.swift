@@ -139,11 +139,19 @@ public struct CreateCryptoKeyRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.cryptoKeyId, forKey: .cryptoKeyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.cryptoKeyId.isEmpty {
+      try container.encode(self.cryptoKeyId, forKey: .cryptoKeyId)
+    }
     try container.encodeIfPresent(self.cryptoKey, forKey: .cryptoKey)
-    try container.encode(self.skipInitialVersionCreation, forKey: .skipInitialVersionCreation)
-    try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
+    if self.skipInitialVersionCreation {
+      try container.encode(self.skipInitialVersionCreation, forKey: .skipInitialVersionCreation)
+    }
+    if self.trustedWrappingEnabled {
+      try container.encode(self.trustedWrappingEnabled, forKey: .trustedWrappingEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

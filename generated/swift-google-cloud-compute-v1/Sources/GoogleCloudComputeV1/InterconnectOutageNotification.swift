@@ -146,7 +146,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.affectedCircuits, forKey: .affectedCircuits)
+      if !self.affectedCircuits.isEmpty {
+        try container.encode(self.affectedCircuits, forKey: .affectedCircuits)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.issueType, forKey: .issueType)

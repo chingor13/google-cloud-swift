@@ -134,14 +134,22 @@ public struct AnalysisRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.displayName, forKey: .displayName)
-    try container.encode(self.conversationFilter, forKey: .conversationFilter)
+    if !self.conversationFilter.isEmpty {
+      try container.encode(self.conversationFilter, forKey: .conversationFilter)
+    }
     try container.encodeIfPresent(self.annotatorSelector, forKey: .annotatorSelector)
-    try container.encode(self.analysisPercentage, forKey: .analysisPercentage)
-    try container.encode(self.active, forKey: .active)
+    if self.analysisPercentage != 0 {
+      try container.encode(self.analysisPercentage, forKey: .analysisPercentage)
+    }
+    if self.active {
+      try container.encode(self.active, forKey: .active)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

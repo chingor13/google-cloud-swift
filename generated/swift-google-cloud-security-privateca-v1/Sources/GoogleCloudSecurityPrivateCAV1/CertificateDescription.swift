@@ -149,10 +149,16 @@ public struct CertificateDescription: Codable, Equatable, GoogleWKT._AnyPackable
     try container.encodeIfPresent(self.publicKey, forKey: .publicKey)
     try container.encodeIfPresent(self.subjectKeyId, forKey: .subjectKeyId)
     try container.encodeIfPresent(self.authorityKeyId, forKey: .authorityKeyId)
-    try container.encode(self.crlDistributionPoints, forKey: .crlDistributionPoints)
-    try container.encode(self.aiaIssuingCertificateUrls, forKey: .aiaIssuingCertificateUrls)
+    if !self.crlDistributionPoints.isEmpty {
+      try container.encode(self.crlDistributionPoints, forKey: .crlDistributionPoints)
+    }
+    if !self.aiaIssuingCertificateUrls.isEmpty {
+      try container.encode(self.aiaIssuingCertificateUrls, forKey: .aiaIssuingCertificateUrls)
+    }
     try container.encodeIfPresent(self.certFingerprint, forKey: .certFingerprint)
-    try container.encode(self.tbsCertificateDigest, forKey: .tbsCertificateDigest)
+    if !self.tbsCertificateDigest.isEmpty {
+      try container.encode(self.tbsCertificateDigest, forKey: .tbsCertificateDigest)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -250,7 +256,9 @@ public struct CertificateDescription: Codable, Equatable, GoogleWKT._AnyPackable
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.subject, forKey: .subject)
       try container.encodeIfPresent(self.subjectAltName, forKey: .subjectAltName)
-      try container.encode(self.hexSerialNumber, forKey: .hexSerialNumber)
+      if !self.hexSerialNumber.isEmpty {
+        try container.encode(self.hexSerialNumber, forKey: .hexSerialNumber)
+      }
       try container.encodeIfPresent(self.lifetime, forKey: .lifetime)
       try container.encodeIfPresent(self.notBeforeTime, forKey: .notBeforeTime)
       try container.encodeIfPresent(self.notAfterTime, forKey: .notAfterTime)
@@ -336,7 +344,9 @@ public struct CertificateDescription: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.keyId, forKey: .keyId)
+      if !self.keyId.isEmpty {
+        try container.encode(self.keyId, forKey: .keyId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -416,7 +426,9 @@ public struct CertificateDescription: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sha256Hash, forKey: .sha256Hash)
+      if !self.sha256Hash.isEmpty {
+        try container.encode(self.sha256Hash, forKey: .sha256Hash)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

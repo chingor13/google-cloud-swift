@@ -119,9 +119,13 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostUri, forKey: .hostUri)
+    if !self.hostUri.isEmpty {
+      try container.encode(self.hostUri, forKey: .hostUri)
+    }
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
-    try container.encode(self.sslCaCertificate, forKey: .sslCaCertificate)
+    if !self.sslCaCertificate.isEmpty {
+      try container.encode(self.sslCaCertificate, forKey: .sslCaCertificate)
+    }
 
     if let choice = self.authentication {
       switch choice {
@@ -210,7 +214,9 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.username, forKey: .username)
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
 
       if let choice = self.password {
         switch choice {

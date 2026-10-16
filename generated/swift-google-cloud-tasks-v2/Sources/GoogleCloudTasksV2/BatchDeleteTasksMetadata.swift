@@ -115,8 +115,10 @@ public struct BatchDeleteTasksMetadata: Codable, Equatable, GoogleWKT._AnyPackab
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.state, forKey: .state)
-    do {
+    if self.state != BatchDeleteTasksMetadata.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failedRequests.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.failedRequests.lazy.map { (Swift.String($0), $1) }
       )

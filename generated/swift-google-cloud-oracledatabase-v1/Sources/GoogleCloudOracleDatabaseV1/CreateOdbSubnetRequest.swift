@@ -102,10 +102,16 @@ public struct CreateOdbSubnetRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.odbSubnetId, forKey: .odbSubnetId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.odbSubnetId.isEmpty {
+      try container.encode(self.odbSubnetId, forKey: .odbSubnetId)
+    }
     try container.encodeIfPresent(self.odbSubnet, forKey: .odbSubnet)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

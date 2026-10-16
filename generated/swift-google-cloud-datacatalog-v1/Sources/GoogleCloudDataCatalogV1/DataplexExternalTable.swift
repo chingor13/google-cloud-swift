@@ -99,10 +99,18 @@ public struct DataplexExternalTable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.system, forKey: .system)
-    try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
-    try container.encode(self.googleCloudResource, forKey: .googleCloudResource)
-    try container.encode(self.dataCatalogEntry, forKey: .dataCatalogEntry)
+    if self.system != IntegratedSystem() {
+      try container.encode(self.system, forKey: .system)
+    }
+    if !self.fullyQualifiedName.isEmpty {
+      try container.encode(self.fullyQualifiedName, forKey: .fullyQualifiedName)
+    }
+    if !self.googleCloudResource.isEmpty {
+      try container.encode(self.googleCloudResource, forKey: .googleCloudResource)
+    }
+    if !self.dataCatalogEntry.isEmpty {
+      try container.encode(self.dataCatalogEntry, forKey: .dataCatalogEntry)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

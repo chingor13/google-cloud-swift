@@ -103,10 +103,18 @@ public struct Page: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.property, forKey: .property)
-    try container.encode(self.width, forKey: .width)
-    try container.encode(self.height, forKey: .height)
-    try container.encode(self.blocks, forKey: .blocks)
-    try container.encode(self.confidence, forKey: .confidence)
+    if self.width != 0 {
+      try container.encode(self.width, forKey: .width)
+    }
+    if self.height != 0 {
+      try container.encode(self.height, forKey: .height)
+    }
+    if !self.blocks.isEmpty {
+      try container.encode(self.blocks, forKey: .blocks)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -105,10 +105,16 @@ public struct CreateParameterVersionRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.parameterVersionId, forKey: .parameterVersionId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.parameterVersionId.isEmpty {
+      try container.encode(self.parameterVersionId, forKey: .parameterVersionId)
+    }
     try container.encodeIfPresent(self.parameterVersion, forKey: .parameterVersion)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

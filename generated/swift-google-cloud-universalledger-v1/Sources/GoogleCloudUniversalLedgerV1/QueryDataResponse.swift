@@ -97,7 +97,9 @@ public struct QueryDataResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.redactedFields, forKey: .redactedFields)
+    if !self.redactedFields.isEmpty {
+      try container.encode(self.redactedFields, forKey: .redactedFields)
+    }
 
     if let choice = self.kind {
       switch choice {

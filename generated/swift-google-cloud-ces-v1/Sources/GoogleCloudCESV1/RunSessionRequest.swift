@@ -79,7 +79,9 @@ public struct RunSessionRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.inputs, forKey: .inputs)
+    if !self.inputs.isEmpty {
+      try container.encode(self.inputs, forKey: .inputs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

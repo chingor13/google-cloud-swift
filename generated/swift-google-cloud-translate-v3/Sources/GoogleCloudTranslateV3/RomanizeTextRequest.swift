@@ -98,9 +98,15 @@ public struct RomanizeTextRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.contents, forKey: .contents)
-    try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.contents.isEmpty {
+      try container.encode(self.contents, forKey: .contents)
+    }
+    if !self.sourceLanguageCode.isEmpty {
+      try container.encode(self.sourceLanguageCode, forKey: .sourceLanguageCode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

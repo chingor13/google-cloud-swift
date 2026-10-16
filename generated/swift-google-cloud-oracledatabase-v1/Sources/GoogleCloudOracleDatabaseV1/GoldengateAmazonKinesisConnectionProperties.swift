@@ -107,11 +107,21 @@ public struct GoldengateAmazonKinesisConnectionProperties: Codable, Equatable, G
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.accessKeyId, forKey: .accessKeyId)
-    try container.encode(self.secretAccessKeySecret, forKey: .secretAccessKeySecret)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.awsRegion, forKey: .awsRegion)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.accessKeyId.isEmpty {
+      try container.encode(self.accessKeyId, forKey: .accessKeyId)
+    }
+    if !self.secretAccessKeySecret.isEmpty {
+      try container.encode(self.secretAccessKeySecret, forKey: .secretAccessKeySecret)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.awsRegion.isEmpty {
+      try container.encode(self.awsRegion, forKey: .awsRegion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

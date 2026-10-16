@@ -88,9 +88,15 @@ public struct VerifyKmsConfigResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.healthy, forKey: .healthy)
-    try container.encode(self.healthError, forKey: .healthError)
-    try container.encode(self.instructions, forKey: .instructions)
+    if self.healthy {
+      try container.encode(self.healthy, forKey: .healthy)
+    }
+    if !self.healthError.isEmpty {
+      try container.encode(self.healthError, forKey: .healthError)
+    }
+    if !self.instructions.isEmpty {
+      try container.encode(self.instructions, forKey: .instructions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

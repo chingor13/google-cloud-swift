@@ -86,9 +86,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.vectorsCount, forKey: .vectorsCount)
-      try container.encode(self.sparseVectorsCount, forKey: .sparseVectorsCount)
-      try container.encode(self.shardsCount, forKey: .shardsCount)
+      if self.vectorsCount != 0 {
+        try container.encode(self.vectorsCount, forKey: .vectorsCount)
+      }
+      if self.sparseVectorsCount != 0 {
+        try container.encode(self.sparseVectorsCount, forKey: .sparseVectorsCount)
+      }
+      if self.shardsCount != 0 {
+        try container.encode(self.shardsCount, forKey: .shardsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

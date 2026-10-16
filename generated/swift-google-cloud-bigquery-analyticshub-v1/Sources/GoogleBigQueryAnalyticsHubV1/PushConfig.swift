@@ -154,8 +154,12 @@ public struct PushConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pushEndpoint, forKey: .pushEndpoint)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.pushEndpoint.isEmpty {
+      try container.encode(self.pushEndpoint, forKey: .pushEndpoint)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
 
     if let choice = self.authenticationMethod {
       switch choice {
@@ -250,8 +254,12 @@ public struct PushConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
-      try container.encode(self.audience, forKey: .audience)
+      if !self.serviceAccountEmail.isEmpty {
+        try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+      }
+      if !self.audience.isEmpty {
+        try container.encode(self.audience, forKey: .audience)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -404,7 +412,9 @@ public struct PushConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.writeMetadata, forKey: .writeMetadata)
+      if self.writeMetadata {
+        try container.encode(self.writeMetadata, forKey: .writeMetadata)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

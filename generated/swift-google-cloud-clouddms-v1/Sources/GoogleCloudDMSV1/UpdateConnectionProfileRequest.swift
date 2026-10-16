@@ -112,9 +112,15 @@ public struct UpdateConnectionProfileRequest: Codable, Equatable, GoogleWKT._Any
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(self.connectionProfile, forKey: .connectionProfile)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.skipValidation, forKey: .skipValidation)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if self.skipValidation {
+      try container.encode(self.skipValidation, forKey: .skipValidation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

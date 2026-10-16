@@ -94,9 +94,15 @@ public struct SftpSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.sourceType, forKey: .sourceType)
-    try container.encode(self.sourceDeletionOption, forKey: .sourceDeletionOption)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.sourceType != URISourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
+    if self.sourceDeletionOption != SourceDeletionOption() {
+      try container.encode(self.sourceDeletionOption, forKey: .sourceDeletionOption)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

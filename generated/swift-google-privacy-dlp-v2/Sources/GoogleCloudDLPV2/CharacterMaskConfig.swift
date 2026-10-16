@@ -125,10 +125,18 @@ public struct CharacterMaskConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maskingCharacter, forKey: .maskingCharacter)
-    try container.encode(self.numberToMask, forKey: .numberToMask)
-    try container.encode(self.reverseOrder, forKey: .reverseOrder)
-    try container.encode(self.charactersToIgnore, forKey: .charactersToIgnore)
+    if !self.maskingCharacter.isEmpty {
+      try container.encode(self.maskingCharacter, forKey: .maskingCharacter)
+    }
+    if self.numberToMask != 0 {
+      try container.encode(self.numberToMask, forKey: .numberToMask)
+    }
+    if self.reverseOrder {
+      try container.encode(self.reverseOrder, forKey: .reverseOrder)
+    }
+    if !self.charactersToIgnore.isEmpty {
+      try container.encode(self.charactersToIgnore, forKey: .charactersToIgnore)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -559,36 +559,72 @@ public struct NodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
-    try container.encode(self.oauthScopes, forKey: .oauthScopes)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.imageType, forKey: .imageType)
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
+    if !self.oauthScopes.isEmpty {
+      try container.encode(self.oauthScopes, forKey: .oauthScopes)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.imageType.isEmpty {
+      try container.encode(self.imageType, forKey: .imageType)
+    }
     try container.encodeIfPresent(self.nodeImageConfig, forKey: .nodeImageConfig)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.localSsdCount, forKey: .localSsdCount)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.preemptible, forKey: .preemptible)
-    try container.encode(self.accelerators, forKey: .accelerators)
-    try container.encode(self.diskType, forKey: .diskType)
-    try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.localSsdCount != 0 {
+      try container.encode(self.localSsdCount, forKey: .localSsdCount)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.preemptible {
+      try container.encode(self.preemptible, forKey: .preemptible)
+    }
+    if !self.accelerators.isEmpty {
+      try container.encode(self.accelerators, forKey: .accelerators)
+    }
+    if !self.diskType.isEmpty {
+      try container.encode(self.diskType, forKey: .diskType)
+    }
+    if !self.minCpuPlatform.isEmpty {
+      try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
+    }
     try container.encodeIfPresent(self.workloadMetadataConfig, forKey: .workloadMetadataConfig)
-    try container.encode(self.taints, forKey: .taints)
+    if !self.taints.isEmpty {
+      try container.encode(self.taints, forKey: .taints)
+    }
     try container.encodeIfPresent(self.sandboxConfig, forKey: .sandboxConfig)
-    try container.encode(self.nodeGroup, forKey: .nodeGroup)
+    if !self.nodeGroup.isEmpty {
+      try container.encode(self.nodeGroup, forKey: .nodeGroup)
+    }
     try container.encodeIfPresent(self.reservationAffinity, forKey: .reservationAffinity)
     try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
     try container.encodeIfPresent(self.linuxNodeConfig, forKey: .linuxNodeConfig)
     try container.encodeIfPresent(self.kubeletConfig, forKey: .kubeletConfig)
-    try container.encode(self.bootDiskKmsKey, forKey: .bootDiskKmsKey)
+    if !self.bootDiskKmsKey.isEmpty {
+      try container.encode(self.bootDiskKmsKey, forKey: .bootDiskKmsKey)
+    }
     try container.encodeIfPresent(self.gcfsConfig, forKey: .gcfsConfig)
     try container.encodeIfPresent(self.advancedMachineFeatures, forKey: .advancedMachineFeatures)
     try container.encodeIfPresent(self.gvnic, forKey: .gvnic)
-    try container.encode(self.spot, forKey: .spot)
+    if self.spot {
+      try container.encode(self.spot, forKey: .spot)
+    }
     try container.encodeIfPresent(self.confidentialNodes, forKey: .confidentialNodes)
     try container.encodeIfPresent(self.fastSocket, forKey: .fastSocket)
-    try container.encode(self.resourceLabels, forKey: .resourceLabels)
+    if !self.resourceLabels.isEmpty {
+      try container.encode(self.resourceLabels, forKey: .resourceLabels)
+    }
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
     try container.encodeIfPresent(self.windowsNodeConfig, forKey: .windowsNodeConfig)
     try container.encodeIfPresent(self.localNvmeSsdBlockConfig, forKey: .localNvmeSsdBlockConfig)
@@ -597,15 +633,23 @@ public struct NodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.soleTenantConfig, forKey: .soleTenantConfig)
     try container.encodeIfPresent(self.containerdConfig, forKey: .containerdConfig)
     try container.encodeIfPresent(self.resourceManagerTags, forKey: .resourceManagerTags)
-    try container.encode(self.enableConfidentialStorage, forKey: .enableConfidentialStorage)
-    try container.encode(self.secondaryBootDisks, forKey: .secondaryBootDisks)
-    try container.encode(self.storagePools, forKey: .storagePools)
+    if self.enableConfidentialStorage {
+      try container.encode(self.enableConfidentialStorage, forKey: .enableConfidentialStorage)
+    }
+    if !self.secondaryBootDisks.isEmpty {
+      try container.encode(self.secondaryBootDisks, forKey: .secondaryBootDisks)
+    }
+    if !self.storagePools.isEmpty {
+      try container.encode(self.storagePools, forKey: .storagePools)
+    }
     try container.encodeIfPresent(
       self.secondaryBootDiskUpdateStrategy, forKey: .secondaryBootDiskUpdateStrategy)
     try container.encodeIfPresent(self.gpuDirectConfig, forKey: .gpuDirectConfig)
     try container.encodeIfPresent(self.maxRunDuration, forKey: .maxRunDuration)
     try container.encodeIfPresent(self.localSsdEncryptionMode, forKey: .localSsdEncryptionMode)
-    try container.encode(self.effectiveCgroupMode, forKey: .effectiveCgroupMode)
+    if self.effectiveCgroupMode != NodeConfig.EffectiveCgroupMode() {
+      try container.encode(self.effectiveCgroupMode, forKey: .effectiveCgroupMode)
+    }
     try container.encodeIfPresent(self.flexStart, forKey: .flexStart)
     try container.encodeIfPresent(self.bootDisk, forKey: .bootDisk)
     try container.encodeIfPresent(self.consolidationDelay, forKey: .consolidationDelay)

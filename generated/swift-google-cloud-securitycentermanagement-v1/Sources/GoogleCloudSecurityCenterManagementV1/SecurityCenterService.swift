@@ -142,10 +142,18 @@ public struct SecurityCenterService: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.intendedEnablementState, forKey: .intendedEnablementState)
-    try container.encode(self.effectiveEnablementState, forKey: .effectiveEnablementState)
-    try container.encode(self.modules, forKey: .modules)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.intendedEnablementState != SecurityCenterService.EnablementState() {
+      try container.encode(self.intendedEnablementState, forKey: .intendedEnablementState)
+    }
+    if self.effectiveEnablementState != SecurityCenterService.EnablementState() {
+      try container.encode(self.effectiveEnablementState, forKey: .effectiveEnablementState)
+    }
+    if !self.modules.isEmpty {
+      try container.encode(self.modules, forKey: .modules)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.serviceConfig, forKey: .serviceConfig)
     for (key, value) in self._unknownFields.json {
@@ -224,8 +232,12 @@ public struct SecurityCenterService: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.intendedEnablementState, forKey: .intendedEnablementState)
-      try container.encode(self.effectiveEnablementState, forKey: .effectiveEnablementState)
+      if self.intendedEnablementState != SecurityCenterService.EnablementState() {
+        try container.encode(self.intendedEnablementState, forKey: .intendedEnablementState)
+      }
+      if self.effectiveEnablementState != SecurityCenterService.EnablementState() {
+        try container.encode(self.effectiveEnablementState, forKey: .effectiveEnablementState)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

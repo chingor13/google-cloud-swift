@@ -125,8 +125,12 @@ public struct UpdateBucketRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.bucket, forKey: .bucket)
     try container.encodeIfPresent(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)
     try container.encodeIfPresent(self.ifMetagenerationNotMatch, forKey: .ifMetagenerationNotMatch)
-    try container.encode(self.predefinedAcl, forKey: .predefinedAcl)
-    try container.encode(self.predefinedDefaultObjectAcl, forKey: .predefinedDefaultObjectAcl)
+    if !self.predefinedAcl.isEmpty {
+      try container.encode(self.predefinedAcl, forKey: .predefinedAcl)
+    }
+    if !self.predefinedDefaultObjectAcl.isEmpty {
+      try container.encode(self.predefinedDefaultObjectAcl, forKey: .predefinedDefaultObjectAcl)
+    }
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

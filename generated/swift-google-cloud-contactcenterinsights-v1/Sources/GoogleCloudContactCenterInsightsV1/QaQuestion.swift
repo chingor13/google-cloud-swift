@@ -155,15 +155,29 @@ public struct QaQuestion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.abbreviation, forKey: .abbreviation)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.abbreviation.isEmpty {
+      try container.encode(self.abbreviation, forKey: .abbreviation)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.questionBody, forKey: .questionBody)
-    try container.encode(self.answerInstructions, forKey: .answerInstructions)
-    try container.encode(self.answerChoices, forKey: .answerChoices)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.order, forKey: .order)
+    if !self.questionBody.isEmpty {
+      try container.encode(self.questionBody, forKey: .questionBody)
+    }
+    if !self.answerInstructions.isEmpty {
+      try container.encode(self.answerInstructions, forKey: .answerInstructions)
+    }
+    if !self.answerChoices.isEmpty {
+      try container.encode(self.answerChoices, forKey: .answerChoices)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.order != 0 {
+      try container.encode(self.order, forKey: .order)
+    }
     try container.encodeIfPresent(self.metrics, forKey: .metrics)
     try container.encodeIfPresent(self.tuningMetadata, forKey: .tuningMetadata)
     for (key, value) in self._unknownFields.json {
@@ -265,7 +279,9 @@ public struct QaQuestion: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
       try container.encodeIfPresent(self.score, forKey: .score)
 
       if let choice = self.value {
@@ -375,7 +391,9 @@ public struct QaQuestion: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.accuracy, forKey: .accuracy)
+      if self.accuracy != 0 {
+        try container.encode(self.accuracy, forKey: .accuracy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -478,9 +496,15 @@ public struct QaQuestion: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.totalValidLabelCount, forKey: .totalValidLabelCount)
-      try container.encode(self.datasetValidationWarnings, forKey: .datasetValidationWarnings)
-      try container.encode(self.tuningError, forKey: .tuningError)
+      if self.totalValidLabelCount != 0 {
+        try container.encode(self.totalValidLabelCount, forKey: .totalValidLabelCount)
+      }
+      if !self.datasetValidationWarnings.isEmpty {
+        try container.encode(self.datasetValidationWarnings, forKey: .datasetValidationWarnings)
+      }
+      if !self.tuningError.isEmpty {
+        try container.encode(self.tuningError, forKey: .tuningError)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

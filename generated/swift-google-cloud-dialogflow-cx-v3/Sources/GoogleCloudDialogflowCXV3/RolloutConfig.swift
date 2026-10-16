@@ -96,9 +96,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rolloutSteps, forKey: .rolloutSteps)
-      try container.encode(self.rolloutCondition, forKey: .rolloutCondition)
-      try container.encode(self.failureCondition, forKey: .failureCondition)
+      if !self.rolloutSteps.isEmpty {
+        try container.encode(self.rolloutSteps, forKey: .rolloutSteps)
+      }
+      if !self.rolloutCondition.isEmpty {
+        try container.encode(self.rolloutCondition, forKey: .rolloutCondition)
+      }
+      if !self.failureCondition.isEmpty {
+        try container.encode(self.failureCondition, forKey: .failureCondition)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -174,8 +180,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.trafficPercent, forKey: .trafficPercent)
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if self.trafficPercent != 0 {
+          try container.encode(self.trafficPercent, forKey: .trafficPercent)
+        }
         try container.encodeIfPresent(self.minDuration, forKey: .minDuration)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

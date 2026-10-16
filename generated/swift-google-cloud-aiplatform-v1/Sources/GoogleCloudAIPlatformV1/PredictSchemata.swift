@@ -142,9 +142,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instanceSchemaUri, forKey: .instanceSchemaUri)
-      try container.encode(self.parametersSchemaUri, forKey: .parametersSchemaUri)
-      try container.encode(self.predictionSchemaUri, forKey: .predictionSchemaUri)
+      if !self.instanceSchemaUri.isEmpty {
+        try container.encode(self.instanceSchemaUri, forKey: .instanceSchemaUri)
+      }
+      if !self.parametersSchemaUri.isEmpty {
+        try container.encode(self.parametersSchemaUri, forKey: .parametersSchemaUri)
+      }
+      if !self.predictionSchemaUri.isEmpty {
+        try container.encode(self.predictionSchemaUri, forKey: .predictionSchemaUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

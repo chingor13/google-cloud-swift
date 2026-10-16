@@ -244,25 +244,47 @@ public struct AwsCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.networking, forKey: .networking)
-    try container.encode(self.awsRegion, forKey: .awsRegion)
+    if !self.awsRegion.isEmpty {
+      try container.encode(self.awsRegion, forKey: .awsRegion)
+    }
     try container.encodeIfPresent(self.controlPlane, forKey: .controlPlane)
     try container.encodeIfPresent(self.authorization, forKey: .authorization)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.reconciling, forKey: .reconciling)
+    if self.state != AwsCluster.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.workloadIdentityConfig, forKey: .workloadIdentityConfig)
-    try container.encode(self.clusterCaCertificate, forKey: .clusterCaCertificate)
+    if !self.clusterCaCertificate.isEmpty {
+      try container.encode(self.clusterCaCertificate, forKey: .clusterCaCertificate)
+    }
     try container.encodeIfPresent(self.fleet, forKey: .fleet)
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     try container.encodeIfPresent(self.monitoringConfig, forKey: .monitoringConfig)
     try container.encodeIfPresent(self.binaryAuthorization, forKey: .binaryAuthorization)
     for (key, value) in self._unknownFields.json {

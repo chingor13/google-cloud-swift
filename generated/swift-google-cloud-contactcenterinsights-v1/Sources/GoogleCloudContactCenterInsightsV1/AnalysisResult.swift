@@ -213,14 +213,26 @@ public struct AnalysisResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.annotations, forKey: .annotations)
-      try container.encode(self.entities, forKey: .entities)
-      try container.encode(self.sentiments, forKey: .sentiments)
+      if !self.annotations.isEmpty {
+        try container.encode(self.annotations, forKey: .annotations)
+      }
+      if !self.entities.isEmpty {
+        try container.encode(self.entities, forKey: .entities)
+      }
+      if !self.sentiments.isEmpty {
+        try container.encode(self.sentiments, forKey: .sentiments)
+      }
       try container.encodeIfPresent(self.silence, forKey: .silence)
-      try container.encode(self.intents, forKey: .intents)
-      try container.encode(self.phraseMatchers, forKey: .phraseMatchers)
+      if !self.intents.isEmpty {
+        try container.encode(self.intents, forKey: .intents)
+      }
+      if !self.phraseMatchers.isEmpty {
+        try container.encode(self.phraseMatchers, forKey: .phraseMatchers)
+      }
       try container.encodeIfPresent(self.issueModelResult, forKey: .issueModelResult)
-      try container.encode(self.qaScorecardResults, forKey: .qaScorecardResults)
+      if !self.qaScorecardResults.isEmpty {
+        try container.encode(self.qaScorecardResults, forKey: .qaScorecardResults)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

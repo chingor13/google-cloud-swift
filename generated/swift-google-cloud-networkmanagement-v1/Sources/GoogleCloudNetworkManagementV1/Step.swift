@@ -356,10 +356,18 @@ public struct Step: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.causesDrop, forKey: .causesDrop)
-    try container.encode(self.projectId, forKey: .projectId)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != Step.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.causesDrop {
+      try container.encode(self.causesDrop, forKey: .causesDrop)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
 
     if let choice = self.stepInfo {
       switch choice {

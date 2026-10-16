@@ -120,13 +120,27 @@ public struct GenerativeQuestionConfig: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.catalog, forKey: .catalog)
-    try container.encode(self.facet, forKey: .facet)
-    try container.encode(self.generatedQuestion, forKey: .generatedQuestion)
-    try container.encode(self.finalQuestion, forKey: .finalQuestion)
-    try container.encode(self.exampleValues, forKey: .exampleValues)
-    try container.encode(self.frequency, forKey: .frequency)
-    try container.encode(self.allowedInConversation, forKey: .allowedInConversation)
+    if !self.catalog.isEmpty {
+      try container.encode(self.catalog, forKey: .catalog)
+    }
+    if !self.facet.isEmpty {
+      try container.encode(self.facet, forKey: .facet)
+    }
+    if !self.generatedQuestion.isEmpty {
+      try container.encode(self.generatedQuestion, forKey: .generatedQuestion)
+    }
+    if !self.finalQuestion.isEmpty {
+      try container.encode(self.finalQuestion, forKey: .finalQuestion)
+    }
+    if !self.exampleValues.isEmpty {
+      try container.encode(self.exampleValues, forKey: .exampleValues)
+    }
+    if self.frequency != 0 {
+      try container.encode(self.frequency, forKey: .frequency)
+    }
+    if self.allowedInConversation {
+      try container.encode(self.allowedInConversation, forKey: .allowedInConversation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

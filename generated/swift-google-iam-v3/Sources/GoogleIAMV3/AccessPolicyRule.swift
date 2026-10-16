@@ -179,10 +179,16 @@ public struct AccessPolicyRule: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.description, forKey: .description)
     try container.encodeIfPresent(self.effect, forKey: .effect)
-    try container.encode(self.principals, forKey: .principals)
-    try container.encode(self.excludedPrincipals, forKey: .excludedPrincipals)
+    if !self.principals.isEmpty {
+      try container.encode(self.principals, forKey: .principals)
+    }
+    if !self.excludedPrincipals.isEmpty {
+      try container.encode(self.excludedPrincipals, forKey: .excludedPrincipals)
+    }
     try container.encodeIfPresent(self.operation, forKey: .operation)
-    try container.encode(self.conditions, forKey: .conditions)
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -262,8 +268,12 @@ public struct AccessPolicyRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.permissions, forKey: .permissions)
-      try container.encode(self.excludedPermissions, forKey: .excludedPermissions)
+      if !self.permissions.isEmpty {
+        try container.encode(self.permissions, forKey: .permissions)
+      }
+      if !self.excludedPermissions.isEmpty {
+        try container.encode(self.excludedPermissions, forKey: .excludedPermissions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

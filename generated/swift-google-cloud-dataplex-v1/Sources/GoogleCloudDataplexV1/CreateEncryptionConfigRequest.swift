@@ -88,8 +88,12 @@ public struct CreateEncryptionConfigRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.encryptionConfigId, forKey: .encryptionConfigId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.encryptionConfigId.isEmpty {
+      try container.encode(self.encryptionConfigId, forKey: .encryptionConfigId)
+    }
     try container.encodeIfPresent(self.encryptionConfig, forKey: .encryptionConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -135,14 +135,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.createConversationOnTheFly, forKey: .createConversationOnTheFly)
-      try container.encode(self.inactiveStart, forKey: .inactiveStart)
+      if self.createConversationOnTheFly {
+        try container.encode(self.createConversationOnTheFly, forKey: .createConversationOnTheFly)
+      }
+      if self.inactiveStart {
+        try container.encode(self.inactiveStart, forKey: .inactiveStart)
+      }
       try container.encodeIfPresent(
         self.maxAudioRecordingDuration, forKey: .maxAudioRecordingDuration)
-      try container.encode(self.allowVirtualAgentInteraction, forKey: .allowVirtualAgentInteraction)
-      try container.encode(self.keepConversationRunning, forKey: .keepConversationRunning)
-      try container.encode(self.copyInboundCallLegHeaders, forKey: .copyInboundCallLegHeaders)
-      try container.encode(self.ignoreReinviteMediaDirection, forKey: .ignoreReinviteMediaDirection)
+      if self.allowVirtualAgentInteraction {
+        try container.encode(
+          self.allowVirtualAgentInteraction, forKey: .allowVirtualAgentInteraction)
+      }
+      if self.keepConversationRunning {
+        try container.encode(self.keepConversationRunning, forKey: .keepConversationRunning)
+      }
+      if !self.copyInboundCallLegHeaders.isEmpty {
+        try container.encode(self.copyInboundCallLegHeaders, forKey: .copyInboundCallLegHeaders)
+      }
+      if self.ignoreReinviteMediaDirection {
+        try container.encode(
+          self.ignoreReinviteMediaDirection, forKey: .ignoreReinviteMediaDirection)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

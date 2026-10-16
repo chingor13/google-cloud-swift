@@ -238,13 +238,17 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedReplacementLicenses, forKey: .allowedReplacementLicenses)
+      if !self.allowedReplacementLicenses.isEmpty {
+        try container.encode(self.allowedReplacementLicenses, forKey: .allowedReplacementLicenses)
+      }
       try container.encodeIfPresent(self.appendableToDisk, forKey: .appendableToDisk)
       try container.encodeIfPresent(self.chargesUseFee, forKey: .chargesUseFee)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.incompatibleLicenses, forKey: .incompatibleLicenses)
+      if !self.incompatibleLicenses.isEmpty {
+        try container.encode(self.incompatibleLicenses, forKey: .incompatibleLicenses)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.licenseCode, forKey: .licenseCode)
       try container.encodeIfPresent(self.minimumRetention, forKey: .minimumRetention)
@@ -253,7 +257,9 @@
       try container.encodeIfPresent(self.osLicense, forKey: .osLicense)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.removableFromDisk, forKey: .removableFromDisk)
-      try container.encode(self.requiredCoattachedLicenses, forKey: .requiredCoattachedLicenses)
+      if !self.requiredCoattachedLicenses.isEmpty {
+        try container.encode(self.requiredCoattachedLicenses, forKey: .requiredCoattachedLicenses)
+      }
       try container.encodeIfPresent(self.resourceRequirements, forKey: .resourceRequirements)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)

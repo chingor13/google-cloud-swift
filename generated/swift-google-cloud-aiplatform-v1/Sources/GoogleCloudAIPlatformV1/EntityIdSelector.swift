@@ -92,7 +92,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entityIdField, forKey: .entityIdField)
+      if !self.entityIdField.isEmpty {
+        try container.encode(self.entityIdField, forKey: .entityIdField)
+      }
 
       if let choice = self.entityIdsSource {
         switch choice {

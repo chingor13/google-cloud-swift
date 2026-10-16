@@ -90,7 +90,9 @@ public struct VideoActionRecognitionPredictionResult: Codable, Equatable, Google
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.segmentStartTime, forKey: .segmentStartTime)
     try container.encodeIfPresent(self.segmentEndTime, forKey: .segmentEndTime)
-    try container.encode(self.actions, forKey: .actions)
+    if !self.actions.isEmpty {
+      try container.encode(self.actions, forKey: .actions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -167,9 +169,15 @@ public struct VideoActionRecognitionPredictionResult: Codable, Equatable, Google
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.confidence, forKey: .confidence)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

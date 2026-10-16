@@ -83,7 +83,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topK, forKey: .topK)
+      if self.topK != 0 {
+        try container.encode(self.topK, forKey: .topK)
+      }
       try container.encodeIfPresent(self.filter, forKey: .filter)
       try container.encodeIfPresent(self.ranking, forKey: .ranking)
       for (key, value) in self._unknownFields.json {
@@ -173,7 +175,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.metadataFilter, forKey: .metadataFilter)
+        if !self.metadataFilter.isEmpty {
+          try container.encode(self.metadataFilter, forKey: .metadataFilter)
+        }
 
         if let choice = self.vectorDbThreshold {
           switch choice {

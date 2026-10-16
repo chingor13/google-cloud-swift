@@ -69,7 +69,9 @@ public struct GlueIcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.glueId, forKey: .glueId)
+    if !self.glueId.isEmpty {
+      try container.encode(self.glueId, forKey: .glueId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

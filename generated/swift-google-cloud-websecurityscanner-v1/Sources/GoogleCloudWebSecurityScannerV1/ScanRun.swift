@@ -159,17 +159,33 @@ public struct ScanRun: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.executionState, forKey: .executionState)
-    try container.encode(self.resultState, forKey: .resultState)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.executionState != ScanRun.ExecutionState() {
+      try container.encode(self.executionState, forKey: .executionState)
+    }
+    if self.resultState != ScanRun.ResultState() {
+      try container.encode(self.resultState, forKey: .resultState)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.urlsCrawledCount, forKey: .urlsCrawledCount)
-    try container.encode(self.urlsTestedCount, forKey: .urlsTestedCount)
-    try container.encode(self.hasVulnerabilities, forKey: .hasVulnerabilities)
-    try container.encode(self.progressPercent, forKey: .progressPercent)
+    if self.urlsCrawledCount != 0 {
+      try container.encode(self.urlsCrawledCount, forKey: .urlsCrawledCount)
+    }
+    if self.urlsTestedCount != 0 {
+      try container.encode(self.urlsTestedCount, forKey: .urlsTestedCount)
+    }
+    if self.hasVulnerabilities {
+      try container.encode(self.hasVulnerabilities, forKey: .hasVulnerabilities)
+    }
+    if self.progressPercent != 0 {
+      try container.encode(self.progressPercent, forKey: .progressPercent)
+    }
     try container.encodeIfPresent(self.errorTrace, forKey: .errorTrace)
-    try container.encode(self.warningTraces, forKey: .warningTraces)
+    if !self.warningTraces.isEmpty {
+      try container.encode(self.warningTraces, forKey: .warningTraces)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

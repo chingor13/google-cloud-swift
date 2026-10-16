@@ -98,10 +98,16 @@ public struct CreateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleW
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.mirroringDeploymentGroupId, forKey: .mirroringDeploymentGroupId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.mirroringDeploymentGroupId.isEmpty {
+      try container.encode(self.mirroringDeploymentGroupId, forKey: .mirroringDeploymentGroupId)
+    }
     try container.encodeIfPresent(self.mirroringDeploymentGroup, forKey: .mirroringDeploymentGroup)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

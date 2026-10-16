@@ -152,10 +152,18 @@ public struct RestoreObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.object, forKey: .object)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.restoreToken, forKey: .restoreToken)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.object.isEmpty {
+      try container.encode(self.object, forKey: .object)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.restoreToken.isEmpty {
+      try container.encode(self.restoreToken, forKey: .restoreToken)
+    }
     try container.encodeIfPresent(self.ifGenerationMatch, forKey: .ifGenerationMatch)
     try container.encodeIfPresent(self.ifGenerationNotMatch, forKey: .ifGenerationNotMatch)
     try container.encodeIfPresent(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)

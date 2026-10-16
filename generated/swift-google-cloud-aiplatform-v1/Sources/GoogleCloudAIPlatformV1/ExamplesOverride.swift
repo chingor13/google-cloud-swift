@@ -106,11 +106,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.neighborCount, forKey: .neighborCount)
-      try container.encode(self.crowdingCount, forKey: .crowdingCount)
-      try container.encode(self.restrictions, forKey: .restrictions)
-      try container.encode(self.returnEmbeddings, forKey: .returnEmbeddings)
-      try container.encode(self.dataFormat, forKey: .dataFormat)
+      if self.neighborCount != 0 {
+        try container.encode(self.neighborCount, forKey: .neighborCount)
+      }
+      if self.crowdingCount != 0 {
+        try container.encode(self.crowdingCount, forKey: .crowdingCount)
+      }
+      if !self.restrictions.isEmpty {
+        try container.encode(self.restrictions, forKey: .restrictions)
+      }
+      if self.returnEmbeddings {
+        try container.encode(self.returnEmbeddings, forKey: .returnEmbeddings)
+      }
+      if self.dataFormat != ExamplesOverride.DataFormat() {
+        try container.encode(self.dataFormat, forKey: .dataFormat)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

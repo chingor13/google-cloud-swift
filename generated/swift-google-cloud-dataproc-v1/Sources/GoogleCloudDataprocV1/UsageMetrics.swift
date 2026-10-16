@@ -108,10 +108,18 @@ public struct UsageMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.milliDcuSeconds, forKey: .milliDcuSeconds)
-    try container.encode(self.shuffleStorageGbSeconds, forKey: .shuffleStorageGbSeconds)
-    try container.encode(self.milliAcceleratorSeconds, forKey: .milliAcceleratorSeconds)
-    try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    if self.milliDcuSeconds != 0 {
+      try container.encode(self.milliDcuSeconds, forKey: .milliDcuSeconds)
+    }
+    if self.shuffleStorageGbSeconds != 0 {
+      try container.encode(self.shuffleStorageGbSeconds, forKey: .shuffleStorageGbSeconds)
+    }
+    if self.milliAcceleratorSeconds != 0 {
+      try container.encode(self.milliAcceleratorSeconds, forKey: .milliAcceleratorSeconds)
+    }
+    if !self.acceleratorType.isEmpty {
+      try container.encode(self.acceleratorType, forKey: .acceleratorType)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

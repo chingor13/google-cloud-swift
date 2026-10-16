@@ -103,11 +103,21 @@ public struct MeshRouteView: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.routeProjectNumber, forKey: .routeProjectNumber)
-    try container.encode(self.routeLocation, forKey: .routeLocation)
-    try container.encode(self.routeType, forKey: .routeType)
-    try container.encode(self.routeId, forKey: .routeId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.routeProjectNumber != 0 {
+      try container.encode(self.routeProjectNumber, forKey: .routeProjectNumber)
+    }
+    if !self.routeLocation.isEmpty {
+      try container.encode(self.routeLocation, forKey: .routeLocation)
+    }
+    if !self.routeType.isEmpty {
+      try container.encode(self.routeType, forKey: .routeType)
+    }
+    if !self.routeId.isEmpty {
+      try container.encode(self.routeId, forKey: .routeId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

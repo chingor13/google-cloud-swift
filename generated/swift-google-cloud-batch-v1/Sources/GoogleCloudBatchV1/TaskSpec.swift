@@ -157,13 +157,23 @@ public struct TaskSpec: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.runnables, forKey: .runnables)
+    if !self.runnables.isEmpty {
+      try container.encode(self.runnables, forKey: .runnables)
+    }
     try container.encodeIfPresent(self.computeResource, forKey: .computeResource)
     try container.encodeIfPresent(self.maxRunDuration, forKey: .maxRunDuration)
-    try container.encode(self.maxRetryCount, forKey: .maxRetryCount)
-    try container.encode(self.lifecyclePolicies, forKey: .lifecyclePolicies)
-    try container.encode(self.environments, forKey: .environments)
-    try container.encode(self.volumes, forKey: .volumes)
+    if self.maxRetryCount != 0 {
+      try container.encode(self.maxRetryCount, forKey: .maxRetryCount)
+    }
+    if !self.lifecyclePolicies.isEmpty {
+      try container.encode(self.lifecyclePolicies, forKey: .lifecyclePolicies)
+    }
+    if !self.environments.isEmpty {
+      try container.encode(self.environments, forKey: .environments)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
     try container.encodeIfPresent(self.environment, forKey: .environment)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

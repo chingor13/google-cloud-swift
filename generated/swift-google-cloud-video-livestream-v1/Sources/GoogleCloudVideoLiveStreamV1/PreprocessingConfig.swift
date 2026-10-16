@@ -149,7 +149,9 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.lufs, forKey: .lufs)
+      if self.lufs != 0 {
+        try container.encode(self.lufs, forKey: .lufs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -254,10 +256,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topPixels, forKey: .topPixels)
-      try container.encode(self.bottomPixels, forKey: .bottomPixels)
-      try container.encode(self.leftPixels, forKey: .leftPixels)
-      try container.encode(self.rightPixels, forKey: .rightPixels)
+      if self.topPixels != 0 {
+        try container.encode(self.topPixels, forKey: .topPixels)
+      }
+      if self.bottomPixels != 0 {
+        try container.encode(self.bottomPixels, forKey: .bottomPixels)
+      }
+      if self.leftPixels != 0 {
+        try container.encode(self.leftPixels, forKey: .leftPixels)
+      }
+      if self.rightPixels != 0 {
+        try container.encode(self.rightPixels, forKey: .rightPixels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -362,10 +372,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topPixels, forKey: .topPixels)
-      try container.encode(self.bottomPixels, forKey: .bottomPixels)
-      try container.encode(self.leftPixels, forKey: .leftPixels)
-      try container.encode(self.rightPixels, forKey: .rightPixels)
+      if self.topPixels != 0 {
+        try container.encode(self.topPixels, forKey: .topPixels)
+      }
+      if self.bottomPixels != 0 {
+        try container.encode(self.bottomPixels, forKey: .bottomPixels)
+      }
+      if self.leftPixels != 0 {
+        try container.encode(self.leftPixels, forKey: .leftPixels)
+      }
+      if self.rightPixels != 0 {
+        try container.encode(self.rightPixels, forKey: .rightPixels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

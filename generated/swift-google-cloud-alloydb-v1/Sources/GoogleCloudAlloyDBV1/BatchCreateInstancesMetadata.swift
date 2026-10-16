@@ -88,8 +88,12 @@ public struct BatchCreateInstancesMetadata: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instanceTargets, forKey: .instanceTargets)
-    try container.encode(self.instanceStatuses, forKey: .instanceStatuses)
+    if !self.instanceTargets.isEmpty {
+      try container.encode(self.instanceTargets, forKey: .instanceTargets)
+    }
+    if !self.instanceStatuses.isEmpty {
+      try container.encode(self.instanceStatuses, forKey: .instanceStatuses)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

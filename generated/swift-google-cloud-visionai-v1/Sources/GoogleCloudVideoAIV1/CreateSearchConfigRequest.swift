@@ -88,9 +88,13 @@ public struct CreateSearchConfigRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.searchConfig, forKey: .searchConfig)
-    try container.encode(self.searchConfigId, forKey: .searchConfigId)
+    if !self.searchConfigId.isEmpty {
+      try container.encode(self.searchConfigId, forKey: .searchConfigId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

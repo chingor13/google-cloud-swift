@@ -114,11 +114,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.artifact, forKey: .artifact)
-      try container.encode(self.execution, forKey: .execution)
+      if !self.artifact.isEmpty {
+        try container.encode(self.artifact, forKey: .artifact)
+      }
+      if !self.execution.isEmpty {
+        try container.encode(self.execution, forKey: .execution)
+      }
       try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.labels, forKey: .labels)
+      if self.type != Event.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

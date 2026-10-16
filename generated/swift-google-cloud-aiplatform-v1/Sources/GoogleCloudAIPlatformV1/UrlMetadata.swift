@@ -80,8 +80,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.retrievedUrl, forKey: .retrievedUrl)
-      try container.encode(self.urlRetrievalStatus, forKey: .urlRetrievalStatus)
+      if !self.retrievedUrl.isEmpty {
+        try container.encode(self.retrievedUrl, forKey: .retrievedUrl)
+      }
+      if self.urlRetrievalStatus != UrlMetadata.UrlRetrievalStatus() {
+        try container.encode(self.urlRetrievalStatus, forKey: .urlRetrievalStatus)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

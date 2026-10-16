@@ -537,34 +537,74 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.company, forKey: .company)
-    try container.encode(self.requisitionId, forKey: .requisitionId)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.addresses, forKey: .addresses)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.company.isEmpty {
+      try container.encode(self.company, forKey: .company)
+    }
+    if !self.requisitionId.isEmpty {
+      try container.encode(self.requisitionId, forKey: .requisitionId)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.addresses.isEmpty {
+      try container.encode(self.addresses, forKey: .addresses)
+    }
     try container.encodeIfPresent(self.applicationInfo, forKey: .applicationInfo)
-    try container.encode(self.jobBenefits, forKey: .jobBenefits)
+    if !self.jobBenefits.isEmpty {
+      try container.encode(self.jobBenefits, forKey: .jobBenefits)
+    }
     try container.encodeIfPresent(self.compensationInfo, forKey: .compensationInfo)
-    try container.encode(self.customAttributes, forKey: .customAttributes)
-    try container.encode(self.degreeTypes, forKey: .degreeTypes)
-    try container.encode(self.department, forKey: .department)
-    try container.encode(self.employmentTypes, forKey: .employmentTypes)
-    try container.encode(self.incentives, forKey: .incentives)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.jobLevel, forKey: .jobLevel)
-    try container.encode(self.promotionValue, forKey: .promotionValue)
-    try container.encode(self.qualifications, forKey: .qualifications)
-    try container.encode(self.responsibilities, forKey: .responsibilities)
-    try container.encode(self.postingRegion, forKey: .postingRegion)
-    try container.encode(self.visibility, forKey: .visibility)
+    if !self.customAttributes.isEmpty {
+      try container.encode(self.customAttributes, forKey: .customAttributes)
+    }
+    if !self.degreeTypes.isEmpty {
+      try container.encode(self.degreeTypes, forKey: .degreeTypes)
+    }
+    if !self.department.isEmpty {
+      try container.encode(self.department, forKey: .department)
+    }
+    if !self.employmentTypes.isEmpty {
+      try container.encode(self.employmentTypes, forKey: .employmentTypes)
+    }
+    if !self.incentives.isEmpty {
+      try container.encode(self.incentives, forKey: .incentives)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if self.jobLevel != JobLevel() {
+      try container.encode(self.jobLevel, forKey: .jobLevel)
+    }
+    if self.promotionValue != 0 {
+      try container.encode(self.promotionValue, forKey: .promotionValue)
+    }
+    if !self.qualifications.isEmpty {
+      try container.encode(self.qualifications, forKey: .qualifications)
+    }
+    if !self.responsibilities.isEmpty {
+      try container.encode(self.responsibilities, forKey: .responsibilities)
+    }
+    if self.postingRegion != PostingRegion() {
+      try container.encode(self.postingRegion, forKey: .postingRegion)
+    }
+    if self.visibility != Visibility() {
+      try container.encode(self.visibility, forKey: .visibility)
+    }
     try container.encodeIfPresent(self.jobStartTime, forKey: .jobStartTime)
     try container.encodeIfPresent(self.jobEndTime, forKey: .jobEndTime)
     try container.encodeIfPresent(self.postingPublishTime, forKey: .postingPublishTime)
     try container.encodeIfPresent(self.postingExpireTime, forKey: .postingExpireTime)
     try container.encodeIfPresent(self.postingCreateTime, forKey: .postingCreateTime)
     try container.encodeIfPresent(self.postingUpdateTime, forKey: .postingUpdateTime)
-    try container.encode(self.companyDisplayName, forKey: .companyDisplayName)
+    if !self.companyDisplayName.isEmpty {
+      try container.encode(self.companyDisplayName, forKey: .companyDisplayName)
+    }
     try container.encodeIfPresent(self.derivedInfo, forKey: .derivedInfo)
     try container.encodeIfPresent(self.processingOptions, forKey: .processingOptions)
     for (key, value) in self._unknownFields.json {
@@ -652,9 +692,15 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.emails, forKey: .emails)
-      try container.encode(self.instruction, forKey: .instruction)
-      try container.encode(self.uris, forKey: .uris)
+      if !self.emails.isEmpty {
+        try container.encode(self.emails, forKey: .emails)
+      }
+      if !self.instruction.isEmpty {
+        try container.encode(self.instruction, forKey: .instruction)
+      }
+      if !self.uris.isEmpty {
+        try container.encode(self.uris, forKey: .uris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -756,8 +802,12 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.locations, forKey: .locations)
-      try container.encode(self.jobCategories, forKey: .jobCategories)
+      if !self.locations.isEmpty {
+        try container.encode(self.locations, forKey: .locations)
+      }
+      if !self.jobCategories.isEmpty {
+        try container.encode(self.jobCategories, forKey: .jobCategories)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -864,9 +914,13 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.disableStreetAddressResolution, forKey: .disableStreetAddressResolution)
-      try container.encode(self.htmlSanitization, forKey: .htmlSanitization)
+      if self.disableStreetAddressResolution {
+        try container.encode(
+          self.disableStreetAddressResolution, forKey: .disableStreetAddressResolution)
+      }
+      if self.htmlSanitization != HtmlSanitization() {
+        try container.encode(self.htmlSanitization, forKey: .htmlSanitization)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

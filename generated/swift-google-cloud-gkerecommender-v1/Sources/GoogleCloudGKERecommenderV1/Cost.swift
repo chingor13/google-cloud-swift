@@ -102,7 +102,9 @@ public struct Cost: Codable, Equatable, GoogleWKT._AnyPackable,
       self.costPerMillionOutputTokens, forKey: .costPerMillionOutputTokens)
     try container.encodeIfPresent(
       self.costPerMillionInputTokens, forKey: .costPerMillionInputTokens)
-    try container.encode(self.pricingModel, forKey: .pricingModel)
+    if !self.pricingModel.isEmpty {
+      try container.encode(self.pricingModel, forKey: .pricingModel)
+    }
     try container.encodeIfPresent(self.outputInputCostRatio, forKey: .outputInputCostRatio)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

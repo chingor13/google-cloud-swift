@@ -111,11 +111,21 @@ public struct Attack: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.volumePpsLong, forKey: .volumePpsLong)
-    try container.encode(self.volumeBpsLong, forKey: .volumeBpsLong)
-    try container.encode(self.classification, forKey: .classification)
-    try container.encode(self.volumePps, forKey: .volumePps)
-    try container.encode(self.volumeBps, forKey: .volumeBps)
+    if self.volumePpsLong != 0 {
+      try container.encode(self.volumePpsLong, forKey: .volumePpsLong)
+    }
+    if self.volumeBpsLong != 0 {
+      try container.encode(self.volumeBpsLong, forKey: .volumeBpsLong)
+    }
+    if !self.classification.isEmpty {
+      try container.encode(self.classification, forKey: .classification)
+    }
+    if self.volumePps != 0 {
+      try container.encode(self.volumePps, forKey: .volumePps)
+    }
+    if self.volumeBps != 0 {
+      try container.encode(self.volumeBps, forKey: .volumeBps)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

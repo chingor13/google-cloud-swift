@@ -84,7 +84,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.effectiveSla, forKey: .effectiveSla)
-      try container.encode(self.intendedSlaBlockers, forKey: .intendedSlaBlockers)
+      if !self.intendedSlaBlockers.isEmpty {
+        try container.encode(self.intendedSlaBlockers, forKey: .intendedSlaBlockers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

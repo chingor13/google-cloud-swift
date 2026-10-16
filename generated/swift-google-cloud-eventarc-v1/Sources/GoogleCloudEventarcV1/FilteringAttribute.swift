@@ -96,10 +96,18 @@ public struct FilteringAttribute: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attribute, forKey: .attribute)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.`required`, forKey: .`required`)
-    try container.encode(self.pathPatternSupported, forKey: .pathPatternSupported)
+    if !self.attribute.isEmpty {
+      try container.encode(self.attribute, forKey: .attribute)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.`required` {
+      try container.encode(self.`required`, forKey: .`required`)
+    }
+    if self.pathPatternSupported {
+      try container.encode(self.pathPatternSupported, forKey: .pathPatternSupported)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

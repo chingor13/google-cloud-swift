@@ -184,12 +184,22 @@ public struct AwsS3Data: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucketName, forKey: .bucketName)
+    if !self.bucketName.isEmpty {
+      try container.encode(self.bucketName, forKey: .bucketName)
+    }
     try container.encodeIfPresent(self.awsAccessKey, forKey: .awsAccessKey)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.roleArn, forKey: .roleArn)
-    try container.encode(self.cloudfrontDomain, forKey: .cloudfrontDomain)
-    try container.encode(self.credentialsSecret, forKey: .credentialsSecret)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.roleArn.isEmpty {
+      try container.encode(self.roleArn, forKey: .roleArn)
+    }
+    if !self.cloudfrontDomain.isEmpty {
+      try container.encode(self.cloudfrontDomain, forKey: .cloudfrontDomain)
+    }
+    if !self.credentialsSecret.isEmpty {
+      try container.encode(self.credentialsSecret, forKey: .credentialsSecret)
+    }
 
     if let choice = self.privateNetwork {
       switch choice {

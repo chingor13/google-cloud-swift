@@ -116,7 +116,9 @@ public struct Dimension: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dimensionKey, forKey: .dimensionKey)
+    if self.dimensionKey != Dimension.DimensionKey() {
+      try container.encode(self.dimensionKey, forKey: .dimensionKey)
+    }
 
     if let choice = self.dimensionMetadata {
       switch choice {
@@ -203,9 +205,15 @@ public struct Dimension: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.issueId, forKey: .issueId)
-      try container.encode(self.issueDisplayName, forKey: .issueDisplayName)
-      try container.encode(self.issueModelId, forKey: .issueModelId)
+      if !self.issueId.isEmpty {
+        try container.encode(self.issueId, forKey: .issueId)
+      }
+      if !self.issueDisplayName.isEmpty {
+        try container.encode(self.issueDisplayName, forKey: .issueDisplayName)
+      }
+      if !self.issueModelId.isEmpty {
+        try container.encode(self.issueModelId, forKey: .issueModelId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -302,9 +310,15 @@ public struct Dimension: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.agentId, forKey: .agentId)
-      try container.encode(self.agentDisplayName, forKey: .agentDisplayName)
-      try container.encode(self.agentTeam, forKey: .agentTeam)
+      if !self.agentId.isEmpty {
+        try container.encode(self.agentId, forKey: .agentId)
+      }
+      if !self.agentDisplayName.isEmpty {
+        try container.encode(self.agentDisplayName, forKey: .agentDisplayName)
+      }
+      if !self.agentTeam.isEmpty {
+        try container.encode(self.agentTeam, forKey: .agentTeam)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -401,9 +415,15 @@ public struct Dimension: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.qaScorecardId, forKey: .qaScorecardId)
-      try container.encode(self.qaQuestionId, forKey: .qaQuestionId)
-      try container.encode(self.questionBody, forKey: .questionBody)
+      if !self.qaScorecardId.isEmpty {
+        try container.encode(self.qaScorecardId, forKey: .qaScorecardId)
+      }
+      if !self.qaQuestionId.isEmpty {
+        try container.encode(self.qaQuestionId, forKey: .qaQuestionId)
+      }
+      if !self.questionBody.isEmpty {
+        try container.encode(self.questionBody, forKey: .questionBody)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -510,10 +530,18 @@ public struct Dimension: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.qaScorecardId, forKey: .qaScorecardId)
-      try container.encode(self.qaQuestionId, forKey: .qaQuestionId)
-      try container.encode(self.questionBody, forKey: .questionBody)
-      try container.encode(self.answerValue, forKey: .answerValue)
+      if !self.qaScorecardId.isEmpty {
+        try container.encode(self.qaScorecardId, forKey: .qaScorecardId)
+      }
+      if !self.qaQuestionId.isEmpty {
+        try container.encode(self.qaQuestionId, forKey: .qaQuestionId)
+      }
+      if !self.questionBody.isEmpty {
+        try container.encode(self.questionBody, forKey: .questionBody)
+      }
+      if !self.answerValue.isEmpty {
+        try container.encode(self.answerValue, forKey: .answerValue)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

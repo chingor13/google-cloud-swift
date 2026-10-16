@@ -72,7 +72,9 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.runtimes, forKey: .runtimes)
+    if !self.runtimes.isEmpty {
+      try container.encode(self.runtimes, forKey: .runtimes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -179,11 +181,21 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.stage, forKey: .stage)
-      try container.encode(self.warnings, forKey: .warnings)
-      try container.encode(self.environment, forKey: .environment)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.stage != ListRuntimesResponse.RuntimeStage() {
+        try container.encode(self.stage, forKey: .stage)
+      }
+      if !self.warnings.isEmpty {
+        try container.encode(self.warnings, forKey: .warnings)
+      }
+      if self.environment != Environment() {
+        try container.encode(self.environment, forKey: .environment)
+      }
       try container.encodeIfPresent(self.deprecationDate, forKey: .deprecationDate)
       try container.encodeIfPresent(self.decommissionDate, forKey: .decommissionDate)
       for (key, value) in self._unknownFields.json {

@@ -103,10 +103,16 @@ public struct CreateTargetProjectRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.targetProjectId, forKey: .targetProjectId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.targetProjectId.isEmpty {
+      try container.encode(self.targetProjectId, forKey: .targetProjectId)
+    }
     try container.encodeIfPresent(self.targetProject, forKey: .targetProject)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -103,9 +103,15 @@ public struct HistogramQueryPropertyNameFilter: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.documentSchemas, forKey: .documentSchemas)
-    try container.encode(self.propertyNames, forKey: .propertyNames)
-    try container.encode(self.yAxis, forKey: .yAxis)
+    if !self.documentSchemas.isEmpty {
+      try container.encode(self.documentSchemas, forKey: .documentSchemas)
+    }
+    if !self.propertyNames.isEmpty {
+      try container.encode(self.propertyNames, forKey: .propertyNames)
+    }
+    if self.yAxis != HistogramQueryPropertyNameFilter.HistogramYAxis() {
+      try container.encode(self.yAxis, forKey: .yAxis)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

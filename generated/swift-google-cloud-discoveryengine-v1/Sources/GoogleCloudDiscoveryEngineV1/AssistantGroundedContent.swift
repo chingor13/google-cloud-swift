@@ -170,8 +170,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.segments, forKey: .segments)
-        try container.encode(self.references, forKey: .references)
+        if !self.segments.isEmpty {
+          try container.encode(self.segments, forKey: .segments)
+        }
+        if !self.references.isEmpty {
+          try container.encode(self.references, forKey: .references)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -265,11 +269,21 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.startIndex, forKey: .startIndex)
-          try container.encode(self.endIndex, forKey: .endIndex)
-          try container.encode(self.referenceIndices, forKey: .referenceIndices)
-          try container.encode(self.groundingScore, forKey: .groundingScore)
-          try container.encode(self.text, forKey: .text)
+          if self.startIndex != 0 {
+            try container.encode(self.startIndex, forKey: .startIndex)
+          }
+          if self.endIndex != 0 {
+            try container.encode(self.endIndex, forKey: .endIndex)
+          }
+          if !self.referenceIndices.isEmpty {
+            try container.encode(self.referenceIndices, forKey: .referenceIndices)
+          }
+          if self.groundingScore != 0 {
+            try container.encode(self.groundingScore, forKey: .groundingScore)
+          }
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -359,7 +373,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.content, forKey: .content)
+          if !self.content.isEmpty {
+            try container.encode(self.content, forKey: .content)
+          }
           try container.encodeIfPresent(self.documentMetadata, forKey: .documentMetadata)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))

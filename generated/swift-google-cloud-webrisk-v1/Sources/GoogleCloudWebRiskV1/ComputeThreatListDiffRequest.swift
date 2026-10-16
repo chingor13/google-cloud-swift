@@ -90,8 +90,12 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.threatType, forKey: .threatType)
-    try container.encode(self.versionToken, forKey: .versionToken)
+    if self.threatType != ThreatType() {
+      try container.encode(self.threatType, forKey: .threatType)
+    }
+    if !self.versionToken.isEmpty {
+      try container.encode(self.versionToken, forKey: .versionToken)
+    }
     try container.encodeIfPresent(self.constraints, forKey: .constraints)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -172,9 +176,15 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxDiffEntries, forKey: .maxDiffEntries)
-      try container.encode(self.maxDatabaseEntries, forKey: .maxDatabaseEntries)
-      try container.encode(self.supportedCompressions, forKey: .supportedCompressions)
+      if self.maxDiffEntries != 0 {
+        try container.encode(self.maxDiffEntries, forKey: .maxDiffEntries)
+      }
+      if self.maxDatabaseEntries != 0 {
+        try container.encode(self.maxDatabaseEntries, forKey: .maxDatabaseEntries)
+      }
+      if !self.supportedCompressions.isEmpty {
+        try container.encode(self.supportedCompressions, forKey: .supportedCompressions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

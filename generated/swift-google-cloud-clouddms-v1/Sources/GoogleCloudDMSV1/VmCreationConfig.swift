@@ -85,9 +85,15 @@ public struct VmCreationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmMachineType, forKey: .vmMachineType)
-    try container.encode(self.vmZone, forKey: .vmZone)
-    try container.encode(self.subnet, forKey: .subnet)
+    if !self.vmMachineType.isEmpty {
+      try container.encode(self.vmMachineType, forKey: .vmMachineType)
+    }
+    if !self.vmZone.isEmpty {
+      try container.encode(self.vmZone, forKey: .vmZone)
+    }
+    if !self.subnet.isEmpty {
+      try container.encode(self.subnet, forKey: .subnet)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -291,25 +291,57 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.referenceId, forKey: .referenceId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.displayUri, forKey: .displayUri)
-    try container.encode(self.documentSchemaName, forKey: .documentSchemaName)
-    try container.encode(self.structuredContentUri, forKey: .structuredContentUri)
-    try container.encode(self.properties, forKey: .properties)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.referenceId.isEmpty {
+      try container.encode(self.referenceId, forKey: .referenceId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.displayUri.isEmpty {
+      try container.encode(self.displayUri, forKey: .displayUri)
+    }
+    if !self.documentSchemaName.isEmpty {
+      try container.encode(self.documentSchemaName, forKey: .documentSchemaName)
+    }
+    if !self.structuredContentUri.isEmpty {
+      try container.encode(self.structuredContentUri, forKey: .structuredContentUri)
+    }
+    if !self.properties.isEmpty {
+      try container.encode(self.properties, forKey: .properties)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.rawDocumentFileType, forKey: .rawDocumentFileType)
-    try container.encode(self.asyncEnabled, forKey: .asyncEnabled)
-    try container.encode(self.contentCategory, forKey: .contentCategory)
-    try container.encode(self.textExtractionDisabled, forKey: .textExtractionDisabled)
-    try container.encode(self.textExtractionEnabled, forKey: .textExtractionEnabled)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.updater, forKey: .updater)
+    if self.rawDocumentFileType != RawDocumentFileType() {
+      try container.encode(self.rawDocumentFileType, forKey: .rawDocumentFileType)
+    }
+    if self.asyncEnabled {
+      try container.encode(self.asyncEnabled, forKey: .asyncEnabled)
+    }
+    if self.contentCategory != ContentCategory() {
+      try container.encode(self.contentCategory, forKey: .contentCategory)
+    }
+    if self.textExtractionDisabled {
+      try container.encode(self.textExtractionDisabled, forKey: .textExtractionDisabled)
+    }
+    if self.textExtractionEnabled {
+      try container.encode(self.textExtractionEnabled, forKey: .textExtractionEnabled)
+    }
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.updater.isEmpty {
+      try container.encode(self.updater, forKey: .updater)
+    }
     try container.encodeIfPresent(self.dispositionTime, forKey: .dispositionTime)
-    try container.encode(self.legalHold, forKey: .legalHold)
+    if self.legalHold {
+      try container.encode(self.legalHold, forKey: .legalHold)
+    }
 
     if let choice = self.structuredContent {
       switch choice {

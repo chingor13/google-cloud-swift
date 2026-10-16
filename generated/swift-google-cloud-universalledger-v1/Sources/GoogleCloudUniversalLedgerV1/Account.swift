@@ -165,10 +165,18 @@ public struct Account: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
-    try container.encode(self.publicKey, forKey: .publicKey)
-    try container.encode(self.roundId, forKey: .roundId)
-    try container.encode(self.comment, forKey: .comment)
+    if self.sequenceNumber != 0 {
+      try container.encode(self.sequenceNumber, forKey: .sequenceNumber)
+    }
+    if !self.publicKey.isEmpty {
+      try container.encode(self.publicKey, forKey: .publicKey)
+    }
+    if self.roundId != 0 {
+      try container.encode(self.roundId, forKey: .roundId)
+    }
+    if !self.comment.isEmpty {
+      try container.encode(self.comment, forKey: .comment)
+    }
 
     if let choice = self.accountDetails {
       switch choice {

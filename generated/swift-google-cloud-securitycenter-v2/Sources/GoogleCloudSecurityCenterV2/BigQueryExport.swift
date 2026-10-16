@@ -163,14 +163,26 @@ public struct BigQueryExport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.dataset, forKey: .dataset)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.mostRecentEditor, forKey: .mostRecentEditor)
-    try container.encode(self.principal, forKey: .principal)
+    if !self.mostRecentEditor.isEmpty {
+      try container.encode(self.mostRecentEditor, forKey: .mostRecentEditor)
+    }
+    if !self.principal.isEmpty {
+      try container.encode(self.principal, forKey: .principal)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

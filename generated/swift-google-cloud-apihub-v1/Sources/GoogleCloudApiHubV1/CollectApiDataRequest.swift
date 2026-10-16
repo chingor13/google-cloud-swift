@@ -107,10 +107,18 @@ public struct CollectApiDataRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.collectionType, forKey: .collectionType)
-    try container.encode(self.pluginInstance, forKey: .pluginInstance)
-    try container.encode(self.actionId, forKey: .actionId)
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if self.collectionType != CollectionType() {
+      try container.encode(self.collectionType, forKey: .collectionType)
+    }
+    if !self.pluginInstance.isEmpty {
+      try container.encode(self.pluginInstance, forKey: .pluginInstance)
+    }
+    if !self.actionId.isEmpty {
+      try container.encode(self.actionId, forKey: .actionId)
+    }
     try container.encodeIfPresent(self.apiData, forKey: .apiData)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

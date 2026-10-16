@@ -142,8 +142,12 @@ public struct Monitoring: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.producerDestinations, forKey: .producerDestinations)
-    try container.encode(self.consumerDestinations, forKey: .consumerDestinations)
+    if !self.producerDestinations.isEmpty {
+      try container.encode(self.producerDestinations, forKey: .producerDestinations)
+    }
+    if !self.consumerDestinations.isEmpty {
+      try container.encode(self.consumerDestinations, forKey: .consumerDestinations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -218,8 +222,12 @@ public struct Monitoring: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.monitoredResource, forKey: .monitoredResource)
-      try container.encode(self.metrics, forKey: .metrics)
+      if !self.monitoredResource.isEmpty {
+        try container.encode(self.monitoredResource, forKey: .monitoredResource)
+      }
+      if !self.metrics.isEmpty {
+        try container.encode(self.metrics, forKey: .metrics)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

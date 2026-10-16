@@ -160,15 +160,27 @@ public struct WasmPlugin: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.mainVersionId, forKey: .mainVersionId)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.mainVersionId.isEmpty {
+      try container.encode(self.mainVersionId, forKey: .mainVersionId)
+    }
     try container.encodeIfPresent(self.logConfig, forKey: .logConfig)
-    try container.encode(self.versions, forKey: .versions)
-    try container.encode(self.usedBy, forKey: .usedBy)
+    if !self.versions.isEmpty {
+      try container.encode(self.versions, forKey: .versions)
+    }
+    if !self.usedBy.isEmpty {
+      try container.encode(self.usedBy, forKey: .usedBy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -332,11 +344,21 @@ public struct WasmPlugin: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.imageUri, forKey: .imageUri)
-      try container.encode(self.imageDigest, forKey: .imageDigest)
-      try container.encode(self.pluginConfigDigest, forKey: .pluginConfigDigest)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.imageUri.isEmpty {
+        try container.encode(self.imageUri, forKey: .imageUri)
+      }
+      if !self.imageDigest.isEmpty {
+        try container.encode(self.imageDigest, forKey: .imageDigest)
+      }
+      if !self.pluginConfigDigest.isEmpty {
+        try container.encode(self.pluginConfigDigest, forKey: .pluginConfigDigest)
+      }
 
       if let choice = self.pluginConfigSource {
         switch choice {
@@ -493,9 +515,15 @@ public struct WasmPlugin: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enable, forKey: .enable)
-      try container.encode(self.sampleRate, forKey: .sampleRate)
-      try container.encode(self.minLogLevel, forKey: .minLogLevel)
+      if self.enable {
+        try container.encode(self.enable, forKey: .enable)
+      }
+      if self.sampleRate != 0 {
+        try container.encode(self.sampleRate, forKey: .sampleRate)
+      }
+      if self.minLogLevel != WasmPlugin.LogConfig.LogLevel() {
+        try container.encode(self.minLogLevel, forKey: .minLogLevel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -723,7 +751,9 @@ public struct WasmPlugin: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

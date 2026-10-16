@@ -93,7 +93,9 @@ public struct SpecMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.spec, forKey: .spec)
-    try container.encode(self.originalId, forKey: .originalId)
+    if !self.originalId.isEmpty {
+      try container.encode(self.originalId, forKey: .originalId)
+    }
     try container.encodeIfPresent(self.originalCreateTime, forKey: .originalCreateTime)
     try container.encodeIfPresent(self.originalUpdateTime, forKey: .originalUpdateTime)
     for (key, value) in self._unknownFields.json {

@@ -133,13 +133,27 @@ public struct ProtectedResourcesSummary: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.resourceCount, forKey: .resourceCount)
-    try container.encode(self.projectCount, forKey: .projectCount)
-    try container.encode(self.resourceTypes, forKey: .resourceTypes)
-    try container.encode(self.cloudProducts, forKey: .cloudProducts)
-    try container.encode(self.locations, forKey: .locations)
-    try container.encode(self.warnings, forKey: .warnings)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.resourceCount != 0 {
+      try container.encode(self.resourceCount, forKey: .resourceCount)
+    }
+    if self.projectCount != 0 {
+      try container.encode(self.projectCount, forKey: .projectCount)
+    }
+    if !self.resourceTypes.isEmpty {
+      try container.encode(self.resourceTypes, forKey: .resourceTypes)
+    }
+    if !self.cloudProducts.isEmpty {
+      try container.encode(self.cloudProducts, forKey: .cloudProducts)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

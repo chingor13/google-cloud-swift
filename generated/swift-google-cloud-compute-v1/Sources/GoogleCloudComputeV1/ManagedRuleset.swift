@@ -132,7 +132,9 @@
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.ruleIds, forKey: .ruleIds)
+      if !self.ruleIds.isEmpty {
+        try container.encode(self.ruleIds, forKey: .ruleIds)
+      }
       try container.encodeIfPresent(self.rulesetId, forKey: .rulesetId)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       for (key, value) in self._unknownFields.json {

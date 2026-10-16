@@ -237,20 +237,38 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.transitionRoutes, forKey: .transitionRoutes)
-      try container.encode(self.eventHandlers, forKey: .eventHandlers)
-      try container.encode(self.transitionRouteGroups, forKey: .transitionRouteGroups)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.transitionRoutes.isEmpty {
+        try container.encode(self.transitionRoutes, forKey: .transitionRoutes)
+      }
+      if !self.eventHandlers.isEmpty {
+        try container.encode(self.eventHandlers, forKey: .eventHandlers)
+      }
+      if !self.transitionRouteGroups.isEmpty {
+        try container.encode(self.transitionRouteGroups, forKey: .transitionRouteGroups)
+      }
       try container.encodeIfPresent(self.nluSettings, forKey: .nluSettings)
       try container.encodeIfPresent(self.advancedSettings, forKey: .advancedSettings)
       try container.encodeIfPresent(
         self.knowledgeConnectorSettings, forKey: .knowledgeConnectorSettings)
-      try container.encode(self.inputParameterDefinitions, forKey: .inputParameterDefinitions)
-      try container.encode(self.outputParameterDefinitions, forKey: .outputParameterDefinitions)
+      if !self.inputParameterDefinitions.isEmpty {
+        try container.encode(self.inputParameterDefinitions, forKey: .inputParameterDefinitions)
+      }
+      if !self.outputParameterDefinitions.isEmpty {
+        try container.encode(self.outputParameterDefinitions, forKey: .outputParameterDefinitions)
+      }
       try container.encodeIfPresent(self.multiLanguageSettings, forKey: .multiLanguageSettings)
-      try container.encode(self.locked, forKey: .locked)
+      if self.locked {
+        try container.encode(self.locked, forKey: .locked)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -336,10 +354,14 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.enableMultiLanguageDetection, forKey: .enableMultiLanguageDetection)
-        try container.encode(
-          self.supportedResponseLanguageCodes, forKey: .supportedResponseLanguageCodes)
+        if self.enableMultiLanguageDetection {
+          try container.encode(
+            self.enableMultiLanguageDetection, forKey: .enableMultiLanguageDetection)
+        }
+        if !self.supportedResponseLanguageCodes.isEmpty {
+          try container.encode(
+            self.supportedResponseLanguageCodes, forKey: .supportedResponseLanguageCodes)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

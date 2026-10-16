@@ -103,11 +103,21 @@ public struct ReportSummary: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalCount, forKey: .totalCount)
-    try container.encode(self.compliantCount, forKey: .compliantCount)
-    try container.encode(self.violationCount, forKey: .violationCount)
-    try container.encode(self.manualReviewNeededCount, forKey: .manualReviewNeededCount)
-    try container.encode(self.errorCount, forKey: .errorCount)
+    if self.totalCount != 0 {
+      try container.encode(self.totalCount, forKey: .totalCount)
+    }
+    if self.compliantCount != 0 {
+      try container.encode(self.compliantCount, forKey: .compliantCount)
+    }
+    if self.violationCount != 0 {
+      try container.encode(self.violationCount, forKey: .violationCount)
+    }
+    if self.manualReviewNeededCount != 0 {
+      try container.encode(self.manualReviewNeededCount, forKey: .manualReviewNeededCount)
+    }
+    if self.errorCount != 0 {
+      try container.encode(self.errorCount, forKey: .errorCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

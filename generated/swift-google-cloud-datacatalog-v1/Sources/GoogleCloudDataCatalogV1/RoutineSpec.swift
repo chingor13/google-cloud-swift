@@ -132,11 +132,21 @@ public struct RoutineSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.routineType, forKey: .routineType)
-    try container.encode(self.language, forKey: .language)
-    try container.encode(self.routineArguments, forKey: .routineArguments)
-    try container.encode(self.returnType, forKey: .returnType)
-    try container.encode(self.definitionBody, forKey: .definitionBody)
+    if self.routineType != RoutineSpec.RoutineType() {
+      try container.encode(self.routineType, forKey: .routineType)
+    }
+    if !self.language.isEmpty {
+      try container.encode(self.language, forKey: .language)
+    }
+    if !self.routineArguments.isEmpty {
+      try container.encode(self.routineArguments, forKey: .routineArguments)
+    }
+    if !self.returnType.isEmpty {
+      try container.encode(self.returnType, forKey: .returnType)
+    }
+    if !self.definitionBody.isEmpty {
+      try container.encode(self.definitionBody, forKey: .definitionBody)
+    }
 
     if let choice = self.systemSpec {
       switch choice {
@@ -219,9 +229,15 @@ public struct RoutineSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.mode, forKey: .mode)
-      try container.encode(self.type, forKey: .type)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.mode != RoutineSpec.Argument.Mode() {
+        try container.encode(self.mode, forKey: .mode)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

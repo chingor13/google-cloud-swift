@@ -84,7 +84,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.intents, forKey: .intents)
+      if !self.intents.isEmpty {
+        try container.encode(self.intents, forKey: .intents)
+      }
       try container.encodeIfPresent(self.conflictingResources, forKey: .conflictingResources)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -157,8 +159,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.intentDisplayNames, forKey: .intentDisplayNames)
-        try container.encode(self.entityDisplayNames, forKey: .entityDisplayNames)
+        if !self.intentDisplayNames.isEmpty {
+          try container.encode(self.intentDisplayNames, forKey: .intentDisplayNames)
+        }
+        if !self.entityDisplayNames.isEmpty {
+          try container.encode(self.entityDisplayNames, forKey: .entityDisplayNames)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

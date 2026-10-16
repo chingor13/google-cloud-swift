@@ -135,7 +135,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.aliasLinks, forKey: .aliasLinks)
+      if !self.aliasLinks.isEmpty {
+        try container.encode(self.aliasLinks, forKey: .aliasLinks)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.id, forKey: .id)

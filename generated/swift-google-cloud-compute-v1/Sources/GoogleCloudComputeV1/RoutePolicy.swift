@@ -112,13 +112,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.terms, forKey: .terms)
+      if !self.terms.isEmpty {
+        try container.encode(self.terms, forKey: .terms)
+      }
       try container.encodeIfPresent(self.type, forKey: .type)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

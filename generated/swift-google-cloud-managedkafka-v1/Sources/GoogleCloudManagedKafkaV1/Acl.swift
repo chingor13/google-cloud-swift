@@ -146,12 +146,24 @@ public struct Acl: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.aclEntries, forKey: .aclEntries)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.patternType, forKey: .patternType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.aclEntries.isEmpty {
+      try container.encode(self.aclEntries, forKey: .aclEntries)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.patternType.isEmpty {
+      try container.encode(self.patternType, forKey: .patternType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

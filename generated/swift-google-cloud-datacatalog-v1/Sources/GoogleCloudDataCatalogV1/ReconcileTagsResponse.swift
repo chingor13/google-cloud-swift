@@ -90,9 +90,15 @@ public struct ReconcileTagsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.createdTagsCount, forKey: .createdTagsCount)
-    try container.encode(self.updatedTagsCount, forKey: .updatedTagsCount)
-    try container.encode(self.deletedTagsCount, forKey: .deletedTagsCount)
+    if self.createdTagsCount != 0 {
+      try container.encode(self.createdTagsCount, forKey: .createdTagsCount)
+    }
+    if self.updatedTagsCount != 0 {
+      try container.encode(self.updatedTagsCount, forKey: .updatedTagsCount)
+    }
+    if self.deletedTagsCount != 0 {
+      try container.encode(self.deletedTagsCount, forKey: .deletedTagsCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

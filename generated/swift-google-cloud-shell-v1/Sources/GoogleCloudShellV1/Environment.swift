@@ -150,15 +150,33 @@ public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.dockerImage, forKey: .dockerImage)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.webHost, forKey: .webHost)
-    try container.encode(self.sshUsername, forKey: .sshUsername)
-    try container.encode(self.sshHost, forKey: .sshHost)
-    try container.encode(self.sshPort, forKey: .sshPort)
-    try container.encode(self.publicKeys, forKey: .publicKeys)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.dockerImage.isEmpty {
+      try container.encode(self.dockerImage, forKey: .dockerImage)
+    }
+    if self.state != Environment.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.webHost.isEmpty {
+      try container.encode(self.webHost, forKey: .webHost)
+    }
+    if !self.sshUsername.isEmpty {
+      try container.encode(self.sshUsername, forKey: .sshUsername)
+    }
+    if !self.sshHost.isEmpty {
+      try container.encode(self.sshHost, forKey: .sshHost)
+    }
+    if self.sshPort != 0 {
+      try container.encode(self.sshPort, forKey: .sshPort)
+    }
+    if !self.publicKeys.isEmpty {
+      try container.encode(self.publicKeys, forKey: .publicKeys)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

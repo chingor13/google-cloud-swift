@@ -131,11 +131,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.project, forKey: .project)
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.enableFinalBackup, forKey: .enableFinalBackup)
-      try container.encode(self.finalBackupDescription, forKey: .finalBackupDescription)
-      try container.encode(self.location, forKey: .location)
+      if !self.finalBackupDescription.isEmpty {
+        try container.encode(self.finalBackupDescription, forKey: .finalBackupDescription)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
 
       if let choice = self.expiration {
         switch choice {

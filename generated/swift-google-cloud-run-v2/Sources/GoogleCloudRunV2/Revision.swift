@@ -369,42 +369,88 @@ public struct Revision: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.launchStage, forKey: .launchStage)
-    try container.encode(self.service, forKey: .service)
+    if self.launchStage != GoogleApi.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
     try container.encodeIfPresent(self.scaling, forKey: .scaling)
     try container.encodeIfPresent(self.vpcAccess, forKey: .vpcAccess)
-    try container.encode(self.maxInstanceRequestConcurrency, forKey: .maxInstanceRequestConcurrency)
+    if self.maxInstanceRequestConcurrency != 0 {
+      try container.encode(
+        self.maxInstanceRequestConcurrency, forKey: .maxInstanceRequestConcurrency)
+    }
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.containers, forKey: .containers)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.executionEnvironment, forKey: .executionEnvironment)
-    try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.containers.isEmpty {
+      try container.encode(self.containers, forKey: .containers)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if self.executionEnvironment != ExecutionEnvironment() {
+      try container.encode(self.executionEnvironment, forKey: .executionEnvironment)
+    }
+    if !self.encryptionKey.isEmpty {
+      try container.encode(self.encryptionKey, forKey: .encryptionKey)
+    }
     try container.encodeIfPresent(self.serviceMesh, forKey: .serviceMesh)
-    try container.encode(self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    if self.encryptionKeyRevocationAction != EncryptionKeyRevocationAction() {
+      try container.encode(
+        self.encryptionKeyRevocationAction, forKey: .encryptionKeyRevocationAction)
+    }
     try container.encodeIfPresent(
       self.encryptionKeyShutdownDuration, forKey: .encryptionKeyShutdownDuration)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.observedGeneration, forKey: .observedGeneration)
-    try container.encode(self.logUri, forKey: .logUri)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.sessionAffinity, forKey: .sessionAffinity)
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if self.observedGeneration != 0 {
+      try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    }
+    if !self.logUri.isEmpty {
+      try container.encode(self.logUri, forKey: .logUri)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.sessionAffinity {
+      try container.encode(self.sessionAffinity, forKey: .sessionAffinity)
+    }
     try container.encodeIfPresent(self.scalingStatus, forKey: .scalingStatus)
     try container.encodeIfPresent(self.nodeSelector, forKey: .nodeSelector)
     try container.encodeIfPresent(
       self.gpuZonalRedundancyDisabled, forKey: .gpuZonalRedundancyDisabled)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

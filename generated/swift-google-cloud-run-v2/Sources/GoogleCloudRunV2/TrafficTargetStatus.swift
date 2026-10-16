@@ -101,11 +101,21 @@ public struct TrafficTargetStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.revision, forKey: .revision)
-    try container.encode(self.percent, forKey: .percent)
-    try container.encode(self.tag, forKey: .tag)
-    try container.encode(self.uri, forKey: .uri)
+    if self.type != TrafficTargetAllocationType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
+    if self.percent != 0 {
+      try container.encode(self.percent, forKey: .percent)
+    }
+    if !self.tag.isEmpty {
+      try container.encode(self.tag, forKey: .tag)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

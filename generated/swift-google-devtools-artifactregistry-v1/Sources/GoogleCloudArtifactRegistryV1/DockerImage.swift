@@ -166,16 +166,30 @@ public struct DockerImage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.imageSizeBytes, forKey: .imageSizeBytes)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.imageSizeBytes != 0 {
+      try container.encode(self.imageSizeBytes, forKey: .imageSizeBytes)
+    }
     try container.encodeIfPresent(self.uploadTime, forKey: .uploadTime)
-    try container.encode(self.mediaType, forKey: .mediaType)
+    if !self.mediaType.isEmpty {
+      try container.encode(self.mediaType, forKey: .mediaType)
+    }
     try container.encodeIfPresent(self.buildTime, forKey: .buildTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.artifactType, forKey: .artifactType)
-    try container.encode(self.imageManifests, forKey: .imageManifests)
+    if !self.artifactType.isEmpty {
+      try container.encode(self.artifactType, forKey: .artifactType)
+    }
+    if !self.imageManifests.isEmpty {
+      try container.encode(self.imageManifests, forKey: .imageManifests)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

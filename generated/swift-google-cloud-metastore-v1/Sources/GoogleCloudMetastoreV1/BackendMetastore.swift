@@ -86,8 +86,12 @@ public struct BackendMetastore: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.metastoreType, forKey: .metastoreType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.metastoreType != BackendMetastore.MetastoreType() {
+      try container.encode(self.metastoreType, forKey: .metastoreType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

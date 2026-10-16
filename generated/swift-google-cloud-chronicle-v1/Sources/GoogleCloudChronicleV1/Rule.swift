@@ -243,23 +243,51 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.text, forKey: .text)
-    try container.encode(self.author, forKey: .author)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.text.isEmpty {
+      try container.encode(self.text, forKey: .text)
+    }
+    if !self.author.isEmpty {
+      try container.encode(self.author, forKey: .author)
+    }
     try container.encodeIfPresent(self.severity, forKey: .severity)
-    try container.encode(self.metadata, forKey: .metadata)
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
-    try container.encode(self.compilationState, forKey: .compilationState)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.referenceLists, forKey: .referenceLists)
-    try container.encode(self.allowedRunFrequencies, forKey: .allowedRunFrequencies)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.compilationDiagnostics, forKey: .compilationDiagnostics)
-    try container.encode(self.nearRealTimeLiveRuleEligible, forKey: .nearRealTimeLiveRuleEligible)
+    if self.compilationState != Rule.CompilationState() {
+      try container.encode(self.compilationState, forKey: .compilationState)
+    }
+    if self.type != RuleType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.referenceLists.isEmpty {
+      try container.encode(self.referenceLists, forKey: .referenceLists)
+    }
+    if !self.allowedRunFrequencies.isEmpty {
+      try container.encode(self.allowedRunFrequencies, forKey: .allowedRunFrequencies)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if !self.compilationDiagnostics.isEmpty {
+      try container.encode(self.compilationDiagnostics, forKey: .compilationDiagnostics)
+    }
+    if self.nearRealTimeLiveRuleEligible {
+      try container.encode(self.nearRealTimeLiveRuleEligible, forKey: .nearRealTimeLiveRuleEligible)
+    }
     try container.encodeIfPresent(self.inputsUsed, forKey: .inputsUsed)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

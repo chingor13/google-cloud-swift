@@ -93,9 +93,15 @@ public struct BatchingDescriptorProto: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.batchedField, forKey: .batchedField)
-    try container.encode(self.discriminatorFields, forKey: .discriminatorFields)
-    try container.encode(self.subresponseField, forKey: .subresponseField)
+    if !self.batchedField.isEmpty {
+      try container.encode(self.batchedField, forKey: .batchedField)
+    }
+    if !self.discriminatorFields.isEmpty {
+      try container.encode(self.discriminatorFields, forKey: .discriminatorFields)
+    }
+    if !self.subresponseField.isEmpty {
+      try container.encode(self.subresponseField, forKey: .subresponseField)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

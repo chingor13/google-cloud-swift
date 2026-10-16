@@ -277,32 +277,72 @@ public struct RouteInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.routeType, forKey: .routeType)
-    try container.encode(self.nextHopType, forKey: .nextHopType)
-    try container.encode(self.routeScope, forKey: .routeScope)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.destIpRange, forKey: .destIpRange)
-    try container.encode(self.nextHop, forKey: .nextHop)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.instanceTags, forKey: .instanceTags)
-    try container.encode(self.srcIpRange, forKey: .srcIpRange)
-    try container.encode(self.destPortRanges, forKey: .destPortRanges)
-    try container.encode(self.srcPortRanges, forKey: .srcPortRanges)
-    try container.encode(self.protocols, forKey: .protocols)
+    if self.routeType != RouteInfo.RouteType() {
+      try container.encode(self.routeType, forKey: .routeType)
+    }
+    if self.nextHopType != RouteInfo.NextHopType() {
+      try container.encode(self.nextHopType, forKey: .nextHopType)
+    }
+    if self.routeScope != RouteInfo.RouteScope() {
+      try container.encode(self.routeScope, forKey: .routeScope)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.destIpRange.isEmpty {
+      try container.encode(self.destIpRange, forKey: .destIpRange)
+    }
+    if !self.nextHop.isEmpty {
+      try container.encode(self.nextHop, forKey: .nextHop)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if self.priority != 0 {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if !self.instanceTags.isEmpty {
+      try container.encode(self.instanceTags, forKey: .instanceTags)
+    }
+    if !self.srcIpRange.isEmpty {
+      try container.encode(self.srcIpRange, forKey: .srcIpRange)
+    }
+    if !self.destPortRanges.isEmpty {
+      try container.encode(self.destPortRanges, forKey: .destPortRanges)
+    }
+    if !self.srcPortRanges.isEmpty {
+      try container.encode(self.srcPortRanges, forKey: .srcPortRanges)
+    }
+    if !self.protocols.isEmpty {
+      try container.encode(self.protocols, forKey: .protocols)
+    }
     try container.encodeIfPresent(self.nccHubUri, forKey: .nccHubUri)
     try container.encodeIfPresent(self.nccSpokeUri, forKey: .nccSpokeUri)
     try container.encodeIfPresent(
       self.advertisedRouteSourceRouterUri, forKey: .advertisedRouteSourceRouterUri)
     try container.encodeIfPresent(
       self.advertisedRouteNextHopUri, forKey: .advertisedRouteNextHopUri)
-    try container.encode(self.nextHopUri, forKey: .nextHopUri)
-    try container.encode(self.nextHopNetworkUri, forKey: .nextHopNetworkUri)
-    try container.encode(self.originatingRouteUri, forKey: .originatingRouteUri)
-    try container.encode(self.originatingRouteDisplayName, forKey: .originatingRouteDisplayName)
-    try container.encode(self.nccHubRouteUri, forKey: .nccHubRouteUri)
+    if !self.nextHopUri.isEmpty {
+      try container.encode(self.nextHopUri, forKey: .nextHopUri)
+    }
+    if !self.nextHopNetworkUri.isEmpty {
+      try container.encode(self.nextHopNetworkUri, forKey: .nextHopNetworkUri)
+    }
+    if !self.originatingRouteUri.isEmpty {
+      try container.encode(self.originatingRouteUri, forKey: .originatingRouteUri)
+    }
+    if !self.originatingRouteDisplayName.isEmpty {
+      try container.encode(self.originatingRouteDisplayName, forKey: .originatingRouteDisplayName)
+    }
+    if !self.nccHubRouteUri.isEmpty {
+      try container.encode(self.nccHubRouteUri, forKey: .nccHubRouteUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

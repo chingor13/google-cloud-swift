@@ -160,15 +160,29 @@ public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.enabled, forKey: .enabled)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.sessionMatcher, forKey: .sessionMatcher)
-    try container.encode(self.applicationMatcher, forKey: .applicationMatcher)
-    try container.encode(self.tlsInspectionEnabled, forKey: .tlsInspectionEnabled)
+    if self.enabled {
+      try container.encode(self.enabled, forKey: .enabled)
+    }
+    if self.priority != 0 {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.sessionMatcher.isEmpty {
+      try container.encode(self.sessionMatcher, forKey: .sessionMatcher)
+    }
+    if !self.applicationMatcher.isEmpty {
+      try container.encode(self.applicationMatcher, forKey: .applicationMatcher)
+    }
+    if self.tlsInspectionEnabled {
+      try container.encode(self.tlsInspectionEnabled, forKey: .tlsInspectionEnabled)
+    }
 
     if let choice = self.profile {
       switch choice {

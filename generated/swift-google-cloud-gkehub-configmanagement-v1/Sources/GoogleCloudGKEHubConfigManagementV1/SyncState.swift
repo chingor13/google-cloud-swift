@@ -127,13 +127,25 @@ public struct SyncState: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceToken, forKey: .sourceToken)
-    try container.encode(self.importToken, forKey: .importToken)
-    try container.encode(self.syncToken, forKey: .syncToken)
-    try container.encode(self.lastSync, forKey: .lastSync)
+    if !self.sourceToken.isEmpty {
+      try container.encode(self.sourceToken, forKey: .sourceToken)
+    }
+    if !self.importToken.isEmpty {
+      try container.encode(self.importToken, forKey: .importToken)
+    }
+    if !self.syncToken.isEmpty {
+      try container.encode(self.syncToken, forKey: .syncToken)
+    }
+    if !self.lastSync.isEmpty {
+      try container.encode(self.lastSync, forKey: .lastSync)
+    }
     try container.encodeIfPresent(self.lastSyncTime, forKey: .lastSyncTime)
-    try container.encode(self.code, forKey: .code)
-    try container.encode(self.errors, forKey: .errors)
+    if self.code != SyncState.SyncCode() {
+      try container.encode(self.code, forKey: .code)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

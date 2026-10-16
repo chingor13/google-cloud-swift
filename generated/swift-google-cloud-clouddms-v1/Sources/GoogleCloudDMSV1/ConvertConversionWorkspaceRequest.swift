@@ -98,10 +98,18 @@ public struct ConvertConversionWorkspaceRequest: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.autoCommit, forKey: .autoCommit)
-    try container.encode(self.filter, forKey: .filter)
-    try container.encode(self.convertFullPath, forKey: .convertFullPath)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.autoCommit {
+      try container.encode(self.autoCommit, forKey: .autoCommit)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
+    if self.convertFullPath {
+      try container.encode(self.convertFullPath, forKey: .convertFullPath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -86,7 +86,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.startOffset, forKey: .startOffset)
       try container.encodeIfPresent(self.endOffset, forKey: .endOffset)
-      try container.encode(self.fps, forKey: .fps)
+      if self.fps != 0 {
+        try container.encode(self.fps, forKey: .fps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

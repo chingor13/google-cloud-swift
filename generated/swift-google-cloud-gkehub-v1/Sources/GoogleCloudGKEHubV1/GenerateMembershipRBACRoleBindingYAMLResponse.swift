@@ -70,7 +70,9 @@ public struct GenerateMembershipRBACRoleBindingYAMLResponse: Codable, Equatable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.roleBindingsYaml, forKey: .roleBindingsYaml)
+    if !self.roleBindingsYaml.isEmpty {
+      try container.encode(self.roleBindingsYaml, forKey: .roleBindingsYaml)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

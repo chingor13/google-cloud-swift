@@ -130,13 +130,23 @@ public struct SavedQuery: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.creator, forKey: .creator)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
     try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
-    try container.encode(self.lastUpdater, forKey: .lastUpdater)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.lastUpdater.isEmpty {
+      try container.encode(self.lastUpdater, forKey: .lastUpdater)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.content, forKey: .content)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

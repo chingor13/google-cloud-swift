@@ -96,9 +96,15 @@ public struct ReplicaConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateReasons, forKey: .stateReasons)
-    try container.encode(self.peerInstance, forKey: .peerInstance)
+    if self.state != ReplicaConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateReasons.isEmpty {
+      try container.encode(self.stateReasons, forKey: .stateReasons)
+    }
+    if !self.peerInstance.isEmpty {
+      try container.encode(self.peerInstance, forKey: .peerInstance)
+    }
     try container.encodeIfPresent(self.lastActiveSyncTime, forKey: .lastActiveSyncTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

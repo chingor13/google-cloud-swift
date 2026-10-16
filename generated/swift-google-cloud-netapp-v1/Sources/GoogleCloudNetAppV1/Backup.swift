@@ -199,20 +199,44 @@ public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.volumeUsageBytes, forKey: .volumeUsageBytes)
-    try container.encode(self.backupType, forKey: .backupType)
-    try container.encode(self.sourceVolume, forKey: .sourceVolume)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != Backup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.volumeUsageBytes != 0 {
+      try container.encode(self.volumeUsageBytes, forKey: .volumeUsageBytes)
+    }
+    if self.backupType != Backup.Type_() {
+      try container.encode(self.backupType, forKey: .backupType)
+    }
+    if !self.sourceVolume.isEmpty {
+      try container.encode(self.sourceVolume, forKey: .sourceVolume)
+    }
     try container.encodeIfPresent(self.sourceSnapshot, forKey: .sourceSnapshot)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.chainStorageBytes, forKey: .chainStorageBytes)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
-    try container.encode(self.volumeRegion, forKey: .volumeRegion)
-    try container.encode(self.backupRegion, forKey: .backupRegion)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.chainStorageBytes != 0 {
+      try container.encode(self.chainStorageBytes, forKey: .chainStorageBytes)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
+    if !self.volumeRegion.isEmpty {
+      try container.encode(self.volumeRegion, forKey: .volumeRegion)
+    }
+    if !self.backupRegion.isEmpty {
+      try container.encode(self.backupRegion, forKey: .backupRegion)
+    }
     try container.encodeIfPresent(self.enforcedRetentionEndTime, forKey: .enforcedRetentionEndTime)
     try container.encodeIfPresent(self.ontapSource, forKey: .ontapSource)
     for (key, value) in self._unknownFields.json {

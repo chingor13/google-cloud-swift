@@ -113,10 +113,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.content, forKey: .content)
-      try container.encode(self.score, forKey: .score)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -105,10 +105,16 @@ public struct AuthenticationRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
     try container.encodeIfPresent(self.oauth, forKey: .oauth)
-    try container.encode(self.allowWithoutCredential, forKey: .allowWithoutCredential)
-    try container.encode(self.requirements, forKey: .requirements)
+    if self.allowWithoutCredential {
+      try container.encode(self.allowWithoutCredential, forKey: .allowWithoutCredential)
+    }
+    if !self.requirements.isEmpty {
+      try container.encode(self.requirements, forKey: .requirements)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

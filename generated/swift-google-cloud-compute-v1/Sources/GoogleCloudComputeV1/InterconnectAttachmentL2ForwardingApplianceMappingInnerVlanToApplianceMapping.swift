@@ -87,7 +87,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.innerApplianceIpAddress, forKey: .innerApplianceIpAddress)
-      try container.encode(self.innerVlanTags, forKey: .innerVlanTags)
+      if !self.innerVlanTags.isEmpty {
+        try container.encode(self.innerVlanTags, forKey: .innerVlanTags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

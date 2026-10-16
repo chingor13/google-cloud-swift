@@ -79,8 +79,12 @@ public struct DialogflowInteractionData: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dialogflowIntentId, forKey: .dialogflowIntentId)
-    try container.encode(self.confidence, forKey: .confidence)
+    if !self.dialogflowIntentId.isEmpty {
+      try container.encode(self.dialogflowIntentId, forKey: .dialogflowIntentId)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

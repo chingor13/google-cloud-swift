@@ -164,20 +164,39 @@ public struct FrameworkAudit: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.frameworkAuditId, forKey: .frameworkAuditId)
-    try container.encode(self.complianceFramework, forKey: .complianceFramework)
-    try container.encode(self.scope, forKey: .scope)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.frameworkAuditId.isEmpty {
+      try container.encode(self.frameworkAuditId, forKey: .frameworkAuditId)
+    }
+    if !self.complianceFramework.isEmpty {
+      try container.encode(self.complianceFramework, forKey: .complianceFramework)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
     try container.encodeIfPresent(
       self.frameworkAuditDestination, forKey: .frameworkAuditDestination)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.finishTime, forKey: .finishTime)
-    try container.encode(self.complianceState, forKey: .complianceState)
+    if self.complianceState != ComplianceState() {
+      try container.encode(self.complianceState, forKey: .complianceState)
+    }
     try container.encodeIfPresent(self.reportSummary, forKey: .reportSummary)
-    try container.encode(self.cloudControlGroupAuditDetails, forKey: .cloudControlGroupAuditDetails)
-    try container.encode(self.cloudControlAuditDetails, forKey: .cloudControlAuditDetails)
-    try container.encode(self.operationId, forKey: .operationId)
-    try container.encode(self.state, forKey: .state)
+    if !self.cloudControlGroupAuditDetails.isEmpty {
+      try container.encode(
+        self.cloudControlGroupAuditDetails, forKey: .cloudControlGroupAuditDetails)
+    }
+    if !self.cloudControlAuditDetails.isEmpty {
+      try container.encode(self.cloudControlAuditDetails, forKey: .cloudControlAuditDetails)
+    }
+    if !self.operationId.isEmpty {
+      try container.encode(self.operationId, forKey: .operationId)
+    }
+    if self.state != FrameworkAudit.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

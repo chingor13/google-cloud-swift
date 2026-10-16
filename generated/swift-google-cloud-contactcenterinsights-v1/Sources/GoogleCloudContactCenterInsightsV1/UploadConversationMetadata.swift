@@ -99,7 +99,9 @@ public struct UploadConversationMetadata: Codable, Equatable, GoogleWKT._AnyPack
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.analysisOperation, forKey: .analysisOperation)
+    if !self.analysisOperation.isEmpty {
+      try container.encode(self.analysisOperation, forKey: .analysisOperation)
+    }
     try container.encodeIfPresent(self.appliedRedactionConfig, forKey: .appliedRedactionConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

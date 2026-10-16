@@ -147,16 +147,28 @@ public struct UtilizationReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.state != UtilizationReport.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.stateTime, forKey: .stateTime)
     try container.encodeIfPresent(self.error, forKey: .error)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.timeFrame, forKey: .timeFrame)
+    if self.timeFrame != UtilizationReport.TimeFrame() {
+      try container.encode(self.timeFrame, forKey: .timeFrame)
+    }
     try container.encodeIfPresent(self.frameEndTime, forKey: .frameEndTime)
-    try container.encode(self.vmCount, forKey: .vmCount)
-    try container.encode(self.vms, forKey: .vms)
+    if self.vmCount != 0 {
+      try container.encode(self.vmCount, forKey: .vmCount)
+    }
+    if !self.vms.isEmpty {
+      try container.encode(self.vms, forKey: .vms)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

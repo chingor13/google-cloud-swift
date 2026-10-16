@@ -137,9 +137,15 @@ public struct StorageFormat: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.format, forKey: .format)
-    try container.encode(self.compressionFormat, forKey: .compressionFormat)
-    try container.encode(self.mimeType, forKey: .mimeType)
+    if self.format != StorageFormat.Format() {
+      try container.encode(self.format, forKey: .format)
+    }
+    if self.compressionFormat != StorageFormat.CompressionFormat() {
+      try container.encode(self.compressionFormat, forKey: .compressionFormat)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
 
     if let choice = self.options {
       switch choice {
@@ -236,10 +242,18 @@ public struct StorageFormat: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.encoding, forKey: .encoding)
-      try container.encode(self.headerRows, forKey: .headerRows)
-      try container.encode(self.delimiter, forKey: .delimiter)
-      try container.encode(self.quote, forKey: .quote)
+      if !self.encoding.isEmpty {
+        try container.encode(self.encoding, forKey: .encoding)
+      }
+      if self.headerRows != 0 {
+        try container.encode(self.headerRows, forKey: .headerRows)
+      }
+      if !self.delimiter.isEmpty {
+        try container.encode(self.delimiter, forKey: .delimiter)
+      }
+      if !self.quote.isEmpty {
+        try container.encode(self.quote, forKey: .quote)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -320,7 +334,9 @@ public struct StorageFormat: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.encoding, forKey: .encoding)
+      if !self.encoding.isEmpty {
+        try container.encode(self.encoding, forKey: .encoding)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -401,7 +417,9 @@ public struct StorageFormat: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.metadataLocation, forKey: .metadataLocation)
+      if !self.metadataLocation.isEmpty {
+        try container.encode(self.metadataLocation, forKey: .metadataLocation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

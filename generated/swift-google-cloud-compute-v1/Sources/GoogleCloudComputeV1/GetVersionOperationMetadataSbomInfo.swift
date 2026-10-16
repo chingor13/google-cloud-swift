@@ -83,8 +83,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.currentComponentVersions, forKey: .currentComponentVersions)
-      try container.encode(self.targetComponentVersions, forKey: .targetComponentVersions)
+      if !self.currentComponentVersions.isEmpty {
+        try container.encode(self.currentComponentVersions, forKey: .currentComponentVersions)
+      }
+      if !self.targetComponentVersions.isEmpty {
+        try container.encode(self.targetComponentVersions, forKey: .targetComponentVersions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

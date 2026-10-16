@@ -85,8 +85,12 @@ public struct CreateLogicalViewRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.logicalViewId, forKey: .logicalViewId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.logicalViewId.isEmpty {
+      try container.encode(self.logicalViewId, forKey: .logicalViewId)
+    }
     try container.encodeIfPresent(self.logicalView, forKey: .logicalView)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

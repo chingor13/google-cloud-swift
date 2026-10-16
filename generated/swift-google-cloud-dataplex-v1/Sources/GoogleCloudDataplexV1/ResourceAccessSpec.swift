@@ -89,9 +89,15 @@ public struct ResourceAccessSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.readers, forKey: .readers)
-    try container.encode(self.writers, forKey: .writers)
-    try container.encode(self.owners, forKey: .owners)
+    if !self.readers.isEmpty {
+      try container.encode(self.readers, forKey: .readers)
+    }
+    if !self.writers.isEmpty {
+      try container.encode(self.writers, forKey: .writers)
+    }
+    if !self.owners.isEmpty {
+      try container.encode(self.owners, forKey: .owners)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

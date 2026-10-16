@@ -130,14 +130,28 @@ public struct OracleAsmConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.asmService, forKey: .asmService)
-    try container.encode(self.connectionAttributes, forKey: .connectionAttributes)
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.asmService.isEmpty {
+      try container.encode(self.asmService, forKey: .asmService)
+    }
+    if !self.connectionAttributes.isEmpty {
+      try container.encode(self.connectionAttributes, forKey: .connectionAttributes)
+    }
     try container.encodeIfPresent(self.oracleSslConfig, forKey: .oracleSslConfig)
-    try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+    if !self.secretManagerStoredPassword.isEmpty {
+      try container.encode(self.secretManagerStoredPassword, forKey: .secretManagerStoredPassword)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -88,9 +88,15 @@ public struct HTTPGetAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.httpHeaders, forKey: .httpHeaders)
-    try container.encode(self.port, forKey: .port)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.httpHeaders.isEmpty {
+      try container.encode(self.httpHeaders, forKey: .httpHeaders)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

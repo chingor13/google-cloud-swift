@@ -123,9 +123,15 @@ public struct ComputeResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpuMilli, forKey: .cpuMilli)
-    try container.encode(self.memoryMib, forKey: .memoryMib)
-    try container.encode(self.bootDiskMib, forKey: .bootDiskMib)
+    if self.cpuMilli != 0 {
+      try container.encode(self.cpuMilli, forKey: .cpuMilli)
+    }
+    if self.memoryMib != 0 {
+      try container.encode(self.memoryMib, forKey: .memoryMib)
+    }
+    if self.bootDiskMib != 0 {
+      try container.encode(self.bootDiskMib, forKey: .bootDiskMib)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

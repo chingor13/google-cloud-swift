@@ -150,14 +150,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.versionId, forKey: .versionId)
-      try container.encode(self.openSourceCategory, forKey: .openSourceCategory)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.versionId.isEmpty {
+        try container.encode(self.versionId, forKey: .versionId)
+      }
+      if self.openSourceCategory != PublisherModel.OpenSourceCategory() {
+        try container.encode(self.openSourceCategory, forKey: .openSourceCategory)
+      }
       try container.encodeIfPresent(self.supportedActions, forKey: .supportedActions)
-      try container.encode(self.frameworks, forKey: .frameworks)
-      try container.encode(self.launchStage, forKey: .launchStage)
-      try container.encode(self.versionState, forKey: .versionState)
-      try container.encode(self.publisherModelTemplate, forKey: .publisherModelTemplate)
+      if !self.frameworks.isEmpty {
+        try container.encode(self.frameworks, forKey: .frameworks)
+      }
+      if self.launchStage != PublisherModel.LaunchStage() {
+        try container.encode(self.launchStage, forKey: .launchStage)
+      }
+      if self.versionState != PublisherModel.VersionState() {
+        try container.encode(self.versionState, forKey: .versionState)
+      }
+      if !self.publisherModelTemplate.isEmpty {
+        try container.encode(self.publisherModelTemplate, forKey: .publisherModelTemplate)
+      }
       try container.encodeIfPresent(self.predictSchemata, forKey: .predictSchemata)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -365,8 +379,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.title, forKey: .title)
-        try container.encode(self.content, forKey: .content)
+        if !self.title.isEmpty {
+          try container.encode(self.title, forKey: .title)
+        }
+        if !self.content.isEmpty {
+          try container.encode(self.content, forKey: .content)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -642,8 +660,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.references, forKey: .references)
-          try container.encode(self.title, forKey: .title)
+          if !self.references.isEmpty {
+            try container.encode(self.references, forKey: .references)
+          }
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
           try container.encodeIfPresent(self.resourceTitle, forKey: .resourceTitle)
           try container.encodeIfPresent(self.resourceUseCase, forKey: .resourceUseCase)
           try container.encodeIfPresent(self.resourceDescription, forKey: .resourceDescription)
@@ -737,8 +759,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.documentations, forKey: .documentations)
-          try container.encode(self.title, forKey: .title)
+          if !self.documentations.isEmpty {
+            try container.encode(self.documentations, forKey: .documentations)
+          }
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -821,7 +847,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.notebooks, forKey: .notebooks)
+          if !self.notebooks.isEmpty {
+            try container.encode(self.notebooks, forKey: .notebooks)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -906,7 +934,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.fineTuningPipelines, forKey: .fineTuningPipelines)
+          if !self.fineTuningPipelines.isEmpty {
+            try container.encode(self.fineTuningPipelines, forKey: .fineTuningPipelines)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1085,14 +1115,22 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+          if !self.modelDisplayName.isEmpty {
+            try container.encode(self.modelDisplayName, forKey: .modelDisplayName)
+          }
           try container.encodeIfPresent(self.largeModelReference, forKey: .largeModelReference)
           try container.encodeIfPresent(self.containerSpec, forKey: .containerSpec)
-          try container.encode(self.artifactUri, forKey: .artifactUri)
+          if !self.artifactUri.isEmpty {
+            try container.encode(self.artifactUri, forKey: .artifactUri)
+          }
           try container.encodeIfPresent(self.deployTaskName, forKey: .deployTaskName)
           try container.encodeIfPresent(self.deployMetadata, forKey: .deployMetadata)
-          try container.encode(self.title, forKey: .title)
-          try container.encode(self.publicArtifactUri, forKey: .publicArtifactUri)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
+          if !self.publicArtifactUri.isEmpty {
+            try container.encode(self.publicArtifactUri, forKey: .publicArtifactUri)
+          }
 
           if let choice = self.predictionResources {
             switch choice {
@@ -1174,8 +1212,12 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.labels, forKey: .labels)
-            try container.encode(self.sampleRequest, forKey: .sampleRequest)
+            if !self.labels.isEmpty {
+              try container.encode(self.labels, forKey: .labels)
+            }
+            if !self.sampleRequest.isEmpty {
+              try container.encode(self.sampleRequest, forKey: .sampleRequest)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -1294,7 +1336,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.gkeYamlConfigs, forKey: .gkeYamlConfigs)
+          if !self.gkeYamlConfigs.isEmpty {
+            try container.encode(self.gkeYamlConfigs, forKey: .gkeYamlConfigs)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

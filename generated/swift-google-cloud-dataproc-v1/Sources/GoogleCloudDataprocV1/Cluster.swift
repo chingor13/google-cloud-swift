@@ -156,14 +156,24 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.clusterName, forKey: .clusterName)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
     try container.encodeIfPresent(self.virtualClusterConfig, forKey: .virtualClusterConfig)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.statusHistory, forKey: .statusHistory)
-    try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    if !self.statusHistory.isEmpty {
+      try container.encode(self.statusHistory, forKey: .statusHistory)
+    }
+    if !self.clusterUuid.isEmpty {
+      try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    }
     try container.encodeIfPresent(self.metrics, forKey: .metrics)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

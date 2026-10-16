@@ -92,8 +92,12 @@ extension ResourceRecordSetsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.project, forKey: .project)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -206,10 +210,18 @@ extension ResourceRecordSetsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.type, forKey: .type)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -321,10 +333,18 @@ extension ResourceRecordSetsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.type, forKey: .type)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -443,11 +463,15 @@ extension ResourceRecordSetsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.filter, forKey: .filter)
-      try container.encode(self.managedZone, forKey: .managedZone)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
       try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-      try container.encode(self.project, forKey: .project)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
       try container.encodeIfPresent(self.type, forKey: .type)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -566,10 +590,18 @@ extension ResourceRecordSetsClient {
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.clientOperationId, forKey: .clientOperationId)
-      try container.encode(self.managedZone, forKey: .managedZone)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.type, forKey: .type)
+      if !self.managedZone.isEmpty {
+        try container.encode(self.managedZone, forKey: .managedZone)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       try container.encodeIfPresent(self.body, forKey: .body)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

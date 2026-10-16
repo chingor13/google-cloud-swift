@@ -88,8 +88,12 @@ public struct SelectiveGapicGeneration: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.methods, forKey: .methods)
-    try container.encode(self.generateOmittedAsInternal, forKey: .generateOmittedAsInternal)
+    if !self.methods.isEmpty {
+      try container.encode(self.methods, forKey: .methods)
+    }
+    if self.generateOmittedAsInternal {
+      try container.encode(self.generateOmittedAsInternal, forKey: .generateOmittedAsInternal)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

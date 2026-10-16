@@ -102,7 +102,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datastoreResponseReason, forKey: .datastoreResponseReason)
+      if self.datastoreResponseReason != DatastoreResponseReason() {
+        try container.encode(self.datastoreResponseReason, forKey: .datastoreResponseReason)
+      }
       try container.encodeIfPresent(self.searchKnowledgeBehavior, forKey: .searchKnowledgeBehavior)
       try container.encodeIfPresent(
         self.ingestedContextReferenceDebugInfo, forKey: .ingestedContextReferenceDebugInfo)
@@ -191,9 +193,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.answerGenerationRewriterOn, forKey: .answerGenerationRewriterOn)
-        try container.encode(self.endUserMetadataIncluded, forKey: .endUserMetadataIncluded)
-        try container.encode(self.thirdPartyConnectorAllowed, forKey: .thirdPartyConnectorAllowed)
+        if self.answerGenerationRewriterOn {
+          try container.encode(self.answerGenerationRewriterOn, forKey: .answerGenerationRewriterOn)
+        }
+        if self.endUserMetadataIncluded {
+          try container.encode(self.endUserMetadataIncluded, forKey: .endUserMetadataIncluded)
+        }
+        if self.thirdPartyConnectorAllowed {
+          try container.encode(self.thirdPartyConnectorAllowed, forKey: .thirdPartyConnectorAllowed)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

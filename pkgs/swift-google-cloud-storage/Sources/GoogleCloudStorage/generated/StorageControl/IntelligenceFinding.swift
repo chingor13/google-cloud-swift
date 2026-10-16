@@ -198,15 +198,29 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.severity, forKey: .severity)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.type != FindingType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.category != FindingCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if self.severity != FindingSeverity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.targetResource, forKey: .targetResource)
-    try container.encode(self.associatedResources, forKey: .associatedResources)
+    if !self.targetResource.isEmpty {
+      try container.encode(self.targetResource, forKey: .targetResource)
+    }
+    if !self.associatedResources.isEmpty {
+      try container.encode(self.associatedResources, forKey: .associatedResources)
+    }
     try container.encodeIfPresent(self.observationPeriod, forKey: .observationPeriod)
 
     if let choice = self.intelligenceFindingDetails {
@@ -304,9 +318,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
-      try container.encode(self.totalOperationsCount, forKey: .totalOperationsCount)
-      try container.encode(self.topBuckets, forKey: .topBuckets)
+      if self.percentageIncrease != 0 {
+        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+      }
+      if self.totalOperationsCount != 0 {
+        try container.encode(self.totalOperationsCount, forKey: .totalOperationsCount)
+      }
+      if !self.topBuckets.isEmpty {
+        try container.encode(self.topBuckets, forKey: .topBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -412,9 +432,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.bucket, forKey: .bucket)
-        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
-        try container.encode(self.totalOperationsCount, forKey: .totalOperationsCount)
+        if !self.bucket.isEmpty {
+          try container.encode(self.bucket, forKey: .bucket)
+        }
+        if self.percentageIncrease != 0 {
+          try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        }
+        if self.totalOperationsCount != 0 {
+          try container.encode(self.totalOperationsCount, forKey: .totalOperationsCount)
+        }
 
         if let choice = self.details {
           switch choice {
@@ -490,7 +516,9 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.topPrefixes, forKey: .topPrefixes)
+          if !self.topPrefixes.isEmpty {
+            try container.encode(self.topPrefixes, forKey: .topPrefixes)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -570,9 +598,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.`prefix`, forKey: .`prefix`)
-            try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
-            try container.encode(self.totalOperationsCount, forKey: .totalOperationsCount)
+            if !self.`prefix`.isEmpty {
+              try container.encode(self.`prefix`, forKey: .`prefix`)
+            }
+            if self.percentageIncrease != 0 {
+              try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+            }
+            if self.totalOperationsCount != 0 {
+              try container.encode(self.totalOperationsCount, forKey: .totalOperationsCount)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -757,9 +791,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.totalEgressBytes, forKey: .totalEgressBytes)
-      try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
-      try container.encode(self.topBuckets, forKey: .topBuckets)
+      if self.totalEgressBytes != 0 {
+        try container.encode(self.totalEgressBytes, forKey: .totalEgressBytes)
+      }
+      if self.percentageIncrease != 0 {
+        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+      }
+      if !self.topBuckets.isEmpty {
+        try container.encode(self.topBuckets, forKey: .topBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -865,9 +905,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.bucket, forKey: .bucket)
-        try container.encode(self.totalEgressBytes, forKey: .totalEgressBytes)
-        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        if !self.bucket.isEmpty {
+          try container.encode(self.bucket, forKey: .bucket)
+        }
+        if self.totalEgressBytes != 0 {
+          try container.encode(self.totalEgressBytes, forKey: .totalEgressBytes)
+        }
+        if self.percentageIncrease != 0 {
+          try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        }
 
         if let choice = self.details {
           switch choice {
@@ -943,7 +989,9 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.topPrefixes, forKey: .topPrefixes)
+          if !self.topPrefixes.isEmpty {
+            try container.encode(self.topPrefixes, forKey: .topPrefixes)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1025,9 +1073,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.`prefix`, forKey: .`prefix`)
-            try container.encode(self.totalEgressBytes, forKey: .totalEgressBytes)
-            try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+            if !self.`prefix`.isEmpty {
+              try container.encode(self.`prefix`, forKey: .`prefix`)
+            }
+            if self.totalEgressBytes != 0 {
+              try container.encode(self.totalEgressBytes, forKey: .totalEgressBytes)
+            }
+            if self.percentageIncrease != 0 {
+              try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -1210,9 +1264,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.throttledRequests, forKey: .throttledRequests)
-      try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
-      try container.encode(self.topBuckets, forKey: .topBuckets)
+      if self.throttledRequests != 0 {
+        try container.encode(self.throttledRequests, forKey: .throttledRequests)
+      }
+      if self.percentageIncrease != 0 {
+        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+      }
+      if !self.topBuckets.isEmpty {
+        try container.encode(self.topBuckets, forKey: .topBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1317,9 +1377,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.bucket, forKey: .bucket)
-        try container.encode(self.throttledRequests, forKey: .throttledRequests)
-        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        if !self.bucket.isEmpty {
+          try container.encode(self.bucket, forKey: .bucket)
+        }
+        if self.throttledRequests != 0 {
+          try container.encode(self.throttledRequests, forKey: .throttledRequests)
+        }
+        if self.percentageIncrease != 0 {
+          try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        }
 
         if let choice = self.details {
           switch choice {
@@ -1395,7 +1461,9 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.topPrefixes, forKey: .topPrefixes)
+          if !self.topPrefixes.isEmpty {
+            try container.encode(self.topPrefixes, forKey: .topPrefixes)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1475,9 +1543,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.`prefix`, forKey: .`prefix`)
-            try container.encode(self.throttledRequests, forKey: .throttledRequests)
-            try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+            if !self.`prefix`.isEmpty {
+              try container.encode(self.`prefix`, forKey: .`prefix`)
+            }
+            if self.throttledRequests != 0 {
+              try container.encode(self.throttledRequests, forKey: .throttledRequests)
+            }
+            if self.percentageIncrease != 0 {
+              try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -1660,9 +1734,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.totalStorageGrowthBytes, forKey: .totalStorageGrowthBytes)
-      try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
-      try container.encode(self.topBuckets, forKey: .topBuckets)
+      if self.totalStorageGrowthBytes != 0 {
+        try container.encode(self.totalStorageGrowthBytes, forKey: .totalStorageGrowthBytes)
+      }
+      if self.percentageIncrease != 0 {
+        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+      }
+      if !self.topBuckets.isEmpty {
+        try container.encode(self.topBuckets, forKey: .topBuckets)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1760,9 +1840,15 @@ public struct IntelligenceFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.bucket, forKey: .bucket)
-        try container.encode(self.totalStorageGrowthBytes, forKey: .totalStorageGrowthBytes)
-        try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        if !self.bucket.isEmpty {
+          try container.encode(self.bucket, forKey: .bucket)
+        }
+        if self.totalStorageGrowthBytes != 0 {
+          try container.encode(self.totalStorageGrowthBytes, forKey: .totalStorageGrowthBytes)
+        }
+        if self.percentageIncrease != 0 {
+          try container.encode(self.percentageIncrease, forKey: .percentageIncrease)
+        }
 
         if let choice = self.details {
           switch choice {

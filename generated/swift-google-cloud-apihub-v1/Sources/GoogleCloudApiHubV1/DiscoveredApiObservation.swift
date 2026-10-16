@@ -181,17 +181,37 @@ public struct DiscoveredApiObservation: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.style, forKey: .style)
-    try container.encode(self.serverIps, forKey: .serverIps)
-    try container.encode(self.hostname, forKey: .hostname)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.style != DiscoveredApiObservation.Style() {
+      try container.encode(self.style, forKey: .style)
+    }
+    if !self.serverIps.isEmpty {
+      try container.encode(self.serverIps, forKey: .serverIps)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
     try container.encodeIfPresent(self.lastEventDetectedTime, forKey: .lastEventDetectedTime)
-    try container.encode(self.sourceLocations, forKey: .sourceLocations)
-    try container.encode(self.apiOperationCount, forKey: .apiOperationCount)
-    try container.encode(self.origin, forKey: .origin)
-    try container.encode(self.sourceTypes, forKey: .sourceTypes)
-    try container.encode(self.knownOperationsCount, forKey: .knownOperationsCount)
-    try container.encode(self.unknownOperationsCount, forKey: .unknownOperationsCount)
+    if !self.sourceLocations.isEmpty {
+      try container.encode(self.sourceLocations, forKey: .sourceLocations)
+    }
+    if self.apiOperationCount != 0 {
+      try container.encode(self.apiOperationCount, forKey: .apiOperationCount)
+    }
+    if !self.origin.isEmpty {
+      try container.encode(self.origin, forKey: .origin)
+    }
+    if !self.sourceTypes.isEmpty {
+      try container.encode(self.sourceTypes, forKey: .sourceTypes)
+    }
+    if self.knownOperationsCount != 0 {
+      try container.encode(self.knownOperationsCount, forKey: .knownOperationsCount)
+    }
+    if self.unknownOperationsCount != 0 {
+      try container.encode(self.unknownOperationsCount, forKey: .unknownOperationsCount)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.sourceMetadata, forKey: .sourceMetadata)

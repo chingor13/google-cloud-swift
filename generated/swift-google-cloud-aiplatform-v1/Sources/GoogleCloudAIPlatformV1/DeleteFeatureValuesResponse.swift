@@ -179,10 +179,14 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(
-          self.offlineStorageDeletedEntityRowCount, forKey: .offlineStorageDeletedEntityRowCount)
-        try container.encode(
-          self.onlineStorageDeletedEntityCount, forKey: .onlineStorageDeletedEntityCount)
+        if self.offlineStorageDeletedEntityRowCount != 0 {
+          try container.encode(
+            self.offlineStorageDeletedEntityRowCount, forKey: .offlineStorageDeletedEntityRowCount)
+        }
+        if self.onlineStorageDeletedEntityCount != 0 {
+          try container.encode(
+            self.onlineStorageDeletedEntityCount, forKey: .onlineStorageDeletedEntityCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -295,11 +299,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.impactedFeatureCount, forKey: .impactedFeatureCount)
-        try container.encode(
-          self.offlineStorageModifiedEntityRowCount, forKey: .offlineStorageModifiedEntityRowCount)
-        try container.encode(
-          self.onlineStorageModifiedEntityCount, forKey: .onlineStorageModifiedEntityCount)
+        if self.impactedFeatureCount != 0 {
+          try container.encode(self.impactedFeatureCount, forKey: .impactedFeatureCount)
+        }
+        if self.offlineStorageModifiedEntityRowCount != 0 {
+          try container.encode(
+            self.offlineStorageModifiedEntityRowCount, forKey: .offlineStorageModifiedEntityRowCount
+          )
+        }
+        if self.onlineStorageModifiedEntityCount != 0 {
+          try container.encode(
+            self.onlineStorageModifiedEntityCount, forKey: .onlineStorageModifiedEntityCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

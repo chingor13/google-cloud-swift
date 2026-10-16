@@ -79,8 +79,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.intents, forKey: .intents)
-      try container.encode(self.coverageScore, forKey: .coverageScore)
+      if !self.intents.isEmpty {
+        try container.encode(self.intents, forKey: .intents)
+      }
+      if self.coverageScore != 0 {
+        try container.encode(self.coverageScore, forKey: .coverageScore)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -147,8 +151,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.intent, forKey: .intent)
-        try container.encode(self.covered, forKey: .covered)
+        if !self.intent.isEmpty {
+          try container.encode(self.intent, forKey: .intent)
+        }
+        if self.covered {
+          try container.encode(self.covered, forKey: .covered)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

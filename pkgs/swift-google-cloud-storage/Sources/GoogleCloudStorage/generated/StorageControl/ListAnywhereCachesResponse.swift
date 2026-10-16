@@ -79,8 +79,12 @@ public struct ListAnywhereCachesResponse: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.anywhereCaches, forKey: .anywhereCaches)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.anywhereCaches.isEmpty {
+      try container.encode(self.anywhereCaches, forKey: .anywhereCaches)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -155,12 +155,24 @@ public struct TransitionAttributes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.srcTag, forKey: .srcTag)
-    try container.encode(self.excludedSrcTag, forKey: .excludedSrcTag)
-    try container.encode(self.dstTag, forKey: .dstTag)
-    try container.encode(self.excludedDstTag, forKey: .excludedDstTag)
-    try container.encode(self.cost, forKey: .cost)
-    try container.encode(self.costPerKilometer, forKey: .costPerKilometer)
+    if !self.srcTag.isEmpty {
+      try container.encode(self.srcTag, forKey: .srcTag)
+    }
+    if !self.excludedSrcTag.isEmpty {
+      try container.encode(self.excludedSrcTag, forKey: .excludedSrcTag)
+    }
+    if !self.dstTag.isEmpty {
+      try container.encode(self.dstTag, forKey: .dstTag)
+    }
+    if !self.excludedDstTag.isEmpty {
+      try container.encode(self.excludedDstTag, forKey: .excludedDstTag)
+    }
+    if self.cost != 0 {
+      try container.encode(self.cost, forKey: .cost)
+    }
+    if self.costPerKilometer != 0 {
+      try container.encode(self.costPerKilometer, forKey: .costPerKilometer)
+    }
     try container.encodeIfPresent(self.distanceLimit, forKey: .distanceLimit)
     try container.encodeIfPresent(self.delay, forKey: .delay)
     for (key, value) in self._unknownFields.json {

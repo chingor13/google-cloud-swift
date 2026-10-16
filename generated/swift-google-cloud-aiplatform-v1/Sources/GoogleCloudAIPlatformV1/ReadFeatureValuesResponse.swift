@@ -141,7 +141,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -244,8 +246,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.entityType, forKey: .entityType)
-        try container.encode(self.featureDescriptors, forKey: .featureDescriptors)
+        if !self.entityType.isEmpty {
+          try container.encode(self.entityType, forKey: .entityType)
+        }
+        if !self.featureDescriptors.isEmpty {
+          try container.encode(self.featureDescriptors, forKey: .featureDescriptors)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -342,8 +348,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.entityId, forKey: .entityId)
-        try container.encode(self.data, forKey: .data)
+        if !self.entityId.isEmpty {
+          try container.encode(self.entityId, forKey: .entityId)
+        }
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

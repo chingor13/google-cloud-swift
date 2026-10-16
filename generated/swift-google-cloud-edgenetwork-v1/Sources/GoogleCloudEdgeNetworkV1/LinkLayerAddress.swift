@@ -77,8 +77,12 @@ public struct LinkLayerAddress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.macAddress, forKey: .macAddress)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
+    if !self.macAddress.isEmpty {
+      try container.encode(self.macAddress, forKey: .macAddress)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

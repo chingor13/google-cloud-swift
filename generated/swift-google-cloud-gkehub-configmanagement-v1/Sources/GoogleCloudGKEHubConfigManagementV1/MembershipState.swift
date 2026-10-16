@@ -106,7 +106,9 @@ public struct MembershipState: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterName, forKey: .clusterName)
+    if !self.clusterName.isEmpty {
+      try container.encode(self.clusterName, forKey: .clusterName)
+    }
     try container.encodeIfPresent(self.membershipSpec, forKey: .membershipSpec)
     try container.encodeIfPresent(self.operatorState, forKey: .operatorState)
     try container.encodeIfPresent(self.configSyncState, forKey: .configSyncState)

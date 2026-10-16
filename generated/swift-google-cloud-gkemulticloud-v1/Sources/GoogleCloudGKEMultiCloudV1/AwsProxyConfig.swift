@@ -84,8 +84,12 @@ public struct AwsProxyConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.secretArn, forKey: .secretArn)
-    try container.encode(self.secretVersion, forKey: .secretVersion)
+    if !self.secretArn.isEmpty {
+      try container.encode(self.secretArn, forKey: .secretArn)
+    }
+    if !self.secretVersion.isEmpty {
+      try container.encode(self.secretVersion, forKey: .secretVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

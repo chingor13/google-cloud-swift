@@ -97,8 +97,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asPaths, forKey: .asPaths)
-      try container.encode(self.communities, forKey: .communities)
+      if !self.asPaths.isEmpty {
+        try container.encode(self.asPaths, forKey: .asPaths)
+      }
+      if !self.communities.isEmpty {
+        try container.encode(self.communities, forKey: .communities)
+      }
       try container.encodeIfPresent(self.destination, forKey: .destination)
       try container.encodeIfPresent(self.med, forKey: .med)
       try container.encodeIfPresent(self.origin, forKey: .origin)

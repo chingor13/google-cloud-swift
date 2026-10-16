@@ -236,27 +236,69 @@ public struct ProtectedResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.resourceId, forKey: .resourceId)
-    try container.encode(self.backupInclusionOrExclusion, forKey: .backupInclusionOrExclusion)
-    try container.encode(self.hostId, forKey: .hostId)
-    try container.encode(self.hostName, forKey: .hostName)
-    try container.encode(self.backupPlanPolicyTemplateId, forKey: .backupPlanPolicyTemplateId)
-    try container.encode(self.backupPlanPolicyTemplate, forKey: .backupPlanPolicyTemplate)
-    try container.encode(self.slaId, forKey: .slaId)
-    try container.encode(self.backupPlanRestrictions, forKey: .backupPlanRestrictions)
-    try container.encode(self.protectedOn, forKey: .protectedOn)
-    try container.encode(self.policyOverrides, forKey: .policyOverrides)
-    try container.encode(self.sourceAppliance, forKey: .sourceAppliance)
-    try container.encode(self.sourceApplianceId, forKey: .sourceApplianceId)
-    try container.encode(self.protectedDataInGib, forKey: .protectedDataInGib)
-    try container.encode(self.onvaultInGib, forKey: .onvaultInGib)
-    try container.encode(self.applianceName, forKey: .applianceName)
-    try container.encode(self.applianceId, forKey: .applianceId)
-    try container.encode(self.remoteAppliance, forKey: .remoteAppliance)
-    try container.encode(self.remoteApplianceId, forKey: .remoteApplianceId)
-    try container.encode(self.recoveryPoint, forKey: .recoveryPoint)
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if !self.resourceId.isEmpty {
+      try container.encode(self.resourceId, forKey: .resourceId)
+    }
+    if !self.backupInclusionOrExclusion.isEmpty {
+      try container.encode(self.backupInclusionOrExclusion, forKey: .backupInclusionOrExclusion)
+    }
+    if !self.hostId.isEmpty {
+      try container.encode(self.hostId, forKey: .hostId)
+    }
+    if !self.hostName.isEmpty {
+      try container.encode(self.hostName, forKey: .hostName)
+    }
+    if !self.backupPlanPolicyTemplateId.isEmpty {
+      try container.encode(self.backupPlanPolicyTemplateId, forKey: .backupPlanPolicyTemplateId)
+    }
+    if !self.backupPlanPolicyTemplate.isEmpty {
+      try container.encode(self.backupPlanPolicyTemplate, forKey: .backupPlanPolicyTemplate)
+    }
+    if !self.slaId.isEmpty {
+      try container.encode(self.slaId, forKey: .slaId)
+    }
+    if !self.backupPlanRestrictions.isEmpty {
+      try container.encode(self.backupPlanRestrictions, forKey: .backupPlanRestrictions)
+    }
+    if !self.protectedOn.isEmpty {
+      try container.encode(self.protectedOn, forKey: .protectedOn)
+    }
+    if !self.policyOverrides.isEmpty {
+      try container.encode(self.policyOverrides, forKey: .policyOverrides)
+    }
+    if !self.sourceAppliance.isEmpty {
+      try container.encode(self.sourceAppliance, forKey: .sourceAppliance)
+    }
+    if !self.sourceApplianceId.isEmpty {
+      try container.encode(self.sourceApplianceId, forKey: .sourceApplianceId)
+    }
+    if self.protectedDataInGib != 0 {
+      try container.encode(self.protectedDataInGib, forKey: .protectedDataInGib)
+    }
+    if self.onvaultInGib != 0 {
+      try container.encode(self.onvaultInGib, forKey: .onvaultInGib)
+    }
+    if !self.applianceName.isEmpty {
+      try container.encode(self.applianceName, forKey: .applianceName)
+    }
+    if !self.applianceId.isEmpty {
+      try container.encode(self.applianceId, forKey: .applianceId)
+    }
+    if !self.remoteAppliance.isEmpty {
+      try container.encode(self.remoteAppliance, forKey: .remoteAppliance)
+    }
+    if !self.remoteApplianceId.isEmpty {
+      try container.encode(self.remoteApplianceId, forKey: .remoteApplianceId)
+    }
+    if !self.recoveryPoint.isEmpty {
+      try container.encode(self.recoveryPoint, forKey: .recoveryPoint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

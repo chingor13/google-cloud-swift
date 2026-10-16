@@ -98,10 +98,16 @@ public struct DataQualityColumnResult: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.column, forKey: .column)
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
     try container.encodeIfPresent(self.score, forKey: .score)
-    try container.encode(self.passed, forKey: .passed)
-    try container.encode(self.dimensions, forKey: .dimensions)
+    if self.passed {
+      try container.encode(self.passed, forKey: .passed)
+    }
+    if !self.dimensions.isEmpty {
+      try container.encode(self.dimensions, forKey: .dimensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

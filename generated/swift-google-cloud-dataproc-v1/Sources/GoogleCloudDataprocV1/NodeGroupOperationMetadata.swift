@@ -129,14 +129,28 @@ public struct NodeGroupOperationMetadata: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nodeGroupId, forKey: .nodeGroupId)
-    try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    if !self.nodeGroupId.isEmpty {
+      try container.encode(self.nodeGroupId, forKey: .nodeGroupId)
+    }
+    if !self.clusterUuid.isEmpty {
+      try container.encode(self.clusterUuid, forKey: .clusterUuid)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.statusHistory, forKey: .statusHistory)
-    try container.encode(self.operationType, forKey: .operationType)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.warnings, forKey: .warnings)
+    if !self.statusHistory.isEmpty {
+      try container.encode(self.statusHistory, forKey: .statusHistory)
+    }
+    if self.operationType != NodeGroupOperationMetadata.NodeGroupOperationType() {
+      try container.encode(self.operationType, forKey: .operationType)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

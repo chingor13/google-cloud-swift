@@ -111,9 +111,15 @@ public struct GcsData: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucketName, forKey: .bucketName)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.managedFolderTransferEnabled, forKey: .managedFolderTransferEnabled)
+    if !self.bucketName.isEmpty {
+      try container.encode(self.bucketName, forKey: .bucketName)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if self.managedFolderTransferEnabled {
+      try container.encode(self.managedFolderTransferEnabled, forKey: .managedFolderTransferEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

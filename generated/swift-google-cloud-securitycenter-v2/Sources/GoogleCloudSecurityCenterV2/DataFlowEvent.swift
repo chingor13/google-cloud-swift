@@ -102,10 +102,18 @@ public struct DataFlowEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.eventId, forKey: .eventId)
-    try container.encode(self.principalEmail, forKey: .principalEmail)
-    try container.encode(self.operation, forKey: .operation)
-    try container.encode(self.violatedLocation, forKey: .violatedLocation)
+    if !self.eventId.isEmpty {
+      try container.encode(self.eventId, forKey: .eventId)
+    }
+    if !self.principalEmail.isEmpty {
+      try container.encode(self.principalEmail, forKey: .principalEmail)
+    }
+    if self.operation != DataFlowEvent.Operation() {
+      try container.encode(self.operation, forKey: .operation)
+    }
+    if !self.violatedLocation.isEmpty {
+      try container.encode(self.violatedLocation, forKey: .violatedLocation)
+    }
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

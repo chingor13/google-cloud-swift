@@ -105,9 +105,15 @@ public struct SanitizationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.filterMatchState, forKey: .filterMatchState)
-    try container.encode(self.filterResults, forKey: .filterResults)
-    try container.encode(self.invocationResult, forKey: .invocationResult)
+    if self.filterMatchState != FilterMatchState() {
+      try container.encode(self.filterMatchState, forKey: .filterMatchState)
+    }
+    if !self.filterResults.isEmpty {
+      try container.encode(self.filterResults, forKey: .filterResults)
+    }
+    if self.invocationResult != InvocationResult() {
+      try container.encode(self.invocationResult, forKey: .invocationResult)
+    }
     try container.encodeIfPresent(self.sanitizationMetadata, forKey: .sanitizationMetadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -193,10 +199,16 @@ public struct SanitizationResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.errorCode, forKey: .errorCode)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
-      try container.encode(
-        self.ignorePartialInvocationFailures, forKey: .ignorePartialInvocationFailures)
+      if self.errorCode != 0 {
+        try container.encode(self.errorCode, forKey: .errorCode)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
+      if self.ignorePartialInvocationFailures {
+        try container.encode(
+          self.ignorePartialInvocationFailures, forKey: .ignorePartialInvocationFailures)
+      }
       try container.encodeIfPresent(self.streamChunkProcessed, forKey: .streamChunkProcessed)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

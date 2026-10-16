@@ -92,9 +92,15 @@ public struct GenericInsight: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.messageId, forKey: .messageId)
-    try container.encode(self.defaultMessage, forKey: .defaultMessage)
-    try container.encode(self.additionalInformation, forKey: .additionalInformation)
+    if self.messageId != 0 {
+      try container.encode(self.messageId, forKey: .messageId)
+    }
+    if !self.defaultMessage.isEmpty {
+      try container.encode(self.defaultMessage, forKey: .defaultMessage)
+    }
+    if !self.additionalInformation.isEmpty {
+      try container.encode(self.additionalInformation, forKey: .additionalInformation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

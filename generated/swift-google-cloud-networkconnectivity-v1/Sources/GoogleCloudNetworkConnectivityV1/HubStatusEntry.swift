@@ -88,8 +88,12 @@ public struct HubStatusEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.count, forKey: .count)
-    try container.encode(self.groupBy, forKey: .groupBy)
+    if self.count != 0 {
+      try container.encode(self.count, forKey: .count)
+    }
+    if !self.groupBy.isEmpty {
+      try container.encode(self.groupBy, forKey: .groupBy)
+    }
     try container.encodeIfPresent(self.pscPropagationStatus, forKey: .pscPropagationStatus)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

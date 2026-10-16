@@ -163,13 +163,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.excludedQueryParameters, forKey: .excludedQueryParameters)
+      if !self.excludedQueryParameters.isEmpty {
+        try container.encode(self.excludedQueryParameters, forKey: .excludedQueryParameters)
+      }
       try container.encodeIfPresent(self.includeHost, forKey: .includeHost)
       try container.encodeIfPresent(self.includeProtocol, forKey: .includeProtocol)
       try container.encodeIfPresent(self.includeQueryString, forKey: .includeQueryString)
-      try container.encode(self.includedCookieNames, forKey: .includedCookieNames)
-      try container.encode(self.includedHeaderNames, forKey: .includedHeaderNames)
-      try container.encode(self.includedQueryParameters, forKey: .includedQueryParameters)
+      if !self.includedCookieNames.isEmpty {
+        try container.encode(self.includedCookieNames, forKey: .includedCookieNames)
+      }
+      if !self.includedHeaderNames.isEmpty {
+        try container.encode(self.includedHeaderNames, forKey: .includedHeaderNames)
+      }
+      if !self.includedQueryParameters.isEmpty {
+        try container.encode(self.includedQueryParameters, forKey: .includedQueryParameters)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

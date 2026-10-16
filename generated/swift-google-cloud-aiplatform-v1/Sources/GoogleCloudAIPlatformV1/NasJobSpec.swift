@@ -103,8 +103,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resumeNasJobId, forKey: .resumeNasJobId)
-      try container.encode(self.searchSpaceSpec, forKey: .searchSpaceSpec)
+      if !self.resumeNasJobId.isEmpty {
+        try container.encode(self.resumeNasJobId, forKey: .resumeNasJobId)
+      }
+      if !self.searchSpaceSpec.isEmpty {
+        try container.encode(self.searchSpaceSpec, forKey: .searchSpaceSpec)
+      }
 
       if let choice = self.nasAlgorithmSpec {
         switch choice {
@@ -197,7 +201,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.multiTrialAlgorithm, forKey: .multiTrialAlgorithm)
+        if self.multiTrialAlgorithm != NasJobSpec.MultiTrialAlgorithmSpec.MultiTrialAlgorithm() {
+          try container.encode(self.multiTrialAlgorithm, forKey: .multiTrialAlgorithm)
+        }
         try container.encodeIfPresent(self.metric, forKey: .metric)
         try container.encodeIfPresent(self.searchTrialSpec, forKey: .searchTrialSpec)
         try container.encodeIfPresent(self.trainTrialSpec, forKey: .trainTrialSpec)
@@ -269,8 +275,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.metricId, forKey: .metricId)
-          try container.encode(self.goal, forKey: .goal)
+          if !self.metricId.isEmpty {
+            try container.encode(self.metricId, forKey: .metricId)
+          }
+          if self.goal != NasJobSpec.MultiTrialAlgorithmSpec.MetricSpec.GoalType() {
+            try container.encode(self.goal, forKey: .goal)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -502,9 +512,15 @@
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.searchTrialJobSpec, forKey: .searchTrialJobSpec)
-          try container.encode(self.maxTrialCount, forKey: .maxTrialCount)
-          try container.encode(self.maxParallelTrialCount, forKey: .maxParallelTrialCount)
-          try container.encode(self.maxFailedTrialCount, forKey: .maxFailedTrialCount)
+          if self.maxTrialCount != 0 {
+            try container.encode(self.maxTrialCount, forKey: .maxTrialCount)
+          }
+          if self.maxParallelTrialCount != 0 {
+            try container.encode(self.maxParallelTrialCount, forKey: .maxParallelTrialCount)
+          }
+          if self.maxFailedTrialCount != 0 {
+            try container.encode(self.maxFailedTrialCount, forKey: .maxFailedTrialCount)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -607,8 +623,12 @@
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.trainTrialJobSpec, forKey: .trainTrialJobSpec)
-          try container.encode(self.maxParallelTrialCount, forKey: .maxParallelTrialCount)
-          try container.encode(self.frequency, forKey: .frequency)
+          if self.maxParallelTrialCount != 0 {
+            try container.encode(self.maxParallelTrialCount, forKey: .maxParallelTrialCount)
+          }
+          if self.frequency != 0 {
+            try container.encode(self.frequency, forKey: .frequency)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

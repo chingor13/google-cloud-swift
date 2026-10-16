@@ -318,14 +318,18 @@
         self.enableEmergentMaintenance, forKey: .enableEmergentMaintenance)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      try container.encode(self.linkedCommitments, forKey: .linkedCommitments)
+      if !self.linkedCommitments.isEmpty {
+        try container.encode(self.linkedCommitments, forKey: .linkedCommitments)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.params, forKey: .params)
       try container.encodeIfPresent(self.protectionTier, forKey: .protectionTier)
       try container.encodeIfPresent(
         self.reservationSharingPolicy, forKey: .reservationSharingPolicy)
       try container.encodeIfPresent(self.resourceMetadata, forKey: .resourceMetadata)
-      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      if !self.resourcePolicies.isEmpty {
+        try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+      }
       try container.encodeIfPresent(self.resourceStatus, forKey: .resourceStatus)
       try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
       try container.encodeIfPresent(self.schedulingType, forKey: .schedulingType)

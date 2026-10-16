@@ -129,12 +129,22 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.endpoint, forKey: .endpoint)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.instances, forKey: .instances)
-      try container.encode(self.contents, forKey: .contents)
+      if !self.endpoint.isEmpty {
+        try container.encode(self.endpoint, forKey: .endpoint)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.instances.isEmpty {
+        try container.encode(self.instances, forKey: .instances)
+      }
+      if !self.contents.isEmpty {
+        try container.encode(self.contents, forKey: .contents)
+      }
       try container.encodeIfPresent(self.systemInstruction, forKey: .systemInstruction)
-      try container.encode(self.tools, forKey: .tools)
+      if !self.tools.isEmpty {
+        try container.encode(self.tools, forKey: .tools)
+      }
       try container.encodeIfPresent(self.generationConfig, forKey: .generationConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

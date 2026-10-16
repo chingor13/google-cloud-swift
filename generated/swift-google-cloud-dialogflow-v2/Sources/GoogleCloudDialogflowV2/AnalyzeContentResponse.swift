@@ -161,12 +161,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.replyText, forKey: .replyText)
+      if !self.replyText.isEmpty {
+        try container.encode(self.replyText, forKey: .replyText)
+      }
       try container.encodeIfPresent(self.replyAudio, forKey: .replyAudio)
       try container.encodeIfPresent(self.automatedAgentReply, forKey: .automatedAgentReply)
       try container.encodeIfPresent(self.message, forKey: .message)
-      try container.encode(self.humanAgentSuggestionResults, forKey: .humanAgentSuggestionResults)
-      try container.encode(self.endUserSuggestionResults, forKey: .endUserSuggestionResults)
+      if !self.humanAgentSuggestionResults.isEmpty {
+        try container.encode(self.humanAgentSuggestionResults, forKey: .humanAgentSuggestionResults)
+      }
+      if !self.endUserSuggestionResults.isEmpty {
+        try container.encode(self.endUserSuggestionResults, forKey: .endUserSuggestionResults)
+      }
       try container.encodeIfPresent(self.dtmfParameters, forKey: .dtmfParameters)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

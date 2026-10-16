@@ -116,12 +116,24 @@ public struct DiskPartition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.fileSystem, forKey: .fileSystem)
-    try container.encode(self.mountPoint, forKey: .mountPoint)
-    try container.encode(self.capacityBytes, forKey: .capacityBytes)
-    try container.encode(self.freeBytes, forKey: .freeBytes)
-    try container.encode(self.uuid, forKey: .uuid)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.fileSystem.isEmpty {
+      try container.encode(self.fileSystem, forKey: .fileSystem)
+    }
+    if !self.mountPoint.isEmpty {
+      try container.encode(self.mountPoint, forKey: .mountPoint)
+    }
+    if self.capacityBytes != 0 {
+      try container.encode(self.capacityBytes, forKey: .capacityBytes)
+    }
+    if self.freeBytes != 0 {
+      try container.encode(self.freeBytes, forKey: .freeBytes)
+    }
+    if !self.uuid.isEmpty {
+      try container.encode(self.uuid, forKey: .uuid)
+    }
     try container.encodeIfPresent(self.subPartitions, forKey: .subPartitions)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

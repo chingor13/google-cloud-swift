@@ -232,13 +232,25 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.baselineOutputValue, forKey: .baselineOutputValue)
-      try container.encode(self.instanceOutputValue, forKey: .instanceOutputValue)
+      if self.baselineOutputValue != 0 {
+        try container.encode(self.baselineOutputValue, forKey: .baselineOutputValue)
+      }
+      if self.instanceOutputValue != 0 {
+        try container.encode(self.instanceOutputValue, forKey: .instanceOutputValue)
+      }
       try container.encodeIfPresent(self.featureAttributions, forKey: .featureAttributions)
-      try container.encode(self.outputIndex, forKey: .outputIndex)
-      try container.encode(self.outputDisplayName, forKey: .outputDisplayName)
-      try container.encode(self.approximationError, forKey: .approximationError)
-      try container.encode(self.outputName, forKey: .outputName)
+      if !self.outputIndex.isEmpty {
+        try container.encode(self.outputIndex, forKey: .outputIndex)
+      }
+      if !self.outputDisplayName.isEmpty {
+        try container.encode(self.outputDisplayName, forKey: .outputDisplayName)
+      }
+      if self.approximationError != 0 {
+        try container.encode(self.approximationError, forKey: .approximationError)
+      }
+      if !self.outputName.isEmpty {
+        try container.encode(self.outputName, forKey: .outputName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

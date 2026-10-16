@@ -346,10 +346,16 @@ public struct DataProfileAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topic, forKey: .topic)
-      try container.encode(self.event, forKey: .event)
+      if !self.topic.isEmpty {
+        try container.encode(self.topic, forKey: .topic)
+      }
+      if self.event != DataProfileAction.EventType() {
+        try container.encode(self.event, forKey: .event)
+      }
       try container.encodeIfPresent(self.pubsubCondition, forKey: .pubsubCondition)
-      try container.encode(self.detailOfMessage, forKey: .detailOfMessage)
+      if self.detailOfMessage != DataProfileAction.PubSubNotification.DetailLevel() {
+        try container.encode(self.detailOfMessage, forKey: .detailOfMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -701,7 +707,9 @@ public struct DataProfileAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.lowerDataRiskToLow, forKey: .lowerDataRiskToLow)
+      if self.lowerDataRiskToLow {
+        try container.encode(self.lowerDataRiskToLow, forKey: .lowerDataRiskToLow)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -818,9 +826,15 @@ public struct DataProfileAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tagConditions, forKey: .tagConditions)
-      try container.encode(self.profileGenerationsToTag, forKey: .profileGenerationsToTag)
-      try container.encode(self.lowerDataRiskToLow, forKey: .lowerDataRiskToLow)
+      if !self.tagConditions.isEmpty {
+        try container.encode(self.tagConditions, forKey: .tagConditions)
+      }
+      if !self.profileGenerationsToTag.isEmpty {
+        try container.encode(self.profileGenerationsToTag, forKey: .profileGenerationsToTag)
+      }
+      if self.lowerDataRiskToLow {
+        try container.encode(self.lowerDataRiskToLow, forKey: .lowerDataRiskToLow)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

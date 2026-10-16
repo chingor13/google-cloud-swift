@@ -109,11 +109,21 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.enableExternalIps, forKey: .enableExternalIps)
-    try container.encode(self.canIpForward, forKey: .canIpForward)
-    try container.encode(self.queueCount, forKey: .queueCount)
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if self.enableExternalIps {
+      try container.encode(self.enableExternalIps, forKey: .enableExternalIps)
+    }
+    if self.canIpForward {
+      try container.encode(self.canIpForward, forKey: .canIpForward)
+    }
+    if self.queueCount != 0 {
+      try container.encode(self.queueCount, forKey: .queueCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

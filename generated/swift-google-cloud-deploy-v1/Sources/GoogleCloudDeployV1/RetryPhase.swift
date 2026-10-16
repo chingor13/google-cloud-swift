@@ -87,9 +87,15 @@ public struct RetryPhase: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.totalAttempts, forKey: .totalAttempts)
-    try container.encode(self.backoffMode, forKey: .backoffMode)
-    try container.encode(self.attempts, forKey: .attempts)
+    if self.totalAttempts != 0 {
+      try container.encode(self.totalAttempts, forKey: .totalAttempts)
+    }
+    if self.backoffMode != BackoffMode() {
+      try container.encode(self.backoffMode, forKey: .backoffMode)
+    }
+    if !self.attempts.isEmpty {
+      try container.encode(self.attempts, forKey: .attempts)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

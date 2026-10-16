@@ -151,7 +151,9 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.target, forKey: .target)
     try container.encodeIfPresent(self.canonicalTarget, forKey: .canonicalTarget)
-    try container.encode(self.filePath, forKey: .filePath)
+    if !self.filePath.isEmpty {
+      try container.encode(self.filePath, forKey: .filePath)
+    }
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)
 
     if let choice = self.compiledObject {
@@ -390,24 +392,56 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.dependencyTargets.isEmpty {
+        try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
+      }
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       try container.encodeIfPresent(self.relationDescriptor, forKey: .relationDescriptor)
-      try container.encode(self.relationType, forKey: .relationType)
-      try container.encode(self.selectQuery, forKey: .selectQuery)
-      try container.encode(self.preOperations, forKey: .preOperations)
-      try container.encode(self.postOperations, forKey: .postOperations)
+      if self.relationType != CompilationResultAction.Relation.RelationType() {
+        try container.encode(self.relationType, forKey: .relationType)
+      }
+      if !self.selectQuery.isEmpty {
+        try container.encode(self.selectQuery, forKey: .selectQuery)
+      }
+      if !self.preOperations.isEmpty {
+        try container.encode(self.preOperations, forKey: .preOperations)
+      }
+      if !self.postOperations.isEmpty {
+        try container.encode(self.postOperations, forKey: .postOperations)
+      }
       try container.encodeIfPresent(self.incrementalTableConfig, forKey: .incrementalTableConfig)
-      try container.encode(self.partitionExpression, forKey: .partitionExpression)
-      try container.encode(self.clusterExpressions, forKey: .clusterExpressions)
-      try container.encode(self.partitionExpirationDays, forKey: .partitionExpirationDays)
-      try container.encode(self.requirePartitionFilter, forKey: .requirePartitionFilter)
-      try container.encode(self.additionalOptions, forKey: .additionalOptions)
-      try container.encode(self.connection, forKey: .connection)
-      try container.encode(self.tableFormat, forKey: .tableFormat)
-      try container.encode(self.fileFormat, forKey: .fileFormat)
-      try container.encode(self.storageUri, forKey: .storageUri)
+      if !self.partitionExpression.isEmpty {
+        try container.encode(self.partitionExpression, forKey: .partitionExpression)
+      }
+      if !self.clusterExpressions.isEmpty {
+        try container.encode(self.clusterExpressions, forKey: .clusterExpressions)
+      }
+      if self.partitionExpirationDays != 0 {
+        try container.encode(self.partitionExpirationDays, forKey: .partitionExpirationDays)
+      }
+      if self.requirePartitionFilter {
+        try container.encode(self.requirePartitionFilter, forKey: .requirePartitionFilter)
+      }
+      if !self.additionalOptions.isEmpty {
+        try container.encode(self.additionalOptions, forKey: .additionalOptions)
+      }
+      if !self.connection.isEmpty {
+        try container.encode(self.connection, forKey: .connection)
+      }
+      if self.tableFormat != CompilationResultAction.Relation.TableFormat() {
+        try container.encode(self.tableFormat, forKey: .tableFormat)
+      }
+      if self.fileFormat != CompilationResultAction.Relation.FileFormat() {
+        try container.encode(self.fileFormat, forKey: .fileFormat)
+      }
+      if !self.storageUri.isEmpty {
+        try container.encode(self.storageUri, forKey: .storageUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -521,12 +555,24 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.incrementalSelectQuery, forKey: .incrementalSelectQuery)
-        try container.encode(self.refreshDisabled, forKey: .refreshDisabled)
-        try container.encode(self.uniqueKeyParts, forKey: .uniqueKeyParts)
-        try container.encode(self.updatePartitionFilter, forKey: .updatePartitionFilter)
-        try container.encode(self.incrementalPreOperations, forKey: .incrementalPreOperations)
-        try container.encode(self.incrementalPostOperations, forKey: .incrementalPostOperations)
+        if !self.incrementalSelectQuery.isEmpty {
+          try container.encode(self.incrementalSelectQuery, forKey: .incrementalSelectQuery)
+        }
+        if self.refreshDisabled {
+          try container.encode(self.refreshDisabled, forKey: .refreshDisabled)
+        }
+        if !self.uniqueKeyParts.isEmpty {
+          try container.encode(self.uniqueKeyParts, forKey: .uniqueKeyParts)
+        }
+        if !self.updatePartitionFilter.isEmpty {
+          try container.encode(self.updatePartitionFilter, forKey: .updatePartitionFilter)
+        }
+        if !self.incrementalPreOperations.isEmpty {
+          try container.encode(self.incrementalPreOperations, forKey: .incrementalPreOperations)
+        }
+        if !self.incrementalPostOperations.isEmpty {
+          try container.encode(self.incrementalPostOperations, forKey: .incrementalPostOperations)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1021,12 +1067,22 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.dependencyTargets.isEmpty {
+        try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
+      }
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       try container.encodeIfPresent(self.relationDescriptor, forKey: .relationDescriptor)
-      try container.encode(self.queries, forKey: .queries)
-      try container.encode(self.hasOutput, forKey: .hasOutput)
+      if !self.queries.isEmpty {
+        try container.encode(self.queries, forKey: .queries)
+      }
+      if self.hasOutput {
+        try container.encode(self.hasOutput, forKey: .hasOutput)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1147,11 +1203,19 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
+      if !self.dependencyTargets.isEmpty {
+        try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
+      }
       try container.encodeIfPresent(self.parentAction, forKey: .parentAction)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.tags, forKey: .tags)
-      try container.encode(self.selectQuery, forKey: .selectQuery)
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
+      if !self.selectQuery.isEmpty {
+        try container.encode(self.selectQuery, forKey: .selectQuery)
+      }
       try container.encodeIfPresent(self.relationDescriptor, forKey: .relationDescriptor)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1337,10 +1401,18 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.contents, forKey: .contents)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.dependencyTargets.isEmpty {
+        try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
+      }
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if !self.contents.isEmpty {
+        try container.encode(self.contents, forKey: .contents)
+      }
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1464,9 +1536,15 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.dependencyTargets.isEmpty {
+        try container.encode(self.dependencyTargets, forKey: .dependencyTargets)
+      }
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
 
       if let choice = self.definition {
         switch choice {
@@ -1548,7 +1626,9 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.query, forKey: .query)
+        if !self.query.isEmpty {
+          try container.encode(self.query, forKey: .query)
+        }
         try container.encodeIfPresent(self.errorTable, forKey: .errorTable)
         try container.encodeIfPresent(self.load, forKey: .load)
         for (key, value) in self._unknownFields.json {
@@ -1640,7 +1720,9 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.target, forKey: .target)
-        try container.encode(self.retentionDays, forKey: .retentionDays)
+        if self.retentionDays != 0 {
+          try container.encode(self.retentionDays, forKey: .retentionDays)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1962,7 +2044,9 @@ public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackabl
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.column, forKey: .column)
+      if !self.column.isEmpty {
+        try container.encode(self.column, forKey: .column)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

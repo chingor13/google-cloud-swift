@@ -143,16 +143,30 @@ public struct Process: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.analysis, forKey: .analysis)
-    try container.encode(self.attributeOverrides, forKey: .attributeOverrides)
+    if !self.analysis.isEmpty {
+      try container.encode(self.analysis, forKey: .analysis)
+    }
+    if !self.attributeOverrides.isEmpty {
+      try container.encode(self.attributeOverrides, forKey: .attributeOverrides)
+    }
     try container.encodeIfPresent(self.runStatus, forKey: .runStatus)
-    try container.encode(self.runMode, forKey: .runMode)
-    try container.encode(self.eventId, forKey: .eventId)
-    try container.encode(self.batchId, forKey: .batchId)
-    try container.encode(self.retryCount, forKey: .retryCount)
+    if self.runMode != RunMode() {
+      try container.encode(self.runMode, forKey: .runMode)
+    }
+    if !self.eventId.isEmpty {
+      try container.encode(self.eventId, forKey: .eventId)
+    }
+    if !self.batchId.isEmpty {
+      try container.encode(self.batchId, forKey: .batchId)
+    }
+    if self.retryCount != 0 {
+      try container.encode(self.retryCount, forKey: .retryCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -103,9 +103,15 @@ public struct DataProductAccessRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.accessGroupId, forKey: .accessGroupId)
-    try container.encode(self.accessGroupDisplayName, forKey: .accessGroupDisplayName)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.accessGroupId.isEmpty {
+      try container.encode(self.accessGroupId, forKey: .accessGroupId)
+    }
+    if !self.accessGroupDisplayName.isEmpty {
+      try container.encode(self.accessGroupDisplayName, forKey: .accessGroupDisplayName)
+    }
     try container.encodeIfPresent(self.requestedPrincipal, forKey: .requestedPrincipal)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

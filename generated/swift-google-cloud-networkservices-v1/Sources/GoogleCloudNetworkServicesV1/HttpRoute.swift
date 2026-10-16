@@ -179,16 +179,32 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.selfLink, forKey: .selfLink)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.hostnames, forKey: .hostnames)
-    try container.encode(self.meshes, forKey: .meshes)
-    try container.encode(self.gateways, forKey: .gateways)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.rules, forKey: .rules)
+    if !self.hostnames.isEmpty {
+      try container.encode(self.hostnames, forKey: .hostnames)
+    }
+    if !self.meshes.isEmpty {
+      try container.encode(self.meshes, forKey: .meshes)
+    }
+    if !self.gateways.isEmpty {
+      try container.encode(self.gateways, forKey: .gateways)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.rules.isEmpty {
+      try container.encode(self.rules, forKey: .rules)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -301,8 +317,12 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.header, forKey: .header)
-      try container.encode(self.invertMatch, forKey: .invertMatch)
+      if !self.header.isEmpty {
+        try container.encode(self.header, forKey: .header)
+      }
+      if self.invertMatch {
+        try container.encode(self.invertMatch, forKey: .invertMatch)
+      }
 
       if let choice = self.matchType {
         switch choice {
@@ -385,8 +405,12 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.start, forKey: .start)
-        try container.encode(self.end, forKey: .end)
+        if self.start != 0 {
+          try container.encode(self.start, forKey: .start)
+        }
+        if self.end != 0 {
+          try container.encode(self.end, forKey: .end)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -538,7 +562,9 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.queryParameter, forKey: .queryParameter)
+      if !self.queryParameter.isEmpty {
+        try container.encode(self.queryParameter, forKey: .queryParameter)
+      }
 
       if let choice = self.matchType {
         switch choice {
@@ -703,9 +729,15 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ignoreCase, forKey: .ignoreCase)
-      try container.encode(self.headers, forKey: .headers)
-      try container.encode(self.queryParameters, forKey: .queryParameters)
+      if self.ignoreCase {
+        try container.encode(self.ignoreCase, forKey: .ignoreCase)
+      }
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
+      if !self.queryParameters.isEmpty {
+        try container.encode(self.queryParameters, forKey: .queryParameters)
+      }
 
       if let choice = self.pathMatch {
         switch choice {
@@ -860,8 +892,12 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceName, forKey: .serviceName)
-      try container.encode(self.weight, forKey: .weight)
+      if !self.serviceName.isEmpty {
+        try container.encode(self.serviceName, forKey: .serviceName)
+      }
+      if self.weight != 0 {
+        try container.encode(self.weight, forKey: .weight)
+      }
       try container.encodeIfPresent(self.requestHeaderModifier, forKey: .requestHeaderModifier)
       try container.encodeIfPresent(self.responseHeaderModifier, forKey: .responseHeaderModifier)
       for (key, value) in self._unknownFields.json {
@@ -1009,13 +1045,27 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.hostRedirect, forKey: .hostRedirect)
-      try container.encode(self.pathRedirect, forKey: .pathRedirect)
-      try container.encode(self.prefixRewrite, forKey: .prefixRewrite)
-      try container.encode(self.responseCode, forKey: .responseCode)
-      try container.encode(self.httpsRedirect, forKey: .httpsRedirect)
-      try container.encode(self.stripQuery, forKey: .stripQuery)
-      try container.encode(self.portRedirect, forKey: .portRedirect)
+      if !self.hostRedirect.isEmpty {
+        try container.encode(self.hostRedirect, forKey: .hostRedirect)
+      }
+      if !self.pathRedirect.isEmpty {
+        try container.encode(self.pathRedirect, forKey: .pathRedirect)
+      }
+      if !self.prefixRewrite.isEmpty {
+        try container.encode(self.prefixRewrite, forKey: .prefixRewrite)
+      }
+      if self.responseCode != HttpRoute.Redirect.ResponseCode() {
+        try container.encode(self.responseCode, forKey: .responseCode)
+      }
+      if self.httpsRedirect {
+        try container.encode(self.httpsRedirect, forKey: .httpsRedirect)
+      }
+      if self.stripQuery {
+        try container.encode(self.stripQuery, forKey: .stripQuery)
+      }
+      if self.portRedirect != 0 {
+        try container.encode(self.portRedirect, forKey: .portRedirect)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1314,7 +1364,9 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.fixedDelay, forKey: .fixedDelay)
-        try container.encode(self.percentage, forKey: .percentage)
+        if self.percentage != 0 {
+          try container.encode(self.percentage, forKey: .percentage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1408,8 +1460,12 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.httpStatus, forKey: .httpStatus)
-        try container.encode(self.percentage, forKey: .percentage)
+        if self.httpStatus != 0 {
+          try container.encode(self.httpStatus, forKey: .httpStatus)
+        }
+        if self.percentage != 0 {
+          try container.encode(self.percentage, forKey: .percentage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1625,9 +1681,15 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.`set`, forKey: .`set`)
-      try container.encode(self.add, forKey: .add)
-      try container.encode(self.remove, forKey: .remove)
+      if !self.`set`.isEmpty {
+        try container.encode(self.`set`, forKey: .`set`)
+      }
+      if !self.add.isEmpty {
+        try container.encode(self.add, forKey: .add)
+      }
+      if !self.remove.isEmpty {
+        try container.encode(self.remove, forKey: .remove)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1718,8 +1780,12 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pathPrefixRewrite, forKey: .pathPrefixRewrite)
-      try container.encode(self.hostRewrite, forKey: .hostRewrite)
+      if !self.pathPrefixRewrite.isEmpty {
+        try container.encode(self.pathPrefixRewrite, forKey: .pathPrefixRewrite)
+      }
+      if !self.hostRewrite.isEmpty {
+        try container.encode(self.hostRewrite, forKey: .hostRewrite)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1836,8 +1902,12 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.retryConditions, forKey: .retryConditions)
-      try container.encode(self.numRetries, forKey: .numRetries)
+      if !self.retryConditions.isEmpty {
+        try container.encode(self.retryConditions, forKey: .retryConditions)
+      }
+      if self.numRetries != 0 {
+        try container.encode(self.numRetries, forKey: .numRetries)
+      }
       try container.encodeIfPresent(self.perTryTimeout, forKey: .perTryTimeout)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1932,7 +2002,9 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.destination, forKey: .destination)
-      try container.encode(self.mirrorPercent, forKey: .mirrorPercent)
+      if self.mirrorPercent != 0 {
+        try container.encode(self.mirrorPercent, forKey: .mirrorPercent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2079,14 +2151,30 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowOrigins, forKey: .allowOrigins)
-      try container.encode(self.allowOriginRegexes, forKey: .allowOriginRegexes)
-      try container.encode(self.allowMethods, forKey: .allowMethods)
-      try container.encode(self.allowHeaders, forKey: .allowHeaders)
-      try container.encode(self.exposeHeaders, forKey: .exposeHeaders)
-      try container.encode(self.maxAge, forKey: .maxAge)
-      try container.encode(self.allowCredentials, forKey: .allowCredentials)
-      try container.encode(self.disabled, forKey: .disabled)
+      if !self.allowOrigins.isEmpty {
+        try container.encode(self.allowOrigins, forKey: .allowOrigins)
+      }
+      if !self.allowOriginRegexes.isEmpty {
+        try container.encode(self.allowOriginRegexes, forKey: .allowOriginRegexes)
+      }
+      if !self.allowMethods.isEmpty {
+        try container.encode(self.allowMethods, forKey: .allowMethods)
+      }
+      if !self.allowHeaders.isEmpty {
+        try container.encode(self.allowHeaders, forKey: .allowHeaders)
+      }
+      if !self.exposeHeaders.isEmpty {
+        try container.encode(self.exposeHeaders, forKey: .exposeHeaders)
+      }
+      if !self.maxAge.isEmpty {
+        try container.encode(self.maxAge, forKey: .maxAge)
+      }
+      if self.allowCredentials {
+        try container.encode(self.allowCredentials, forKey: .allowCredentials)
+      }
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2192,7 +2280,9 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.status, forKey: .status)
+      if self.status != 0 {
+        try container.encode(self.status, forKey: .status)
+      }
 
       if let choice = self.httpBody {
         switch choice {
@@ -2400,7 +2490,9 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destinations, forKey: .destinations)
+      if !self.destinations.isEmpty {
+        try container.encode(self.destinations, forKey: .destinations)
+      }
       try container.encodeIfPresent(self.redirect, forKey: .redirect)
       try container.encodeIfPresent(self.faultInjectionPolicy, forKey: .faultInjectionPolicy)
       try container.encodeIfPresent(self.requestHeaderModifier, forKey: .requestHeaderModifier)
@@ -2507,7 +2599,9 @@ public struct HttpRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matches, forKey: .matches)
+      if !self.matches.isEmpty {
+        try container.encode(self.matches, forKey: .matches)
+      }
       try container.encodeIfPresent(self.action, forKey: .action)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

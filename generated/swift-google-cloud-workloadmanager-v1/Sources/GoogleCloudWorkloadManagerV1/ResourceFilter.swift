@@ -104,9 +104,15 @@ public struct ResourceFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.scopes, forKey: .scopes)
-    try container.encode(self.resourceIdPatterns, forKey: .resourceIdPatterns)
-    try container.encode(self.inclusionLabels, forKey: .inclusionLabels)
+    if !self.scopes.isEmpty {
+      try container.encode(self.scopes, forKey: .scopes)
+    }
+    if !self.resourceIdPatterns.isEmpty {
+      try container.encode(self.resourceIdPatterns, forKey: .resourceIdPatterns)
+    }
+    if !self.inclusionLabels.isEmpty {
+      try container.encode(self.inclusionLabels, forKey: .inclusionLabels)
+    }
     try container.encodeIfPresent(self.gceInstanceFilter, forKey: .gceInstanceFilter)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -96,10 +96,18 @@ public struct GenerateConfigReportResponse: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceName, forKey: .serviceName)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.changeReports, forKey: .changeReports)
-    try container.encode(self.diagnostics, forKey: .diagnostics)
+    if !self.serviceName.isEmpty {
+      try container.encode(self.serviceName, forKey: .serviceName)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.changeReports.isEmpty {
+      try container.encode(self.changeReports, forKey: .changeReports)
+    }
+    if !self.diagnostics.isEmpty {
+      try container.encode(self.diagnostics, forKey: .diagnostics)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

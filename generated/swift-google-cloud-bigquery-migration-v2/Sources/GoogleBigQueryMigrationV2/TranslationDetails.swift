@@ -116,11 +116,19 @@ public struct TranslationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceTargetMapping, forKey: .sourceTargetMapping)
-    try container.encode(self.targetBaseUri, forKey: .targetBaseUri)
+    if !self.sourceTargetMapping.isEmpty {
+      try container.encode(self.sourceTargetMapping, forKey: .sourceTargetMapping)
+    }
+    if !self.targetBaseUri.isEmpty {
+      try container.encode(self.targetBaseUri, forKey: .targetBaseUri)
+    }
     try container.encodeIfPresent(self.sourceEnvironment, forKey: .sourceEnvironment)
-    try container.encode(self.targetReturnLiterals, forKey: .targetReturnLiterals)
-    try container.encode(self.targetTypes, forKey: .targetTypes)
+    if !self.targetReturnLiterals.isEmpty {
+      try container.encode(self.targetReturnLiterals, forKey: .targetReturnLiterals)
+    }
+    if !self.targetTypes.isEmpty {
+      try container.encode(self.targetTypes, forKey: .targetTypes)
+    }
     try container.encodeIfPresent(self.suggestionConfig, forKey: .suggestionConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -92,8 +92,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.exposeHostTopology, forKey: .exposeHostTopology)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.metadata, forKey: .metadata)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.metadata.isEmpty {
+        try container.encode(self.metadata, forKey: .metadata)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

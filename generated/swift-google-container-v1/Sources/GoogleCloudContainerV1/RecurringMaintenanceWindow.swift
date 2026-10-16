@@ -110,7 +110,9 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPack
     try container.encodeIfPresent(self.delayUntil, forKey: .delayUntil)
     try container.encodeIfPresent(self.windowStartTime, forKey: .windowStartTime)
     try container.encodeIfPresent(self.windowDuration, forKey: .windowDuration)
-    try container.encode(self.recurrence, forKey: .recurrence)
+    if !self.recurrence.isEmpty {
+      try container.encode(self.recurrence, forKey: .recurrence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

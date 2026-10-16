@@ -131,13 +131,21 @@ public struct DataProfileSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.samplingPercent, forKey: .samplingPercent)
-    try container.encode(self.rowFilter, forKey: .rowFilter)
+    if self.samplingPercent != 0 {
+      try container.encode(self.samplingPercent, forKey: .samplingPercent)
+    }
+    if !self.rowFilter.isEmpty {
+      try container.encode(self.rowFilter, forKey: .rowFilter)
+    }
     try container.encodeIfPresent(self.postScanActions, forKey: .postScanActions)
     try container.encodeIfPresent(self.includeFields, forKey: .includeFields)
     try container.encodeIfPresent(self.excludeFields, forKey: .excludeFields)
-    try container.encode(self.catalogPublishingEnabled, forKey: .catalogPublishingEnabled)
-    try container.encode(self.mode, forKey: .mode)
+    if self.catalogPublishingEnabled {
+      try container.encode(self.catalogPublishingEnabled, forKey: .catalogPublishingEnabled)
+    }
+    if self.mode != DataProfileSpec.Mode() {
+      try container.encode(self.mode, forKey: .mode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -255,7 +263,9 @@ public struct DataProfileSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.resultsTable, forKey: .resultsTable)
+        if !self.resultsTable.isEmpty {
+          try container.encode(self.resultsTable, forKey: .resultsTable)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -364,7 +374,9 @@ public struct DataProfileSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fieldNames, forKey: .fieldNames)
+      if !self.fieldNames.isEmpty {
+        try container.encode(self.fieldNames, forKey: .fieldNames)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

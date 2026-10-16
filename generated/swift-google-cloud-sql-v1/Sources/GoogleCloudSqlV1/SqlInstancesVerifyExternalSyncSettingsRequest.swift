@@ -171,15 +171,33 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instance, forKey: .instance)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.verifyConnectionOnly, forKey: .verifyConnectionOnly)
-      try container.encode(self.syncMode, forKey: .syncMode)
-      try container.encode(self.verifyReplicationOnly, forKey: .verifyReplicationOnly)
-      try container.encode(self.migrationType, forKey: .migrationType)
-      try container.encode(self.syncParallelLevel, forKey: .syncParallelLevel)
-      try container.encode(self.selectedObjects, forKey: .selectedObjects)
-      try container.encode(self.location, forKey: .location)
+      if !self.instance.isEmpty {
+        try container.encode(self.instance, forKey: .instance)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if self.verifyConnectionOnly {
+        try container.encode(self.verifyConnectionOnly, forKey: .verifyConnectionOnly)
+      }
+      if self.syncMode != SqlInstancesVerifyExternalSyncSettingsRequest.ExternalSyncMode() {
+        try container.encode(self.syncMode, forKey: .syncMode)
+      }
+      if self.verifyReplicationOnly {
+        try container.encode(self.verifyReplicationOnly, forKey: .verifyReplicationOnly)
+      }
+      if self.migrationType != SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType() {
+        try container.encode(self.migrationType, forKey: .migrationType)
+      }
+      if self.syncParallelLevel != ExternalSyncParallelLevel() {
+        try container.encode(self.syncParallelLevel, forKey: .syncParallelLevel)
+      }
+      if !self.selectedObjects.isEmpty {
+        try container.encode(self.selectedObjects, forKey: .selectedObjects)
+      }
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
 
       if let choice = self.syncConfig {
         switch choice {

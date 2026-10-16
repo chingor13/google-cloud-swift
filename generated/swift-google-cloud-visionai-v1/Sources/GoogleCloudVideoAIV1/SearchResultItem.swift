@@ -132,12 +132,22 @@ public struct SearchResultItem: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.asset, forKey: .asset)
-    try container.encode(self.segments, forKey: .segments)
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
+    if !self.segments.isEmpty {
+      try container.encode(self.segments, forKey: .segments)
+    }
     try container.encodeIfPresent(self.segment, forKey: .segment)
-    try container.encode(self.relevance, forKey: .relevance)
-    try container.encode(self.requestedAnnotations, forKey: .requestedAnnotations)
-    try container.encode(self.annotationMatchingResults, forKey: .annotationMatchingResults)
+    if self.relevance != 0 {
+      try container.encode(self.relevance, forKey: .relevance)
+    }
+    if !self.requestedAnnotations.isEmpty {
+      try container.encode(self.requestedAnnotations, forKey: .requestedAnnotations)
+    }
+    if !self.annotationMatchingResults.isEmpty {
+      try container.encode(self.annotationMatchingResults, forKey: .annotationMatchingResults)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -87,8 +87,12 @@ public struct EkmConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.connectionName, forKey: .connectionName)
-    try container.encode(self.connectionState, forKey: .connectionState)
+    if !self.connectionName.isEmpty {
+      try container.encode(self.connectionName, forKey: .connectionName)
+    }
+    if self.connectionState != EkmConnection.ConnectionState() {
+      try container.encode(self.connectionState, forKey: .connectionState)
+    }
     try container.encodeIfPresent(self.connectionError, forKey: .connectionError)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -156,8 +160,12 @@ public struct EkmConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.errorDomain, forKey: .errorDomain)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if !self.errorDomain.isEmpty {
+        try container.encode(self.errorDomain, forKey: .errorDomain)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

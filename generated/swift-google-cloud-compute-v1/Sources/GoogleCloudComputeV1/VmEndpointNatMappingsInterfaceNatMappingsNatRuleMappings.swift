@@ -114,8 +114,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.drainNatIpPortRanges, forKey: .drainNatIpPortRanges)
-      try container.encode(self.natIpPortRanges, forKey: .natIpPortRanges)
+      if !self.drainNatIpPortRanges.isEmpty {
+        try container.encode(self.drainNatIpPortRanges, forKey: .drainNatIpPortRanges)
+      }
+      if !self.natIpPortRanges.isEmpty {
+        try container.encode(self.natIpPortRanges, forKey: .natIpPortRanges)
+      }
       try container.encodeIfPresent(self.numTotalDrainNatPorts, forKey: .numTotalDrainNatPorts)
       try container.encodeIfPresent(self.numTotalNatPorts, forKey: .numTotalNatPorts)
       try container.encodeIfPresent(self.ruleNumber, forKey: .ruleNumber)

@@ -254,10 +254,18 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.processedBytes, forKey: .processedBytes)
-      try container.encode(self.totalEstimatedBytes, forKey: .totalEstimatedBytes)
-      try container.encode(self.infoTypeStats, forKey: .infoTypeStats)
-      try container.encode(self.numRowsProcessed, forKey: .numRowsProcessed)
+      if self.processedBytes != 0 {
+        try container.encode(self.processedBytes, forKey: .processedBytes)
+      }
+      if self.totalEstimatedBytes != 0 {
+        try container.encode(self.totalEstimatedBytes, forKey: .totalEstimatedBytes)
+      }
+      if !self.infoTypeStats.isEmpty {
+        try container.encode(self.infoTypeStats, forKey: .infoTypeStats)
+      }
+      if self.numRowsProcessed != 0 {
+        try container.encode(self.numRowsProcessed, forKey: .numRowsProcessed)
+      }
       try container.encodeIfPresent(self.hybridStats, forKey: .hybridStats)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

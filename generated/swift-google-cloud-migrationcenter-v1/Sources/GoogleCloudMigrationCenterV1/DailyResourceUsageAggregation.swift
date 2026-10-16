@@ -182,10 +182,18 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.average, forKey: .average)
-      try container.encode(self.median, forKey: .median)
-      try container.encode(self.ninteyFifthPercentile, forKey: .ninteyFifthPercentile)
-      try container.encode(self.peak, forKey: .peak)
+      if self.average != 0 {
+        try container.encode(self.average, forKey: .average)
+      }
+      if self.median != 0 {
+        try container.encode(self.median, forKey: .median)
+      }
+      if self.ninteyFifthPercentile != 0 {
+        try container.encode(self.ninteyFifthPercentile, forKey: .ninteyFifthPercentile)
+      }
+      if self.peak != 0 {
+        try container.encode(self.peak, forKey: .peak)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -267,24 +267,36 @@ public struct ComputeInstanceRestoreProperties: Codable, Equatable, GoogleWKT._A
       self.confidentialInstanceConfig, forKey: .confidentialInstanceConfig)
     try container.encodeIfPresent(self.deletionProtection, forKey: .deletionProtection)
     try container.encodeIfPresent(self.description, forKey: .description)
-    try container.encode(self.disks, forKey: .disks)
+    if !self.disks.isEmpty {
+      try container.encode(self.disks, forKey: .disks)
+    }
     try container.encodeIfPresent(self.displayDevice, forKey: .displayDevice)
-    try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+    if !self.guestAccelerators.isEmpty {
+      try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+    }
     try container.encodeIfPresent(self.hostname, forKey: .hostname)
     try container.encodeIfPresent(self.instanceEncryptionKey, forKey: .instanceEncryptionKey)
     try container.encodeIfPresent(self.keyRevocationActionType, forKey: .keyRevocationActionType)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.machineType, forKey: .machineType)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)
-    try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    if !self.networkInterfaces.isEmpty {
+      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    }
     try container.encodeIfPresent(self.networkPerformanceConfig, forKey: .networkPerformanceConfig)
     try container.encodeIfPresent(self.params, forKey: .params)
     try container.encodeIfPresent(self.privateIpv6GoogleAccess, forKey: .privateIpv6GoogleAccess)
     try container.encodeIfPresent(self.allocationAffinity, forKey: .allocationAffinity)
-    try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+    if !self.resourcePolicies.isEmpty {
+      try container.encode(self.resourcePolicies, forKey: .resourcePolicies)
+    }
     try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
-    try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+    if !self.serviceAccounts.isEmpty {
+      try container.encode(self.serviceAccounts, forKey: .serviceAccounts)
+    }
     try container.encodeIfPresent(self.tags, forKey: .tags)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

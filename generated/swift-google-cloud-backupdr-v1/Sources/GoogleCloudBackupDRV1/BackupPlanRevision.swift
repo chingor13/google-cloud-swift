@@ -105,9 +105,15 @@ public struct BackupPlanRevision: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if self.state != BackupPlanRevision.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.backupPlanSnapshot, forKey: .backupPlanSnapshot)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {

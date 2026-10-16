@@ -89,9 +89,15 @@ public struct NetworkAddressReservation: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.startAddress, forKey: .startAddress)
-    try container.encode(self.endAddress, forKey: .endAddress)
-    try container.encode(self.note, forKey: .note)
+    if !self.startAddress.isEmpty {
+      try container.encode(self.startAddress, forKey: .startAddress)
+    }
+    if !self.endAddress.isEmpty {
+      try container.encode(self.endAddress, forKey: .endAddress)
+    }
+    if !self.note.isEmpty {
+      try container.encode(self.note, forKey: .note)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -185,13 +185,27 @@ public struct GoldengateMongodbConnectionProperties: Codable, Equatable, GoogleW
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.connectionString, forKey: .connectionString)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.databaseId, forKey: .databaseId)
-    try container.encode(self.securityProtocol, forKey: .securityProtocol)
-    try container.encode(self.tlsCaFile, forKey: .tlsCaFile)
-    try container.encode(self.tlsCertificateKeyFile, forKey: .tlsCertificateKeyFile)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.connectionString.isEmpty {
+      try container.encode(self.connectionString, forKey: .connectionString)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.databaseId.isEmpty {
+      try container.encode(self.databaseId, forKey: .databaseId)
+    }
+    if self.securityProtocol != GoldengateMongodbConnectionProperties.MongodbSecurityProtocol() {
+      try container.encode(self.securityProtocol, forKey: .securityProtocol)
+    }
+    if !self.tlsCaFile.isEmpty {
+      try container.encode(self.tlsCaFile, forKey: .tlsCaFile)
+    }
+    if !self.tlsCertificateKeyFile.isEmpty {
+      try container.encode(self.tlsCertificateKeyFile, forKey: .tlsCertificateKeyFile)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

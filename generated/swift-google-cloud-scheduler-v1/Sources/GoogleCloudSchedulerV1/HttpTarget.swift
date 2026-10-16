@@ -182,10 +182,18 @@ public struct HttpTarget: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.httpMethod, forKey: .httpMethod)
-    try container.encode(self.headers, forKey: .headers)
-    try container.encode(self.body, forKey: .body)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.httpMethod != HttpMethod() {
+      try container.encode(self.httpMethod, forKey: .httpMethod)
+    }
+    if !self.headers.isEmpty {
+      try container.encode(self.headers, forKey: .headers)
+    }
+    if !self.body.isEmpty {
+      try container.encode(self.body, forKey: .body)
+    }
 
     if let choice = self.authorizationHeader {
       switch choice {

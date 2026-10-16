@@ -93,10 +93,16 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.analyzedConversationsCount, forKey: .analyzedConversationsCount)
-    try container.encode(
-      self.unclassifiedConversationsCount, forKey: .unclassifiedConversationsCount)
-    try container.encode(self.issueStats, forKey: .issueStats)
+    if self.analyzedConversationsCount != 0 {
+      try container.encode(self.analyzedConversationsCount, forKey: .analyzedConversationsCount)
+    }
+    if self.unclassifiedConversationsCount != 0 {
+      try container.encode(
+        self.unclassifiedConversationsCount, forKey: .unclassifiedConversationsCount)
+    }
+    if !self.issueStats.isEmpty {
+      try container.encode(self.issueStats, forKey: .issueStats)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -174,9 +180,15 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.issue, forKey: .issue)
-      try container.encode(self.labeledConversationsCount, forKey: .labeledConversationsCount)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.issue.isEmpty {
+        try container.encode(self.issue, forKey: .issue)
+      }
+      if self.labeledConversationsCount != 0 {
+        try container.encode(self.labeledConversationsCount, forKey: .labeledConversationsCount)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

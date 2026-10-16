@@ -83,8 +83,12 @@ public struct HealthCheckResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.healthy, forKey: .healthy)
-    try container.encode(self.reason, forKey: .reason)
+    if self.healthy {
+      try container.encode(self.healthy, forKey: .healthy)
+    }
+    if !self.reason.isEmpty {
+      try container.encode(self.reason, forKey: .reason)
+    }
     try container.encodeIfPresent(self.clusterInfo, forKey: .clusterInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

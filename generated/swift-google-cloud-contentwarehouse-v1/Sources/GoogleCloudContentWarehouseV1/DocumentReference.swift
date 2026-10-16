@@ -138,15 +138,27 @@ public struct DocumentReference: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.documentName, forKey: .documentName)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.snippet, forKey: .snippet)
-    try container.encode(self.documentIsFolder, forKey: .documentIsFolder)
+    if !self.documentName.isEmpty {
+      try container.encode(self.documentName, forKey: .documentName)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.snippet.isEmpty {
+      try container.encode(self.snippet, forKey: .snippet)
+    }
+    if self.documentIsFolder {
+      try container.encode(self.documentIsFolder, forKey: .documentIsFolder)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.documentIsRetentionFolder, forKey: .documentIsRetentionFolder)
-    try container.encode(self.documentIsLegalHoldFolder, forKey: .documentIsLegalHoldFolder)
+    if self.documentIsRetentionFolder {
+      try container.encode(self.documentIsRetentionFolder, forKey: .documentIsRetentionFolder)
+    }
+    if self.documentIsLegalHoldFolder {
+      try container.encode(self.documentIsLegalHoldFolder, forKey: .documentIsLegalHoldFolder)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

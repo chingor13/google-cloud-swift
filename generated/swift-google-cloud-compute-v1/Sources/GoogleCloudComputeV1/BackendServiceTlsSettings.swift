@@ -147,7 +147,9 @@
       try container.encodeIfPresent(self.authenticationConfig, forKey: .authenticationConfig)
       try container.encodeIfPresent(self.identity, forKey: .identity)
       try container.encodeIfPresent(self.sni, forKey: .sni)
-      try container.encode(self.subjectAltNames, forKey: .subjectAltNames)
+      if !self.subjectAltNames.isEmpty {
+        try container.encode(self.subjectAltNames, forKey: .subjectAltNames)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

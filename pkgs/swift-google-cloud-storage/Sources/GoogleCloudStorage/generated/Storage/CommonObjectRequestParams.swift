@@ -91,9 +91,15 @@ public struct CommonObjectRequestParams: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.encryptionAlgorithm, forKey: .encryptionAlgorithm)
-    try container.encode(self.encryptionKeyBytes, forKey: .encryptionKeyBytes)
-    try container.encode(self.encryptionKeySha256Bytes, forKey: .encryptionKeySha256Bytes)
+    if !self.encryptionAlgorithm.isEmpty {
+      try container.encode(self.encryptionAlgorithm, forKey: .encryptionAlgorithm)
+    }
+    if !self.encryptionKeyBytes.isEmpty {
+      try container.encode(self.encryptionKeyBytes, forKey: .encryptionKeyBytes)
+    }
+    if !self.encryptionKeySha256Bytes.isEmpty {
+      try container.encode(self.encryptionKeySha256Bytes, forKey: .encryptionKeySha256Bytes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

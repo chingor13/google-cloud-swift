@@ -135,7 +135,9 @@
       try container.encodeIfPresent(self.expectedOutputUrl, forKey: .expectedOutputUrl)
       try container.encodeIfPresent(
         self.expectedRedirectResponseCode, forKey: .expectedRedirectResponseCode)
-      try container.encode(self.headers, forKey: .headers)
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
       try container.encodeIfPresent(self.host, forKey: .host)
       try container.encodeIfPresent(self.path, forKey: .path)
       try container.encodeIfPresent(self.service, forKey: .service)

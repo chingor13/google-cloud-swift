@@ -141,12 +141,22 @@ public struct MachineDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uuid, forKey: .uuid)
-    try container.encode(self.machineName, forKey: .machineName)
+    if !self.uuid.isEmpty {
+      try container.encode(self.uuid, forKey: .uuid)
+    }
+    if !self.machineName.isEmpty {
+      try container.encode(self.machineName, forKey: .machineName)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.coreCount, forKey: .coreCount)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
-    try container.encode(self.powerState, forKey: .powerState)
+    if self.coreCount != 0 {
+      try container.encode(self.coreCount, forKey: .coreCount)
+    }
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
+    if self.powerState != MachineDetails.PowerState() {
+      try container.encode(self.powerState, forKey: .powerState)
+    }
     try container.encodeIfPresent(self.architecture, forKey: .architecture)
     try container.encodeIfPresent(self.guestOs, forKey: .guestOs)
     try container.encodeIfPresent(self.network, forKey: .network)

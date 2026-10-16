@@ -153,11 +153,19 @@ public struct RemoveFulfillmentPlacesRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.product, forKey: .product)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.placeIds, forKey: .placeIds)
+    if !self.product.isEmpty {
+      try container.encode(self.product, forKey: .product)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.placeIds.isEmpty {
+      try container.encode(self.placeIds, forKey: .placeIds)
+    }
     try container.encodeIfPresent(self.removeTime, forKey: .removeTime)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

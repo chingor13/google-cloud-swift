@@ -87,8 +87,12 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.output, forKey: .output)
-    try container.encode(self.outputEnd, forKey: .outputEnd)
+    if !self.output.isEmpty {
+      try container.encode(self.output, forKey: .output)
+    }
+    if self.outputEnd {
+      try container.encode(self.outputEnd, forKey: .outputEnd)
+    }
     try container.encodeIfPresent(self.exitInfo, forKey: .exitInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -155,8 +159,12 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.lineNumber, forKey: .lineNumber)
-      try container.encode(self.content, forKey: .content)
+      if self.lineNumber != 0 {
+        try container.encode(self.lineNumber, forKey: .lineNumber)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -245,8 +253,12 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.exitCode, forKey: .exitCode)
-      try container.encode(self.error, forKey: .error)
+      if self.exitCode != 0 {
+        try container.encode(self.exitCode, forKey: .exitCode)
+      }
+      if !self.error.isEmpty {
+        try container.encode(self.error, forKey: .error)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

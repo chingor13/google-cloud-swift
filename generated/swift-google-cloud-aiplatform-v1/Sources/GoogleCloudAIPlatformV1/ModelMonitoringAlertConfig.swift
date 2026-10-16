@@ -109,8 +109,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableLogging, forKey: .enableLogging)
-      try container.encode(self.notificationChannels, forKey: .notificationChannels)
+      if self.enableLogging {
+        try container.encode(self.enableLogging, forKey: .enableLogging)
+      }
+      if !self.notificationChannels.isEmpty {
+        try container.encode(self.notificationChannels, forKey: .notificationChannels)
+      }
 
       if let choice = self.alert {
         switch choice {
@@ -175,7 +179,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.userEmails, forKey: .userEmails)
+        if !self.userEmails.isEmpty {
+          try container.encode(self.userEmails, forKey: .userEmails)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -77,8 +77,12 @@ public struct MetadataManagementActivity: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metadataExports, forKey: .metadataExports)
-    try container.encode(self.restores, forKey: .restores)
+    if !self.metadataExports.isEmpty {
+      try container.encode(self.metadataExports, forKey: .metadataExports)
+    }
+    if !self.restores.isEmpty {
+      try container.encode(self.restores, forKey: .restores)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

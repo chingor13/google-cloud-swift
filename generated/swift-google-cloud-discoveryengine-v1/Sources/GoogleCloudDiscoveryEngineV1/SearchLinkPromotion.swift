@@ -121,12 +121,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.document, forKey: .document)
-      try container.encode(self.imageUri, forKey: .imageUri)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.enabled, forKey: .enabled)
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.document.isEmpty {
+        try container.encode(self.document, forKey: .document)
+      }
+      if !self.imageUri.isEmpty {
+        try container.encode(self.imageUri, forKey: .imageUri)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

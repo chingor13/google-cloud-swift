@@ -209,22 +209,50 @@ public struct BranchRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.includePattern, forKey: .includePattern)
-    try container.encode(self.disabled, forKey: .disabled)
-    try container.encode(self.requirePullRequest, forKey: .requirePullRequest)
-    try container.encode(self.minimumReviewsCount, forKey: .minimumReviewsCount)
-    try container.encode(self.minimumApprovalsCount, forKey: .minimumApprovalsCount)
-    try container.encode(self.requireCodeOwnerApproval, forKey: .requireCodeOwnerApproval)
-    try container.encode(self.requireCommentsResolved, forKey: .requireCommentsResolved)
-    try container.encode(self.allowStaleReviews, forKey: .allowStaleReviews)
-    try container.encode(self.requireLinearHistory, forKey: .requireLinearHistory)
-    try container.encode(self.requiredStatusChecks, forKey: .requiredStatusChecks)
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.includePattern.isEmpty {
+      try container.encode(self.includePattern, forKey: .includePattern)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
+    if self.requirePullRequest {
+      try container.encode(self.requirePullRequest, forKey: .requirePullRequest)
+    }
+    if self.minimumReviewsCount != 0 {
+      try container.encode(self.minimumReviewsCount, forKey: .minimumReviewsCount)
+    }
+    if self.minimumApprovalsCount != 0 {
+      try container.encode(self.minimumApprovalsCount, forKey: .minimumApprovalsCount)
+    }
+    if self.requireCodeOwnerApproval {
+      try container.encode(self.requireCodeOwnerApproval, forKey: .requireCodeOwnerApproval)
+    }
+    if self.requireCommentsResolved {
+      try container.encode(self.requireCommentsResolved, forKey: .requireCommentsResolved)
+    }
+    if self.allowStaleReviews {
+      try container.encode(self.allowStaleReviews, forKey: .allowStaleReviews)
+    }
+    if self.requireLinearHistory {
+      try container.encode(self.requireLinearHistory, forKey: .requireLinearHistory)
+    }
+    if !self.requiredStatusChecks.isEmpty {
+      try container.encode(self.requiredStatusChecks, forKey: .requiredStatusChecks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -282,7 +310,9 @@ public struct BranchRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.context, forKey: .context)
+      if !self.context.isEmpty {
+        try container.encode(self.context, forKey: .context)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

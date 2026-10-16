@@ -115,11 +115,21 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.all, forKey: .all)
-    try container.encode(self.groupLabels, forKey: .groupLabels)
-    try container.encode(self.zones, forKey: .zones)
-    try container.encode(self.instances, forKey: .instances)
-    try container.encode(self.instanceNamePrefixes, forKey: .instanceNamePrefixes)
+    if self.all {
+      try container.encode(self.all, forKey: .all)
+    }
+    if !self.groupLabels.isEmpty {
+      try container.encode(self.groupLabels, forKey: .groupLabels)
+    }
+    if !self.zones.isEmpty {
+      try container.encode(self.zones, forKey: .zones)
+    }
+    if !self.instances.isEmpty {
+      try container.encode(self.instances, forKey: .instances)
+    }
+    if !self.instanceNamePrefixes.isEmpty {
+      try container.encode(self.instanceNamePrefixes, forKey: .instanceNamePrefixes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -187,7 +197,9 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

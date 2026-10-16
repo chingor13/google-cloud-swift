@@ -87,9 +87,13 @@ public struct RenderParameterVersionResponse: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parameterVersion, forKey: .parameterVersion)
+    if !self.parameterVersion.isEmpty {
+      try container.encode(self.parameterVersion, forKey: .parameterVersion)
+    }
     try container.encodeIfPresent(self.payload, forKey: .payload)
-    try container.encode(self.renderedPayload, forKey: .renderedPayload)
+    if !self.renderedPayload.isEmpty {
+      try container.encode(self.renderedPayload, forKey: .renderedPayload)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

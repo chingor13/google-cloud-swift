@@ -104,9 +104,15 @@ public struct FieldPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
-    try container.encode(self.resourcePermission, forKey: .resourcePermission)
-    try container.encode(self.resourceType, forKey: .resourceType)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
+    if !self.resourcePermission.isEmpty {
+      try container.encode(self.resourcePermission, forKey: .resourcePermission)
+    }
+    if !self.resourceType.isEmpty {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

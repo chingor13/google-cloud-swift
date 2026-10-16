@@ -120,11 +120,21 @@ public struct Recipe: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.definedInMaterial, forKey: .definedInMaterial)
-    try container.encode(self.entryPoint, forKey: .entryPoint)
-    try container.encode(self.arguments, forKey: .arguments)
-    try container.encode(self.environment, forKey: .environment)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.definedInMaterial != 0 {
+      try container.encode(self.definedInMaterial, forKey: .definedInMaterial)
+    }
+    if !self.entryPoint.isEmpty {
+      try container.encode(self.entryPoint, forKey: .entryPoint)
+    }
+    if !self.arguments.isEmpty {
+      try container.encode(self.arguments, forKey: .arguments)
+    }
+    if !self.environment.isEmpty {
+      try container.encode(self.environment, forKey: .environment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

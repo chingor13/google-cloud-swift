@@ -441,26 +441,62 @@ public struct ServingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.modelId, forKey: .modelId)
-    try container.encode(self.priceRerankingLevel, forKey: .priceRerankingLevel)
-    try container.encode(self.facetControlIds, forKey: .facetControlIds)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.modelId.isEmpty {
+      try container.encode(self.modelId, forKey: .modelId)
+    }
+    if !self.priceRerankingLevel.isEmpty {
+      try container.encode(self.priceRerankingLevel, forKey: .priceRerankingLevel)
+    }
+    if !self.facetControlIds.isEmpty {
+      try container.encode(self.facetControlIds, forKey: .facetControlIds)
+    }
     try container.encodeIfPresent(self.dynamicFacetSpec, forKey: .dynamicFacetSpec)
-    try container.encode(self.boostControlIds, forKey: .boostControlIds)
-    try container.encode(self.filterControlIds, forKey: .filterControlIds)
-    try container.encode(self.redirectControlIds, forKey: .redirectControlIds)
-    try container.encode(self.twowaySynonymsControlIds, forKey: .twowaySynonymsControlIds)
-    try container.encode(self.onewaySynonymsControlIds, forKey: .onewaySynonymsControlIds)
-    try container.encode(self.doNotAssociateControlIds, forKey: .doNotAssociateControlIds)
-    try container.encode(self.replacementControlIds, forKey: .replacementControlIds)
-    try container.encode(self.ignoreControlIds, forKey: .ignoreControlIds)
-    try container.encode(self.diversityLevel, forKey: .diversityLevel)
-    try container.encode(self.diversityType, forKey: .diversityType)
-    try container.encode(self.enableCategoryFilterLevel, forKey: .enableCategoryFilterLevel)
-    try container.encode(self.ignoreRecsDenylist, forKey: .ignoreRecsDenylist)
+    if !self.boostControlIds.isEmpty {
+      try container.encode(self.boostControlIds, forKey: .boostControlIds)
+    }
+    if !self.filterControlIds.isEmpty {
+      try container.encode(self.filterControlIds, forKey: .filterControlIds)
+    }
+    if !self.redirectControlIds.isEmpty {
+      try container.encode(self.redirectControlIds, forKey: .redirectControlIds)
+    }
+    if !self.twowaySynonymsControlIds.isEmpty {
+      try container.encode(self.twowaySynonymsControlIds, forKey: .twowaySynonymsControlIds)
+    }
+    if !self.onewaySynonymsControlIds.isEmpty {
+      try container.encode(self.onewaySynonymsControlIds, forKey: .onewaySynonymsControlIds)
+    }
+    if !self.doNotAssociateControlIds.isEmpty {
+      try container.encode(self.doNotAssociateControlIds, forKey: .doNotAssociateControlIds)
+    }
+    if !self.replacementControlIds.isEmpty {
+      try container.encode(self.replacementControlIds, forKey: .replacementControlIds)
+    }
+    if !self.ignoreControlIds.isEmpty {
+      try container.encode(self.ignoreControlIds, forKey: .ignoreControlIds)
+    }
+    if !self.diversityLevel.isEmpty {
+      try container.encode(self.diversityLevel, forKey: .diversityLevel)
+    }
+    if self.diversityType != ServingConfig.DiversityType() {
+      try container.encode(self.diversityType, forKey: .diversityType)
+    }
+    if !self.enableCategoryFilterLevel.isEmpty {
+      try container.encode(self.enableCategoryFilterLevel, forKey: .enableCategoryFilterLevel)
+    }
+    if self.ignoreRecsDenylist {
+      try container.encode(self.ignoreRecsDenylist, forKey: .ignoreRecsDenylist)
+    }
     try container.encodeIfPresent(self.personalizationSpec, forKey: .personalizationSpec)
-    try container.encode(self.solutionTypes, forKey: .solutionTypes)
+    if !self.solutionTypes.isEmpty {
+      try container.encode(self.solutionTypes, forKey: .solutionTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -84,9 +84,13 @@ public struct ExecutionReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.framesReported, forKey: .framesReported)
+    if self.framesReported != 0 {
+      try container.encode(self.framesReported, forKey: .framesReported)
+    }
     try container.encodeIfPresent(self.executionErrors, forKey: .executionErrors)
-    try container.encode(self.totalRowsCount, forKey: .totalRowsCount)
+    if self.totalRowsCount != 0 {
+      try container.encode(self.totalRowsCount, forKey: .totalRowsCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

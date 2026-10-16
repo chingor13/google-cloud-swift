@@ -92,9 +92,15 @@ public struct TimeSeriesTable: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataSets, forKey: .dataSets)
-    try container.encode(self.metricVisualization, forKey: .metricVisualization)
-    try container.encode(self.columnSettings, forKey: .columnSettings)
+    if !self.dataSets.isEmpty {
+      try container.encode(self.dataSets, forKey: .dataSets)
+    }
+    if self.metricVisualization != TimeSeriesTable.MetricVisualization() {
+      try container.encode(self.metricVisualization, forKey: .metricVisualization)
+    }
+    if !self.columnSettings.isEmpty {
+      try container.encode(self.columnSettings, forKey: .columnSettings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -183,7 +189,9 @@ public struct TimeSeriesTable: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.timeSeriesQuery, forKey: .timeSeriesQuery)
-      try container.encode(self.tableTemplate, forKey: .tableTemplate)
+      if !self.tableTemplate.isEmpty {
+        try container.encode(self.tableTemplate, forKey: .tableTemplate)
+      }
       try container.encodeIfPresent(self.minAlignmentPeriod, forKey: .minAlignmentPeriod)
       try container.encodeIfPresent(self.tableDisplayOptions, forKey: .tableDisplayOptions)
       for (key, value) in self._unknownFields.json {
@@ -273,8 +281,12 @@ public struct TimeSeriesTable: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.column, forKey: .column)
-      try container.encode(self.visible, forKey: .visible)
+      if !self.column.isEmpty {
+        try container.encode(self.column, forKey: .column)
+      }
+      if self.visible {
+        try container.encode(self.visible, forKey: .visible)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

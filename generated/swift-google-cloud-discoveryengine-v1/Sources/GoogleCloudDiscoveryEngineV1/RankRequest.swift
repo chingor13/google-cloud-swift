@@ -150,14 +150,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.rankingConfig, forKey: .rankingConfig)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.topN, forKey: .topN)
-      try container.encode(self.query, forKey: .query)
-      try container.encode(self.records, forKey: .records)
-      try container.encode(
-        self.ignoreRecordDetailsInResponse, forKey: .ignoreRecordDetailsInResponse)
-      try container.encode(self.userLabels, forKey: .userLabels)
+      if !self.rankingConfig.isEmpty {
+        try container.encode(self.rankingConfig, forKey: .rankingConfig)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if self.topN != 0 {
+        try container.encode(self.topN, forKey: .topN)
+      }
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
+      if !self.records.isEmpty {
+        try container.encode(self.records, forKey: .records)
+      }
+      if self.ignoreRecordDetailsInResponse {
+        try container.encode(
+          self.ignoreRecordDetailsInResponse, forKey: .ignoreRecordDetailsInResponse)
+      }
+      if !self.userLabels.isEmpty {
+        try container.encode(self.userLabels, forKey: .userLabels)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

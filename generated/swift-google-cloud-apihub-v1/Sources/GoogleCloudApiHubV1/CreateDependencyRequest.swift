@@ -95,8 +95,12 @@ public struct CreateDependencyRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.dependencyId, forKey: .dependencyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.dependencyId.isEmpty {
+      try container.encode(self.dependencyId, forKey: .dependencyId)
+    }
     try container.encodeIfPresent(self.dependency, forKey: .dependency)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

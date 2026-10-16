@@ -154,12 +154,22 @@ public struct EkmConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.serviceResolvers, forKey: .serviceResolvers)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.keyManagementMode, forKey: .keyManagementMode)
-    try container.encode(self.cryptoSpacePath, forKey: .cryptoSpacePath)
+    if !self.serviceResolvers.isEmpty {
+      try container.encode(self.serviceResolvers, forKey: .serviceResolvers)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.keyManagementMode != EkmConnection.KeyManagementMode() {
+      try container.encode(self.keyManagementMode, forKey: .keyManagementMode)
+    }
+    if !self.cryptoSpacePath.isEmpty {
+      try container.encode(self.cryptoSpacePath, forKey: .cryptoSpacePath)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -260,10 +270,18 @@ public struct EkmConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceDirectoryService, forKey: .serviceDirectoryService)
-      try container.encode(self.endpointFilter, forKey: .endpointFilter)
-      try container.encode(self.hostname, forKey: .hostname)
-      try container.encode(self.serverCertificates, forKey: .serverCertificates)
+      if !self.serviceDirectoryService.isEmpty {
+        try container.encode(self.serviceDirectoryService, forKey: .serviceDirectoryService)
+      }
+      if !self.endpointFilter.isEmpty {
+        try container.encode(self.endpointFilter, forKey: .endpointFilter)
+      }
+      if !self.hostname.isEmpty {
+        try container.encode(self.hostname, forKey: .hostname)
+      }
+      if !self.serverCertificates.isEmpty {
+        try container.encode(self.serverCertificates, forKey: .serverCertificates)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

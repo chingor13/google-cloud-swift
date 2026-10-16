@@ -86,8 +86,12 @@ public struct Message: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.role, forKey: .role)
-    try container.encode(self.chunks, forKey: .chunks)
+    if !self.role.isEmpty {
+      try container.encode(self.role, forKey: .role)
+    }
+    if !self.chunks.isEmpty {
+      try container.encode(self.chunks, forKey: .chunks)
+    }
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

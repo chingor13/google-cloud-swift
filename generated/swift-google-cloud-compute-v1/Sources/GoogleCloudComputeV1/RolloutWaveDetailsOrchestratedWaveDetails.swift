@@ -121,9 +121,13 @@
       try container.encodeIfPresent(self.estimatedCompletionTime, forKey: .estimatedCompletionTime)
       try container.encodeIfPresent(
         self.estimatedTotalResourcesCount, forKey: .estimatedTotalResourcesCount)
-      try container.encode(self.failedLocations, forKey: .failedLocations)
+      if !self.failedLocations.isEmpty {
+        try container.encode(self.failedLocations, forKey: .failedLocations)
+      }
       try container.encodeIfPresent(self.failedResourcesCount, forKey: .failedResourcesCount)
-      try container.encode(self.locationStatus, forKey: .locationStatus)
+      if !self.locationStatus.isEmpty {
+        try container.encode(self.locationStatus, forKey: .locationStatus)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

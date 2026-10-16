@@ -146,9 +146,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.isFinal, forKey: .isFinal)
-      try container.encode(self.answerRecord, forKey: .answerRecord)
-      try container.encode(self.textMessageId, forKey: .textMessageId)
+      if self.isFinal {
+        try container.encode(self.isFinal, forKey: .isFinal)
+      }
+      if !self.answerRecord.isEmpty {
+        try container.encode(self.answerRecord, forKey: .answerRecord)
+      }
+      if !self.textMessageId.isEmpty {
+        try container.encode(self.textMessageId, forKey: .textMessageId)
+      }
       try container.encodeIfPresent(self.sendTime, forKey: .sendTime)
 
       if let choice = self.response {
@@ -242,9 +248,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.response, forKey: .response)
+        if !self.response.isEmpty {
+          try container.encode(self.response, forKey: .response)
+        }
         try container.encodeIfPresent(self.groundingMetadata, forKey: .groundingMetadata)
-        try container.encode(self.toolCalls, forKey: .toolCalls)
+        if !self.toolCalls.isEmpty {
+          try container.encode(self.toolCalls, forKey: .toolCalls)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

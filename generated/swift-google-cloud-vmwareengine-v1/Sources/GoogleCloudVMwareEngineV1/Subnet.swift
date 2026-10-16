@@ -116,12 +116,24 @@ public struct Subnet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
-    try container.encode(self.gatewayIp, forKey: .gatewayIp)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.vlanId, forKey: .vlanId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.ipCidrRange.isEmpty {
+      try container.encode(self.ipCidrRange, forKey: .ipCidrRange)
+    }
+    if !self.gatewayIp.isEmpty {
+      try container.encode(self.gatewayIp, forKey: .gatewayIp)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.state != Subnet.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.vlanId != 0 {
+      try container.encode(self.vlanId, forKey: .vlanId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

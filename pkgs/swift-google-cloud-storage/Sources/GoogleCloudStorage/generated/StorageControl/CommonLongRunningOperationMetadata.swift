@@ -111,9 +111,15 @@ public struct CommonLongRunningOperationMetadata: Codable, Equatable, GoogleWKT.
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
-    try container.encode(self.progressPercent, forKey: .progressPercent)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.requestedCancellation {
+      try container.encode(self.requestedCancellation, forKey: .requestedCancellation)
+    }
+    if self.progressPercent != 0 {
+      try container.encode(self.progressPercent, forKey: .progressPercent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

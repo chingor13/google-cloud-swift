@@ -115,12 +115,24 @@ public struct MysqlSslConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clientKey, forKey: .clientKey)
-    try container.encode(self.clientKeySet, forKey: .clientKeySet)
-    try container.encode(self.clientCertificate, forKey: .clientCertificate)
-    try container.encode(self.clientCertificateSet, forKey: .clientCertificateSet)
-    try container.encode(self.caCertificate, forKey: .caCertificate)
-    try container.encode(self.caCertificateSet, forKey: .caCertificateSet)
+    if !self.clientKey.isEmpty {
+      try container.encode(self.clientKey, forKey: .clientKey)
+    }
+    if self.clientKeySet {
+      try container.encode(self.clientKeySet, forKey: .clientKeySet)
+    }
+    if !self.clientCertificate.isEmpty {
+      try container.encode(self.clientCertificate, forKey: .clientCertificate)
+    }
+    if self.clientCertificateSet {
+      try container.encode(self.clientCertificateSet, forKey: .clientCertificateSet)
+    }
+    if !self.caCertificate.isEmpty {
+      try container.encode(self.caCertificate, forKey: .caCertificate)
+    }
+    if self.caCertificateSet {
+      try container.encode(self.caCertificateSet, forKey: .caCertificateSet)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

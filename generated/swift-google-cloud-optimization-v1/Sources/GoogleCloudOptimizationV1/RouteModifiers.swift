@@ -104,10 +104,18 @@ public struct RouteModifiers: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.avoidTolls, forKey: .avoidTolls)
-    try container.encode(self.avoidHighways, forKey: .avoidHighways)
-    try container.encode(self.avoidFerries, forKey: .avoidFerries)
-    try container.encode(self.avoidIndoor, forKey: .avoidIndoor)
+    if self.avoidTolls {
+      try container.encode(self.avoidTolls, forKey: .avoidTolls)
+    }
+    if self.avoidHighways {
+      try container.encode(self.avoidHighways, forKey: .avoidHighways)
+    }
+    if self.avoidFerries {
+      try container.encode(self.avoidFerries, forKey: .avoidFerries)
+    }
+    if self.avoidIndoor {
+      try container.encode(self.avoidIndoor, forKey: .avoidIndoor)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

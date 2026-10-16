@@ -77,7 +77,9 @@ public struct ProofpointOnDemandSettings: Codable, Equatable, GoogleWKT._AnyPack
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.authentication, forKey: .authentication)
-    try container.encode(self.clusterId, forKey: .clusterId)
+    if !self.clusterId.isEmpty {
+      try container.encode(self.clusterId, forKey: .clusterId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

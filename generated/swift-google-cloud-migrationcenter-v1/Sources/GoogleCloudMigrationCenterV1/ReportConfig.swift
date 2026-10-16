@@ -111,12 +111,21 @@ public struct ReportConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.groupPreferencesetAssignments, forKey: .groupPreferencesetAssignments)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.groupPreferencesetAssignments.isEmpty {
+      try container.encode(
+        self.groupPreferencesetAssignments, forKey: .groupPreferencesetAssignments)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -182,8 +191,12 @@ public struct ReportConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.group, forKey: .group)
-      try container.encode(self.preferenceSet, forKey: .preferenceSet)
+      if !self.group.isEmpty {
+        try container.encode(self.group, forKey: .group)
+      }
+      if !self.preferenceSet.isEmpty {
+        try container.encode(self.preferenceSet, forKey: .preferenceSet)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

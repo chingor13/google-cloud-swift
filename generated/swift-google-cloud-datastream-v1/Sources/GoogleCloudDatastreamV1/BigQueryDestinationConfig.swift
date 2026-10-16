@@ -214,7 +214,9 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datasetId, forKey: .datasetId)
+      if !self.datasetId.isEmpty {
+        try container.encode(self.datasetId, forKey: .datasetId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -389,9 +391,15 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.location, forKey: .location)
-        try container.encode(self.datasetIdPrefix, forKey: .datasetIdPrefix)
-        try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+        if !self.location.isEmpty {
+          try container.encode(self.location, forKey: .location)
+        }
+        if !self.datasetIdPrefix.isEmpty {
+          try container.encode(self.datasetIdPrefix, forKey: .datasetIdPrefix)
+        }
+        if !self.kmsKeyName.isEmpty {
+          try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -534,11 +542,21 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.bucket, forKey: .bucket)
-      try container.encode(self.rootPath, forKey: .rootPath)
-      try container.encode(self.connectionName, forKey: .connectionName)
-      try container.encode(self.fileFormat, forKey: .fileFormat)
-      try container.encode(self.tableFormat, forKey: .tableFormat)
+      if !self.bucket.isEmpty {
+        try container.encode(self.bucket, forKey: .bucket)
+      }
+      if !self.rootPath.isEmpty {
+        try container.encode(self.rootPath, forKey: .rootPath)
+      }
+      if !self.connectionName.isEmpty {
+        try container.encode(self.connectionName, forKey: .connectionName)
+      }
+      if self.fileFormat != BigQueryDestinationConfig.BlmtConfig.FileFormat() {
+        try container.encode(self.fileFormat, forKey: .fileFormat)
+      }
+      if self.tableFormat != BigQueryDestinationConfig.BlmtConfig.TableFormat() {
+        try container.encode(self.tableFormat, forKey: .tableFormat)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

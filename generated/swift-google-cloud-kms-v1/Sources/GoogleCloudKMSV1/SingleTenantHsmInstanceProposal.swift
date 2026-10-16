@@ -291,10 +291,16 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureReason, forKey: .failureReason)
+    if self.state != SingleTenantHsmInstanceProposal.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failureReason.isEmpty {
+      try container.encode(self.failureReason, forKey: .failureReason)
+    }
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.purgeTime, forKey: .purgeTime)
 
@@ -424,10 +430,16 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
-      try container.encode(self.challenges, forKey: .challenges)
-      try container.encode(
-        self.approvedTwoFactorPublicKeyPems, forKey: .approvedTwoFactorPublicKeyPems)
+      if self.requiredApproverCount != 0 {
+        try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
+      }
+      if !self.challenges.isEmpty {
+        try container.encode(self.challenges, forKey: .challenges)
+      }
+      if !self.approvedTwoFactorPublicKeyPems.isEmpty {
+        try container.encode(
+          self.approvedTwoFactorPublicKeyPems, forKey: .approvedTwoFactorPublicKeyPems)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -546,11 +558,19 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requiredChallenges, forKey: .requiredChallenges)
-      try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
-      try container.encode(self.quorumChallenges, forKey: .quorumChallenges)
-      try container.encode(
-        self.approvedTwoFactorPublicKeyPems, forKey: .approvedTwoFactorPublicKeyPems)
+      if !self.requiredChallenges.isEmpty {
+        try container.encode(self.requiredChallenges, forKey: .requiredChallenges)
+      }
+      if self.requiredApproverCount != 0 {
+        try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
+      }
+      if !self.quorumChallenges.isEmpty {
+        try container.encode(self.quorumChallenges, forKey: .quorumChallenges)
+      }
+      if !self.approvedTwoFactorPublicKeyPems.isEmpty {
+        try container.encode(
+          self.approvedTwoFactorPublicKeyPems, forKey: .approvedTwoFactorPublicKeyPems)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -660,8 +680,12 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
-      try container.encode(self.twoFactorPublicKeyPems, forKey: .twoFactorPublicKeyPems)
+      if self.requiredApproverCount != 0 {
+        try container.encode(self.requiredApproverCount, forKey: .requiredApproverCount)
+      }
+      if !self.twoFactorPublicKeyPems.isEmpty {
+        try container.encode(self.twoFactorPublicKeyPems, forKey: .twoFactorPublicKeyPems)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -999,7 +1023,9 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.twoFactorPublicKeyPem, forKey: .twoFactorPublicKeyPem)
+      if !self.twoFactorPublicKeyPem.isEmpty {
+        try container.encode(self.twoFactorPublicKeyPem, forKey: .twoFactorPublicKeyPem)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1095,7 +1121,9 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.twoFactorPublicKeyPem, forKey: .twoFactorPublicKeyPem)
+      if !self.twoFactorPublicKeyPem.isEmpty {
+        try container.encode(self.twoFactorPublicKeyPem, forKey: .twoFactorPublicKeyPem)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1278,8 +1306,12 @@ public struct SingleTenantHsmInstanceProposal: Codable, Equatable, GoogleWKT._An
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.twoFactorPublicKeyPem, forKey: .twoFactorPublicKeyPem)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.twoFactorPublicKeyPem.isEmpty {
+        try container.encode(self.twoFactorPublicKeyPem, forKey: .twoFactorPublicKeyPem)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

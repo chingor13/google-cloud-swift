@@ -101,7 +101,9 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleWKT._A
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.partialErrors, forKey: .partialErrors)
+    if !self.partialErrors.isEmpty {
+      try container.encode(self.partialErrors, forKey: .partialErrors)
+    }
     try container.encodeIfPresent(self.uploadStats, forKey: .uploadStats)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -179,9 +181,15 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleWKT._A
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.processedObjectCount, forKey: .processedObjectCount)
-      try container.encode(self.failedValidationCount, forKey: .failedValidationCount)
-      try container.encode(self.successfulUploadCount, forKey: .successfulUploadCount)
+      if self.processedObjectCount != 0 {
+        try container.encode(self.processedObjectCount, forKey: .processedObjectCount)
+      }
+      if self.failedValidationCount != 0 {
+        try container.encode(self.failedValidationCount, forKey: .failedValidationCount)
+      }
+      if self.successfulUploadCount != 0 {
+        try container.encode(self.successfulUploadCount, forKey: .successfulUploadCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

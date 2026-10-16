@@ -217,17 +217,33 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.network, forKey: .network)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
     try container.encodeIfPresent(self.filter, forKey: .filter)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.warnings, forKey: .warnings)
-    try container.encode(self.selfLink, forKey: .selfLink)
-    try container.encode(self.kind, forKey: .kind)
+    if self.priority != 0 {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
+    if !self.kind.isEmpty {
+      try container.encode(self.kind, forKey: .kind)
+    }
 
     if let choice = self.target {
       switch choice {
@@ -304,7 +320,9 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -386,7 +404,9 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.region, forKey: .region)
+      if !self.region.isEmpty {
+        try container.encode(self.region, forKey: .region)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -499,10 +519,18 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.ipProtocol, forKey: .ipProtocol)
-      try container.encode(self.srcRange, forKey: .srcRange)
-      try container.encode(self.destRange, forKey: .destRange)
-      try container.encode(self.protocolVersion, forKey: .protocolVersion)
+      if !self.ipProtocol.isEmpty {
+        try container.encode(self.ipProtocol, forKey: .ipProtocol)
+      }
+      if !self.srcRange.isEmpty {
+        try container.encode(self.srcRange, forKey: .srcRange)
+      }
+      if !self.destRange.isEmpty {
+        try container.encode(self.destRange, forKey: .destRange)
+      }
+      if self.protocolVersion != PolicyBasedRoute.Filter.ProtocolVersion() {
+        try container.encode(self.protocolVersion, forKey: .protocolVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -716,9 +744,15 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.code, forKey: .code)
-      try container.encode(self.data, forKey: .data)
-      try container.encode(self.warningMessage, forKey: .warningMessage)
+      if self.code != PolicyBasedRoute.Warnings.Code() {
+        try container.encode(self.code, forKey: .code)
+      }
+      if !self.data.isEmpty {
+        try container.encode(self.data, forKey: .data)
+      }
+      if !self.warningMessage.isEmpty {
+        try container.encode(self.warningMessage, forKey: .warningMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

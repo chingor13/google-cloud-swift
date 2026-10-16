@@ -94,7 +94,9 @@ public struct UpdateAnywhereCacheRequest: Codable, Equatable, GoogleWKT._AnyPack
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.anywhereCache, forKey: .anywhereCache)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -173,18 +173,41 @@ public struct Publishing: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.methodSettings, forKey: .methodSettings)
-    try container.encode(self.newIssueUri, forKey: .newIssueUri)
-    try container.encode(self.documentationUri, forKey: .documentationUri)
-    try container.encode(self.apiShortName, forKey: .apiShortName)
-    try container.encode(self.githubLabel, forKey: .githubLabel)
-    try container.encode(self.codeownerGithubTeams, forKey: .codeownerGithubTeams)
-    try container.encode(self.docTagPrefix, forKey: .docTagPrefix)
-    try container.encode(self.organization, forKey: .organization)
-    try container.encode(self.librarySettings, forKey: .librarySettings)
-    try container.encode(
-      self.protoReferenceDocumentationUri, forKey: .protoReferenceDocumentationUri)
-    try container.encode(self.restReferenceDocumentationUri, forKey: .restReferenceDocumentationUri)
+    if !self.methodSettings.isEmpty {
+      try container.encode(self.methodSettings, forKey: .methodSettings)
+    }
+    if !self.newIssueUri.isEmpty {
+      try container.encode(self.newIssueUri, forKey: .newIssueUri)
+    }
+    if !self.documentationUri.isEmpty {
+      try container.encode(self.documentationUri, forKey: .documentationUri)
+    }
+    if !self.apiShortName.isEmpty {
+      try container.encode(self.apiShortName, forKey: .apiShortName)
+    }
+    if !self.githubLabel.isEmpty {
+      try container.encode(self.githubLabel, forKey: .githubLabel)
+    }
+    if !self.codeownerGithubTeams.isEmpty {
+      try container.encode(self.codeownerGithubTeams, forKey: .codeownerGithubTeams)
+    }
+    if !self.docTagPrefix.isEmpty {
+      try container.encode(self.docTagPrefix, forKey: .docTagPrefix)
+    }
+    if self.organization != ClientLibraryOrganization() {
+      try container.encode(self.organization, forKey: .organization)
+    }
+    if !self.librarySettings.isEmpty {
+      try container.encode(self.librarySettings, forKey: .librarySettings)
+    }
+    if !self.protoReferenceDocumentationUri.isEmpty {
+      try container.encode(
+        self.protoReferenceDocumentationUri, forKey: .protoReferenceDocumentationUri)
+    }
+    if !self.restReferenceDocumentationUri.isEmpty {
+      try container.encode(
+        self.restReferenceDocumentationUri, forKey: .restReferenceDocumentationUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

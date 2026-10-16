@@ -71,7 +71,9 @@ public struct ListMetricsScopesByMonitoredProjectResponse: Codable, Equatable, G
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.metricsScopes, forKey: .metricsScopes)
+    if !self.metricsScopes.isEmpty {
+      try container.encode(self.metricsScopes, forKey: .metricsScopes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

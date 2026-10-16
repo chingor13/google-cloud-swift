@@ -150,14 +150,20 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.state, forKey: .state)
     try container.encodeIfPresent(self.role, forKey: .role)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.principal {
       switch choice {
@@ -236,8 +242,12 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.predefinedRole, forKey: .predefinedRole)
-      try container.encode(self.customRole, forKey: .customRole)
+      if self.predefinedRole != RBACRoleBinding.Role.PredefinedRoles() {
+        try container.encode(self.predefinedRole, forKey: .predefinedRole)
+      }
+      if !self.customRole.isEmpty {
+        try container.encode(self.customRole, forKey: .customRole)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

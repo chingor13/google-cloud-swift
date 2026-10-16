@@ -203,7 +203,9 @@
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
-      try container.encode(self.supportedDiskTypes, forKey: .supportedDiskTypes)
+      if !self.supportedDiskTypes.isEmpty {
+        try container.encode(self.supportedDiskTypes, forKey: .supportedDiskTypes)
+      }
       try container.encodeIfPresent(self.zone, forKey: .zone)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

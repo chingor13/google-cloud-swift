@@ -118,11 +118,21 @@ public struct SynthesizeSpeechConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.voice, forKey: .voice)
-    try container.encode(self.voiceSampleGcsUri, forKey: .voiceSampleGcsUri)
-    try container.encode(self.speakingRate, forKey: .speakingRate)
-    try container.encode(self.model, forKey: .model)
-    try container.encode(self.instruction, forKey: .instruction)
+    if !self.voice.isEmpty {
+      try container.encode(self.voice, forKey: .voice)
+    }
+    if !self.voiceSampleGcsUri.isEmpty {
+      try container.encode(self.voiceSampleGcsUri, forKey: .voiceSampleGcsUri)
+    }
+    if self.speakingRate != 0 {
+      try container.encode(self.speakingRate, forKey: .speakingRate)
+    }
+    if !self.model.isEmpty {
+      try container.encode(self.model, forKey: .model)
+    }
+    if !self.instruction.isEmpty {
+      try container.encode(self.instruction, forKey: .instruction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

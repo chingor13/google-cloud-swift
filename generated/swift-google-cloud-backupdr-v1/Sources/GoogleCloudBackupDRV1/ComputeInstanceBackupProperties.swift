@@ -194,16 +194,26 @@ public struct ComputeInstanceBackupProperties: Codable, Equatable, GoogleWKT._An
     try container.encodeIfPresent(self.tags, forKey: .tags)
     try container.encodeIfPresent(self.machineType, forKey: .machineType)
     try container.encodeIfPresent(self.canIpForward, forKey: .canIpForward)
-    try container.encode(self.networkInterface, forKey: .networkInterface)
-    try container.encode(self.disk, forKey: .disk)
+    if !self.networkInterface.isEmpty {
+      try container.encode(self.networkInterface, forKey: .networkInterface)
+    }
+    if !self.disk.isEmpty {
+      try container.encode(self.disk, forKey: .disk)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.scheduling, forKey: .scheduling)
-    try container.encode(self.guestAccelerator, forKey: .guestAccelerator)
+    if !self.guestAccelerator.isEmpty {
+      try container.encode(self.guestAccelerator, forKey: .guestAccelerator)
+    }
     try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)
     try container.encodeIfPresent(self.keyRevocationActionType, forKey: .keyRevocationActionType)
     try container.encodeIfPresent(self.sourceInstance, forKey: .sourceInstance)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

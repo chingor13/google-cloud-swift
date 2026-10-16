@@ -99,10 +99,18 @@ public struct ListSharedResourceSubscriptionsRequest: Codable, Equatable, Google
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.includeDeletedSubscriptions, forKey: .includeDeletedSubscriptions)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if self.includeDeletedSubscriptions {
+      try container.encode(self.includeDeletedSubscriptions, forKey: .includeDeletedSubscriptions)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

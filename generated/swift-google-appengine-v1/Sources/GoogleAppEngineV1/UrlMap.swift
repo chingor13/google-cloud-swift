@@ -146,11 +146,21 @@ public struct UrlMap: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.urlRegex, forKey: .urlRegex)
-    try container.encode(self.securityLevel, forKey: .securityLevel)
-    try container.encode(self.login, forKey: .login)
-    try container.encode(self.authFailAction, forKey: .authFailAction)
-    try container.encode(self.redirectHttpResponseCode, forKey: .redirectHttpResponseCode)
+    if !self.urlRegex.isEmpty {
+      try container.encode(self.urlRegex, forKey: .urlRegex)
+    }
+    if self.securityLevel != SecurityLevel() {
+      try container.encode(self.securityLevel, forKey: .securityLevel)
+    }
+    if self.login != LoginRequirement() {
+      try container.encode(self.login, forKey: .login)
+    }
+    if self.authFailAction != AuthFailAction() {
+      try container.encode(self.authFailAction, forKey: .authFailAction)
+    }
+    if self.redirectHttpResponseCode != UrlMap.RedirectHttpResponseCode() {
+      try container.encode(self.redirectHttpResponseCode, forKey: .redirectHttpResponseCode)
+    }
 
     if let choice = self.handlerType {
       switch choice {

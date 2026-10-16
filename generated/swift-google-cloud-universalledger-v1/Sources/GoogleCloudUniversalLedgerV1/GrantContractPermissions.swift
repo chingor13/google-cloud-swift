@@ -91,9 +91,15 @@ public struct GrantContractPermissions: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.contractId, forKey: .contractId)
-    try container.encode(self.permissions, forKey: .permissions)
-    try container.encode(self.delegateContractId, forKey: .delegateContractId)
+    if !self.contractId.isEmpty {
+      try container.encode(self.contractId, forKey: .contractId)
+    }
+    if !self.permissions.isEmpty {
+      try container.encode(self.permissions, forKey: .permissions)
+    }
+    if !self.delegateContractId.isEmpty {
+      try container.encode(self.delegateContractId, forKey: .delegateContractId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

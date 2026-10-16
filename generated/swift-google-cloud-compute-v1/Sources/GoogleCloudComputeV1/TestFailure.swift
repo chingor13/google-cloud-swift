@@ -137,7 +137,9 @@
       try container.encodeIfPresent(
         self.expectedRedirectResponseCode, forKey: .expectedRedirectResponseCode)
       try container.encodeIfPresent(self.expectedService, forKey: .expectedService)
-      try container.encode(self.headers, forKey: .headers)
+      if !self.headers.isEmpty {
+        try container.encode(self.headers, forKey: .headers)
+      }
       try container.encodeIfPresent(self.host, forKey: .host)
       try container.encodeIfPresent(self.path, forKey: .path)
       for (key, value) in self._unknownFields.json {

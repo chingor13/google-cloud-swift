@@ -91,10 +91,16 @@ public struct RetryAttempt: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attempt, forKey: .attempt)
+    if self.attempt != 0 {
+      try container.encode(self.attempt, forKey: .attempt)
+    }
     try container.encodeIfPresent(self.wait, forKey: .wait)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateDesc, forKey: .stateDesc)
+    if self.state != RepairState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateDesc.isEmpty {
+      try container.encode(self.stateDesc, forKey: .stateDesc)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

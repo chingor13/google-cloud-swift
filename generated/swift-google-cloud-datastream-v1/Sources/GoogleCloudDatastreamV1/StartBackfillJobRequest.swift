@@ -70,7 +70,9 @@ public struct StartBackfillJobRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.object, forKey: .object)
+    if !self.object.isEmpty {
+      try container.encode(self.object, forKey: .object)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -110,8 +110,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.deleteUnassignedUserLicenses, forKey: .deleteUnassignedUserLicenses)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if self.deleteUnassignedUserLicenses {
+        try container.encode(
+          self.deleteUnassignedUserLicenses, forKey: .deleteUnassignedUserLicenses)
+      }
 
       if let choice = self.source {
         switch choice {
@@ -188,7 +193,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.userLicenses, forKey: .userLicenses)
+        if !self.userLicenses.isEmpty {
+          try container.encode(self.userLicenses, forKey: .userLicenses)
+        }
         try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

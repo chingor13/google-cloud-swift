@@ -112,9 +112,15 @@ public struct ProductSearchParams: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.boundingPoly, forKey: .boundingPoly)
-    try container.encode(self.productSet, forKey: .productSet)
-    try container.encode(self.productCategories, forKey: .productCategories)
-    try container.encode(self.filter, forKey: .filter)
+    if !self.productSet.isEmpty {
+      try container.encode(self.productSet, forKey: .productSet)
+    }
+    if !self.productCategories.isEmpty {
+      try container.encode(self.productCategories, forKey: .productCategories)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -120,11 +120,21 @@ public struct WindowsUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.identity, forKey: .identity)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.kbArticleIds, forKey: .kbArticleIds)
-    try container.encode(self.supportUrl, forKey: .supportUrl)
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.kbArticleIds.isEmpty {
+      try container.encode(self.kbArticleIds, forKey: .kbArticleIds)
+    }
+    if !self.supportUrl.isEmpty {
+      try container.encode(self.supportUrl, forKey: .supportUrl)
+    }
     try container.encodeIfPresent(self.lastPublishedTimestamp, forKey: .lastPublishedTimestamp)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -191,8 +201,12 @@ public struct WindowsUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.updateId, forKey: .updateId)
-      try container.encode(self.revision, forKey: .revision)
+      if !self.updateId.isEmpty {
+        try container.encode(self.updateId, forKey: .updateId)
+      }
+      if self.revision != 0 {
+        try container.encode(self.revision, forKey: .revision)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -280,8 +294,12 @@ public struct WindowsUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.categoryId, forKey: .categoryId)
-      try container.encode(self.name, forKey: .name)
+      if !self.categoryId.isEmpty {
+        try container.encode(self.categoryId, forKey: .categoryId)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

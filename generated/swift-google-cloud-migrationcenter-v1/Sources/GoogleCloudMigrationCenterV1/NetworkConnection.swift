@@ -124,14 +124,30 @@ public struct NetworkConnection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.localIpAddress, forKey: .localIpAddress)
-    try container.encode(self.localPort, forKey: .localPort)
-    try container.encode(self.remoteIpAddress, forKey: .remoteIpAddress)
-    try container.encode(self.remotePort, forKey: .remotePort)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.pid, forKey: .pid)
-    try container.encode(self.processName, forKey: .processName)
+    if !self.`protocol`.isEmpty {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if !self.localIpAddress.isEmpty {
+      try container.encode(self.localIpAddress, forKey: .localIpAddress)
+    }
+    if self.localPort != 0 {
+      try container.encode(self.localPort, forKey: .localPort)
+    }
+    if !self.remoteIpAddress.isEmpty {
+      try container.encode(self.remoteIpAddress, forKey: .remoteIpAddress)
+    }
+    if self.remotePort != 0 {
+      try container.encode(self.remotePort, forKey: .remotePort)
+    }
+    if self.state != NetworkConnection.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.pid != 0 {
+      try container.encode(self.pid, forKey: .pid)
+    }
+    if !self.processName.isEmpty {
+      try container.encode(self.processName, forKey: .processName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

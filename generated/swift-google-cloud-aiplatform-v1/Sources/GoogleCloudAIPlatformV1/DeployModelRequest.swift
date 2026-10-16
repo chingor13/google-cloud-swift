@@ -112,9 +112,13 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.endpoint, forKey: .endpoint)
+      if !self.endpoint.isEmpty {
+        try container.encode(self.endpoint, forKey: .endpoint)
+      }
       try container.encodeIfPresent(self.deployedModel, forKey: .deployedModel)
-      try container.encode(self.trafficSplit, forKey: .trafficSplit)
+      if !self.trafficSplit.isEmpty {
+        try container.encode(self.trafficSplit, forKey: .trafficSplit)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

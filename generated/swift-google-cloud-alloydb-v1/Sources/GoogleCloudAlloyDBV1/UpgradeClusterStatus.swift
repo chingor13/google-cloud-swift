@@ -104,11 +104,21 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.cancellable, forKey: .cancellable)
-    try container.encode(self.sourceVersion, forKey: .sourceVersion)
-    try container.encode(self.targetVersion, forKey: .targetVersion)
-    try container.encode(self.stages, forKey: .stages)
+    if self.state != UpgradeClusterResponse.Status() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.cancellable {
+      try container.encode(self.cancellable, forKey: .cancellable)
+    }
+    if self.sourceVersion != DatabaseVersion() {
+      try container.encode(self.sourceVersion, forKey: .sourceVersion)
+    }
+    if self.targetVersion != DatabaseVersion() {
+      try container.encode(self.targetVersion, forKey: .targetVersion)
+    }
+    if !self.stages.isEmpty {
+      try container.encode(self.stages, forKey: .stages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -208,8 +218,12 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.stage, forKey: .stage)
-      try container.encode(self.state, forKey: .state)
+      if self.stage != UpgradeClusterResponse.Stage() {
+        try container.encode(self.stage, forKey: .stage)
+      }
+      if self.state != UpgradeClusterResponse.Status() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.schedule, forKey: .schedule)
 
       if let choice = self.stageSpecificStatus {
@@ -491,10 +505,18 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.notStarted, forKey: .notStarted)
-        try container.encode(self.ongoing, forKey: .ongoing)
-        try container.encode(self.success, forKey: .success)
-        try container.encode(self.failed, forKey: .failed)
+        if self.notStarted != 0 {
+          try container.encode(self.notStarted, forKey: .notStarted)
+        }
+        if self.ongoing != 0 {
+          try container.encode(self.ongoing, forKey: .ongoing)
+        }
+        if self.success != 0 {
+          try container.encode(self.success, forKey: .success)
+        }
+        if self.failed != 0 {
+          try container.encode(self.failed, forKey: .failed)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

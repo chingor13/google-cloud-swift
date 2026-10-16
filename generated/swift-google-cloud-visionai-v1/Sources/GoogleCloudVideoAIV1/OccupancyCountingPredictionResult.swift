@@ -114,10 +114,16 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.currentTime, forKey: .currentTime)
-    try container.encode(self.identifiedBoxes, forKey: .identifiedBoxes)
+    if !self.identifiedBoxes.isEmpty {
+      try container.encode(self.identifiedBoxes, forKey: .identifiedBoxes)
+    }
     try container.encodeIfPresent(self.stats, forKey: .stats)
-    try container.encode(self.trackInfo, forKey: .trackInfo)
-    try container.encode(self.dwellTimeInfo, forKey: .dwellTimeInfo)
+    if !self.trackInfo.isEmpty {
+      try container.encode(self.trackInfo, forKey: .trackInfo)
+    }
+    if !self.dwellTimeInfo.isEmpty {
+      try container.encode(self.dwellTimeInfo, forKey: .dwellTimeInfo)
+    }
     try container.encodeIfPresent(self.pts, forKey: .pts)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -184,8 +190,12 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labelId, forKey: .labelId)
-      try container.encode(self.labelString, forKey: .labelString)
+      if self.labelId != 0 {
+        try container.encode(self.labelId, forKey: .labelId)
+      }
+      if !self.labelString.isEmpty {
+        try container.encode(self.labelString, forKey: .labelString)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -298,11 +308,17 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.boxId, forKey: .boxId)
+      if self.boxId != 0 {
+        try container.encode(self.boxId, forKey: .boxId)
+      }
       try container.encodeIfPresent(self.normalizedBoundingBox, forKey: .normalizedBoundingBox)
-      try container.encode(self.score, forKey: .score)
+      if self.score != 0 {
+        try container.encode(self.score, forKey: .score)
+      }
       try container.encodeIfPresent(self.entity, forKey: .entity)
-      try container.encode(self.trackId, forKey: .trackId)
+      if self.trackId != 0 {
+        try container.encode(self.trackId, forKey: .trackId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -384,10 +400,18 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.xmin, forKey: .xmin)
-        try container.encode(self.ymin, forKey: .ymin)
-        try container.encode(self.width, forKey: .width)
-        try container.encode(self.height, forKey: .height)
+        if self.xmin != 0 {
+          try container.encode(self.xmin, forKey: .xmin)
+        }
+        if self.ymin != 0 {
+          try container.encode(self.ymin, forKey: .ymin)
+        }
+        if self.width != 0 {
+          try container.encode(self.width, forKey: .width)
+        }
+        if self.height != 0 {
+          try container.encode(self.height, forKey: .height)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -514,9 +538,15 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fullFrameCount, forKey: .fullFrameCount)
-      try container.encode(self.crossingLineCounts, forKey: .crossingLineCounts)
-      try container.encode(self.activeZoneCounts, forKey: .activeZoneCounts)
+      if !self.fullFrameCount.isEmpty {
+        try container.encode(self.fullFrameCount, forKey: .fullFrameCount)
+      }
+      if !self.crossingLineCounts.isEmpty {
+        try container.encode(self.crossingLineCounts, forKey: .crossingLineCounts)
+      }
+      if !self.activeZoneCounts.isEmpty {
+        try container.encode(self.activeZoneCounts, forKey: .activeZoneCounts)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -583,7 +613,9 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.entity, forKey: .entity)
-        try container.encode(self.count, forKey: .count)
+        if self.count != 0 {
+          try container.encode(self.count, forKey: .count)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -800,12 +832,20 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.annotation, forKey: .annotation)
-        try container.encode(self.positiveDirectionCounts, forKey: .positiveDirectionCounts)
-        try container.encode(self.negativeDirectionCounts, forKey: .negativeDirectionCounts)
-        try container.encode(
-          self.accumulatedPositiveDirectionCounts, forKey: .accumulatedPositiveDirectionCounts)
-        try container.encode(
-          self.accumulatedNegativeDirectionCounts, forKey: .accumulatedNegativeDirectionCounts)
+        if !self.positiveDirectionCounts.isEmpty {
+          try container.encode(self.positiveDirectionCounts, forKey: .positiveDirectionCounts)
+        }
+        if !self.negativeDirectionCounts.isEmpty {
+          try container.encode(self.negativeDirectionCounts, forKey: .negativeDirectionCounts)
+        }
+        if !self.accumulatedPositiveDirectionCounts.isEmpty {
+          try container.encode(
+            self.accumulatedPositiveDirectionCounts, forKey: .accumulatedPositiveDirectionCounts)
+        }
+        if !self.accumulatedNegativeDirectionCounts.isEmpty {
+          try container.encode(
+            self.accumulatedNegativeDirectionCounts, forKey: .accumulatedNegativeDirectionCounts)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -895,7 +935,9 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.annotation, forKey: .annotation)
-        try container.encode(self.counts, forKey: .counts)
+        if !self.counts.isEmpty {
+          try container.encode(self.counts, forKey: .counts)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1005,7 +1047,9 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trackId, forKey: .trackId)
+      if !self.trackId.isEmpty {
+        try container.encode(self.trackId, forKey: .trackId)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1109,8 +1153,12 @@ public struct OccupancyCountingPredictionResult: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trackId, forKey: .trackId)
-      try container.encode(self.zoneId, forKey: .zoneId)
+      if !self.trackId.isEmpty {
+        try container.encode(self.trackId, forKey: .trackId)
+      }
+      if !self.zoneId.isEmpty {
+        try container.encode(self.zoneId, forKey: .zoneId)
+      }
       try container.encodeIfPresent(self.dwellStartTime, forKey: .dwellStartTime)
       try container.encodeIfPresent(self.dwellEndTime, forKey: .dwellEndTime)
       for (key, value) in self._unknownFields.json {

@@ -91,9 +91,15 @@ public struct BatchDeleteConversationsResponse: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.deletedConversations, forKey: .deletedConversations)
-    try container.encode(self.failedConversations, forKey: .failedConversations)
-    try container.encode(self.errorMessages, forKey: .errorMessages)
+    if !self.deletedConversations.isEmpty {
+      try container.encode(self.deletedConversations, forKey: .deletedConversations)
+    }
+    if !self.failedConversations.isEmpty {
+      try container.encode(self.failedConversations, forKey: .failedConversations)
+    }
+    if !self.errorMessages.isEmpty {
+      try container.encode(self.errorMessages, forKey: .errorMessages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -97,8 +97,12 @@ public struct TextSearch: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.searchText, forKey: .searchText)
-    try container.encode(self.dataFieldNames, forKey: .dataFieldNames)
+    if !self.searchText.isEmpty {
+      try container.encode(self.searchText, forKey: .searchText)
+    }
+    if !self.dataFieldNames.isEmpty {
+      try container.encode(self.dataFieldNames, forKey: .dataFieldNames)
+    }
     try container.encodeIfPresent(self.outputFields, forKey: .outputFields)
     try container.encodeIfPresent(self.topK, forKey: .topK)
     try container.encodeIfPresent(self.filter, forKey: .filter)

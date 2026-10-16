@@ -80,8 +80,12 @@ public struct EnumTypeOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.possibleValues, forKey: .possibleValues)
-    try container.encode(self.validationCheckDisabled, forKey: .validationCheckDisabled)
+    if !self.possibleValues.isEmpty {
+      try container.encode(self.possibleValues, forKey: .possibleValues)
+    }
+    if self.validationCheckDisabled {
+      try container.encode(self.validationCheckDisabled, forKey: .validationCheckDisabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

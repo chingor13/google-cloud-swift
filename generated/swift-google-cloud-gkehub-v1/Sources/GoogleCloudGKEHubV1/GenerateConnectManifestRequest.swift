@@ -134,13 +134,27 @@ public struct GenerateConnectManifestRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.namespace, forKey: .namespace)
-    try container.encode(self.proxy, forKey: .proxy)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.isUpgrade, forKey: .isUpgrade)
-    try container.encode(self.registry, forKey: .registry)
-    try container.encode(self.imagePullSecretContent, forKey: .imagePullSecretContent)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.namespace.isEmpty {
+      try container.encode(self.namespace, forKey: .namespace)
+    }
+    if !self.proxy.isEmpty {
+      try container.encode(self.proxy, forKey: .proxy)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.isUpgrade {
+      try container.encode(self.isUpgrade, forKey: .isUpgrade)
+    }
+    if !self.registry.isEmpty {
+      try container.encode(self.registry, forKey: .registry)
+    }
+    if !self.imagePullSecretContent.isEmpty {
+      try container.encode(self.imagePullSecretContent, forKey: .imagePullSecretContent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

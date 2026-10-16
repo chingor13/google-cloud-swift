@@ -104,11 +104,21 @@ public struct RepairRolloutOperation: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rollout, forKey: .rollout)
-    try container.encode(self.currentRepairPhaseIndex, forKey: .currentRepairPhaseIndex)
-    try container.encode(self.repairPhases, forKey: .repairPhases)
-    try container.encode(self.phaseId, forKey: .phaseId)
-    try container.encode(self.jobId, forKey: .jobId)
+    if !self.rollout.isEmpty {
+      try container.encode(self.rollout, forKey: .rollout)
+    }
+    if self.currentRepairPhaseIndex != 0 {
+      try container.encode(self.currentRepairPhaseIndex, forKey: .currentRepairPhaseIndex)
+    }
+    if !self.repairPhases.isEmpty {
+      try container.encode(self.repairPhases, forKey: .repairPhases)
+    }
+    if !self.phaseId.isEmpty {
+      try container.encode(self.phaseId, forKey: .phaseId)
+    }
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

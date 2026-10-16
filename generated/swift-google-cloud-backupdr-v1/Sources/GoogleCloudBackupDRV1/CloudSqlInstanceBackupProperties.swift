@@ -114,11 +114,19 @@ public struct CloudSqlInstanceBackupProperties: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.databaseInstalledVersion, forKey: .databaseInstalledVersion)
-    try container.encode(self.finalBackup, forKey: .finalBackup)
-    try container.encode(self.sourceInstance, forKey: .sourceInstance)
+    if !self.databaseInstalledVersion.isEmpty {
+      try container.encode(self.databaseInstalledVersion, forKey: .databaseInstalledVersion)
+    }
+    if self.finalBackup {
+      try container.encode(self.finalBackup, forKey: .finalBackup)
+    }
+    if !self.sourceInstance.isEmpty {
+      try container.encode(self.sourceInstance, forKey: .sourceInstance)
+    }
     try container.encodeIfPresent(self.instanceCreateTime, forKey: .instanceCreateTime)
-    try container.encode(self.instanceTier, forKey: .instanceTier)
+    if !self.instanceTier.isEmpty {
+      try container.encode(self.instanceTier, forKey: .instanceTier)
+    }
     try container.encodeIfPresent(self.instanceDeleteTime, forKey: .instanceDeleteTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

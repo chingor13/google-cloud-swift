@@ -81,8 +81,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.promptTemplateName, forKey: .promptTemplateName)
-      try container.encode(self.responseTemplateName, forKey: .responseTemplateName)
+      if !self.promptTemplateName.isEmpty {
+        try container.encode(self.promptTemplateName, forKey: .promptTemplateName)
+      }
+      if !self.responseTemplateName.isEmpty {
+        try container.encode(self.responseTemplateName, forKey: .responseTemplateName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

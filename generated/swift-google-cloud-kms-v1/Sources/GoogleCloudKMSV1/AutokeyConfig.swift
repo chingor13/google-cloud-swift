@@ -127,11 +127,21 @@ public struct AutokeyConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.keyProject, forKey: .keyProject)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.keyProjectResolutionMode, forKey: .keyProjectResolutionMode)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.keyProject.isEmpty {
+      try container.encode(self.keyProject, forKey: .keyProject)
+    }
+    if self.state != AutokeyConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.keyProjectResolutionMode != AutokeyConfig.KeyProjectResolutionMode() {
+      try container.encode(self.keyProjectResolutionMode, forKey: .keyProjectResolutionMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -103,11 +103,17 @@ public struct ConfigureContactSettingsRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.registration, forKey: .registration)
+    if !self.registration.isEmpty {
+      try container.encode(self.registration, forKey: .registration)
+    }
     try container.encodeIfPresent(self.contactSettings, forKey: .contactSettings)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.contactNotices, forKey: .contactNotices)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.contactNotices.isEmpty {
+      try container.encode(self.contactNotices, forKey: .contactNotices)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -139,8 +139,12 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.value, forKey: .value)
-      try container.encode(self.currency, forKey: .currency)
-      try container.encode(self.transactionId, forKey: .transactionId)
+      if !self.currency.isEmpty {
+        try container.encode(self.currency, forKey: .currency)
+      }
+      if !self.transactionId.isEmpty {
+        try container.encode(self.transactionId, forKey: .transactionId)
+      }
       try container.encodeIfPresent(self.tax, forKey: .tax)
       try container.encodeIfPresent(self.cost, forKey: .cost)
       try container.encodeIfPresent(self.discountValue, forKey: .discountValue)

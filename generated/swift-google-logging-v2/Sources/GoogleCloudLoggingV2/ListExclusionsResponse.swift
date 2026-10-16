@@ -80,8 +80,12 @@ public struct ListExclusionsResponse: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.exclusions, forKey: .exclusions)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.exclusions.isEmpty {
+      try container.encode(self.exclusions, forKey: .exclusions)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

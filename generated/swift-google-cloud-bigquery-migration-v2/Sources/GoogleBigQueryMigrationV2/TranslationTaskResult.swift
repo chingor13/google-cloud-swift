@@ -87,9 +87,15 @@ public struct TranslationTaskResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.translatedLiterals, forKey: .translatedLiterals)
-    try container.encode(self.reportLogMessages, forKey: .reportLogMessages)
-    try container.encode(self.consoleUri, forKey: .consoleUri)
+    if !self.translatedLiterals.isEmpty {
+      try container.encode(self.translatedLiterals, forKey: .translatedLiterals)
+    }
+    if !self.reportLogMessages.isEmpty {
+      try container.encode(self.reportLogMessages, forKey: .reportLogMessages)
+    }
+    if !self.consoleUri.isEmpty {
+      try container.encode(self.consoleUri, forKey: .consoleUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

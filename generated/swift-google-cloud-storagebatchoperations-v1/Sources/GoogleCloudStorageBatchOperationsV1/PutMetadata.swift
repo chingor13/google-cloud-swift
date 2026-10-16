@@ -148,7 +148,9 @@ public struct PutMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.contentType, forKey: .contentType)
     try container.encodeIfPresent(self.cacheControl, forKey: .cacheControl)
     try container.encodeIfPresent(self.customTime, forKey: .customTime)
-    try container.encode(self.customMetadata, forKey: .customMetadata)
+    if !self.customMetadata.isEmpty {
+      try container.encode(self.customMetadata, forKey: .customMetadata)
+    }
     try container.encodeIfPresent(self.objectRetention, forKey: .objectRetention)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

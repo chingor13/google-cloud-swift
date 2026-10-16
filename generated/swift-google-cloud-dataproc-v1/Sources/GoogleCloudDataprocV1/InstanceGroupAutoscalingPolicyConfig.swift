@@ -111,9 +111,15 @@ public struct InstanceGroupAutoscalingPolicyConfig: Codable, Equatable, GoogleWK
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.minInstances, forKey: .minInstances)
-    try container.encode(self.maxInstances, forKey: .maxInstances)
-    try container.encode(self.weight, forKey: .weight)
+    if self.minInstances != 0 {
+      try container.encode(self.minInstances, forKey: .minInstances)
+    }
+    if self.maxInstances != 0 {
+      try container.encode(self.maxInstances, forKey: .maxInstances)
+    }
+    if self.weight != 0 {
+      try container.encode(self.weight, forKey: .weight)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

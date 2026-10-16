@@ -368,7 +368,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.addressPurposes, forKey: .addressPurposes)
+      if !self.addressPurposes.isEmpty {
+        try container.encode(self.addressPurposes, forKey: .addressPurposes)
+      }
       try container.encodeIfPresent(self.allowAddressCreation, forKey: .allowAddressCreation)
       try container.encodeIfPresent(self.allowAliasIpRanges, forKey: .allowAliasIpRanges)
       try container.encodeIfPresent(self.allowAutoModeSubnet, forKey: .allowAutoModeSubnet)
@@ -400,16 +402,30 @@
       try container.encodeIfPresent(self.allowVpcFirewallRules, forKey: .allowVpcFirewallRules)
       try container.encodeIfPresent(self.allowVpcPeering, forKey: .allowVpcPeering)
       try container.encodeIfPresent(self.allowVpn, forKey: .allowVpn)
-      try container.encode(self.firewallPolicyTypes, forKey: .firewallPolicyTypes)
-      try container.encode(self.interfaceTypes, forKey: .interfaceTypes)
+      if !self.firewallPolicyTypes.isEmpty {
+        try container.encode(self.firewallPolicyTypes, forKey: .firewallPolicyTypes)
+      }
+      if !self.interfaceTypes.isEmpty {
+        try container.encode(self.interfaceTypes, forKey: .interfaceTypes)
+      }
       try container.encodeIfPresent(self.multicast, forKey: .multicast)
       try container.encodeIfPresent(
         self.predefinedNetworkInternalIpv6Range, forKey: .predefinedNetworkInternalIpv6Range)
-      try container.encode(self.predefinedSubnetworkRanges, forKey: .predefinedSubnetworkRanges)
-      try container.encode(self.subnetPurposes, forKey: .subnetPurposes)
-      try container.encode(self.subnetStackTypes, forKey: .subnetStackTypes)
-      try container.encode(self.subnetworkPurposes, forKey: .subnetworkPurposes)
-      try container.encode(self.subnetworkStackTypes, forKey: .subnetworkStackTypes)
+      if !self.predefinedSubnetworkRanges.isEmpty {
+        try container.encode(self.predefinedSubnetworkRanges, forKey: .predefinedSubnetworkRanges)
+      }
+      if !self.subnetPurposes.isEmpty {
+        try container.encode(self.subnetPurposes, forKey: .subnetPurposes)
+      }
+      if !self.subnetStackTypes.isEmpty {
+        try container.encode(self.subnetStackTypes, forKey: .subnetStackTypes)
+      }
+      if !self.subnetworkPurposes.isEmpty {
+        try container.encode(self.subnetworkPurposes, forKey: .subnetworkPurposes)
+      }
+      if !self.subnetworkStackTypes.isEmpty {
+        try container.encode(self.subnetworkStackTypes, forKey: .subnetworkStackTypes)
+      }
       try container.encodeIfPresent(self.unicast, forKey: .unicast)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

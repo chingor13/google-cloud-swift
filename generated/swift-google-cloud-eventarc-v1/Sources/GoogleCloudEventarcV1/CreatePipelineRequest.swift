@@ -93,10 +93,16 @@ public struct CreatePipelineRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.pipeline, forKey: .pipeline)
-    try container.encode(self.pipelineId, forKey: .pipelineId)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if !self.pipelineId.isEmpty {
+      try container.encode(self.pipelineId, forKey: .pipelineId)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

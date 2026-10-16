@@ -88,8 +88,12 @@ public struct InputStreamProperty: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.lastEstablishTime, forKey: .lastEstablishTime)
-    try container.encode(self.videoStreams, forKey: .videoStreams)
-    try container.encode(self.audioStreams, forKey: .audioStreams)
+    if !self.videoStreams.isEmpty {
+      try container.encode(self.videoStreams, forKey: .videoStreams)
+    }
+    if !self.audioStreams.isEmpty {
+      try container.encode(self.audioStreams, forKey: .audioStreams)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

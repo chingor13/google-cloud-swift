@@ -99,10 +99,18 @@ public struct ListTransferConfigsRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.dataSourceIds, forKey: .dataSourceIds)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.pageSize, forKey: .pageSize)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.dataSourceIds.isEmpty {
+      try container.encode(self.dataSourceIds, forKey: .dataSourceIds)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

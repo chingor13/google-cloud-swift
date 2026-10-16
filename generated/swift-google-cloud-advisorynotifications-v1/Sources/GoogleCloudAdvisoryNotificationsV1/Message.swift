@@ -90,7 +90,9 @@ public struct Message: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.body, forKey: .body)
-    try container.encode(self.attachments, forKey: .attachments)
+    if !self.attachments.isEmpty {
+      try container.encode(self.attachments, forKey: .attachments)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.localizationTime, forKey: .localizationTime)
     for (key, value) in self._unknownFields.json {

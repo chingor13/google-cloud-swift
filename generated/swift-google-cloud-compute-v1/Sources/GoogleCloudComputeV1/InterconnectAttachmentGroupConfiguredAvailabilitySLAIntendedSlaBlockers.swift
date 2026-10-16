@@ -129,13 +129,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attachments, forKey: .attachments)
+      if !self.attachments.isEmpty {
+        try container.encode(self.attachments, forKey: .attachments)
+      }
       try container.encodeIfPresent(self.blockerType, forKey: .blockerType)
       try container.encodeIfPresent(self.documentationLink, forKey: .documentationLink)
       try container.encodeIfPresent(self.explanation, forKey: .explanation)
-      try container.encode(self.metros, forKey: .metros)
-      try container.encode(self.regions, forKey: .regions)
-      try container.encode(self.zones, forKey: .zones)
+      if !self.metros.isEmpty {
+        try container.encode(self.metros, forKey: .metros)
+      }
+      if !self.regions.isEmpty {
+        try container.encode(self.regions, forKey: .regions)
+      }
+      if !self.zones.isEmpty {
+        try container.encode(self.zones, forKey: .zones)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

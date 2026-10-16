@@ -103,11 +103,19 @@ public struct SubscribeDataExchangeRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.destination, forKey: .destination)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.destination.isEmpty {
+      try container.encode(self.destination, forKey: .destination)
+    }
     try container.encodeIfPresent(self.destinationDataset, forKey: .destinationDataset)
-    try container.encode(self.subscription, forKey: .subscription)
-    try container.encode(self.subscriberContact, forKey: .subscriberContact)
+    if !self.subscription.isEmpty {
+      try container.encode(self.subscription, forKey: .subscription)
+    }
+    if !self.subscriberContact.isEmpty {
+      try container.encode(self.subscriberContact, forKey: .subscriberContact)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

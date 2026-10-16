@@ -74,7 +74,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.noiseSigma, forKey: .noiseSigma)
+      if !self.noiseSigma.isEmpty {
+        try container.encode(self.noiseSigma, forKey: .noiseSigma)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -150,8 +152,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.sigma, forKey: .sigma)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if self.sigma != 0 {
+          try container.encode(self.sigma, forKey: .sigma)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

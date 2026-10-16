@@ -161,17 +161,39 @@ public struct HybridReplicationParameters: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.replication, forKey: .replication)
-    try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
-    try container.encode(self.peerClusterName, forKey: .peerClusterName)
-    try container.encode(self.peerSvmName, forKey: .peerSvmName)
-    try container.encode(self.peerIpAddresses, forKey: .peerIpAddresses)
-    try container.encode(self.clusterLocation, forKey: .clusterLocation)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.replicationSchedule, forKey: .replicationSchedule)
-    try container.encode(self.hybridReplicationType, forKey: .hybridReplicationType)
-    try container.encode(self.largeVolumeConstituentCount, forKey: .largeVolumeConstituentCount)
+    if !self.replication.isEmpty {
+      try container.encode(self.replication, forKey: .replication)
+    }
+    if !self.peerVolumeName.isEmpty {
+      try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
+    }
+    if !self.peerClusterName.isEmpty {
+      try container.encode(self.peerClusterName, forKey: .peerClusterName)
+    }
+    if !self.peerSvmName.isEmpty {
+      try container.encode(self.peerSvmName, forKey: .peerSvmName)
+    }
+    if !self.peerIpAddresses.isEmpty {
+      try container.encode(self.peerIpAddresses, forKey: .peerIpAddresses)
+    }
+    if !self.clusterLocation.isEmpty {
+      try container.encode(self.clusterLocation, forKey: .clusterLocation)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.replicationSchedule != HybridReplicationSchedule() {
+      try container.encode(self.replicationSchedule, forKey: .replicationSchedule)
+    }
+    if self.hybridReplicationType != HybridReplicationParameters.VolumeHybridReplicationType() {
+      try container.encode(self.hybridReplicationType, forKey: .hybridReplicationType)
+    }
+    if self.largeVolumeConstituentCount != 0 {
+      try container.encode(self.largeVolumeConstituentCount, forKey: .largeVolumeConstituentCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

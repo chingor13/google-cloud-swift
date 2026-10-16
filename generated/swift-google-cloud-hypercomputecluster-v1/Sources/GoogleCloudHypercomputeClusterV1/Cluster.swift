@@ -167,15 +167,29 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.networkResources, forKey: .networkResources)
-    try container.encode(self.storageResources, forKey: .storageResources)
-    try container.encode(self.computeResources, forKey: .computeResources)
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.networkResources.isEmpty {
+      try container.encode(self.networkResources, forKey: .networkResources)
+    }
+    if !self.storageResources.isEmpty {
+      try container.encode(self.storageResources, forKey: .storageResources)
+    }
+    if !self.computeResources.isEmpty {
+      try container.encode(self.computeResources, forKey: .computeResources)
+    }
     try container.encodeIfPresent(self.orchestrator, forKey: .orchestrator)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

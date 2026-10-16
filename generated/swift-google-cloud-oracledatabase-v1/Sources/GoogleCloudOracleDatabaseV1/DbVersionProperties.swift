@@ -106,11 +106,21 @@ public struct DbVersionProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.isLatestForMajorVersion, forKey: .isLatestForMajorVersion)
-    try container.encode(self.supportsPdb, forKey: .supportsPdb)
-    try container.encode(self.isPreviewDbVersion, forKey: .isPreviewDbVersion)
-    try container.encode(self.isUpgradeSupported, forKey: .isUpgradeSupported)
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.isLatestForMajorVersion {
+      try container.encode(self.isLatestForMajorVersion, forKey: .isLatestForMajorVersion)
+    }
+    if self.supportsPdb {
+      try container.encode(self.supportsPdb, forKey: .supportsPdb)
+    }
+    if self.isPreviewDbVersion {
+      try container.encode(self.isPreviewDbVersion, forKey: .isPreviewDbVersion)
+    }
+    if self.isUpgradeSupported {
+      try container.encode(self.isUpgradeSupported, forKey: .isUpgradeSupported)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

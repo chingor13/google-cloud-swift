@@ -93,10 +93,16 @@ public struct PromoteReleaseOperation: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.targetId, forKey: .targetId)
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
     try container.encodeIfPresent(self.wait, forKey: .wait)
-    try container.encode(self.rollout, forKey: .rollout)
-    try container.encode(self.phase, forKey: .phase)
+    if !self.rollout.isEmpty {
+      try container.encode(self.rollout, forKey: .rollout)
+    }
+    if !self.phase.isEmpty {
+      try container.encode(self.phase, forKey: .phase)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -126,10 +126,18 @@ public struct ImportMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.successCount, forKey: .successCount)
-    try container.encode(self.failureCount, forKey: .failureCount)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    if self.successCount != 0 {
+      try container.encode(self.successCount, forKey: .successCount)
+    }
+    if self.failureCount != 0 {
+      try container.encode(self.failureCount, forKey: .failureCount)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if !self.notificationPubsubTopic.isEmpty {
+      try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

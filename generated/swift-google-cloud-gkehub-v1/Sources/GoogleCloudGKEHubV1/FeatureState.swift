@@ -88,8 +88,12 @@ public struct FeatureState: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.code, forKey: .code)
-    try container.encode(self.description, forKey: .description)
+    if self.code != GoogleCloudGKEHubV1.FeatureState.Code() {
+      try container.encode(self.code, forKey: .code)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

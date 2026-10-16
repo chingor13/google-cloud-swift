@@ -213,15 +213,29 @@ public struct SoftwareConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.imageVersion, forKey: .imageVersion)
-    try container.encode(self.airflowConfigOverrides, forKey: .airflowConfigOverrides)
-    try container.encode(self.pypiPackages, forKey: .pypiPackages)
-    try container.encode(self.envVariables, forKey: .envVariables)
-    try container.encode(self.pythonVersion, forKey: .pythonVersion)
-    try container.encode(self.schedulerCount, forKey: .schedulerCount)
+    if !self.imageVersion.isEmpty {
+      try container.encode(self.imageVersion, forKey: .imageVersion)
+    }
+    if !self.airflowConfigOverrides.isEmpty {
+      try container.encode(self.airflowConfigOverrides, forKey: .airflowConfigOverrides)
+    }
+    if !self.pypiPackages.isEmpty {
+      try container.encode(self.pypiPackages, forKey: .pypiPackages)
+    }
+    if !self.envVariables.isEmpty {
+      try container.encode(self.envVariables, forKey: .envVariables)
+    }
+    if !self.pythonVersion.isEmpty {
+      try container.encode(self.pythonVersion, forKey: .pythonVersion)
+    }
+    if self.schedulerCount != 0 {
+      try container.encode(self.schedulerCount, forKey: .schedulerCount)
+    }
     try container.encodeIfPresent(
       self.cloudDataLineageIntegration, forKey: .cloudDataLineageIntegration)
-    try container.encode(self.webServerPluginsMode, forKey: .webServerPluginsMode)
+    if self.webServerPluginsMode != SoftwareConfig.WebServerPluginsMode() {
+      try container.encode(self.webServerPluginsMode, forKey: .webServerPluginsMode)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -164,8 +164,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.noSmalltalk, forKey: .noSmalltalk)
-        try container.encode(self.onlyEndUser, forKey: .onlyEndUser)
+        if self.noSmalltalk {
+          try container.encode(self.noSmalltalk, forKey: .noSmalltalk)
+        }
+        if self.onlyEndUser {
+          try container.encode(self.onlyEndUser, forKey: .onlyEndUser)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -397,17 +401,33 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.suggestionFeature, forKey: .suggestionFeature)
-        try container.encode(self.enableEventBasedSuggestion, forKey: .enableEventBasedSuggestion)
-        try container.encode(self.disableAgentQueryLogging, forKey: .disableAgentQueryLogging)
-        try container.encode(
-          self.enableQuerySuggestionWhenNoAnswer, forKey: .enableQuerySuggestionWhenNoAnswer)
-        try container.encode(
-          self.enableConversationAugmentedQuery, forKey: .enableConversationAugmentedQuery)
-        try container.encode(self.enableQuerySuggestionOnly, forKey: .enableQuerySuggestionOnly)
-        try container.encode(self.enableResponseDebugInfo, forKey: .enableResponseDebugInfo)
+        if self.enableEventBasedSuggestion {
+          try container.encode(self.enableEventBasedSuggestion, forKey: .enableEventBasedSuggestion)
+        }
+        if self.disableAgentQueryLogging {
+          try container.encode(self.disableAgentQueryLogging, forKey: .disableAgentQueryLogging)
+        }
+        if self.enableQuerySuggestionWhenNoAnswer {
+          try container.encode(
+            self.enableQuerySuggestionWhenNoAnswer, forKey: .enableQuerySuggestionWhenNoAnswer)
+        }
+        if self.enableConversationAugmentedQuery {
+          try container.encode(
+            self.enableConversationAugmentedQuery, forKey: .enableConversationAugmentedQuery)
+        }
+        if self.enableQuerySuggestionOnly {
+          try container.encode(self.enableQuerySuggestionOnly, forKey: .enableQuerySuggestionOnly)
+        }
+        if self.enableResponseDebugInfo {
+          try container.encode(self.enableResponseDebugInfo, forKey: .enableResponseDebugInfo)
+        }
         try container.encodeIfPresent(self.raiSettings, forKey: .raiSettings)
-        try container.encode(self.suggestionTriggerEvent, forKey: .suggestionTriggerEvent)
-        try container.encode(self.disableQuerySearchContext, forKey: .disableQuerySearchContext)
+        if self.suggestionTriggerEvent != GoogleCloudDialogflowV2.TriggerEvent() {
+          try container.encode(self.suggestionTriggerEvent, forKey: .suggestionTriggerEvent)
+        }
+        if self.disableQuerySearchContext {
+          try container.encode(self.disableQuerySearchContext, forKey: .disableQuerySearchContext)
+        }
         try container.encodeIfPresent(
           self.suggestionTriggerSettings, forKey: .suggestionTriggerSettings)
         try container.encodeIfPresent(self.queryConfig, forKey: .queryConfig)
@@ -605,18 +625,34 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.featureConfigs, forKey: .featureConfigs)
-        try container.encode(self.groupSuggestionResponses, forKey: .groupSuggestionResponses)
-        try container.encode(self.generators, forKey: .generators)
-        try container.encode(
-          self.disableHighLatencyFeaturesSyncDelivery,
-          forKey: .disableHighLatencyFeaturesSyncDelivery)
-        try container.encode(
-          self.skipEmptyEventBasedSuggestion, forKey: .skipEmptyEventBasedSuggestion)
-        try container.encode(
-          self.useUnredactedConversationData, forKey: .useUnredactedConversationData)
-        try container.encode(self.enableAsyncToolCall, forKey: .enableAsyncToolCall)
-        try container.encode(self.companionAgent, forKey: .companionAgent)
+        if !self.featureConfigs.isEmpty {
+          try container.encode(self.featureConfigs, forKey: .featureConfigs)
+        }
+        if self.groupSuggestionResponses {
+          try container.encode(self.groupSuggestionResponses, forKey: .groupSuggestionResponses)
+        }
+        if !self.generators.isEmpty {
+          try container.encode(self.generators, forKey: .generators)
+        }
+        if self.disableHighLatencyFeaturesSyncDelivery {
+          try container.encode(
+            self.disableHighLatencyFeaturesSyncDelivery,
+            forKey: .disableHighLatencyFeaturesSyncDelivery)
+        }
+        if self.skipEmptyEventBasedSuggestion {
+          try container.encode(
+            self.skipEmptyEventBasedSuggestion, forKey: .skipEmptyEventBasedSuggestion)
+        }
+        if self.useUnredactedConversationData {
+          try container.encode(
+            self.useUnredactedConversationData, forKey: .useUnredactedConversationData)
+        }
+        if self.enableAsyncToolCall {
+          try container.encode(self.enableAsyncToolCall, forKey: .enableAsyncToolCall)
+        }
+        if !self.companionAgent.isEmpty {
+          try container.encode(self.companionAgent, forKey: .companionAgent)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -792,11 +828,17 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.maxResults, forKey: .maxResults)
-        try container.encode(self.confidenceThreshold, forKey: .confidenceThreshold)
+        if self.maxResults != 0 {
+          try container.encode(self.maxResults, forKey: .maxResults)
+        }
+        if self.confidenceThreshold != 0 {
+          try container.encode(self.confidenceThreshold, forKey: .confidenceThreshold)
+        }
         try container.encodeIfPresent(self.contextFilterSettings, forKey: .contextFilterSettings)
         try container.encodeIfPresent(self.sections, forKey: .sections)
-        try container.encode(self.contextSize, forKey: .contextSize)
+        if self.contextSize != 0 {
+          try container.encode(self.contextSize, forKey: .contextSize)
+        }
 
         if let choice = self.querySource {
           switch choice {
@@ -871,7 +913,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.knowledgeBases, forKey: .knowledgeBases)
+          if !self.knowledgeBases.isEmpty {
+            try container.encode(self.knowledgeBases, forKey: .knowledgeBases)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -957,7 +1001,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.documents, forKey: .documents)
+          if !self.documents.isEmpty {
+            try container.encode(self.documents, forKey: .documents)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1053,7 +1099,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.agent, forKey: .agent)
+          if !self.agent.isEmpty {
+            try container.encode(self.agent, forKey: .agent)
+          }
           try container.encodeIfPresent(self.humanAgentSideConfig, forKey: .humanAgentSideConfig)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1115,7 +1163,9 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.agent, forKey: .agent)
+            if !self.agent.isEmpty {
+              try container.encode(self.agent, forKey: .agent)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -1241,9 +1291,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.dropHandoffMessages, forKey: .dropHandoffMessages)
-          try container.encode(self.dropVirtualAgentMessages, forKey: .dropVirtualAgentMessages)
-          try container.encode(self.dropIvrMessages, forKey: .dropIvrMessages)
+          if self.dropHandoffMessages {
+            try container.encode(self.dropHandoffMessages, forKey: .dropHandoffMessages)
+          }
+          if self.dropVirtualAgentMessages {
+            try container.encode(self.dropVirtualAgentMessages, forKey: .dropVirtualAgentMessages)
+          }
+          if self.dropIvrMessages {
+            try container.encode(self.dropIvrMessages, forKey: .dropIvrMessages)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1335,7 +1391,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.sectionTypes, forKey: .sectionTypes)
+          if !self.sectionTypes.isEmpty {
+            try container.encode(self.sectionTypes, forKey: .sectionTypes)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1634,8 +1692,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.model, forKey: .model)
-        try container.encode(self.baselineModelVersion, forKey: .baselineModelVersion)
+        if !self.model.isEmpty {
+          try container.encode(self.model, forKey: .model)
+        }
+        if !self.baselineModelVersion.isEmpty {
+          try container.encode(self.baselineModelVersion, forKey: .baselineModelVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1719,7 +1781,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.recentSentencesCount, forKey: .recentSentencesCount)
+        if self.recentSentencesCount != 0 {
+          try container.encode(self.recentSentencesCount, forKey: .recentSentencesCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1881,9 +1945,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableEntityExtraction, forKey: .enableEntityExtraction)
-        try container.encode(self.enableSentimentAnalysis, forKey: .enableSentimentAnalysis)
-        try container.encode(self.enableSentimentAnalysisV3, forKey: .enableSentimentAnalysisV3)
+        if self.enableEntityExtraction {
+          try container.encode(self.enableEntityExtraction, forKey: .enableEntityExtraction)
+        }
+        if self.enableSentimentAnalysis {
+          try container.encode(self.enableSentimentAnalysis, forKey: .enableSentimentAnalysis)
+        }
+        if self.enableSentimentAnalysisV3 {
+          try container.encode(self.enableSentimentAnalysisV3, forKey: .enableSentimentAnalysisV3)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -84,7 +84,9 @@ public struct ObjectChecksums: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.crc32C, forKey: .crc32C)
-    try container.encode(self.md5Hash, forKey: .md5Hash)
+    if !self.md5Hash.isEmpty {
+      try container.encode(self.md5Hash, forKey: .md5Hash)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

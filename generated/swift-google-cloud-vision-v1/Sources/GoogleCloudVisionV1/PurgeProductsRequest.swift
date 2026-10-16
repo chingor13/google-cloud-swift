@@ -109,8 +109,12 @@ public struct PurgeProductsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.force, forKey: .force)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if self.force {
+      try container.encode(self.force, forKey: .force)
+    }
 
     if let choice = self.target {
       switch choice {

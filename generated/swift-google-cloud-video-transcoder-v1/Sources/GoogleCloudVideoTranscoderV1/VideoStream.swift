@@ -581,25 +581,63 @@ public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.widthPixels, forKey: .widthPixels)
-      try container.encode(self.heightPixels, forKey: .heightPixels)
-      try container.encode(self.frameRate, forKey: .frameRate)
-      try container.encode(self.frameRateConversionStrategy, forKey: .frameRateConversionStrategy)
-      try container.encode(self.bitrateBps, forKey: .bitrateBps)
-      try container.encode(self.pixelFormat, forKey: .pixelFormat)
-      try container.encode(self.rateControlMode, forKey: .rateControlMode)
-      try container.encode(self.crfLevel, forKey: .crfLevel)
-      try container.encode(self.allowOpenGop, forKey: .allowOpenGop)
-      try container.encode(self.enableTwoPass, forKey: .enableTwoPass)
-      try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
-      try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
-      try container.encode(self.entropyCoder, forKey: .entropyCoder)
-      try container.encode(self.bPyramid, forKey: .bPyramid)
-      try container.encode(self.bFrameCount, forKey: .bFrameCount)
-      try container.encode(self.aqStrength, forKey: .aqStrength)
-      try container.encode(self.profile, forKey: .profile)
-      try container.encode(self.tune, forKey: .tune)
-      try container.encode(self.preset, forKey: .preset)
+      if self.widthPixels != 0 {
+        try container.encode(self.widthPixels, forKey: .widthPixels)
+      }
+      if self.heightPixels != 0 {
+        try container.encode(self.heightPixels, forKey: .heightPixels)
+      }
+      if self.frameRate != 0 {
+        try container.encode(self.frameRate, forKey: .frameRate)
+      }
+      if self.frameRateConversionStrategy != VideoStream.FrameRateConversionStrategy() {
+        try container.encode(self.frameRateConversionStrategy, forKey: .frameRateConversionStrategy)
+      }
+      if self.bitrateBps != 0 {
+        try container.encode(self.bitrateBps, forKey: .bitrateBps)
+      }
+      if !self.pixelFormat.isEmpty {
+        try container.encode(self.pixelFormat, forKey: .pixelFormat)
+      }
+      if !self.rateControlMode.isEmpty {
+        try container.encode(self.rateControlMode, forKey: .rateControlMode)
+      }
+      if self.crfLevel != 0 {
+        try container.encode(self.crfLevel, forKey: .crfLevel)
+      }
+      if self.allowOpenGop {
+        try container.encode(self.allowOpenGop, forKey: .allowOpenGop)
+      }
+      if self.enableTwoPass {
+        try container.encode(self.enableTwoPass, forKey: .enableTwoPass)
+      }
+      if self.vbvSizeBits != 0 {
+        try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
+      }
+      if self.vbvFullnessBits != 0 {
+        try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
+      }
+      if !self.entropyCoder.isEmpty {
+        try container.encode(self.entropyCoder, forKey: .entropyCoder)
+      }
+      if self.bPyramid {
+        try container.encode(self.bPyramid, forKey: .bPyramid)
+      }
+      if self.bFrameCount != 0 {
+        try container.encode(self.bFrameCount, forKey: .bFrameCount)
+      }
+      if self.aqStrength != 0 {
+        try container.encode(self.aqStrength, forKey: .aqStrength)
+      }
+      if !self.profile.isEmpty {
+        try container.encode(self.profile, forKey: .profile)
+      }
+      if !self.tune.isEmpty {
+        try container.encode(self.tune, forKey: .tune)
+      }
+      if !self.preset.isEmpty {
+        try container.encode(self.preset, forKey: .preset)
+      }
 
       if let choice = self.gopMode {
         switch choice {
@@ -1215,24 +1253,60 @@ public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.widthPixels, forKey: .widthPixels)
-      try container.encode(self.heightPixels, forKey: .heightPixels)
-      try container.encode(self.frameRate, forKey: .frameRate)
-      try container.encode(self.frameRateConversionStrategy, forKey: .frameRateConversionStrategy)
-      try container.encode(self.bitrateBps, forKey: .bitrateBps)
-      try container.encode(self.pixelFormat, forKey: .pixelFormat)
-      try container.encode(self.rateControlMode, forKey: .rateControlMode)
-      try container.encode(self.crfLevel, forKey: .crfLevel)
-      try container.encode(self.allowOpenGop, forKey: .allowOpenGop)
-      try container.encode(self.enableTwoPass, forKey: .enableTwoPass)
-      try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
-      try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
-      try container.encode(self.bPyramid, forKey: .bPyramid)
-      try container.encode(self.bFrameCount, forKey: .bFrameCount)
-      try container.encode(self.aqStrength, forKey: .aqStrength)
-      try container.encode(self.profile, forKey: .profile)
-      try container.encode(self.tune, forKey: .tune)
-      try container.encode(self.preset, forKey: .preset)
+      if self.widthPixels != 0 {
+        try container.encode(self.widthPixels, forKey: .widthPixels)
+      }
+      if self.heightPixels != 0 {
+        try container.encode(self.heightPixels, forKey: .heightPixels)
+      }
+      if self.frameRate != 0 {
+        try container.encode(self.frameRate, forKey: .frameRate)
+      }
+      if self.frameRateConversionStrategy != VideoStream.FrameRateConversionStrategy() {
+        try container.encode(self.frameRateConversionStrategy, forKey: .frameRateConversionStrategy)
+      }
+      if self.bitrateBps != 0 {
+        try container.encode(self.bitrateBps, forKey: .bitrateBps)
+      }
+      if !self.pixelFormat.isEmpty {
+        try container.encode(self.pixelFormat, forKey: .pixelFormat)
+      }
+      if !self.rateControlMode.isEmpty {
+        try container.encode(self.rateControlMode, forKey: .rateControlMode)
+      }
+      if self.crfLevel != 0 {
+        try container.encode(self.crfLevel, forKey: .crfLevel)
+      }
+      if self.allowOpenGop {
+        try container.encode(self.allowOpenGop, forKey: .allowOpenGop)
+      }
+      if self.enableTwoPass {
+        try container.encode(self.enableTwoPass, forKey: .enableTwoPass)
+      }
+      if self.vbvSizeBits != 0 {
+        try container.encode(self.vbvSizeBits, forKey: .vbvSizeBits)
+      }
+      if self.vbvFullnessBits != 0 {
+        try container.encode(self.vbvFullnessBits, forKey: .vbvFullnessBits)
+      }
+      if self.bPyramid {
+        try container.encode(self.bPyramid, forKey: .bPyramid)
+      }
+      if self.bFrameCount != 0 {
+        try container.encode(self.bFrameCount, forKey: .bFrameCount)
+      }
+      if self.aqStrength != 0 {
+        try container.encode(self.aqStrength, forKey: .aqStrength)
+      }
+      if !self.profile.isEmpty {
+        try container.encode(self.profile, forKey: .profile)
+      }
+      if !self.tune.isEmpty {
+        try container.encode(self.tune, forKey: .tune)
+      }
+      if !self.preset.isEmpty {
+        try container.encode(self.preset, forKey: .preset)
+      }
 
       if let choice = self.gopMode {
         switch choice {
@@ -1662,15 +1736,33 @@ public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.widthPixels, forKey: .widthPixels)
-      try container.encode(self.heightPixels, forKey: .heightPixels)
-      try container.encode(self.frameRate, forKey: .frameRate)
-      try container.encode(self.frameRateConversionStrategy, forKey: .frameRateConversionStrategy)
-      try container.encode(self.bitrateBps, forKey: .bitrateBps)
-      try container.encode(self.pixelFormat, forKey: .pixelFormat)
-      try container.encode(self.rateControlMode, forKey: .rateControlMode)
-      try container.encode(self.crfLevel, forKey: .crfLevel)
-      try container.encode(self.profile, forKey: .profile)
+      if self.widthPixels != 0 {
+        try container.encode(self.widthPixels, forKey: .widthPixels)
+      }
+      if self.heightPixels != 0 {
+        try container.encode(self.heightPixels, forKey: .heightPixels)
+      }
+      if self.frameRate != 0 {
+        try container.encode(self.frameRate, forKey: .frameRate)
+      }
+      if self.frameRateConversionStrategy != VideoStream.FrameRateConversionStrategy() {
+        try container.encode(self.frameRateConversionStrategy, forKey: .frameRateConversionStrategy)
+      }
+      if self.bitrateBps != 0 {
+        try container.encode(self.bitrateBps, forKey: .bitrateBps)
+      }
+      if !self.pixelFormat.isEmpty {
+        try container.encode(self.pixelFormat, forKey: .pixelFormat)
+      }
+      if !self.rateControlMode.isEmpty {
+        try container.encode(self.rateControlMode, forKey: .rateControlMode)
+      }
+      if self.crfLevel != 0 {
+        try container.encode(self.crfLevel, forKey: .crfLevel)
+      }
+      if !self.profile.isEmpty {
+        try container.encode(self.profile, forKey: .profile)
+      }
 
       if let choice = self.gopMode {
         switch choice {

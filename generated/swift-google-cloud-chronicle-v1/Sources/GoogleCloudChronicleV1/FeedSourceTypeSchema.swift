@@ -109,11 +109,21 @@ public struct FeedSourceTypeSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.readOnly, forKey: .readOnly)
-    try container.encode(self.feedSourceType, forKey: .feedSourceType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.readOnly {
+      try container.encode(self.readOnly, forKey: .readOnly)
+    }
+    if self.feedSourceType != FeedDetails.FeedSourceType() {
+      try container.encode(self.feedSourceType, forKey: .feedSourceType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -86,7 +86,9 @@ public struct SpanContext: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.spanName, forKey: .spanName)
+    if !self.spanName.isEmpty {
+      try container.encode(self.spanName, forKey: .spanName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -96,8 +96,12 @@ public struct UpdateMessageBusRequest: Codable, Equatable, GoogleWKT._AnyPackabl
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.messageBus, forKey: .messageBus)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

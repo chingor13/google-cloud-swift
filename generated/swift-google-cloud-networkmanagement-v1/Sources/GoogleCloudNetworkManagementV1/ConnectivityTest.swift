@@ -199,22 +199,38 @@ public struct ConnectivityTest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.source, forKey: .source)
     try container.encodeIfPresent(self.destination, forKey: .destination)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.relatedProjects, forKey: .relatedProjects)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.`protocol`.isEmpty {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if !self.relatedProjects.isEmpty {
+      try container.encode(self.relatedProjects, forKey: .relatedProjects)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.reachabilityDetails, forKey: .reachabilityDetails)
     try container.encodeIfPresent(self.probingDetails, forKey: .probingDetails)
-    try container.encode(self.roundTrip, forKey: .roundTrip)
+    if self.roundTrip {
+      try container.encode(self.roundTrip, forKey: .roundTrip)
+    }
     try container.encodeIfPresent(
       self.returnReachabilityDetails, forKey: .returnReachabilityDetails)
-    try container.encode(self.bypassFirewallChecks, forKey: .bypassFirewallChecks)
+    if self.bypassFirewallChecks {
+      try container.encode(self.bypassFirewallChecks, forKey: .bypassFirewallChecks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

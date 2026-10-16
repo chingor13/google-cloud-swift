@@ -237,19 +237,33 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.documentation, forKey: .documentation)
-    try container.encode(self.userLabels, forKey: .userLabels)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.combiner, forKey: .combiner)
+    if !self.userLabels.isEmpty {
+      try container.encode(self.userLabels, forKey: .userLabels)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if self.combiner != AlertPolicy.ConditionCombinerType() {
+      try container.encode(self.combiner, forKey: .combiner)
+    }
     try container.encodeIfPresent(self.enabled, forKey: .enabled)
     try container.encodeIfPresent(self.validity, forKey: .validity)
-    try container.encode(self.notificationChannels, forKey: .notificationChannels)
+    if !self.notificationChannels.isEmpty {
+      try container.encode(self.notificationChannels, forKey: .notificationChannels)
+    }
     try container.encodeIfPresent(self.creationRecord, forKey: .creationRecord)
     try container.encodeIfPresent(self.mutationRecord, forKey: .mutationRecord)
     try container.encodeIfPresent(self.alertStrategy, forKey: .alertStrategy)
-    try container.encode(self.severity, forKey: .severity)
+    if self.severity != AlertPolicy.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -353,10 +367,18 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.content, forKey: .content)
-      try container.encode(self.mimeType, forKey: .mimeType)
-      try container.encode(self.subject, forKey: .subject)
-      try container.encode(self.links, forKey: .links)
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
+      if !self.mimeType.isEmpty {
+        try container.encode(self.mimeType, forKey: .mimeType)
+      }
+      if !self.subject.isEmpty {
+        try container.encode(self.subject, forKey: .subject)
+      }
+      if !self.links.isEmpty {
+        try container.encode(self.links, forKey: .links)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -427,8 +449,12 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.url, forKey: .url)
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if !self.url.isEmpty {
+          try container.encode(self.url, forKey: .url)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -632,8 +658,12 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
 
       if let choice = self.condition {
         switch choice {
@@ -961,16 +991,30 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.filter, forKey: .filter)
-        try container.encode(self.aggregations, forKey: .aggregations)
-        try container.encode(self.denominatorFilter, forKey: .denominatorFilter)
-        try container.encode(self.denominatorAggregations, forKey: .denominatorAggregations)
+        if !self.filter.isEmpty {
+          try container.encode(self.filter, forKey: .filter)
+        }
+        if !self.aggregations.isEmpty {
+          try container.encode(self.aggregations, forKey: .aggregations)
+        }
+        if !self.denominatorFilter.isEmpty {
+          try container.encode(self.denominatorFilter, forKey: .denominatorFilter)
+        }
+        if !self.denominatorAggregations.isEmpty {
+          try container.encode(self.denominatorAggregations, forKey: .denominatorAggregations)
+        }
         try container.encodeIfPresent(self.forecastOptions, forKey: .forecastOptions)
-        try container.encode(self.comparison, forKey: .comparison)
-        try container.encode(self.thresholdValue, forKey: .thresholdValue)
+        if self.comparison != ComparisonType() {
+          try container.encode(self.comparison, forKey: .comparison)
+        }
+        if self.thresholdValue != 0 {
+          try container.encode(self.thresholdValue, forKey: .thresholdValue)
+        }
         try container.encodeIfPresent(self.duration, forKey: .duration)
         try container.encodeIfPresent(self.trigger, forKey: .trigger)
-        try container.encode(self.evaluationMissingData, forKey: .evaluationMissingData)
+        if self.evaluationMissingData != AlertPolicy.Condition.EvaluationMissingData() {
+          try container.encode(self.evaluationMissingData, forKey: .evaluationMissingData)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1190,8 +1234,12 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.filter, forKey: .filter)
-        try container.encode(self.aggregations, forKey: .aggregations)
+        if !self.filter.isEmpty {
+          try container.encode(self.filter, forKey: .filter)
+        }
+        if !self.aggregations.isEmpty {
+          try container.encode(self.aggregations, forKey: .aggregations)
+        }
         try container.encodeIfPresent(self.duration, forKey: .duration)
         try container.encodeIfPresent(self.trigger, forKey: .trigger)
         for (key, value) in self._unknownFields.json {
@@ -1298,8 +1346,12 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.filter, forKey: .filter)
-        try container.encode(self.labelExtractors, forKey: .labelExtractors)
+        if !self.filter.isEmpty {
+          try container.encode(self.filter, forKey: .filter)
+        }
+        if !self.labelExtractors.isEmpty {
+          try container.encode(self.labelExtractors, forKey: .labelExtractors)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1420,10 +1472,14 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.query, forKey: .query)
+        if !self.query.isEmpty {
+          try container.encode(self.query, forKey: .query)
+        }
         try container.encodeIfPresent(self.duration, forKey: .duration)
         try container.encodeIfPresent(self.trigger, forKey: .trigger)
-        try container.encode(self.evaluationMissingData, forKey: .evaluationMissingData)
+        if self.evaluationMissingData != AlertPolicy.Condition.EvaluationMissingData() {
+          try container.encode(self.evaluationMissingData, forKey: .evaluationMissingData)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1632,13 +1688,23 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.query, forKey: .query)
+        if !self.query.isEmpty {
+          try container.encode(self.query, forKey: .query)
+        }
         try container.encodeIfPresent(self.duration, forKey: .duration)
         try container.encodeIfPresent(self.evaluationInterval, forKey: .evaluationInterval)
-        try container.encode(self.labels, forKey: .labels)
-        try container.encode(self.ruleGroup, forKey: .ruleGroup)
-        try container.encode(self.alertRule, forKey: .alertRule)
-        try container.encode(self.disableMetricValidation, forKey: .disableMetricValidation)
+        if !self.labels.isEmpty {
+          try container.encode(self.labels, forKey: .labels)
+        }
+        if !self.ruleGroup.isEmpty {
+          try container.encode(self.ruleGroup, forKey: .ruleGroup)
+        }
+        if !self.alertRule.isEmpty {
+          try container.encode(self.alertRule, forKey: .alertRule)
+        }
+        if self.disableMetricValidation {
+          try container.encode(self.disableMetricValidation, forKey: .disableMetricValidation)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1800,7 +1866,9 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.query, forKey: .query)
+        if !self.query.isEmpty {
+          try container.encode(self.query, forKey: .query)
+        }
 
         if let choice = self.schedule {
           switch choice {
@@ -1880,7 +1948,9 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.periodicity, forKey: .periodicity)
+          if self.periodicity != 0 {
+            try container.encode(self.periodicity, forKey: .periodicity)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1971,7 +2041,9 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.periodicity, forKey: .periodicity)
+          if self.periodicity != 0 {
+            try container.encode(self.periodicity, forKey: .periodicity)
+          }
           try container.encodeIfPresent(self.minuteOffset, forKey: .minuteOffset)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2063,7 +2135,9 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.periodicity, forKey: .periodicity)
+          if self.periodicity != 0 {
+            try container.encode(self.periodicity, forKey: .periodicity)
+          }
           try container.encodeIfPresent(self.executionTime, forKey: .executionTime)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2154,8 +2228,12 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.comparison, forKey: .comparison)
-          try container.encode(self.threshold, forKey: .threshold)
+          if self.comparison != ComparisonType() {
+            try container.encode(self.comparison, forKey: .comparison)
+          }
+          if self.threshold != 0 {
+            try container.encode(self.threshold, forKey: .threshold)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2238,7 +2316,9 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.column, forKey: .column)
+          if !self.column.isEmpty {
+            try container.encode(self.column, forKey: .column)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2568,9 +2648,13 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.notificationRateLimit, forKey: .notificationRateLimit)
-      try container.encode(self.notificationPrompts, forKey: .notificationPrompts)
+      if !self.notificationPrompts.isEmpty {
+        try container.encode(self.notificationPrompts, forKey: .notificationPrompts)
+      }
       try container.encodeIfPresent(self.autoClose, forKey: .autoClose)
-      try container.encode(self.notificationChannelStrategy, forKey: .notificationChannelStrategy)
+      if !self.notificationChannelStrategy.isEmpty {
+        try container.encode(self.notificationChannelStrategy, forKey: .notificationChannelStrategy)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -2725,7 +2809,9 @@ public struct AlertPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.notificationChannelNames, forKey: .notificationChannelNames)
+        if !self.notificationChannelNames.isEmpty {
+          try container.encode(self.notificationChannelNames, forKey: .notificationChannelNames)
+        }
         try container.encodeIfPresent(self.renotifyInterval, forKey: .renotifyInterval)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

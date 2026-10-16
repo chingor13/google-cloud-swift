@@ -455,30 +455,60 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.stateInfo, forKey: .stateInfo)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.replicaCount, forKey: .replicaCount)
-    try container.encode(self.authorizationMode, forKey: .authorizationMode)
-    try container.encode(self.transitEncryptionMode, forKey: .transitEncryptionMode)
-    try container.encode(self.shardCount, forKey: .shardCount)
-    try container.encode(self.discoveryEndpoints, forKey: .discoveryEndpoints)
-    try container.encode(self.nodeType, forKey: .nodeType)
+    if self.authorizationMode != Instance.AuthorizationMode() {
+      try container.encode(self.authorizationMode, forKey: .authorizationMode)
+    }
+    if self.transitEncryptionMode != Instance.TransitEncryptionMode() {
+      try container.encode(self.transitEncryptionMode, forKey: .transitEncryptionMode)
+    }
+    if self.shardCount != 0 {
+      try container.encode(self.shardCount, forKey: .shardCount)
+    }
+    if !self.discoveryEndpoints.isEmpty {
+      try container.encode(self.discoveryEndpoints, forKey: .discoveryEndpoints)
+    }
+    if self.nodeType != Instance.NodeType() {
+      try container.encode(self.nodeType, forKey: .nodeType)
+    }
     try container.encodeIfPresent(self.persistenceConfig, forKey: .persistenceConfig)
-    try container.encode(self.engineVersion, forKey: .engineVersion)
-    try container.encode(self.engineConfigs, forKey: .engineConfigs)
+    if !self.engineVersion.isEmpty {
+      try container.encode(self.engineVersion, forKey: .engineVersion)
+    }
+    if !self.engineConfigs.isEmpty {
+      try container.encode(self.engineConfigs, forKey: .engineConfigs)
+    }
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
     try container.encodeIfPresent(self.zoneDistributionConfig, forKey: .zoneDistributionConfig)
     try container.encodeIfPresent(
       self.deletionProtectionEnabled, forKey: .deletionProtectionEnabled)
-    try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
-    try container.encode(self.pscAttachmentDetails, forKey: .pscAttachmentDetails)
-    try container.encode(self.endpoints, forKey: .endpoints)
-    try container.encode(self.mode, forKey: .mode)
+    if !self.pscAutoConnections.isEmpty {
+      try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
+    }
+    if !self.pscAttachmentDetails.isEmpty {
+      try container.encode(self.pscAttachmentDetails, forKey: .pscAttachmentDetails)
+    }
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
+    if self.mode != Instance.Mode() {
+      try container.encode(self.mode, forKey: .mode)
+    }
     try container.encodeIfPresent(self.simulateMaintenanceEvent, forKey: .simulateMaintenanceEvent)
     try container.encodeIfPresent(self.ondemandMaintenance, forKey: .ondemandMaintenance)
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
@@ -496,8 +526,12 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.maintenanceVersion, forKey: .maintenanceVersion)
     try container.encodeIfPresent(
       self.effectiveMaintenanceVersion, forKey: .effectiveMaintenanceVersion)
-    try container.encode(self.availableMaintenanceVersions, forKey: .availableMaintenanceVersions)
-    try container.encode(self.allowFewerZonesDeployment, forKey: .allowFewerZonesDeployment)
+    if !self.availableMaintenanceVersions.isEmpty {
+      try container.encode(self.availableMaintenanceVersions, forKey: .availableMaintenanceVersions)
+    }
+    if self.allowFewerZonesDeployment {
+      try container.encode(self.allowFewerZonesDeployment, forKey: .allowFewerZonesDeployment)
+    }
     try container.encodeIfPresent(self.serverCaMode, forKey: .serverCaMode)
     try container.encodeIfPresent(self.serverCaPool, forKey: .serverCaPool)
     try container.encodeIfPresent(self.rotateServerCertificate, forKey: .rotateServerCertificate)
@@ -776,7 +810,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uris, forKey: .uris)
+      if !self.uris.isEmpty {
+        try container.encode(self.uris, forKey: .uris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -861,7 +897,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.backup, forKey: .backup)
+      if !self.backup.isEmpty {
+        try container.encode(self.backup, forKey: .backup)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -946,7 +984,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connections, forKey: .connections)
+      if !self.connections.isEmpty {
+        try container.encode(self.connections, forKey: .connections)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

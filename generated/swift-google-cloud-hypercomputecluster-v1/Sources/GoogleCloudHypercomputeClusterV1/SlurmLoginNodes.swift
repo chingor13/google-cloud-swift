@@ -161,15 +161,33 @@ public struct SlurmLoginNodes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.count, forKey: .count)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.startupScript, forKey: .startupScript)
-    try container.encode(self.enableOsLogin, forKey: .enableOsLogin)
-    try container.encode(self.enablePublicIps, forKey: .enablePublicIps)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.storageConfigs, forKey: .storageConfigs)
-    try container.encode(self.instances, forKey: .instances)
+    if self.count != 0 {
+      try container.encode(self.count, forKey: .count)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if !self.startupScript.isEmpty {
+      try container.encode(self.startupScript, forKey: .startupScript)
+    }
+    if self.enableOsLogin {
+      try container.encode(self.enableOsLogin, forKey: .enableOsLogin)
+    }
+    if self.enablePublicIps {
+      try container.encode(self.enablePublicIps, forKey: .enablePublicIps)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.storageConfigs.isEmpty {
+      try container.encode(self.storageConfigs, forKey: .storageConfigs)
+    }
+    if !self.instances.isEmpty {
+      try container.encode(self.instances, forKey: .instances)
+    }
     try container.encodeIfPresent(self.bootDisk, forKey: .bootDisk)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

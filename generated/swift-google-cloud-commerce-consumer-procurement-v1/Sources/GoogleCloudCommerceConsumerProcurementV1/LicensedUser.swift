@@ -86,7 +86,9 @@ public struct LicensedUser: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
     try container.encodeIfPresent(self.assignTime, forKey: .assignTime)
     try container.encodeIfPresent(self.recentUsageTime, forKey: .recentUsageTime)
     for (key, value) in self._unknownFields.json {

@@ -110,9 +110,15 @@ public struct DataSourceGcpResourceInfo: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gcpResourcename, forKey: .gcpResourcename)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.location, forKey: .location)
+    if !self.gcpResourcename.isEmpty {
+      try container.encode(self.gcpResourcename, forKey: .gcpResourcename)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
 
     if let choice = self.resourceProperties {
       switch choice {

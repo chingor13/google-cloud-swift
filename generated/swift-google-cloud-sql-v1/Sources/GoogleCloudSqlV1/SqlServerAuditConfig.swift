@@ -92,8 +92,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.bucket, forKey: .bucket)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.bucket.isEmpty {
+        try container.encode(self.bucket, forKey: .bucket)
+      }
       try container.encodeIfPresent(self.retentionInterval, forKey: .retentionInterval)
       try container.encodeIfPresent(self.uploadInterval, forKey: .uploadInterval)
       for (key, value) in self._unknownFields.json {

@@ -87,9 +87,15 @@ public struct ResourceRecord: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.rrdata, forKey: .rrdata)
-    try container.encode(self.type, forKey: .type)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.rrdata.isEmpty {
+      try container.encode(self.rrdata, forKey: .rrdata)
+    }
+    if self.type != ResourceRecord.RecordType() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

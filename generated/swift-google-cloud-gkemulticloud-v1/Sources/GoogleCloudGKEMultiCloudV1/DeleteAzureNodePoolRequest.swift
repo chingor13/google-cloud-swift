@@ -134,11 +134,21 @@ public struct DeleteAzureNodePoolRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.ignoreErrors, forKey: .ignoreErrors)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.ignoreErrors {
+      try container.encode(self.ignoreErrors, forKey: .ignoreErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

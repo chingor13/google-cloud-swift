@@ -176,20 +176,44 @@ public struct AzureVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmId, forKey: .vmId)
-    try container.encode(self.powerState, forKey: .powerState)
-    try container.encode(self.vmSize, forKey: .vmSize)
-    try container.encode(self.cpuCount, forKey: .cpuCount)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
-    try container.encode(self.diskCount, forKey: .diskCount)
-    try container.encode(self.committedStorageMb, forKey: .committedStorageMb)
+    if !self.vmId.isEmpty {
+      try container.encode(self.vmId, forKey: .vmId)
+    }
+    if self.powerState != AzureVmDetails.PowerState() {
+      try container.encode(self.powerState, forKey: .powerState)
+    }
+    if !self.vmSize.isEmpty {
+      try container.encode(self.vmSize, forKey: .vmSize)
+    }
+    if self.cpuCount != 0 {
+      try container.encode(self.cpuCount, forKey: .cpuCount)
+    }
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
+    if self.diskCount != 0 {
+      try container.encode(self.diskCount, forKey: .diskCount)
+    }
+    if self.committedStorageMb != 0 {
+      try container.encode(self.committedStorageMb, forKey: .committedStorageMb)
+    }
     try container.encodeIfPresent(self.osDisk, forKey: .osDisk)
-    try container.encode(self.disks, forKey: .disks)
+    if !self.disks.isEmpty {
+      try container.encode(self.disks, forKey: .disks)
+    }
     try container.encodeIfPresent(self.osDescription, forKey: .osDescription)
-    try container.encode(self.bootOption, forKey: .bootOption)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.computerName, forKey: .computerName)
-    try container.encode(self.architecture, forKey: .architecture)
+    if self.bootOption != AzureVmDetails.BootOption() {
+      try container.encode(self.bootOption, forKey: .bootOption)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.computerName.isEmpty {
+      try container.encode(self.computerName, forKey: .computerName)
+    }
+    if self.architecture != AzureVmDetails.VmArchitecture() {
+      try container.encode(self.architecture, forKey: .architecture)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -263,9 +287,15 @@ public struct AzureVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.sizeGb, forKey: .sizeGb)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.sizeGb != 0 {
+        try container.encode(self.sizeGb, forKey: .sizeGb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -361,9 +391,15 @@ public struct AzureVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.sizeGb, forKey: .sizeGb)
-      try container.encode(self.lun, forKey: .lun)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.sizeGb != 0 {
+        try container.encode(self.sizeGb, forKey: .sizeGb)
+      }
+      if self.lun != 0 {
+        try container.encode(self.lun, forKey: .lun)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -468,10 +504,18 @@ public struct AzureVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.publisher, forKey: .publisher)
-      try container.encode(self.offer, forKey: .offer)
-      try container.encode(self.plan, forKey: .plan)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.publisher.isEmpty {
+        try container.encode(self.publisher, forKey: .publisher)
+      }
+      if !self.offer.isEmpty {
+        try container.encode(self.offer, forKey: .offer)
+      }
+      if !self.plan.isEmpty {
+        try container.encode(self.plan, forKey: .plan)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -82,8 +82,12 @@ public struct ReleaseInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ociImagePath, forKey: .ociImagePath)
-    try container.encode(self.variantOciImagePaths, forKey: .variantOciImagePaths)
+    if !self.ociImagePath.isEmpty {
+      try container.encode(self.ociImagePath, forKey: .ociImagePath)
+    }
+    if !self.variantOciImagePaths.isEmpty {
+      try container.encode(self.variantOciImagePaths, forKey: .variantOciImagePaths)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

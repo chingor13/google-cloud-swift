@@ -153,16 +153,36 @@ public struct RuntimeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.locationId, forKey: .locationId)
-    try container.encode(self.conndTopic, forKey: .conndTopic)
-    try container.encode(self.conndSubscription, forKey: .conndSubscription)
-    try container.encode(self.controlPlaneTopic, forKey: .controlPlaneTopic)
-    try container.encode(self.controlPlaneSubscription, forKey: .controlPlaneSubscription)
-    try container.encode(self.runtimeEndpoint, forKey: .runtimeEndpoint)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.schemaGcsBucket, forKey: .schemaGcsBucket)
-    try container.encode(self.serviceDirectory, forKey: .serviceDirectory)
-    try container.encode(self.name, forKey: .name)
+    if !self.locationId.isEmpty {
+      try container.encode(self.locationId, forKey: .locationId)
+    }
+    if !self.conndTopic.isEmpty {
+      try container.encode(self.conndTopic, forKey: .conndTopic)
+    }
+    if !self.conndSubscription.isEmpty {
+      try container.encode(self.conndSubscription, forKey: .conndSubscription)
+    }
+    if !self.controlPlaneTopic.isEmpty {
+      try container.encode(self.controlPlaneTopic, forKey: .controlPlaneTopic)
+    }
+    if !self.controlPlaneSubscription.isEmpty {
+      try container.encode(self.controlPlaneSubscription, forKey: .controlPlaneSubscription)
+    }
+    if !self.runtimeEndpoint.isEmpty {
+      try container.encode(self.runtimeEndpoint, forKey: .runtimeEndpoint)
+    }
+    if self.state != RuntimeConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.schemaGcsBucket.isEmpty {
+      try container.encode(self.schemaGcsBucket, forKey: .schemaGcsBucket)
+    }
+    if !self.serviceDirectory.isEmpty {
+      try container.encode(self.serviceDirectory, forKey: .serviceDirectory)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

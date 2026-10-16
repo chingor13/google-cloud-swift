@@ -109,7 +109,9 @@ public struct OAuthSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.clientId, forKey: .clientId)
     try container.encodeIfPresent(self.clientSecret, forKey: .clientSecret)
     try container.encodeIfPresent(self.clientSecretSha256, forKey: .clientSecretSha256)
-    try container.encode(self.programmaticClients, forKey: .programmaticClients)
+    if !self.programmaticClients.isEmpty {
+      try container.encode(self.programmaticClients, forKey: .programmaticClients)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

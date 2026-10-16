@@ -115,11 +115,21 @@ public struct ContextRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
-    try container.encode(self.requested, forKey: .requested)
-    try container.encode(self.provided, forKey: .provided)
-    try container.encode(self.allowedRequestExtensions, forKey: .allowedRequestExtensions)
-    try container.encode(self.allowedResponseExtensions, forKey: .allowedResponseExtensions)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
+    if !self.requested.isEmpty {
+      try container.encode(self.requested, forKey: .requested)
+    }
+    if !self.provided.isEmpty {
+      try container.encode(self.provided, forKey: .provided)
+    }
+    if !self.allowedRequestExtensions.isEmpty {
+      try container.encode(self.allowedRequestExtensions, forKey: .allowedRequestExtensions)
+    }
+    if !self.allowedResponseExtensions.isEmpty {
+      try container.encode(self.allowedResponseExtensions, forKey: .allowedResponseExtensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

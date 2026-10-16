@@ -133,15 +133,31 @@ public struct UpgradeHistoryEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.snapshot, forKey: .snapshot)
-    try container.encode(self.vmImage, forKey: .vmImage)
-    try container.encode(self.containerImage, forKey: .containerImage)
-    try container.encode(self.framework, forKey: .framework)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.state, forKey: .state)
+    if !self.snapshot.isEmpty {
+      try container.encode(self.snapshot, forKey: .snapshot)
+    }
+    if !self.vmImage.isEmpty {
+      try container.encode(self.vmImage, forKey: .vmImage)
+    }
+    if !self.containerImage.isEmpty {
+      try container.encode(self.containerImage, forKey: .containerImage)
+    }
+    if !self.framework.isEmpty {
+      try container.encode(self.framework, forKey: .framework)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.state != UpgradeHistoryEntry.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.targetVersion, forKey: .targetVersion)
+    if self.action != UpgradeHistoryEntry.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.targetVersion.isEmpty {
+      try container.encode(self.targetVersion, forKey: .targetVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

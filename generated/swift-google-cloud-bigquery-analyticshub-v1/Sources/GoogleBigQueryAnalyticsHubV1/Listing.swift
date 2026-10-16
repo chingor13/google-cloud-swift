@@ -247,21 +247,41 @@ public struct Listing: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.primaryContact, forKey: .primaryContact)
-    try container.encode(self.documentation, forKey: .documentation)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.icon, forKey: .icon)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.primaryContact.isEmpty {
+      try container.encode(self.primaryContact, forKey: .primaryContact)
+    }
+    if !self.documentation.isEmpty {
+      try container.encode(self.documentation, forKey: .documentation)
+    }
+    if self.state != Listing.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.icon.isEmpty {
+      try container.encode(self.icon, forKey: .icon)
+    }
     try container.encodeIfPresent(self.dataProvider, forKey: .dataProvider)
-    try container.encode(self.categories, forKey: .categories)
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
     try container.encodeIfPresent(self.publisher, forKey: .publisher)
-    try container.encode(self.requestAccess, forKey: .requestAccess)
+    if !self.requestAccess.isEmpty {
+      try container.encode(self.requestAccess, forKey: .requestAccess)
+    }
     try container.encodeIfPresent(self.restrictedExportConfig, forKey: .restrictedExportConfig)
     try container.encodeIfPresent(self.storedProcedureConfig, forKey: .storedProcedureConfig)
     try container.encodeIfPresent(self.discoveryType, forKey: .discoveryType)
-    try container.encode(self.resourceType, forKey: .resourceType)
+    if self.resourceType != SharedResourceType() {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
     try container.encodeIfPresent(self.commercialInfo, forKey: .commercialInfo)
     try container.encodeIfPresent(
       self.logLinkedDatasetQueryUserEmail, forKey: .logLinkedDatasetQueryUserEmail)
@@ -380,11 +400,19 @@ public struct Listing: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataset, forKey: .dataset)
-      try container.encode(self.selectedResources, forKey: .selectedResources)
+      if !self.dataset.isEmpty {
+        try container.encode(self.dataset, forKey: .dataset)
+      }
+      if !self.selectedResources.isEmpty {
+        try container.encode(self.selectedResources, forKey: .selectedResources)
+      }
       try container.encodeIfPresent(self.restrictedExportPolicy, forKey: .restrictedExportPolicy)
-      try container.encode(self.replicaLocations, forKey: .replicaLocations)
-      try container.encode(self.effectiveReplicas, forKey: .effectiveReplicas)
+      if !self.replicaLocations.isEmpty {
+        try container.encode(self.replicaLocations, forKey: .replicaLocations)
+      }
+      if !self.effectiveReplicas.isEmpty {
+        try container.encode(self.effectiveReplicas, forKey: .effectiveReplicas)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -683,8 +711,12 @@ public struct Listing: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.location, forKey: .location)
-        try container.encode(self.replicaState, forKey: .replicaState)
+        if !self.location.isEmpty {
+          try container.encode(self.location, forKey: .location)
+        }
+        if self.replicaState != Listing.BigQueryDatasetSource.Replica.ReplicaState() {
+          try container.encode(self.replicaState, forKey: .replicaState)
+        }
         try container.encodeIfPresent(self.primaryState, forKey: .primaryState)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1030,8 +1062,12 @@ public struct Listing: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.topic, forKey: .topic)
-      try container.encode(self.dataAffinityRegions, forKey: .dataAffinityRegions)
+      if !self.topic.isEmpty {
+        try container.encode(self.topic, forKey: .topic)
+      }
+      if !self.dataAffinityRegions.isEmpty {
+        try container.encode(self.dataAffinityRegions, forKey: .dataAffinityRegions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1132,9 +1168,15 @@ public struct Listing: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
-      try container.encode(self.restrictDirectTableAccess, forKey: .restrictDirectTableAccess)
-      try container.encode(self.restrictQueryResult, forKey: .restrictQueryResult)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
+      if self.restrictDirectTableAccess {
+        try container.encode(self.restrictDirectTableAccess, forKey: .restrictDirectTableAccess)
+      }
+      if self.restrictQueryResult {
+        try container.encode(self.restrictQueryResult, forKey: .restrictQueryResult)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

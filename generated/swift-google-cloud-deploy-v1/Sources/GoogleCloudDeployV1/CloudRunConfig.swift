@@ -100,10 +100,18 @@ public struct CloudRunConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.automaticTrafficControl, forKey: .automaticTrafficControl)
-    try container.encode(self.canaryRevisionTags, forKey: .canaryRevisionTags)
-    try container.encode(self.priorRevisionTags, forKey: .priorRevisionTags)
-    try container.encode(self.stableRevisionTags, forKey: .stableRevisionTags)
+    if self.automaticTrafficControl {
+      try container.encode(self.automaticTrafficControl, forKey: .automaticTrafficControl)
+    }
+    if !self.canaryRevisionTags.isEmpty {
+      try container.encode(self.canaryRevisionTags, forKey: .canaryRevisionTags)
+    }
+    if !self.priorRevisionTags.isEmpty {
+      try container.encode(self.priorRevisionTags, forKey: .priorRevisionTags)
+    }
+    if !self.stableRevisionTags.isEmpty {
+      try container.encode(self.stableRevisionTags, forKey: .stableRevisionTags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

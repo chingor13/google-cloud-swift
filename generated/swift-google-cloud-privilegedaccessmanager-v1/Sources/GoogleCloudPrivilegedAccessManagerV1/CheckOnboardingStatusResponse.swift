@@ -81,8 +81,12 @@ public struct CheckOnboardingStatusResponse: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.findings, forKey: .findings)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.findings.isEmpty {
+      try container.encode(self.findings, forKey: .findings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -223,7 +227,9 @@ public struct CheckOnboardingStatusResponse: Codable, Equatable, GoogleWKT._AnyP
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.missingPermissions, forKey: .missingPermissions)
+        if !self.missingPermissions.isEmpty {
+          try container.encode(self.missingPermissions, forKey: .missingPermissions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

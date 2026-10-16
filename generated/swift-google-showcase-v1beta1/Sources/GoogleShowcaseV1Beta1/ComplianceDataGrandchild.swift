@@ -81,9 +81,15 @@ public struct ComplianceDataGrandchild: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fString, forKey: .fString)
-    try container.encode(self.fDouble, forKey: .fDouble)
-    try container.encode(self.fBool, forKey: .fBool)
+    if !self.fString.isEmpty {
+      try container.encode(self.fString, forKey: .fString)
+    }
+    if self.fDouble != 0 {
+      try container.encode(self.fDouble, forKey: .fDouble)
+    }
+    if self.fBool {
+      try container.encode(self.fBool, forKey: .fBool)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

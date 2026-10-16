@@ -100,10 +100,18 @@ public struct SmartComposeSuggestionData: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.suggestion, forKey: .suggestion)
-    try container.encode(self.confidenceScore, forKey: .confidenceScore)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.queryRecord, forKey: .queryRecord)
+    if !self.suggestion.isEmpty {
+      try container.encode(self.suggestion, forKey: .suggestion)
+    }
+    if self.confidenceScore != 0 {
+      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.queryRecord.isEmpty {
+      try container.encode(self.queryRecord, forKey: .queryRecord)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

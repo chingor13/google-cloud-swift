@@ -118,12 +118,24 @@ public struct YarnApplication: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.progress, forKey: .progress)
-    try container.encode(self.trackingUrl, forKey: .trackingUrl)
-    try container.encode(self.vcoreSeconds, forKey: .vcoreSeconds)
-    try container.encode(self.memoryMbSeconds, forKey: .memoryMbSeconds)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.state != YarnApplication.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.progress != 0 {
+      try container.encode(self.progress, forKey: .progress)
+    }
+    if !self.trackingUrl.isEmpty {
+      try container.encode(self.trackingUrl, forKey: .trackingUrl)
+    }
+    if self.vcoreSeconds != 0 {
+      try container.encode(self.vcoreSeconds, forKey: .vcoreSeconds)
+    }
+    if self.memoryMbSeconds != 0 {
+      try container.encode(self.memoryMbSeconds, forKey: .memoryMbSeconds)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

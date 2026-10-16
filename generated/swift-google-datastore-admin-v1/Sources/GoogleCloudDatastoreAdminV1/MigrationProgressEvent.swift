@@ -103,7 +103,9 @@ public struct MigrationProgressEvent: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.step, forKey: .step)
+    if self.step != MigrationStep() {
+      try container.encode(self.step, forKey: .step)
+    }
 
     if let choice = self.stepDetails {
       switch choice {
@@ -174,7 +176,9 @@ public struct MigrationProgressEvent: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.concurrencyMode, forKey: .concurrencyMode)
+      if self.concurrencyMode != MigrationProgressEvent.ConcurrencyMode() {
+        try container.encode(self.concurrencyMode, forKey: .concurrencyMode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -258,7 +262,9 @@ public struct MigrationProgressEvent: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.concurrencyMode, forKey: .concurrencyMode)
+      if self.concurrencyMode != MigrationProgressEvent.ConcurrencyMode() {
+        try container.encode(self.concurrencyMode, forKey: .concurrencyMode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

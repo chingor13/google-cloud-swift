@@ -148,16 +148,32 @@ public struct Connector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.documentationUri, forKey: .documentationUri)
-    try container.encode(self.externalUri, forKey: .externalUri)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.webAssetsLocation, forKey: .webAssetsLocation)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.launchStage, forKey: .launchStage)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.documentationUri.isEmpty {
+      try container.encode(self.documentationUri, forKey: .documentationUri)
+    }
+    if !self.externalUri.isEmpty {
+      try container.encode(self.externalUri, forKey: .externalUri)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.webAssetsLocation.isEmpty {
+      try container.encode(self.webAssetsLocation, forKey: .webAssetsLocation)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.launchStage != GoogleCloudConnectorsV1.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -125,13 +125,27 @@ public struct PackLogType: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.logType, forKey: .logType)
-    try container.encode(self.`required`, forKey: .`required`)
-    try container.encode(self.hasDefaultParser, forKey: .hasDefaultParser)
-    try container.encode(self.recommendedSourceType, forKey: .recommendedSourceType)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.configurationDocumentation, forKey: .configurationDocumentation)
-    try container.encode(self.additionalDocumentation, forKey: .additionalDocumentation)
+    if !self.logType.isEmpty {
+      try container.encode(self.logType, forKey: .logType)
+    }
+    if self.`required` {
+      try container.encode(self.`required`, forKey: .`required`)
+    }
+    if self.hasDefaultParser {
+      try container.encode(self.hasDefaultParser, forKey: .hasDefaultParser)
+    }
+    if self.recommendedSourceType != FeedDetails.FeedSourceType() {
+      try container.encode(self.recommendedSourceType, forKey: .recommendedSourceType)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.configurationDocumentation.isEmpty {
+      try container.encode(self.configurationDocumentation, forKey: .configurationDocumentation)
+    }
+    if !self.additionalDocumentation.isEmpty {
+      try container.encode(self.additionalDocumentation, forKey: .additionalDocumentation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

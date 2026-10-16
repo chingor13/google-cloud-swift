@@ -760,38 +760,86 @@ public struct Product: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.primaryProductId, forKey: .primaryProductId)
-    try container.encode(self.collectionMemberIds, forKey: .collectionMemberIds)
-    try container.encode(self.gtin, forKey: .gtin)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.brands, forKey: .brands)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.type != Product.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.primaryProductId.isEmpty {
+      try container.encode(self.primaryProductId, forKey: .primaryProductId)
+    }
+    if !self.collectionMemberIds.isEmpty {
+      try container.encode(self.collectionMemberIds, forKey: .collectionMemberIds)
+    }
+    if !self.gtin.isEmpty {
+      try container.encode(self.gtin, forKey: .gtin)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.brands.isEmpty {
+      try container.encode(self.brands, forKey: .brands)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     try container.encodeIfPresent(self.priceInfo, forKey: .priceInfo)
     try container.encodeIfPresent(self.rating, forKey: .rating)
     try container.encodeIfPresent(self.availableTime, forKey: .availableTime)
-    try container.encode(self.availability, forKey: .availability)
+    if self.availability != Product.Availability() {
+      try container.encode(self.availability, forKey: .availability)
+    }
     try container.encodeIfPresent(self.availableQuantity, forKey: .availableQuantity)
-    try container.encode(self.fulfillmentInfo, forKey: .fulfillmentInfo)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.images, forKey: .images)
+    if !self.fulfillmentInfo.isEmpty {
+      try container.encode(self.fulfillmentInfo, forKey: .fulfillmentInfo)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.images.isEmpty {
+      try container.encode(self.images, forKey: .images)
+    }
     try container.encodeIfPresent(self.audience, forKey: .audience)
     try container.encodeIfPresent(self.colorInfo, forKey: .colorInfo)
-    try container.encode(self.sizes, forKey: .sizes)
-    try container.encode(self.materials, forKey: .materials)
-    try container.encode(self.patterns, forKey: .patterns)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.promotions, forKey: .promotions)
+    if !self.sizes.isEmpty {
+      try container.encode(self.sizes, forKey: .sizes)
+    }
+    if !self.materials.isEmpty {
+      try container.encode(self.materials, forKey: .materials)
+    }
+    if !self.patterns.isEmpty {
+      try container.encode(self.patterns, forKey: .patterns)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if !self.promotions.isEmpty {
+      try container.encode(self.promotions, forKey: .promotions)
+    }
     try container.encodeIfPresent(self.publishTime, forKey: .publishTime)
     try container.encodeIfPresent(self.retrievableFields, forKey: .retrievableFields)
-    try container.encode(self.variants, forKey: .variants)
-    try container.encode(self.localInventories, forKey: .localInventories)
+    if !self.variants.isEmpty {
+      try container.encode(self.variants, forKey: .variants)
+    }
+    if !self.localInventories.isEmpty {
+      try container.encode(self.localInventories, forKey: .localInventories)
+    }
 
     if let choice = self.expiration {
       switch choice {

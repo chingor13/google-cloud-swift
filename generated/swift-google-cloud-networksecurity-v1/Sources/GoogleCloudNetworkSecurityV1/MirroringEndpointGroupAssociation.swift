@@ -176,16 +176,32 @@ public struct MirroringEndpointGroupAssociation: Codable, Equatable, GoogleWKT._
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.mirroringEndpointGroup, forKey: .mirroringEndpointGroup)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.locationsDetails, forKey: .locationsDetails)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.locations, forKey: .locations)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.mirroringEndpointGroup.isEmpty {
+      try container.encode(self.mirroringEndpointGroup, forKey: .mirroringEndpointGroup)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.locationsDetails.isEmpty {
+      try container.encode(self.locationsDetails, forKey: .locationsDetails)
+    }
+    if self.state != MirroringEndpointGroupAssociation.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -255,8 +271,12 @@ public struct MirroringEndpointGroupAssociation: Codable, Equatable, GoogleWKT._
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.location, forKey: .location)
-      try container.encode(self.state, forKey: .state)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
+      if self.state != MirroringEndpointGroupAssociation.LocationDetails.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

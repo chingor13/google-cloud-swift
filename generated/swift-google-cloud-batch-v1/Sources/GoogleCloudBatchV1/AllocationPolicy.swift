@@ -147,12 +147,18 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.location, forKey: .location)
-    try container.encode(self.instances, forKey: .instances)
+    if !self.instances.isEmpty {
+      try container.encode(self.instances, forKey: .instances)
+    }
     try container.encodeIfPresent(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.network, forKey: .network)
     try container.encodeIfPresent(self.placement, forKey: .placement)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -234,7 +240,9 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.allowedLocations, forKey: .allowedLocations)
+      if !self.allowedLocations.isEmpty {
+        try container.encode(self.allowedLocations, forKey: .allowedLocations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -385,9 +393,15 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.sizeGb, forKey: .sizeGb)
-      try container.encode(self.diskInterface, forKey: .diskInterface)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.sizeGb != 0 {
+        try container.encode(self.sizeGb, forKey: .sizeGb)
+      }
+      if !self.diskInterface.isEmpty {
+        try container.encode(self.diskInterface, forKey: .diskInterface)
+      }
 
       if let choice = self.dataSource {
         switch choice {
@@ -527,7 +541,9 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.deviceName, forKey: .deviceName)
+      if !self.deviceName.isEmpty {
+        try container.encode(self.deviceName, forKey: .deviceName)
+      }
 
       if let choice = self.attached {
         switch choice {
@@ -660,10 +676,18 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.count, forKey: .count)
-      try container.encode(self.installGpuDrivers, forKey: .installGpuDrivers)
-      try container.encode(self.driverVersion, forKey: .driverVersion)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.count != 0 {
+        try container.encode(self.count, forKey: .count)
+      }
+      if self.installGpuDrivers {
+        try container.encode(self.installGpuDrivers, forKey: .installGpuDrivers)
+      }
+      if !self.driverVersion.isEmpty {
+        try container.encode(self.driverVersion, forKey: .driverVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -808,13 +832,25 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.machineType, forKey: .machineType)
-      try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
-      try container.encode(self.provisioningModel, forKey: .provisioningModel)
-      try container.encode(self.accelerators, forKey: .accelerators)
+      if !self.machineType.isEmpty {
+        try container.encode(self.machineType, forKey: .machineType)
+      }
+      if !self.minCpuPlatform.isEmpty {
+        try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
+      }
+      if self.provisioningModel != AllocationPolicy.ProvisioningModel() {
+        try container.encode(self.provisioningModel, forKey: .provisioningModel)
+      }
+      if !self.accelerators.isEmpty {
+        try container.encode(self.accelerators, forKey: .accelerators)
+      }
       try container.encodeIfPresent(self.bootDisk, forKey: .bootDisk)
-      try container.encode(self.disks, forKey: .disks)
-      try container.encode(self.reservation, forKey: .reservation)
+      if !self.disks.isEmpty {
+        try container.encode(self.disks, forKey: .disks)
+      }
+      if !self.reservation.isEmpty {
+        try container.encode(self.reservation, forKey: .reservation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -967,9 +1003,15 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.installGpuDrivers, forKey: .installGpuDrivers)
-      try container.encode(self.installOpsAgent, forKey: .installOpsAgent)
-      try container.encode(self.blockProjectSshKeys, forKey: .blockProjectSshKeys)
+      if self.installGpuDrivers {
+        try container.encode(self.installGpuDrivers, forKey: .installGpuDrivers)
+      }
+      if self.installOpsAgent {
+        try container.encode(self.installOpsAgent, forKey: .installOpsAgent)
+      }
+      if self.blockProjectSshKeys {
+        try container.encode(self.blockProjectSshKeys, forKey: .blockProjectSshKeys)
+      }
 
       if let choice = self.policyTemplate {
         switch choice {
@@ -1114,9 +1156,15 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.subnetwork, forKey: .subnetwork)
-      try container.encode(self.noExternalIpAddress, forKey: .noExternalIpAddress)
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.subnetwork.isEmpty {
+        try container.encode(self.subnetwork, forKey: .subnetwork)
+      }
+      if self.noExternalIpAddress {
+        try container.encode(self.noExternalIpAddress, forKey: .noExternalIpAddress)
+      }
       try container.encodeIfPresent(self.nicType, forKey: .nicType)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1323,7 +1371,9 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+      if !self.networkInterfaces.isEmpty {
+        try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1419,8 +1469,12 @@ public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.collocation, forKey: .collocation)
-      try container.encode(self.maxDistance, forKey: .maxDistance)
+      if !self.collocation.isEmpty {
+        try container.encode(self.collocation, forKey: .collocation)
+      }
+      if self.maxDistance != 0 {
+        try container.encode(self.maxDistance, forKey: .maxDistance)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

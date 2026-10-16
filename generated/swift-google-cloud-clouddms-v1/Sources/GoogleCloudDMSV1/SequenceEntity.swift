@@ -119,12 +119,24 @@ public struct SequenceEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.increment, forKey: .increment)
-    try container.encode(self.startValue, forKey: .startValue)
-    try container.encode(self.maxValue, forKey: .maxValue)
-    try container.encode(self.minValue, forKey: .minValue)
-    try container.encode(self.cycle, forKey: .cycle)
-    try container.encode(self.cache, forKey: .cache)
+    if self.increment != 0 {
+      try container.encode(self.increment, forKey: .increment)
+    }
+    if !self.startValue.isEmpty {
+      try container.encode(self.startValue, forKey: .startValue)
+    }
+    if !self.maxValue.isEmpty {
+      try container.encode(self.maxValue, forKey: .maxValue)
+    }
+    if !self.minValue.isEmpty {
+      try container.encode(self.minValue, forKey: .minValue)
+    }
+    if self.cycle {
+      try container.encode(self.cycle, forKey: .cycle)
+    }
+    if self.cache != 0 {
+      try container.encode(self.cache, forKey: .cache)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -147,11 +147,21 @@ public struct SlurmNodeSet: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.computeId, forKey: .computeId)
-    try container.encode(self.storageConfigs, forKey: .storageConfigs)
-    try container.encode(self.staticNodeCount, forKey: .staticNodeCount)
-    try container.encode(self.maxDynamicNodeCount, forKey: .maxDynamicNodeCount)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.computeId.isEmpty {
+      try container.encode(self.computeId, forKey: .computeId)
+    }
+    if !self.storageConfigs.isEmpty {
+      try container.encode(self.storageConfigs, forKey: .storageConfigs)
+    }
+    if self.staticNodeCount != 0 {
+      try container.encode(self.staticNodeCount, forKey: .staticNodeCount)
+    }
+    if self.maxDynamicNodeCount != 0 {
+      try container.encode(self.maxDynamicNodeCount, forKey: .maxDynamicNodeCount)
+    }
 
     if let choice = self.type {
       switch choice {

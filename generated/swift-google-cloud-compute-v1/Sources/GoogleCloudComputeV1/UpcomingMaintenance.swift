@@ -123,7 +123,9 @@
       try container.encodeIfPresent(self.canReschedule, forKey: .canReschedule)
       try container.encodeIfPresent(self.latestWindowStartTime, forKey: .latestWindowStartTime)
       try container.encodeIfPresent(self.maintenanceOnShutdown, forKey: .maintenanceOnShutdown)
-      try container.encode(self.maintenanceReasons, forKey: .maintenanceReasons)
+      if !self.maintenanceReasons.isEmpty {
+        try container.encode(self.maintenanceReasons, forKey: .maintenanceReasons)
+      }
       try container.encodeIfPresent(self.maintenanceStatus, forKey: .maintenanceStatus)
       try container.encodeIfPresent(self.type, forKey: .type)
       try container.encodeIfPresent(self.windowEndTime, forKey: .windowEndTime)

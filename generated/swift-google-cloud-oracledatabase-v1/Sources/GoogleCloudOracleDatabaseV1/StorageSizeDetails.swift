@@ -80,8 +80,12 @@ public struct StorageSizeDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataStorageSizeInGbs, forKey: .dataStorageSizeInGbs)
-    try container.encode(self.recoStorageSizeInGbs, forKey: .recoStorageSizeInGbs)
+    if self.dataStorageSizeInGbs != 0 {
+      try container.encode(self.dataStorageSizeInGbs, forKey: .dataStorageSizeInGbs)
+    }
+    if self.recoStorageSizeInGbs != 0 {
+      try container.encode(self.recoStorageSizeInGbs, forKey: .recoStorageSizeInGbs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

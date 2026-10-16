@@ -86,8 +86,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.eucDisabled, forKey: .eucDisabled)
-      try container.encode(self.bypassActasCheck, forKey: .bypassActasCheck)
+      if self.eucDisabled {
+        try container.encode(self.eucDisabled, forKey: .eucDisabled)
+      }
+      if self.bypassActasCheck {
+        try container.encode(self.bypassActasCheck, forKey: .bypassActasCheck)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

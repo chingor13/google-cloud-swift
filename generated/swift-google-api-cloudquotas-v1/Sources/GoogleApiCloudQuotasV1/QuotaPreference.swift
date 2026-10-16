@@ -180,17 +180,33 @@ public struct QuotaPreference: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.dimensions, forKey: .dimensions)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.dimensions.isEmpty {
+      try container.encode(self.dimensions, forKey: .dimensions)
+    }
     try container.encodeIfPresent(self.quotaConfig, forKey: .quotaConfig)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.quotaId, forKey: .quotaId)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.justification, forKey: .justification)
-    try container.encode(self.contactEmail, forKey: .contactEmail)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.quotaId.isEmpty {
+      try container.encode(self.quotaId, forKey: .quotaId)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.justification.isEmpty {
+      try container.encode(self.justification, forKey: .justification)
+    }
+    if !self.contactEmail.isEmpty {
+      try container.encode(self.contactEmail, forKey: .contactEmail)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -97,10 +97,16 @@ public struct AndroidKeySettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.allowAllPackageNames, forKey: .allowAllPackageNames)
-    try container.encode(self.allowedPackageNames, forKey: .allowedPackageNames)
-    try container.encode(
-      self.supportNonGoogleAppStoreDistribution, forKey: .supportNonGoogleAppStoreDistribution)
+    if self.allowAllPackageNames {
+      try container.encode(self.allowAllPackageNames, forKey: .allowAllPackageNames)
+    }
+    if !self.allowedPackageNames.isEmpty {
+      try container.encode(self.allowedPackageNames, forKey: .allowedPackageNames)
+    }
+    if self.supportNonGoogleAppStoreDistribution {
+      try container.encode(
+        self.supportNonGoogleAppStoreDistribution, forKey: .supportNonGoogleAppStoreDistribution)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -118,12 +118,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.title, forKey: .title)
-      try container.encode(self.uri, forKey: .uri)
-      try container.encode(self.snippets, forKey: .snippets)
-      try container.encode(self.confidence, forKey: .confidence)
-      try container.encode(self.metadata, forKey: .metadata)
-      try container.encode(self.answerRecord, forKey: .answerRecord)
+      if !self.title.isEmpty {
+        try container.encode(self.title, forKey: .title)
+      }
+      if !self.uri.isEmpty {
+        try container.encode(self.uri, forKey: .uri)
+      }
+      if !self.snippets.isEmpty {
+        try container.encode(self.snippets, forKey: .snippets)
+      }
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
+      if !self.metadata.isEmpty {
+        try container.encode(self.metadata, forKey: .metadata)
+      }
+      if !self.answerRecord.isEmpty {
+        try container.encode(self.answerRecord, forKey: .answerRecord)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

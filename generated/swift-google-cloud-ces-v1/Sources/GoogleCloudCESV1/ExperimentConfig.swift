@@ -136,8 +136,12 @@ public struct ExperimentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.trafficAllocations, forKey: .trafficAllocations)
+      if self.state != ExperimentConfig.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.trafficAllocations.isEmpty {
+        try container.encode(self.trafficAllocations, forKey: .trafficAllocations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -215,9 +219,15 @@ public struct ExperimentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.trafficPercentage, forKey: .trafficPercentage)
-        try container.encode(self.appVersion, forKey: .appVersion)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if self.trafficPercentage != 0 {
+          try container.encode(self.trafficPercentage, forKey: .trafficPercentage)
+        }
+        if !self.appVersion.isEmpty {
+          try container.encode(self.appVersion, forKey: .appVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

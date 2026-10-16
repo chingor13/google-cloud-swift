@@ -79,8 +79,12 @@ public struct QAResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.highlights, forKey: .highlights)
-    try container.encode(self.confidenceScore, forKey: .confidenceScore)
+    if !self.highlights.isEmpty {
+      try container.encode(self.highlights, forKey: .highlights)
+    }
+    if self.confidenceScore != 0 {
+      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -147,8 +151,12 @@ public struct QAResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.startIndex, forKey: .startIndex)
-      try container.encode(self.endIndex, forKey: .endIndex)
+      if self.startIndex != 0 {
+        try container.encode(self.startIndex, forKey: .startIndex)
+      }
+      if self.endIndex != 0 {
+        try container.encode(self.endIndex, forKey: .endIndex)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

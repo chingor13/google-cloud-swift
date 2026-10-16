@@ -100,9 +100,15 @@ public struct AdaptiveMtSentence: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sourceSentence, forKey: .sourceSentence)
-    try container.encode(self.targetSentence, forKey: .targetSentence)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.sourceSentence.isEmpty {
+      try container.encode(self.sourceSentence, forKey: .sourceSentence)
+    }
+    if !self.targetSentence.isEmpty {
+      try container.encode(self.targetSentence, forKey: .targetSentence)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

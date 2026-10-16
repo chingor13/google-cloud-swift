@@ -171,19 +171,35 @@ public struct SourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.autonomousDatabase, forKey: .autonomousDatabase)
-    try container.encode(
-      self.automaticBackupsReplicationEnabled, forKey: .automaticBackupsReplicationEnabled)
-    try container.encode(self.sourceType, forKey: .sourceType)
-    try container.encode(self.cloneType, forKey: .cloneType)
-    try container.encode(self.refreshableMode, forKey: .refreshableMode)
-    try container.encode(self.autoRefreshFrequencySeconds, forKey: .autoRefreshFrequencySeconds)
+    if !self.autonomousDatabase.isEmpty {
+      try container.encode(self.autonomousDatabase, forKey: .autonomousDatabase)
+    }
+    if self.automaticBackupsReplicationEnabled {
+      try container.encode(
+        self.automaticBackupsReplicationEnabled, forKey: .automaticBackupsReplicationEnabled)
+    }
+    if self.sourceType != SourceConfig.SourceType() {
+      try container.encode(self.sourceType, forKey: .sourceType)
+    }
+    if self.cloneType != SourceConfig.CloneType() {
+      try container.encode(self.cloneType, forKey: .cloneType)
+    }
+    if self.refreshableMode != SourceConfig.RefreshableMode() {
+      try container.encode(self.refreshableMode, forKey: .refreshableMode)
+    }
+    if self.autoRefreshFrequencySeconds != 0 {
+      try container.encode(self.autoRefreshFrequencySeconds, forKey: .autoRefreshFrequencySeconds)
+    }
     try container.encodeIfPresent(
       self.autoRefreshPointLagSeconds, forKey: .autoRefreshPointLagSeconds)
     try container.encodeIfPresent(self.autoRefreshStartTime, forKey: .autoRefreshStartTime)
-    try container.encode(self.autonomousDatabaseBackup, forKey: .autonomousDatabaseBackup)
+    if !self.autonomousDatabaseBackup.isEmpty {
+      try container.encode(self.autonomousDatabaseBackup, forKey: .autonomousDatabaseBackup)
+    }
     try container.encodeIfPresent(self.backupTime, forKey: .backupTime)
-    try container.encode(self.useLatestAvailableBackup, forKey: .useLatestAvailableBackup)
+    if self.useLatestAvailableBackup {
+      try container.encode(self.useLatestAvailableBackup, forKey: .useLatestAvailableBackup)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

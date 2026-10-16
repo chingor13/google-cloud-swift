@@ -103,7 +103,9 @@
       try container.encodeIfPresent(self.displayName, forKey: .displayName)
       try container.encodeIfPresent(self.number, forKey: .number)
       try container.encodeIfPresent(self.orchestrationOptions, forKey: .orchestrationOptions)
-      try container.encode(self.selectors, forKey: .selectors)
+      if !self.selectors.isEmpty {
+        try container.encode(self.selectors, forKey: .selectors)
+      }
       try container.encodeIfPresent(self.validation, forKey: .validation)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

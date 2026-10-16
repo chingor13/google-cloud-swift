@@ -84,8 +84,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.keyFieldName, forKey: .keyFieldName)
-      try container.encode(self.families, forKey: .families)
+      if !self.keyFieldName.isEmpty {
+        try container.encode(self.keyFieldName, forKey: .keyFieldName)
+      }
+      if !self.families.isEmpty {
+        try container.encode(self.families, forKey: .families)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -184,10 +188,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.fieldName, forKey: .fieldName)
-        try container.encode(self.encoding, forKey: .encoding)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.columns, forKey: .columns)
+        if !self.fieldName.isEmpty {
+          try container.encode(self.fieldName, forKey: .fieldName)
+        }
+        if self.encoding != BigtableOptions.Encoding() {
+          try container.encode(self.encoding, forKey: .encoding)
+        }
+        if self.type != BigtableOptions.Type_() {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.columns.isEmpty {
+          try container.encode(self.columns, forKey: .columns)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -307,10 +319,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.qualifier, forKey: .qualifier)
-        try container.encode(self.fieldName, forKey: .fieldName)
-        try container.encode(self.encoding, forKey: .encoding)
-        try container.encode(self.type, forKey: .type)
+        if !self.qualifier.isEmpty {
+          try container.encode(self.qualifier, forKey: .qualifier)
+        }
+        if !self.fieldName.isEmpty {
+          try container.encode(self.fieldName, forKey: .fieldName)
+        }
+        if self.encoding != BigtableOptions.Encoding() {
+          try container.encode(self.encoding, forKey: .encoding)
+        }
+        if self.type != BigtableOptions.Type_() {
+          try container.encode(self.type, forKey: .type)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

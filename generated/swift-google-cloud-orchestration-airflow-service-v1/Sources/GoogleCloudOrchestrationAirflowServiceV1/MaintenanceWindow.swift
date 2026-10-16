@@ -100,7 +100,9 @@ public struct MaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.recurrence, forKey: .recurrence)
+    if !self.recurrence.isEmpty {
+      try container.encode(self.recurrence, forKey: .recurrence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

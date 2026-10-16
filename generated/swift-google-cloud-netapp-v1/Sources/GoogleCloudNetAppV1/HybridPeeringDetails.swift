@@ -122,13 +122,25 @@ public struct HybridPeeringDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.subnetIp, forKey: .subnetIp)
-    try container.encode(self.command, forKey: .command)
+    if !self.subnetIp.isEmpty {
+      try container.encode(self.subnetIp, forKey: .subnetIp)
+    }
+    if !self.command.isEmpty {
+      try container.encode(self.command, forKey: .command)
+    }
     try container.encodeIfPresent(self.commandExpiryTime, forKey: .commandExpiryTime)
-    try container.encode(self.passphrase, forKey: .passphrase)
-    try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
-    try container.encode(self.peerClusterName, forKey: .peerClusterName)
-    try container.encode(self.peerSvmName, forKey: .peerSvmName)
+    if !self.passphrase.isEmpty {
+      try container.encode(self.passphrase, forKey: .passphrase)
+    }
+    if !self.peerVolumeName.isEmpty {
+      try container.encode(self.peerVolumeName, forKey: .peerVolumeName)
+    }
+    if !self.peerClusterName.isEmpty {
+      try container.encode(self.peerClusterName, forKey: .peerClusterName)
+    }
+    if !self.peerSvmName.isEmpty {
+      try container.encode(self.peerSvmName, forKey: .peerSvmName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -125,12 +125,24 @@ public struct EffectiveTag: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.tagValue, forKey: .tagValue)
-    try container.encode(self.namespacedTagValue, forKey: .namespacedTagValue)
-    try container.encode(self.tagKey, forKey: .tagKey)
-    try container.encode(self.namespacedTagKey, forKey: .namespacedTagKey)
-    try container.encode(self.tagKeyParentName, forKey: .tagKeyParentName)
-    try container.encode(self.inherited, forKey: .inherited)
+    if !self.tagValue.isEmpty {
+      try container.encode(self.tagValue, forKey: .tagValue)
+    }
+    if !self.namespacedTagValue.isEmpty {
+      try container.encode(self.namespacedTagValue, forKey: .namespacedTagValue)
+    }
+    if !self.tagKey.isEmpty {
+      try container.encode(self.tagKey, forKey: .tagKey)
+    }
+    if !self.namespacedTagKey.isEmpty {
+      try container.encode(self.namespacedTagKey, forKey: .namespacedTagKey)
+    }
+    if !self.tagKeyParentName.isEmpty {
+      try container.encode(self.tagKeyParentName, forKey: .tagKeyParentName)
+    }
+    if self.inherited {
+      try container.encode(self.inherited, forKey: .inherited)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -257,8 +257,14 @@ public struct DataProfilePubSubCondition: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.logicalOperator, forKey: .logicalOperator)
-      try container.encode(self.conditions, forKey: .conditions)
+      if self.logicalOperator
+        != DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator()
+      {
+        try container.encode(self.logicalOperator, forKey: .logicalOperator)
+      }
+      if !self.conditions.isEmpty {
+        try container.encode(self.conditions, forKey: .conditions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

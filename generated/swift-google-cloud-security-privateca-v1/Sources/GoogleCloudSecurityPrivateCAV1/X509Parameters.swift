@@ -124,10 +124,16 @@ public struct X509Parameters: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.keyUsage, forKey: .keyUsage)
     try container.encodeIfPresent(self.caOptions, forKey: .caOptions)
-    try container.encode(self.policyIds, forKey: .policyIds)
-    try container.encode(self.aiaOcspServers, forKey: .aiaOcspServers)
+    if !self.policyIds.isEmpty {
+      try container.encode(self.policyIds, forKey: .policyIds)
+    }
+    if !self.aiaOcspServers.isEmpty {
+      try container.encode(self.aiaOcspServers, forKey: .aiaOcspServers)
+    }
     try container.encodeIfPresent(self.nameConstraints, forKey: .nameConstraints)
-    try container.encode(self.additionalExtensions, forKey: .additionalExtensions)
+    if !self.additionalExtensions.isEmpty {
+      try container.encode(self.additionalExtensions, forKey: .additionalExtensions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -373,15 +379,33 @@ public struct X509Parameters: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.critical, forKey: .critical)
-      try container.encode(self.permittedDnsNames, forKey: .permittedDnsNames)
-      try container.encode(self.excludedDnsNames, forKey: .excludedDnsNames)
-      try container.encode(self.permittedIpRanges, forKey: .permittedIpRanges)
-      try container.encode(self.excludedIpRanges, forKey: .excludedIpRanges)
-      try container.encode(self.permittedEmailAddresses, forKey: .permittedEmailAddresses)
-      try container.encode(self.excludedEmailAddresses, forKey: .excludedEmailAddresses)
-      try container.encode(self.permittedUris, forKey: .permittedUris)
-      try container.encode(self.excludedUris, forKey: .excludedUris)
+      if self.critical {
+        try container.encode(self.critical, forKey: .critical)
+      }
+      if !self.permittedDnsNames.isEmpty {
+        try container.encode(self.permittedDnsNames, forKey: .permittedDnsNames)
+      }
+      if !self.excludedDnsNames.isEmpty {
+        try container.encode(self.excludedDnsNames, forKey: .excludedDnsNames)
+      }
+      if !self.permittedIpRanges.isEmpty {
+        try container.encode(self.permittedIpRanges, forKey: .permittedIpRanges)
+      }
+      if !self.excludedIpRanges.isEmpty {
+        try container.encode(self.excludedIpRanges, forKey: .excludedIpRanges)
+      }
+      if !self.permittedEmailAddresses.isEmpty {
+        try container.encode(self.permittedEmailAddresses, forKey: .permittedEmailAddresses)
+      }
+      if !self.excludedEmailAddresses.isEmpty {
+        try container.encode(self.excludedEmailAddresses, forKey: .excludedEmailAddresses)
+      }
+      if !self.permittedUris.isEmpty {
+        try container.encode(self.permittedUris, forKey: .permittedUris)
+      }
+      if !self.excludedUris.isEmpty {
+        try container.encode(self.excludedUris, forKey: .excludedUris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

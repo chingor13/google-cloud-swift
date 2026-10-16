@@ -151,17 +151,39 @@ public struct GcsReportLogMessage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.filePath, forKey: .filePath)
-    try container.encode(self.filename, forKey: .filename)
-    try container.encode(self.sourceScriptLine, forKey: .sourceScriptLine)
-    try container.encode(self.sourceScriptColumn, forKey: .sourceScriptColumn)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.scriptContext, forKey: .scriptContext)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.effect, forKey: .effect)
-    try container.encode(self.objectName, forKey: .objectName)
+    if !self.severity.isEmpty {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.category.isEmpty {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.filePath.isEmpty {
+      try container.encode(self.filePath, forKey: .filePath)
+    }
+    if !self.filename.isEmpty {
+      try container.encode(self.filename, forKey: .filename)
+    }
+    if self.sourceScriptLine != 0 {
+      try container.encode(self.sourceScriptLine, forKey: .sourceScriptLine)
+    }
+    if self.sourceScriptColumn != 0 {
+      try container.encode(self.sourceScriptColumn, forKey: .sourceScriptColumn)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.scriptContext.isEmpty {
+      try container.encode(self.scriptContext, forKey: .scriptContext)
+    }
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.effect.isEmpty {
+      try container.encode(self.effect, forKey: .effect)
+    }
+    if !self.objectName.isEmpty {
+      try container.encode(self.objectName, forKey: .objectName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

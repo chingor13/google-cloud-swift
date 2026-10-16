@@ -102,11 +102,19 @@ public struct AdStitchDetail: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.adBreakId, forKey: .adBreakId)
-    try container.encode(self.adId, forKey: .adId)
+    if !self.adBreakId.isEmpty {
+      try container.encode(self.adBreakId, forKey: .adBreakId)
+    }
+    if !self.adId.isEmpty {
+      try container.encode(self.adId, forKey: .adId)
+    }
     try container.encodeIfPresent(self.adTimeOffset, forKey: .adTimeOffset)
-    try container.encode(self.skipReason, forKey: .skipReason)
-    try container.encode(self.media, forKey: .media)
+    if !self.skipReason.isEmpty {
+      try container.encode(self.skipReason, forKey: .skipReason)
+    }
+    if !self.media.isEmpty {
+      try container.encode(self.media, forKey: .media)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -85,7 +85,9 @@ public struct CreateSearchHypernymRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.searchHypernym, forKey: .searchHypernym)
     try container.encodeIfPresent(self.searchHypernymId, forKey: .searchHypernymId)
     for (key, value) in self._unknownFields.json {

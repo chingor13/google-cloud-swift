@@ -108,10 +108,16 @@ public struct CreateIcebergCatalogRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.icebergCatalogId, forKey: .icebergCatalogId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.icebergCatalogId.isEmpty {
+      try container.encode(self.icebergCatalogId, forKey: .icebergCatalogId)
+    }
     try container.encodeIfPresent(self.icebergCatalog, forKey: .icebergCatalog)
-    try container.encode(self.primaryLocation, forKey: .primaryLocation)
+    if !self.primaryLocation.isEmpty {
+      try container.encode(self.primaryLocation, forKey: .primaryLocation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

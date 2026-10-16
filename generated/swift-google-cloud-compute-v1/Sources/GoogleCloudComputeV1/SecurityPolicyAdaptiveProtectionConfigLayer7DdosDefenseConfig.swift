@@ -101,7 +101,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.enable, forKey: .enable)
       try container.encodeIfPresent(self.ruleVisibility, forKey: .ruleVisibility)
-      try container.encode(self.thresholdConfigs, forKey: .thresholdConfigs)
+      if !self.thresholdConfigs.isEmpty {
+        try container.encode(self.thresholdConfigs, forKey: .thresholdConfigs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

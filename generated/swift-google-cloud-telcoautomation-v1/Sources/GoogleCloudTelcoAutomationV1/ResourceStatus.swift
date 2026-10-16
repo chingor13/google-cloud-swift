@@ -126,13 +126,27 @@ public struct ResourceStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.resourceNamespace, forKey: .resourceNamespace)
-    try container.encode(self.group, forKey: .group)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.kind, forKey: .kind)
-    try container.encode(self.resourceType, forKey: .resourceType)
-    try container.encode(self.status, forKey: .status)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.resourceNamespace.isEmpty {
+      try container.encode(self.resourceNamespace, forKey: .resourceNamespace)
+    }
+    if !self.group.isEmpty {
+      try container.encode(self.group, forKey: .group)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.kind.isEmpty {
+      try container.encode(self.kind, forKey: .kind)
+    }
+    if self.resourceType != ResourceType() {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
+    if self.status != GoogleCloudTelcoAutomationV1.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.nfDeployStatus, forKey: .nfDeployStatus)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

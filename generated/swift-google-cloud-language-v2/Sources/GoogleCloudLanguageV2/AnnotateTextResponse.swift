@@ -135,13 +135,25 @@ public struct AnnotateTextResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sentences, forKey: .sentences)
-    try container.encode(self.entities, forKey: .entities)
+    if !self.sentences.isEmpty {
+      try container.encode(self.sentences, forKey: .sentences)
+    }
+    if !self.entities.isEmpty {
+      try container.encode(self.entities, forKey: .entities)
+    }
     try container.encodeIfPresent(self.documentSentiment, forKey: .documentSentiment)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.moderationCategories, forKey: .moderationCategories)
-    try container.encode(self.languageSupported, forKey: .languageSupported)
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.moderationCategories.isEmpty {
+      try container.encode(self.moderationCategories, forKey: .moderationCategories)
+    }
+    if self.languageSupported {
+      try container.encode(self.languageSupported, forKey: .languageSupported)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

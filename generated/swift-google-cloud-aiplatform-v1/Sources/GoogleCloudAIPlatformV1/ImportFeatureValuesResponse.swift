@@ -107,11 +107,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.importedEntityCount, forKey: .importedEntityCount)
-      try container.encode(self.importedFeatureValueCount, forKey: .importedFeatureValueCount)
-      try container.encode(self.invalidRowCount, forKey: .invalidRowCount)
-      try container.encode(
-        self.timestampOutsideRetentionRowsCount, forKey: .timestampOutsideRetentionRowsCount)
+      if self.importedEntityCount != 0 {
+        try container.encode(self.importedEntityCount, forKey: .importedEntityCount)
+      }
+      if self.importedFeatureValueCount != 0 {
+        try container.encode(self.importedFeatureValueCount, forKey: .importedFeatureValueCount)
+      }
+      if self.invalidRowCount != 0 {
+        try container.encode(self.invalidRowCount, forKey: .invalidRowCount)
+      }
+      if self.timestampOutsideRetentionRowsCount != 0 {
+        try container.encode(
+          self.timestampOutsideRetentionRowsCount, forKey: .timestampOutsideRetentionRowsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

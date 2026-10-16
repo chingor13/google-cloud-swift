@@ -92,8 +92,12 @@ public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.variables, forKey: .variables)
-    try container.encode(self.secretVariables, forKey: .secretVariables)
+    if !self.variables.isEmpty {
+      try container.encode(self.variables, forKey: .variables)
+    }
+    if !self.secretVariables.isEmpty {
+      try container.encode(self.secretVariables, forKey: .secretVariables)
+    }
     try container.encodeIfPresent(self.encryptedVariables, forKey: .encryptedVariables)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -159,8 +163,12 @@ public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.keyName, forKey: .keyName)
-      try container.encode(self.cipherText, forKey: .cipherText)
+      if !self.keyName.isEmpty {
+        try container.encode(self.keyName, forKey: .keyName)
+      }
+      if !self.cipherText.isEmpty {
+        try container.encode(self.cipherText, forKey: .cipherText)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

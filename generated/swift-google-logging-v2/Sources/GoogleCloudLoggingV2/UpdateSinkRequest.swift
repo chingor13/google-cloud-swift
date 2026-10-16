@@ -128,9 +128,13 @@ public struct UpdateSinkRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sinkName, forKey: .sinkName)
+    if !self.sinkName.isEmpty {
+      try container.encode(self.sinkName, forKey: .sinkName)
+    }
     try container.encodeIfPresent(self.sink, forKey: .sink)
-    try container.encode(self.uniqueWriterIdentity, forKey: .uniqueWriterIdentity)
+    if self.uniqueWriterIdentity {
+      try container.encode(self.uniqueWriterIdentity, forKey: .uniqueWriterIdentity)
+    }
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

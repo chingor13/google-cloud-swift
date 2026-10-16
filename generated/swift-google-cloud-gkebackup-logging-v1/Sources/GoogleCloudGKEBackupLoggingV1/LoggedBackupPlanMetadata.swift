@@ -89,9 +89,15 @@ public struct LoggedBackupPlanMetadata: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupChannel, forKey: .backupChannel)
-    try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
-    try container.encode(self.rpoRiskReason, forKey: .rpoRiskReason)
+    if !self.backupChannel.isEmpty {
+      try container.encode(self.backupChannel, forKey: .backupChannel)
+    }
+    if self.rpoRiskLevel != 0 {
+      try container.encode(self.rpoRiskLevel, forKey: .rpoRiskLevel)
+    }
+    if !self.rpoRiskReason.isEmpty {
+      try container.encode(self.rpoRiskReason, forKey: .rpoRiskReason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

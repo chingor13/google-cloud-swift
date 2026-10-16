@@ -297,7 +297,9 @@ public struct Quota: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(
       self.targetNameServersPerPolicy, forKey: .targetNameServersPerPolicy)
     try container.encodeIfPresent(self.totalRrdataSizePerChange, forKey: .totalRrdataSizePerChange)
-    try container.encode(self.whitelistedKeySpecs, forKey: .whitelistedKeySpecs)
+    if !self.whitelistedKeySpecs.isEmpty {
+      try container.encode(self.whitelistedKeySpecs, forKey: .whitelistedKeySpecs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -110,7 +110,9 @@ public struct ClientQuery: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.senderId, forKey: .senderId)
+    if !self.senderId.isEmpty {
+      try container.encode(self.senderId, forKey: .senderId)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
 
     if let choice = self.kind {

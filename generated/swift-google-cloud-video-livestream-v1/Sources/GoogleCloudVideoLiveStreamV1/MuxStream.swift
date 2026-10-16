@@ -116,11 +116,19 @@ public struct MuxStream: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.container, forKey: .container)
-    try container.encode(self.elementaryStreams, forKey: .elementaryStreams)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if !self.container.isEmpty {
+      try container.encode(self.container, forKey: .container)
+    }
+    if !self.elementaryStreams.isEmpty {
+      try container.encode(self.elementaryStreams, forKey: .elementaryStreams)
+    }
     try container.encodeIfPresent(self.segmentSettings, forKey: .segmentSettings)
-    try container.encode(self.encryptionId, forKey: .encryptionId)
+    if !self.encryptionId.isEmpty {
+      try container.encode(self.encryptionId, forKey: .encryptionId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

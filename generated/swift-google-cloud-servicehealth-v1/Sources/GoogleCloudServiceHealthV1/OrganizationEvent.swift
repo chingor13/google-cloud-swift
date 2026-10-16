@@ -188,16 +188,36 @@ public struct OrganizationEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.detailedCategory, forKey: .detailedCategory)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.detailedState, forKey: .detailedState)
-    try container.encode(self.eventImpacts, forKey: .eventImpacts)
-    try container.encode(self.updates, forKey: .updates)
-    try container.encode(self.parentEvent, forKey: .parentEvent)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.category != OrganizationEvent.EventCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if self.detailedCategory != OrganizationEvent.DetailedCategory() {
+      try container.encode(self.detailedCategory, forKey: .detailedCategory)
+    }
+    if self.state != OrganizationEvent.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.detailedState != OrganizationEvent.DetailedState() {
+      try container.encode(self.detailedState, forKey: .detailedState)
+    }
+    if !self.eventImpacts.isEmpty {
+      try container.encode(self.eventImpacts, forKey: .eventImpacts)
+    }
+    if !self.updates.isEmpty {
+      try container.encode(self.updates, forKey: .updates)
+    }
+    if !self.parentEvent.isEmpty {
+      try container.encode(self.parentEvent, forKey: .parentEvent)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)

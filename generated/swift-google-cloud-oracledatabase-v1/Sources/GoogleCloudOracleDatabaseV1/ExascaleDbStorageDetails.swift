@@ -79,8 +79,12 @@ public struct ExascaleDbStorageDetails: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.availableSizeGbs, forKey: .availableSizeGbs)
-    try container.encode(self.totalSizeGbs, forKey: .totalSizeGbs)
+    if self.availableSizeGbs != 0 {
+      try container.encode(self.availableSizeGbs, forKey: .availableSizeGbs)
+    }
+    if self.totalSizeGbs != 0 {
+      try container.encode(self.totalSizeGbs, forKey: .totalSizeGbs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

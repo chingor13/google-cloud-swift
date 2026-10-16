@@ -84,8 +84,12 @@ public struct BackupFile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fileName, forKey: .fileName)
-    try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    if !self.fileName.isEmpty {
+      try container.encode(self.fileName, forKey: .fileName)
+    }
+    if self.sizeBytes != 0 {
+      try container.encode(self.sizeBytes, forKey: .sizeBytes)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

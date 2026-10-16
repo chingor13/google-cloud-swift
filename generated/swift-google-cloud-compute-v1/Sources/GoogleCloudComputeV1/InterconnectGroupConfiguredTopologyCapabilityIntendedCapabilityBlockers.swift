@@ -130,10 +130,18 @@
       try container.encodeIfPresent(self.blockerType, forKey: .blockerType)
       try container.encodeIfPresent(self.documentationLink, forKey: .documentationLink)
       try container.encodeIfPresent(self.explanation, forKey: .explanation)
-      try container.encode(self.facilities, forKey: .facilities)
-      try container.encode(self.interconnects, forKey: .interconnects)
-      try container.encode(self.metros, forKey: .metros)
-      try container.encode(self.zones, forKey: .zones)
+      if !self.facilities.isEmpty {
+        try container.encode(self.facilities, forKey: .facilities)
+      }
+      if !self.interconnects.isEmpty {
+        try container.encode(self.interconnects, forKey: .interconnects)
+      }
+      if !self.metros.isEmpty {
+        try container.encode(self.metros, forKey: .metros)
+      }
+      if !self.zones.isEmpty {
+        try container.encode(self.zones, forKey: .zones)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

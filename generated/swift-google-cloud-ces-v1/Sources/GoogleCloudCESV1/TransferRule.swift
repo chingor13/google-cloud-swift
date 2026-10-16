@@ -108,8 +108,12 @@ public struct TransferRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.childAgent, forKey: .childAgent)
-    try container.encode(self.direction, forKey: .direction)
+    if !self.childAgent.isEmpty {
+      try container.encode(self.childAgent, forKey: .childAgent)
+    }
+    if self.direction != TransferRule.Direction() {
+      try container.encode(self.direction, forKey: .direction)
+    }
 
     if let choice = self.ruleType {
       switch choice {

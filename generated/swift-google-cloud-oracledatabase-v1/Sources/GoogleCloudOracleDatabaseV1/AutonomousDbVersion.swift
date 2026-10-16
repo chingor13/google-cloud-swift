@@ -97,10 +97,18 @@ public struct AutonomousDbVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.dbWorkload, forKey: .dbWorkload)
-    try container.encode(self.workloadUri, forKey: .workloadUri)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.dbWorkload != DBWorkload() {
+      try container.encode(self.dbWorkload, forKey: .dbWorkload)
+    }
+    if !self.workloadUri.isEmpty {
+      try container.encode(self.workloadUri, forKey: .workloadUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

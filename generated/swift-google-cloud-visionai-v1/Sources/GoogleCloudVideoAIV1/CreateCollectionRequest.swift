@@ -88,7 +88,9 @@ public struct CreateCollectionRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.collection, forKey: .collection)
     try container.encodeIfPresent(self.collectionId, forKey: .collectionId)
     for (key, value) in self._unknownFields.json {

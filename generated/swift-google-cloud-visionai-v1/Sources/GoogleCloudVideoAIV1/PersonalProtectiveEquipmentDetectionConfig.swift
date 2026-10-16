@@ -93,9 +93,15 @@ public struct PersonalProtectiveEquipmentDetectionConfig: Codable, Equatable, Go
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enableFaceCoverageDetection, forKey: .enableFaceCoverageDetection)
-    try container.encode(self.enableHeadCoverageDetection, forKey: .enableHeadCoverageDetection)
-    try container.encode(self.enableHandsCoverageDetection, forKey: .enableHandsCoverageDetection)
+    if self.enableFaceCoverageDetection {
+      try container.encode(self.enableFaceCoverageDetection, forKey: .enableFaceCoverageDetection)
+    }
+    if self.enableHeadCoverageDetection {
+      try container.encode(self.enableHeadCoverageDetection, forKey: .enableHeadCoverageDetection)
+    }
+    if self.enableHandsCoverageDetection {
+      try container.encode(self.enableHandsCoverageDetection, forKey: .enableHandsCoverageDetection)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

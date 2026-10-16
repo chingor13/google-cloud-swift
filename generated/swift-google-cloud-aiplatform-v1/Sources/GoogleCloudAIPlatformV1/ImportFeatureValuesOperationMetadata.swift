@@ -131,13 +131,25 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.genericMetadata, forKey: .genericMetadata)
-      try container.encode(self.importedEntityCount, forKey: .importedEntityCount)
-      try container.encode(self.importedFeatureValueCount, forKey: .importedFeatureValueCount)
-      try container.encode(self.sourceUris, forKey: .sourceUris)
-      try container.encode(self.invalidRowCount, forKey: .invalidRowCount)
-      try container.encode(
-        self.timestampOutsideRetentionRowsCount, forKey: .timestampOutsideRetentionRowsCount)
-      try container.encode(self.blockingOperationIds, forKey: .blockingOperationIds)
+      if self.importedEntityCount != 0 {
+        try container.encode(self.importedEntityCount, forKey: .importedEntityCount)
+      }
+      if self.importedFeatureValueCount != 0 {
+        try container.encode(self.importedFeatureValueCount, forKey: .importedFeatureValueCount)
+      }
+      if !self.sourceUris.isEmpty {
+        try container.encode(self.sourceUris, forKey: .sourceUris)
+      }
+      if self.invalidRowCount != 0 {
+        try container.encode(self.invalidRowCount, forKey: .invalidRowCount)
+      }
+      if self.timestampOutsideRetentionRowsCount != 0 {
+        try container.encode(
+          self.timestampOutsideRetentionRowsCount, forKey: .timestampOutsideRetentionRowsCount)
+      }
+      if !self.blockingOperationIds.isEmpty {
+        try container.encode(self.blockingOperationIds, forKey: .blockingOperationIds)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

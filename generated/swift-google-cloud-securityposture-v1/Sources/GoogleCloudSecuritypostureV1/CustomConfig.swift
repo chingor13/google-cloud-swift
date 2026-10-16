@@ -119,9 +119,15 @@ public struct CustomConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.predicate, forKey: .predicate)
     try container.encodeIfPresent(self.customOutput, forKey: .customOutput)
     try container.encodeIfPresent(self.resourceSelector, forKey: .resourceSelector)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.recommendation, forKey: .recommendation)
+    if self.severity != CustomConfig.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.recommendation.isEmpty {
+      try container.encode(self.recommendation, forKey: .recommendation)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -184,7 +190,9 @@ public struct CustomConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.properties, forKey: .properties)
+      if !self.properties.isEmpty {
+        try container.encode(self.properties, forKey: .properties)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -251,7 +259,9 @@ public struct CustomConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         try container.encodeIfPresent(self.valueExpression, forKey: .valueExpression)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -355,7 +365,9 @@ public struct CustomConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resourceTypes, forKey: .resourceTypes)
+      if !self.resourceTypes.isEmpty {
+        try container.encode(self.resourceTypes, forKey: .resourceTypes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

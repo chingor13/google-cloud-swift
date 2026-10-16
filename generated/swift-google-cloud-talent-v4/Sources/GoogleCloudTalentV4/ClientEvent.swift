@@ -124,10 +124,16 @@ public struct ClientEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.requestId, forKey: .requestId)
-    try container.encode(self.eventId, forKey: .eventId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
+    if !self.eventId.isEmpty {
+      try container.encode(self.eventId, forKey: .eventId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.eventNotes, forKey: .eventNotes)
+    if !self.eventNotes.isEmpty {
+      try container.encode(self.eventNotes, forKey: .eventNotes)
+    }
 
     if let choice = self.event {
       switch choice {

@@ -84,8 +84,12 @@ public struct NativeDashboardWithChartsAndQueries: Codable, Equatable, GoogleWKT
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.dashboard, forKey: .dashboard)
-    try container.encode(self.dashboardCharts, forKey: .dashboardCharts)
-    try container.encode(self.dashboardQueries, forKey: .dashboardQueries)
+    if !self.dashboardCharts.isEmpty {
+      try container.encode(self.dashboardCharts, forKey: .dashboardCharts)
+    }
+    if !self.dashboardQueries.isEmpty {
+      try container.encode(self.dashboardQueries, forKey: .dashboardQueries)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

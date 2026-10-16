@@ -124,13 +124,27 @@ public struct AzureProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.application, forKey: .application)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.objectId, forKey: .objectId)
-    try container.encode(self.customerTenantId, forKey: .customerTenantId)
-    try container.encode(self.redirectUri, forKey: .redirectUri)
-    try container.encode(self.federatedApplicationClientId, forKey: .federatedApplicationClientId)
-    try container.encode(self.identity, forKey: .identity)
+    if !self.application.isEmpty {
+      try container.encode(self.application, forKey: .application)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.objectId.isEmpty {
+      try container.encode(self.objectId, forKey: .objectId)
+    }
+    if !self.customerTenantId.isEmpty {
+      try container.encode(self.customerTenantId, forKey: .customerTenantId)
+    }
+    if !self.redirectUri.isEmpty {
+      try container.encode(self.redirectUri, forKey: .redirectUri)
+    }
+    if !self.federatedApplicationClientId.isEmpty {
+      try container.encode(self.federatedApplicationClientId, forKey: .federatedApplicationClientId)
+    }
+    if !self.identity.isEmpty {
+      try container.encode(self.identity, forKey: .identity)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

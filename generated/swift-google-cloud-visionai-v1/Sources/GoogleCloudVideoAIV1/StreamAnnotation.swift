@@ -121,10 +121,18 @@ public struct StreamAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.sourceStream, forKey: .sourceStream)
-    try container.encode(self.type, forKey: .type)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.sourceStream.isEmpty {
+      try container.encode(self.sourceStream, forKey: .sourceStream)
+    }
+    if self.type != StreamAnnotationType() {
+      try container.encode(self.type, forKey: .type)
+    }
 
     if let choice = self.annotationPayload {
       switch choice {

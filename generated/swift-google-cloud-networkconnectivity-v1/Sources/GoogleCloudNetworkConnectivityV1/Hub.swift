@@ -195,18 +195,36 @@ public struct Hub: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.uniqueId, forKey: .uniqueId)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.routingVpcs, forKey: .routingVpcs)
-    try container.encode(self.routeTables, forKey: .routeTables)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.uniqueId.isEmpty {
+      try container.encode(self.uniqueId, forKey: .uniqueId)
+    }
+    if self.state != GoogleCloudNetworkConnectivityV1.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.routingVpcs.isEmpty {
+      try container.encode(self.routingVpcs, forKey: .routingVpcs)
+    }
+    if !self.routeTables.isEmpty {
+      try container.encode(self.routeTables, forKey: .routeTables)
+    }
     try container.encodeIfPresent(self.spokeSummary, forKey: .spokeSummary)
-    try container.encode(self.policyMode, forKey: .policyMode)
-    try container.encode(self.presetTopology, forKey: .presetTopology)
+    if self.policyMode != PolicyMode() {
+      try container.encode(self.policyMode, forKey: .policyMode)
+    }
+    if self.presetTopology != PresetTopology() {
+      try container.encode(self.presetTopology, forKey: .presetTopology)
+    }
     try container.encodeIfPresent(self.exportPsc, forKey: .exportPsc)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

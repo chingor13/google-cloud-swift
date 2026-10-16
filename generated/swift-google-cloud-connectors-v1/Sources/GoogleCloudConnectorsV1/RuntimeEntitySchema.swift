@@ -78,8 +78,12 @@ public struct RuntimeEntitySchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.entity, forKey: .entity)
-    try container.encode(self.fields, forKey: .fields)
+    if !self.entity.isEmpty {
+      try container.encode(self.entity, forKey: .entity)
+    }
+    if !self.fields.isEmpty {
+      try container.encode(self.fields, forKey: .fields)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -195,12 +199,24 @@ public struct RuntimeEntitySchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.field, forKey: .field)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.dataType, forKey: .dataType)
-      try container.encode(self.key, forKey: .key)
-      try container.encode(self.readonly, forKey: .readonly)
-      try container.encode(self.nullable, forKey: .nullable)
+      if !self.field.isEmpty {
+        try container.encode(self.field, forKey: .field)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.dataType != DataType() {
+        try container.encode(self.dataType, forKey: .dataType)
+      }
+      if self.key {
+        try container.encode(self.key, forKey: .key)
+      }
+      if self.readonly {
+        try container.encode(self.readonly, forKey: .readonly)
+      }
+      if self.nullable {
+        try container.encode(self.nullable, forKey: .nullable)
+      }
       try container.encodeIfPresent(self.defaultValue, forKey: .defaultValue)
       try container.encodeIfPresent(self.additionalDetails, forKey: .additionalDetails)
       for (key, value) in self._unknownFields.json {

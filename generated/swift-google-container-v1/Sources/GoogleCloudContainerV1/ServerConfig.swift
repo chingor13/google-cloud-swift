@@ -113,12 +113,24 @@ public struct ServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.defaultClusterVersion, forKey: .defaultClusterVersion)
-    try container.encode(self.validNodeVersions, forKey: .validNodeVersions)
-    try container.encode(self.defaultImageType, forKey: .defaultImageType)
-    try container.encode(self.validImageTypes, forKey: .validImageTypes)
-    try container.encode(self.validMasterVersions, forKey: .validMasterVersions)
-    try container.encode(self.channels, forKey: .channels)
+    if !self.defaultClusterVersion.isEmpty {
+      try container.encode(self.defaultClusterVersion, forKey: .defaultClusterVersion)
+    }
+    if !self.validNodeVersions.isEmpty {
+      try container.encode(self.validNodeVersions, forKey: .validNodeVersions)
+    }
+    if !self.defaultImageType.isEmpty {
+      try container.encode(self.defaultImageType, forKey: .defaultImageType)
+    }
+    if !self.validImageTypes.isEmpty {
+      try container.encode(self.validImageTypes, forKey: .validImageTypes)
+    }
+    if !self.validMasterVersions.isEmpty {
+      try container.encode(self.validMasterVersions, forKey: .validMasterVersions)
+    }
+    if !self.channels.isEmpty {
+      try container.encode(self.channels, forKey: .channels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -201,10 +213,18 @@ public struct ServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.channel, forKey: .channel)
-      try container.encode(self.defaultVersion, forKey: .defaultVersion)
-      try container.encode(self.validVersions, forKey: .validVersions)
-      try container.encode(self.upgradeTargetVersion, forKey: .upgradeTargetVersion)
+      if self.channel != ReleaseChannel.Channel() {
+        try container.encode(self.channel, forKey: .channel)
+      }
+      if !self.defaultVersion.isEmpty {
+        try container.encode(self.defaultVersion, forKey: .defaultVersion)
+      }
+      if !self.validVersions.isEmpty {
+        try container.encode(self.validVersions, forKey: .validVersions)
+      }
+      if !self.upgradeTargetVersion.isEmpty {
+        try container.encode(self.upgradeTargetVersion, forKey: .upgradeTargetVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

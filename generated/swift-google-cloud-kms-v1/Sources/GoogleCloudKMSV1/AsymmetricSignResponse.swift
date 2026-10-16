@@ -167,12 +167,22 @@ public struct AsymmetricSignResponse: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.signature, forKey: .signature)
+    if !self.signature.isEmpty {
+      try container.encode(self.signature, forKey: .signature)
+    }
     try container.encodeIfPresent(self.signatureCrc32C, forKey: .signatureCrc32C)
-    try container.encode(self.verifiedDigestCrc32C, forKey: .verifiedDigestCrc32C)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.verifiedDataCrc32C, forKey: .verifiedDataCrc32C)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    if self.verifiedDigestCrc32C {
+      try container.encode(self.verifiedDigestCrc32C, forKey: .verifiedDigestCrc32C)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.verifiedDataCrc32C {
+      try container.encode(self.verifiedDataCrc32C, forKey: .verifiedDataCrc32C)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

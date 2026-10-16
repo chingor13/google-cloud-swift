@@ -92,8 +92,12 @@ public struct CreateEndpointRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.endpointId, forKey: .endpointId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.endpointId.isEmpty {
+      try container.encode(self.endpointId, forKey: .endpointId)
+    }
     try container.encodeIfPresent(self.endpoint, forKey: .endpoint)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

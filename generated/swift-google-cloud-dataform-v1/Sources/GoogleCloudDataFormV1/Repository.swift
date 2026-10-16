@@ -200,20 +200,35 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.containingFolder, forKey: .containingFolder)
     try container.encodeIfPresent(self.teamFolderName, forKey: .teamFolderName)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.gitRemoteSettings, forKey: .gitRemoteSettings)
-    try container.encode(
-      self.npmrcEnvironmentVariablesSecretVersion, forKey: .npmrcEnvironmentVariablesSecretVersion)
+    if !self.npmrcEnvironmentVariablesSecretVersion.isEmpty {
+      try container.encode(
+        self.npmrcEnvironmentVariablesSecretVersion, forKey: .npmrcEnvironmentVariablesSecretVersion
+      )
+    }
     try container.encodeIfPresent(
       self.workspaceCompilationOverrides, forKey: .workspaceCompilationOverrides)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.setAuthenticatedUserAdmin, forKey: .setAuthenticatedUserAdmin)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.setAuthenticatedUserAdmin {
+      try container.encode(self.setAuthenticatedUserAdmin, forKey: .setAuthenticatedUserAdmin)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
     try container.encodeIfPresent(self.dataEncryptionState, forKey: .dataEncryptionState)
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)
     try container.encodeIfPresent(self.endUserAuthConfig, forKey: .endUserAuthConfig)
@@ -343,14 +358,24 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.url, forKey: .url)
-      try container.encode(self.defaultBranch, forKey: .defaultBranch)
-      try container.encode(self.effectiveDefaultBranch, forKey: .effectiveDefaultBranch)
-      try container.encode(
-        self.authenticationTokenSecretVersion, forKey: .authenticationTokenSecretVersion)
+      if !self.url.isEmpty {
+        try container.encode(self.url, forKey: .url)
+      }
+      if !self.defaultBranch.isEmpty {
+        try container.encode(self.defaultBranch, forKey: .defaultBranch)
+      }
+      if !self.effectiveDefaultBranch.isEmpty {
+        try container.encode(self.effectiveDefaultBranch, forKey: .effectiveDefaultBranch)
+      }
+      if !self.authenticationTokenSecretVersion.isEmpty {
+        try container.encode(
+          self.authenticationTokenSecretVersion, forKey: .authenticationTokenSecretVersion)
+      }
       try container.encodeIfPresent(self.sshAuthenticationConfig, forKey: .sshAuthenticationConfig)
       try container.encodeIfPresent(self.gitRepositoryLink, forKey: .gitRepositoryLink)
-      try container.encode(self.tokenStatus, forKey: .tokenStatus)
+      if self.tokenStatus != Repository.GitRemoteSettings.TokenStatus() {
+        try container.encode(self.tokenStatus, forKey: .tokenStatus)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -422,8 +447,13 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.userPrivateKeySecretVersion, forKey: .userPrivateKeySecretVersion)
-        try container.encode(self.hostPublicKey, forKey: .hostPublicKey)
+        if !self.userPrivateKeySecretVersion.isEmpty {
+          try container.encode(
+            self.userPrivateKeySecretVersion, forKey: .userPrivateKeySecretVersion)
+        }
+        if !self.hostPublicKey.isEmpty {
+          try container.encode(self.hostPublicKey, forKey: .hostPublicKey)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -668,9 +698,15 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.defaultDatabase, forKey: .defaultDatabase)
-      try container.encode(self.schemaSuffix, forKey: .schemaSuffix)
-      try container.encode(self.tablePrefix, forKey: .tablePrefix)
+      if !self.defaultDatabase.isEmpty {
+        try container.encode(self.defaultDatabase, forKey: .defaultDatabase)
+      }
+      if !self.schemaSuffix.isEmpty {
+        try container.encode(self.schemaSuffix, forKey: .schemaSuffix)
+      }
+      if !self.tablePrefix.isEmpty {
+        try container.encode(self.tablePrefix, forKey: .tablePrefix)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

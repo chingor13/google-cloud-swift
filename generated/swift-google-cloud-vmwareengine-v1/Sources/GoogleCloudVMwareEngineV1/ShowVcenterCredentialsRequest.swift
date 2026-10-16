@@ -94,8 +94,12 @@ public struct ShowVcenterCredentialsRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.privateCloud, forKey: .privateCloud)
-    try container.encode(self.username, forKey: .username)
+    if !self.privateCloud.isEmpty {
+      try container.encode(self.privateCloud, forKey: .privateCloud)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

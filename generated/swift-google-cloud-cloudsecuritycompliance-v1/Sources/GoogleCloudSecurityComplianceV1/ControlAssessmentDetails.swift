@@ -95,10 +95,18 @@ public struct ControlAssessmentDetails: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.passingControls, forKey: .passingControls)
-    try container.encode(self.failingControls, forKey: .failingControls)
-    try container.encode(self.assessedPassingControls, forKey: .assessedPassingControls)
-    try container.encode(self.notAssessedControls, forKey: .notAssessedControls)
+    if self.passingControls != 0 {
+      try container.encode(self.passingControls, forKey: .passingControls)
+    }
+    if self.failingControls != 0 {
+      try container.encode(self.failingControls, forKey: .failingControls)
+    }
+    if self.assessedPassingControls != 0 {
+      try container.encode(self.assessedPassingControls, forKey: .assessedPassingControls)
+    }
+    if self.notAssessedControls != 0 {
+      try container.encode(self.notAssessedControls, forKey: .notAssessedControls)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

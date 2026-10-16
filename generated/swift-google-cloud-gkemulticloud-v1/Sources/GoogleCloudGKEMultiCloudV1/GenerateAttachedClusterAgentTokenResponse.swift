@@ -81,9 +81,15 @@ public struct GenerateAttachedClusterAgentTokenResponse: Codable, Equatable, Goo
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.accessToken, forKey: .accessToken)
-    try container.encode(self.expiresIn, forKey: .expiresIn)
-    try container.encode(self.tokenType, forKey: .tokenType)
+    if !self.accessToken.isEmpty {
+      try container.encode(self.accessToken, forKey: .accessToken)
+    }
+    if self.expiresIn != 0 {
+      try container.encode(self.expiresIn, forKey: .expiresIn)
+    }
+    if !self.tokenType.isEmpty {
+      try container.encode(self.tokenType, forKey: .tokenType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -374,7 +374,9 @@ public struct PrivacyMetric: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.quasiIds, forKey: .quasiIds)
+      if !self.quasiIds.isEmpty {
+        try container.encode(self.quasiIds, forKey: .quasiIds)
+      }
       try container.encodeIfPresent(self.entityId, forKey: .entityId)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -464,7 +466,9 @@ public struct PrivacyMetric: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.quasiIds, forKey: .quasiIds)
+      if !self.quasiIds.isEmpty {
+        try container.encode(self.quasiIds, forKey: .quasiIds)
+      }
       try container.encodeIfPresent(self.sensitiveAttribute, forKey: .sensitiveAttribute)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -575,9 +579,15 @@ public struct PrivacyMetric: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.quasiIds, forKey: .quasiIds)
-      try container.encode(self.regionCode, forKey: .regionCode)
-      try container.encode(self.auxiliaryTables, forKey: .auxiliaryTables)
+      if !self.quasiIds.isEmpty {
+        try container.encode(self.quasiIds, forKey: .quasiIds)
+      }
+      if !self.regionCode.isEmpty {
+        try container.encode(self.regionCode, forKey: .regionCode)
+      }
+      if !self.auxiliaryTables.isEmpty {
+        try container.encode(self.auxiliaryTables, forKey: .auxiliaryTables)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -800,7 +810,9 @@ public struct PrivacyMetric: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.table, forKey: .table)
-        try container.encode(self.quasiIds, forKey: .quasiIds)
+        if !self.quasiIds.isEmpty {
+          try container.encode(self.quasiIds, forKey: .quasiIds)
+        }
         try container.encodeIfPresent(self.relativeFrequency, forKey: .relativeFrequency)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -867,7 +879,9 @@ public struct PrivacyMetric: Codable, Equatable, GoogleWKT._AnyPackable,
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.field, forKey: .field)
-          try container.encode(self.customTag, forKey: .customTag)
+          if !self.customTag.isEmpty {
+            try container.encode(self.customTag, forKey: .customTag)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1019,9 +1033,15 @@ public struct PrivacyMetric: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.quasiIds, forKey: .quasiIds)
-      try container.encode(self.regionCode, forKey: .regionCode)
-      try container.encode(self.auxiliaryTables, forKey: .auxiliaryTables)
+      if !self.quasiIds.isEmpty {
+        try container.encode(self.quasiIds, forKey: .quasiIds)
+      }
+      if !self.regionCode.isEmpty {
+        try container.encode(self.regionCode, forKey: .regionCode)
+      }
+      if !self.auxiliaryTables.isEmpty {
+        try container.encode(self.auxiliaryTables, forKey: .auxiliaryTables)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

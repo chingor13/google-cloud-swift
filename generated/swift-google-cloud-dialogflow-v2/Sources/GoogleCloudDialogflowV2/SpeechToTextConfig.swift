@@ -206,16 +206,34 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.speechModelVariant, forKey: .speechModelVariant)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.phraseSets, forKey: .phraseSets)
-      try container.encode(self.audioEncoding, forKey: .audioEncoding)
-      try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
-      try container.encode(self.languageCode, forKey: .languageCode)
-      try container.encode(self.enableWordInfo, forKey: .enableWordInfo)
-      try container.encode(self.useTimeoutBasedEndpointing, forKey: .useTimeoutBasedEndpointing)
+      if self.speechModelVariant != SpeechModelVariant() {
+        try container.encode(self.speechModelVariant, forKey: .speechModelVariant)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.phraseSets.isEmpty {
+        try container.encode(self.phraseSets, forKey: .phraseSets)
+      }
+      if self.audioEncoding != AudioEncoding() {
+        try container.encode(self.audioEncoding, forKey: .audioEncoding)
+      }
+      if self.sampleRateHertz != 0 {
+        try container.encode(self.sampleRateHertz, forKey: .sampleRateHertz)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
+      if self.enableWordInfo {
+        try container.encode(self.enableWordInfo, forKey: .enableWordInfo)
+      }
+      if self.useTimeoutBasedEndpointing {
+        try container.encode(self.useTimeoutBasedEndpointing, forKey: .useTimeoutBasedEndpointing)
+      }
       try container.encodeIfPresent(self.geminiAsrConfig, forKey: .geminiAsrConfig)
-      try container.encode(self.useGeminiAsr, forKey: .useGeminiAsr)
+      if self.useGeminiAsr {
+        try container.encode(self.useGeminiAsr, forKey: .useGeminiAsr)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -318,11 +336,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.modelId, forKey: .modelId)
-        try container.encode(self.silenceDurationMs, forKey: .silenceDurationMs)
-        try container.encode(self.prefixPaddingMs, forKey: .prefixPaddingMs)
-        try container.encode(self.startOfSpeechSensitivity, forKey: .startOfSpeechSensitivity)
-        try container.encode(self.endOfSpeechSensitivity, forKey: .endOfSpeechSensitivity)
+        if !self.modelId.isEmpty {
+          try container.encode(self.modelId, forKey: .modelId)
+        }
+        if self.silenceDurationMs != 0 {
+          try container.encode(self.silenceDurationMs, forKey: .silenceDurationMs)
+        }
+        if self.prefixPaddingMs != 0 {
+          try container.encode(self.prefixPaddingMs, forKey: .prefixPaddingMs)
+        }
+        if self.startOfSpeechSensitivity != SpeechToTextConfig.GeminiAsrConfig.StartSensitivity() {
+          try container.encode(self.startOfSpeechSensitivity, forKey: .startOfSpeechSensitivity)
+        }
+        if self.endOfSpeechSensitivity != SpeechToTextConfig.GeminiAsrConfig.EndSensitivity() {
+          try container.encode(self.endOfSpeechSensitivity, forKey: .endOfSpeechSensitivity)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

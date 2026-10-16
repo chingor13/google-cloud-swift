@@ -87,9 +87,15 @@ public struct CloudStorageResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.vttFormatUri, forKey: .vttFormatUri)
-    try container.encode(self.srtFormatUri, forKey: .srtFormatUri)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.vttFormatUri.isEmpty {
+      try container.encode(self.vttFormatUri, forKey: .vttFormatUri)
+    }
+    if !self.srtFormatUri.isEmpty {
+      try container.encode(self.srtFormatUri, forKey: .srtFormatUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

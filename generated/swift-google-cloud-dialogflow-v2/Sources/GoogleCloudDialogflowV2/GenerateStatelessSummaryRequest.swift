@@ -105,8 +105,12 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.statelessConversation, forKey: .statelessConversation)
       try container.encodeIfPresent(self.conversationProfile, forKey: .conversationProfile)
-      try container.encode(self.latestMessage, forKey: .latestMessage)
-      try container.encode(self.maxContextSize, forKey: .maxContextSize)
+      if !self.latestMessage.isEmpty {
+        try container.encode(self.latestMessage, forKey: .latestMessage)
+      }
+      if self.maxContextSize != 0 {
+        try container.encode(self.maxContextSize, forKey: .maxContextSize)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -180,8 +184,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.messages, forKey: .messages)
-        try container.encode(self.parent, forKey: .parent)
+        if !self.messages.isEmpty {
+          try container.encode(self.messages, forKey: .messages)
+        }
+        if !self.parent.isEmpty {
+          try container.encode(self.parent, forKey: .parent)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

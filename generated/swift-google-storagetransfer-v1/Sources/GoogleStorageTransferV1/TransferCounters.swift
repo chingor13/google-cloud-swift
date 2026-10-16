@@ -283,32 +283,75 @@ public struct TransferCounters: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.objectsFoundFromSource, forKey: .objectsFoundFromSource)
-    try container.encode(self.bytesFoundFromSource, forKey: .bytesFoundFromSource)
-    try container.encode(self.objectsFoundOnlyFromSink, forKey: .objectsFoundOnlyFromSink)
-    try container.encode(self.bytesFoundOnlyFromSink, forKey: .bytesFoundOnlyFromSink)
-    try container.encode(
-      self.objectsFromSourceSkippedBySync, forKey: .objectsFromSourceSkippedBySync)
-    try container.encode(self.bytesFromSourceSkippedBySync, forKey: .bytesFromSourceSkippedBySync)
-    try container.encode(self.objectsCopiedToSink, forKey: .objectsCopiedToSink)
-    try container.encode(self.bytesCopiedToSink, forKey: .bytesCopiedToSink)
-    try container.encode(self.objectsDeletedFromSource, forKey: .objectsDeletedFromSource)
-    try container.encode(self.bytesDeletedFromSource, forKey: .bytesDeletedFromSource)
-    try container.encode(self.objectsDeletedFromSink, forKey: .objectsDeletedFromSink)
-    try container.encode(self.bytesDeletedFromSink, forKey: .bytesDeletedFromSink)
-    try container.encode(self.objectsFromSourceFailed, forKey: .objectsFromSourceFailed)
-    try container.encode(self.bytesFromSourceFailed, forKey: .bytesFromSourceFailed)
-    try container.encode(self.objectsFailedToDeleteFromSink, forKey: .objectsFailedToDeleteFromSink)
-    try container.encode(self.bytesFailedToDeleteFromSink, forKey: .bytesFailedToDeleteFromSink)
-    try container.encode(self.directoriesFoundFromSource, forKey: .directoriesFoundFromSource)
-    try container.encode(
-      self.directoriesFailedToListFromSource, forKey: .directoriesFailedToListFromSource)
-    try container.encode(
-      self.directoriesSuccessfullyListedFromSource, forKey: .directoriesSuccessfullyListedFromSource
-    )
-    try container.encode(self.intermediateObjectsCleanedUp, forKey: .intermediateObjectsCleanedUp)
-    try container.encode(
-      self.intermediateObjectsFailedCleanedUp, forKey: .intermediateObjectsFailedCleanedUp)
+    if self.objectsFoundFromSource != 0 {
+      try container.encode(self.objectsFoundFromSource, forKey: .objectsFoundFromSource)
+    }
+    if self.bytesFoundFromSource != 0 {
+      try container.encode(self.bytesFoundFromSource, forKey: .bytesFoundFromSource)
+    }
+    if self.objectsFoundOnlyFromSink != 0 {
+      try container.encode(self.objectsFoundOnlyFromSink, forKey: .objectsFoundOnlyFromSink)
+    }
+    if self.bytesFoundOnlyFromSink != 0 {
+      try container.encode(self.bytesFoundOnlyFromSink, forKey: .bytesFoundOnlyFromSink)
+    }
+    if self.objectsFromSourceSkippedBySync != 0 {
+      try container.encode(
+        self.objectsFromSourceSkippedBySync, forKey: .objectsFromSourceSkippedBySync)
+    }
+    if self.bytesFromSourceSkippedBySync != 0 {
+      try container.encode(self.bytesFromSourceSkippedBySync, forKey: .bytesFromSourceSkippedBySync)
+    }
+    if self.objectsCopiedToSink != 0 {
+      try container.encode(self.objectsCopiedToSink, forKey: .objectsCopiedToSink)
+    }
+    if self.bytesCopiedToSink != 0 {
+      try container.encode(self.bytesCopiedToSink, forKey: .bytesCopiedToSink)
+    }
+    if self.objectsDeletedFromSource != 0 {
+      try container.encode(self.objectsDeletedFromSource, forKey: .objectsDeletedFromSource)
+    }
+    if self.bytesDeletedFromSource != 0 {
+      try container.encode(self.bytesDeletedFromSource, forKey: .bytesDeletedFromSource)
+    }
+    if self.objectsDeletedFromSink != 0 {
+      try container.encode(self.objectsDeletedFromSink, forKey: .objectsDeletedFromSink)
+    }
+    if self.bytesDeletedFromSink != 0 {
+      try container.encode(self.bytesDeletedFromSink, forKey: .bytesDeletedFromSink)
+    }
+    if self.objectsFromSourceFailed != 0 {
+      try container.encode(self.objectsFromSourceFailed, forKey: .objectsFromSourceFailed)
+    }
+    if self.bytesFromSourceFailed != 0 {
+      try container.encode(self.bytesFromSourceFailed, forKey: .bytesFromSourceFailed)
+    }
+    if self.objectsFailedToDeleteFromSink != 0 {
+      try container.encode(
+        self.objectsFailedToDeleteFromSink, forKey: .objectsFailedToDeleteFromSink)
+    }
+    if self.bytesFailedToDeleteFromSink != 0 {
+      try container.encode(self.bytesFailedToDeleteFromSink, forKey: .bytesFailedToDeleteFromSink)
+    }
+    if self.directoriesFoundFromSource != 0 {
+      try container.encode(self.directoriesFoundFromSource, forKey: .directoriesFoundFromSource)
+    }
+    if self.directoriesFailedToListFromSource != 0 {
+      try container.encode(
+        self.directoriesFailedToListFromSource, forKey: .directoriesFailedToListFromSource)
+    }
+    if self.directoriesSuccessfullyListedFromSource != 0 {
+      try container.encode(
+        self.directoriesSuccessfullyListedFromSource,
+        forKey: .directoriesSuccessfullyListedFromSource)
+    }
+    if self.intermediateObjectsCleanedUp != 0 {
+      try container.encode(self.intermediateObjectsCleanedUp, forKey: .intermediateObjectsCleanedUp)
+    }
+    if self.intermediateObjectsFailedCleanedUp != 0 {
+      try container.encode(
+        self.intermediateObjectsFailedCleanedUp, forKey: .intermediateObjectsFailedCleanedUp)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

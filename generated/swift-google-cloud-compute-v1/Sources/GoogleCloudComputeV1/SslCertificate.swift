@@ -213,7 +213,9 @@
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfManaged, forKey: .selfManaged)
-      try container.encode(self.subjectAlternativeNames, forKey: .subjectAlternativeNames)
+      if !self.subjectAlternativeNames.isEmpty {
+        try container.encode(self.subjectAlternativeNames, forKey: .subjectAlternativeNames)
+      }
       try container.encodeIfPresent(self.type, forKey: .type)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -183,19 +183,41 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.turns, forKey: .turns)
-    try container.encode(self.turnCount, forKey: .turnCount)
-    try container.encode(self.channelType, forKey: .channelType)
-    try container.encode(self.source, forKey: .source)
-    try container.encode(self.inputTypes, forKey: .inputTypes)
-    try container.encode(self.entryAgent, forKey: .entryAgent)
-    try container.encode(self.deployment, forKey: .deployment)
-    try container.encode(self.appVersion, forKey: .appVersion)
-    try container.encode(self.languageCode, forKey: .languageCode)
-    try container.encode(self.messages, forKey: .messages)
+    if !self.turns.isEmpty {
+      try container.encode(self.turns, forKey: .turns)
+    }
+    if self.turnCount != 0 {
+      try container.encode(self.turnCount, forKey: .turnCount)
+    }
+    if self.channelType != Conversation.ChannelType() {
+      try container.encode(self.channelType, forKey: .channelType)
+    }
+    if self.source != Conversation.Source() {
+      try container.encode(self.source, forKey: .source)
+    }
+    if !self.inputTypes.isEmpty {
+      try container.encode(self.inputTypes, forKey: .inputTypes)
+    }
+    if !self.entryAgent.isEmpty {
+      try container.encode(self.entryAgent, forKey: .entryAgent)
+    }
+    if !self.deployment.isEmpty {
+      try container.encode(self.deployment, forKey: .deployment)
+    }
+    if !self.appVersion.isEmpty {
+      try container.encode(self.appVersion, forKey: .appVersion)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
+    if !self.messages.isEmpty {
+      try container.encode(self.messages, forKey: .messages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -260,7 +282,9 @@ public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.messages, forKey: .messages)
+      if !self.messages.isEmpty {
+        try container.encode(self.messages, forKey: .messages)
+      }
       try container.encodeIfPresent(self.rootSpan, forKey: .rootSpan)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

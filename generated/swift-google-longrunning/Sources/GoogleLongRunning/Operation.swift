@@ -120,9 +120,13 @@ public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.done, forKey: .done)
+    if self.done {
+      try container.encode(self.done, forKey: .done)
+    }
 
     if let choice = self.result {
       switch choice {

@@ -285,18 +285,28 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.advertiseMode, forKey: .advertiseMode)
-      try container.encode(self.advertisedGroups, forKey: .advertisedGroups)
-      try container.encode(self.advertisedIpRanges, forKey: .advertisedIpRanges)
+      if !self.advertisedGroups.isEmpty {
+        try container.encode(self.advertisedGroups, forKey: .advertisedGroups)
+      }
+      if !self.advertisedIpRanges.isEmpty {
+        try container.encode(self.advertisedIpRanges, forKey: .advertisedIpRanges)
+      }
       try container.encodeIfPresent(self.advertisedRoutePriority, forKey: .advertisedRoutePriority)
       try container.encodeIfPresent(self.bfd, forKey: .bfd)
-      try container.encode(self.customLearnedIpRanges, forKey: .customLearnedIpRanges)
+      if !self.customLearnedIpRanges.isEmpty {
+        try container.encode(self.customLearnedIpRanges, forKey: .customLearnedIpRanges)
+      }
       try container.encodeIfPresent(
         self.customLearnedRoutePriority, forKey: .customLearnedRoutePriority)
       try container.encodeIfPresent(self.enable, forKey: .enable)
       try container.encodeIfPresent(self.enableIpv4, forKey: .enableIpv4)
       try container.encodeIfPresent(self.enableIpv6, forKey: .enableIpv6)
-      try container.encode(self.exportPolicies, forKey: .exportPolicies)
-      try container.encode(self.importPolicies, forKey: .importPolicies)
+      if !self.exportPolicies.isEmpty {
+        try container.encode(self.exportPolicies, forKey: .exportPolicies)
+      }
+      if !self.importPolicies.isEmpty {
+        try container.encode(self.importPolicies, forKey: .importPolicies)
+      }
       try container.encodeIfPresent(self.interfaceName, forKey: .interfaceName)
       try container.encodeIfPresent(self.ipAddress, forKey: .ipAddress)
       try container.encodeIfPresent(self.ipv4NexthopAddress, forKey: .ipv4NexthopAddress)

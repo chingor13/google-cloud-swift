@@ -82,8 +82,12 @@ public struct LoggingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.logActions, forKey: .logActions)
-    try container.encode(self.logActionStates, forKey: .logActionStates)
+    if !self.logActions.isEmpty {
+      try container.encode(self.logActions, forKey: .logActions)
+    }
+    if !self.logActionStates.isEmpty {
+      try container.encode(self.logActionStates, forKey: .logActionStates)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

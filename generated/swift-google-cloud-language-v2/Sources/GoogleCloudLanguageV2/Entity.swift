@@ -110,10 +110,18 @@ public struct Entity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.metadata, forKey: .metadata)
-    try container.encode(self.mentions, forKey: .mentions)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.type != Entity.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
+    if !self.mentions.isEmpty {
+      try container.encode(self.mentions, forKey: .mentions)
+    }
     try container.encodeIfPresent(self.sentiment, forKey: .sentiment)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

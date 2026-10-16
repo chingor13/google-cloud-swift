@@ -128,14 +128,26 @@ public struct ExternalAddress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.internalIp, forKey: .internalIp)
-    try container.encode(self.externalIp, forKey: .externalIp)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.description, forKey: .description)
+    if !self.internalIp.isEmpty {
+      try container.encode(self.internalIp, forKey: .internalIp)
+    }
+    if !self.externalIp.isEmpty {
+      try container.encode(self.externalIp, forKey: .externalIp)
+    }
+    if self.state != ExternalAddress.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

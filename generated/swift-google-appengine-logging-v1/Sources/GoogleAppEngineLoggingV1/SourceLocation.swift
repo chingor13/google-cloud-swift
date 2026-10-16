@@ -91,9 +91,15 @@ public struct SourceLocation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.file, forKey: .file)
-    try container.encode(self.line, forKey: .line)
-    try container.encode(self.functionName, forKey: .functionName)
+    if !self.file.isEmpty {
+      try container.encode(self.file, forKey: .file)
+    }
+    if self.line != 0 {
+      try container.encode(self.line, forKey: .line)
+    }
+    if !self.functionName.isEmpty {
+      try container.encode(self.functionName, forKey: .functionName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

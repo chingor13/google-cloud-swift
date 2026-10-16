@@ -95,9 +95,13 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.governedContainers, forKey: .governedContainers)
+    if !self.governedContainers.isEmpty {
+      try container.encode(self.governedContainers, forKey: .governedContainers)
+    }
     try container.encodeIfPresent(self.constraint, forKey: .constraint)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -243,14 +247,28 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fullResourceName, forKey: .fullResourceName)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.fullResourceName.isEmpty {
+        try container.encode(self.fullResourceName, forKey: .fullResourceName)
+      }
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.consolidatedPolicy, forKey: .consolidatedPolicy)
-      try container.encode(self.policyBundle, forKey: .policyBundle)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.folders, forKey: .folders)
-      try container.encode(self.organization, forKey: .organization)
-      try container.encode(self.effectiveTags, forKey: .effectiveTags)
+      if !self.policyBundle.isEmpty {
+        try container.encode(self.policyBundle, forKey: .policyBundle)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.folders.isEmpty {
+        try container.encode(self.folders, forKey: .folders)
+      }
+      if !self.organization.isEmpty {
+        try container.encode(self.organization, forKey: .organization)
+      }
+      if !self.effectiveTags.isEmpty {
+        try container.encode(self.effectiveTags, forKey: .effectiveTags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

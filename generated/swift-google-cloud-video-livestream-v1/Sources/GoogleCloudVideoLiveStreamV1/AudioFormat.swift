@@ -85,9 +85,15 @@ public struct AudioFormat: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.codec, forKey: .codec)
-    try container.encode(self.channelCount, forKey: .channelCount)
-    try container.encode(self.channelLayout, forKey: .channelLayout)
+    if !self.codec.isEmpty {
+      try container.encode(self.codec, forKey: .codec)
+    }
+    if self.channelCount != 0 {
+      try container.encode(self.channelCount, forKey: .channelCount)
+    }
+    if !self.channelLayout.isEmpty {
+      try container.encode(self.channelLayout, forKey: .channelLayout)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

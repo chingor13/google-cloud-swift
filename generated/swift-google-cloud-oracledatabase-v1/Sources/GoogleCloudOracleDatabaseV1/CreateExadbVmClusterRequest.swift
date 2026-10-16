@@ -108,10 +108,16 @@ public struct CreateExadbVmClusterRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.exadbVmClusterId, forKey: .exadbVmClusterId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.exadbVmClusterId.isEmpty {
+      try container.encode(self.exadbVmClusterId, forKey: .exadbVmClusterId)
+    }
     try container.encodeIfPresent(self.exadbVmCluster, forKey: .exadbVmCluster)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

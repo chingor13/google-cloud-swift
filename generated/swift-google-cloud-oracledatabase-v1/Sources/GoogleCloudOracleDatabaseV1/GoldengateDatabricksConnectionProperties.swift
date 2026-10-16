@@ -147,12 +147,26 @@ public struct GoldengateDatabricksConnectionProperties: Codable, Equatable, Goog
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.authenticationType, forKey: .authenticationType)
-    try container.encode(self.connectionUrl, forKey: .connectionUrl)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
-    try container.encode(self.storageCredential, forKey: .storageCredential)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if self.authenticationType
+      != GoldengateDatabricksConnectionProperties.DatabricksAuthenticationType()
+    {
+      try container.encode(self.authenticationType, forKey: .authenticationType)
+    }
+    if !self.connectionUrl.isEmpty {
+      try container.encode(self.connectionUrl, forKey: .connectionUrl)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
+    if !self.storageCredential.isEmpty {
+      try container.encode(self.storageCredential, forKey: .storageCredential)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

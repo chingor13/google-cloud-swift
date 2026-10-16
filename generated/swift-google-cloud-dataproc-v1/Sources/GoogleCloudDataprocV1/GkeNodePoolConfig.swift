@@ -96,7 +96,9 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.locations, forKey: .locations)
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
     try container.encodeIfPresent(self.autoscaling, forKey: .autoscaling)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -240,13 +242,27 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.machineType, forKey: .machineType)
-      try container.encode(self.localSsdCount, forKey: .localSsdCount)
-      try container.encode(self.preemptible, forKey: .preemptible)
-      try container.encode(self.accelerators, forKey: .accelerators)
-      try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
-      try container.encode(self.bootDiskKmsKey, forKey: .bootDiskKmsKey)
-      try container.encode(self.spot, forKey: .spot)
+      if !self.machineType.isEmpty {
+        try container.encode(self.machineType, forKey: .machineType)
+      }
+      if self.localSsdCount != 0 {
+        try container.encode(self.localSsdCount, forKey: .localSsdCount)
+      }
+      if self.preemptible {
+        try container.encode(self.preemptible, forKey: .preemptible)
+      }
+      if !self.accelerators.isEmpty {
+        try container.encode(self.accelerators, forKey: .accelerators)
+      }
+      if !self.minCpuPlatform.isEmpty {
+        try container.encode(self.minCpuPlatform, forKey: .minCpuPlatform)
+      }
+      if !self.bootDiskKmsKey.isEmpty {
+        try container.encode(self.bootDiskKmsKey, forKey: .bootDiskKmsKey)
+      }
+      if self.spot {
+        try container.encode(self.spot, forKey: .spot)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -345,9 +361,15 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.acceleratorCount, forKey: .acceleratorCount)
-      try container.encode(self.acceleratorType, forKey: .acceleratorType)
-      try container.encode(self.gpuPartitionSize, forKey: .gpuPartitionSize)
+      if self.acceleratorCount != 0 {
+        try container.encode(self.acceleratorCount, forKey: .acceleratorCount)
+      }
+      if !self.acceleratorType.isEmpty {
+        try container.encode(self.acceleratorType, forKey: .acceleratorType)
+      }
+      if !self.gpuPartitionSize.isEmpty {
+        try container.encode(self.gpuPartitionSize, forKey: .gpuPartitionSize)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -440,8 +462,12 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.minNodeCount, forKey: .minNodeCount)
-      try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
+      if self.minNodeCount != 0 {
+        try container.encode(self.minNodeCount, forKey: .minNodeCount)
+      }
+      if self.maxNodeCount != 0 {
+        try container.encode(self.maxNodeCount, forKey: .maxNodeCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

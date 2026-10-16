@@ -96,10 +96,18 @@ public struct ConfigureExascaleCloudExadataInfrastructureRequest: Codable, Equat
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.totalStorageSizeGb, forKey: .totalStorageSizeGb)
-    try container.encode(self.totalVmStorageSizeGb, forKey: .totalVmStorageSizeGb)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.totalStorageSizeGb != 0 {
+      try container.encode(self.totalStorageSizeGb, forKey: .totalStorageSizeGb)
+    }
+    if self.totalVmStorageSizeGb != 0 {
+      try container.encode(self.totalVmStorageSizeGb, forKey: .totalVmStorageSizeGb)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

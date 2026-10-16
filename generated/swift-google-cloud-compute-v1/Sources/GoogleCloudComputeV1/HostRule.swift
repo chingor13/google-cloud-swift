@@ -94,7 +94,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.hosts, forKey: .hosts)
+      if !self.hosts.isEmpty {
+        try container.encode(self.hosts, forKey: .hosts)
+      }
       try container.encodeIfPresent(self.pathMatcher, forKey: .pathMatcher)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

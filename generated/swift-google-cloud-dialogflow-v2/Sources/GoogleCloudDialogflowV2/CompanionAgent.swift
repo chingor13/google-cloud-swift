@@ -134,14 +134,26 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.toolsetTools, forKey: .toolsetTools)
-      try container.encode(self.cesToolSpecs, forKey: .cesToolSpecs)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.skillConfigs, forKey: .skillConfigs)
+      if !self.toolsetTools.isEmpty {
+        try container.encode(self.toolsetTools, forKey: .toolsetTools)
+      }
+      if !self.cesToolSpecs.isEmpty {
+        try container.encode(self.cesToolSpecs, forKey: .cesToolSpecs)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.skillConfigs.isEmpty {
+        try container.encode(self.skillConfigs, forKey: .skillConfigs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -231,7 +243,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.skillTriggeringEvent, forKey: .skillTriggeringEvent)
+        if self.skillTriggeringEvent != CompanionAgent.SkillConfig.SkillTriggerEvent() {
+          try container.encode(self.skillTriggeringEvent, forKey: .skillTriggeringEvent)
+        }
 
         if let choice = self.config {
           switch choice {
@@ -472,8 +486,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.guidanceInstructions, forKey: .guidanceInstructions)
-        try container.encode(self.overarchingGuidance, forKey: .overarchingGuidance)
+        if !self.guidanceInstructions.isEmpty {
+          try container.encode(self.guidanceInstructions, forKey: .guidanceInstructions)
+        }
+        if !self.overarchingGuidance.isEmpty {
+          try container.encode(self.overarchingGuidance, forKey: .overarchingGuidance)
+        }
         try container.encodeIfPresent(self.knowledgeSource, forKey: .knowledgeSource)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -636,8 +654,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.agentLanguageCode, forKey: .agentLanguageCode)
-        try container.encode(self.customerLanguageCode, forKey: .customerLanguageCode)
+        if !self.agentLanguageCode.isEmpty {
+          try container.encode(self.agentLanguageCode, forKey: .agentLanguageCode)
+        }
+        if !self.customerLanguageCode.isEmpty {
+          try container.encode(self.customerLanguageCode, forKey: .customerLanguageCode)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

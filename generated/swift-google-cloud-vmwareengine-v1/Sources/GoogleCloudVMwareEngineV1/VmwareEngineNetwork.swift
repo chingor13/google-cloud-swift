@@ -143,15 +143,29 @@ public struct VmwareEngineNetwork: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.vpcNetworks, forKey: .vpcNetworks)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.vpcNetworks.isEmpty {
+      try container.encode(self.vpcNetworks, forKey: .vpcNetworks)
+    }
+    if self.state != VmwareEngineNetwork.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.type != VmwareEngineNetwork.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -223,8 +237,12 @@ public struct VmwareEngineNetwork: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.network, forKey: .network)
+      if self.type != VmwareEngineNetwork.VpcNetwork.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

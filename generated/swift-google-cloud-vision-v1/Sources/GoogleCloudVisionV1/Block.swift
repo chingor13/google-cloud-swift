@@ -119,9 +119,15 @@ public struct Block: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.property, forKey: .property)
     try container.encodeIfPresent(self.boundingBox, forKey: .boundingBox)
-    try container.encode(self.paragraphs, forKey: .paragraphs)
-    try container.encode(self.blockType, forKey: .blockType)
-    try container.encode(self.confidence, forKey: .confidence)
+    if !self.paragraphs.isEmpty {
+      try container.encode(self.paragraphs, forKey: .paragraphs)
+    }
+    if self.blockType != Block.BlockType() {
+      try container.encode(self.blockType, forKey: .blockType)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

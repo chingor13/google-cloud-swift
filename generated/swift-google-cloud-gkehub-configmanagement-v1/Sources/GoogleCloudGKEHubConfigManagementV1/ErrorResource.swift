@@ -91,9 +91,15 @@ public struct ErrorResource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourcePath, forKey: .sourcePath)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.resourceNamespace, forKey: .resourceNamespace)
+    if !self.sourcePath.isEmpty {
+      try container.encode(self.sourcePath, forKey: .sourcePath)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.resourceNamespace.isEmpty {
+      try container.encode(self.resourceNamespace, forKey: .resourceNamespace)
+    }
     try container.encodeIfPresent(self.resourceGvk, forKey: .resourceGvk)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -143,15 +143,27 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.nodeLocation, forKey: .nodeLocation)
-    try container.encode(self.nodeCount, forKey: .nodeCount)
-    try container.encode(self.machineFilter, forKey: .machineFilter)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.nodeLocation.isEmpty {
+      try container.encode(self.nodeLocation, forKey: .nodeLocation)
+    }
+    if self.nodeCount != 0 {
+      try container.encode(self.nodeCount, forKey: .nodeCount)
+    }
+    if !self.machineFilter.isEmpty {
+      try container.encode(self.machineFilter, forKey: .machineFilter)
+    }
     try container.encodeIfPresent(self.localDiskEncryption, forKey: .localDiskEncryption)
-    try container.encode(self.nodeVersion, forKey: .nodeVersion)
+    if !self.nodeVersion.isEmpty {
+      try container.encode(self.nodeVersion, forKey: .nodeVersion)
+    }
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -251,11 +263,19 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kmsKey, forKey: .kmsKey)
-      try container.encode(self.kmsKeyActiveVersion, forKey: .kmsKeyActiveVersion)
-      try container.encode(self.kmsKeyState, forKey: .kmsKeyState)
+      if !self.kmsKey.isEmpty {
+        try container.encode(self.kmsKey, forKey: .kmsKey)
+      }
+      if !self.kmsKeyActiveVersion.isEmpty {
+        try container.encode(self.kmsKeyActiveVersion, forKey: .kmsKeyActiveVersion)
+      }
+      if self.kmsKeyState != KmsKeyState() {
+        try container.encode(self.kmsKeyState, forKey: .kmsKeyState)
+      }
       try container.encodeIfPresent(self.kmsStatus, forKey: .kmsStatus)
-      try container.encode(self.resourceState, forKey: .resourceState)
+      if self.resourceState != ResourceState() {
+        try container.encode(self.resourceState, forKey: .resourceState)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -349,8 +369,12 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.nodeStorageSchema, forKey: .nodeStorageSchema)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.nodeStorageSchema.isEmpty {
+        try container.encode(self.nodeStorageSchema, forKey: .nodeStorageSchema)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

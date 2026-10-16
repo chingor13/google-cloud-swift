@@ -159,16 +159,28 @@ public struct EngineConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.engineVersion, forKey: .engineVersion)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != EngineConfig.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.engineVersion.isEmpty {
+      try container.encode(self.engineVersion, forKey: .engineVersion)
+    }
     try container.encodeIfPresent(self.tuning, forKey: .tuning)
     try container.encodeIfPresent(self.performanceTarget, forKey: .performanceTarget)
-    try container.encode(self.lineOfBusiness, forKey: .lineOfBusiness)
-    try container.encode(self.hyperparameterSourceType, forKey: .hyperparameterSourceType)
+    if self.lineOfBusiness != LineOfBusiness() {
+      try container.encode(self.lineOfBusiness, forKey: .lineOfBusiness)
+    }
+    if self.hyperparameterSourceType != EngineConfig.HyperparameterSourceType() {
+      try container.encode(self.hyperparameterSourceType, forKey: .hyperparameterSourceType)
+    }
     try container.encodeIfPresent(self.hyperparameterSource, forKey: .hyperparameterSource)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -239,7 +251,9 @@ public struct EngineConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.primaryDataset, forKey: .primaryDataset)
+      if !self.primaryDataset.isEmpty {
+        try container.encode(self.primaryDataset, forKey: .primaryDataset)
+      }
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -329,8 +343,10 @@ public struct EngineConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.partyInvestigationsPerPeriodHint, forKey: .partyInvestigationsPerPeriodHint)
+      if self.partyInvestigationsPerPeriodHint != 0 {
+        try container.encode(
+          self.partyInvestigationsPerPeriodHint, forKey: .partyInvestigationsPerPeriodHint)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -424,8 +440,12 @@ public struct EngineConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceEngineConfig, forKey: .sourceEngineConfig)
-      try container.encode(self.sourceEngineVersion, forKey: .sourceEngineVersion)
+      if !self.sourceEngineConfig.isEmpty {
+        try container.encode(self.sourceEngineConfig, forKey: .sourceEngineConfig)
+      }
+      if !self.sourceEngineVersion.isEmpty {
+        try container.encode(self.sourceEngineVersion, forKey: .sourceEngineVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -79,8 +79,12 @@ public struct VpcPeeringConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vpc, forKey: .vpc)
-    try container.encode(self.subnet, forKey: .subnet)
+    if !self.vpc.isEmpty {
+      try container.encode(self.vpc, forKey: .vpc)
+    }
+    if !self.subnet.isEmpty {
+      try container.encode(self.subnet, forKey: .subnet)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

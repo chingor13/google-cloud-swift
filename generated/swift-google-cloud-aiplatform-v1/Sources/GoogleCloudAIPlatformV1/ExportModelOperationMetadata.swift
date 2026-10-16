@@ -155,8 +155,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.artifactOutputUri, forKey: .artifactOutputUri)
-        try container.encode(self.imageOutputUri, forKey: .imageOutputUri)
+        if !self.artifactOutputUri.isEmpty {
+          try container.encode(self.artifactOutputUri, forKey: .artifactOutputUri)
+        }
+        if !self.imageOutputUri.isEmpty {
+          try container.encode(self.imageOutputUri, forKey: .imageOutputUri)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

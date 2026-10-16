@@ -97,8 +97,12 @@ public struct RRSetRoutingPolicyGeoPolicyGeoPolicyItem: Codable, Equatable, Goog
     try container.encodeIfPresent(self.healthCheckedTargets, forKey: .healthCheckedTargets)
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.location, forKey: .location)
-    try container.encode(self.rrdatas, forKey: .rrdatas)
-    try container.encode(self.signatureRrdatas, forKey: .signatureRrdatas)
+    if !self.rrdatas.isEmpty {
+      try container.encode(self.rrdatas, forKey: .rrdatas)
+    }
+    if !self.signatureRrdatas.isEmpty {
+      try container.encode(self.signatureRrdatas, forKey: .signatureRrdatas)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

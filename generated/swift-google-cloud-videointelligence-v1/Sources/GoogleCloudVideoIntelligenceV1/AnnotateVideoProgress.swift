@@ -73,7 +73,9 @@ public struct AnnotateVideoProgress: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.annotationProgress, forKey: .annotationProgress)
+    if !self.annotationProgress.isEmpty {
+      try container.encode(self.annotationProgress, forKey: .annotationProgress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

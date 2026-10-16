@@ -126,11 +126,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datapointId, forKey: .datapointId)
-      try container.encode(self.featureVector, forKey: .featureVector)
+      if !self.datapointId.isEmpty {
+        try container.encode(self.datapointId, forKey: .datapointId)
+      }
+      if !self.featureVector.isEmpty {
+        try container.encode(self.featureVector, forKey: .featureVector)
+      }
       try container.encodeIfPresent(self.sparseEmbedding, forKey: .sparseEmbedding)
-      try container.encode(self.restricts, forKey: .restricts)
-      try container.encode(self.numericRestricts, forKey: .numericRestricts)
+      if !self.restricts.isEmpty {
+        try container.encode(self.restricts, forKey: .restricts)
+      }
+      if !self.numericRestricts.isEmpty {
+        try container.encode(self.numericRestricts, forKey: .numericRestricts)
+      }
       try container.encodeIfPresent(self.crowdingTag, forKey: .crowdingTag)
       try container.encodeIfPresent(self.embeddingMetadata, forKey: .embeddingMetadata)
       for (key, value) in self._unknownFields.json {
@@ -200,8 +208,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.values, forKey: .values)
-        try container.encode(self.dimensions, forKey: .dimensions)
+        if !self.values.isEmpty {
+          try container.encode(self.values, forKey: .values)
+        }
+        if !self.dimensions.isEmpty {
+          try container.encode(self.dimensions, forKey: .dimensions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -298,9 +310,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.namespace, forKey: .namespace)
-        try container.encode(self.allowList, forKey: .allowList)
-        try container.encode(self.denyList, forKey: .denyList)
+        if !self.namespace.isEmpty {
+          try container.encode(self.namespace, forKey: .namespace)
+        }
+        if !self.allowList.isEmpty {
+          try container.encode(self.allowList, forKey: .allowList)
+        }
+        if !self.denyList.isEmpty {
+          try container.encode(self.denyList, forKey: .denyList)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -425,8 +443,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.namespace, forKey: .namespace)
-        try container.encode(self.op, forKey: .op)
+        if !self.namespace.isEmpty {
+          try container.encode(self.namespace, forKey: .namespace)
+        }
+        if self.op != IndexDatapoint.NumericRestriction.Operator() {
+          try container.encode(self.op, forKey: .op)
+        }
 
         if let choice = self.value {
           switch choice {
@@ -684,7 +706,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.crowdingAttribute, forKey: .crowdingAttribute)
+        if !self.crowdingAttribute.isEmpty {
+          try container.encode(self.crowdingAttribute, forKey: .crowdingAttribute)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

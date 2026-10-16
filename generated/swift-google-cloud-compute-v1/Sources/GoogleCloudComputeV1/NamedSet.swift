@@ -112,8 +112,10 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.elements, forKey: .elements)
-      if let v = fingerprint {
+      if !self.elements.isEmpty {
+        try container.encode(self.elements, forKey: .elements)
+      }
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )

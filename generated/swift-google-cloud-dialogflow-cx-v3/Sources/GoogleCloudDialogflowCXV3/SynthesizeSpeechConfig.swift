@@ -114,10 +114,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.speakingRate, forKey: .speakingRate)
-      try container.encode(self.pitch, forKey: .pitch)
-      try container.encode(self.volumeGainDb, forKey: .volumeGainDb)
-      try container.encode(self.effectsProfileId, forKey: .effectsProfileId)
+      if self.speakingRate != 0 {
+        try container.encode(self.speakingRate, forKey: .speakingRate)
+      }
+      if self.pitch != 0 {
+        try container.encode(self.pitch, forKey: .pitch)
+      }
+      if self.volumeGainDb != 0 {
+        try container.encode(self.volumeGainDb, forKey: .volumeGainDb)
+      }
+      if !self.effectsProfileId.isEmpty {
+        try container.encode(self.effectsProfileId, forKey: .effectsProfileId)
+      }
       try container.encodeIfPresent(self.voice, forKey: .voice)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

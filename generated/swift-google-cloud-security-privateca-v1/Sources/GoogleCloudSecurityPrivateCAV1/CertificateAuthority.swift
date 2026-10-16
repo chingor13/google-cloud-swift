@@ -307,26 +307,46 @@ public struct CertificateAuthority: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.type, forKey: .type)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.type != CertificateAuthority.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
     try container.encodeIfPresent(self.lifetime, forKey: .lifetime)
     try container.encodeIfPresent(self.keySpec, forKey: .keySpec)
     try container.encodeIfPresent(self.subordinateConfig, forKey: .subordinateConfig)
-    try container.encode(self.tier, forKey: .tier)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.pemCaCertificates, forKey: .pemCaCertificates)
-    try container.encode(self.caCertificateDescriptions, forKey: .caCertificateDescriptions)
-    try container.encode(self.gcsBucket, forKey: .gcsBucket)
+    if self.tier != CaPool.Tier() {
+      try container.encode(self.tier, forKey: .tier)
+    }
+    if self.state != CertificateAuthority.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.pemCaCertificates.isEmpty {
+      try container.encode(self.pemCaCertificates, forKey: .pemCaCertificates)
+    }
+    if !self.caCertificateDescriptions.isEmpty {
+      try container.encode(self.caCertificateDescriptions, forKey: .caCertificateDescriptions)
+    }
+    if !self.gcsBucket.isEmpty {
+      try container.encode(self.gcsBucket, forKey: .gcsBucket)
+    }
     try container.encodeIfPresent(self.accessUrls, forKey: .accessUrls)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.userDefinedAccessUrls, forKey: .userDefinedAccessUrls)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -408,8 +428,12 @@ public struct CertificateAuthority: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.caCertificateAccessUrl, forKey: .caCertificateAccessUrl)
-      try container.encode(self.crlAccessUrls, forKey: .crlAccessUrls)
+      if !self.caCertificateAccessUrl.isEmpty {
+        try container.encode(self.caCertificateAccessUrl, forKey: .caCertificateAccessUrl)
+      }
+      if !self.crlAccessUrls.isEmpty {
+        try container.encode(self.crlAccessUrls, forKey: .crlAccessUrls)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -643,8 +667,12 @@ public struct CertificateAuthority: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.aiaIssuingCertificateUrls, forKey: .aiaIssuingCertificateUrls)
-      try container.encode(self.crlAccessUrls, forKey: .crlAccessUrls)
+      if !self.aiaIssuingCertificateUrls.isEmpty {
+        try container.encode(self.aiaIssuingCertificateUrls, forKey: .aiaIssuingCertificateUrls)
+      }
+      if !self.crlAccessUrls.isEmpty {
+        try container.encode(self.crlAccessUrls, forKey: .crlAccessUrls)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

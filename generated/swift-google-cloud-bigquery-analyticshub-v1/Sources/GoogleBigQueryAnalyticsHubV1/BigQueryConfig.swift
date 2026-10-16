@@ -127,12 +127,24 @@ public struct BigQueryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.table, forKey: .table)
-    try container.encode(self.useTopicSchema, forKey: .useTopicSchema)
-    try container.encode(self.writeMetadata, forKey: .writeMetadata)
-    try container.encode(self.dropUnknownFields, forKey: .dropUnknownFields)
-    try container.encode(self.useTableSchema, forKey: .useTableSchema)
-    try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+    if !self.table.isEmpty {
+      try container.encode(self.table, forKey: .table)
+    }
+    if self.useTopicSchema {
+      try container.encode(self.useTopicSchema, forKey: .useTopicSchema)
+    }
+    if self.writeMetadata {
+      try container.encode(self.writeMetadata, forKey: .writeMetadata)
+    }
+    if self.dropUnknownFields {
+      try container.encode(self.dropUnknownFields, forKey: .dropUnknownFields)
+    }
+    if self.useTableSchema {
+      try container.encode(self.useTableSchema, forKey: .useTableSchema)
+    }
+    if !self.serviceAccountEmail.isEmpty {
+      try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

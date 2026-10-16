@@ -94,8 +94,10 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.environment, forKey: .environment)
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-      try container.encode(
-        self.allowLoadToDraftAndDiscardChanges, forKey: .allowLoadToDraftAndDiscardChanges)
+      if self.allowLoadToDraftAndDiscardChanges {
+        try container.encode(
+          self.allowLoadToDraftAndDiscardChanges, forKey: .allowLoadToDraftAndDiscardChanges)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

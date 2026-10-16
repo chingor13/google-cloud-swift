@@ -103,11 +103,21 @@ public struct VmwareSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.username, forKey: .username)
-    try container.encode(self.password, forKey: .password)
-    try container.encode(self.vcenterIp, forKey: .vcenterIp)
-    try container.encode(self.thumbprint, forKey: .thumbprint)
-    try container.encode(self.resolvedVcenterHost, forKey: .resolvedVcenterHost)
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
+    if !self.password.isEmpty {
+      try container.encode(self.password, forKey: .password)
+    }
+    if !self.vcenterIp.isEmpty {
+      try container.encode(self.vcenterIp, forKey: .vcenterIp)
+    }
+    if !self.thumbprint.isEmpty {
+      try container.encode(self.thumbprint, forKey: .thumbprint)
+    }
+    if !self.resolvedVcenterHost.isEmpty {
+      try container.encode(self.resolvedVcenterHost, forKey: .resolvedVcenterHost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -102,7 +102,9 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.originalRequest, forKey: .originalRequest)
     try container.encodeIfPresent(self.requestTime, forKey: .requestTime)
     try container.encodeIfPresent(self.finishTime, forKey: .finishTime)
-    try container.encode(self.tables, forKey: .tables)
+    if !self.tables.isEmpty {
+      try container.encode(self.tables, forKey: .tables)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -181,9 +183,15 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.estimatedSizeBytes, forKey: .estimatedSizeBytes)
-      try container.encode(self.estimatedCopiedBytes, forKey: .estimatedCopiedBytes)
-      try container.encode(self.state, forKey: .state)
+      if self.estimatedSizeBytes != 0 {
+        try container.encode(self.estimatedSizeBytes, forKey: .estimatedSizeBytes)
+      }
+      if self.estimatedCopiedBytes != 0 {
+        try container.encode(self.estimatedCopiedBytes, forKey: .estimatedCopiedBytes)
+      }
+      if self.state != CreateClusterMetadata.TableProgress.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

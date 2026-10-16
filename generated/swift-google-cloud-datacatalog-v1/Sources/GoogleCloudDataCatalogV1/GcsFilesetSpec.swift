@@ -106,8 +106,12 @@ public struct GcsFilesetSpec: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.filePatterns, forKey: .filePatterns)
-    try container.encode(self.sampleGcsFileSpecs, forKey: .sampleGcsFileSpecs)
+    if !self.filePatterns.isEmpty {
+      try container.encode(self.filePatterns, forKey: .filePatterns)
+    }
+    if !self.sampleGcsFileSpecs.isEmpty {
+      try container.encode(self.sampleGcsFileSpecs, forKey: .sampleGcsFileSpecs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

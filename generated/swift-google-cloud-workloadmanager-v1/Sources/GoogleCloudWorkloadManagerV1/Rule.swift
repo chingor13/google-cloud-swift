@@ -166,19 +166,45 @@ public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.primaryCategory, forKey: .primaryCategory)
-    try container.encode(self.secondaryCategory, forKey: .secondaryCategory)
-    try container.encode(self.errorMessage, forKey: .errorMessage)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.remediation, forKey: .remediation)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.ruleType, forKey: .ruleType)
-    try container.encode(self.assetType, forKey: .assetType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.severity.isEmpty {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.primaryCategory.isEmpty {
+      try container.encode(self.primaryCategory, forKey: .primaryCategory)
+    }
+    if !self.secondaryCategory.isEmpty {
+      try container.encode(self.secondaryCategory, forKey: .secondaryCategory)
+    }
+    if !self.errorMessage.isEmpty {
+      try container.encode(self.errorMessage, forKey: .errorMessage)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.remediation.isEmpty {
+      try container.encode(self.remediation, forKey: .remediation)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.ruleType != Rule.RuleType() {
+      try container.encode(self.ruleType, forKey: .ruleType)
+    }
+    if !self.assetType.isEmpty {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

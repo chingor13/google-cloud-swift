@@ -151,13 +151,25 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.matchingJobs, forKey: .matchingJobs)
-    try container.encode(self.histogramQueryResults, forKey: .histogramQueryResults)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.locationFilters, forKey: .locationFilters)
-    try container.encode(self.totalSize, forKey: .totalSize)
+    if !self.matchingJobs.isEmpty {
+      try container.encode(self.matchingJobs, forKey: .matchingJobs)
+    }
+    if !self.histogramQueryResults.isEmpty {
+      try container.encode(self.histogramQueryResults, forKey: .histogramQueryResults)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if !self.locationFilters.isEmpty {
+      try container.encode(self.locationFilters, forKey: .locationFilters)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.broadenedQueryJobsCount, forKey: .broadenedQueryJobsCount)
+    if self.broadenedQueryJobsCount != 0 {
+      try container.encode(self.broadenedQueryJobsCount, forKey: .broadenedQueryJobsCount)
+    }
     try container.encodeIfPresent(self.spellCorrection, forKey: .spellCorrection)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -267,9 +279,15 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.job, forKey: .job)
-      try container.encode(self.jobSummary, forKey: .jobSummary)
-      try container.encode(self.jobTitleSnippet, forKey: .jobTitleSnippet)
-      try container.encode(self.searchTextSnippet, forKey: .searchTextSnippet)
+      if !self.jobSummary.isEmpty {
+        try container.encode(self.jobSummary, forKey: .jobSummary)
+      }
+      if !self.jobTitleSnippet.isEmpty {
+        try container.encode(self.jobTitleSnippet, forKey: .jobTitleSnippet)
+      }
+      if !self.searchTextSnippet.isEmpty {
+        try container.encode(self.searchTextSnippet, forKey: .searchTextSnippet)
+      }
       try container.encodeIfPresent(self.commuteInfo, forKey: .commuteInfo)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -79,8 +79,12 @@ public struct UserEventImportSummary: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.joinedEventsCount, forKey: .joinedEventsCount)
-    try container.encode(self.unjoinedEventsCount, forKey: .unjoinedEventsCount)
+    if self.joinedEventsCount != 0 {
+      try container.encode(self.joinedEventsCount, forKey: .joinedEventsCount)
+    }
+    if self.unjoinedEventsCount != 0 {
+      try container.encode(self.unjoinedEventsCount, forKey: .unjoinedEventsCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

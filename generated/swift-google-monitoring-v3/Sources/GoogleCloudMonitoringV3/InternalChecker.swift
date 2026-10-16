@@ -121,12 +121,24 @@ public struct InternalChecker: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.gcpZone, forKey: .gcpZone)
-    try container.encode(self.peerProjectId, forKey: .peerProjectId)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.gcpZone.isEmpty {
+      try container.encode(self.gcpZone, forKey: .gcpZone)
+    }
+    if !self.peerProjectId.isEmpty {
+      try container.encode(self.peerProjectId, forKey: .peerProjectId)
+    }
+    if self.state != InternalChecker.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

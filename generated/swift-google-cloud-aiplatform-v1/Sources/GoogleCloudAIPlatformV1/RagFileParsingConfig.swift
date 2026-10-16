@@ -176,8 +176,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.processorName, forKey: .processorName)
-        try container.encode(self.maxParsingRequestsPerMin, forKey: .maxParsingRequestsPerMin)
+        if !self.processorName.isEmpty {
+          try container.encode(self.processorName, forKey: .processorName)
+        }
+        if self.maxParsingRequestsPerMin != 0 {
+          try container.encode(self.maxParsingRequestsPerMin, forKey: .maxParsingRequestsPerMin)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -284,9 +288,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.modelName, forKey: .modelName)
-        try container.encode(self.maxParsingRequestsPerMin, forKey: .maxParsingRequestsPerMin)
-        try container.encode(self.customParsingPrompt, forKey: .customParsingPrompt)
+        if !self.modelName.isEmpty {
+          try container.encode(self.modelName, forKey: .modelName)
+        }
+        if self.maxParsingRequestsPerMin != 0 {
+          try container.encode(self.maxParsingRequestsPerMin, forKey: .maxParsingRequestsPerMin)
+        }
+        if !self.customParsingPrompt.isEmpty {
+          try container.encode(self.customParsingPrompt, forKey: .customParsingPrompt)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -88,8 +88,12 @@ public struct RemoveGranteesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataPolicy, forKey: .dataPolicy)
-    try container.encode(self.grantees, forKey: .grantees)
+    if !self.dataPolicy.isEmpty {
+      try container.encode(self.dataPolicy, forKey: .dataPolicy)
+    }
+    if !self.grantees.isEmpty {
+      try container.encode(self.grantees, forKey: .grantees)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -117,9 +117,15 @@ public struct GoldengateAmazonRedshiftConnectionProperties: Codable, Equatable, 
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.connectionUrl, forKey: .connectionUrl)
-    try container.encode(self.username, forKey: .username)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.connectionUrl.isEmpty {
+      try container.encode(self.connectionUrl, forKey: .connectionUrl)
+    }
+    if !self.username.isEmpty {
+      try container.encode(self.username, forKey: .username)
+    }
 
     if let choice = self.connectionPasswordOptions {
       switch choice {

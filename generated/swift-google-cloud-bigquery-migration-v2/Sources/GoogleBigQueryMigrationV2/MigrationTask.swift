@@ -219,18 +219,34 @@ public struct MigrationTask: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.state, forKey: .state)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.state != MigrationTask.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.processingError, forKey: .processingError)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
-    try container.encode(self.resourceErrorDetails, forKey: .resourceErrorDetails)
-    try container.encode(self.resourceErrorCount, forKey: .resourceErrorCount)
-    try container.encode(self.metrics, forKey: .metrics)
+    if !self.resourceErrorDetails.isEmpty {
+      try container.encode(self.resourceErrorDetails, forKey: .resourceErrorDetails)
+    }
+    if self.resourceErrorCount != 0 {
+      try container.encode(self.resourceErrorCount, forKey: .resourceErrorCount)
+    }
+    if !self.metrics.isEmpty {
+      try container.encode(self.metrics, forKey: .metrics)
+    }
     try container.encodeIfPresent(self.taskResult, forKey: .taskResult)
-    try container.encode(self.totalProcessingErrorCount, forKey: .totalProcessingErrorCount)
-    try container.encode(self.totalResourceErrorCount, forKey: .totalResourceErrorCount)
+    if self.totalProcessingErrorCount != 0 {
+      try container.encode(self.totalProcessingErrorCount, forKey: .totalProcessingErrorCount)
+    }
+    if self.totalResourceErrorCount != 0 {
+      try container.encode(self.totalResourceErrorCount, forKey: .totalResourceErrorCount)
+    }
 
     if let choice = self.taskDetails {
       switch choice {

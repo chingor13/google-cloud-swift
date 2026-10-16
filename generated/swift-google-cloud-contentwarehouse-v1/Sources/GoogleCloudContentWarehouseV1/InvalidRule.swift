@@ -76,7 +76,9 @@ public struct InvalidRule: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.rule, forKey: .rule)
-    try container.encode(self.error, forKey: .error)
+    if !self.error.isEmpty {
+      try container.encode(self.error, forKey: .error)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

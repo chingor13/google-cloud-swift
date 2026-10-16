@@ -161,13 +161,27 @@ public struct AzureClient: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.tenantId, forKey: .tenantId)
-    try container.encode(self.applicationId, forKey: .applicationId)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.pemCertificate, forKey: .pemCertificate)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.tenantId.isEmpty {
+      try container.encode(self.tenantId, forKey: .tenantId)
+    }
+    if !self.applicationId.isEmpty {
+      try container.encode(self.applicationId, forKey: .applicationId)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.pemCertificate.isEmpty {
+      try container.encode(self.pemCertificate, forKey: .pemCertificate)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

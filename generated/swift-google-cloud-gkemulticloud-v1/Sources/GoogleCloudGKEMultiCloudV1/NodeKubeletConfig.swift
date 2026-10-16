@@ -128,8 +128,10 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.insecureKubeletReadonlyPortEnabled, forKey: .insecureKubeletReadonlyPortEnabled)
+    if self.insecureKubeletReadonlyPortEnabled {
+      try container.encode(
+        self.insecureKubeletReadonlyPortEnabled, forKey: .insecureKubeletReadonlyPortEnabled)
+    }
     try container.encodeIfPresent(self.cpuManagerPolicy, forKey: .cpuManagerPolicy)
     try container.encodeIfPresent(self.cpuCfsQuota, forKey: .cpuCfsQuota)
     try container.encodeIfPresent(self.cpuCfsQuotaPeriod, forKey: .cpuCfsQuotaPeriod)

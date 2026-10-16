@@ -100,9 +100,15 @@ public struct TrackDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.inputTrack, forKey: .inputTrack)
-    try container.encode(self.languages, forKey: .languages)
-    try container.encode(self.detectLanguages, forKey: .detectLanguages)
-    try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+    if !self.languages.isEmpty {
+      try container.encode(self.languages, forKey: .languages)
+    }
+    if self.detectLanguages {
+      try container.encode(self.detectLanguages, forKey: .detectLanguages)
+    }
+    if !self.detectedLanguages.isEmpty {
+      try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

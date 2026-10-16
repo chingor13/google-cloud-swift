@@ -179,13 +179,23 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.fulfillmentText, forKey: .fulfillmentText)
-      try container.encode(self.fulfillmentMessages, forKey: .fulfillmentMessages)
-      try container.encode(self.source, forKey: .source)
+      if !self.fulfillmentText.isEmpty {
+        try container.encode(self.fulfillmentText, forKey: .fulfillmentText)
+      }
+      if !self.fulfillmentMessages.isEmpty {
+        try container.encode(self.fulfillmentMessages, forKey: .fulfillmentMessages)
+      }
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
       try container.encodeIfPresent(self.payload, forKey: .payload)
-      try container.encode(self.outputContexts, forKey: .outputContexts)
+      if !self.outputContexts.isEmpty {
+        try container.encode(self.outputContexts, forKey: .outputContexts)
+      }
       try container.encodeIfPresent(self.followupEventInput, forKey: .followupEventInput)
-      try container.encode(self.sessionEntityTypes, forKey: .sessionEntityTypes)
+      if !self.sessionEntityTypes.isEmpty {
+        try container.encode(self.sessionEntityTypes, forKey: .sessionEntityTypes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

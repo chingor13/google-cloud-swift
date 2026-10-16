@@ -135,11 +135,17 @@ public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.product, forKey: .product)
-    try container.encode(self.localInventories, forKey: .localInventories)
+    if !self.product.isEmpty {
+      try container.encode(self.product, forKey: .product)
+    }
+    if !self.localInventories.isEmpty {
+      try container.encode(self.localInventories, forKey: .localInventories)
+    }
     try container.encodeIfPresent(self.addMask, forKey: .addMask)
     try container.encodeIfPresent(self.addTime, forKey: .addTime)
-    try container.encode(self.allowMissing, forKey: .allowMissing)
+    if self.allowMissing {
+      try container.encode(self.allowMissing, forKey: .allowMissing)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

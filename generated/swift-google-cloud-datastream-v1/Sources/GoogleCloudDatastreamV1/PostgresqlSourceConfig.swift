@@ -107,9 +107,15 @@ public struct PostgresqlSourceConfig: Codable, Equatable, GoogleWKT._AnyPackable
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.includeObjects, forKey: .includeObjects)
     try container.encodeIfPresent(self.excludeObjects, forKey: .excludeObjects)
-    try container.encode(self.replicationSlot, forKey: .replicationSlot)
-    try container.encode(self.publication, forKey: .publication)
-    try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    if !self.replicationSlot.isEmpty {
+      try container.encode(self.replicationSlot, forKey: .replicationSlot)
+    }
+    if !self.publication.isEmpty {
+      try container.encode(self.publication, forKey: .publication)
+    }
+    if self.maxConcurrentBackfillTasks != 0 {
+      try container.encode(self.maxConcurrentBackfillTasks, forKey: .maxConcurrentBackfillTasks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

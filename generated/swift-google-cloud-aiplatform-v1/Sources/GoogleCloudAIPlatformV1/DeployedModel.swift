@@ -294,21 +294,41 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.model, forKey: .model)
-      try container.encode(self.modelVersionId, forKey: .modelVersionId)
-      try container.encode(self.displayName, forKey: .displayName)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
+      if !self.modelVersionId.isEmpty {
+        try container.encode(self.modelVersionId, forKey: .modelVersionId)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.explanationSpec, forKey: .explanationSpec)
-      try container.encode(self.disableExplanations, forKey: .disableExplanations)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
-      try container.encode(self.disableContainerLogging, forKey: .disableContainerLogging)
-      try container.encode(self.enableAccessLogging, forKey: .enableAccessLogging)
+      if self.disableExplanations {
+        try container.encode(self.disableExplanations, forKey: .disableExplanations)
+      }
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
+      if self.disableContainerLogging {
+        try container.encode(self.disableContainerLogging, forKey: .disableContainerLogging)
+      }
+      if self.enableAccessLogging {
+        try container.encode(self.enableAccessLogging, forKey: .enableAccessLogging)
+      }
       try container.encodeIfPresent(self.privateEndpoints, forKey: .privateEndpoints)
       try container.encodeIfPresent(self.fasterDeploymentConfig, forKey: .fasterDeploymentConfig)
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.systemLabels, forKey: .systemLabels)
-      try container.encode(self.checkpointId, forKey: .checkpointId)
+      if !self.systemLabels.isEmpty {
+        try container.encode(self.systemLabels, forKey: .systemLabels)
+      }
+      if !self.checkpointId.isEmpty {
+        try container.encode(self.checkpointId, forKey: .checkpointId)
+      }
       try container.encodeIfPresent(self.speculativeDecodingSpec, forKey: .speculativeDecodingSpec)
 
       if let choice = self.predictionResources {
@@ -395,9 +415,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.message, forKey: .message)
+        if !self.message.isEmpty {
+          try container.encode(self.message, forKey: .message)
+        }
         try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
-        try container.encode(self.availableReplicaCount, forKey: .availableReplicaCount)
+        if self.availableReplicaCount != 0 {
+          try container.encode(self.availableReplicaCount, forKey: .availableReplicaCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

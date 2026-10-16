@@ -115,12 +115,20 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.skipSummarization, forKey: .skipSummarization)
+      if self.skipSummarization {
+        try container.encode(self.skipSummarization, forKey: .skipSummarization)
+      }
       try container.encodeIfPresent(self.stateDelta, forKey: .stateDelta)
-      try container.encode(self.artifactDelta, forKey: .artifactDelta)
-      try container.encode(self.escalate, forKey: .escalate)
+      if !self.artifactDelta.isEmpty {
+        try container.encode(self.artifactDelta, forKey: .artifactDelta)
+      }
+      if self.escalate {
+        try container.encode(self.escalate, forKey: .escalate)
+      }
       try container.encodeIfPresent(self.requestedAuthConfigs, forKey: .requestedAuthConfigs)
-      try container.encode(self.transferAgent, forKey: .transferAgent)
+      if !self.transferAgent.isEmpty {
+        try container.encode(self.transferAgent, forKey: .transferAgent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

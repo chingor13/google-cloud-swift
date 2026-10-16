@@ -223,20 +223,40 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.inputUri, forKey: .inputUri)
-    try container.encode(self.outputUri, forKey: .outputUri)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.inputUri.isEmpty {
+      try container.encode(self.inputUri, forKey: .inputUri)
+    }
+    if !self.outputUri.isEmpty {
+      try container.encode(self.outputUri, forKey: .outputUri)
+    }
+    if self.state != Job.ProcessingState() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.ttlAfterCompletionDays, forKey: .ttlAfterCompletionDays)
-    try container.encode(self.labels, forKey: .labels)
+    if self.ttlAfterCompletionDays != 0 {
+      try container.encode(self.ttlAfterCompletionDays, forKey: .ttlAfterCompletionDays)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.batchModePriority, forKey: .batchModePriority)
-    try container.encode(self.optimization, forKey: .optimization)
-    try container.encode(self.fillContentGaps, forKey: .fillContentGaps)
+    if self.mode != Job.ProcessingMode() {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if self.batchModePriority != 0 {
+      try container.encode(self.batchModePriority, forKey: .batchModePriority)
+    }
+    if self.optimization != Job.OptimizationStrategy() {
+      try container.encode(self.optimization, forKey: .optimization)
+    }
+    if self.fillContentGaps {
+      try container.encode(self.fillContentGaps, forKey: .fillContentGaps)
+    }
 
     if let choice = self.jobConfig {
       switch choice {

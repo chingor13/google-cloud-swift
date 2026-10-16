@@ -175,14 +175,18 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.coolDownPeriodSec, forKey: .coolDownPeriodSec)
       try container.encodeIfPresent(self.cpuUtilization, forKey: .cpuUtilization)
-      try container.encode(self.customMetricUtilizations, forKey: .customMetricUtilizations)
+      if !self.customMetricUtilizations.isEmpty {
+        try container.encode(self.customMetricUtilizations, forKey: .customMetricUtilizations)
+      }
       try container.encodeIfPresent(
         self.loadBalancingUtilization, forKey: .loadBalancingUtilization)
       try container.encodeIfPresent(self.maxNumReplicas, forKey: .maxNumReplicas)
       try container.encodeIfPresent(self.minNumReplicas, forKey: .minNumReplicas)
       try container.encodeIfPresent(self.mode, forKey: .mode)
       try container.encodeIfPresent(self.scaleInControl, forKey: .scaleInControl)
-      try container.encode(self.scalingSchedules, forKey: .scalingSchedules)
+      if !self.scalingSchedules.isEmpty {
+        try container.encode(self.scalingSchedules, forKey: .scalingSchedules)
+      }
       try container.encodeIfPresent(self.stabilizationPeriodSec, forKey: .stabilizationPeriodSec)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

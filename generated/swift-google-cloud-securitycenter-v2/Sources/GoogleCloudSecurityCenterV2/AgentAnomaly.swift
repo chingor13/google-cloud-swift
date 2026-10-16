@@ -93,9 +93,15 @@ public struct AgentAnomaly: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.confidenceScore, forKey: .confidenceScore)
-    try container.encode(self.detectorReferences, forKey: .detectorReferences)
-    try container.encode(self.invocationReferences, forKey: .invocationReferences)
+    if self.confidenceScore != 0 {
+      try container.encode(self.confidenceScore, forKey: .confidenceScore)
+    }
+    if !self.detectorReferences.isEmpty {
+      try container.encode(self.detectorReferences, forKey: .detectorReferences)
+    }
+    if !self.invocationReferences.isEmpty {
+      try container.encode(self.invocationReferences, forKey: .invocationReferences)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

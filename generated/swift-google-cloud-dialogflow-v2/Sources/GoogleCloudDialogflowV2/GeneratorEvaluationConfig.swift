@@ -104,7 +104,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.inputDataConfig, forKey: .inputDataConfig)
-      try container.encode(self.outputGcsBucketPath, forKey: .outputGcsBucketPath)
+      if !self.outputGcsBucketPath.isEmpty {
+        try container.encode(self.outputGcsBucketPath, forKey: .outputGcsBucketPath)
+      }
 
       if let choice = self.evaluationFeatureConfig {
         switch choice {
@@ -261,7 +263,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataset, forKey: .dataset)
+        if !self.dataset.isEmpty {
+          try container.encode(self.dataset, forKey: .dataset)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -434,12 +438,22 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.inputDataSourceType, forKey: .inputDataSourceType)
+        if self.inputDataSourceType != GeneratorEvaluationConfig.InputDataSourceType() {
+          try container.encode(self.inputDataSourceType, forKey: .inputDataSourceType)
+        }
         try container.encodeIfPresent(self.startTime, forKey: .startTime)
         try container.encodeIfPresent(self.endTime, forKey: .endTime)
-        try container.encode(self.sampleSize, forKey: .sampleSize)
-        try container.encode(self.isSummaryGenerationAllowed, forKey: .isSummaryGenerationAllowed)
-        try container.encode(self.summaryGenerationOption, forKey: .summaryGenerationOption)
+        if self.sampleSize != 0 {
+          try container.encode(self.sampleSize, forKey: .sampleSize)
+        }
+        if self.isSummaryGenerationAllowed {
+          try container.encode(self.isSummaryGenerationAllowed, forKey: .isSummaryGenerationAllowed)
+        }
+        if self.summaryGenerationOption
+          != GeneratorEvaluationConfig.InputDataConfig.SummaryGenerationOption()
+        {
+          try container.encode(self.summaryGenerationOption, forKey: .summaryGenerationOption)
+        }
 
         if let choice = self.sourceSpecificConfig {
           switch choice {
@@ -716,12 +730,20 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableAccuracyEvaluation, forKey: .enableAccuracyEvaluation)
-        try container.encode(self.accuracyEvaluationVersion, forKey: .accuracyEvaluationVersion)
-        try container.encode(
-          self.enableCompletenessEvaluation, forKey: .enableCompletenessEvaluation)
-        try container.encode(
-          self.completenessEvaluationVersion, forKey: .completenessEvaluationVersion)
+        if self.enableAccuracyEvaluation {
+          try container.encode(self.enableAccuracyEvaluation, forKey: .enableAccuracyEvaluation)
+        }
+        if !self.accuracyEvaluationVersion.isEmpty {
+          try container.encode(self.accuracyEvaluationVersion, forKey: .accuracyEvaluationVersion)
+        }
+        if self.enableCompletenessEvaluation {
+          try container.encode(
+            self.enableCompletenessEvaluation, forKey: .enableCompletenessEvaluation)
+        }
+        if !self.completenessEvaluationVersion.isEmpty {
+          try container.encode(
+            self.completenessEvaluationVersion, forKey: .completenessEvaluationVersion)
+        }
         try container.encodeIfPresent(self.evaluatorVersion, forKey: .evaluatorVersion)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

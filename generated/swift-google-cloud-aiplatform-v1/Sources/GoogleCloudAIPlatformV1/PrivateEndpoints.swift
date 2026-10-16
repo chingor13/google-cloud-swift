@@ -99,10 +99,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.predictHttpUri, forKey: .predictHttpUri)
-      try container.encode(self.explainHttpUri, forKey: .explainHttpUri)
-      try container.encode(self.healthHttpUri, forKey: .healthHttpUri)
-      try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+      if !self.predictHttpUri.isEmpty {
+        try container.encode(self.predictHttpUri, forKey: .predictHttpUri)
+      }
+      if !self.explainHttpUri.isEmpty {
+        try container.encode(self.explainHttpUri, forKey: .explainHttpUri)
+      }
+      if !self.healthHttpUri.isEmpty {
+        try container.encode(self.healthHttpUri, forKey: .healthHttpUri)
+      }
+      if !self.serviceAttachment.isEmpty {
+        try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

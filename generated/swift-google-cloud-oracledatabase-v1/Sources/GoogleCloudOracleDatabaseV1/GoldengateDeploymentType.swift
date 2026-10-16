@@ -168,17 +168,39 @@ public struct GoldengateDeploymentType: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.deploymentType, forKey: .deploymentType)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.connectionTypes, forKey: .connectionTypes)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.oggVersion, forKey: .oggVersion)
-    try container.encode(self.sourceTechnologies, forKey: .sourceTechnologies)
-    try container.encode(self.supportedCapabilities, forKey: .supportedCapabilities)
-    try container.encode(self.supportedTechnologiesUrl, forKey: .supportedTechnologiesUrl)
-    try container.encode(self.targetTechnologies, forKey: .targetTechnologies)
-    try container.encode(self.defaultUsername, forKey: .defaultUsername)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.deploymentType != GoldengateDeploymentType.DeploymentType() {
+      try container.encode(self.deploymentType, forKey: .deploymentType)
+    }
+    if self.category != GoldengateDeploymentType.DeploymentCategory() {
+      try container.encode(self.category, forKey: .category)
+    }
+    if !self.connectionTypes.isEmpty {
+      try container.encode(self.connectionTypes, forKey: .connectionTypes)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.oggVersion.isEmpty {
+      try container.encode(self.oggVersion, forKey: .oggVersion)
+    }
+    if !self.sourceTechnologies.isEmpty {
+      try container.encode(self.sourceTechnologies, forKey: .sourceTechnologies)
+    }
+    if !self.supportedCapabilities.isEmpty {
+      try container.encode(self.supportedCapabilities, forKey: .supportedCapabilities)
+    }
+    if !self.supportedTechnologiesUrl.isEmpty {
+      try container.encode(self.supportedTechnologiesUrl, forKey: .supportedTechnologiesUrl)
+    }
+    if !self.targetTechnologies.isEmpty {
+      try container.encode(self.targetTechnologies, forKey: .targetTechnologies)
+    }
+    if !self.defaultUsername.isEmpty {
+      try container.encode(self.defaultUsername, forKey: .defaultUsername)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

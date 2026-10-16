@@ -246,19 +246,41 @@ public struct Target: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.targetId, forKey: .targetId)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.requireApproval, forKey: .requireApproval)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.requireApproval {
+      try container.encode(self.requireApproval, forKey: .requireApproval)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.associatedEntities, forKey: .associatedEntities)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.executionConfigs, forKey: .executionConfigs)
-    try container.encode(self.deployParameters, forKey: .deployParameters)
+    if !self.associatedEntities.isEmpty {
+      try container.encode(self.associatedEntities, forKey: .associatedEntities)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.executionConfigs.isEmpty {
+      try container.encode(self.executionConfigs, forKey: .executionConfigs)
+    }
+    if !self.deployParameters.isEmpty {
+      try container.encode(self.deployParameters, forKey: .deployParameters)
+    }
 
     if let choice = self.deploymentTarget {
       switch choice {

@@ -79,8 +79,12 @@ public struct AdvanceChildRolloutJobRun: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rollout, forKey: .rollout)
-    try container.encode(self.rolloutPhaseId, forKey: .rolloutPhaseId)
+    if !self.rollout.isEmpty {
+      try container.encode(self.rollout, forKey: .rollout)
+    }
+    if !self.rolloutPhaseId.isEmpty {
+      try container.encode(self.rolloutPhaseId, forKey: .rolloutPhaseId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

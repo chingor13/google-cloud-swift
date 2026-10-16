@@ -108,9 +108,15 @@ public struct DataSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.resource, forKey: .resource)
-    try container.encode(self.sourceEntry, forKey: .sourceEntry)
+    if self.service != DataSource.Service() {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.resource.isEmpty {
+      try container.encode(self.resource, forKey: .resource)
+    }
+    if !self.sourceEntry.isEmpty {
+      try container.encode(self.sourceEntry, forKey: .sourceEntry)
+    }
 
     if let choice = self.properties {
       switch choice {

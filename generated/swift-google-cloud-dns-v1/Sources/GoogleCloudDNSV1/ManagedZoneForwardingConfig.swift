@@ -86,8 +86,12 @@ public struct ManagedZoneForwardingConfig: Codable, Equatable, GoogleWKT._AnyPac
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.kind, forKey: .kind)
-    try container.encode(self.outboundEndpoints, forKey: .outboundEndpoints)
-    try container.encode(self.targetNameServers, forKey: .targetNameServers)
+    if !self.outboundEndpoints.isEmpty {
+      try container.encode(self.outboundEndpoints, forKey: .outboundEndpoints)
+    }
+    if !self.targetNameServers.isEmpty {
+      try container.encode(self.targetNameServers, forKey: .targetNameServers)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

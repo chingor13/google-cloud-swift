@@ -101,9 +101,15 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.targetStreamInputs, forKey: .targetStreamInputs)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.targetStreamInputs.isEmpty {
+      try container.encode(self.targetStreamInputs, forKey: .targetStreamInputs)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -160,7 +166,9 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleWKT
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.stream, forKey: .stream)
+      if !self.stream.isEmpty {
+        try container.encode(self.stream, forKey: .stream)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

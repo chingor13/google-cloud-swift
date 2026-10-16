@@ -89,9 +89,13 @@ public struct JobMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.jobId, forKey: .jobId)
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.operationType, forKey: .operationType)
+    if !self.operationType.isEmpty {
+      try container.encode(self.operationType, forKey: .operationType)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

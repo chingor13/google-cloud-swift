@@ -212,12 +212,20 @@ public struct KubernetesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.httpRoute, forKey: .httpRoute)
-      try container.encode(self.service, forKey: .service)
-      try container.encode(self.deployment, forKey: .deployment)
+      if !self.httpRoute.isEmpty {
+        try container.encode(self.httpRoute, forKey: .httpRoute)
+      }
+      if !self.service.isEmpty {
+        try container.encode(self.service, forKey: .service)
+      }
+      if !self.deployment.isEmpty {
+        try container.encode(self.deployment, forKey: .deployment)
+      }
       try container.encodeIfPresent(self.routeUpdateWaitTime, forKey: .routeUpdateWaitTime)
       try container.encodeIfPresent(self.stableCutbackDuration, forKey: .stableCutbackDuration)
-      try container.encode(self.podSelectorLabel, forKey: .podSelectorLabel)
+      if !self.podSelectorLabel.isEmpty {
+        try container.encode(self.podSelectorLabel, forKey: .podSelectorLabel)
+      }
       try container.encodeIfPresent(self.routeDestinations, forKey: .routeDestinations)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -291,8 +299,12 @@ public struct KubernetesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.destinationIds, forKey: .destinationIds)
-        try container.encode(self.propagateService, forKey: .propagateService)
+        if !self.destinationIds.isEmpty {
+          try container.encode(self.destinationIds, forKey: .destinationIds)
+        }
+        if self.propagateService {
+          try container.encode(self.propagateService, forKey: .propagateService)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -426,10 +438,18 @@ public struct KubernetesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.service, forKey: .service)
-      try container.encode(self.deployment, forKey: .deployment)
-      try container.encode(self.disablePodOverprovisioning, forKey: .disablePodOverprovisioning)
-      try container.encode(self.podSelectorLabel, forKey: .podSelectorLabel)
+      if !self.service.isEmpty {
+        try container.encode(self.service, forKey: .service)
+      }
+      if !self.deployment.isEmpty {
+        try container.encode(self.deployment, forKey: .deployment)
+      }
+      if self.disablePodOverprovisioning {
+        try container.encode(self.disablePodOverprovisioning, forKey: .disablePodOverprovisioning)
+      }
+      if !self.podSelectorLabel.isEmpty {
+        try container.encode(self.podSelectorLabel, forKey: .podSelectorLabel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

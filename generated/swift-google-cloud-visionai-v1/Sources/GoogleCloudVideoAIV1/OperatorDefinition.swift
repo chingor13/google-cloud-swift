@@ -127,13 +127,25 @@ public struct OperatorDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.`operator`, forKey: .`operator`)
-    try container.encode(self.inputArgs, forKey: .inputArgs)
-    try container.encode(self.outputArgs, forKey: .outputArgs)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.`operator`.isEmpty {
+      try container.encode(self.`operator`, forKey: .`operator`)
+    }
+    if !self.inputArgs.isEmpty {
+      try container.encode(self.inputArgs, forKey: .inputArgs)
+    }
+    if !self.outputArgs.isEmpty {
+      try container.encode(self.outputArgs, forKey: .outputArgs)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     try container.encodeIfPresent(self.resources, forKey: .resources)
-    try container.encode(self.shortDescription, forKey: .shortDescription)
-    try container.encode(self.description, forKey: .description)
+    if !self.shortDescription.isEmpty {
+      try container.encode(self.shortDescription, forKey: .shortDescription)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -206,8 +218,12 @@ public struct OperatorDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.argument, forKey: .argument)
-      try container.encode(self.type, forKey: .type)
+      if !self.argument.isEmpty {
+        try container.encode(self.argument, forKey: .argument)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -306,8 +322,12 @@ public struct OperatorDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.attribute, forKey: .attribute)
-      try container.encode(self.type, forKey: .type)
+      if !self.attribute.isEmpty {
+        try container.encode(self.attribute, forKey: .attribute)
+      }
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
       try container.encodeIfPresent(self.defaultValue, forKey: .defaultValue)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

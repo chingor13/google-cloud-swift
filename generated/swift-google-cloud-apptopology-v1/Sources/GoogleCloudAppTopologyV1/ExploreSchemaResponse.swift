@@ -107,11 +107,21 @@ public struct ExploreSchemaResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.nodeTypes, forKey: .nodeTypes)
-    try container.encode(self.edgeTypes, forKey: .edgeTypes)
-    try container.encode(self.labelProperties, forKey: .labelProperties)
-    try container.encode(self.edgeRules, forKey: .edgeRules)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.nodeTypes.isEmpty {
+      try container.encode(self.nodeTypes, forKey: .nodeTypes)
+    }
+    if !self.edgeTypes.isEmpty {
+      try container.encode(self.edgeTypes, forKey: .edgeTypes)
+    }
+    if !self.labelProperties.isEmpty {
+      try container.encode(self.labelProperties, forKey: .labelProperties)
+    }
+    if !self.edgeRules.isEmpty {
+      try container.encode(self.edgeRules, forKey: .edgeRules)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

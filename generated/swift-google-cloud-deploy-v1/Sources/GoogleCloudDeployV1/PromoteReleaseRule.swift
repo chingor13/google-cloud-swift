@@ -107,11 +107,17 @@ public struct PromoteReleaseRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     try container.encodeIfPresent(self.wait, forKey: .wait)
-    try container.encode(self.destinationTargetId, forKey: .destinationTargetId)
+    if !self.destinationTargetId.isEmpty {
+      try container.encode(self.destinationTargetId, forKey: .destinationTargetId)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
-    try container.encode(self.destinationPhase, forKey: .destinationPhase)
+    if !self.destinationPhase.isEmpty {
+      try container.encode(self.destinationPhase, forKey: .destinationPhase)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

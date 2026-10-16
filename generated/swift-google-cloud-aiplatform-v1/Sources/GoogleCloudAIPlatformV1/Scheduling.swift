@@ -109,9 +109,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.timeout, forKey: .timeout)
-      try container.encode(self.restartJobOnWorkerRestart, forKey: .restartJobOnWorkerRestart)
-      try container.encode(self.strategy, forKey: .strategy)
-      try container.encode(self.disableRetries, forKey: .disableRetries)
+      if self.restartJobOnWorkerRestart {
+        try container.encode(self.restartJobOnWorkerRestart, forKey: .restartJobOnWorkerRestart)
+      }
+      if self.strategy != Scheduling.Strategy() {
+        try container.encode(self.strategy, forKey: .strategy)
+      }
+      if self.disableRetries {
+        try container.encode(self.disableRetries, forKey: .disableRetries)
+      }
       try container.encodeIfPresent(self.maxWaitDuration, forKey: .maxWaitDuration)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

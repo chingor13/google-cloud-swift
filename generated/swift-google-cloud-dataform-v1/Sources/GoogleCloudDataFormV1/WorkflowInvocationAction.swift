@@ -153,8 +153,12 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.target, forKey: .target)
     try container.encodeIfPresent(self.canonicalTarget, forKey: .canonicalTarget)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.failureReason, forKey: .failureReason)
+    if self.state != WorkflowInvocationAction.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.failureReason.isEmpty {
+      try container.encode(self.failureReason, forKey: .failureReason)
+    }
     try container.encodeIfPresent(self.invocationTiming, forKey: .invocationTiming)
     try container.encodeIfPresent(self.internalMetadata, forKey: .internalMetadata)
 
@@ -234,8 +238,12 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sqlScript, forKey: .sqlScript)
-      try container.encode(self.jobId, forKey: .jobId)
+      if !self.sqlScript.isEmpty {
+        try container.encode(self.sqlScript, forKey: .sqlScript)
+      }
+      if !self.jobId.isEmpty {
+        try container.encode(self.jobId, forKey: .jobId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -334,9 +342,15 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.contents, forKey: .contents)
-      try container.encode(self.jobId, forKey: .jobId)
-      try container.encode(self.filePath, forKey: .filePath)
+      if !self.contents.isEmpty {
+        try container.encode(self.contents, forKey: .contents)
+      }
+      if !self.jobId.isEmpty {
+        try container.encode(self.jobId, forKey: .jobId)
+      }
+      if !self.filePath.isEmpty {
+        try container.encode(self.filePath, forKey: .filePath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -455,8 +469,12 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.generatedSql, forKey: .generatedSql)
-      try container.encode(self.jobId, forKey: .jobId)
+      if !self.generatedSql.isEmpty {
+        try container.encode(self.generatedSql, forKey: .generatedSql)
+      }
+      if !self.jobId.isEmpty {
+        try container.encode(self.jobId, forKey: .jobId)
+      }
 
       if let choice = self.definition {
         switch choice {
@@ -538,7 +556,9 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.query, forKey: .query)
+        if !self.query.isEmpty {
+          try container.encode(self.query, forKey: .query)
+        }
         try container.encodeIfPresent(self.errorTable, forKey: .errorTable)
         try container.encodeIfPresent(self.loadConfig, forKey: .loadConfig)
         for (key, value) in self._unknownFields.json {
@@ -630,7 +650,9 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.target, forKey: .target)
-        try container.encode(self.retentionDays, forKey: .retentionDays)
+        if self.retentionDays != 0 {
+          try container.encode(self.retentionDays, forKey: .retentionDays)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -927,7 +949,9 @@ public struct WorkflowInvocationAction: Codable, Equatable, GoogleWKT._AnyPackab
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.column, forKey: .column)
+        if !self.column.isEmpty {
+          try container.encode(self.column, forKey: .column)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -99,10 +99,18 @@ public struct RelationshipAttributes: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.sourceResourceType, forKey: .sourceResourceType)
-    try container.encode(self.targetResourceType, forKey: .targetResourceType)
-    try container.encode(self.action, forKey: .action)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.sourceResourceType.isEmpty {
+      try container.encode(self.sourceResourceType, forKey: .sourceResourceType)
+    }
+    if !self.targetResourceType.isEmpty {
+      try container.encode(self.targetResourceType, forKey: .targetResourceType)
+    }
+    if !self.action.isEmpty {
+      try container.encode(self.action, forKey: .action)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

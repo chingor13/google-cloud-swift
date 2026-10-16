@@ -122,14 +122,26 @@ public struct EntityIssue: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.code, forKey: .code)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.type != EntityIssue.IssueType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.severity != EntityIssue.IssueSeverity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if !self.code.isEmpty {
+      try container.encode(self.code, forKey: .code)
+    }
     try container.encodeIfPresent(self.ddl, forKey: .ddl)
     try container.encodeIfPresent(self.position, forKey: .position)
-    try container.encode(self.entityType, forKey: .entityType)
+    if self.entityType != DatabaseEntityType() {
+      try container.encode(self.entityType, forKey: .entityType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -211,10 +223,18 @@ public struct EntityIssue: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.line, forKey: .line)
-      try container.encode(self.column, forKey: .column)
-      try container.encode(self.offset, forKey: .offset)
-      try container.encode(self.length, forKey: .length)
+      if self.line != 0 {
+        try container.encode(self.line, forKey: .line)
+      }
+      if self.column != 0 {
+        try container.encode(self.column, forKey: .column)
+      }
+      if self.offset != 0 {
+        try container.encode(self.offset, forKey: .offset)
+      }
+      if self.length != 0 {
+        try container.encode(self.length, forKey: .length)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

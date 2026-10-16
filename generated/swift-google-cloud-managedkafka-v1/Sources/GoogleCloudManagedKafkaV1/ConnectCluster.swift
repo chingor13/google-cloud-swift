@@ -149,14 +149,24 @@ public struct ConnectCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.kafkaCluster, forKey: .kafkaCluster)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.kafkaCluster.isEmpty {
+      try container.encode(self.kafkaCluster, forKey: .kafkaCluster)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.capacityConfig, forKey: .capacityConfig)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.config, forKey: .config)
+    if self.state != ConnectCluster.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.config.isEmpty {
+      try container.encode(self.config, forKey: .config)
+    }
 
     if let choice = self.platformConfig {
       switch choice {

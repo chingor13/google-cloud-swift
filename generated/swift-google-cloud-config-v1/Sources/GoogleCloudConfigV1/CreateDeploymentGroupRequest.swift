@@ -105,10 +105,16 @@ public struct CreateDeploymentGroupRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.deploymentGroupId, forKey: .deploymentGroupId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.deploymentGroupId.isEmpty {
+      try container.encode(self.deploymentGroupId, forKey: .deploymentGroupId)
+    }
     try container.encodeIfPresent(self.deploymentGroup, forKey: .deploymentGroup)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

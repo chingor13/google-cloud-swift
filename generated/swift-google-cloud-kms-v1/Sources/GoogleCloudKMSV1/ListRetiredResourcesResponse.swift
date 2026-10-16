@@ -99,9 +99,15 @@ public struct ListRetiredResourcesResponse: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.retiredResources, forKey: .retiredResources)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.totalSize, forKey: .totalSize)
+    if !self.retiredResources.isEmpty {
+      try container.encode(self.retiredResources, forKey: .retiredResources)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if self.totalSize != 0 {
+      try container.encode(self.totalSize, forKey: .totalSize)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

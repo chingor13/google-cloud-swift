@@ -89,8 +89,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.answers, forKey: .answers)
-      try container.encode(self.rewrittenQuery, forKey: .rewrittenQuery)
+      if !self.answers.isEmpty {
+        try container.encode(self.answers, forKey: .answers)
+      }
+      if !self.rewrittenQuery.isEmpty {
+        try container.encode(self.rewrittenQuery, forKey: .rewrittenQuery)
+      }
       try container.encodeIfPresent(
         self.searchKnowledgeDebugInfo, forKey: .searchKnowledgeDebugInfo)
       for (key, value) in self._unknownFields.json {

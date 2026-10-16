@@ -157,15 +157,29 @@ public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rawDer, forKey: .rawDer)
-    try container.encode(self.parsed, forKey: .parsed)
-    try container.encode(self.issuer, forKey: .issuer)
-    try container.encode(self.subject, forKey: .subject)
-    try container.encode(self.subjectAlternativeDnsNames, forKey: .subjectAlternativeDnsNames)
+    if !self.rawDer.isEmpty {
+      try container.encode(self.rawDer, forKey: .rawDer)
+    }
+    if self.parsed {
+      try container.encode(self.parsed, forKey: .parsed)
+    }
+    if !self.issuer.isEmpty {
+      try container.encode(self.issuer, forKey: .issuer)
+    }
+    if !self.subject.isEmpty {
+      try container.encode(self.subject, forKey: .subject)
+    }
+    if !self.subjectAlternativeDnsNames.isEmpty {
+      try container.encode(self.subjectAlternativeDnsNames, forKey: .subjectAlternativeDnsNames)
+    }
     try container.encodeIfPresent(self.notBeforeTime, forKey: .notBeforeTime)
     try container.encodeIfPresent(self.notAfterTime, forKey: .notAfterTime)
-    try container.encode(self.serialNumber, forKey: .serialNumber)
-    try container.encode(self.sha256Fingerprint, forKey: .sha256Fingerprint)
+    if !self.serialNumber.isEmpty {
+      try container.encode(self.serialNumber, forKey: .serialNumber)
+    }
+    if !self.sha256Fingerprint.isEmpty {
+      try container.encode(self.sha256Fingerprint, forKey: .sha256Fingerprint)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

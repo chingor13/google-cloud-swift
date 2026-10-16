@@ -86,7 +86,9 @@ public struct UpdateProvisioningConfigRequest: Codable, Equatable, GoogleWKT._An
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.provisioningConfig, forKey: .provisioningConfig)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.email, forKey: .email)
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

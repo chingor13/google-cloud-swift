@@ -277,23 +277,43 @@ public struct Shipment: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.pickups, forKey: .pickups)
-    try container.encode(self.deliveries, forKey: .deliveries)
-    try container.encode(self.loadDemands, forKey: .loadDemands)
+    if !self.pickups.isEmpty {
+      try container.encode(self.pickups, forKey: .pickups)
+    }
+    if !self.deliveries.isEmpty {
+      try container.encode(self.deliveries, forKey: .deliveries)
+    }
+    if !self.loadDemands.isEmpty {
+      try container.encode(self.loadDemands, forKey: .loadDemands)
+    }
     try container.encodeIfPresent(self.penaltyCost, forKey: .penaltyCost)
-    try container.encode(self.allowedVehicleIndices, forKey: .allowedVehicleIndices)
-    try container.encode(self.costsPerVehicle, forKey: .costsPerVehicle)
-    try container.encode(self.costsPerVehicleIndices, forKey: .costsPerVehicleIndices)
+    if !self.allowedVehicleIndices.isEmpty {
+      try container.encode(self.allowedVehicleIndices, forKey: .allowedVehicleIndices)
+    }
+    if !self.costsPerVehicle.isEmpty {
+      try container.encode(self.costsPerVehicle, forKey: .costsPerVehicle)
+    }
+    if !self.costsPerVehicleIndices.isEmpty {
+      try container.encode(self.costsPerVehicleIndices, forKey: .costsPerVehicleIndices)
+    }
     try container.encodeIfPresent(
       self.pickupToDeliveryRelativeDetourLimit, forKey: .pickupToDeliveryRelativeDetourLimit)
     try container.encodeIfPresent(
       self.pickupToDeliveryAbsoluteDetourLimit, forKey: .pickupToDeliveryAbsoluteDetourLimit)
     try container.encodeIfPresent(
       self.pickupToDeliveryTimeLimit, forKey: .pickupToDeliveryTimeLimit)
-    try container.encode(self.shipmentType, forKey: .shipmentType)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.ignore, forKey: .ignore)
-    try container.encode(self.demands, forKey: .demands)
+    if !self.shipmentType.isEmpty {
+      try container.encode(self.shipmentType, forKey: .shipmentType)
+    }
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if self.ignore {
+      try container.encode(self.ignore, forKey: .ignore)
+    }
+    if !self.demands.isEmpty {
+      try container.encode(self.demands, forKey: .demands)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -503,14 +523,28 @@ public struct Shipment: Codable, Equatable, GoogleWKT._AnyPackable,
       try container.encodeIfPresent(self.arrivalWaypoint, forKey: .arrivalWaypoint)
       try container.encodeIfPresent(self.departureLocation, forKey: .departureLocation)
       try container.encodeIfPresent(self.departureWaypoint, forKey: .departureWaypoint)
-      try container.encode(self.tags, forKey: .tags)
-      try container.encode(self.timeWindows, forKey: .timeWindows)
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
+      if !self.timeWindows.isEmpty {
+        try container.encode(self.timeWindows, forKey: .timeWindows)
+      }
       try container.encodeIfPresent(self.duration, forKey: .duration)
-      try container.encode(self.cost, forKey: .cost)
-      try container.encode(self.loadDemands, forKey: .loadDemands)
-      try container.encode(self.visitTypes, forKey: .visitTypes)
-      try container.encode(self.label, forKey: .label)
-      try container.encode(self.demands, forKey: .demands)
+      if self.cost != 0 {
+        try container.encode(self.cost, forKey: .cost)
+      }
+      if !self.loadDemands.isEmpty {
+        try container.encode(self.loadDemands, forKey: .loadDemands)
+      }
+      if !self.visitTypes.isEmpty {
+        try container.encode(self.visitTypes, forKey: .visitTypes)
+      }
+      if !self.label.isEmpty {
+        try container.encode(self.label, forKey: .label)
+      }
+      if !self.demands.isEmpty {
+        try container.encode(self.demands, forKey: .demands)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -597,7 +631,9 @@ public struct Shipment: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.amount, forKey: .amount)
+      if self.amount != 0 {
+        try container.encode(self.amount, forKey: .amount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

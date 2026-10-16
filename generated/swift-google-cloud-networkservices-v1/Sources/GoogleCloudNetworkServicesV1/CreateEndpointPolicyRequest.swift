@@ -86,8 +86,12 @@ public struct CreateEndpointPolicyRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.endpointPolicyId, forKey: .endpointPolicyId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.endpointPolicyId.isEmpty {
+      try container.encode(self.endpointPolicyId, forKey: .endpointPolicyId)
+    }
     try container.encodeIfPresent(self.endpointPolicy, forKey: .endpointPolicy)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

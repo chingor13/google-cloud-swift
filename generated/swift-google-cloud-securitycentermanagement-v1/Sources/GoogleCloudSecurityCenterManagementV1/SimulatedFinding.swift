@@ -164,15 +164,31 @@ public struct SimulatedFinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.category, forKey: .category)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.sourceProperties, forKey: .sourceProperties)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.category.isEmpty {
+      try container.encode(self.category, forKey: .category)
+    }
+    if self.state != SimulatedFinding.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.sourceProperties.isEmpty {
+      try container.encode(self.sourceProperties, forKey: .sourceProperties)
+    }
     try container.encodeIfPresent(self.eventTime, forKey: .eventTime)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.findingClass, forKey: .findingClass)
+    if self.severity != SimulatedFinding.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if self.findingClass != SimulatedFinding.FindingClass() {
+      try container.encode(self.findingClass, forKey: .findingClass)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

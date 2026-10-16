@@ -122,9 +122,13 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.displayName, forKey: .displayName)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.packetMirroringRules, forKey: .packetMirroringRules)
+      if !self.packetMirroringRules.isEmpty {
+        try container.encode(self.packetMirroringRules, forKey: .packetMirroringRules)
+      }
       try container.encodeIfPresent(self.priority, forKey: .priority)
-      try container.encode(self.rules, forKey: .rules)
+      if !self.rules.isEmpty {
+        try container.encode(self.rules, forKey: .rules)
+      }
       try container.encodeIfPresent(self.shortName, forKey: .shortName)
       try container.encodeIfPresent(self.type, forKey: .type)
       for (key, value) in self._unknownFields.json {

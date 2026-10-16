@@ -117,9 +117,13 @@ public struct CrossClusterReplicationConfig: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clusterRole, forKey: .clusterRole)
+    if self.clusterRole != CrossClusterReplicationConfig.ClusterRole() {
+      try container.encode(self.clusterRole, forKey: .clusterRole)
+    }
     try container.encodeIfPresent(self.primaryCluster, forKey: .primaryCluster)
-    try container.encode(self.secondaryClusters, forKey: .secondaryClusters)
+    if !self.secondaryClusters.isEmpty {
+      try container.encode(self.secondaryClusters, forKey: .secondaryClusters)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.membership, forKey: .membership)
     for (key, value) in self._unknownFields.json {
@@ -189,8 +193,12 @@ public struct CrossClusterReplicationConfig: Codable, Equatable, GoogleWKT._AnyP
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cluster, forKey: .cluster)
-      try container.encode(self.uid, forKey: .uid)
+      if !self.cluster.isEmpty {
+        try container.encode(self.cluster, forKey: .cluster)
+      }
+      if !self.uid.isEmpty {
+        try container.encode(self.uid, forKey: .uid)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -284,7 +292,9 @@ public struct CrossClusterReplicationConfig: Codable, Equatable, GoogleWKT._AnyP
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.primaryCluster, forKey: .primaryCluster)
-      try container.encode(self.secondaryClusters, forKey: .secondaryClusters)
+      if !self.secondaryClusters.isEmpty {
+        try container.encode(self.secondaryClusters, forKey: .secondaryClusters)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

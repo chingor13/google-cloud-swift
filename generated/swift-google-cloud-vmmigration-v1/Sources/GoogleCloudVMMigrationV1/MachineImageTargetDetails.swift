@@ -198,19 +198,35 @@ public struct MachineImageTargetDetails: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.machineImageName, forKey: .machineImageName)
-    try container.encode(self.targetProject, forKey: .targetProject)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.singleRegionStorage, forKey: .singleRegionStorage)
+    if !self.machineImageName.isEmpty {
+      try container.encode(self.machineImageName, forKey: .machineImageName)
+    }
+    if !self.targetProject.isEmpty {
+      try container.encode(self.targetProject, forKey: .targetProject)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.singleRegionStorage {
+      try container.encode(self.singleRegionStorage, forKey: .singleRegionStorage)
+    }
     try container.encodeIfPresent(self.encryption, forKey: .encryption)
     try container.encodeIfPresent(
       self.machineImageParametersOverrides, forKey: .machineImageParametersOverrides)
     try container.encodeIfPresent(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.additionalLicenses.isEmpty {
+      try container.encode(self.additionalLicenses, forKey: .additionalLicenses)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     try container.encodeIfPresent(self.shieldedInstanceConfig, forKey: .shieldedInstanceConfig)
-    try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    if !self.networkInterfaces.isEmpty {
+      try container.encode(self.networkInterfaces, forKey: .networkInterfaces)
+    }
 
     if let choice = self.osAdaptationConfig {
       switch choice {

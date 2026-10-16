@@ -70,7 +70,9 @@ public struct BatchUpdateAssetsResponse: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.assets, forKey: .assets)
+    if !self.assets.isEmpty {
+      try container.encode(self.assets, forKey: .assets)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

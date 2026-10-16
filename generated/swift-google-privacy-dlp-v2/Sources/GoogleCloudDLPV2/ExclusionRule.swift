@@ -118,7 +118,9 @@ public struct ExclusionRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.matchingType, forKey: .matchingType)
+    if self.matchingType != MatchingType() {
+      try container.encode(self.matchingType, forKey: .matchingType)
+    }
 
     if let choice = self.type {
       switch choice {

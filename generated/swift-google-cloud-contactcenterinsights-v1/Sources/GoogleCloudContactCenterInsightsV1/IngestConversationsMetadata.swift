@@ -100,7 +100,9 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleWKT._AnyPac
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.request, forKey: .request)
-    try container.encode(self.partialErrors, forKey: .partialErrors)
+    if !self.partialErrors.isEmpty {
+      try container.encode(self.partialErrors, forKey: .partialErrors)
+    }
     try container.encodeIfPresent(self.ingestConversationsStats, forKey: .ingestConversationsStats)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -190,10 +192,18 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.processedObjectCount, forKey: .processedObjectCount)
-      try container.encode(self.duplicatesSkippedCount, forKey: .duplicatesSkippedCount)
-      try container.encode(self.successfulIngestCount, forKey: .successfulIngestCount)
-      try container.encode(self.failedIngestCount, forKey: .failedIngestCount)
+      if self.processedObjectCount != 0 {
+        try container.encode(self.processedObjectCount, forKey: .processedObjectCount)
+      }
+      if self.duplicatesSkippedCount != 0 {
+        try container.encode(self.duplicatesSkippedCount, forKey: .duplicatesSkippedCount)
+      }
+      if self.successfulIngestCount != 0 {
+        try container.encode(self.successfulIngestCount, forKey: .successfulIngestCount)
+      }
+      if self.failedIngestCount != 0 {
+        try container.encode(self.failedIngestCount, forKey: .failedIngestCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

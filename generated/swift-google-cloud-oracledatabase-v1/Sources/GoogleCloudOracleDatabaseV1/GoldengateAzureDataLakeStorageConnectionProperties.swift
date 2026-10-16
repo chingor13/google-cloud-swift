@@ -155,16 +155,38 @@ public struct GoldengateAzureDataLakeStorageConnectionProperties: Codable, Equat
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.authenticationType, forKey: .authenticationType)
-    try container.encode(self.account, forKey: .account)
-    try container.encode(self.accountKeySecret, forKey: .accountKeySecret)
-    try container.encode(self.sasTokenSecret, forKey: .sasTokenSecret)
-    try container.encode(self.azureTenantId, forKey: .azureTenantId)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.clientSecret, forKey: .clientSecret)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.azureAuthorityHost, forKey: .azureAuthorityHost)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if self.authenticationType
+      != GoldengateAzureDataLakeStorageConnectionProperties.AuthenticationType()
+    {
+      try container.encode(self.authenticationType, forKey: .authenticationType)
+    }
+    if !self.account.isEmpty {
+      try container.encode(self.account, forKey: .account)
+    }
+    if !self.accountKeySecret.isEmpty {
+      try container.encode(self.accountKeySecret, forKey: .accountKeySecret)
+    }
+    if !self.sasTokenSecret.isEmpty {
+      try container.encode(self.sasTokenSecret, forKey: .sasTokenSecret)
+    }
+    if !self.azureTenantId.isEmpty {
+      try container.encode(self.azureTenantId, forKey: .azureTenantId)
+    }
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.clientSecret.isEmpty {
+      try container.encode(self.clientSecret, forKey: .clientSecret)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.azureAuthorityHost.isEmpty {
+      try container.encode(self.azureAuthorityHost, forKey: .azureAuthorityHost)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

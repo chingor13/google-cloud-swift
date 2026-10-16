@@ -135,12 +135,20 @@ public struct Dataset: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.tableSpecs, forKey: .tableSpecs)
-    try container.encode(self.state, forKey: .state)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.tableSpecs.isEmpty {
+      try container.encode(self.tableSpecs, forKey: .tableSpecs)
+    }
+    if self.state != Dataset.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.dateRange, forKey: .dateRange)
     try container.encodeIfPresent(self.timeZone, forKey: .timeZone)
     for (key, value) in self._unknownFields.json {

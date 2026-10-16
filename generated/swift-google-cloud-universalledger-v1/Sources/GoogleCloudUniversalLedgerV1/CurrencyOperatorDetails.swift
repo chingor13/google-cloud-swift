@@ -118,12 +118,24 @@ public struct CurrencyOperatorDetails: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.currencyCode, forKey: .currencyCode)
-    try container.encode(self.accountStatus, forKey: .accountStatus)
-    try container.encode(self.previousCurrencyOperatorId, forKey: .previousCurrencyOperatorId)
-    try container.encode(self.platformOperatorId, forKey: .platformOperatorId)
-    try container.encode(self.contractTokenManagerId, forKey: .contractTokenManagerId)
-    try container.encode(self.clearinghouseId, forKey: .clearinghouseId)
+    if !self.currencyCode.isEmpty {
+      try container.encode(self.currencyCode, forKey: .currencyCode)
+    }
+    if self.accountStatus != AccountStatus() {
+      try container.encode(self.accountStatus, forKey: .accountStatus)
+    }
+    if !self.previousCurrencyOperatorId.isEmpty {
+      try container.encode(self.previousCurrencyOperatorId, forKey: .previousCurrencyOperatorId)
+    }
+    if !self.platformOperatorId.isEmpty {
+      try container.encode(self.platformOperatorId, forKey: .platformOperatorId)
+    }
+    if !self.contractTokenManagerId.isEmpty {
+      try container.encode(self.contractTokenManagerId, forKey: .contractTokenManagerId)
+    }
+    if !self.clearinghouseId.isEmpty {
+      try container.encode(self.clearinghouseId, forKey: .clearinghouseId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -77,7 +77,9 @@ public struct ConversationLevelSilence: Codable, Equatable, GoogleWKT._AnyPackab
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.silenceDuration, forKey: .silenceDuration)
-    try container.encode(self.silencePercentage, forKey: .silencePercentage)
+    if self.silencePercentage != 0 {
+      try container.encode(self.silencePercentage, forKey: .silencePercentage)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -108,7 +108,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.participant, forKey: .participant)
+      if !self.participant.isEmpty {
+        try container.encode(self.participant, forKey: .participant)
+      }
 
       if let choice = self.input {
         switch choice {

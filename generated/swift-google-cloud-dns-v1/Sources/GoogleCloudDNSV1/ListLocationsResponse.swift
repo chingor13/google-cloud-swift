@@ -76,7 +76,9 @@ public struct ListLocationsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.locations, forKey: .locations)
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

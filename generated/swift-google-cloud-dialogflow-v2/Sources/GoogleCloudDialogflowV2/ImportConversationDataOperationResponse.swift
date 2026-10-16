@@ -85,8 +85,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conversationDataset, forKey: .conversationDataset)
-      try container.encode(self.importCount, forKey: .importCount)
+      if !self.conversationDataset.isEmpty {
+        try container.encode(self.conversationDataset, forKey: .conversationDataset)
+      }
+      if self.importCount != 0 {
+        try container.encode(self.importCount, forKey: .importCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

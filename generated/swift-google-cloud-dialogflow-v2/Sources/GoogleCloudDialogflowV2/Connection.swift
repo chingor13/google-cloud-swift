@@ -93,8 +93,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connectionId, forKey: .connectionId)
-      try container.encode(self.state, forKey: .state)
+      if !self.connectionId.isEmpty {
+        try container.encode(self.connectionId, forKey: .connectionId)
+      }
+      if self.state != Connection.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.errorDetails, forKey: .errorDetails)
       for (key, value) in self._unknownFields.json {

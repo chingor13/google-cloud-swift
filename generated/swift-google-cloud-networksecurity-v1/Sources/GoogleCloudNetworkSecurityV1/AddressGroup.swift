@@ -143,16 +143,32 @@ public struct AddressGroup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.items, forKey: .items)
-    try container.encode(self.capacity, forKey: .capacity)
-    try container.encode(self.selfLink, forKey: .selfLink)
-    try container.encode(self.purpose, forKey: .purpose)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.type != AddressGroup.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.items.isEmpty {
+      try container.encode(self.items, forKey: .items)
+    }
+    if self.capacity != 0 {
+      try container.encode(self.capacity, forKey: .capacity)
+    }
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
+    if !self.purpose.isEmpty {
+      try container.encode(self.purpose, forKey: .purpose)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

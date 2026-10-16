@@ -118,11 +118,17 @@ public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.release, forKey: .release)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.release.isEmpty {
+      try container.encode(self.release, forKey: .release)
+    }
     try container.encodeIfPresent(self.rolloutStrategy, forKey: .rolloutStrategy)
     try container.encodeIfPresent(self.info, forKey: .info)
-    try container.encode(self.deletionPropagationPolicy, forKey: .deletionPropagationPolicy)
+    if self.deletionPropagationPolicy != DeletionPropagationPolicy() {
+      try container.encode(self.deletionPropagationPolicy, forKey: .deletionPropagationPolicy)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

@@ -77,8 +77,12 @@ public struct ManagementURI: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.webUi, forKey: .webUi)
-    try container.encode(self.api, forKey: .api)
+    if !self.webUi.isEmpty {
+      try container.encode(self.webUi, forKey: .webUi)
+    }
+    if !self.api.isEmpty {
+      try container.encode(self.api, forKey: .api)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

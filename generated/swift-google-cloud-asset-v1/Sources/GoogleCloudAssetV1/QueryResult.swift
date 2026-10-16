@@ -95,10 +95,16 @@ public struct QueryResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rows, forKey: .rows)
+    if !self.rows.isEmpty {
+      try container.encode(self.rows, forKey: .rows)
+    }
     try container.encodeIfPresent(self.schema, forKey: .schema)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.totalRows, forKey: .totalRows)
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
+    if self.totalRows != 0 {
+      try container.encode(self.totalRows, forKey: .totalRows)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

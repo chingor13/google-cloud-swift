@@ -117,9 +117,15 @@ public struct Barcode: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.format, forKey: .format)
-    try container.encode(self.valueFormat, forKey: .valueFormat)
-    try container.encode(self.rawValue, forKey: .rawValue)
+    if !self.format.isEmpty {
+      try container.encode(self.format, forKey: .format)
+    }
+    if !self.valueFormat.isEmpty {
+      try container.encode(self.valueFormat, forKey: .valueFormat)
+    }
+    if !self.rawValue.isEmpty {
+      try container.encode(self.rawValue, forKey: .rawValue)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

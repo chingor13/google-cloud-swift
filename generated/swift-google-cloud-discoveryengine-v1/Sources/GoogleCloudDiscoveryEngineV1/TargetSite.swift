@@ -151,14 +151,28 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.providedUriPattern, forKey: .providedUriPattern)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.exactMatch, forKey: .exactMatch)
-      try container.encode(self.generatedUriPattern, forKey: .generatedUriPattern)
-      try container.encode(self.rootDomainUri, forKey: .rootDomainUri)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.providedUriPattern.isEmpty {
+        try container.encode(self.providedUriPattern, forKey: .providedUriPattern)
+      }
+      if self.type != TargetSite.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.exactMatch {
+        try container.encode(self.exactMatch, forKey: .exactMatch)
+      }
+      if !self.generatedUriPattern.isEmpty {
+        try container.encode(self.generatedUriPattern, forKey: .generatedUriPattern)
+      }
+      if !self.rootDomainUri.isEmpty {
+        try container.encode(self.rootDomainUri, forKey: .rootDomainUri)
+      }
       try container.encodeIfPresent(self.siteVerificationInfo, forKey: .siteVerificationInfo)
-      try container.encode(self.indexingStatus, forKey: .indexingStatus)
+      if self.indexingStatus != TargetSite.IndexingStatus() {
+        try container.encode(self.indexingStatus, forKey: .indexingStatus)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.failureReason, forKey: .failureReason)
       for (key, value) in self._unknownFields.json {
@@ -299,7 +313,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.totalRequiredQuota, forKey: .totalRequiredQuota)
+          if self.totalRequiredQuota != 0 {
+            try container.encode(self.totalRequiredQuota, forKey: .totalRequiredQuota)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

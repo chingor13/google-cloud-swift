@@ -79,8 +79,12 @@ public struct ConsumerPartitionMetadata: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.offset, forKey: .offset)
-    try container.encode(self.metadata, forKey: .metadata)
+    if self.offset != 0 {
+      try container.encode(self.offset, forKey: .offset)
+    }
+    if !self.metadata.isEmpty {
+      try container.encode(self.metadata, forKey: .metadata)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

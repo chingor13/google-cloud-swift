@@ -72,7 +72,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.jiraQueries, forKey: .jiraQueries)
+      if !self.jiraQueries.isEmpty {
+        try container.encode(self.jiraQueries, forKey: .jiraQueries)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -166,10 +168,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.projects, forKey: .projects)
-        try container.encode(self.customQueries, forKey: .customQueries)
-        try container.encode(self.email, forKey: .email)
-        try container.encode(self.serverUri, forKey: .serverUri)
+        if !self.projects.isEmpty {
+          try container.encode(self.projects, forKey: .projects)
+        }
+        if !self.customQueries.isEmpty {
+          try container.encode(self.customQueries, forKey: .customQueries)
+        }
+        if !self.email.isEmpty {
+          try container.encode(self.email, forKey: .email)
+        }
+        if !self.serverUri.isEmpty {
+          try container.encode(self.serverUri, forKey: .serverUri)
+        }
         try container.encodeIfPresent(self.apiKeyConfig, forKey: .apiKeyConfig)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

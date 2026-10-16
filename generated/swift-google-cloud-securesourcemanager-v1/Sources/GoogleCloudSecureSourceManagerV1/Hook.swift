@@ -132,15 +132,27 @@ public struct Hook: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.targetUri, forKey: .targetUri)
-    try container.encode(self.disabled, forKey: .disabled)
-    try container.encode(self.events, forKey: .events)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.targetUri.isEmpty {
+      try container.encode(self.targetUri, forKey: .targetUri)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
+    if !self.events.isEmpty {
+      try container.encode(self.events, forKey: .events)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.pushOption, forKey: .pushOption)
-    try container.encode(self.sensitiveQueryString, forKey: .sensitiveQueryString)
+    if !self.sensitiveQueryString.isEmpty {
+      try container.encode(self.sensitiveQueryString, forKey: .sensitiveQueryString)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -200,7 +212,9 @@ public struct Hook: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.branchFilter, forKey: .branchFilter)
+      if !self.branchFilter.isEmpty {
+        try container.encode(self.branchFilter, forKey: .branchFilter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

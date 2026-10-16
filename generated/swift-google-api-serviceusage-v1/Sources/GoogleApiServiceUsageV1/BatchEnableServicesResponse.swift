@@ -82,8 +82,12 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.services, forKey: .services)
-    try container.encode(self.failures, forKey: .failures)
+    if !self.services.isEmpty {
+      try container.encode(self.services, forKey: .services)
+    }
+    if !self.failures.isEmpty {
+      try container.encode(self.failures, forKey: .failures)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -149,8 +153,12 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceId, forKey: .serviceId)
-      try container.encode(self.errorMessage, forKey: .errorMessage)
+      if !self.serviceId.isEmpty {
+        try container.encode(self.serviceId, forKey: .serviceId)
+      }
+      if !self.errorMessage.isEmpty {
+        try container.encode(self.errorMessage, forKey: .errorMessage)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

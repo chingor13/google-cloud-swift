@@ -126,10 +126,16 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.languageCode, forKey: .languageCode)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.languageCode.isEmpty {
+        try container.encode(self.languageCode, forKey: .languageCode)
+      }
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-      try container.encode(self.intentView, forKey: .intentView)
+      if self.intentView != IntentView() {
+        try container.encode(self.intentView, forKey: .intentView)
+      }
 
       if let choice = self.intentBatch {
         switch choice {

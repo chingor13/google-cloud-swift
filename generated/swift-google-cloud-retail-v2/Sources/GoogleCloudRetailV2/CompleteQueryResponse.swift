@@ -143,10 +143,18 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.completionResults, forKey: .completionResults)
-    try container.encode(self.attributionToken, forKey: .attributionToken)
-    try container.encode(self.recentSearchResults, forKey: .recentSearchResults)
-    try container.encode(self.attributeResults, forKey: .attributeResults)
+    if !self.completionResults.isEmpty {
+      try container.encode(self.completionResults, forKey: .completionResults)
+    }
+    if !self.attributionToken.isEmpty {
+      try container.encode(self.attributionToken, forKey: .attributionToken)
+    }
+    if !self.recentSearchResults.isEmpty {
+      try container.encode(self.recentSearchResults, forKey: .recentSearchResults)
+    }
+    if !self.attributeResults.isEmpty {
+      try container.encode(self.attributeResults, forKey: .attributeResults)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -224,8 +232,12 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.suggestion, forKey: .suggestion)
-      try container.encode(self.attributes, forKey: .attributes)
+      if !self.suggestion.isEmpty {
+        try container.encode(self.suggestion, forKey: .suggestion)
+      }
+      if !self.attributes.isEmpty {
+        try container.encode(self.attributes, forKey: .attributes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -306,7 +318,9 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.recentSearch, forKey: .recentSearch)
+      if !self.recentSearch.isEmpty {
+        try container.encode(self.recentSearch, forKey: .recentSearch)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -386,7 +400,9 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.suggestions, forKey: .suggestions)
+      if !self.suggestions.isEmpty {
+        try container.encode(self.suggestions, forKey: .suggestions)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

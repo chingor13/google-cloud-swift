@@ -92,10 +92,16 @@ public struct BatchRunProcessRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.requests, forKey: .requests)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.requests.isEmpty {
+      try container.encode(self.requests, forKey: .requests)
+    }
     try container.encodeIfPresent(self.options, forKey: .options)
-    try container.encode(self.batchId, forKey: .batchId)
+    if !self.batchId.isEmpty {
+      try container.encode(self.batchId, forKey: .batchId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -161,8 +167,12 @@ public struct BatchRunProcessRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.retryCount, forKey: .retryCount)
-      try container.encode(self.batchSize, forKey: .batchSize)
+      if self.retryCount != 0 {
+        try container.encode(self.retryCount, forKey: .retryCount)
+      }
+      if self.batchSize != 0 {
+        try container.encode(self.batchSize, forKey: .batchSize)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

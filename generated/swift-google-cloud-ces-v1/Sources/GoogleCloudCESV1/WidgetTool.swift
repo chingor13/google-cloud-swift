@@ -130,9 +130,15 @@ public struct WidgetTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.widgetType, forKey: .widgetType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.widgetType != WidgetTool.WidgetType() {
+      try container.encode(self.widgetType, forKey: .widgetType)
+    }
     try container.encodeIfPresent(self.uiConfig, forKey: .uiConfig)
     try container.encodeIfPresent(self.dataMapping, forKey: .dataMapping)
     try container.encodeIfPresent(self.textResponseConfig, forKey: .textResponseConfig)
@@ -222,9 +228,15 @@ public struct WidgetTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.staticText, forKey: .staticText)
-      try container.encode(self.textResponseInstruction, forKey: .textResponseInstruction)
+      if self.type != WidgetTool.TextResponseConfig.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.staticText.isEmpty {
+        try container.encode(self.staticText, forKey: .staticText)
+      }
+      if !self.textResponseInstruction.isEmpty {
+        try container.encode(self.textResponseInstruction, forKey: .textResponseInstruction)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -475,11 +487,19 @@ public struct WidgetTool: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceToolName, forKey: .sourceToolName)
-      try container.encode(self.fieldMappings, forKey: .fieldMappings)
+      if !self.sourceToolName.isEmpty {
+        try container.encode(self.sourceToolName, forKey: .sourceToolName)
+      }
+      if !self.fieldMappings.isEmpty {
+        try container.encode(self.fieldMappings, forKey: .fieldMappings)
+      }
       try container.encodeIfPresent(self.pythonFunction, forKey: .pythonFunction)
-      try container.encode(self.mode, forKey: .mode)
-      try container.encode(self.pythonScript, forKey: .pythonScript)
+      if self.mode != WidgetTool.DataMapping.Mode() {
+        try container.encode(self.mode, forKey: .mode)
+      }
+      if !self.pythonScript.isEmpty {
+        try container.encode(self.pythonScript, forKey: .pythonScript)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

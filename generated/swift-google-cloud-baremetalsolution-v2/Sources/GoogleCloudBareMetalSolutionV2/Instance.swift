@@ -240,26 +240,60 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.id, forKey: .id)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.hyperthreadingEnabled, forKey: .hyperthreadingEnabled)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.luns, forKey: .luns)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.networks, forKey: .networks)
-    try container.encode(
-      self.interactiveSerialConsoleEnabled, forKey: .interactiveSerialConsoleEnabled)
-    try container.encode(self.osImage, forKey: .osImage)
-    try container.encode(self.pod, forKey: .pod)
-    try container.encode(self.networkTemplate, forKey: .networkTemplate)
-    try container.encode(self.logicalInterfaces, forKey: .logicalInterfaces)
-    try container.encode(self.loginInfo, forKey: .loginInfo)
-    try container.encode(self.workloadProfile, forKey: .workloadProfile)
-    try container.encode(self.firmwareVersion, forKey: .firmwareVersion)
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.hyperthreadingEnabled {
+      try container.encode(self.hyperthreadingEnabled, forKey: .hyperthreadingEnabled)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.luns.isEmpty {
+      try container.encode(self.luns, forKey: .luns)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
+    if self.interactiveSerialConsoleEnabled {
+      try container.encode(
+        self.interactiveSerialConsoleEnabled, forKey: .interactiveSerialConsoleEnabled)
+    }
+    if !self.osImage.isEmpty {
+      try container.encode(self.osImage, forKey: .osImage)
+    }
+    if !self.pod.isEmpty {
+      try container.encode(self.pod, forKey: .pod)
+    }
+    if !self.networkTemplate.isEmpty {
+      try container.encode(self.networkTemplate, forKey: .networkTemplate)
+    }
+    if !self.logicalInterfaces.isEmpty {
+      try container.encode(self.logicalInterfaces, forKey: .logicalInterfaces)
+    }
+    if !self.loginInfo.isEmpty {
+      try container.encode(self.loginInfo, forKey: .loginInfo)
+    }
+    if self.workloadProfile != GoogleCloudBareMetalSolutionV2.WorkloadProfile() {
+      try container.encode(self.workloadProfile, forKey: .workloadProfile)
+    }
+    if !self.firmwareVersion.isEmpty {
+      try container.encode(self.firmwareVersion, forKey: .firmwareVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -79,8 +79,12 @@ public struct QueryEligibleBillingAccountsRequest: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.customer, forKey: .customer)
-    try container.encode(self.skus, forKey: .skus)
+    if !self.customer.isEmpty {
+      try container.encode(self.customer, forKey: .customer)
+    }
+    if !self.skus.isEmpty {
+      try container.encode(self.skus, forKey: .skus)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

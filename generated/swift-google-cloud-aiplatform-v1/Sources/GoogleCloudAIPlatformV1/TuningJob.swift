@@ -290,22 +290,38 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.tunedModelDisplayName, forKey: .tunedModelDisplayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.state, forKey: .state)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.tunedModelDisplayName.isEmpty {
+        try container.encode(self.tunedModelDisplayName, forKey: .tunedModelDisplayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.state != JobState() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.experiment, forKey: .experiment)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.experiment.isEmpty {
+        try container.encode(self.experiment, forKey: .experiment)
+      }
       try container.encodeIfPresent(self.tunedModel, forKey: .tunedModel)
       try container.encodeIfPresent(self.tuningDataStats, forKey: .tuningDataStats)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
-      try container.encode(self.evaluateDatasetRuns, forKey: .evaluateDatasetRuns)
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
+      if !self.evaluateDatasetRuns.isEmpty {
+        try container.encode(self.evaluateDatasetRuns, forKey: .evaluateDatasetRuns)
+      }
 
       if let choice = self.sourceModel {
         switch choice {

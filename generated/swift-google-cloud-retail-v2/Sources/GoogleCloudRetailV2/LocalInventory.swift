@@ -135,10 +135,16 @@ public struct LocalInventory: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.placeId, forKey: .placeId)
+    if !self.placeId.isEmpty {
+      try container.encode(self.placeId, forKey: .placeId)
+    }
     try container.encodeIfPresent(self.priceInfo, forKey: .priceInfo)
-    try container.encode(self.attributes, forKey: .attributes)
-    try container.encode(self.fulfillmentTypes, forKey: .fulfillmentTypes)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
+    if !self.fulfillmentTypes.isEmpty {
+      try container.encode(self.fulfillmentTypes, forKey: .fulfillmentTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

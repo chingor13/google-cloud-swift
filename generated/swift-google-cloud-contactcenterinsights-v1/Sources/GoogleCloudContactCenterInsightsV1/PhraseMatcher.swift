@@ -162,16 +162,32 @@ public struct PhraseMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.revisionId, forKey: .revisionId)
-    try container.encode(self.versionTag, forKey: .versionTag)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.revisionId.isEmpty {
+      try container.encode(self.revisionId, forKey: .revisionId)
+    }
+    if !self.versionTag.isEmpty {
+      try container.encode(self.versionTag, forKey: .versionTag)
+    }
     try container.encodeIfPresent(self.revisionCreateTime, forKey: .revisionCreateTime)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.active, forKey: .active)
-    try container.encode(self.phraseMatchRuleGroups, forKey: .phraseMatchRuleGroups)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if self.type != PhraseMatcher.PhraseMatcherType() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if self.active {
+      try container.encode(self.active, forKey: .active)
+    }
+    if !self.phraseMatchRuleGroups.isEmpty {
+      try container.encode(self.phraseMatchRuleGroups, forKey: .phraseMatchRuleGroups)
+    }
     try container.encodeIfPresent(self.activationUpdateTime, forKey: .activationUpdateTime)
-    try container.encode(self.roleMatch, forKey: .roleMatch)
+    if self.roleMatch != ConversationParticipant.Role() {
+      try container.encode(self.roleMatch, forKey: .roleMatch)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -104,7 +104,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parent, forKey: .parent)
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
       try container.encodeIfPresent(self.query, forKey: .query)
 
       if let choice = self.dataSource {
@@ -190,7 +192,9 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.ragResources, forKey: .ragResources)
+        if !self.ragResources.isEmpty {
+          try container.encode(self.ragResources, forKey: .ragResources)
+        }
         try container.encodeIfPresent(
           self.vectorDistanceThreshold, forKey: .vectorDistanceThreshold)
         for (key, value) in self._unknownFields.json {
@@ -261,8 +265,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.ragCorpus, forKey: .ragCorpus)
-          try container.encode(self.ragFileIds, forKey: .ragFileIds)
+          if !self.ragCorpus.isEmpty {
+            try container.encode(self.ragCorpus, forKey: .ragCorpus)
+          }
+          if !self.ragFileIds.isEmpty {
+            try container.encode(self.ragFileIds, forKey: .ragFileIds)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

@@ -310,34 +310,64 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.runtimeUser, forKey: .runtimeUser)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.runtimeUser.isEmpty {
+        try container.encode(self.runtimeUser, forKey: .runtimeUser)
+      }
       try container.encodeIfPresent(
         self.notebookRuntimeTemplateRef, forKey: .notebookRuntimeTemplateRef)
-      try container.encode(self.proxyUri, forKey: .proxyUri)
+      if !self.proxyUri.isEmpty {
+        try container.encode(self.proxyUri, forKey: .proxyUri)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.healthState, forKey: .healthState)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.serviceAccount, forKey: .serviceAccount)
-      try container.encode(self.runtimeState, forKey: .runtimeState)
-      try container.encode(self.isUpgradable, forKey: .isUpgradable)
-      try container.encode(self.labels, forKey: .labels)
+      if self.healthState != NotebookRuntime.HealthState() {
+        try container.encode(self.healthState, forKey: .healthState)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if !self.serviceAccount.isEmpty {
+        try container.encode(self.serviceAccount, forKey: .serviceAccount)
+      }
+      if self.runtimeState != NotebookRuntime.RuntimeState() {
+        try container.encode(self.runtimeState, forKey: .runtimeState)
+      }
+      if self.isUpgradable {
+        try container.encode(self.isUpgradable, forKey: .isUpgradable)
+      }
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.expirationTime, forKey: .expirationTime)
-      try container.encode(self.version, forKey: .version)
-      try container.encode(self.notebookRuntimeType, forKey: .notebookRuntimeType)
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
+      if self.notebookRuntimeType != NotebookRuntimeType() {
+        try container.encode(self.notebookRuntimeType, forKey: .notebookRuntimeType)
+      }
       try container.encodeIfPresent(self.machineSpec, forKey: .machineSpec)
       try container.encodeIfPresent(self.dataPersistentDiskSpec, forKey: .dataPersistentDiskSpec)
       try container.encodeIfPresent(self.networkSpec, forKey: .networkSpec)
       try container.encodeIfPresent(self.idleShutdownConfig, forKey: .idleShutdownConfig)
       try container.encodeIfPresent(self.eucConfig, forKey: .eucConfig)
       try container.encodeIfPresent(self.shieldedVmConfig, forKey: .shieldedVmConfig)
-      try container.encode(self.networkTags, forKey: .networkTags)
+      if !self.networkTags.isEmpty {
+        try container.encode(self.networkTags, forKey: .networkTags)
+      }
       try container.encodeIfPresent(self.softwareConfig, forKey: .softwareConfig)
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
-      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      if self.satisfiesPzs {
+        try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+      }
+      if self.satisfiesPzi {
+        try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

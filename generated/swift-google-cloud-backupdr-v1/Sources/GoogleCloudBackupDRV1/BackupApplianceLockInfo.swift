@@ -118,9 +118,15 @@ public struct BackupApplianceLockInfo: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupApplianceId, forKey: .backupApplianceId)
-    try container.encode(self.backupApplianceName, forKey: .backupApplianceName)
-    try container.encode(self.lockReason, forKey: .lockReason)
+    if self.backupApplianceId != 0 {
+      try container.encode(self.backupApplianceId, forKey: .backupApplianceId)
+    }
+    if !self.backupApplianceName.isEmpty {
+      try container.encode(self.backupApplianceName, forKey: .backupApplianceName)
+    }
+    if !self.lockReason.isEmpty {
+      try container.encode(self.lockReason, forKey: .lockReason)
+    }
 
     if let choice = self.lockSource {
       switch choice {

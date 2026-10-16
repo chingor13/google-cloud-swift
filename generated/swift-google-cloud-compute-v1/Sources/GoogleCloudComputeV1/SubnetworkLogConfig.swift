@@ -125,7 +125,9 @@
       try container.encodeIfPresent(self.filterExpr, forKey: .filterExpr)
       try container.encodeIfPresent(self.flowSampling, forKey: .flowSampling)
       try container.encodeIfPresent(self.metadata, forKey: .metadata)
-      try container.encode(self.metadataFields, forKey: .metadataFields)
+      if !self.metadataFields.isEmpty {
+        try container.encode(self.metadataFields, forKey: .metadataFields)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

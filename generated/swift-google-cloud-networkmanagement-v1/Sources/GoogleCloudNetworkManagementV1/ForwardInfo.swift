@@ -85,9 +85,15 @@ public struct ForwardInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.resourceUri, forKey: .resourceUri)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
+    if self.target != ForwardInfo.Target() {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.resourceUri.isEmpty {
+      try container.encode(self.resourceUri, forKey: .resourceUri)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

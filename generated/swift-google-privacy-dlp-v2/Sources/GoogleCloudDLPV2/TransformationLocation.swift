@@ -99,7 +99,9 @@ public struct TransformationLocation: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.containerType, forKey: .containerType)
+    if self.containerType != TransformationContainerType() {
+      try container.encode(self.containerType, forKey: .containerType)
+    }
 
     if let choice = self.locationType {
       switch choice {

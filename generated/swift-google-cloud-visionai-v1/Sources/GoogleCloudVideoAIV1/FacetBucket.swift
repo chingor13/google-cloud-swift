@@ -97,7 +97,9 @@ public struct FacetBucket: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selected, forKey: .selected)
+    if self.selected {
+      try container.encode(self.selected, forKey: .selected)
+    }
 
     if let choice = self.bucketValue {
       switch choice {

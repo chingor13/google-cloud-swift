@@ -117,13 +117,27 @@ public struct ConfigSyncVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.importer, forKey: .importer)
-    try container.encode(self.syncer, forKey: .syncer)
-    try container.encode(self.gitSync, forKey: .gitSync)
-    try container.encode(self.monitor, forKey: .monitor)
-    try container.encode(self.reconcilerManager, forKey: .reconcilerManager)
-    try container.encode(self.rootReconciler, forKey: .rootReconciler)
-    try container.encode(self.admissionWebhook, forKey: .admissionWebhook)
+    if !self.importer.isEmpty {
+      try container.encode(self.importer, forKey: .importer)
+    }
+    if !self.syncer.isEmpty {
+      try container.encode(self.syncer, forKey: .syncer)
+    }
+    if !self.gitSync.isEmpty {
+      try container.encode(self.gitSync, forKey: .gitSync)
+    }
+    if !self.monitor.isEmpty {
+      try container.encode(self.monitor, forKey: .monitor)
+    }
+    if !self.reconcilerManager.isEmpty {
+      try container.encode(self.reconcilerManager, forKey: .reconcilerManager)
+    }
+    if !self.rootReconciler.isEmpty {
+      try container.encode(self.rootReconciler, forKey: .rootReconciler)
+    }
+    if !self.admissionWebhook.isEmpty {
+      try container.encode(self.admissionWebhook, forKey: .admissionWebhook)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

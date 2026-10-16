@@ -79,7 +79,9 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.threats, forKey: .threats)
+    if !self.threats.isEmpty {
+      try container.encode(self.threats, forKey: .threats)
+    }
     try container.encodeIfPresent(self.negativeExpireTime, forKey: .negativeExpireTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -156,8 +158,12 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.threatTypes, forKey: .threatTypes)
-      try container.encode(self.hash, forKey: .hash)
+      if !self.threatTypes.isEmpty {
+        try container.encode(self.threatTypes, forKey: .threatTypes)
+      }
+      if !self.hash.isEmpty {
+        try container.encode(self.hash, forKey: .hash)
+      }
       try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

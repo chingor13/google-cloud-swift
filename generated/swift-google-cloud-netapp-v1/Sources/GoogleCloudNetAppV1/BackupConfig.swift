@@ -96,8 +96,12 @@ public struct BackupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backupPolicies, forKey: .backupPolicies)
-    try container.encode(self.backupVault, forKey: .backupVault)
+    if !self.backupPolicies.isEmpty {
+      try container.encode(self.backupPolicies, forKey: .backupPolicies)
+    }
+    if !self.backupVault.isEmpty {
+      try container.encode(self.backupVault, forKey: .backupVault)
+    }
     try container.encodeIfPresent(self.scheduledBackupEnabled, forKey: .scheduledBackupEnabled)
     try container.encodeIfPresent(self.backupChainBytes, forKey: .backupChainBytes)
     for (key, value) in self._unknownFields.json {

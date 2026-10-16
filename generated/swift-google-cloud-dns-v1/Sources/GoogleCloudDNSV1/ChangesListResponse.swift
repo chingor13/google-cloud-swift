@@ -82,7 +82,9 @@ public struct ChangesListResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.changes, forKey: .changes)
+    if !self.changes.isEmpty {
+      try container.encode(self.changes, forKey: .changes)
+    }
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
     for (key, value) in self._unknownFields.json {

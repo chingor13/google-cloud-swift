@@ -85,8 +85,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.step, forKey: .step)
-      try container.encode(self.stepIndex, forKey: .stepIndex)
+      if !self.step.isEmpty {
+        try container.encode(self.step, forKey: .step)
+      }
+      if self.stepIndex != 0 {
+        try container.encode(self.stepIndex, forKey: .stepIndex)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

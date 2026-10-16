@@ -216,13 +216,21 @@ public struct RawEncryptRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.plaintext, forKey: .plaintext)
-    try container.encode(self.additionalAuthenticatedData, forKey: .additionalAuthenticatedData)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.plaintext.isEmpty {
+      try container.encode(self.plaintext, forKey: .plaintext)
+    }
+    if !self.additionalAuthenticatedData.isEmpty {
+      try container.encode(self.additionalAuthenticatedData, forKey: .additionalAuthenticatedData)
+    }
     try container.encodeIfPresent(self.plaintextCrc32C, forKey: .plaintextCrc32C)
     try container.encodeIfPresent(
       self.additionalAuthenticatedDataCrc32C, forKey: .additionalAuthenticatedDataCrc32C)
-    try container.encode(self.initializationVector, forKey: .initializationVector)
+    if !self.initializationVector.isEmpty {
+      try container.encode(self.initializationVector, forKey: .initializationVector)
+    }
     try container.encodeIfPresent(
       self.initializationVectorCrc32C, forKey: .initializationVectorCrc32C)
     for (key, value) in self._unknownFields.json {

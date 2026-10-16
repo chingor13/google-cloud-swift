@@ -124,11 +124,19 @@ public struct Node: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
-    try container.encode(self.processor, forKey: .processor)
-    try container.encode(self.parents, forKey: .parents)
+    if !self.processor.isEmpty {
+      try container.encode(self.processor, forKey: .processor)
+    }
+    if !self.parents.isEmpty {
+      try container.encode(self.parents, forKey: .parents)
+    }
 
     if let choice = self.streamOutputConfig {
       switch choice {
@@ -214,9 +222,15 @@ public struct Node: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.parentNode, forKey: .parentNode)
-      try container.encode(self.parentOutputChannel, forKey: .parentOutputChannel)
-      try container.encode(self.connectedInputChannel, forKey: .connectedInputChannel)
+      if !self.parentNode.isEmpty {
+        try container.encode(self.parentNode, forKey: .parentNode)
+      }
+      if !self.parentOutputChannel.isEmpty {
+        try container.encode(self.parentOutputChannel, forKey: .parentOutputChannel)
+      }
+      if !self.connectedInputChannel.isEmpty {
+        try container.encode(self.connectedInputChannel, forKey: .connectedInputChannel)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

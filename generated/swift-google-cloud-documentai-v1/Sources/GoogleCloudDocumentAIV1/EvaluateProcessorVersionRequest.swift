@@ -86,7 +86,9 @@ public struct EvaluateProcessorVersionRequest: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.processorVersion, forKey: .processorVersion)
+    if !self.processorVersion.isEmpty {
+      try container.encode(self.processorVersion, forKey: .processorVersion)
+    }
     try container.encodeIfPresent(self.evaluationDocuments, forKey: .evaluationDocuments)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

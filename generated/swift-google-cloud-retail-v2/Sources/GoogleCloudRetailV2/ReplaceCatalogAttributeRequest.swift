@@ -100,7 +100,9 @@ public struct ReplaceCatalogAttributeRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.attributesConfig, forKey: .attributesConfig)
+    if !self.attributesConfig.isEmpty {
+      try container.encode(self.attributesConfig, forKey: .attributesConfig)
+    }
     try container.encodeIfPresent(self.catalogAttribute, forKey: .catalogAttribute)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     for (key, value) in self._unknownFields.json {

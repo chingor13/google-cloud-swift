@@ -177,14 +177,28 @@ public struct CloudStorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.filenamePrefix, forKey: .filenamePrefix)
-    try container.encode(self.filenameSuffix, forKey: .filenameSuffix)
-    try container.encode(self.filenameDatetimeFormat, forKey: .filenameDatetimeFormat)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if !self.filenamePrefix.isEmpty {
+      try container.encode(self.filenamePrefix, forKey: .filenamePrefix)
+    }
+    if !self.filenameSuffix.isEmpty {
+      try container.encode(self.filenameSuffix, forKey: .filenameSuffix)
+    }
+    if !self.filenameDatetimeFormat.isEmpty {
+      try container.encode(self.filenameDatetimeFormat, forKey: .filenameDatetimeFormat)
+    }
     try container.encodeIfPresent(self.maxDuration, forKey: .maxDuration)
-    try container.encode(self.maxBytes, forKey: .maxBytes)
-    try container.encode(self.maxMessages, forKey: .maxMessages)
-    try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+    if self.maxBytes != 0 {
+      try container.encode(self.maxBytes, forKey: .maxBytes)
+    }
+    if self.maxMessages != 0 {
+      try container.encode(self.maxMessages, forKey: .maxMessages)
+    }
+    if !self.serviceAccountEmail.isEmpty {
+      try container.encode(self.serviceAccountEmail, forKey: .serviceAccountEmail)
+    }
 
     if let choice = self.outputFormat {
       switch choice {
@@ -338,8 +352,12 @@ public struct CloudStorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.writeMetadata, forKey: .writeMetadata)
-      try container.encode(self.useTopicSchema, forKey: .useTopicSchema)
+      if self.writeMetadata {
+        try container.encode(self.writeMetadata, forKey: .writeMetadata)
+      }
+      if self.useTopicSchema {
+        try container.encode(self.useTopicSchema, forKey: .useTopicSchema)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

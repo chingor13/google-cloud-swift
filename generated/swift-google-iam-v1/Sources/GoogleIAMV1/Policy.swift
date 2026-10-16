@@ -209,10 +209,18 @@ public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.bindings, forKey: .bindings)
-    try container.encode(self.auditConfigs, forKey: .auditConfigs)
-    try container.encode(self.etag, forKey: .etag)
+    if self.version != 0 {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.bindings.isEmpty {
+      try container.encode(self.bindings, forKey: .bindings)
+    }
+    if !self.auditConfigs.isEmpty {
+      try container.encode(self.auditConfigs, forKey: .auditConfigs)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

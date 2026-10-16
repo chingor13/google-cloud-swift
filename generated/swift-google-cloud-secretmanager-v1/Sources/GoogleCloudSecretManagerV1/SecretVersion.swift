@@ -179,14 +179,22 @@ public struct SecretVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.destroyTime, forKey: .destroyTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != SecretVersion.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.replicationStatus, forKey: .replicationStatus)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(
-      self.clientSpecifiedPayloadChecksum, forKey: .clientSpecifiedPayloadChecksum)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if self.clientSpecifiedPayloadChecksum {
+      try container.encode(
+        self.clientSpecifiedPayloadChecksum, forKey: .clientSpecifiedPayloadChecksum)
+    }
     try container.encodeIfPresent(self.scheduledDestroyTime, forKey: .scheduledDestroyTime)
     try container.encodeIfPresent(
       self.customerManagedEncryption, forKey: .customerManagedEncryption)

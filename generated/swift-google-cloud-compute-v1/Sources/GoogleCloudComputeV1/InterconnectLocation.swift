@@ -253,12 +253,18 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.address, forKey: .address)
       try container.encodeIfPresent(self.availabilityZone, forKey: .availabilityZone)
-      try container.encode(self.availableFeatures, forKey: .availableFeatures)
-      try container.encode(self.availableLinkTypes, forKey: .availableLinkTypes)
+      if !self.availableFeatures.isEmpty {
+        try container.encode(self.availableFeatures, forKey: .availableFeatures)
+      }
+      if !self.availableLinkTypes.isEmpty {
+        try container.encode(self.availableLinkTypes, forKey: .availableLinkTypes)
+      }
       try container.encodeIfPresent(self.city, forKey: .city)
       try container.encodeIfPresent(self.continent, forKey: .continent)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
-      try container.encode(self.crossSiteInterconnectInfos, forKey: .crossSiteInterconnectInfos)
+      if !self.crossSiteInterconnectInfos.isEmpty {
+        try container.encode(self.crossSiteInterconnectInfos, forKey: .crossSiteInterconnectInfos)
+      }
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.facilityProvider, forKey: .facilityProvider)
       try container.encodeIfPresent(
@@ -267,11 +273,15 @@
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.peeringdbFacilityId, forKey: .peeringdbFacilityId)
-      try container.encode(self.regionInfos, forKey: .regionInfos)
+      if !self.regionInfos.isEmpty {
+        try container.encode(self.regionInfos, forKey: .regionInfos)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
-      try container.encode(
-        self.singleRegionProductionCriticalPeerLocations,
-        forKey: .singleRegionProductionCriticalPeerLocations)
+      if !self.singleRegionProductionCriticalPeerLocations.isEmpty {
+        try container.encode(
+          self.singleRegionProductionCriticalPeerLocations,
+          forKey: .singleRegionProductionCriticalPeerLocations)
+      }
       try container.encodeIfPresent(self.status, forKey: .status)
       try container.encodeIfPresent(self.supportsPzs, forKey: .supportsPzs)
       for (key, value) in self._unknownFields.json {

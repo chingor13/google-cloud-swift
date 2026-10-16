@@ -110,7 +110,9 @@ public struct NewBucketConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
     try container.encodeIfPresent(self.hierarchicalNamespace, forKey: .hierarchicalNamespace)
 
     if let choice = self.option {

@@ -203,20 +203,46 @@ public struct ListObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.delimiter, forKey: .delimiter)
-    try container.encode(self.includeTrailingDelimiter, forKey: .includeTrailingDelimiter)
-    try container.encode(self.`prefix`, forKey: .`prefix`)
-    try container.encode(self.versions, forKey: .versions)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.delimiter.isEmpty {
+      try container.encode(self.delimiter, forKey: .delimiter)
+    }
+    if self.includeTrailingDelimiter {
+      try container.encode(self.includeTrailingDelimiter, forKey: .includeTrailingDelimiter)
+    }
+    if !self.`prefix`.isEmpty {
+      try container.encode(self.`prefix`, forKey: .`prefix`)
+    }
+    if self.versions {
+      try container.encode(self.versions, forKey: .versions)
+    }
     try container.encodeIfPresent(self.readMask, forKey: .readMask)
-    try container.encode(self.lexicographicStart, forKey: .lexicographicStart)
-    try container.encode(self.lexicographicEnd, forKey: .lexicographicEnd)
-    try container.encode(self.softDeleted, forKey: .softDeleted)
-    try container.encode(self.includeFoldersAsPrefixes, forKey: .includeFoldersAsPrefixes)
-    try container.encode(self.matchGlob, forKey: .matchGlob)
-    try container.encode(self.filter, forKey: .filter)
+    if !self.lexicographicStart.isEmpty {
+      try container.encode(self.lexicographicStart, forKey: .lexicographicStart)
+    }
+    if !self.lexicographicEnd.isEmpty {
+      try container.encode(self.lexicographicEnd, forKey: .lexicographicEnd)
+    }
+    if self.softDeleted {
+      try container.encode(self.softDeleted, forKey: .softDeleted)
+    }
+    if self.includeFoldersAsPrefixes {
+      try container.encode(self.includeFoldersAsPrefixes, forKey: .includeFoldersAsPrefixes)
+    }
+    if !self.matchGlob.isEmpty {
+      try container.encode(self.matchGlob, forKey: .matchGlob)
+    }
+    if !self.filter.isEmpty {
+      try container.encode(self.filter, forKey: .filter)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

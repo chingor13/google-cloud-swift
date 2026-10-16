@@ -180,17 +180,37 @@ public struct Access: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.principalEmail, forKey: .principalEmail)
-    try container.encode(self.callerIp, forKey: .callerIp)
+    if !self.principalEmail.isEmpty {
+      try container.encode(self.principalEmail, forKey: .principalEmail)
+    }
+    if !self.callerIp.isEmpty {
+      try container.encode(self.callerIp, forKey: .callerIp)
+    }
     try container.encodeIfPresent(self.callerIpGeo, forKey: .callerIpGeo)
-    try container.encode(self.userAgentFamily, forKey: .userAgentFamily)
-    try container.encode(self.userAgent, forKey: .userAgent)
-    try container.encode(self.serviceName, forKey: .serviceName)
-    try container.encode(self.methodName, forKey: .methodName)
-    try container.encode(self.principalSubject, forKey: .principalSubject)
-    try container.encode(self.serviceAccountKeyName, forKey: .serviceAccountKeyName)
-    try container.encode(self.serviceAccountDelegationInfo, forKey: .serviceAccountDelegationInfo)
-    try container.encode(self.userName, forKey: .userName)
+    if !self.userAgentFamily.isEmpty {
+      try container.encode(self.userAgentFamily, forKey: .userAgentFamily)
+    }
+    if !self.userAgent.isEmpty {
+      try container.encode(self.userAgent, forKey: .userAgent)
+    }
+    if !self.serviceName.isEmpty {
+      try container.encode(self.serviceName, forKey: .serviceName)
+    }
+    if !self.methodName.isEmpty {
+      try container.encode(self.methodName, forKey: .methodName)
+    }
+    if !self.principalSubject.isEmpty {
+      try container.encode(self.principalSubject, forKey: .principalSubject)
+    }
+    if !self.serviceAccountKeyName.isEmpty {
+      try container.encode(self.serviceAccountKeyName, forKey: .serviceAccountKeyName)
+    }
+    if !self.serviceAccountDelegationInfo.isEmpty {
+      try container.encode(self.serviceAccountDelegationInfo, forKey: .serviceAccountDelegationInfo)
+    }
+    if !self.userName.isEmpty {
+      try container.encode(self.userName, forKey: .userName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

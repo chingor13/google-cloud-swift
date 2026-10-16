@@ -165,9 +165,16 @@ public struct PythonSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.restAsyncIoEnabled, forKey: .restAsyncIoEnabled)
-      try container.encode(self.protobufPythonicTypesEnabled, forKey: .protobufPythonicTypesEnabled)
-      try container.encode(self.unversionedPackageDisabled, forKey: .unversionedPackageDisabled)
+      if self.restAsyncIoEnabled {
+        try container.encode(self.restAsyncIoEnabled, forKey: .restAsyncIoEnabled)
+      }
+      if self.protobufPythonicTypesEnabled {
+        try container.encode(
+          self.protobufPythonicTypesEnabled, forKey: .protobufPythonicTypesEnabled)
+      }
+      if self.unversionedPackageDisabled {
+        try container.encode(self.unversionedPackageDisabled, forKey: .unversionedPackageDisabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

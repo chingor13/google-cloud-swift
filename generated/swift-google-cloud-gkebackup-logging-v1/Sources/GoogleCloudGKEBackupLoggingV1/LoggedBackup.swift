@@ -114,12 +114,24 @@ public struct LoggedBackup: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.deleteLockDays, forKey: .deleteLockDays)
-    try container.encode(self.retainDays, forKey: .retainDays)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateReason, forKey: .stateReason)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.deleteLockDays != 0 {
+      try container.encode(self.deleteLockDays, forKey: .deleteLockDays)
+    }
+    if self.retainDays != 0 {
+      try container.encode(self.retainDays, forKey: .retainDays)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != LoggedBackup.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateReason.isEmpty {
+      try container.encode(self.stateReason, forKey: .stateReason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

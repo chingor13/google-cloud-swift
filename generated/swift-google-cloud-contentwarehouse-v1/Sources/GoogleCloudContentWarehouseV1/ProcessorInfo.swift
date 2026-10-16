@@ -91,9 +91,15 @@ public struct ProcessorInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.processorName, forKey: .processorName)
-    try container.encode(self.documentType, forKey: .documentType)
-    try container.encode(self.schemaName, forKey: .schemaName)
+    if !self.processorName.isEmpty {
+      try container.encode(self.processorName, forKey: .processorName)
+    }
+    if !self.documentType.isEmpty {
+      try container.encode(self.documentType, forKey: .documentType)
+    }
+    if !self.schemaName.isEmpty {
+      try container.encode(self.schemaName, forKey: .schemaName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

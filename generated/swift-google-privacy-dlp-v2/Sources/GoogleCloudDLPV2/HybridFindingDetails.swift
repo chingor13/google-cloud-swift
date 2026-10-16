@@ -124,10 +124,16 @@ public struct HybridFindingDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.containerDetails, forKey: .containerDetails)
-    try container.encode(self.fileOffset, forKey: .fileOffset)
-    try container.encode(self.rowOffset, forKey: .rowOffset)
+    if self.fileOffset != 0 {
+      try container.encode(self.fileOffset, forKey: .fileOffset)
+    }
+    if self.rowOffset != 0 {
+      try container.encode(self.rowOffset, forKey: .rowOffset)
+    }
     try container.encodeIfPresent(self.tableOptions, forKey: .tableOptions)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

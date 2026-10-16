@@ -293,23 +293,41 @@ public struct MigratingVm: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.sourceVmId, forKey: .sourceVmId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.sourceVmId.isEmpty {
+      try container.encode(self.sourceVmId, forKey: .sourceVmId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.policy, forKey: .policy)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.lastSync, forKey: .lastSync)
-    try container.encode(self.state, forKey: .state)
+    if self.state != MigratingVm.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.stateTime, forKey: .stateTime)
     try container.encodeIfPresent(self.currentSyncInfo, forKey: .currentSyncInfo)
     try container.encodeIfPresent(self.lastReplicationCycle, forKey: .lastReplicationCycle)
-    try container.encode(self.group, forKey: .group)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.recentCloneJobs, forKey: .recentCloneJobs)
+    if !self.group.isEmpty {
+      try container.encode(self.group, forKey: .group)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.recentCloneJobs.isEmpty {
+      try container.encode(self.recentCloneJobs, forKey: .recentCloneJobs)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.recentCutoverJobs, forKey: .recentCutoverJobs)
+    if !self.recentCutoverJobs.isEmpty {
+      try container.encode(self.recentCutoverJobs, forKey: .recentCutoverJobs)
+    }
     try container.encodeIfPresent(self.cutoverForecast, forKey: .cutoverForecast)
     try container.encodeIfPresent(self.expiration, forKey: .expiration)
 
@@ -405,8 +423,12 @@ public struct MigratingVm: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-      try container.encode(self.extensionCount, forKey: .extensionCount)
-      try container.encode(self.extendable, forKey: .extendable)
+      if self.extensionCount != 0 {
+        try container.encode(self.extensionCount, forKey: .extensionCount)
+      }
+      if self.extendable {
+        try container.encode(self.extendable, forKey: .extendable)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

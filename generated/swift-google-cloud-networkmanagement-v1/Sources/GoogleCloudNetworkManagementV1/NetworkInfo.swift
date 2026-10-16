@@ -101,11 +101,21 @@ public struct NetworkInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.matchedSubnetUri, forKey: .matchedSubnetUri)
-    try container.encode(self.matchedIpRange, forKey: .matchedIpRange)
-    try container.encode(self.region, forKey: .region)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.matchedSubnetUri.isEmpty {
+      try container.encode(self.matchedSubnetUri, forKey: .matchedSubnetUri)
+    }
+    if !self.matchedIpRange.isEmpty {
+      try container.encode(self.matchedIpRange, forKey: .matchedIpRange)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

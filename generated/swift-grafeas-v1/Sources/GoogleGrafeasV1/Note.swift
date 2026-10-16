@@ -222,15 +222,27 @@ public struct Note: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.shortDescription, forKey: .shortDescription)
-    try container.encode(self.longDescription, forKey: .longDescription)
-    try container.encode(self.kind, forKey: .kind)
-    try container.encode(self.relatedUrl, forKey: .relatedUrl)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.shortDescription.isEmpty {
+      try container.encode(self.shortDescription, forKey: .shortDescription)
+    }
+    if !self.longDescription.isEmpty {
+      try container.encode(self.longDescription, forKey: .longDescription)
+    }
+    if self.kind != NoteKind() {
+      try container.encode(self.kind, forKey: .kind)
+    }
+    if !self.relatedUrl.isEmpty {
+      try container.encode(self.relatedUrl, forKey: .relatedUrl)
+    }
     try container.encodeIfPresent(self.expirationTime, forKey: .expirationTime)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.relatedNoteNames, forKey: .relatedNoteNames)
+    if !self.relatedNoteNames.isEmpty {
+      try container.encode(self.relatedNoteNames, forKey: .relatedNoteNames)
+    }
 
     if let choice = self.type {
       switch choice {

@@ -259,23 +259,47 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.docid, forKey: .docid)
-    try container.encode(self.mimeType, forKey: .mimeType)
-    try container.encode(self.text, forKey: .text)
-    try container.encode(self.textStyles, forKey: .textStyles)
-    try container.encode(self.pages, forKey: .pages)
-    try container.encode(self.entities, forKey: .entities)
-    try container.encode(self.entityRelations, forKey: .entityRelations)
-    try container.encode(self.textChanges, forKey: .textChanges)
+    if !self.docid.isEmpty {
+      try container.encode(self.docid, forKey: .docid)
+    }
+    if !self.mimeType.isEmpty {
+      try container.encode(self.mimeType, forKey: .mimeType)
+    }
+    if !self.text.isEmpty {
+      try container.encode(self.text, forKey: .text)
+    }
+    if !self.textStyles.isEmpty {
+      try container.encode(self.textStyles, forKey: .textStyles)
+    }
+    if !self.pages.isEmpty {
+      try container.encode(self.pages, forKey: .pages)
+    }
+    if !self.entities.isEmpty {
+      try container.encode(self.entities, forKey: .entities)
+    }
+    if !self.entityRelations.isEmpty {
+      try container.encode(self.entityRelations, forKey: .entityRelations)
+    }
+    if !self.textChanges.isEmpty {
+      try container.encode(self.textChanges, forKey: .textChanges)
+    }
     try container.encodeIfPresent(self.shardInfo, forKey: .shardInfo)
     try container.encodeIfPresent(self.error, forKey: .error)
-    try container.encode(self.revisions, forKey: .revisions)
+    if !self.revisions.isEmpty {
+      try container.encode(self.revisions, forKey: .revisions)
+    }
     try container.encodeIfPresent(self.documentLayout, forKey: .documentLayout)
     try container.encodeIfPresent(self.chunkedDocument, forKey: .chunkedDocument)
-    try container.encode(self.blobAssets, forKey: .blobAssets)
+    if !self.blobAssets.isEmpty {
+      try container.encode(self.blobAssets, forKey: .blobAssets)
+    }
     try container.encodeIfPresent(self.entityValidationOutput, forKey: .entityValidationOutput)
-    try container.encode(self.entitiesRevisions, forKey: .entitiesRevisions)
-    try container.encode(self.entitiesRevisionId, forKey: .entitiesRevisionId)
+    if !self.entitiesRevisions.isEmpty {
+      try container.encode(self.entitiesRevisions, forKey: .entitiesRevisions)
+    }
+    if !self.entitiesRevisionId.isEmpty {
+      try container.encode(self.entitiesRevisionId, forKey: .entitiesRevisionId)
+    }
 
     if let choice = self.source {
       switch choice {
@@ -364,9 +388,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.shardIndex, forKey: .shardIndex)
-      try container.encode(self.shardCount, forKey: .shardCount)
-      try container.encode(self.textOffset, forKey: .textOffset)
+      if self.shardIndex != 0 {
+        try container.encode(self.shardIndex, forKey: .shardIndex)
+      }
+      if self.shardCount != 0 {
+        try container.encode(self.shardCount, forKey: .shardCount)
+      }
+      if self.textOffset != 0 {
+        try container.encode(self.textOffset, forKey: .textOffset)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -508,11 +538,19 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       try container.encodeIfPresent(self.textAnchor, forKey: .textAnchor)
       try container.encodeIfPresent(self.color, forKey: .color)
       try container.encodeIfPresent(self.backgroundColor, forKey: .backgroundColor)
-      try container.encode(self.fontWeight, forKey: .fontWeight)
-      try container.encode(self.textStyle, forKey: .textStyle)
-      try container.encode(self.textDecoration, forKey: .textDecoration)
+      if !self.fontWeight.isEmpty {
+        try container.encode(self.fontWeight, forKey: .fontWeight)
+      }
+      if !self.textStyle.isEmpty {
+        try container.encode(self.textStyle, forKey: .textStyle)
+      }
+      if !self.textDecoration.isEmpty {
+        try container.encode(self.textDecoration, forKey: .textDecoration)
+      }
       try container.encodeIfPresent(self.fontSize, forKey: .fontSize)
-      try container.encode(self.fontFamily, forKey: .fontFamily)
+      if !self.fontFamily.isEmpty {
+        try container.encode(self.fontFamily, forKey: .fontFamily)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -579,8 +617,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.size, forKey: .size)
-        try container.encode(self.unit, forKey: .unit)
+        if self.size != 0 {
+          try container.encode(self.size, forKey: .size)
+        }
+        if !self.unit.isEmpty {
+          try container.encode(self.unit, forKey: .unit)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -841,21 +883,45 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pageNumber, forKey: .pageNumber)
+      if self.pageNumber != 0 {
+        try container.encode(self.pageNumber, forKey: .pageNumber)
+      }
       try container.encodeIfPresent(self.image, forKey: .image)
-      try container.encode(self.transforms, forKey: .transforms)
+      if !self.transforms.isEmpty {
+        try container.encode(self.transforms, forKey: .transforms)
+      }
       try container.encodeIfPresent(self.dimension, forKey: .dimension)
       try container.encodeIfPresent(self.layout, forKey: .layout)
-      try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
-      try container.encode(self.blocks, forKey: .blocks)
-      try container.encode(self.paragraphs, forKey: .paragraphs)
-      try container.encode(self.lines, forKey: .lines)
-      try container.encode(self.tokens, forKey: .tokens)
-      try container.encode(self.visualElements, forKey: .visualElements)
-      try container.encode(self.tables, forKey: .tables)
-      try container.encode(self.formFields, forKey: .formFields)
-      try container.encode(self.symbols, forKey: .symbols)
-      try container.encode(self.detectedBarcodes, forKey: .detectedBarcodes)
+      if !self.detectedLanguages.isEmpty {
+        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+      }
+      if !self.blocks.isEmpty {
+        try container.encode(self.blocks, forKey: .blocks)
+      }
+      if !self.paragraphs.isEmpty {
+        try container.encode(self.paragraphs, forKey: .paragraphs)
+      }
+      if !self.lines.isEmpty {
+        try container.encode(self.lines, forKey: .lines)
+      }
+      if !self.tokens.isEmpty {
+        try container.encode(self.tokens, forKey: .tokens)
+      }
+      if !self.visualElements.isEmpty {
+        try container.encode(self.visualElements, forKey: .visualElements)
+      }
+      if !self.tables.isEmpty {
+        try container.encode(self.tables, forKey: .tables)
+      }
+      if !self.formFields.isEmpty {
+        try container.encode(self.formFields, forKey: .formFields)
+      }
+      if !self.symbols.isEmpty {
+        try container.encode(self.symbols, forKey: .symbols)
+      }
+      if !self.detectedBarcodes.isEmpty {
+        try container.encode(self.detectedBarcodes, forKey: .detectedBarcodes)
+      }
       try container.encodeIfPresent(self.imageQualityScores, forKey: .imageQualityScores)
       try container.encodeIfPresent(self.provenance, forKey: .provenance)
       for (key, value) in self._unknownFields.json {
@@ -931,9 +997,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.width, forKey: .width)
-        try container.encode(self.height, forKey: .height)
-        try container.encode(self.unit, forKey: .unit)
+        if self.width != 0 {
+          try container.encode(self.width, forKey: .width)
+        }
+        if self.height != 0 {
+          try container.encode(self.height, forKey: .height)
+        }
+        if !self.unit.isEmpty {
+          try container.encode(self.unit, forKey: .unit)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1039,10 +1111,18 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.content, forKey: .content)
-        try container.encode(self.mimeType, forKey: .mimeType)
-        try container.encode(self.width, forKey: .width)
-        try container.encode(self.height, forKey: .height)
+        if !self.content.isEmpty {
+          try container.encode(self.content, forKey: .content)
+        }
+        if !self.mimeType.isEmpty {
+          try container.encode(self.mimeType, forKey: .mimeType)
+        }
+        if self.width != 0 {
+          try container.encode(self.width, forKey: .width)
+        }
+        if self.height != 0 {
+          try container.encode(self.height, forKey: .height)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1150,10 +1230,18 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.rows, forKey: .rows)
-        try container.encode(self.cols, forKey: .cols)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.data, forKey: .data)
+        if self.rows != 0 {
+          try container.encode(self.rows, forKey: .rows)
+        }
+        if self.cols != 0 {
+          try container.encode(self.cols, forKey: .cols)
+        }
+        if self.type != 0 {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.data.isEmpty {
+          try container.encode(self.data, forKey: .data)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1272,9 +1360,13 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.textAnchor, forKey: .textAnchor)
-        try container.encode(self.confidence, forKey: .confidence)
+        if self.confidence != 0 {
+          try container.encode(self.confidence, forKey: .confidence)
+        }
         try container.encodeIfPresent(self.boundingPoly, forKey: .boundingPoly)
-        try container.encode(self.orientation, forKey: .orientation)
+        if self.orientation != Document.Page.Layout.Orientation() {
+          try container.encode(self.orientation, forKey: .orientation)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1516,7 +1608,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         try container.encodeIfPresent(self.provenance, forKey: .provenance)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1624,7 +1718,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         try container.encodeIfPresent(self.provenance, forKey: .provenance)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1733,7 +1829,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         try container.encodeIfPresent(self.provenance, forKey: .provenance)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1859,7 +1957,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
         try container.encodeIfPresent(self.detectedBreak, forKey: .detectedBreak)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         try container.encodeIfPresent(self.provenance, forKey: .provenance)
         try container.encodeIfPresent(self.styleInfo, forKey: .styleInfo)
         for (key, value) in self._unknownFields.json {
@@ -1925,7 +2025,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
+          if self.type != Document.Page.Token.DetectedBreak.Type_() {
+            try container.encode(self.type, forKey: .type)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2247,19 +2349,45 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.fontSize, forKey: .fontSize)
-          try container.encode(self.pixelFontSize, forKey: .pixelFontSize)
-          try container.encode(self.letterSpacing, forKey: .letterSpacing)
-          try container.encode(self.fontType, forKey: .fontType)
-          try container.encode(self.bold, forKey: .bold)
-          try container.encode(self.italic, forKey: .italic)
-          try container.encode(self.underlined, forKey: .underlined)
-          try container.encode(self.strikeout, forKey: .strikeout)
-          try container.encode(self.`subscript`, forKey: .`subscript`)
-          try container.encode(self.superscript, forKey: .superscript)
-          try container.encode(self.smallcaps, forKey: .smallcaps)
-          try container.encode(self.fontWeight, forKey: .fontWeight)
-          try container.encode(self.handwritten, forKey: .handwritten)
+          if self.fontSize != 0 {
+            try container.encode(self.fontSize, forKey: .fontSize)
+          }
+          if self.pixelFontSize != 0 {
+            try container.encode(self.pixelFontSize, forKey: .pixelFontSize)
+          }
+          if self.letterSpacing != 0 {
+            try container.encode(self.letterSpacing, forKey: .letterSpacing)
+          }
+          if !self.fontType.isEmpty {
+            try container.encode(self.fontType, forKey: .fontType)
+          }
+          if self.bold {
+            try container.encode(self.bold, forKey: .bold)
+          }
+          if self.italic {
+            try container.encode(self.italic, forKey: .italic)
+          }
+          if self.underlined {
+            try container.encode(self.underlined, forKey: .underlined)
+          }
+          if self.strikeout {
+            try container.encode(self.strikeout, forKey: .strikeout)
+          }
+          if self.`subscript` {
+            try container.encode(self.`subscript`, forKey: .`subscript`)
+          }
+          if self.superscript {
+            try container.encode(self.superscript, forKey: .superscript)
+          }
+          if self.smallcaps {
+            try container.encode(self.smallcaps, forKey: .smallcaps)
+          }
+          if self.fontWeight != 0 {
+            try container.encode(self.fontWeight, forKey: .fontWeight)
+          }
+          if self.handwritten {
+            try container.encode(self.handwritten, forKey: .handwritten)
+          }
           try container.encodeIfPresent(self.textColor, forKey: .textColor)
           try container.encodeIfPresent(self.backgroundColor, forKey: .backgroundColor)
           for (key, value) in self._unknownFields.json {
@@ -2376,7 +2504,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2481,8 +2611,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.type.isEmpty {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -2609,9 +2743,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.layout, forKey: .layout)
-        try container.encode(self.headerRows, forKey: .headerRows)
-        try container.encode(self.bodyRows, forKey: .bodyRows)
-        try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        if !self.headerRows.isEmpty {
+          try container.encode(self.headerRows, forKey: .headerRows)
+        }
+        if !self.bodyRows.isEmpty {
+          try container.encode(self.bodyRows, forKey: .bodyRows)
+        }
+        if !self.detectedLanguages.isEmpty {
+          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+        }
         try container.encodeIfPresent(self.provenance, forKey: .provenance)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2672,7 +2812,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.cells, forKey: .cells)
+          if !self.cells.isEmpty {
+            try container.encode(self.cells, forKey: .cells)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2781,9 +2923,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
           try container.encodeIfPresent(self.layout, forKey: .layout)
-          try container.encode(self.rowSpan, forKey: .rowSpan)
-          try container.encode(self.colSpan, forKey: .colSpan)
-          try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+          if self.rowSpan != 0 {
+            try container.encode(self.rowSpan, forKey: .rowSpan)
+          }
+          if self.colSpan != 0 {
+            try container.encode(self.colSpan, forKey: .colSpan)
+          }
+          if !self.detectedLanguages.isEmpty {
+            try container.encode(self.detectedLanguages, forKey: .detectedLanguages)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2963,11 +3111,21 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.fieldName, forKey: .fieldName)
         try container.encodeIfPresent(self.fieldValue, forKey: .fieldValue)
-        try container.encode(self.nameDetectedLanguages, forKey: .nameDetectedLanguages)
-        try container.encode(self.valueDetectedLanguages, forKey: .valueDetectedLanguages)
-        try container.encode(self.valueType, forKey: .valueType)
-        try container.encode(self.correctedKeyText, forKey: .correctedKeyText)
-        try container.encode(self.correctedValueText, forKey: .correctedValueText)
+        if !self.nameDetectedLanguages.isEmpty {
+          try container.encode(self.nameDetectedLanguages, forKey: .nameDetectedLanguages)
+        }
+        if !self.valueDetectedLanguages.isEmpty {
+          try container.encode(self.valueDetectedLanguages, forKey: .valueDetectedLanguages)
+        }
+        if !self.valueType.isEmpty {
+          try container.encode(self.valueType, forKey: .valueType)
+        }
+        if !self.correctedKeyText.isEmpty {
+          try container.encode(self.correctedKeyText, forKey: .correctedKeyText)
+        }
+        if !self.correctedValueText.isEmpty {
+          try container.encode(self.correctedValueText, forKey: .correctedValueText)
+        }
         try container.encodeIfPresent(self.provenance, forKey: .provenance)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -3150,8 +3308,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.languageCode, forKey: .languageCode)
-        try container.encode(self.confidence, forKey: .confidence)
+        if !self.languageCode.isEmpty {
+          try container.encode(self.languageCode, forKey: .languageCode)
+        }
+        if self.confidence != 0 {
+          try container.encode(self.confidence, forKey: .confidence)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -3241,8 +3403,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.qualityScore, forKey: .qualityScore)
-        try container.encode(self.detectedDefects, forKey: .detectedDefects)
+        if self.qualityScore != 0 {
+          try container.encode(self.qualityScore, forKey: .qualityScore)
+        }
+        if !self.detectedDefects.isEmpty {
+          try container.encode(self.detectedDefects, forKey: .detectedDefects)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -3318,8 +3484,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.confidence, forKey: .confidence)
+          if !self.type.isEmpty {
+            try container.encode(self.type, forKey: .type)
+          }
+          if self.confidence != 0 {
+            try container.encode(self.confidence, forKey: .confidence)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -3540,17 +3710,33 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.textAnchor, forKey: .textAnchor)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.mentionText, forKey: .mentionText)
-      try container.encode(self.mentionId, forKey: .mentionId)
-      try container.encode(self.confidence, forKey: .confidence)
+      if !self.type.isEmpty {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.mentionText.isEmpty {
+        try container.encode(self.mentionText, forKey: .mentionText)
+      }
+      if !self.mentionId.isEmpty {
+        try container.encode(self.mentionId, forKey: .mentionId)
+      }
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
       try container.encodeIfPresent(self.pageAnchor, forKey: .pageAnchor)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       try container.encodeIfPresent(self.normalizedValue, forKey: .normalizedValue)
-      try container.encode(self.properties, forKey: .properties)
+      if !self.properties.isEmpty {
+        try container.encode(self.properties, forKey: .properties)
+      }
       try container.encodeIfPresent(self.provenance, forKey: .provenance)
-      try container.encode(self.redacted, forKey: .redacted)
-      try container.encode(self.method, forKey: .method)
+      if self.redacted {
+        try container.encode(self.redacted, forKey: .redacted)
+      }
+      if self.method != Document.Entity.Method() {
+        try container.encode(self.method, forKey: .method)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -3686,7 +3872,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.text, forKey: .text)
+        if !self.text.isEmpty {
+          try container.encode(self.text, forKey: .text)
+        }
 
         if let choice = self.structuredValue {
           switch choice {
@@ -3976,9 +4164,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.subjectId, forKey: .subjectId)
-      try container.encode(self.objectId, forKey: .objectId)
-      try container.encode(self.relation, forKey: .relation)
+      if !self.subjectId.isEmpty {
+        try container.encode(self.subjectId, forKey: .subjectId)
+      }
+      if !self.objectId.isEmpty {
+        try container.encode(self.objectId, forKey: .objectId)
+      }
+      if !self.relation.isEmpty {
+        try container.encode(self.relation, forKey: .relation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -4076,8 +4270,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.textSegments, forKey: .textSegments)
-      try container.encode(self.content, forKey: .content)
+      if !self.textSegments.isEmpty {
+        try container.encode(self.textSegments, forKey: .textSegments)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -4160,8 +4358,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.startIndex, forKey: .startIndex)
-        try container.encode(self.endIndex, forKey: .endIndex)
+        if self.startIndex != 0 {
+          try container.encode(self.startIndex, forKey: .startIndex)
+        }
+        if self.endIndex != 0 {
+          try container.encode(self.endIndex, forKey: .endIndex)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -4270,7 +4472,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pageRefs, forKey: .pageRefs)
+      if !self.pageRefs.isEmpty {
+        try container.encode(self.pageRefs, forKey: .pageRefs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -4383,11 +4587,19 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.page, forKey: .page)
-        try container.encode(self.layoutType, forKey: .layoutType)
-        try container.encode(self.layoutId, forKey: .layoutId)
+        if self.page != 0 {
+          try container.encode(self.page, forKey: .page)
+        }
+        if self.layoutType != Document.PageAnchor.PageRef.LayoutType() {
+          try container.encode(self.layoutType, forKey: .layoutType)
+        }
+        if !self.layoutId.isEmpty {
+          try container.encode(self.layoutId, forKey: .layoutId)
+        }
         try container.encodeIfPresent(self.boundingPoly, forKey: .boundingPoly)
-        try container.encode(self.confidence, forKey: .confidence)
+        if self.confidence != 0 {
+          try container.encode(self.confidence, forKey: .confidence)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -4706,10 +4918,18 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.revision, forKey: .revision)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.parents, forKey: .parents)
-      try container.encode(self.type, forKey: .type)
+      if self.revision != 0 {
+        try container.encode(self.revision, forKey: .revision)
+      }
+      if self.id != 0 {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.parents.isEmpty {
+        try container.encode(self.parents, forKey: .parents)
+      }
+      if self.type != Document.Provenance.OperationType() {
+        try container.encode(self.type, forKey: .type)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -4792,9 +5012,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.revision, forKey: .revision)
-        try container.encode(self.index, forKey: .index)
-        try container.encode(self.id, forKey: .id)
+        if self.revision != 0 {
+          try container.encode(self.revision, forKey: .revision)
+        }
+        if self.index != 0 {
+          try container.encode(self.index, forKey: .index)
+        }
+        if self.id != 0 {
+          try container.encode(self.id, forKey: .id)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -5131,9 +5357,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.parent, forKey: .parent)
-      try container.encode(self.parentIds, forKey: .parentIds)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.parent.isEmpty {
+        try container.encode(self.parent, forKey: .parent)
+      }
+      if !self.parentIds.isEmpty {
+        try container.encode(self.parentIds, forKey: .parentIds)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.humanReview, forKey: .humanReview)
 
@@ -5211,8 +5443,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.state, forKey: .state)
-        try container.encode(self.stateMessage, forKey: .stateMessage)
+        if !self.state.isEmpty {
+          try container.encode(self.state, forKey: .state)
+        }
+        if !self.stateMessage.isEmpty {
+          try container.encode(self.stateMessage, forKey: .stateMessage)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -5354,8 +5590,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.textAnchor, forKey: .textAnchor)
-      try container.encode(self.changedText, forKey: .changedText)
-      try container.encode(self.provenance, forKey: .provenance)
+      if !self.changedText.isEmpty {
+        try container.encode(self.changedText, forKey: .changedText)
+      }
+      if !self.provenance.isEmpty {
+        try container.encode(self.provenance, forKey: .provenance)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -5435,7 +5675,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.description, forKey: .description)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -5518,7 +5760,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.blocks, forKey: .blocks)
+      if !self.blocks.isEmpty {
+        try container.encode(self.blocks, forKey: .blocks)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -5632,7 +5876,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.blockId, forKey: .blockId)
+        if !self.blockId.isEmpty {
+          try container.encode(self.blockId, forKey: .blockId)
+        }
         try container.encodeIfPresent(self.pageSpan, forKey: .pageSpan)
         try container.encodeIfPresent(self.boundingBox, forKey: .boundingBox)
 
@@ -5713,8 +5959,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.pageStart, forKey: .pageStart)
-          try container.encode(self.pageEnd, forKey: .pageEnd)
+          if self.pageStart != 0 {
+            try container.encode(self.pageStart, forKey: .pageStart)
+          }
+          if self.pageEnd != 0 {
+            try container.encode(self.pageEnd, forKey: .pageEnd)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -5823,9 +6073,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.blocks, forKey: .blocks)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
+          if !self.type.isEmpty {
+            try container.encode(self.type, forKey: .type)
+          }
+          if !self.blocks.isEmpty {
+            try container.encode(self.blocks, forKey: .blocks)
+          }
           try container.encodeIfPresent(self.annotations, forKey: .annotations)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -5934,9 +6190,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.headerRows, forKey: .headerRows)
-          try container.encode(self.bodyRows, forKey: .bodyRows)
-          try container.encode(self.caption, forKey: .caption)
+          if !self.headerRows.isEmpty {
+            try container.encode(self.headerRows, forKey: .headerRows)
+          }
+          if !self.bodyRows.isEmpty {
+            try container.encode(self.bodyRows, forKey: .bodyRows)
+          }
+          if !self.caption.isEmpty {
+            try container.encode(self.caption, forKey: .caption)
+          }
           try container.encodeIfPresent(self.annotations, forKey: .annotations)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -6020,7 +6282,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.cells, forKey: .cells)
+          if !self.cells.isEmpty {
+            try container.encode(self.cells, forKey: .cells)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -6120,9 +6384,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.blocks, forKey: .blocks)
-          try container.encode(self.rowSpan, forKey: .rowSpan)
-          try container.encode(self.colSpan, forKey: .colSpan)
+          if !self.blocks.isEmpty {
+            try container.encode(self.blocks, forKey: .blocks)
+          }
+          if self.rowSpan != 0 {
+            try container.encode(self.rowSpan, forKey: .rowSpan)
+          }
+          if self.colSpan != 0 {
+            try container.encode(self.colSpan, forKey: .colSpan)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -6214,8 +6484,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.listEntries, forKey: .listEntries)
-          try container.encode(self.type, forKey: .type)
+          if !self.listEntries.isEmpty {
+            try container.encode(self.listEntries, forKey: .listEntries)
+          }
+          if !self.type.isEmpty {
+            try container.encode(self.type, forKey: .type)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -6299,7 +6573,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.blocks, forKey: .blocks)
+          if !self.blocks.isEmpty {
+            try container.encode(self.blocks, forKey: .blocks)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -6429,8 +6705,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.mimeType, forKey: .mimeType)
-          try container.encode(self.imageText, forKey: .imageText)
+          if !self.mimeType.isEmpty {
+            try container.encode(self.mimeType, forKey: .mimeType)
+          }
+          if !self.imageText.isEmpty {
+            try container.encode(self.imageText, forKey: .imageText)
+          }
           try container.encodeIfPresent(self.annotations, forKey: .annotations)
 
           if let choice = self.imageSource {
@@ -6596,7 +6876,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.chunks, forKey: .chunks)
+      if !self.chunks.isEmpty {
+        try container.encode(self.chunks, forKey: .chunks)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -6707,13 +6989,25 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.chunkId, forKey: .chunkId)
-        try container.encode(self.sourceBlockIds, forKey: .sourceBlockIds)
-        try container.encode(self.content, forKey: .content)
+        if !self.chunkId.isEmpty {
+          try container.encode(self.chunkId, forKey: .chunkId)
+        }
+        if !self.sourceBlockIds.isEmpty {
+          try container.encode(self.sourceBlockIds, forKey: .sourceBlockIds)
+        }
+        if !self.content.isEmpty {
+          try container.encode(self.content, forKey: .content)
+        }
         try container.encodeIfPresent(self.pageSpan, forKey: .pageSpan)
-        try container.encode(self.pageHeaders, forKey: .pageHeaders)
-        try container.encode(self.pageFooters, forKey: .pageFooters)
-        try container.encode(self.chunkFields, forKey: .chunkFields)
+        if !self.pageHeaders.isEmpty {
+          try container.encode(self.pageHeaders, forKey: .pageHeaders)
+        }
+        if !self.pageFooters.isEmpty {
+          try container.encode(self.pageFooters, forKey: .pageFooters)
+        }
+        if !self.chunkFields.isEmpty {
+          try container.encode(self.chunkFields, forKey: .chunkFields)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -6779,8 +7073,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.pageStart, forKey: .pageStart)
-          try container.encode(self.pageEnd, forKey: .pageEnd)
+          if self.pageStart != 0 {
+            try container.encode(self.pageStart, forKey: .pageStart)
+          }
+          if self.pageEnd != 0 {
+            try container.encode(self.pageEnd, forKey: .pageEnd)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -6868,7 +7166,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
           try container.encodeIfPresent(self.pageSpan, forKey: .pageSpan)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -6957,7 +7257,9 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
           try container.encodeIfPresent(self.pageSpan, forKey: .pageSpan)
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -7440,9 +7742,15 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.assetId, forKey: .assetId)
-      try container.encode(self.content, forKey: .content)
-      try container.encode(self.mimeType, forKey: .mimeType)
+      if !self.assetId.isEmpty {
+        try container.encode(self.assetId, forKey: .assetId)
+      }
+      if !self.content.isEmpty {
+        try container.encode(self.content, forKey: .content)
+      }
+      if !self.mimeType.isEmpty {
+        try container.encode(self.mimeType, forKey: .mimeType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -7533,8 +7841,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.validationResults, forKey: .validationResults)
-      try container.encode(self.passAllRules, forKey: .passAllRules)
+      if !self.validationResults.isEmpty {
+        try container.encode(self.validationResults, forKey: .validationResults)
+      }
+      if self.passAllRules {
+        try container.encode(self.passAllRules, forKey: .passAllRules)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -7623,10 +7935,20 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.ruleName, forKey: .ruleName)
-        try container.encode(self.ruleDescription, forKey: .ruleDescription)
-        try container.encode(self.validationResultType, forKey: .validationResultType)
-        try container.encode(self.validationDetails, forKey: .validationDetails)
+        if !self.ruleName.isEmpty {
+          try container.encode(self.ruleName, forKey: .ruleName)
+        }
+        if !self.ruleDescription.isEmpty {
+          try container.encode(self.ruleDescription, forKey: .ruleDescription)
+        }
+        if self.validationResultType
+          != Document.EntityValidationOutput.ValidationResult.ValidationResultType()
+        {
+          try container.encode(self.validationResultType, forKey: .validationResultType)
+        }
+        if !self.validationDetails.isEmpty {
+          try container.encode(self.validationDetails, forKey: .validationDetails)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -7875,8 +8197,12 @@ public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.revisionId, forKey: .revisionId)
-      try container.encode(self.entities, forKey: .entities)
+      if !self.revisionId.isEmpty {
+        try container.encode(self.revisionId, forKey: .revisionId)
+      }
+      if !self.entities.isEmpty {
+        try container.encode(self.entities, forKey: .entities)
+      }
       try container.encodeIfPresent(self.entityValidationOutput, forKey: .entityValidationOutput)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

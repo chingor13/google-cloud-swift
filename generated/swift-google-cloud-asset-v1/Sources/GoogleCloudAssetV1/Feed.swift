@@ -165,13 +165,23 @@ public struct Feed: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.assetNames, forKey: .assetNames)
-    try container.encode(self.assetTypes, forKey: .assetTypes)
-    try container.encode(self.contentType, forKey: .contentType)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.assetNames.isEmpty {
+      try container.encode(self.assetNames, forKey: .assetNames)
+    }
+    if !self.assetTypes.isEmpty {
+      try container.encode(self.assetTypes, forKey: .assetTypes)
+    }
+    if self.contentType != ContentType() {
+      try container.encode(self.contentType, forKey: .contentType)
+    }
     try container.encodeIfPresent(self.feedOutputConfig, forKey: .feedOutputConfig)
     try container.encodeIfPresent(self.condition, forKey: .condition)
-    try container.encode(self.relationshipTypes, forKey: .relationshipTypes)
+    if !self.relationshipTypes.isEmpty {
+      try container.encode(self.relationshipTypes, forKey: .relationshipTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

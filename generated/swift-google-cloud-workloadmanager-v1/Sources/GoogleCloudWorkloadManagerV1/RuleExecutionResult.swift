@@ -101,11 +101,21 @@ public struct RuleExecutionResult: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rule, forKey: .rule)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.message, forKey: .message)
-    try container.encode(self.resultCount, forKey: .resultCount)
-    try container.encode(self.scannedResourceCount, forKey: .scannedResourceCount)
+    if !self.rule.isEmpty {
+      try container.encode(self.rule, forKey: .rule)
+    }
+    if self.state != RuleExecutionResult.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.message.isEmpty {
+      try container.encode(self.message, forKey: .message)
+    }
+    if self.resultCount != 0 {
+      try container.encode(self.resultCount, forKey: .resultCount)
+    }
+    if self.scannedResourceCount != 0 {
+      try container.encode(self.scannedResourceCount, forKey: .scannedResourceCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

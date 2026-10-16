@@ -86,8 +86,12 @@ public struct CreateStoragePoolRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.storagePoolId, forKey: .storagePoolId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.storagePoolId.isEmpty {
+      try container.encode(self.storagePoolId, forKey: .storagePoolId)
+    }
     try container.encodeIfPresent(self.storagePool, forKey: .storagePool)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

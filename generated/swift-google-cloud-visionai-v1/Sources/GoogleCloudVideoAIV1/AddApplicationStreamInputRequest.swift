@@ -102,9 +102,15 @@ public struct AddApplicationStreamInputRequest: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.applicationStreamInputs, forKey: .applicationStreamInputs)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.applicationStreamInputs.isEmpty {
+      try container.encode(self.applicationStreamInputs, forKey: .applicationStreamInputs)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -109,8 +109,12 @@ public struct TopologyManager: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.policy, forKey: .policy)
-    try container.encode(self.scope, forKey: .scope)
+    if !self.policy.isEmpty {
+      try container.encode(self.policy, forKey: .policy)
+    }
+    if !self.scope.isEmpty {
+      try container.encode(self.scope, forKey: .scope)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

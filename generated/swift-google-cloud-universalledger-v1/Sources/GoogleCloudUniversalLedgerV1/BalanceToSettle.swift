@@ -83,8 +83,12 @@ public struct BalanceToSettle: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.balancePayerId, forKey: .balancePayerId)
-    try container.encode(self.balanceReceiverId, forKey: .balanceReceiverId)
+    if !self.balancePayerId.isEmpty {
+      try container.encode(self.balancePayerId, forKey: .balancePayerId)
+    }
+    if !self.balanceReceiverId.isEmpty {
+      try container.encode(self.balanceReceiverId, forKey: .balanceReceiverId)
+    }
     try container.encodeIfPresent(self.balance, forKey: .balance)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

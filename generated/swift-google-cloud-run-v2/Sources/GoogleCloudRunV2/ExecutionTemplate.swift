@@ -132,10 +132,18 @@ public struct ExecutionTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.parallelism, forKey: .parallelism)
-    try container.encode(self.taskCount, forKey: .taskCount)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if self.parallelism != 0 {
+      try container.encode(self.parallelism, forKey: .parallelism)
+    }
+    if self.taskCount != 0 {
+      try container.encode(self.taskCount, forKey: .taskCount)
+    }
     try container.encodeIfPresent(self.template, forKey: .template)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

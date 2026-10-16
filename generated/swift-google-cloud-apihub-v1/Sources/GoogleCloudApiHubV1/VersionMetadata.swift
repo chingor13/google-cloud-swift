@@ -112,9 +112,15 @@ public struct VersionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.version, forKey: .version)
-    try container.encode(self.specs, forKey: .specs)
-    try container.encode(self.deployments, forKey: .deployments)
-    try container.encode(self.originalId, forKey: .originalId)
+    if !self.specs.isEmpty {
+      try container.encode(self.specs, forKey: .specs)
+    }
+    if !self.deployments.isEmpty {
+      try container.encode(self.deployments, forKey: .deployments)
+    }
+    if !self.originalId.isEmpty {
+      try container.encode(self.originalId, forKey: .originalId)
+    }
     try container.encodeIfPresent(self.originalCreateTime, forKey: .originalCreateTime)
     try container.encodeIfPresent(self.originalUpdateTime, forKey: .originalUpdateTime)
     for (key, value) in self._unknownFields.json {

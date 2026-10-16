@@ -86,7 +86,9 @@ public struct ManagedZoneDnsSecConfig: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.defaultKeySpecs, forKey: .defaultKeySpecs)
+    if !self.defaultKeySpecs.isEmpty {
+      try container.encode(self.defaultKeySpecs, forKey: .defaultKeySpecs)
+    }
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.nonExistence, forKey: .nonExistence)
     try container.encodeIfPresent(self.state, forKey: .state)

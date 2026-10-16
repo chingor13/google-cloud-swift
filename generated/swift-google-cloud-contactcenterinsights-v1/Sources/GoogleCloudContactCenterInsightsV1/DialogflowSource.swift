@@ -81,8 +81,12 @@ public struct DialogflowSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dialogflowConversation, forKey: .dialogflowConversation)
-    try container.encode(self.audioUri, forKey: .audioUri)
+    if !self.dialogflowConversation.isEmpty {
+      try container.encode(self.dialogflowConversation, forKey: .dialogflowConversation)
+    }
+    if !self.audioUri.isEmpty {
+      try container.encode(self.audioUri, forKey: .audioUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

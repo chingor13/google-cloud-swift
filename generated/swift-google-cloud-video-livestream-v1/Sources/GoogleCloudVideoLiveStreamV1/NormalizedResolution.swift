@@ -77,8 +77,12 @@ public struct NormalizedResolution: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.w, forKey: .w)
-    try container.encode(self.h, forKey: .h)
+    if self.w != 0 {
+      try container.encode(self.w, forKey: .w)
+    }
+    if self.h != 0 {
+      try container.encode(self.h, forKey: .h)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

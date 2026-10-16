@@ -137,10 +137,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.inputs, forKey: .inputs)
-      try container.encode(self.outputs, forKey: .outputs)
-      try container.encode(self.featureAttributionsSchemaUri, forKey: .featureAttributionsSchemaUri)
-      try container.encode(self.latentSpaceSource, forKey: .latentSpaceSource)
+      if !self.inputs.isEmpty {
+        try container.encode(self.inputs, forKey: .inputs)
+      }
+      if !self.outputs.isEmpty {
+        try container.encode(self.outputs, forKey: .outputs)
+      }
+      if !self.featureAttributionsSchemaUri.isEmpty {
+        try container.encode(
+          self.featureAttributionsSchemaUri, forKey: .featureAttributionsSchemaUri)
+      }
+      if !self.latentSpaceSource.isEmpty {
+        try container.encode(self.latentSpaceSource, forKey: .latentSpaceSource)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -364,18 +373,38 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.inputBaselines, forKey: .inputBaselines)
-        try container.encode(self.inputTensorName, forKey: .inputTensorName)
-        try container.encode(self.encoding, forKey: .encoding)
-        try container.encode(self.modality, forKey: .modality)
+        if !self.inputBaselines.isEmpty {
+          try container.encode(self.inputBaselines, forKey: .inputBaselines)
+        }
+        if !self.inputTensorName.isEmpty {
+          try container.encode(self.inputTensorName, forKey: .inputTensorName)
+        }
+        if self.encoding != ExplanationMetadata.InputMetadata.Encoding() {
+          try container.encode(self.encoding, forKey: .encoding)
+        }
+        if !self.modality.isEmpty {
+          try container.encode(self.modality, forKey: .modality)
+        }
         try container.encodeIfPresent(self.featureValueDomain, forKey: .featureValueDomain)
-        try container.encode(self.indicesTensorName, forKey: .indicesTensorName)
-        try container.encode(self.denseShapeTensorName, forKey: .denseShapeTensorName)
-        try container.encode(self.indexFeatureMapping, forKey: .indexFeatureMapping)
-        try container.encode(self.encodedTensorName, forKey: .encodedTensorName)
-        try container.encode(self.encodedBaselines, forKey: .encodedBaselines)
+        if !self.indicesTensorName.isEmpty {
+          try container.encode(self.indicesTensorName, forKey: .indicesTensorName)
+        }
+        if !self.denseShapeTensorName.isEmpty {
+          try container.encode(self.denseShapeTensorName, forKey: .denseShapeTensorName)
+        }
+        if !self.indexFeatureMapping.isEmpty {
+          try container.encode(self.indexFeatureMapping, forKey: .indexFeatureMapping)
+        }
+        if !self.encodedTensorName.isEmpty {
+          try container.encode(self.encodedTensorName, forKey: .encodedTensorName)
+        }
+        if !self.encodedBaselines.isEmpty {
+          try container.encode(self.encodedBaselines, forKey: .encodedBaselines)
+        }
         try container.encodeIfPresent(self.visualization, forKey: .visualization)
-        try container.encode(self.groupName, forKey: .groupName)
+        if !self.groupName.isEmpty {
+          try container.encode(self.groupName, forKey: .groupName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -468,10 +497,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.minValue, forKey: .minValue)
-          try container.encode(self.maxValue, forKey: .maxValue)
-          try container.encode(self.originalMean, forKey: .originalMean)
-          try container.encode(self.originalStddev, forKey: .originalStddev)
+          if self.minValue != 0 {
+            try container.encode(self.minValue, forKey: .minValue)
+          }
+          if self.maxValue != 0 {
+            try container.encode(self.maxValue, forKey: .maxValue)
+          }
+          if self.originalMean != 0 {
+            try container.encode(self.originalMean, forKey: .originalMean)
+          }
+          if self.originalStddev != 0 {
+            try container.encode(self.originalStddev, forKey: .originalStddev)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -636,12 +673,24 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.polarity, forKey: .polarity)
-          try container.encode(self.colorMap, forKey: .colorMap)
-          try container.encode(self.clipPercentUpperbound, forKey: .clipPercentUpperbound)
-          try container.encode(self.clipPercentLowerbound, forKey: .clipPercentLowerbound)
-          try container.encode(self.overlayType, forKey: .overlayType)
+          if self.type != ExplanationMetadata.InputMetadata.Visualization.Type_() {
+            try container.encode(self.type, forKey: .type)
+          }
+          if self.polarity != ExplanationMetadata.InputMetadata.Visualization.Polarity() {
+            try container.encode(self.polarity, forKey: .polarity)
+          }
+          if self.colorMap != ExplanationMetadata.InputMetadata.Visualization.ColorMap() {
+            try container.encode(self.colorMap, forKey: .colorMap)
+          }
+          if self.clipPercentUpperbound != 0 {
+            try container.encode(self.clipPercentUpperbound, forKey: .clipPercentUpperbound)
+          }
+          if self.clipPercentLowerbound != 0 {
+            try container.encode(self.clipPercentLowerbound, forKey: .clipPercentLowerbound)
+          }
+          if self.overlayType != ExplanationMetadata.InputMetadata.Visualization.OverlayType() {
+            try container.encode(self.overlayType, forKey: .overlayType)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1509,7 +1558,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.outputTensorName, forKey: .outputTensorName)
+        if !self.outputTensorName.isEmpty {
+          try container.encode(self.outputTensorName, forKey: .outputTensorName)
+        }
 
         if let choice = self.displayNameMapping {
           switch choice {

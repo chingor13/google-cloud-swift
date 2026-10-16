@@ -119,8 +119,12 @@ public struct GuestRuntimeDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.processes, forKey: .processes)
     try container.encodeIfPresent(self.network, forKey: .network)
     try container.encodeIfPresent(self.lastBootTime, forKey: .lastBootTime)
-    try container.encode(self.domain, forKey: .domain)
-    try container.encode(self.machineName, forKey: .machineName)
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
+    if !self.machineName.isEmpty {
+      try container.encode(self.machineName, forKey: .machineName)
+    }
     try container.encodeIfPresent(self.installedApps, forKey: .installedApps)
     try container.encodeIfPresent(self.openFileList, forKey: .openFileList)
     for (key, value) in self._unknownFields.json {

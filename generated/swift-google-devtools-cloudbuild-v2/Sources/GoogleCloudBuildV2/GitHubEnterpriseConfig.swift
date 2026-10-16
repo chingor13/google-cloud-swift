@@ -150,16 +150,34 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostUri, forKey: .hostUri)
-    try container.encode(self.apiKey, forKey: .apiKey)
-    try container.encode(self.appId, forKey: .appId)
-    try container.encode(self.appSlug, forKey: .appSlug)
-    try container.encode(self.privateKeySecretVersion, forKey: .privateKeySecretVersion)
-    try container.encode(self.webhookSecretSecretVersion, forKey: .webhookSecretSecretVersion)
-    try container.encode(self.appInstallationId, forKey: .appInstallationId)
+    if !self.hostUri.isEmpty {
+      try container.encode(self.hostUri, forKey: .hostUri)
+    }
+    if !self.apiKey.isEmpty {
+      try container.encode(self.apiKey, forKey: .apiKey)
+    }
+    if self.appId != 0 {
+      try container.encode(self.appId, forKey: .appId)
+    }
+    if !self.appSlug.isEmpty {
+      try container.encode(self.appSlug, forKey: .appSlug)
+    }
+    if !self.privateKeySecretVersion.isEmpty {
+      try container.encode(self.privateKeySecretVersion, forKey: .privateKeySecretVersion)
+    }
+    if !self.webhookSecretSecretVersion.isEmpty {
+      try container.encode(self.webhookSecretSecretVersion, forKey: .webhookSecretSecretVersion)
+    }
+    if self.appInstallationId != 0 {
+      try container.encode(self.appInstallationId, forKey: .appInstallationId)
+    }
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
-    try container.encode(self.sslCa, forKey: .sslCa)
-    try container.encode(self.serverVersion, forKey: .serverVersion)
+    if !self.sslCa.isEmpty {
+      try container.encode(self.sslCa, forKey: .sslCa)
+    }
+    if !self.serverVersion.isEmpty {
+      try container.encode(self.serverVersion, forKey: .serverVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

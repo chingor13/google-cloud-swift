@@ -98,10 +98,18 @@ public struct CloudRunMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.serviceUrls, forKey: .serviceUrls)
-    try container.encode(self.revision, forKey: .revision)
-    try container.encode(self.job, forKey: .job)
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if !self.serviceUrls.isEmpty {
+      try container.encode(self.serviceUrls, forKey: .serviceUrls)
+    }
+    if !self.revision.isEmpty {
+      try container.encode(self.revision, forKey: .revision)
+    }
+    if !self.job.isEmpty {
+      try container.encode(self.job, forKey: .job)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

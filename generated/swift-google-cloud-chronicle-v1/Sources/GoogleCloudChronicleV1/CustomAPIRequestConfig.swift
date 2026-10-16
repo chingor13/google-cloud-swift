@@ -117,12 +117,24 @@ public struct CustomAPIRequestConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.endpointPath, forKey: .endpointPath)
-    try container.encode(self.httpMethod, forKey: .httpMethod)
-    try container.encode(self.requestBody, forKey: .requestBody)
-    try container.encode(self.queryParameters, forKey: .queryParameters)
-    try container.encode(self.customHeaders, forKey: .customHeaders)
-    try container.encode(self.maxRequestsPerMinute, forKey: .maxRequestsPerMinute)
+    if !self.endpointPath.isEmpty {
+      try container.encode(self.endpointPath, forKey: .endpointPath)
+    }
+    if self.httpMethod != CustomAPIRequestConfig.HttpMethod() {
+      try container.encode(self.httpMethod, forKey: .httpMethod)
+    }
+    if !self.requestBody.isEmpty {
+      try container.encode(self.requestBody, forKey: .requestBody)
+    }
+    if !self.queryParameters.isEmpty {
+      try container.encode(self.queryParameters, forKey: .queryParameters)
+    }
+    if !self.customHeaders.isEmpty {
+      try container.encode(self.customHeaders, forKey: .customHeaders)
+    }
+    if self.maxRequestsPerMinute != 0 {
+      try container.encode(self.maxRequestsPerMinute, forKey: .maxRequestsPerMinute)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -165,15 +165,31 @@ public struct RecognitionFeatures: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.profanityFilter, forKey: .profanityFilter)
-    try container.encode(self.enableWordTimeOffsets, forKey: .enableWordTimeOffsets)
-    try container.encode(self.enableWordConfidence, forKey: .enableWordConfidence)
-    try container.encode(self.enableAutomaticPunctuation, forKey: .enableAutomaticPunctuation)
-    try container.encode(self.enableSpokenPunctuation, forKey: .enableSpokenPunctuation)
-    try container.encode(self.enableSpokenEmojis, forKey: .enableSpokenEmojis)
-    try container.encode(self.multiChannelMode, forKey: .multiChannelMode)
+    if self.profanityFilter {
+      try container.encode(self.profanityFilter, forKey: .profanityFilter)
+    }
+    if self.enableWordTimeOffsets {
+      try container.encode(self.enableWordTimeOffsets, forKey: .enableWordTimeOffsets)
+    }
+    if self.enableWordConfidence {
+      try container.encode(self.enableWordConfidence, forKey: .enableWordConfidence)
+    }
+    if self.enableAutomaticPunctuation {
+      try container.encode(self.enableAutomaticPunctuation, forKey: .enableAutomaticPunctuation)
+    }
+    if self.enableSpokenPunctuation {
+      try container.encode(self.enableSpokenPunctuation, forKey: .enableSpokenPunctuation)
+    }
+    if self.enableSpokenEmojis {
+      try container.encode(self.enableSpokenEmojis, forKey: .enableSpokenEmojis)
+    }
+    if self.multiChannelMode != RecognitionFeatures.MultiChannelMode() {
+      try container.encode(self.multiChannelMode, forKey: .multiChannelMode)
+    }
     try container.encodeIfPresent(self.diarizationConfig, forKey: .diarizationConfig)
-    try container.encode(self.maxAlternatives, forKey: .maxAlternatives)
+    if self.maxAlternatives != 0 {
+      try container.encode(self.maxAlternatives, forKey: .maxAlternatives)
+    }
     try container.encodeIfPresent(self.customPromptConfig, forKey: .customPromptConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

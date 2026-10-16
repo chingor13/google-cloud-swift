@@ -96,10 +96,16 @@ public struct GitHubConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.githubApp, forKey: .githubApp)
+    if self.githubApp != GitHubConfig.GitHubApp() {
+      try container.encode(self.githubApp, forKey: .githubApp)
+    }
     try container.encodeIfPresent(self.authorizerCredential, forKey: .authorizerCredential)
-    try container.encode(self.appInstallationId, forKey: .appInstallationId)
-    try container.encode(self.installationUri, forKey: .installationUri)
+    if self.appInstallationId != 0 {
+      try container.encode(self.appInstallationId, forKey: .appInstallationId)
+    }
+    if !self.installationUri.isEmpty {
+      try container.encode(self.installationUri, forKey: .installationUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

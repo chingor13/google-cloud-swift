@@ -112,8 +112,12 @@ public struct SeedConversionWorkspaceRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.autoCommit, forKey: .autoCommit)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.autoCommit {
+      try container.encode(self.autoCommit, forKey: .autoCommit)
+    }
 
     if let choice = self.seedFrom {
       switch choice {

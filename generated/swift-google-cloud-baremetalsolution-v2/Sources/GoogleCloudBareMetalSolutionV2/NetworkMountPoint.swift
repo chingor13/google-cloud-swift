@@ -93,10 +93,18 @@ public struct NetworkMountPoint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.logicalInterface, forKey: .logicalInterface)
-    try container.encode(self.defaultGateway, forKey: .defaultGateway)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.logicalInterface.isEmpty {
+      try container.encode(self.logicalInterface, forKey: .logicalInterface)
+    }
+    if self.defaultGateway {
+      try container.encode(self.defaultGateway, forKey: .defaultGateway)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

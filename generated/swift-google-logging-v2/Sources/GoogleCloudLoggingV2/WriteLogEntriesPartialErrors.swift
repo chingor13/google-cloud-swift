@@ -88,7 +88,7 @@ public struct WriteLogEntriesPartialErrors: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    do {
+    if !self.logEntryErrors.isEmpty {
       let stringKeyed = Dictionary(
         uniqueKeysWithValues: self.logEntryErrors.lazy.map { (Swift.String($0), $1) }
       )

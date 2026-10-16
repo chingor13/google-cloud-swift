@@ -83,7 +83,9 @@ public struct McpToolDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.description, forKey: .description)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.inputSchema, forKey: .inputSchema)
     try container.encodeIfPresent(self.outputSchema, forKey: .outputSchema)
     for (key, value) in self._unknownFields.json {

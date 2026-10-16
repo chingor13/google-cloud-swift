@@ -231,17 +231,35 @@ public struct SearchDocumentsRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.requestMetadata, forKey: .requestMetadata)
     try container.encodeIfPresent(self.documentQuery, forKey: .documentQuery)
-    try container.encode(self.offset, forKey: .offset)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.orderBy, forKey: .orderBy)
-    try container.encode(self.histogramQueries, forKey: .histogramQueries)
-    try container.encode(self.requireTotalSize, forKey: .requireTotalSize)
-    try container.encode(self.totalResultSize, forKey: .totalResultSize)
-    try container.encode(self.qaSizeLimit, forKey: .qaSizeLimit)
+    if self.offset != 0 {
+      try container.encode(self.offset, forKey: .offset)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.orderBy.isEmpty {
+      try container.encode(self.orderBy, forKey: .orderBy)
+    }
+    if !self.histogramQueries.isEmpty {
+      try container.encode(self.histogramQueries, forKey: .histogramQueries)
+    }
+    if self.requireTotalSize {
+      try container.encode(self.requireTotalSize, forKey: .requireTotalSize)
+    }
+    if self.totalResultSize != SearchDocumentsRequest.TotalResultSize() {
+      try container.encode(self.totalResultSize, forKey: .totalResultSize)
+    }
+    if self.qaSizeLimit != 0 {
+      try container.encode(self.qaSizeLimit, forKey: .qaSizeLimit)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

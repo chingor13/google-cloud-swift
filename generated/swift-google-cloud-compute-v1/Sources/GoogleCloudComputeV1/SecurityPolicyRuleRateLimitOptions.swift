@@ -198,7 +198,9 @@
       try container.encodeIfPresent(self.banThreshold, forKey: .banThreshold)
       try container.encodeIfPresent(self.conformAction, forKey: .conformAction)
       try container.encodeIfPresent(self.enforceOnKey, forKey: .enforceOnKey)
-      try container.encode(self.enforceOnKeyConfigs, forKey: .enforceOnKeyConfigs)
+      if !self.enforceOnKeyConfigs.isEmpty {
+        try container.encode(self.enforceOnKeyConfigs, forKey: .enforceOnKeyConfigs)
+      }
       try container.encodeIfPresent(self.enforceOnKeyName, forKey: .enforceOnKeyName)
       try container.encodeIfPresent(self.exceedAction, forKey: .exceedAction)
       try container.encodeIfPresent(self.exceedRedirectOptions, forKey: .exceedRedirectOptions)

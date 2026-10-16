@@ -154,17 +154,33 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dumpFilePath, forKey: .dumpFilePath)
-      try container.encode(self.username, forKey: .username)
-      try container.encode(self.password, forKey: .password)
+      if !self.dumpFilePath.isEmpty {
+        try container.encode(self.dumpFilePath, forKey: .dumpFilePath)
+      }
+      if !self.username.isEmpty {
+        try container.encode(self.username, forKey: .username)
+      }
+      if !self.password.isEmpty {
+        try container.encode(self.password, forKey: .password)
+      }
       try container.encodeIfPresent(self.connectRetryInterval, forKey: .connectRetryInterval)
       try container.encodeIfPresent(self.masterHeartbeatPeriod, forKey: .masterHeartbeatPeriod)
-      try container.encode(self.caCertificate, forKey: .caCertificate)
-      try container.encode(self.clientCertificate, forKey: .clientCertificate)
-      try container.encode(self.clientKey, forKey: .clientKey)
-      try container.encode(self.sslCipher, forKey: .sslCipher)
+      if !self.caCertificate.isEmpty {
+        try container.encode(self.caCertificate, forKey: .caCertificate)
+      }
+      if !self.clientCertificate.isEmpty {
+        try container.encode(self.clientCertificate, forKey: .clientCertificate)
+      }
+      if !self.clientKey.isEmpty {
+        try container.encode(self.clientKey, forKey: .clientKey)
+      }
+      if !self.sslCipher.isEmpty {
+        try container.encode(self.sslCipher, forKey: .sslCipher)
+      }
       try container.encodeIfPresent(self.verifyServerCertificate, forKey: .verifyServerCertificate)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

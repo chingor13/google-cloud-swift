@@ -91,7 +91,9 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.reply, forKey: .reply)
       try container.encodeIfPresent(self.conversation, forKey: .conversation)
-      try container.encode(self.searchResults, forKey: .searchResults)
+      if !self.searchResults.isEmpty {
+        try container.encode(self.searchResults, forKey: .searchResults)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

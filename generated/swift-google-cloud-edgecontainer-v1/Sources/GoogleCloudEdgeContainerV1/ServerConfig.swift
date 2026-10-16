@@ -87,9 +87,15 @@ public struct ServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.channels, forKey: .channels)
-    try container.encode(self.versions, forKey: .versions)
-    try container.encode(self.defaultVersion, forKey: .defaultVersion)
+    if !self.channels.isEmpty {
+      try container.encode(self.channels, forKey: .channels)
+    }
+    if !self.versions.isEmpty {
+      try container.encode(self.versions, forKey: .versions)
+    }
+    if !self.defaultVersion.isEmpty {
+      try container.encode(self.defaultVersion, forKey: .defaultVersion)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

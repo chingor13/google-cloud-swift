@@ -109,12 +109,16 @@ public struct Link: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.source, forKey: .source)
     try container.encodeIfPresent(self.target, forKey: .target)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.dependencyInfo, forKey: .dependencyInfo)
+    if !self.dependencyInfo.isEmpty {
+      try container.encode(self.dependencyInfo, forKey: .dependencyInfo)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -172,7 +176,9 @@ public struct Link: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyType, forKey: .dependencyType)
+      if self.dependencyType != DependencyType() {
+        try container.encode(self.dependencyType, forKey: .dependencyType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

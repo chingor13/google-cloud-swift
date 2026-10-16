@@ -184,21 +184,33 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.state, forKey: .state)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.state != Experiment.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.definition, forKey: .definition)
       try container.encodeIfPresent(self.rolloutConfig, forKey: .rolloutConfig)
       try container.encodeIfPresent(self.rolloutState, forKey: .rolloutState)
-      try container.encode(self.rolloutFailureReason, forKey: .rolloutFailureReason)
+      if !self.rolloutFailureReason.isEmpty {
+        try container.encode(self.rolloutFailureReason, forKey: .rolloutFailureReason)
+      }
       try container.encodeIfPresent(self.result, forKey: .result)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
       try container.encodeIfPresent(self.experimentLength, forKey: .experimentLength)
-      try container.encode(self.variantsHistory, forKey: .variantsHistory)
+      if !self.variantsHistory.isEmpty {
+        try container.encode(self.variantsHistory, forKey: .variantsHistory)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -282,7 +294,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.condition, forKey: .condition)
+        if !self.condition.isEmpty {
+          try container.encode(self.condition, forKey: .condition)
+        }
 
         if let choice = self.variants {
           switch choice {
@@ -387,7 +401,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.versionMetrics, forKey: .versionMetrics)
+        if !self.versionMetrics.isEmpty {
+          try container.encode(self.versionMetrics, forKey: .versionMetrics)
+        }
         try container.encodeIfPresent(self.lastUpdateTime, forKey: .lastUpdateTime)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -474,10 +490,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.confidenceLevel, forKey: .confidenceLevel)
-          try container.encode(self.ratio, forKey: .ratio)
-          try container.encode(self.lowerBound, forKey: .lowerBound)
-          try container.encode(self.upperBound, forKey: .upperBound)
+          if self.confidenceLevel != 0 {
+            try container.encode(self.confidenceLevel, forKey: .confidenceLevel)
+          }
+          if self.ratio != 0 {
+            try container.encode(self.ratio, forKey: .ratio)
+          }
+          if self.lowerBound != 0 {
+            try container.encode(self.lowerBound, forKey: .lowerBound)
+          }
+          if self.upperBound != 0 {
+            try container.encode(self.upperBound, forKey: .upperBound)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -605,8 +629,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.type, forKey: .type)
-          try container.encode(self.countType, forKey: .countType)
+          if self.type != Experiment.Result.MetricType() {
+            try container.encode(self.type, forKey: .type)
+          }
+          if self.countType != Experiment.Result.CountType() {
+            try container.encode(self.countType, forKey: .countType)
+          }
           try container.encodeIfPresent(self.confidenceInterval, forKey: .confidenceInterval)
 
           if let choice = self.value {
@@ -727,9 +755,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.version, forKey: .version)
-          try container.encode(self.metrics, forKey: .metrics)
-          try container.encode(self.sessionCount, forKey: .sessionCount)
+          if !self.version.isEmpty {
+            try container.encode(self.version, forKey: .version)
+          }
+          if !self.metrics.isEmpty {
+            try container.encode(self.metrics, forKey: .metrics)
+          }
+          if self.sessionCount != 0 {
+            try container.encode(self.sessionCount, forKey: .sessionCount)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

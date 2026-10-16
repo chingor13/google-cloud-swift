@@ -98,9 +98,15 @@ public struct SelfManagedSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.networkAttachment, forKey: .networkAttachment)
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.networkAttachment.isEmpty {
+      try container.encode(self.networkAttachment, forKey: .networkAttachment)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

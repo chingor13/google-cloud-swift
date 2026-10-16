@@ -79,8 +79,12 @@ public struct ByteDataItem: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.byteDataType, forKey: .byteDataType)
-    try container.encode(self.byteData, forKey: .byteData)
+    if self.byteDataType != ByteDataItem.ByteItemType() {
+      try container.encode(self.byteDataType, forKey: .byteDataType)
+    }
+    if !self.byteData.isEmpty {
+      try container.encode(self.byteData, forKey: .byteData)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -81,8 +81,12 @@ public struct WorkforceIdentityBasedManagementURI: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.firstPartyManagementUri, forKey: .firstPartyManagementUri)
-    try container.encode(self.thirdPartyManagementUri, forKey: .thirdPartyManagementUri)
+    if !self.firstPartyManagementUri.isEmpty {
+      try container.encode(self.firstPartyManagementUri, forKey: .firstPartyManagementUri)
+    }
+    if !self.thirdPartyManagementUri.isEmpty {
+      try container.encode(self.thirdPartyManagementUri, forKey: .thirdPartyManagementUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

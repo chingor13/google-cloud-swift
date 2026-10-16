@@ -148,12 +148,24 @@ public struct ResourceSpecification: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cpu, forKey: .cpu)
-    try container.encode(self.cpuLimits, forKey: .cpuLimits)
-    try container.encode(self.memory, forKey: .memory)
-    try container.encode(self.memoryLimits, forKey: .memoryLimits)
-    try container.encode(self.gpus, forKey: .gpus)
-    try container.encode(self.latencyBudgetMs, forKey: .latencyBudgetMs)
+    if !self.cpu.isEmpty {
+      try container.encode(self.cpu, forKey: .cpu)
+    }
+    if !self.cpuLimits.isEmpty {
+      try container.encode(self.cpuLimits, forKey: .cpuLimits)
+    }
+    if !self.memory.isEmpty {
+      try container.encode(self.memory, forKey: .memory)
+    }
+    if !self.memoryLimits.isEmpty {
+      try container.encode(self.memoryLimits, forKey: .memoryLimits)
+    }
+    if self.gpus != 0 {
+      try container.encode(self.gpus, forKey: .gpus)
+    }
+    if self.latencyBudgetMs != 0 {
+      try container.encode(self.latencyBudgetMs, forKey: .latencyBudgetMs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

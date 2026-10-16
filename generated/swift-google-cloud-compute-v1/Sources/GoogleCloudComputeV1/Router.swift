@@ -201,17 +201,25 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.bgp, forKey: .bgp)
-      try container.encode(self.bgpPeers, forKey: .bgpPeers)
+      if !self.bgpPeers.isEmpty {
+        try container.encode(self.bgpPeers, forKey: .bgpPeers)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(
         self.encryptedInterconnectRouter, forKey: .encryptedInterconnectRouter)
       try container.encodeIfPresent(self.id, forKey: .id)
-      try container.encode(self.interfaces, forKey: .interfaces)
+      if !self.interfaces.isEmpty {
+        try container.encode(self.interfaces, forKey: .interfaces)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      try container.encode(self.md5AuthenticationKeys, forKey: .md5AuthenticationKeys)
+      if !self.md5AuthenticationKeys.isEmpty {
+        try container.encode(self.md5AuthenticationKeys, forKey: .md5AuthenticationKeys)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.nats, forKey: .nats)
+      if !self.nats.isEmpty {
+        try container.encode(self.nats, forKey: .nats)
+      }
       try container.encodeIfPresent(self.nccGateway, forKey: .nccGateway)
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(self.params, forKey: .params)

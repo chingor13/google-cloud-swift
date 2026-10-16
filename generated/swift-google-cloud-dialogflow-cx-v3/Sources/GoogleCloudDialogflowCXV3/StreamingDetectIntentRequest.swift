@@ -180,13 +180,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.session, forKey: .session)
+      if !self.session.isEmpty {
+        try container.encode(self.session, forKey: .session)
+      }
       try container.encodeIfPresent(self.queryParams, forKey: .queryParams)
       try container.encodeIfPresent(self.queryInput, forKey: .queryInput)
       try container.encodeIfPresent(self.outputAudioConfig, forKey: .outputAudioConfig)
-      try container.encode(self.enablePartialResponse, forKey: .enablePartialResponse)
-      try container.encode(self.enableDebuggingInfo, forKey: .enableDebuggingInfo)
-      try container.encode(self.responseView, forKey: .responseView)
+      if self.enablePartialResponse {
+        try container.encode(self.enablePartialResponse, forKey: .enablePartialResponse)
+      }
+      if self.enableDebuggingInfo {
+        try container.encode(self.enableDebuggingInfo, forKey: .enableDebuggingInfo)
+      }
+      if self.responseView != DetectIntentResponseView() {
+        try container.encode(self.responseView, forKey: .responseView)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

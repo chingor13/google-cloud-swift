@@ -198,11 +198,21 @@ public struct RawDecryptRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.ciphertext, forKey: .ciphertext)
-    try container.encode(self.additionalAuthenticatedData, forKey: .additionalAuthenticatedData)
-    try container.encode(self.initializationVector, forKey: .initializationVector)
-    try container.encode(self.tagLength, forKey: .tagLength)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.ciphertext.isEmpty {
+      try container.encode(self.ciphertext, forKey: .ciphertext)
+    }
+    if !self.additionalAuthenticatedData.isEmpty {
+      try container.encode(self.additionalAuthenticatedData, forKey: .additionalAuthenticatedData)
+    }
+    if !self.initializationVector.isEmpty {
+      try container.encode(self.initializationVector, forKey: .initializationVector)
+    }
+    if self.tagLength != 0 {
+      try container.encode(self.tagLength, forKey: .tagLength)
+    }
     try container.encodeIfPresent(self.ciphertextCrc32C, forKey: .ciphertextCrc32C)
     try container.encodeIfPresent(
       self.additionalAuthenticatedDataCrc32C, forKey: .additionalAuthenticatedDataCrc32C)

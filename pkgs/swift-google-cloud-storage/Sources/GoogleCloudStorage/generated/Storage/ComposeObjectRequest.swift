@@ -144,11 +144,17 @@ public struct ComposeObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.destination, forKey: .destination)
-    try container.encode(self.sourceObjects, forKey: .sourceObjects)
-    try container.encode(self.destinationPredefinedAcl, forKey: .destinationPredefinedAcl)
+    if !self.sourceObjects.isEmpty {
+      try container.encode(self.sourceObjects, forKey: .sourceObjects)
+    }
+    if !self.destinationPredefinedAcl.isEmpty {
+      try container.encode(self.destinationPredefinedAcl, forKey: .destinationPredefinedAcl)
+    }
     try container.encodeIfPresent(self.ifGenerationMatch, forKey: .ifGenerationMatch)
     try container.encodeIfPresent(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
     try container.encodeIfPresent(
       self.commonObjectRequestParams, forKey: .commonObjectRequestParams)
     try container.encodeIfPresent(self.objectChecksums, forKey: .objectChecksums)
@@ -226,8 +232,12 @@ public struct ComposeObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.generation, forKey: .generation)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if self.generation != 0 {
+        try container.encode(self.generation, forKey: .generation)
+      }
       try container.encodeIfPresent(self.objectPreconditions, forKey: .objectPreconditions)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

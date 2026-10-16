@@ -162,10 +162,18 @@ public struct RequestMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.domain, forKey: .domain)
-    try container.encode(self.sessionId, forKey: .sessionId)
-    try container.encode(self.userId, forKey: .userId)
-    try container.encode(self.allowMissingIds, forKey: .allowMissingIds)
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
+    if !self.sessionId.isEmpty {
+      try container.encode(self.sessionId, forKey: .sessionId)
+    }
+    if !self.userId.isEmpty {
+      try container.encode(self.userId, forKey: .userId)
+    }
+    if self.allowMissingIds {
+      try container.encode(self.allowMissingIds, forKey: .allowMissingIds)
+    }
     try container.encodeIfPresent(self.deviceInfo, forKey: .deviceInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

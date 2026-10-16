@@ -175,15 +175,33 @@ public struct ServiceAccount: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.uniqueId, forKey: .uniqueId)
-    try container.encode(self.email, forKey: .email)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.oauth2ClientId, forKey: .oauth2ClientId)
-    try container.encode(self.disabled, forKey: .disabled)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.uniqueId.isEmpty {
+      try container.encode(self.uniqueId, forKey: .uniqueId)
+    }
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.oauth2ClientId.isEmpty {
+      try container.encode(self.oauth2ClientId, forKey: .oauth2ClientId)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

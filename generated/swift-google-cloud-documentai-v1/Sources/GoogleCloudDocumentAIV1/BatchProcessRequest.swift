@@ -132,12 +132,18 @@ public struct BatchProcessRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.inputDocuments, forKey: .inputDocuments)
     try container.encodeIfPresent(self.documentOutputConfig, forKey: .documentOutputConfig)
-    try container.encode(self.skipHumanReview, forKey: .skipHumanReview)
+    if self.skipHumanReview {
+      try container.encode(self.skipHumanReview, forKey: .skipHumanReview)
+    }
     try container.encodeIfPresent(self.processOptions, forKey: .processOptions)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

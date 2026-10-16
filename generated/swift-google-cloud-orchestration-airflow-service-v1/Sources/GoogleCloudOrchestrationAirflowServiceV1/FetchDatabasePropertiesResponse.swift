@@ -90,9 +90,15 @@ public struct FetchDatabasePropertiesResponse: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primaryGceZone, forKey: .primaryGceZone)
-    try container.encode(self.secondaryGceZone, forKey: .secondaryGceZone)
-    try container.encode(self.isFailoverReplicaAvailable, forKey: .isFailoverReplicaAvailable)
+    if !self.primaryGceZone.isEmpty {
+      try container.encode(self.primaryGceZone, forKey: .primaryGceZone)
+    }
+    if !self.secondaryGceZone.isEmpty {
+      try container.encode(self.secondaryGceZone, forKey: .secondaryGceZone)
+    }
+    if self.isFailoverReplicaAvailable {
+      try container.encode(self.isFailoverReplicaAvailable, forKey: .isFailoverReplicaAvailable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

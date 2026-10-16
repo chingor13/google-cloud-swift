@@ -94,10 +94,14 @@ public struct CryptoMiningEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmResource, forKey: .vmResource)
+    if !self.vmResource.isEmpty {
+      try container.encode(self.vmResource, forKey: .vmResource)
+    }
     try container.encodeIfPresent(self.detectedMiningStartTime, forKey: .detectedMiningStartTime)
     try container.encodeIfPresent(self.detectedMiningEndTime, forKey: .detectedMiningEndTime)
-    try container.encode(self.vmIp, forKey: .vmIp)
+    if !self.vmIp.isEmpty {
+      try container.encode(self.vmIp, forKey: .vmIp)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -199,21 +199,45 @@ public struct CloudVmCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.exadataInfrastructure, forKey: .exadataInfrastructure)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.exadataInfrastructure.isEmpty {
+      try container.encode(self.exadataInfrastructure, forKey: .exadataInfrastructure)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.properties, forKey: .properties)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.cidr, forKey: .cidr)
-    try container.encode(self.backupSubnetCidr, forKey: .backupSubnetCidr)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
-    try container.encode(self.odbNetwork, forKey: .odbNetwork)
-    try container.encode(self.odbSubnet, forKey: .odbSubnet)
-    try container.encode(self.backupOdbSubnet, forKey: .backupOdbSubnet)
+    if !self.cidr.isEmpty {
+      try container.encode(self.cidr, forKey: .cidr)
+    }
+    if !self.backupSubnetCidr.isEmpty {
+      try container.encode(self.backupSubnetCidr, forKey: .backupSubnetCidr)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.gcpOracleZone.isEmpty {
+      try container.encode(self.gcpOracleZone, forKey: .gcpOracleZone)
+    }
+    if !self.odbNetwork.isEmpty {
+      try container.encode(self.odbNetwork, forKey: .odbNetwork)
+    }
+    if !self.odbSubnet.isEmpty {
+      try container.encode(self.odbSubnet, forKey: .odbSubnet)
+    }
+    if !self.backupOdbSubnet.isEmpty {
+      try container.encode(self.backupOdbSubnet, forKey: .backupOdbSubnet)
+    }
     try container.encodeIfPresent(self.identityConnector, forKey: .identityConnector)
-    try container.encode(self.exascaleDbStorageVault, forKey: .exascaleDbStorageVault)
+    if !self.exascaleDbStorageVault.isEmpty {
+      try container.encode(self.exascaleDbStorageVault, forKey: .exascaleDbStorageVault)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

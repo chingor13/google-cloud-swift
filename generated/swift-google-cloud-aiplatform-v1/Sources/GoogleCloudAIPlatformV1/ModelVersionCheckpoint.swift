@@ -87,9 +87,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.checkpointId, forKey: .checkpointId)
-      try container.encode(self.epoch, forKey: .epoch)
-      try container.encode(self.step, forKey: .step)
+      if !self.checkpointId.isEmpty {
+        try container.encode(self.checkpointId, forKey: .checkpointId)
+      }
+      if self.epoch != 0 {
+        try container.encode(self.epoch, forKey: .epoch)
+      }
+      if self.step != 0 {
+        try container.encode(self.step, forKey: .step)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

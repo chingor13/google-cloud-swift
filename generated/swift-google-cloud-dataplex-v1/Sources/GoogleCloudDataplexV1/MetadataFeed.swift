@@ -138,13 +138,19 @@ public struct MetadataFeed: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.scope, forKey: .scope)
     try container.encodeIfPresent(self.filters, forKey: .filters)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.endpoint {
       switch choice {
@@ -237,9 +243,15 @@ public struct MetadataFeed: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.organizationLevel, forKey: .organizationLevel)
-      try container.encode(self.projects, forKey: .projects)
-      try container.encode(self.entryGroups, forKey: .entryGroups)
+      if self.organizationLevel {
+        try container.encode(self.organizationLevel, forKey: .organizationLevel)
+      }
+      if !self.projects.isEmpty {
+        try container.encode(self.projects, forKey: .projects)
+      }
+      if !self.entryGroups.isEmpty {
+        try container.encode(self.entryGroups, forKey: .entryGroups)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -347,9 +359,15 @@ public struct MetadataFeed: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entryTypes, forKey: .entryTypes)
-      try container.encode(self.aspectTypes, forKey: .aspectTypes)
-      try container.encode(self.changeTypes, forKey: .changeTypes)
+      if !self.entryTypes.isEmpty {
+        try container.encode(self.entryTypes, forKey: .entryTypes)
+      }
+      if !self.aspectTypes.isEmpty {
+        try container.encode(self.aspectTypes, forKey: .aspectTypes)
+      }
+      if !self.changeTypes.isEmpty {
+        try container.encode(self.changeTypes, forKey: .changeTypes)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

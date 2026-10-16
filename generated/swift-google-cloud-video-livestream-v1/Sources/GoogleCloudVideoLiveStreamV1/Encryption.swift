@@ -135,7 +135,9 @@ public struct Encryption: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     try container.encodeIfPresent(self.drmSystems, forKey: .drmSystems)
 
     if let choice = self.secretSource {
@@ -213,7 +215,9 @@ public struct Encryption: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.secretVersion, forKey: .secretVersion)
+      if !self.secretVersion.isEmpty {
+        try container.encode(self.secretVersion, forKey: .secretVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -809,7 +813,9 @@ public struct Encryption: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.scheme, forKey: .scheme)
+      if !self.scheme.isEmpty {
+        try container.encode(self.scheme, forKey: .scheme)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

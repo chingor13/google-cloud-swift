@@ -159,11 +159,21 @@ public struct SearchCatalogRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.scope, forKey: .scope)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.pageToken, forKey: .pageToken)
-    try container.encode(self.orderBy, forKey: .orderBy)
-    try container.encode(self.adminSearch, forKey: .adminSearch)
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.pageToken.isEmpty {
+      try container.encode(self.pageToken, forKey: .pageToken)
+    }
+    if !self.orderBy.isEmpty {
+      try container.encode(self.orderBy, forKey: .orderBy)
+    }
+    if self.adminSearch {
+      try container.encode(self.adminSearch, forKey: .adminSearch)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -298,12 +308,24 @@ public struct SearchCatalogRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.includeOrgIds, forKey: .includeOrgIds)
-      try container.encode(self.includeProjectIds, forKey: .includeProjectIds)
-      try container.encode(self.includeGcpPublicDatasets, forKey: .includeGcpPublicDatasets)
-      try container.encode(self.restrictedLocations, forKey: .restrictedLocations)
-      try container.encode(self.starredOnly, forKey: .starredOnly)
-      try container.encode(self.includePublicTagTemplates, forKey: .includePublicTagTemplates)
+      if !self.includeOrgIds.isEmpty {
+        try container.encode(self.includeOrgIds, forKey: .includeOrgIds)
+      }
+      if !self.includeProjectIds.isEmpty {
+        try container.encode(self.includeProjectIds, forKey: .includeProjectIds)
+      }
+      if self.includeGcpPublicDatasets {
+        try container.encode(self.includeGcpPublicDatasets, forKey: .includeGcpPublicDatasets)
+      }
+      if !self.restrictedLocations.isEmpty {
+        try container.encode(self.restrictedLocations, forKey: .restrictedLocations)
+      }
+      if self.starredOnly {
+        try container.encode(self.starredOnly, forKey: .starredOnly)
+      }
+      if self.includePublicTagTemplates {
+        try container.encode(self.includePublicTagTemplates, forKey: .includePublicTagTemplates)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

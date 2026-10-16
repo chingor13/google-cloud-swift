@@ -129,13 +129,25 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.displayDetails, forKey: .displayDetails)
-      try container.encode(self.condition, forKey: .condition)
-      try container.encode(self.agentAction, forKey: .agentAction)
-      try container.encode(self.systemAction, forKey: .systemAction)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.displayDetails.isEmpty {
+        try container.encode(self.displayDetails, forKey: .displayDetails)
+      }
+      if !self.condition.isEmpty {
+        try container.encode(self.condition, forKey: .condition)
+      }
+      if !self.agentAction.isEmpty {
+        try container.encode(self.agentAction, forKey: .agentAction)
+      }
+      if !self.systemAction.isEmpty {
+        try container.encode(self.systemAction, forKey: .systemAction)
+      }
       try container.encodeIfPresent(self.duplicateCheckResult, forKey: .duplicateCheckResult)
-      try container.encode(self.triggeringEvent, forKey: .triggeringEvent)
+      if self.triggeringEvent != AgentCoachingInstruction.TriggerEvent() {
+        try container.encode(self.triggeringEvent, forKey: .triggeringEvent)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -197,7 +209,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.duplicateSuggestions, forKey: .duplicateSuggestions)
+        if !self.duplicateSuggestions.isEmpty {
+          try container.encode(self.duplicateSuggestions, forKey: .duplicateSuggestions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -273,9 +287,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.answerRecord, forKey: .answerRecord)
-          try container.encode(self.suggestionIndex, forKey: .suggestionIndex)
-          try container.encode(self.similarityScore, forKey: .similarityScore)
+          if !self.answerRecord.isEmpty {
+            try container.encode(self.answerRecord, forKey: .answerRecord)
+          }
+          if self.suggestionIndex != 0 {
+            try container.encode(self.suggestionIndex, forKey: .suggestionIndex)
+          }
+          if self.similarityScore != 0 {
+            try container.encode(self.similarityScore, forKey: .similarityScore)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

@@ -161,17 +161,39 @@ public struct SecurityBulletinEvent: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceTypeAffected, forKey: .resourceTypeAffected)
-    try container.encode(self.bulletinId, forKey: .bulletinId)
-    try container.encode(self.cveIds, forKey: .cveIds)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.bulletinUri, forKey: .bulletinUri)
-    try container.encode(self.briefDescription, forKey: .briefDescription)
-    try container.encode(self.affectedSupportedMinors, forKey: .affectedSupportedMinors)
-    try container.encode(self.patchedVersions, forKey: .patchedVersions)
-    try container.encode(self.suggestedUpgradeTarget, forKey: .suggestedUpgradeTarget)
-    try container.encode(self.manualStepsRequired, forKey: .manualStepsRequired)
-    try container.encode(self.mitigatedVersions, forKey: .mitigatedVersions)
+    if !self.resourceTypeAffected.isEmpty {
+      try container.encode(self.resourceTypeAffected, forKey: .resourceTypeAffected)
+    }
+    if !self.bulletinId.isEmpty {
+      try container.encode(self.bulletinId, forKey: .bulletinId)
+    }
+    if !self.cveIds.isEmpty {
+      try container.encode(self.cveIds, forKey: .cveIds)
+    }
+    if !self.severity.isEmpty {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.bulletinUri.isEmpty {
+      try container.encode(self.bulletinUri, forKey: .bulletinUri)
+    }
+    if !self.briefDescription.isEmpty {
+      try container.encode(self.briefDescription, forKey: .briefDescription)
+    }
+    if !self.affectedSupportedMinors.isEmpty {
+      try container.encode(self.affectedSupportedMinors, forKey: .affectedSupportedMinors)
+    }
+    if !self.patchedVersions.isEmpty {
+      try container.encode(self.patchedVersions, forKey: .patchedVersions)
+    }
+    if !self.suggestedUpgradeTarget.isEmpty {
+      try container.encode(self.suggestedUpgradeTarget, forKey: .suggestedUpgradeTarget)
+    }
+    if self.manualStepsRequired {
+      try container.encode(self.manualStepsRequired, forKey: .manualStepsRequired)
+    }
+    if !self.mitigatedVersions.isEmpty {
+      try container.encode(self.mitigatedVersions, forKey: .mitigatedVersions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

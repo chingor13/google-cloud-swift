@@ -81,9 +81,13 @@ public struct ProductRecognizerConfig: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.retailEndpoint, forKey: .retailEndpoint)
-    try container.encode(
-      self.recognitionConfidenceThreshold, forKey: .recognitionConfidenceThreshold)
+    if !self.retailEndpoint.isEmpty {
+      try container.encode(self.retailEndpoint, forKey: .retailEndpoint)
+    }
+    if self.recognitionConfidenceThreshold != 0 {
+      try container.encode(
+        self.recognitionConfidenceThreshold, forKey: .recognitionConfidenceThreshold)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -131,14 +131,30 @@ public struct TransferCounters: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.foundObjectsCount, forKey: .foundObjectsCount)
-    try container.encode(self.bytesFoundCount, forKey: .bytesFoundCount)
-    try container.encode(self.objectsSkippedCount, forKey: .objectsSkippedCount)
-    try container.encode(self.bytesSkippedCount, forKey: .bytesSkippedCount)
-    try container.encode(self.objectsCopiedCount, forKey: .objectsCopiedCount)
-    try container.encode(self.bytesCopiedCount, forKey: .bytesCopiedCount)
-    try container.encode(self.objectsFailedCount, forKey: .objectsFailedCount)
-    try container.encode(self.bytesFailedCount, forKey: .bytesFailedCount)
+    if self.foundObjectsCount != 0 {
+      try container.encode(self.foundObjectsCount, forKey: .foundObjectsCount)
+    }
+    if self.bytesFoundCount != 0 {
+      try container.encode(self.bytesFoundCount, forKey: .bytesFoundCount)
+    }
+    if self.objectsSkippedCount != 0 {
+      try container.encode(self.objectsSkippedCount, forKey: .objectsSkippedCount)
+    }
+    if self.bytesSkippedCount != 0 {
+      try container.encode(self.bytesSkippedCount, forKey: .bytesSkippedCount)
+    }
+    if self.objectsCopiedCount != 0 {
+      try container.encode(self.objectsCopiedCount, forKey: .objectsCopiedCount)
+    }
+    if self.bytesCopiedCount != 0 {
+      try container.encode(self.bytesCopiedCount, forKey: .bytesCopiedCount)
+    }
+    if self.objectsFailedCount != 0 {
+      try container.encode(self.objectsFailedCount, forKey: .objectsFailedCount)
+    }
+    if self.bytesFailedCount != 0 {
+      try container.encode(self.bytesFailedCount, forKey: .bytesFailedCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

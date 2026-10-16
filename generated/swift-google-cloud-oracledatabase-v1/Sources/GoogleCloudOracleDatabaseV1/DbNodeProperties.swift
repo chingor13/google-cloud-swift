@@ -132,14 +132,30 @@ public struct DbNodeProperties: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.ocpuCount, forKey: .ocpuCount)
-    try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
-    try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
-    try container.encode(self.dbServerOcid, forKey: .dbServerOcid)
-    try container.encode(self.hostname, forKey: .hostname)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.totalCpuCoreCount, forKey: .totalCpuCoreCount)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.ocpuCount != 0 {
+      try container.encode(self.ocpuCount, forKey: .ocpuCount)
+    }
+    if self.memorySizeGb != 0 {
+      try container.encode(self.memorySizeGb, forKey: .memorySizeGb)
+    }
+    if self.dbNodeStorageSizeGb != 0 {
+      try container.encode(self.dbNodeStorageSizeGb, forKey: .dbNodeStorageSizeGb)
+    }
+    if !self.dbServerOcid.isEmpty {
+      try container.encode(self.dbServerOcid, forKey: .dbServerOcid)
+    }
+    if !self.hostname.isEmpty {
+      try container.encode(self.hostname, forKey: .hostname)
+    }
+    if self.state != DbNodeProperties.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.totalCpuCoreCount != 0 {
+      try container.encode(self.totalCpuCoreCount, forKey: .totalCpuCoreCount)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

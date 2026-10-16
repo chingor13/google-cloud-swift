@@ -83,7 +83,9 @@ public struct CapacityQuantityInterval: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.minValue, forKey: .minValue)
     try container.encodeIfPresent(self.maxValue, forKey: .maxValue)
     for (key, value) in self._unknownFields.json {

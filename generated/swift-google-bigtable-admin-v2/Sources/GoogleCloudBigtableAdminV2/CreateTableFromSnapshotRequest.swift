@@ -98,9 +98,15 @@ public struct CreateTableFromSnapshotRequest: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.tableId, forKey: .tableId)
-    try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.tableId.isEmpty {
+      try container.encode(self.tableId, forKey: .tableId)
+    }
+    if !self.sourceSnapshot.isEmpty {
+      try container.encode(self.sourceSnapshot, forKey: .sourceSnapshot)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

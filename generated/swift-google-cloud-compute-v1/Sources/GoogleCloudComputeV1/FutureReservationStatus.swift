@@ -149,7 +149,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.amendmentStatus, forKey: .amendmentStatus)
-      try container.encode(self.autoCreatedReservations, forKey: .autoCreatedReservations)
+      if !self.autoCreatedReservations.isEmpty {
+        try container.encode(self.autoCreatedReservations, forKey: .autoCreatedReservations)
+      }
       try container.encodeIfPresent(
         self.exapoolProvisionedCapacityGb, forKey: .exapoolProvisionedCapacityGb)
       try container.encodeIfPresent(

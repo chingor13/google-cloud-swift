@@ -85,9 +85,15 @@ public struct NonCompliantFile: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.path, forKey: .path)
-    try container.encode(self.displayCommand, forKey: .displayCommand)
-    try container.encode(self.reason, forKey: .reason)
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
+    if !self.displayCommand.isEmpty {
+      try container.encode(self.displayCommand, forKey: .displayCommand)
+    }
+    if !self.reason.isEmpty {
+      try container.encode(self.reason, forKey: .reason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -80,8 +80,12 @@ public struct SecurityHealthAnalyticsModule: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.moduleName, forKey: .moduleName)
-    try container.encode(self.moduleEnablementState, forKey: .moduleEnablementState)
+    if !self.moduleName.isEmpty {
+      try container.encode(self.moduleName, forKey: .moduleName)
+    }
+    if self.moduleEnablementState != EnablementState() {
+      try container.encode(self.moduleEnablementState, forKey: .moduleEnablementState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

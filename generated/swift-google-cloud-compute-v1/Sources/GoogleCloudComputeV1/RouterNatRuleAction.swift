@@ -111,10 +111,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceNatActiveIps, forKey: .sourceNatActiveIps)
-      try container.encode(self.sourceNatActiveRanges, forKey: .sourceNatActiveRanges)
-      try container.encode(self.sourceNatDrainIps, forKey: .sourceNatDrainIps)
-      try container.encode(self.sourceNatDrainRanges, forKey: .sourceNatDrainRanges)
+      if !self.sourceNatActiveIps.isEmpty {
+        try container.encode(self.sourceNatActiveIps, forKey: .sourceNatActiveIps)
+      }
+      if !self.sourceNatActiveRanges.isEmpty {
+        try container.encode(self.sourceNatActiveRanges, forKey: .sourceNatActiveRanges)
+      }
+      if !self.sourceNatDrainIps.isEmpty {
+        try container.encode(self.sourceNatDrainIps, forKey: .sourceNatDrainIps)
+      }
+      if !self.sourceNatDrainRanges.isEmpty {
+        try container.encode(self.sourceNatDrainRanges, forKey: .sourceNatDrainRanges)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

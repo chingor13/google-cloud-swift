@@ -246,22 +246,52 @@ public struct BuildOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sourceProvenanceHash, forKey: .sourceProvenanceHash)
-    try container.encode(self.requestedVerifyOption, forKey: .requestedVerifyOption)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
-    try container.encode(self.substitutionOption, forKey: .substitutionOption)
-    try container.encode(self.dynamicSubstitutions, forKey: .dynamicSubstitutions)
-    try container.encode(self.automapSubstitutions, forKey: .automapSubstitutions)
-    try container.encode(self.logStreamingOption, forKey: .logStreamingOption)
-    try container.encode(self.workerPool, forKey: .workerPool)
+    if !self.sourceProvenanceHash.isEmpty {
+      try container.encode(self.sourceProvenanceHash, forKey: .sourceProvenanceHash)
+    }
+    if self.requestedVerifyOption != BuildOptions.VerifyOption() {
+      try container.encode(self.requestedVerifyOption, forKey: .requestedVerifyOption)
+    }
+    if self.machineType != BuildOptions.MachineType() {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if self.diskSizeGb != 0 {
+      try container.encode(self.diskSizeGb, forKey: .diskSizeGb)
+    }
+    if self.substitutionOption != BuildOptions.SubstitutionOption() {
+      try container.encode(self.substitutionOption, forKey: .substitutionOption)
+    }
+    if self.dynamicSubstitutions {
+      try container.encode(self.dynamicSubstitutions, forKey: .dynamicSubstitutions)
+    }
+    if self.automapSubstitutions {
+      try container.encode(self.automapSubstitutions, forKey: .automapSubstitutions)
+    }
+    if self.logStreamingOption != BuildOptions.LogStreamingOption() {
+      try container.encode(self.logStreamingOption, forKey: .logStreamingOption)
+    }
+    if !self.workerPool.isEmpty {
+      try container.encode(self.workerPool, forKey: .workerPool)
+    }
     try container.encodeIfPresent(self.pool, forKey: .pool)
-    try container.encode(self.logging, forKey: .logging)
-    try container.encode(self.env, forKey: .env)
-    try container.encode(self.secretEnv, forKey: .secretEnv)
-    try container.encode(self.volumes, forKey: .volumes)
-    try container.encode(self.defaultLogsBucketBehavior, forKey: .defaultLogsBucketBehavior)
-    try container.encode(self.enableStructuredLogging, forKey: .enableStructuredLogging)
+    if self.logging != BuildOptions.LoggingMode() {
+      try container.encode(self.logging, forKey: .logging)
+    }
+    if !self.env.isEmpty {
+      try container.encode(self.env, forKey: .env)
+    }
+    if !self.secretEnv.isEmpty {
+      try container.encode(self.secretEnv, forKey: .secretEnv)
+    }
+    if !self.volumes.isEmpty {
+      try container.encode(self.volumes, forKey: .volumes)
+    }
+    if self.defaultLogsBucketBehavior != BuildOptions.DefaultLogsBucketBehavior() {
+      try container.encode(self.defaultLogsBucketBehavior, forKey: .defaultLogsBucketBehavior)
+    }
+    if self.enableStructuredLogging {
+      try container.encode(self.enableStructuredLogging, forKey: .enableStructuredLogging)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -327,7 +357,9 @@ public struct BuildOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

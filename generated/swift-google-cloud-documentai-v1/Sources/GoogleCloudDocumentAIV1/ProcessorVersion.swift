@@ -178,19 +178,37 @@ public struct ProcessorVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
     try container.encodeIfPresent(self.documentSchema, forKey: .documentSchema)
-    try container.encode(self.state, forKey: .state)
+    if self.state != ProcessorVersion.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.latestEvaluation, forKey: .latestEvaluation)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
-    try container.encode(self.googleManaged, forKey: .googleManaged)
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if !self.kmsKeyVersionName.isEmpty {
+      try container.encode(self.kmsKeyVersionName, forKey: .kmsKeyVersionName)
+    }
+    if self.googleManaged {
+      try container.encode(self.googleManaged, forKey: .googleManaged)
+    }
     try container.encodeIfPresent(self.deprecationInfo, forKey: .deprecationInfo)
-    try container.encode(self.modelType, forKey: .modelType)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    if self.modelType != ProcessorVersion.ModelType() {
+      try container.encode(self.modelType, forKey: .modelType)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
     try container.encodeIfPresent(self.genAiModelInfo, forKey: .genAiModelInfo)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -260,7 +278,9 @@ public struct ProcessorVersion: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.deprecationTime, forKey: .deprecationTime)
-      try container.encode(self.replacementProcessorVersion, forKey: .replacementProcessorVersion)
+      if !self.replacementProcessorVersion.isEmpty {
+        try container.encode(self.replacementProcessorVersion, forKey: .replacementProcessorVersion)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -440,8 +460,12 @@ public struct ProcessorVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.finetuningAllowed, forKey: .finetuningAllowed)
-        try container.encode(self.minTrainLabeledDocuments, forKey: .minTrainLabeledDocuments)
+        if self.finetuningAllowed {
+          try container.encode(self.finetuningAllowed, forKey: .finetuningAllowed)
+        }
+        if self.minTrainLabeledDocuments != 0 {
+          try container.encode(self.minTrainLabeledDocuments, forKey: .minTrainLabeledDocuments)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -539,8 +563,14 @@ public struct ProcessorVersion: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.customModelType, forKey: .customModelType)
-        try container.encode(self.baseProcessorVersionId, forKey: .baseProcessorVersionId)
+        if self.customModelType
+          != ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType()
+        {
+          try container.encode(self.customModelType, forKey: .customModelType)
+        }
+        if !self.baseProcessorVersionId.isEmpty {
+          try container.encode(self.baseProcessorVersionId, forKey: .baseProcessorVersionId)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

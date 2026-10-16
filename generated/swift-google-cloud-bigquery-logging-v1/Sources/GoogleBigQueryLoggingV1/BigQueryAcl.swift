@@ -69,7 +69,9 @@ public struct BigQueryAcl: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.entries, forKey: .entries)
+    if !self.entries.isEmpty {
+      try container.encode(self.entries, forKey: .entries)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -166,11 +168,21 @@ public struct BigQueryAcl: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.role, forKey: .role)
-      try container.encode(self.groupEmail, forKey: .groupEmail)
-      try container.encode(self.userEmail, forKey: .userEmail)
-      try container.encode(self.domain, forKey: .domain)
-      try container.encode(self.specialGroup, forKey: .specialGroup)
+      if !self.role.isEmpty {
+        try container.encode(self.role, forKey: .role)
+      }
+      if !self.groupEmail.isEmpty {
+        try container.encode(self.groupEmail, forKey: .groupEmail)
+      }
+      if !self.userEmail.isEmpty {
+        try container.encode(self.userEmail, forKey: .userEmail)
+      }
+      if !self.domain.isEmpty {
+        try container.encode(self.domain, forKey: .domain)
+      }
+      if !self.specialGroup.isEmpty {
+        try container.encode(self.specialGroup, forKey: .specialGroup)
+      }
       try container.encodeIfPresent(self.viewName, forKey: .viewName)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

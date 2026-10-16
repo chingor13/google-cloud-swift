@@ -134,12 +134,20 @@ public struct ReportDetail: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.snapshotTime, forKey: .snapshotTime)
-    try container.encode(self.reportPathPrefix, forKey: .reportPathPrefix)
-    try container.encode(self.shardsCount, forKey: .shardsCount)
+    if !self.reportPathPrefix.isEmpty {
+      try container.encode(self.reportPathPrefix, forKey: .reportPathPrefix)
+    }
+    if self.shardsCount != 0 {
+      try container.encode(self.shardsCount, forKey: .shardsCount)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.targetDatetime, forKey: .targetDatetime)
     try container.encodeIfPresent(self.reportMetrics, forKey: .reportMetrics)
     for (key, value) in self._unknownFields.json {
@@ -200,7 +208,9 @@ public struct ReportDetail: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.processedRecordsCount, forKey: .processedRecordsCount)
+      if self.processedRecordsCount != 0 {
+        try container.encode(self.processedRecordsCount, forKey: .processedRecordsCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -89,9 +89,15 @@ public struct DataCollectionOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.diagnosticsEventsEnabled, forKey: .diagnosticsEventsEnabled)
-    try container.encode(self.healthMonitoringEnabled, forKey: .healthMonitoringEnabled)
-    try container.encode(self.incidentLogsEnabled, forKey: .incidentLogsEnabled)
+    if self.diagnosticsEventsEnabled {
+      try container.encode(self.diagnosticsEventsEnabled, forKey: .diagnosticsEventsEnabled)
+    }
+    if self.healthMonitoringEnabled {
+      try container.encode(self.healthMonitoringEnabled, forKey: .healthMonitoringEnabled)
+    }
+    if self.incidentLogsEnabled {
+      try container.encode(self.incidentLogsEnabled, forKey: .incidentLogsEnabled)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

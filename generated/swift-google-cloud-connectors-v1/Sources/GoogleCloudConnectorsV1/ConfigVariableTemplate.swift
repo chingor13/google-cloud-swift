@@ -154,17 +154,35 @@ public struct ConfigVariableTemplate: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
-    try container.encode(self.valueType, forKey: .valueType)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.validationRegex, forKey: .validationRegex)
-    try container.encode(self.`required`, forKey: .`required`)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
+    if self.valueType != ConfigVariableTemplate.ValueType() {
+      try container.encode(self.valueType, forKey: .valueType)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.validationRegex.isEmpty {
+      try container.encode(self.validationRegex, forKey: .validationRegex)
+    }
+    if self.`required` {
+      try container.encode(self.`required`, forKey: .`required`)
+    }
     try container.encodeIfPresent(self.roleGrant, forKey: .roleGrant)
-    try container.encode(self.enumOptions, forKey: .enumOptions)
+    if !self.enumOptions.isEmpty {
+      try container.encode(self.enumOptions, forKey: .enumOptions)
+    }
     try container.encodeIfPresent(self.authorizationCodeLink, forKey: .authorizationCodeLink)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.isAdvanced, forKey: .isAdvanced)
+    if self.state != ConfigVariableTemplate.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.isAdvanced {
+      try container.encode(self.isAdvanced, forKey: .isAdvanced)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

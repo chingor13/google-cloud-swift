@@ -297,26 +297,66 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.webhookState, forKey: .webhookState)
-      try container.encode(self.priority, forKey: .priority)
-      try container.encode(self.isFallback, forKey: .isFallback)
-      try container.encode(self.mlDisabled, forKey: .mlDisabled)
-      try container.encode(self.liveAgentHandoff, forKey: .liveAgentHandoff)
-      try container.encode(self.endInteraction, forKey: .endInteraction)
-      try container.encode(self.inputContextNames, forKey: .inputContextNames)
-      try container.encode(self.events, forKey: .events)
-      try container.encode(self.trainingPhrases, forKey: .trainingPhrases)
-      try container.encode(self.action, forKey: .action)
-      try container.encode(self.outputContexts, forKey: .outputContexts)
-      try container.encode(self.resetContexts, forKey: .resetContexts)
-      try container.encode(self.parameters, forKey: .parameters)
-      try container.encode(self.messages, forKey: .messages)
-      try container.encode(self.defaultResponsePlatforms, forKey: .defaultResponsePlatforms)
-      try container.encode(self.rootFollowupIntentName, forKey: .rootFollowupIntentName)
-      try container.encode(self.parentFollowupIntentName, forKey: .parentFollowupIntentName)
-      try container.encode(self.followupIntentInfo, forKey: .followupIntentInfo)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.webhookState != Intent.WebhookState() {
+        try container.encode(self.webhookState, forKey: .webhookState)
+      }
+      if self.priority != 0 {
+        try container.encode(self.priority, forKey: .priority)
+      }
+      if self.isFallback {
+        try container.encode(self.isFallback, forKey: .isFallback)
+      }
+      if self.mlDisabled {
+        try container.encode(self.mlDisabled, forKey: .mlDisabled)
+      }
+      if self.liveAgentHandoff {
+        try container.encode(self.liveAgentHandoff, forKey: .liveAgentHandoff)
+      }
+      if self.endInteraction {
+        try container.encode(self.endInteraction, forKey: .endInteraction)
+      }
+      if !self.inputContextNames.isEmpty {
+        try container.encode(self.inputContextNames, forKey: .inputContextNames)
+      }
+      if !self.events.isEmpty {
+        try container.encode(self.events, forKey: .events)
+      }
+      if !self.trainingPhrases.isEmpty {
+        try container.encode(self.trainingPhrases, forKey: .trainingPhrases)
+      }
+      if !self.action.isEmpty {
+        try container.encode(self.action, forKey: .action)
+      }
+      if !self.outputContexts.isEmpty {
+        try container.encode(self.outputContexts, forKey: .outputContexts)
+      }
+      if self.resetContexts {
+        try container.encode(self.resetContexts, forKey: .resetContexts)
+      }
+      if !self.parameters.isEmpty {
+        try container.encode(self.parameters, forKey: .parameters)
+      }
+      if !self.messages.isEmpty {
+        try container.encode(self.messages, forKey: .messages)
+      }
+      if !self.defaultResponsePlatforms.isEmpty {
+        try container.encode(self.defaultResponsePlatforms, forKey: .defaultResponsePlatforms)
+      }
+      if !self.rootFollowupIntentName.isEmpty {
+        try container.encode(self.rootFollowupIntentName, forKey: .rootFollowupIntentName)
+      }
+      if !self.parentFollowupIntentName.isEmpty {
+        try container.encode(self.parentFollowupIntentName, forKey: .parentFollowupIntentName)
+      }
+      if !self.followupIntentInfo.isEmpty {
+        try container.encode(self.followupIntentInfo, forKey: .followupIntentInfo)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -426,10 +466,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.parts, forKey: .parts)
-        try container.encode(self.timesAddedCount, forKey: .timesAddedCount)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if self.type != Intent.TrainingPhrase.Type_() {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.parts.isEmpty {
+          try container.encode(self.parts, forKey: .parts)
+        }
+        if self.timesAddedCount != 0 {
+          try container.encode(self.timesAddedCount, forKey: .timesAddedCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -517,10 +565,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
-          try container.encode(self.entityType, forKey: .entityType)
-          try container.encode(self.alias, forKey: .alias)
-          try container.encode(self.userDefined, forKey: .userDefined)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
+          if !self.entityType.isEmpty {
+            try container.encode(self.entityType, forKey: .entityType)
+          }
+          if !self.alias.isEmpty {
+            try container.encode(self.alias, forKey: .alias)
+          }
+          if self.userDefined {
+            try container.encode(self.userDefined, forKey: .userDefined)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -824,14 +880,30 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.value, forKey: .value)
-        try container.encode(self.defaultValue, forKey: .defaultValue)
-        try container.encode(self.entityTypeDisplayName, forKey: .entityTypeDisplayName)
-        try container.encode(self.mandatory, forKey: .mandatory)
-        try container.encode(self.prompts, forKey: .prompts)
-        try container.encode(self.isList, forKey: .isList)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if !self.value.isEmpty {
+          try container.encode(self.value, forKey: .value)
+        }
+        if !self.defaultValue.isEmpty {
+          try container.encode(self.defaultValue, forKey: .defaultValue)
+        }
+        if !self.entityTypeDisplayName.isEmpty {
+          try container.encode(self.entityTypeDisplayName, forKey: .entityTypeDisplayName)
+        }
+        if self.mandatory {
+          try container.encode(self.mandatory, forKey: .mandatory)
+        }
+        if !self.prompts.isEmpty {
+          try container.encode(self.prompts, forKey: .prompts)
+        }
+        if self.isList {
+          try container.encode(self.isList, forKey: .isList)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1022,7 +1094,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.platform, forKey: .platform)
+        if self.platform != Intent.Message.Platform() {
+          try container.encode(self.platform, forKey: .platform)
+        }
 
         if let choice = self.message {
           switch choice {
@@ -1113,7 +1187,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1204,8 +1280,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.imageUri, forKey: .imageUri)
-          try container.encode(self.accessibilityText, forKey: .accessibilityText)
+          if !self.imageUri.isEmpty {
+            try container.encode(self.imageUri, forKey: .imageUri)
+          }
+          if !self.accessibilityText.isEmpty {
+            try container.encode(self.accessibilityText, forKey: .accessibilityText)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1293,8 +1373,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.title, forKey: .title)
-          try container.encode(self.quickReplies, forKey: .quickReplies)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
+          if !self.quickReplies.isEmpty {
+            try container.encode(self.quickReplies, forKey: .quickReplies)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1400,10 +1484,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.title, forKey: .title)
-          try container.encode(self.subtitle, forKey: .subtitle)
-          try container.encode(self.imageUri, forKey: .imageUri)
-          try container.encode(self.buttons, forKey: .buttons)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
+          if !self.subtitle.isEmpty {
+            try container.encode(self.subtitle, forKey: .subtitle)
+          }
+          if !self.imageUri.isEmpty {
+            try container.encode(self.imageUri, forKey: .imageUri)
+          }
+          if !self.buttons.isEmpty {
+            try container.encode(self.buttons, forKey: .buttons)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1470,8 +1562,12 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.text, forKey: .text)
-            try container.encode(self.postback, forKey: .postback)
+            if !self.text.isEmpty {
+              try container.encode(self.text, forKey: .text)
+            }
+            if !self.postback.isEmpty {
+              try container.encode(self.postback, forKey: .postback)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -1592,9 +1688,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.textToSpeech, forKey: .textToSpeech)
-          try container.encode(self.ssml, forKey: .ssml)
-          try container.encode(self.displayText, forKey: .displayText)
+          if !self.textToSpeech.isEmpty {
+            try container.encode(self.textToSpeech, forKey: .textToSpeech)
+          }
+          if !self.ssml.isEmpty {
+            try container.encode(self.ssml, forKey: .ssml)
+          }
+          if !self.displayText.isEmpty {
+            try container.encode(self.displayText, forKey: .displayText)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1679,7 +1781,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.simpleResponses, forKey: .simpleResponses)
+          if !self.simpleResponses.isEmpty {
+            try container.encode(self.simpleResponses, forKey: .simpleResponses)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1791,11 +1895,19 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.title, forKey: .title)
-          try container.encode(self.subtitle, forKey: .subtitle)
-          try container.encode(self.formattedText, forKey: .formattedText)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
+          if !self.subtitle.isEmpty {
+            try container.encode(self.subtitle, forKey: .subtitle)
+          }
+          if !self.formattedText.isEmpty {
+            try container.encode(self.formattedText, forKey: .formattedText)
+          }
           try container.encodeIfPresent(self.image, forKey: .image)
-          try container.encode(self.buttons, forKey: .buttons)
+          if !self.buttons.isEmpty {
+            try container.encode(self.buttons, forKey: .buttons)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1860,7 +1972,9 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.title, forKey: .title)
+            if !self.title.isEmpty {
+              try container.encode(self.title, forKey: .title)
+            }
             try container.encodeIfPresent(self.openUriAction, forKey: .openUriAction)
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1919,7 +2033,9 @@
 
             public func encode(to encoder: any Encoder) throws {
               var container = encoder.container(keyedBy: CodingKeys.self)
-              try container.encode(self.uri, forKey: .uri)
+              if !self.uri.isEmpty {
+                try container.encode(self.uri, forKey: .uri)
+              }
               for (key, value) in self._unknownFields.json {
                 try container.encode(value, forKey: CodingKeys(stringValue: key))
               }
@@ -2045,7 +2161,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.title, forKey: .title)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2127,7 +2245,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.suggestions, forKey: .suggestions)
+          if !self.suggestions.isEmpty {
+            try container.encode(self.suggestions, forKey: .suggestions)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2218,8 +2338,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.destinationName, forKey: .destinationName)
-          try container.encode(self.uri, forKey: .uri)
+          if !self.destinationName.isEmpty {
+            try container.encode(self.destinationName, forKey: .destinationName)
+          }
+          if !self.uri.isEmpty {
+            try container.encode(self.uri, forKey: .uri)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2317,9 +2441,15 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.title, forKey: .title)
-          try container.encode(self.items, forKey: .items)
-          try container.encode(self.subtitle, forKey: .subtitle)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
+          if !self.items.isEmpty {
+            try container.encode(self.items, forKey: .items)
+          }
+          if !self.subtitle.isEmpty {
+            try container.encode(self.subtitle, forKey: .subtitle)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2399,8 +2529,12 @@
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encodeIfPresent(self.info, forKey: .info)
-            try container.encode(self.title, forKey: .title)
-            try container.encode(self.description, forKey: .description)
+            if !self.title.isEmpty {
+              try container.encode(self.title, forKey: .title)
+            }
+            if !self.description.isEmpty {
+              try container.encode(self.description, forKey: .description)
+            }
             try container.encodeIfPresent(self.image, forKey: .image)
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2505,7 +2639,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.items, forKey: .items)
+          if !self.items.isEmpty {
+            try container.encode(self.items, forKey: .items)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2585,8 +2721,12 @@
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encodeIfPresent(self.info, forKey: .info)
-            try container.encode(self.title, forKey: .title)
-            try container.encode(self.description, forKey: .description)
+            if !self.title.isEmpty {
+              try container.encode(self.title, forKey: .title)
+            }
+            if !self.description.isEmpty {
+              try container.encode(self.description, forKey: .description)
+            }
             try container.encodeIfPresent(self.image, forKey: .image)
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -2701,8 +2841,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.key, forKey: .key)
-          try container.encode(self.synonyms, forKey: .synonyms)
+          if !self.key.isEmpty {
+            try container.encode(self.key, forKey: .key)
+          }
+          if !self.synonyms.isEmpty {
+            try container.encode(self.synonyms, forKey: .synonyms)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2795,8 +2939,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.mediaType, forKey: .mediaType)
-          try container.encode(self.mediaObjects, forKey: .mediaObjects)
+          if self.mediaType != Intent.Message.MediaContent.ResponseMediaType() {
+            try container.encode(self.mediaType, forKey: .mediaType)
+          }
+          if !self.mediaObjects.isEmpty {
+            try container.encode(self.mediaObjects, forKey: .mediaObjects)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -2897,9 +3045,15 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.name, forKey: .name)
-            try container.encode(self.description, forKey: .description)
-            try container.encode(self.contentUrl, forKey: .contentUrl)
+            if !self.name.isEmpty {
+              try container.encode(self.name, forKey: .name)
+            }
+            if !self.description.isEmpty {
+              try container.encode(self.description, forKey: .description)
+            }
+            if !self.contentUrl.isEmpty {
+              try container.encode(self.contentUrl, forKey: .contentUrl)
+            }
 
             if let choice = self.image {
               switch choice {
@@ -3147,8 +3301,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.items, forKey: .items)
-          try container.encode(self.imageDisplayOptions, forKey: .imageDisplayOptions)
+          if !self.items.isEmpty {
+            try container.encode(self.items, forKey: .items)
+          }
+          if self.imageDisplayOptions != Intent.Message.BrowseCarouselCard.ImageDisplayOptions() {
+            try container.encode(self.imageDisplayOptions, forKey: .imageDisplayOptions)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -3240,10 +3398,16 @@
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encodeIfPresent(self.openUriAction, forKey: .openUriAction)
-            try container.encode(self.title, forKey: .title)
-            try container.encode(self.description, forKey: .description)
+            if !self.title.isEmpty {
+              try container.encode(self.title, forKey: .title)
+            }
+            if !self.description.isEmpty {
+              try container.encode(self.description, forKey: .description)
+            }
             try container.encodeIfPresent(self.image, forKey: .image)
-            try container.encode(self.footer, forKey: .footer)
+            if !self.footer.isEmpty {
+              try container.encode(self.footer, forKey: .footer)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -3315,8 +3479,15 @@
 
             public func encode(to encoder: any Encoder) throws {
               var container = encoder.container(keyedBy: CodingKeys.self)
-              try container.encode(self.url, forKey: .url)
-              try container.encode(self.urlTypeHint, forKey: .urlTypeHint)
+              if !self.url.isEmpty {
+                try container.encode(self.url, forKey: .url)
+              }
+              if self.urlTypeHint
+                != Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction
+                .UrlTypeHint()
+              {
+                try container.encode(self.urlTypeHint, forKey: .urlTypeHint)
+              }
               for (key, value) in self._unknownFields.json {
                 try container.encode(value, forKey: CodingKeys(stringValue: key))
               }
@@ -3747,12 +3918,22 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.title, forKey: .title)
-          try container.encode(self.subtitle, forKey: .subtitle)
+          if !self.title.isEmpty {
+            try container.encode(self.title, forKey: .title)
+          }
+          if !self.subtitle.isEmpty {
+            try container.encode(self.subtitle, forKey: .subtitle)
+          }
           try container.encodeIfPresent(self.image, forKey: .image)
-          try container.encode(self.columnProperties, forKey: .columnProperties)
-          try container.encode(self.rows, forKey: .rows)
-          try container.encode(self.buttons, forKey: .buttons)
+          if !self.columnProperties.isEmpty {
+            try container.encode(self.columnProperties, forKey: .columnProperties)
+          }
+          if !self.rows.isEmpty {
+            try container.encode(self.rows, forKey: .rows)
+          }
+          if !self.buttons.isEmpty {
+            try container.encode(self.buttons, forKey: .buttons)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -3846,8 +4027,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.header, forKey: .header)
-          try container.encode(self.horizontalAlignment, forKey: .horizontalAlignment)
+          if !self.header.isEmpty {
+            try container.encode(self.header, forKey: .header)
+          }
+          if self.horizontalAlignment != Intent.Message.ColumnProperties.HorizontalAlignment() {
+            try container.encode(self.horizontalAlignment, forKey: .horizontalAlignment)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -4063,8 +4248,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.cells, forKey: .cells)
-          try container.encode(self.dividerAfter, forKey: .dividerAfter)
+          if !self.cells.isEmpty {
+            try container.encode(self.cells, forKey: .cells)
+          }
+          if self.dividerAfter {
+            try container.encode(self.dividerAfter, forKey: .dividerAfter)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -4147,7 +4336,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.text, forKey: .text)
+          if !self.text.isEmpty {
+            try container.encode(self.text, forKey: .text)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -4463,8 +4654,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.followupIntentName, forKey: .followupIntentName)
-        try container.encode(self.parentFollowupIntentName, forKey: .parentFollowupIntentName)
+        if !self.followupIntentName.isEmpty {
+          try container.encode(self.followupIntentName, forKey: .followupIntentName)
+        }
+        if !self.parentFollowupIntentName.isEmpty {
+          try container.encode(self.parentFollowupIntentName, forKey: .parentFollowupIntentName)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

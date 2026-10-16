@@ -209,19 +209,35 @@ public struct Batch: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uuid, forKey: .uuid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uuid.isEmpty {
+      try container.encode(self.uuid, forKey: .uuid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.runtimeInfo, forKey: .runtimeInfo)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.stateMessage, forKey: .stateMessage)
+    if self.state != Batch.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.stateMessage.isEmpty {
+      try container.encode(self.stateMessage, forKey: .stateMessage)
+    }
     try container.encodeIfPresent(self.stateTime, forKey: .stateTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.runtimeConfig, forKey: .runtimeConfig)
     try container.encodeIfPresent(self.environmentConfig, forKey: .environmentConfig)
-    try container.encode(self.operation, forKey: .operation)
-    try container.encode(self.stateHistory, forKey: .stateHistory)
+    if !self.operation.isEmpty {
+      try container.encode(self.operation, forKey: .operation)
+    }
+    if !self.stateHistory.isEmpty {
+      try container.encode(self.stateHistory, forKey: .stateHistory)
+    }
 
     if let choice = self.batchConfig {
       switch choice {
@@ -309,8 +325,12 @@ public struct Batch: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.stateMessage, forKey: .stateMessage)
+      if self.state != Batch.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.stateMessage.isEmpty {
+        try container.encode(self.stateMessage, forKey: .stateMessage)
+      }
       try container.encodeIfPresent(self.stateStartTime, forKey: .stateStartTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

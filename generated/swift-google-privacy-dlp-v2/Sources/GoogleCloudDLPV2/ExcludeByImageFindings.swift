@@ -91,7 +91,9 @@ public struct ExcludeByImageFindings: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.infoTypes, forKey: .infoTypes)
+    if !self.infoTypes.isEmpty {
+      try container.encode(self.infoTypes, forKey: .infoTypes)
+    }
     try container.encodeIfPresent(self.imageContainmentType, forKey: .imageContainmentType)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

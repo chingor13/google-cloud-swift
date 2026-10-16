@@ -79,8 +79,12 @@ public struct CustomerEncryption: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.encryptionAlgorithm, forKey: .encryptionAlgorithm)
-    try container.encode(self.keySha256Bytes, forKey: .keySha256Bytes)
+    if !self.encryptionAlgorithm.isEmpty {
+      try container.encode(self.encryptionAlgorithm, forKey: .encryptionAlgorithm)
+    }
+    if !self.keySha256Bytes.isEmpty {
+      try container.encode(self.keySha256Bytes, forKey: .keySha256Bytes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -78,8 +78,12 @@ public struct Fraction: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.numerator, forKey: .numerator)
-    try container.encode(self.denominator, forKey: .denominator)
+    if self.numerator != 0 {
+      try container.encode(self.numerator, forKey: .numerator)
+    }
+    if self.denominator != 0 {
+      try container.encode(self.denominator, forKey: .denominator)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -122,7 +122,9 @@ public struct MockedToolCall: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.tool, forKey: .tool)
+    if !self.tool.isEmpty {
+      try container.encode(self.tool, forKey: .tool)
+    }
     try container.encodeIfPresent(self.expectedArgsPattern, forKey: .expectedArgsPattern)
     try container.encodeIfPresent(self.mockResponse, forKey: .mockResponse)
 

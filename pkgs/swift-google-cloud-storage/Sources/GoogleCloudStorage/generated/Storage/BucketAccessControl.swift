@@ -152,14 +152,30 @@ public struct BucketAccessControl: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.role, forKey: .role)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.entity, forKey: .entity)
-    try container.encode(self.entityAlt, forKey: .entityAlt)
-    try container.encode(self.entityId, forKey: .entityId)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.email, forKey: .email)
-    try container.encode(self.domain, forKey: .domain)
+    if !self.role.isEmpty {
+      try container.encode(self.role, forKey: .role)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.entity.isEmpty {
+      try container.encode(self.entity, forKey: .entity)
+    }
+    if !self.entityAlt.isEmpty {
+      try container.encode(self.entityAlt, forKey: .entityAlt)
+    }
+    if !self.entityId.isEmpty {
+      try container.encode(self.entityId, forKey: .entityId)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.email.isEmpty {
+      try container.encode(self.email, forKey: .email)
+    }
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
     try container.encodeIfPresent(self.projectTeam, forKey: .projectTeam)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

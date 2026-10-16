@@ -212,15 +212,31 @@ public struct PolicyBinding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.target, forKey: .target)
-    try container.encode(self.policyKind, forKey: .policyKind)
-    try container.encode(self.policy, forKey: .policy)
-    try container.encode(self.policyUid, forKey: .policyUid)
+    if self.policyKind != PolicyBinding.PolicyKind() {
+      try container.encode(self.policyKind, forKey: .policyKind)
+    }
+    if !self.policy.isEmpty {
+      try container.encode(self.policy, forKey: .policy)
+    }
+    if !self.policyUid.isEmpty {
+      try container.encode(self.policyUid, forKey: .policyUid)
+    }
     try container.encodeIfPresent(self.condition, forKey: .condition)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)

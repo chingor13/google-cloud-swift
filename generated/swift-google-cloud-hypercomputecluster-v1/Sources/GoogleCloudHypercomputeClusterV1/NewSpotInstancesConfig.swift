@@ -99,9 +99,15 @@ public struct NewSpotInstancesConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.machineType, forKey: .machineType)
-    try container.encode(self.terminationAction, forKey: .terminationAction)
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.machineType.isEmpty {
+      try container.encode(self.machineType, forKey: .machineType)
+    }
+    if self.terminationAction != NewSpotInstancesConfig.TerminationAction() {
+      try container.encode(self.terminationAction, forKey: .terminationAction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

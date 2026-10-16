@@ -134,14 +134,28 @@ public struct BackupCollection: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.instanceUid, forKey: .instanceUid)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.instanceUid.isEmpty {
+      try container.encode(self.instanceUid, forKey: .instanceUid)
+    }
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.totalBackupSizeBytes, forKey: .totalBackupSizeBytes)
-    try container.encode(self.totalBackupCount, forKey: .totalBackupCount)
+    if self.totalBackupSizeBytes != 0 {
+      try container.encode(self.totalBackupSizeBytes, forKey: .totalBackupSizeBytes)
+    }
+    if self.totalBackupCount != 0 {
+      try container.encode(self.totalBackupCount, forKey: .totalBackupCount)
+    }
     try container.encodeIfPresent(self.lastBackupTime, forKey: .lastBackupTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

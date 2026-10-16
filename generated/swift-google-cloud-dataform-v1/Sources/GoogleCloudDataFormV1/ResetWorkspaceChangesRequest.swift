@@ -86,9 +86,15 @@ public struct ResetWorkspaceChangesRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.paths, forKey: .paths)
-    try container.encode(self.clean, forKey: .clean)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.paths.isEmpty {
+      try container.encode(self.paths, forKey: .paths)
+    }
+    if self.clean {
+      try container.encode(self.clean, forKey: .clean)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -258,28 +258,62 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.tier, forKey: .tier)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.fileShares, forKey: .fileShares)
-    try container.encode(self.networks, forKey: .networks)
-    try container.encode(self.etag, forKey: .etag)
+    if self.tier != Instance.Tier() {
+      try container.encode(self.tier, forKey: .tier)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.fileShares.isEmpty {
+      try container.encode(self.fileShares, forKey: .fileShares)
+    }
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.suspensionReasons, forKey: .suspensionReasons)
+    if self.satisfiesPzi {
+      try container.encode(self.satisfiesPzi, forKey: .satisfiesPzi)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if !self.suspensionReasons.isEmpty {
+      try container.encode(self.suspensionReasons, forKey: .suspensionReasons)
+    }
     try container.encodeIfPresent(self.replication, forKey: .replication)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.customPerformanceSupported, forKey: .customPerformanceSupported)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if self.`protocol` != Instance.FileProtocol() {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if self.customPerformanceSupported {
+      try container.encode(self.customPerformanceSupported, forKey: .customPerformanceSupported)
+    }
     try container.encodeIfPresent(self.performanceConfig, forKey: .performanceConfig)
     try container.encodeIfPresent(self.performanceLimits, forKey: .performanceLimits)
-    try container.encode(self.deletionProtectionEnabled, forKey: .deletionProtectionEnabled)
-    try container.encode(self.deletionProtectionReason, forKey: .deletionProtectionReason)
+    if self.deletionProtectionEnabled {
+      try container.encode(self.deletionProtectionEnabled, forKey: .deletionProtectionEnabled)
+    }
+    if !self.deletionProtectionReason.isEmpty {
+      try container.encode(self.deletionProtectionReason, forKey: .deletionProtectionReason)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -338,7 +372,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxIopsPerTb, forKey: .maxIopsPerTb)
+      if self.maxIopsPerTb != 0 {
+        try container.encode(self.maxIopsPerTb, forKey: .maxIopsPerTb)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -418,7 +454,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxIops, forKey: .maxIops)
+      if self.maxIops != 0 {
+        try container.encode(self.maxIops, forKey: .maxIops)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -670,11 +708,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxIops, forKey: .maxIops)
-      try container.encode(self.maxReadIops, forKey: .maxReadIops)
-      try container.encode(self.maxWriteIops, forKey: .maxWriteIops)
-      try container.encode(self.maxReadThroughputBps, forKey: .maxReadThroughputBps)
-      try container.encode(self.maxWriteThroughputBps, forKey: .maxWriteThroughputBps)
+      if self.maxIops != 0 {
+        try container.encode(self.maxIops, forKey: .maxIops)
+      }
+      if self.maxReadIops != 0 {
+        try container.encode(self.maxReadIops, forKey: .maxReadIops)
+      }
+      if self.maxWriteIops != 0 {
+        try container.encode(self.maxWriteIops, forKey: .maxWriteIops)
+      }
+      if self.maxReadThroughputBps != 0 {
+        try container.encode(self.maxReadThroughputBps, forKey: .maxReadThroughputBps)
+      }
+      if self.maxWriteThroughputBps != 0 {
+        try container.encode(self.maxWriteThroughputBps, forKey: .maxWriteThroughputBps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

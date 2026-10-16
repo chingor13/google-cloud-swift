@@ -99,8 +99,12 @@ public struct CreatePluginInstanceRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.pluginInstanceId, forKey: .pluginInstanceId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.pluginInstanceId.isEmpty {
+      try container.encode(self.pluginInstanceId, forKey: .pluginInstanceId)
+    }
     try container.encodeIfPresent(self.pluginInstance, forKey: .pluginInstance)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

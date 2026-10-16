@@ -179,18 +179,38 @@ public struct ServiceConnectionMap: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.serviceClass, forKey: .serviceClass)
-    try container.encode(self.serviceClassUri, forKey: .serviceClassUri)
-    try container.encode(self.infrastructure, forKey: .infrastructure)
-    try container.encode(self.producerPscConfigs, forKey: .producerPscConfigs)
-    try container.encode(self.consumerPscConfigs, forKey: .consumerPscConfigs)
-    try container.encode(self.consumerPscConnections, forKey: .consumerPscConnections)
-    try container.encode(self.token, forKey: .token)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.serviceClass.isEmpty {
+      try container.encode(self.serviceClass, forKey: .serviceClass)
+    }
+    if !self.serviceClassUri.isEmpty {
+      try container.encode(self.serviceClassUri, forKey: .serviceClassUri)
+    }
+    if self.infrastructure != Infrastructure() {
+      try container.encode(self.infrastructure, forKey: .infrastructure)
+    }
+    if !self.producerPscConfigs.isEmpty {
+      try container.encode(self.producerPscConfigs, forKey: .producerPscConfigs)
+    }
+    if !self.consumerPscConfigs.isEmpty {
+      try container.encode(self.consumerPscConfigs, forKey: .consumerPscConfigs)
+    }
+    if !self.consumerPscConnections.isEmpty {
+      try container.encode(self.consumerPscConnections, forKey: .consumerPscConnections)
+    }
+    if !self.token.isEmpty {
+      try container.encode(self.token, forKey: .token)
+    }
     try container.encodeIfPresent(self.etag, forKey: .etag)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -252,7 +272,9 @@ public struct ServiceConnectionMap: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceAttachmentUri, forKey: .serviceAttachmentUri)
+      if !self.serviceAttachmentUri.isEmpty {
+        try container.encode(self.serviceAttachmentUri, forKey: .serviceAttachmentUri)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -426,15 +448,31 @@ public struct ServiceConnectionMap: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.disableGlobalAccess, forKey: .disableGlobalAccess)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.producerInstanceId, forKey: .producerInstanceId)
-      try container.encode(
-        self.serviceAttachmentIpAddressMap, forKey: .serviceAttachmentIpAddressMap)
-      try container.encode(self.consumerInstanceProject, forKey: .consumerInstanceProject)
-      try container.encode(self.producerInstanceMetadata, forKey: .producerInstanceMetadata)
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if self.disableGlobalAccess {
+        try container.encode(self.disableGlobalAccess, forKey: .disableGlobalAccess)
+      }
+      if self.state != ServiceConnectionMap.ConsumerPscConfig.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.producerInstanceId.isEmpty {
+        try container.encode(self.producerInstanceId, forKey: .producerInstanceId)
+      }
+      if !self.serviceAttachmentIpAddressMap.isEmpty {
+        try container.encode(
+          self.serviceAttachmentIpAddressMap, forKey: .serviceAttachmentIpAddressMap)
+      }
+      if !self.consumerInstanceProject.isEmpty {
+        try container.encode(self.consumerInstanceProject, forKey: .consumerInstanceProject)
+      }
+      if !self.producerInstanceMetadata.isEmpty {
+        try container.encode(self.producerInstanceMetadata, forKey: .producerInstanceMetadata)
+      }
       try container.encodeIfPresent(self.ipVersion, forKey: .ipVersion)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -790,20 +828,44 @@ public struct ServiceConnectionMap: Codable, Equatable, GoogleWKT._AnyPackable,
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceAttachmentUri, forKey: .serviceAttachmentUri)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.project, forKey: .project)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.pscConnectionId, forKey: .pscConnectionId)
-      try container.encode(self.ip, forKey: .ip)
-      try container.encode(self.errorType, forKey: .errorType)
+      if !self.serviceAttachmentUri.isEmpty {
+        try container.encode(self.serviceAttachmentUri, forKey: .serviceAttachmentUri)
+      }
+      if self.state != ServiceConnectionMap.ConsumerPscConnection.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.project.isEmpty {
+        try container.encode(self.project, forKey: .project)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.pscConnectionId.isEmpty {
+        try container.encode(self.pscConnectionId, forKey: .pscConnectionId)
+      }
+      if !self.ip.isEmpty {
+        try container.encode(self.ip, forKey: .ip)
+      }
+      if self.errorType != ConnectionErrorType() {
+        try container.encode(self.errorType, forKey: .errorType)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.gceOperation, forKey: .gceOperation)
-      try container.encode(self.forwardingRule, forKey: .forwardingRule)
+      if !self.gceOperation.isEmpty {
+        try container.encode(self.gceOperation, forKey: .gceOperation)
+      }
+      if !self.forwardingRule.isEmpty {
+        try container.encode(self.forwardingRule, forKey: .forwardingRule)
+      }
       try container.encodeIfPresent(self.errorInfo, forKey: .errorInfo)
-      try container.encode(self.selectedSubnetwork, forKey: .selectedSubnetwork)
-      try container.encode(self.producerInstanceId, forKey: .producerInstanceId)
-      try container.encode(self.producerInstanceMetadata, forKey: .producerInstanceMetadata)
+      if !self.selectedSubnetwork.isEmpty {
+        try container.encode(self.selectedSubnetwork, forKey: .selectedSubnetwork)
+      }
+      if !self.producerInstanceId.isEmpty {
+        try container.encode(self.producerInstanceId, forKey: .producerInstanceId)
+      }
+      if !self.producerInstanceMetadata.isEmpty {
+        try container.encode(self.producerInstanceMetadata, forKey: .producerInstanceMetadata)
+      }
       try container.encodeIfPresent(self.ipVersion, forKey: .ipVersion)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

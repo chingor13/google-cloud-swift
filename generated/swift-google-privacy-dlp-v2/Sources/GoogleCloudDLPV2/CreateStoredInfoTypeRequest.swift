@@ -113,10 +113,16 @@ public struct CreateStoredInfoTypeRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.storedInfoTypeId, forKey: .storedInfoTypeId)
-    try container.encode(self.locationId, forKey: .locationId)
+    if !self.storedInfoTypeId.isEmpty {
+      try container.encode(self.storedInfoTypeId, forKey: .storedInfoTypeId)
+    }
+    if !self.locationId.isEmpty {
+      try container.encode(self.locationId, forKey: .locationId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

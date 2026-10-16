@@ -254,8 +254,12 @@ public struct CustomAPICheckpointConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.checkpointValuePath, forKey: .checkpointValuePath)
-      try container.encode(self.checkpointVariable, forKey: .checkpointVariable)
+      if !self.checkpointValuePath.isEmpty {
+        try container.encode(self.checkpointValuePath, forKey: .checkpointValuePath)
+      }
+      if !self.checkpointVariable.isEmpty {
+        try container.encode(self.checkpointVariable, forKey: .checkpointVariable)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -347,8 +351,12 @@ public struct CustomAPICheckpointConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.checkpointValuePath, forKey: .checkpointValuePath)
-      try container.encode(self.checkpointVariable, forKey: .checkpointVariable)
+      if !self.checkpointValuePath.isEmpty {
+        try container.encode(self.checkpointValuePath, forKey: .checkpointValuePath)
+      }
+      if !self.checkpointVariable.isEmpty {
+        try container.encode(self.checkpointVariable, forKey: .checkpointVariable)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -440,8 +448,12 @@ public struct CustomAPICheckpointConfig: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.checkpointValuePath, forKey: .checkpointValuePath)
-      try container.encode(self.checkpointVariable, forKey: .checkpointVariable)
+      if !self.checkpointValuePath.isEmpty {
+        try container.encode(self.checkpointValuePath, forKey: .checkpointValuePath)
+      }
+      if !self.checkpointVariable.isEmpty {
+        try container.encode(self.checkpointVariable, forKey: .checkpointVariable)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

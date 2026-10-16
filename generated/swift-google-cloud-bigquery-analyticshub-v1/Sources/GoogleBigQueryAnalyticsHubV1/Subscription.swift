@@ -204,16 +204,32 @@ public struct Subscription: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.creationTime, forKey: .creationTime)
     try container.encodeIfPresent(self.lastModifyTime, forKey: .lastModifyTime)
-    try container.encode(self.organizationId, forKey: .organizationId)
-    try container.encode(self.organizationDisplayName, forKey: .organizationDisplayName)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.linkedDatasetMap, forKey: .linkedDatasetMap)
-    try container.encode(self.subscriberContact, forKey: .subscriberContact)
-    try container.encode(self.linkedResources, forKey: .linkedResources)
-    try container.encode(self.resourceType, forKey: .resourceType)
+    if !self.organizationId.isEmpty {
+      try container.encode(self.organizationId, forKey: .organizationId)
+    }
+    if !self.organizationDisplayName.isEmpty {
+      try container.encode(self.organizationDisplayName, forKey: .organizationDisplayName)
+    }
+    if self.state != Subscription.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.linkedDatasetMap.isEmpty {
+      try container.encode(self.linkedDatasetMap, forKey: .linkedDatasetMap)
+    }
+    if !self.subscriberContact.isEmpty {
+      try container.encode(self.subscriberContact, forKey: .subscriberContact)
+    }
+    if !self.linkedResources.isEmpty {
+      try container.encode(self.linkedResources, forKey: .linkedResources)
+    }
+    if self.resourceType != SharedResourceType() {
+      try container.encode(self.resourceType, forKey: .resourceType)
+    }
     try container.encodeIfPresent(self.commercialInfo, forKey: .commercialInfo)
     try container.encodeIfPresent(
       self.logLinkedDatasetQueryUserEmail, forKey: .logLinkedDatasetQueryUserEmail)
@@ -312,7 +328,9 @@ public struct Subscription: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.listing, forKey: .listing)
+      if !self.listing.isEmpty {
+        try container.encode(self.listing, forKey: .listing)
+      }
 
       if let choice = self.reference {
         switch choice {
@@ -468,7 +486,9 @@ public struct Subscription: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.order, forKey: .order)
+        if !self.order.isEmpty {
+          try container.encode(self.order, forKey: .order)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

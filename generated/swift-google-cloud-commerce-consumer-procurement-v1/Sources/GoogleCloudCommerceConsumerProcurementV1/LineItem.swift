@@ -95,10 +95,14 @@ public struct LineItem: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.lineItemId, forKey: .lineItemId)
+    if !self.lineItemId.isEmpty {
+      try container.encode(self.lineItemId, forKey: .lineItemId)
+    }
     try container.encodeIfPresent(self.lineItemInfo, forKey: .lineItemInfo)
     try container.encodeIfPresent(self.pendingChange, forKey: .pendingChange)
-    try container.encode(self.changeHistory, forKey: .changeHistory)
+    if !self.changeHistory.isEmpty {
+      try container.encode(self.changeHistory, forKey: .changeHistory)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

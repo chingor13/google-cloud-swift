@@ -101,11 +101,21 @@ public struct MountOption: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.export, forKey: .export)
-    try container.encode(self.exportFull, forKey: .exportFull)
-    try container.encode(self.`protocol`, forKey: .`protocol`)
-    try container.encode(self.instructions, forKey: .instructions)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
+    if !self.export.isEmpty {
+      try container.encode(self.export, forKey: .export)
+    }
+    if !self.exportFull.isEmpty {
+      try container.encode(self.exportFull, forKey: .exportFull)
+    }
+    if self.`protocol` != Protocols() {
+      try container.encode(self.`protocol`, forKey: .`protocol`)
+    }
+    if !self.instructions.isEmpty {
+      try container.encode(self.instructions, forKey: .instructions)
+    }
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

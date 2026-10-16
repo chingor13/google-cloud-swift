@@ -86,7 +86,9 @@ public struct RiskAnalysisJobConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.privacyMetric, forKey: .privacyMetric)
     try container.encodeIfPresent(self.sourceTable, forKey: .sourceTable)
-    try container.encode(self.actions, forKey: .actions)
+    if !self.actions.isEmpty {
+      try container.encode(self.actions, forKey: .actions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

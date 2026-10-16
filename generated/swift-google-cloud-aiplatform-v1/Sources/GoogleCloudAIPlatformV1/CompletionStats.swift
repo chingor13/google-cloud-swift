@@ -104,10 +104,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.successfulCount, forKey: .successfulCount)
-      try container.encode(self.failedCount, forKey: .failedCount)
-      try container.encode(self.incompleteCount, forKey: .incompleteCount)
-      try container.encode(self.successfulForecastPointCount, forKey: .successfulForecastPointCount)
+      if self.successfulCount != 0 {
+        try container.encode(self.successfulCount, forKey: .successfulCount)
+      }
+      if self.failedCount != 0 {
+        try container.encode(self.failedCount, forKey: .failedCount)
+      }
+      if self.incompleteCount != 0 {
+        try container.encode(self.incompleteCount, forKey: .incompleteCount)
+      }
+      if self.successfulForecastPointCount != 0 {
+        try container.encode(
+          self.successfulForecastPointCount, forKey: .successfulForecastPointCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

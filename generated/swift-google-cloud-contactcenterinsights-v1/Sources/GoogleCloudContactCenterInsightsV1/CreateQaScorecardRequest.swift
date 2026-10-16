@@ -88,9 +88,13 @@ public struct CreateQaScorecardRequest: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.qaScorecard, forKey: .qaScorecard)
-    try container.encode(self.qaScorecardId, forKey: .qaScorecardId)
+    if !self.qaScorecardId.isEmpty {
+      try container.encode(self.qaScorecardId, forKey: .qaScorecardId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

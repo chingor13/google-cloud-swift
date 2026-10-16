@@ -188,20 +188,38 @@ public struct Customer: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.orgDisplayName, forKey: .orgDisplayName)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.orgDisplayName.isEmpty {
+      try container.encode(self.orgDisplayName, forKey: .orgDisplayName)
+    }
     try container.encodeIfPresent(self.orgPostalAddress, forKey: .orgPostalAddress)
     try container.encodeIfPresent(self.primaryContactInfo, forKey: .primaryContactInfo)
-    try container.encode(self.alternateEmail, forKey: .alternateEmail)
-    try container.encode(self.domain, forKey: .domain)
+    if !self.alternateEmail.isEmpty {
+      try container.encode(self.alternateEmail, forKey: .alternateEmail)
+    }
+    if !self.domain.isEmpty {
+      try container.encode(self.domain, forKey: .domain)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.cloudIdentityId, forKey: .cloudIdentityId)
-    try container.encode(self.languageCode, forKey: .languageCode)
+    if !self.cloudIdentityId.isEmpty {
+      try container.encode(self.cloudIdentityId, forKey: .cloudIdentityId)
+    }
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
     try container.encodeIfPresent(self.cloudIdentityInfo, forKey: .cloudIdentityInfo)
-    try container.encode(self.channelPartnerId, forKey: .channelPartnerId)
-    try container.encode(self.correlationId, forKey: .correlationId)
-    try container.encode(self.customerAttestationState, forKey: .customerAttestationState)
+    if !self.channelPartnerId.isEmpty {
+      try container.encode(self.channelPartnerId, forKey: .channelPartnerId)
+    }
+    if !self.correlationId.isEmpty {
+      try container.encode(self.correlationId, forKey: .correlationId)
+    }
+    if self.customerAttestationState != Customer.CustomerAttestationState() {
+      try container.encode(self.customerAttestationState, forKey: .customerAttestationState)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

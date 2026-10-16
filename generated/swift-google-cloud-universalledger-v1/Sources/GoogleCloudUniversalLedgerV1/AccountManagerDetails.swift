@@ -78,8 +78,12 @@ public struct AccountManagerDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.numAccounts, forKey: .numAccounts)
-    try container.encode(self.tokenManagerId, forKey: .tokenManagerId)
+    if self.numAccounts != 0 {
+      try container.encode(self.numAccounts, forKey: .numAccounts)
+    }
+    if !self.tokenManagerId.isEmpty {
+      try container.encode(self.tokenManagerId, forKey: .tokenManagerId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

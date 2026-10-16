@@ -264,7 +264,9 @@
       try container.encodeIfPresent(self.maxLagSize400Gbps, forKey: .maxLagSize400Gbps)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.peeringdbFacilityId, forKey: .peeringdbFacilityId)
-      try container.encode(self.permittedConnections, forKey: .permittedConnections)
+      if !self.permittedConnections.isEmpty {
+        try container.encode(self.permittedConnections, forKey: .permittedConnections)
+      }
       try container.encodeIfPresent(self.remoteService, forKey: .remoteService)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.status, forKey: .status)

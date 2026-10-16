@@ -135,10 +135,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.enabled, forKey: .enabled)
-      try container.encode(self.features, forKey: .features)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
+      if !self.features.isEmpty {
+        try container.encode(self.features, forKey: .features)
+      }
 
       if let choice = self.fulfillment {
         switch choice {
@@ -257,11 +265,21 @@
       #endif
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.username, forKey: .username)
-        try container.encode(self.password, forKey: .password)
-        try container.encode(self.requestHeaders, forKey: .requestHeaders)
-        try container.encode(self.isCloudFunction, forKey: .isCloudFunction)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.username.isEmpty {
+          try container.encode(self.username, forKey: .username)
+        }
+        if !self.password.isEmpty {
+          try container.encode(self.password, forKey: .password)
+        }
+        if !self.requestHeaders.isEmpty {
+          try container.encode(self.requestHeaders, forKey: .requestHeaders)
+        }
+        if self.isCloudFunction {
+          try container.encode(self.isCloudFunction, forKey: .isCloudFunction)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -342,7 +360,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.type, forKey: .type)
+        if self.type != Fulfillment.Feature.Type_() {
+          try container.encode(self.type, forKey: .type)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

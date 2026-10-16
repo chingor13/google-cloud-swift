@@ -99,7 +99,9 @@ public struct ControlledMode: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fallbackStartingOffset, forKey: .fallbackStartingOffset)
+    if !self.fallbackStartingOffset.isEmpty {
+      try container.encode(self.fallbackStartingOffset, forKey: .fallbackStartingOffset)
+    }
 
     if let choice = self.startingOffset {
       switch choice {

@@ -123,12 +123,24 @@ public struct LinkedVpcNetwork: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.excludeExportRanges, forKey: .excludeExportRanges)
-    try container.encode(self.includeExportRanges, forKey: .includeExportRanges)
-    try container.encode(self.proposedIncludeExportRanges, forKey: .proposedIncludeExportRanges)
-    try container.encode(self.proposedExcludeExportRanges, forKey: .proposedExcludeExportRanges)
-    try container.encode(self.producerVpcSpokes, forKey: .producerVpcSpokes)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.excludeExportRanges.isEmpty {
+      try container.encode(self.excludeExportRanges, forKey: .excludeExportRanges)
+    }
+    if !self.includeExportRanges.isEmpty {
+      try container.encode(self.includeExportRanges, forKey: .includeExportRanges)
+    }
+    if !self.proposedIncludeExportRanges.isEmpty {
+      try container.encode(self.proposedIncludeExportRanges, forKey: .proposedIncludeExportRanges)
+    }
+    if !self.proposedExcludeExportRanges.isEmpty {
+      try container.encode(self.proposedExcludeExportRanges, forKey: .proposedExcludeExportRanges)
+    }
+    if !self.producerVpcSpokes.isEmpty {
+      try container.encode(self.producerVpcSpokes, forKey: .producerVpcSpokes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

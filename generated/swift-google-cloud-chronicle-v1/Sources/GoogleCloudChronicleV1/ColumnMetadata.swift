@@ -140,16 +140,34 @@ public struct ColumnMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.column, forKey: .column)
-    try container.encode(self.fieldPath, forKey: .fieldPath)
-    try container.encode(self.functionName, forKey: .functionName)
-    try container.encode(self.functionModule, forKey: .functionModule)
-    try container.encode(self.dataSource, forKey: .dataSource)
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
+    if !self.fieldPath.isEmpty {
+      try container.encode(self.fieldPath, forKey: .fieldPath)
+    }
+    if !self.functionName.isEmpty {
+      try container.encode(self.functionName, forKey: .functionName)
+    }
+    if !self.functionModule.isEmpty {
+      try container.encode(self.functionModule, forKey: .functionModule)
+    }
+    if self.dataSource != DataSource() {
+      try container.encode(self.dataSource, forKey: .dataSource)
+    }
     try container.encodeIfPresent(self.timestampMetadata, forKey: .timestampMetadata)
-    try container.encode(self.longitude, forKey: .longitude)
-    try container.encode(self.latitude, forKey: .latitude)
-    try container.encode(self.selected, forKey: .selected)
-    try container.encode(self.unselected, forKey: .unselected)
+    if self.longitude {
+      try container.encode(self.longitude, forKey: .longitude)
+    }
+    if self.latitude {
+      try container.encode(self.latitude, forKey: .latitude)
+    }
+    if self.selected {
+      try container.encode(self.selected, forKey: .selected)
+    }
+    if self.unselected {
+      try container.encode(self.unselected, forKey: .unselected)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

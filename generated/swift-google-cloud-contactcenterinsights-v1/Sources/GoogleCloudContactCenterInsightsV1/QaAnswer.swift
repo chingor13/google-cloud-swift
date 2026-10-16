@@ -112,12 +112,22 @@ public struct QaAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.qaQuestion, forKey: .qaQuestion)
-    try container.encode(self.conversation, forKey: .conversation)
-    try container.encode(self.questionBody, forKey: .questionBody)
+    if !self.qaQuestion.isEmpty {
+      try container.encode(self.qaQuestion, forKey: .qaQuestion)
+    }
+    if !self.conversation.isEmpty {
+      try container.encode(self.conversation, forKey: .conversation)
+    }
+    if !self.questionBody.isEmpty {
+      try container.encode(self.questionBody, forKey: .questionBody)
+    }
     try container.encodeIfPresent(self.answerValue, forKey: .answerValue)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.answerSources, forKey: .answerSources)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.answerSources.isEmpty {
+      try container.encode(self.answerSources, forKey: .answerSources)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -238,7 +248,9 @@ public struct QaAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.key, forKey: .key)
+      if !self.key.isEmpty {
+        try container.encode(self.key, forKey: .key)
+      }
       try container.encodeIfPresent(self.score, forKey: .score)
       try container.encodeIfPresent(self.potentialScore, forKey: .potentialScore)
       try container.encodeIfPresent(self.normalizedScore, forKey: .normalizedScore)
@@ -357,7 +369,9 @@ public struct QaAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.sourceType, forKey: .sourceType)
+      if self.sourceType != QaAnswer.AnswerSource.SourceType() {
+        try container.encode(self.sourceType, forKey: .sourceType)
+      }
       try container.encodeIfPresent(self.answerValue, forKey: .answerValue)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

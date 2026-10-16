@@ -90,7 +90,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableLiveReplay, forKey: .enableLiveReplay)
+      if self.enableLiveReplay {
+        try container.encode(self.enableLiveReplay, forKey: .enableLiveReplay)
+      }
       try container.encodeIfPresent(self.replayInstance, forKey: .replayInstance)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

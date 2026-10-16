@@ -78,8 +78,12 @@ public struct GoldengateHdfsConnectionProperties: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.coreSiteXml, forKey: .coreSiteXml)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.coreSiteXml.isEmpty {
+      try container.encode(self.coreSiteXml, forKey: .coreSiteXml)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

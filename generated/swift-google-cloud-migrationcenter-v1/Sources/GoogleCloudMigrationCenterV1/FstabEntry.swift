@@ -110,12 +110,24 @@ public struct FstabEntry: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.spec, forKey: .spec)
-    try container.encode(self.file, forKey: .file)
-    try container.encode(self.vfstype, forKey: .vfstype)
-    try container.encode(self.mntops, forKey: .mntops)
-    try container.encode(self.freq, forKey: .freq)
-    try container.encode(self.passno, forKey: .passno)
+    if !self.spec.isEmpty {
+      try container.encode(self.spec, forKey: .spec)
+    }
+    if !self.file.isEmpty {
+      try container.encode(self.file, forKey: .file)
+    }
+    if !self.vfstype.isEmpty {
+      try container.encode(self.vfstype, forKey: .vfstype)
+    }
+    if !self.mntops.isEmpty {
+      try container.encode(self.mntops, forKey: .mntops)
+    }
+    if self.freq != 0 {
+      try container.encode(self.freq, forKey: .freq)
+    }
+    if self.passno != 0 {
+      try container.encode(self.passno, forKey: .passno)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

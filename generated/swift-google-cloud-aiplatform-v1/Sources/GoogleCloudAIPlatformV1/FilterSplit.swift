@@ -117,9 +117,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trainingFilter, forKey: .trainingFilter)
-      try container.encode(self.validationFilter, forKey: .validationFilter)
-      try container.encode(self.testFilter, forKey: .testFilter)
+      if !self.trainingFilter.isEmpty {
+        try container.encode(self.trainingFilter, forKey: .trainingFilter)
+      }
+      if !self.validationFilter.isEmpty {
+        try container.encode(self.validationFilter, forKey: .validationFilter)
+      }
+      if !self.testFilter.isEmpty {
+        try container.encode(self.testFilter, forKey: .testFilter)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

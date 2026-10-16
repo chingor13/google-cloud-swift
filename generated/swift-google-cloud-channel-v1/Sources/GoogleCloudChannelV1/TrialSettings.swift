@@ -80,7 +80,9 @@ public struct TrialSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.trial, forKey: .trial)
+    if self.trial {
+      try container.encode(self.trial, forKey: .trial)
+    }
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

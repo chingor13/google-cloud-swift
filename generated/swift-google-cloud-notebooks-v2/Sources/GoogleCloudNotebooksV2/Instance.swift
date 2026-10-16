@@ -207,19 +207,41 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.proxyUri, forKey: .proxyUri)
-    try container.encode(self.instanceOwners, forKey: .instanceOwners)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.upgradeHistory, forKey: .upgradeHistory)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.healthState, forKey: .healthState)
-    try container.encode(self.healthInfo, forKey: .healthInfo)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.proxyUri.isEmpty {
+      try container.encode(self.proxyUri, forKey: .proxyUri)
+    }
+    if !self.instanceOwners.isEmpty {
+      try container.encode(self.instanceOwners, forKey: .instanceOwners)
+    }
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if self.state != GoogleCloudNotebooksV2.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.upgradeHistory.isEmpty {
+      try container.encode(self.upgradeHistory, forKey: .upgradeHistory)
+    }
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if self.healthState != HealthState() {
+      try container.encode(self.healthState, forKey: .healthState)
+    }
+    if !self.healthInfo.isEmpty {
+      try container.encode(self.healthInfo, forKey: .healthInfo)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.disableProxyAccess, forKey: .disableProxyAccess)
-    try container.encode(self.labels, forKey: .labels)
+    if self.disableProxyAccess {
+      try container.encode(self.disableProxyAccess, forKey: .disableProxyAccess)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
 
     if let choice = self.infrastructure {
       switch choice {

@@ -264,8 +264,12 @@ public struct CustomAPIPagination: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nextPageTokenJsonPath, forKey: .nextPageTokenJsonPath)
-      try container.encode(self.queryParam, forKey: .queryParam)
+      if !self.nextPageTokenJsonPath.isEmpty {
+        try container.encode(self.nextPageTokenJsonPath, forKey: .nextPageTokenJsonPath)
+      }
+      if !self.queryParam.isEmpty {
+        try container.encode(self.queryParam, forKey: .queryParam)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -347,7 +351,9 @@ public struct CustomAPIPagination: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nextPageLinkJsonPath, forKey: .nextPageLinkJsonPath)
+      if !self.nextPageLinkJsonPath.isEmpty {
+        try container.encode(self.nextPageLinkJsonPath, forKey: .nextPageLinkJsonPath)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -427,7 +433,9 @@ public struct CustomAPIPagination: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.offsetQueryParam, forKey: .offsetQueryParam)
+      if !self.offsetQueryParam.isEmpty {
+        try container.encode(self.offsetQueryParam, forKey: .offsetQueryParam)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -509,7 +517,9 @@ public struct CustomAPIPagination: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.pageNumberQueryParam, forKey: .pageNumberQueryParam)
+      if !self.pageNumberQueryParam.isEmpty {
+        try container.encode(self.pageNumberQueryParam, forKey: .pageNumberQueryParam)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -323,34 +323,76 @@ public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     try container.encodeIfPresent(self.completionTime, forKey: .completionTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.launchStage, forKey: .launchStage)
-    try container.encode(self.job, forKey: .job)
-    try container.encode(self.parallelism, forKey: .parallelism)
-    try container.encode(self.taskCount, forKey: .taskCount)
+    if self.launchStage != GoogleApi.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
+    if !self.job.isEmpty {
+      try container.encode(self.job, forKey: .job)
+    }
+    if self.parallelism != 0 {
+      try container.encode(self.parallelism, forKey: .parallelism)
+    }
+    if self.taskCount != 0 {
+      try container.encode(self.taskCount, forKey: .taskCount)
+    }
     try container.encodeIfPresent(self.template, forKey: .template)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.observedGeneration, forKey: .observedGeneration)
-    try container.encode(self.runningCount, forKey: .runningCount)
-    try container.encode(self.succeededCount, forKey: .succeededCount)
-    try container.encode(self.failedCount, forKey: .failedCount)
-    try container.encode(self.cancelledCount, forKey: .cancelledCount)
-    try container.encode(self.retriedCount, forKey: .retriedCount)
-    try container.encode(self.logUri, forKey: .logUri)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.etag, forKey: .etag)
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if self.observedGeneration != 0 {
+      try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    }
+    if self.runningCount != 0 {
+      try container.encode(self.runningCount, forKey: .runningCount)
+    }
+    if self.succeededCount != 0 {
+      try container.encode(self.succeededCount, forKey: .succeededCount)
+    }
+    if self.failedCount != 0 {
+      try container.encode(self.failedCount, forKey: .failedCount)
+    }
+    if self.cancelledCount != 0 {
+      try container.encode(self.cancelledCount, forKey: .cancelledCount)
+    }
+    if self.retriedCount != 0 {
+      try container.encode(self.retriedCount, forKey: .retriedCount)
+    }
+    if !self.logUri.isEmpty {
+      try container.encode(self.logUri, forKey: .logUri)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

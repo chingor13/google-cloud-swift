@@ -125,14 +125,28 @@ public struct GetOpenIDConfigResponse: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.issuer, forKey: .issuer)
-    try container.encode(self.jwksUri, forKey: .jwksUri)
-    try container.encode(self.responseTypesSupported, forKey: .responseTypesSupported)
-    try container.encode(self.subjectTypesSupported, forKey: .subjectTypesSupported)
-    try container.encode(
-      self.idTokenSigningAlgValuesSupported, forKey: .idTokenSigningAlgValuesSupported)
-    try container.encode(self.claimsSupported, forKey: .claimsSupported)
-    try container.encode(self.grantTypes, forKey: .grantTypes)
+    if !self.issuer.isEmpty {
+      try container.encode(self.issuer, forKey: .issuer)
+    }
+    if !self.jwksUri.isEmpty {
+      try container.encode(self.jwksUri, forKey: .jwksUri)
+    }
+    if !self.responseTypesSupported.isEmpty {
+      try container.encode(self.responseTypesSupported, forKey: .responseTypesSupported)
+    }
+    if !self.subjectTypesSupported.isEmpty {
+      try container.encode(self.subjectTypesSupported, forKey: .subjectTypesSupported)
+    }
+    if !self.idTokenSigningAlgValuesSupported.isEmpty {
+      try container.encode(
+        self.idTokenSigningAlgValuesSupported, forKey: .idTokenSigningAlgValuesSupported)
+    }
+    if !self.claimsSupported.isEmpty {
+      try container.encode(self.claimsSupported, forKey: .claimsSupported)
+    }
+    if !self.grantTypes.isEmpty {
+      try container.encode(self.grantTypes, forKey: .grantTypes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

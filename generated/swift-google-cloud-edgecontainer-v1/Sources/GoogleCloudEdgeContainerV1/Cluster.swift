@@ -269,32 +269,60 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.fleet, forKey: .fleet)
     try container.encodeIfPresent(self.networking, forKey: .networking)
     try container.encodeIfPresent(self.authorization, forKey: .authorization)
-    try container.encode(self.defaultMaxPodsPerNode, forKey: .defaultMaxPodsPerNode)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.port, forKey: .port)
-    try container.encode(self.clusterCaCertificate, forKey: .clusterCaCertificate)
+    if self.defaultMaxPodsPerNode != 0 {
+      try container.encode(self.defaultMaxPodsPerNode, forKey: .defaultMaxPodsPerNode)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
+    if !self.clusterCaCertificate.isEmpty {
+      try container.encode(self.clusterCaCertificate, forKey: .clusterCaCertificate)
+    }
     try container.encodeIfPresent(self.maintenancePolicy, forKey: .maintenancePolicy)
-    try container.encode(self.controlPlaneVersion, forKey: .controlPlaneVersion)
-    try container.encode(self.nodeVersion, forKey: .nodeVersion)
+    if !self.controlPlaneVersion.isEmpty {
+      try container.encode(self.controlPlaneVersion, forKey: .controlPlaneVersion)
+    }
+    if !self.nodeVersion.isEmpty {
+      try container.encode(self.nodeVersion, forKey: .nodeVersion)
+    }
     try container.encodeIfPresent(self.controlPlane, forKey: .controlPlane)
     try container.encodeIfPresent(self.systemAddonsConfig, forKey: .systemAddonsConfig)
-    try container.encode(
-      self.externalLoadBalancerIpv4AddressPools, forKey: .externalLoadBalancerIpv4AddressPools)
+    if !self.externalLoadBalancerIpv4AddressPools.isEmpty {
+      try container.encode(
+        self.externalLoadBalancerIpv4AddressPools, forKey: .externalLoadBalancerIpv4AddressPools)
+    }
     try container.encodeIfPresent(self.controlPlaneEncryption, forKey: .controlPlaneEncryption)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.maintenanceEvents, forKey: .maintenanceEvents)
-    try container.encode(self.targetVersion, forKey: .targetVersion)
-    try container.encode(self.releaseChannel, forKey: .releaseChannel)
+    if self.status != Cluster.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.maintenanceEvents.isEmpty {
+      try container.encode(self.maintenanceEvents, forKey: .maintenanceEvents)
+    }
+    if !self.targetVersion.isEmpty {
+      try container.encode(self.targetVersion, forKey: .targetVersion)
+    }
+    if self.releaseChannel != Cluster.ReleaseChannel() {
+      try container.encode(self.releaseChannel, forKey: .releaseChannel)
+    }
     try container.encodeIfPresent(self.survivabilityConfig, forKey: .survivabilityConfig)
-    try container.encode(
-      self.externalLoadBalancerIpv6AddressPools, forKey: .externalLoadBalancerIpv6AddressPools)
+    if !self.externalLoadBalancerIpv6AddressPools.isEmpty {
+      try container.encode(
+        self.externalLoadBalancerIpv6AddressPools, forKey: .externalLoadBalancerIpv6AddressPools)
+    }
     try container.encodeIfPresent(self.connectionState, forKey: .connectionState)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -558,12 +586,22 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.nodeLocation, forKey: .nodeLocation)
-        try container.encode(self.nodeCount, forKey: .nodeCount)
-        try container.encode(self.machineFilter, forKey: .machineFilter)
-        try container.encode(self.sharedDeploymentPolicy, forKey: .sharedDeploymentPolicy)
-        try container.encode(
-          self.controlPlaneNodeStorageSchema, forKey: .controlPlaneNodeStorageSchema)
+        if !self.nodeLocation.isEmpty {
+          try container.encode(self.nodeLocation, forKey: .nodeLocation)
+        }
+        if self.nodeCount != 0 {
+          try container.encode(self.nodeCount, forKey: .nodeCount)
+        }
+        if !self.machineFilter.isEmpty {
+          try container.encode(self.machineFilter, forKey: .machineFilter)
+        }
+        if self.sharedDeploymentPolicy != Cluster.ControlPlane.SharedDeploymentPolicy() {
+          try container.encode(self.sharedDeploymentPolicy, forKey: .sharedDeploymentPolicy)
+        }
+        if !self.controlPlaneNodeStorageSchema.isEmpty {
+          try container.encode(
+            self.controlPlaneNodeStorageSchema, forKey: .controlPlaneNodeStorageSchema)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -873,8 +911,12 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.disabled, forKey: .disabled)
-        try container.encode(self.ipv4Vip, forKey: .ipv4Vip)
+        if self.disabled {
+          try container.encode(self.disabled, forKey: .disabled)
+        }
+        if !self.ipv4Vip.isEmpty {
+          try container.encode(self.ipv4Vip, forKey: .ipv4Vip)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -955,7 +997,9 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.vmmEnabled, forKey: .vmmEnabled)
+        if self.vmmEnabled {
+          try container.encode(self.vmmEnabled, forKey: .vmmEnabled)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1099,11 +1143,19 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kmsKey, forKey: .kmsKey)
-      try container.encode(self.kmsKeyActiveVersion, forKey: .kmsKeyActiveVersion)
-      try container.encode(self.kmsKeyState, forKey: .kmsKeyState)
+      if !self.kmsKey.isEmpty {
+        try container.encode(self.kmsKey, forKey: .kmsKey)
+      }
+      if !self.kmsKeyActiveVersion.isEmpty {
+        try container.encode(self.kmsKeyActiveVersion, forKey: .kmsKeyActiveVersion)
+      }
+      if self.kmsKeyState != KmsKeyState() {
+        try container.encode(self.kmsKeyState, forKey: .kmsKeyState)
+      }
       try container.encodeIfPresent(self.kmsStatus, forKey: .kmsStatus)
-      try container.encode(self.resourceState, forKey: .resourceState)
+      if self.resourceState != ResourceState() {
+        try container.encode(self.resourceState, forKey: .resourceState)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1264,12 +1316,24 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.uuid, forKey: .uuid)
-      try container.encode(self.targetVersion, forKey: .targetVersion)
-      try container.encode(self.operation, forKey: .operation)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.schedule, forKey: .schedule)
-      try container.encode(self.state, forKey: .state)
+      if !self.uuid.isEmpty {
+        try container.encode(self.uuid, forKey: .uuid)
+      }
+      if !self.targetVersion.isEmpty {
+        try container.encode(self.targetVersion, forKey: .targetVersion)
+      }
+      if !self.operation.isEmpty {
+        try container.encode(self.operation, forKey: .operation)
+      }
+      if self.type != Cluster.MaintenanceEvent.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if self.schedule != Cluster.MaintenanceEvent.Schedule() {
+        try container.encode(self.schedule, forKey: .schedule)
+      }
+      if self.state != Cluster.MaintenanceEvent.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
@@ -1796,7 +1860,9 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.state, forKey: .state)
+      if self.state != Cluster.ConnectionState.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

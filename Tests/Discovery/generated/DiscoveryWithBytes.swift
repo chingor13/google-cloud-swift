@@ -108,20 +108,22 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    do {
+    if !self.map.isEmpty {
       let transformed = self.map.mapValues {
         GoogleWKT._DiscoveryBase64.encode($0)
       }
       try container.encode(transformed, forKey: .map)
     }
-    if let v = `optional` {
+    if let v = self.`optional` {
       try container.encode(
         GoogleWKT._DiscoveryBase64.encode(v), forKey: .`optional`
       )
     }
-    try container.encode(
-      repeated.map { GoogleWKT._DiscoveryBase64.encode($0) }, forKey: .repeated
-    )
+    if !self.repeated.isEmpty {
+      try container.encode(
+        self.repeated.map { GoogleWKT._DiscoveryBase64.encode($0) }, forKey: .repeated
+      )
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

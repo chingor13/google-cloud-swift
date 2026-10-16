@@ -229,20 +229,40 @@ public struct AuthzExtension: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.loadBalancingScheme, forKey: .loadBalancingScheme)
-    try container.encode(self.authority, forKey: .authority)
-    try container.encode(self.service, forKey: .service)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.loadBalancingScheme != LoadBalancingScheme() {
+      try container.encode(self.loadBalancingScheme, forKey: .loadBalancingScheme)
+    }
+    if !self.authority.isEmpty {
+      try container.encode(self.authority, forKey: .authority)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
     try container.encodeIfPresent(self.timeout, forKey: .timeout)
-    try container.encode(self.failOpen, forKey: .failOpen)
+    if self.failOpen {
+      try container.encode(self.failOpen, forKey: .failOpen)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
-    try container.encode(self.forwardHeaders, forKey: .forwardHeaders)
-    try container.encode(self.forwardAttributes, forKey: .forwardAttributes)
-    try container.encode(self.wireFormat, forKey: .wireFormat)
+    if !self.forwardHeaders.isEmpty {
+      try container.encode(self.forwardHeaders, forKey: .forwardHeaders)
+    }
+    if !self.forwardAttributes.isEmpty {
+      try container.encode(self.forwardAttributes, forKey: .forwardAttributes)
+    }
+    if self.wireFormat != WireFormat() {
+      try container.encode(self.wireFormat, forKey: .wireFormat)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

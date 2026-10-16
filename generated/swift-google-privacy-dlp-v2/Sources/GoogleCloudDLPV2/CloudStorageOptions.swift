@@ -134,11 +134,21 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.fileSet, forKey: .fileSet)
-    try container.encode(self.bytesLimitPerFile, forKey: .bytesLimitPerFile)
-    try container.encode(self.bytesLimitPerFilePercent, forKey: .bytesLimitPerFilePercent)
-    try container.encode(self.fileTypes, forKey: .fileTypes)
-    try container.encode(self.sampleMethod, forKey: .sampleMethod)
-    try container.encode(self.filesLimitPercent, forKey: .filesLimitPercent)
+    if self.bytesLimitPerFile != 0 {
+      try container.encode(self.bytesLimitPerFile, forKey: .bytesLimitPerFile)
+    }
+    if self.bytesLimitPerFilePercent != 0 {
+      try container.encode(self.bytesLimitPerFilePercent, forKey: .bytesLimitPerFilePercent)
+    }
+    if !self.fileTypes.isEmpty {
+      try container.encode(self.fileTypes, forKey: .fileTypes)
+    }
+    if self.sampleMethod != CloudStorageOptions.SampleMethod() {
+      try container.encode(self.sampleMethod, forKey: .sampleMethod)
+    }
+    if self.filesLimitPercent != 0 {
+      try container.encode(self.filesLimitPercent, forKey: .filesLimitPercent)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -213,7 +223,9 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.url, forKey: .url)
+      if !self.url.isEmpty {
+        try container.encode(self.url, forKey: .url)
+      }
       try container.encodeIfPresent(self.regexFileSet, forKey: .regexFileSet)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

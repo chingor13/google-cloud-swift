@@ -245,22 +245,44 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.datasets, forKey: .datasets)
-      try container.encode(self.annotationLabels, forKey: .annotationLabels)
-      try container.encode(self.labelerCount, forKey: .labelerCount)
-      try container.encode(self.instructionUri, forKey: .instructionUri)
-      try container.encode(self.inputsSchemaUri, forKey: .inputsSchemaUri)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.datasets.isEmpty {
+        try container.encode(self.datasets, forKey: .datasets)
+      }
+      if !self.annotationLabels.isEmpty {
+        try container.encode(self.annotationLabels, forKey: .annotationLabels)
+      }
+      if self.labelerCount != 0 {
+        try container.encode(self.labelerCount, forKey: .labelerCount)
+      }
+      if !self.instructionUri.isEmpty {
+        try container.encode(self.instructionUri, forKey: .instructionUri)
+      }
+      if !self.inputsSchemaUri.isEmpty {
+        try container.encode(self.inputsSchemaUri, forKey: .inputsSchemaUri)
+      }
       try container.encodeIfPresent(self.inputs, forKey: .inputs)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.labelingProgress, forKey: .labelingProgress)
+      if self.state != JobState() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if self.labelingProgress != 0 {
+        try container.encode(self.labelingProgress, forKey: .labelingProgress)
+      }
       try container.encodeIfPresent(self.currentSpend, forKey: .currentSpend)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.labels, forKey: .labels)
-      try container.encode(self.specialistPools, forKey: .specialistPools)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
+      if !self.specialistPools.isEmpty {
+        try container.encode(self.specialistPools, forKey: .specialistPools)
+      }
       try container.encodeIfPresent(self.encryptionSpec, forKey: .encryptionSpec)
       try container.encodeIfPresent(self.activeLearningConfig, forKey: .activeLearningConfig)
       for (key, value) in self._unknownFields.json {

@@ -269,11 +269,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datasetId, forKey: .datasetId)
-      try container.encode(self.annotationsFilter, forKey: .annotationsFilter)
-      try container.encode(self.annotationSchemaUri, forKey: .annotationSchemaUri)
-      try container.encode(self.savedQueryId, forKey: .savedQueryId)
-      try container.encode(self.persistMlUseAssignment, forKey: .persistMlUseAssignment)
+      if !self.datasetId.isEmpty {
+        try container.encode(self.datasetId, forKey: .datasetId)
+      }
+      if !self.annotationsFilter.isEmpty {
+        try container.encode(self.annotationsFilter, forKey: .annotationsFilter)
+      }
+      if !self.annotationSchemaUri.isEmpty {
+        try container.encode(self.annotationSchemaUri, forKey: .annotationSchemaUri)
+      }
+      if !self.savedQueryId.isEmpty {
+        try container.encode(self.savedQueryId, forKey: .savedQueryId)
+      }
+      if self.persistMlUseAssignment {
+        try container.encode(self.persistMlUseAssignment, forKey: .persistMlUseAssignment)
+      }
 
       if let choice = self.split {
         switch choice {

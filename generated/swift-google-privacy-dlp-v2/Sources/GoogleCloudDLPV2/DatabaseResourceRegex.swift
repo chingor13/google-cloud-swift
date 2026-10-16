@@ -102,10 +102,18 @@ public struct DatabaseResourceRegex: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectIdRegex, forKey: .projectIdRegex)
-    try container.encode(self.instanceRegex, forKey: .instanceRegex)
-    try container.encode(self.databaseRegex, forKey: .databaseRegex)
-    try container.encode(self.databaseResourceNameRegex, forKey: .databaseResourceNameRegex)
+    if !self.projectIdRegex.isEmpty {
+      try container.encode(self.projectIdRegex, forKey: .projectIdRegex)
+    }
+    if !self.instanceRegex.isEmpty {
+      try container.encode(self.instanceRegex, forKey: .instanceRegex)
+    }
+    if !self.databaseRegex.isEmpty {
+      try container.encode(self.databaseRegex, forKey: .databaseRegex)
+    }
+    if !self.databaseResourceNameRegex.isEmpty {
+      try container.encode(self.databaseResourceNameRegex, forKey: .databaseResourceNameRegex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

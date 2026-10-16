@@ -112,9 +112,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.flowVersion, forKey: .flowVersion)
-      try container.encode(self.state, forKey: .state)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.flowVersion.isEmpty {
+        try container.encode(self.flowVersion, forKey: .flowVersion)
+      }
+      if self.state != Deployment.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.result, forKey: .result)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
@@ -189,8 +195,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.deploymentTestResults, forKey: .deploymentTestResults)
-        try container.encode(self.experiment, forKey: .experiment)
+        if !self.deploymentTestResults.isEmpty {
+          try container.encode(self.deploymentTestResults, forKey: .deploymentTestResults)
+        }
+        if !self.experiment.isEmpty {
+          try container.encode(self.experiment, forKey: .experiment)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

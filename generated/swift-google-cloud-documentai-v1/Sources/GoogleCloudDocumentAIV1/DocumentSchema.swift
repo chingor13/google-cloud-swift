@@ -93,9 +93,15 @@ public struct DocumentSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.entityTypes, forKey: .entityTypes)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.entityTypes.isEmpty {
+      try container.encode(self.entityTypes, forKey: .entityTypes)
+    }
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -216,10 +222,18 @@ public struct DocumentSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.baseTypes, forKey: .baseTypes)
-      try container.encode(self.properties, forKey: .properties)
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.baseTypes.isEmpty {
+        try container.encode(self.baseTypes, forKey: .baseTypes)
+      }
+      if !self.properties.isEmpty {
+        try container.encode(self.properties, forKey: .properties)
+      }
 
       if let choice = self.valueSource {
         switch choice {
@@ -284,7 +298,9 @@ public struct DocumentSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.values, forKey: .values)
+        if !self.values.isEmpty {
+          try container.encode(self.values, forKey: .values)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -405,11 +421,21 @@ public struct DocumentSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.name, forKey: .name)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.valueType, forKey: .valueType)
-        try container.encode(self.occurrenceType, forKey: .occurrenceType)
-        try container.encode(self.method, forKey: .method)
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if !self.valueType.isEmpty {
+          try container.encode(self.valueType, forKey: .valueType)
+        }
+        if self.occurrenceType != DocumentSchema.EntityType.Property.OccurrenceType() {
+          try container.encode(self.occurrenceType, forKey: .occurrenceType)
+        }
+        if self.method != DocumentSchema.EntityType.Property.Method() {
+          try container.encode(self.method, forKey: .method)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -814,10 +840,18 @@ public struct DocumentSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.documentSplitter, forKey: .documentSplitter)
-      try container.encode(self.documentAllowMultipleLabels, forKey: .documentAllowMultipleLabels)
-      try container.encode(self.prefixedNamingOnProperties, forKey: .prefixedNamingOnProperties)
-      try container.encode(self.skipNamingValidation, forKey: .skipNamingValidation)
+      if self.documentSplitter {
+        try container.encode(self.documentSplitter, forKey: .documentSplitter)
+      }
+      if self.documentAllowMultipleLabels {
+        try container.encode(self.documentAllowMultipleLabels, forKey: .documentAllowMultipleLabels)
+      }
+      if self.prefixedNamingOnProperties {
+        try container.encode(self.prefixedNamingOnProperties, forKey: .prefixedNamingOnProperties)
+      }
+      if self.skipNamingValidation {
+        try container.encode(self.skipNamingValidation, forKey: .skipNamingValidation)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

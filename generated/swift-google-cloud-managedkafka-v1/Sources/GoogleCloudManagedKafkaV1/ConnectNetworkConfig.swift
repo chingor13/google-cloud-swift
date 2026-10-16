@@ -103,9 +103,15 @@ public struct ConnectNetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primarySubnet, forKey: .primarySubnet)
-    try container.encode(self.additionalSubnets, forKey: .additionalSubnets)
-    try container.encode(self.dnsDomainNames, forKey: .dnsDomainNames)
+    if !self.primarySubnet.isEmpty {
+      try container.encode(self.primarySubnet, forKey: .primarySubnet)
+    }
+    if !self.additionalSubnets.isEmpty {
+      try container.encode(self.additionalSubnets, forKey: .additionalSubnets)
+    }
+    if !self.dnsDomainNames.isEmpty {
+      try container.encode(self.dnsDomainNames, forKey: .dnsDomainNames)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

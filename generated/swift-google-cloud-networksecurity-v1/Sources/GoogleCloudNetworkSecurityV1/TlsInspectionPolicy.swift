@@ -176,16 +176,30 @@ public struct TlsInspectionPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.caPool, forKey: .caPool)
-    try container.encode(self.trustConfig, forKey: .trustConfig)
+    if !self.caPool.isEmpty {
+      try container.encode(self.caPool, forKey: .caPool)
+    }
+    if !self.trustConfig.isEmpty {
+      try container.encode(self.trustConfig, forKey: .trustConfig)
+    }
     try container.encodeIfPresent(self.excludePublicCaSet, forKey: .excludePublicCaSet)
-    try container.encode(self.minTlsVersion, forKey: .minTlsVersion)
-    try container.encode(self.tlsFeatureProfile, forKey: .tlsFeatureProfile)
-    try container.encode(self.customTlsFeatures, forKey: .customTlsFeatures)
+    if self.minTlsVersion != TlsInspectionPolicy.TlsVersion() {
+      try container.encode(self.minTlsVersion, forKey: .minTlsVersion)
+    }
+    if self.tlsFeatureProfile != TlsInspectionPolicy.Profile() {
+      try container.encode(self.tlsFeatureProfile, forKey: .tlsFeatureProfile)
+    }
+    if !self.customTlsFeatures.isEmpty {
+      try container.encode(self.customTlsFeatures, forKey: .customTlsFeatures)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

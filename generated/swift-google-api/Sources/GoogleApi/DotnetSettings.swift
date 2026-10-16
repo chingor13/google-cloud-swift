@@ -131,11 +131,21 @@ public struct DotnetSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.common, forKey: .common)
-    try container.encode(self.renamedServices, forKey: .renamedServices)
-    try container.encode(self.renamedResources, forKey: .renamedResources)
-    try container.encode(self.ignoredResources, forKey: .ignoredResources)
-    try container.encode(self.forcedNamespaceAliases, forKey: .forcedNamespaceAliases)
-    try container.encode(self.handwrittenSignatures, forKey: .handwrittenSignatures)
+    if !self.renamedServices.isEmpty {
+      try container.encode(self.renamedServices, forKey: .renamedServices)
+    }
+    if !self.renamedResources.isEmpty {
+      try container.encode(self.renamedResources, forKey: .renamedResources)
+    }
+    if !self.ignoredResources.isEmpty {
+      try container.encode(self.ignoredResources, forKey: .ignoredResources)
+    }
+    if !self.forcedNamespaceAliases.isEmpty {
+      try container.encode(self.forcedNamespaceAliases, forKey: .forcedNamespaceAliases)
+    }
+    if !self.handwrittenSignatures.isEmpty {
+      try container.encode(self.handwrittenSignatures, forKey: .handwrittenSignatures)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -92,9 +92,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.postStartupScript, forKey: .postStartupScript)
-      try container.encode(self.postStartupScriptUrl, forKey: .postStartupScriptUrl)
-      try container.encode(self.postStartupScriptBehavior, forKey: .postStartupScriptBehavior)
+      if !self.postStartupScript.isEmpty {
+        try container.encode(self.postStartupScript, forKey: .postStartupScript)
+      }
+      if !self.postStartupScriptUrl.isEmpty {
+        try container.encode(self.postStartupScriptUrl, forKey: .postStartupScriptUrl)
+      }
+      if self.postStartupScriptBehavior != PostStartupScriptConfig.PostStartupScriptBehavior() {
+        try container.encode(self.postStartupScriptBehavior, forKey: .postStartupScriptBehavior)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

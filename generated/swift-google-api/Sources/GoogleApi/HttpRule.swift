@@ -422,10 +422,18 @@ public struct HttpRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.selector, forKey: .selector)
-    try container.encode(self.body, forKey: .body)
-    try container.encode(self.responseBody, forKey: .responseBody)
-    try container.encode(self.additionalBindings, forKey: .additionalBindings)
+    if !self.selector.isEmpty {
+      try container.encode(self.selector, forKey: .selector)
+    }
+    if !self.body.isEmpty {
+      try container.encode(self.body, forKey: .body)
+    }
+    if !self.responseBody.isEmpty {
+      try container.encode(self.responseBody, forKey: .responseBody)
+    }
+    if !self.additionalBindings.isEmpty {
+      try container.encode(self.additionalBindings, forKey: .additionalBindings)
+    }
 
     if let choice = self.pattern {
       switch choice {

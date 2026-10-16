@@ -92,9 +92,15 @@ public struct SpeechRecognitionAlternative: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.transcript, forKey: .transcript)
-    try container.encode(self.confidence, forKey: .confidence)
-    try container.encode(self.words, forKey: .words)
+    if !self.transcript.isEmpty {
+      try container.encode(self.transcript, forKey: .transcript)
+    }
+    if self.confidence != 0 {
+      try container.encode(self.confidence, forKey: .confidence)
+    }
+    if !self.words.isEmpty {
+      try container.encode(self.words, forKey: .words)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

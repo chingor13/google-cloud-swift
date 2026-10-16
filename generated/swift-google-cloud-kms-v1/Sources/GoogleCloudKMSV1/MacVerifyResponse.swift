@@ -166,12 +166,24 @@ public struct MacVerifyResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.success, forKey: .success)
-    try container.encode(self.verifiedDataCrc32C, forKey: .verifiedDataCrc32C)
-    try container.encode(self.verifiedMacCrc32C, forKey: .verifiedMacCrc32C)
-    try container.encode(self.verifiedSuccessIntegrity, forKey: .verifiedSuccessIntegrity)
-    try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.success {
+      try container.encode(self.success, forKey: .success)
+    }
+    if self.verifiedDataCrc32C {
+      try container.encode(self.verifiedDataCrc32C, forKey: .verifiedDataCrc32C)
+    }
+    if self.verifiedMacCrc32C {
+      try container.encode(self.verifiedMacCrc32C, forKey: .verifiedMacCrc32C)
+    }
+    if self.verifiedSuccessIntegrity {
+      try container.encode(self.verifiedSuccessIntegrity, forKey: .verifiedSuccessIntegrity)
+    }
+    if self.protectionLevel != ProtectionLevel() {
+      try container.encode(self.protectionLevel, forKey: .protectionLevel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

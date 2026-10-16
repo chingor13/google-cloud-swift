@@ -221,25 +221,63 @@ public struct AwsVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.vmId, forKey: .vmId)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.sourceId, forKey: .sourceId)
-    try container.encode(self.sourceDescription, forKey: .sourceDescription)
-    try container.encode(self.powerState, forKey: .powerState)
-    try container.encode(self.cpuCount, forKey: .cpuCount)
-    try container.encode(self.memoryMb, forKey: .memoryMb)
-    try container.encode(self.diskCount, forKey: .diskCount)
-    try container.encode(self.committedStorageMb, forKey: .committedStorageMb)
-    try container.encode(self.osDescription, forKey: .osDescription)
-    try container.encode(self.bootOption, forKey: .bootOption)
-    try container.encode(self.instanceType, forKey: .instanceType)
-    try container.encode(self.vpcId, forKey: .vpcId)
-    try container.encode(self.securityGroups, forKey: .securityGroups)
-    try container.encode(self.tags, forKey: .tags)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.virtualizationType, forKey: .virtualizationType)
-    try container.encode(self.architecture, forKey: .architecture)
-    try container.encode(self.vcpuCount, forKey: .vcpuCount)
+    if !self.vmId.isEmpty {
+      try container.encode(self.vmId, forKey: .vmId)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.sourceId.isEmpty {
+      try container.encode(self.sourceId, forKey: .sourceId)
+    }
+    if !self.sourceDescription.isEmpty {
+      try container.encode(self.sourceDescription, forKey: .sourceDescription)
+    }
+    if self.powerState != AwsVmDetails.PowerState() {
+      try container.encode(self.powerState, forKey: .powerState)
+    }
+    if self.cpuCount != 0 {
+      try container.encode(self.cpuCount, forKey: .cpuCount)
+    }
+    if self.memoryMb != 0 {
+      try container.encode(self.memoryMb, forKey: .memoryMb)
+    }
+    if self.diskCount != 0 {
+      try container.encode(self.diskCount, forKey: .diskCount)
+    }
+    if self.committedStorageMb != 0 {
+      try container.encode(self.committedStorageMb, forKey: .committedStorageMb)
+    }
+    if !self.osDescription.isEmpty {
+      try container.encode(self.osDescription, forKey: .osDescription)
+    }
+    if self.bootOption != AwsVmDetails.BootOption() {
+      try container.encode(self.bootOption, forKey: .bootOption)
+    }
+    if !self.instanceType.isEmpty {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
+    if !self.vpcId.isEmpty {
+      try container.encode(self.vpcId, forKey: .vpcId)
+    }
+    if !self.securityGroups.isEmpty {
+      try container.encode(self.securityGroups, forKey: .securityGroups)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if self.virtualizationType != AwsVmDetails.VmVirtualizationType() {
+      try container.encode(self.virtualizationType, forKey: .virtualizationType)
+    }
+    if self.architecture != AwsVmDetails.VmArchitecture() {
+      try container.encode(self.architecture, forKey: .architecture)
+    }
+    if self.vcpuCount != 0 {
+      try container.encode(self.vcpuCount, forKey: .vcpuCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -83,7 +83,9 @@ public struct ResourceRecordSetsListResponse: Codable, Equatable, GoogleWKT._Any
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.kind, forKey: .kind)
     try container.encodeIfPresent(self.nextPageToken, forKey: .nextPageToken)
-    try container.encode(self.rrsets, forKey: .rrsets)
+    if !self.rrsets.isEmpty {
+      try container.encode(self.rrsets, forKey: .rrsets)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

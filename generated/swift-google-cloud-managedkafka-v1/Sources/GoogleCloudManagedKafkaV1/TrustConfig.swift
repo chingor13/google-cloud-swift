@@ -72,7 +72,9 @@ public struct TrustConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.casConfigs, forKey: .casConfigs)
+    if !self.casConfigs.isEmpty {
+      try container.encode(self.casConfigs, forKey: .casConfigs)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -134,7 +136,9 @@ public struct TrustConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.caPool, forKey: .caPool)
+      if !self.caPool.isEmpty {
+        try container.encode(self.caPool, forKey: .caPool)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

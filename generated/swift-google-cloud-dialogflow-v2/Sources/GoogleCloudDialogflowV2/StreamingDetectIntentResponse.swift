@@ -145,11 +145,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.responseId, forKey: .responseId)
+      if !self.responseId.isEmpty {
+        try container.encode(self.responseId, forKey: .responseId)
+      }
       try container.encodeIfPresent(self.recognitionResult, forKey: .recognitionResult)
       try container.encodeIfPresent(self.queryResult, forKey: .queryResult)
       try container.encodeIfPresent(self.webhookStatus, forKey: .webhookStatus)
-      try container.encode(self.outputAudio, forKey: .outputAudio)
+      if !self.outputAudio.isEmpty {
+        try container.encode(self.outputAudio, forKey: .outputAudio)
+      }
       try container.encodeIfPresent(self.outputAudioConfig, forKey: .outputAudioConfig)
       try container.encodeIfPresent(self.debuggingInfo, forKey: .debuggingInfo)
       for (key, value) in self._unknownFields.json {

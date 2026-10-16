@@ -274,21 +274,41 @@ public struct TransferConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.dataSourceId, forKey: .dataSourceId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.dataSourceId.isEmpty {
+      try container.encode(self.dataSourceId, forKey: .dataSourceId)
+    }
     try container.encodeIfPresent(self.params, forKey: .params)
-    try container.encode(self.schedule, forKey: .schedule)
+    if !self.schedule.isEmpty {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
     try container.encodeIfPresent(self.scheduleOptions, forKey: .scheduleOptions)
     try container.encodeIfPresent(self.scheduleOptionsV2, forKey: .scheduleOptionsV2)
-    try container.encode(self.dataRefreshWindowDays, forKey: .dataRefreshWindowDays)
-    try container.encode(self.disabled, forKey: .disabled)
+    if self.dataRefreshWindowDays != 0 {
+      try container.encode(self.dataRefreshWindowDays, forKey: .dataRefreshWindowDays)
+    }
+    if self.disabled {
+      try container.encode(self.disabled, forKey: .disabled)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.nextRunTime, forKey: .nextRunTime)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.userId, forKey: .userId)
-    try container.encode(self.datasetRegion, forKey: .datasetRegion)
-    try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    if self.state != TransferState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.userId != 0 {
+      try container.encode(self.userId, forKey: .userId)
+    }
+    if !self.datasetRegion.isEmpty {
+      try container.encode(self.datasetRegion, forKey: .datasetRegion)
+    }
+    if !self.notificationPubsubTopic.isEmpty {
+      try container.encode(self.notificationPubsubTopic, forKey: .notificationPubsubTopic)
+    }
     try container.encodeIfPresent(self.emailPreferences, forKey: .emailPreferences)
     try container.encodeIfPresent(self.ownerInfo, forKey: .ownerInfo)
     try container.encodeIfPresent(self.encryptionConfiguration, forKey: .encryptionConfiguration)

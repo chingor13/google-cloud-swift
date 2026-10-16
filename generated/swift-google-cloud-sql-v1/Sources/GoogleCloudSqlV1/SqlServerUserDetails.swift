@@ -78,8 +78,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.disabled, forKey: .disabled)
-      try container.encode(self.serverRoles, forKey: .serverRoles)
+      if self.disabled {
+        try container.encode(self.disabled, forKey: .disabled)
+      }
+      if !self.serverRoles.isEmpty {
+        try container.encode(self.serverRoles, forKey: .serverRoles)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

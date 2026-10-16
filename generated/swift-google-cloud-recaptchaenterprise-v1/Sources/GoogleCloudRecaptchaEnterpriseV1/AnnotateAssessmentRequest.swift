@@ -130,11 +130,21 @@ public struct AnnotateAssessmentRequest: Codable, Equatable, GoogleWKT._AnyPacka
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.annotation, forKey: .annotation)
-    try container.encode(self.reasons, forKey: .reasons)
-    try container.encode(self.accountId, forKey: .accountId)
-    try container.encode(self.hashedAccountId, forKey: .hashedAccountId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if self.annotation != AnnotateAssessmentRequest.Annotation() {
+      try container.encode(self.annotation, forKey: .annotation)
+    }
+    if !self.reasons.isEmpty {
+      try container.encode(self.reasons, forKey: .reasons)
+    }
+    if !self.accountId.isEmpty {
+      try container.encode(self.accountId, forKey: .accountId)
+    }
+    if !self.hashedAccountId.isEmpty {
+      try container.encode(self.hashedAccountId, forKey: .hashedAccountId)
+    }
     try container.encodeIfPresent(self.transactionEvent, forKey: .transactionEvent)
     try container.encodeIfPresent(self.phoneAuthenticationEvent, forKey: .phoneAuthenticationEvent)
     for (key, value) in self._unknownFields.json {

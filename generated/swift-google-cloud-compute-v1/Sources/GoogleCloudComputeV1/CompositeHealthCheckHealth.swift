@@ -86,7 +86,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.healthSources, forKey: .healthSources)
+      if !self.healthSources.isEmpty {
+        try container.encode(self.healthSources, forKey: .healthSources)
+      }
       try container.encodeIfPresent(self.healthState, forKey: .healthState)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       for (key, value) in self._unknownFields.json {

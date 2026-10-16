@@ -92,9 +92,15 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceNames, forKey: .resourceNames)
-    try container.encode(self.steps, forKey: .steps)
-    try container.encode(self.progressPercentage, forKey: .progressPercentage)
+    if !self.resourceNames.isEmpty {
+      try container.encode(self.resourceNames, forKey: .resourceNames)
+    }
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
+    if self.progressPercentage != 0 {
+      try container.encode(self.progressPercentage, forKey: .progressPercentage)
+    }
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -161,8 +167,12 @@ public struct OperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.status, forKey: .status)
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.status != OperationMetadata.Status() {
+        try container.encode(self.status, forKey: .status)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

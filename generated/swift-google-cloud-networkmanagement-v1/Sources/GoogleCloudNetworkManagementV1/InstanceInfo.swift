@@ -160,17 +160,39 @@ public struct InstanceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.interface, forKey: .interface)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.internalIp, forKey: .internalIp)
-    try container.encode(self.externalIp, forKey: .externalIp)
-    try container.encode(self.networkTags, forKey: .networkTags)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
-    try container.encode(self.pscNetworkAttachmentUri, forKey: .pscNetworkAttachmentUri)
-    try container.encode(self.running, forKey: .running)
-    try container.encode(self.status, forKey: .status)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.interface.isEmpty {
+      try container.encode(self.interface, forKey: .interface)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.internalIp.isEmpty {
+      try container.encode(self.internalIp, forKey: .internalIp)
+    }
+    if !self.externalIp.isEmpty {
+      try container.encode(self.externalIp, forKey: .externalIp)
+    }
+    if !self.networkTags.isEmpty {
+      try container.encode(self.networkTags, forKey: .networkTags)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
+    if !self.pscNetworkAttachmentUri.isEmpty {
+      try container.encode(self.pscNetworkAttachmentUri, forKey: .pscNetworkAttachmentUri)
+    }
+    if self.running {
+      try container.encode(self.running, forKey: .running)
+    }
+    if self.status != InstanceInfo.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

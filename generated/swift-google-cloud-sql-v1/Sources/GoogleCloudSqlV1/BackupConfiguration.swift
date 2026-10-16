@@ -161,13 +161,19 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.startTime, forKey: .startTime)
+      if !self.startTime.isEmpty {
+        try container.encode(self.startTime, forKey: .startTime)
+      }
       try container.encodeIfPresent(self.enabled, forKey: .enabled)
-      try container.encode(self.kind, forKey: .kind)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
       try container.encodeIfPresent(self.binaryLogEnabled, forKey: .binaryLogEnabled)
       try container.encodeIfPresent(
         self.replicationLogArchivingEnabled, forKey: .replicationLogArchivingEnabled)
-      try container.encode(self.location, forKey: .location)
+      if !self.location.isEmpty {
+        try container.encode(self.location, forKey: .location)
+      }
       try container.encodeIfPresent(
         self.pointInTimeRecoveryEnabled, forKey: .pointInTimeRecoveryEnabled)
       try container.encodeIfPresent(self.backupRetentionSettings, forKey: .backupRetentionSettings)

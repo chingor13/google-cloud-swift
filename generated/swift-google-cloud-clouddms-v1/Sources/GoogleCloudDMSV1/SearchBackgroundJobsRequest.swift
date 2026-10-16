@@ -100,9 +100,15 @@ public struct SearchBackgroundJobsRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.conversionWorkspace, forKey: .conversionWorkspace)
-    try container.encode(self.returnMostRecentPerJobType, forKey: .returnMostRecentPerJobType)
-    try container.encode(self.maxSize, forKey: .maxSize)
+    if !self.conversionWorkspace.isEmpty {
+      try container.encode(self.conversionWorkspace, forKey: .conversionWorkspace)
+    }
+    if self.returnMostRecentPerJobType {
+      try container.encode(self.returnMostRecentPerJobType, forKey: .returnMostRecentPerJobType)
+    }
+    if self.maxSize != 0 {
+      try container.encode(self.maxSize, forKey: .maxSize)
+    }
     try container.encodeIfPresent(self.completedUntilTime, forKey: .completedUntilTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

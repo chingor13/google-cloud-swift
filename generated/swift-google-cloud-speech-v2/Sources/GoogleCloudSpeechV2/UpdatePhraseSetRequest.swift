@@ -92,7 +92,9 @@ public struct UpdatePhraseSetRequest: Codable, Equatable, GoogleWKT._AnyPackable
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.phraseSet, forKey: .phraseSet)
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

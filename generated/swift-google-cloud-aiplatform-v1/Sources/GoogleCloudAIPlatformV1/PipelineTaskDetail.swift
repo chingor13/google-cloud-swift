@@ -185,20 +185,36 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.taskId, forKey: .taskId)
-      try container.encode(self.parentTaskId, forKey: .parentTaskId)
-      try container.encode(self.taskName, forKey: .taskName)
+      if self.taskId != 0 {
+        try container.encode(self.taskId, forKey: .taskId)
+      }
+      if self.parentTaskId != 0 {
+        try container.encode(self.parentTaskId, forKey: .parentTaskId)
+      }
+      if !self.taskName.isEmpty {
+        try container.encode(self.taskName, forKey: .taskName)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.executorDetail, forKey: .executorDetail)
-      try container.encode(self.state, forKey: .state)
+      if self.state != PipelineTaskDetail.State() {
+        try container.encode(self.state, forKey: .state)
+      }
       try container.encodeIfPresent(self.execution, forKey: .execution)
       try container.encodeIfPresent(self.error, forKey: .error)
-      try container.encode(self.pipelineTaskStatus, forKey: .pipelineTaskStatus)
-      try container.encode(self.inputs, forKey: .inputs)
-      try container.encode(self.outputs, forKey: .outputs)
-      try container.encode(self.taskUniqueName, forKey: .taskUniqueName)
+      if !self.pipelineTaskStatus.isEmpty {
+        try container.encode(self.pipelineTaskStatus, forKey: .pipelineTaskStatus)
+      }
+      if !self.inputs.isEmpty {
+        try container.encode(self.inputs, forKey: .inputs)
+      }
+      if !self.outputs.isEmpty {
+        try container.encode(self.outputs, forKey: .outputs)
+      }
+      if !self.taskUniqueName.isEmpty {
+        try container.encode(self.taskUniqueName, forKey: .taskUniqueName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -275,7 +291,9 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-        try container.encode(self.state, forKey: .state)
+        if self.state != PipelineTaskDetail.State() {
+          try container.encode(self.state, forKey: .state)
+        }
         try container.encodeIfPresent(self.error, forKey: .error)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -357,7 +375,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.artifacts, forKey: .artifacts)
+        if !self.artifacts.isEmpty {
+          try container.encode(self.artifacts, forKey: .artifacts)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

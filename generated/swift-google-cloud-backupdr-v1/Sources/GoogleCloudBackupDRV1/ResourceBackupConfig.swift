@@ -163,15 +163,33 @@ public struct ResourceBackupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.targetResource, forKey: .targetResource)
-    try container.encode(self.targetResourceDisplayName, forKey: .targetResourceDisplayName)
-    try container.encode(self.targetResourceType, forKey: .targetResourceType)
-    try container.encode(self.targetResourceLabels, forKey: .targetResourceLabels)
-    try container.encode(self.backupConfigsDetails, forKey: .backupConfigsDetails)
-    try container.encode(self.backupConfigured, forKey: .backupConfigured)
-    try container.encode(self.vaulted, forKey: .vaulted)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.targetResource.isEmpty {
+      try container.encode(self.targetResource, forKey: .targetResource)
+    }
+    if !self.targetResourceDisplayName.isEmpty {
+      try container.encode(self.targetResourceDisplayName, forKey: .targetResourceDisplayName)
+    }
+    if self.targetResourceType != ResourceBackupConfig.ResourceType() {
+      try container.encode(self.targetResourceType, forKey: .targetResourceType)
+    }
+    if !self.targetResourceLabels.isEmpty {
+      try container.encode(self.targetResourceLabels, forKey: .targetResourceLabels)
+    }
+    if !self.backupConfigsDetails.isEmpty {
+      try container.encode(self.backupConfigsDetails, forKey: .backupConfigsDetails)
+    }
+    if self.backupConfigured {
+      try container.encode(self.backupConfigured, forKey: .backupConfigured)
+    }
+    if self.vaulted {
+      try container.encode(self.vaulted, forKey: .vaulted)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

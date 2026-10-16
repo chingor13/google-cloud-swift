@@ -85,9 +85,15 @@ public struct AzureV2WorkloadIdentityFederation: Codable, Equatable, GoogleWKT._
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.clientId, forKey: .clientId)
-    try container.encode(self.tenantId, forKey: .tenantId)
-    try container.encode(self.subjectId, forKey: .subjectId)
+    if !self.clientId.isEmpty {
+      try container.encode(self.clientId, forKey: .clientId)
+    }
+    if !self.tenantId.isEmpty {
+      try container.encode(self.tenantId, forKey: .tenantId)
+    }
+    if !self.subjectId.isEmpty {
+      try container.encode(self.subjectId, forKey: .subjectId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

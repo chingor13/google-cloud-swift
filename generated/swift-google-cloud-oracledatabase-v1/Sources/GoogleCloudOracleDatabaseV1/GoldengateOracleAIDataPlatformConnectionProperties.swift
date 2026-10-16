@@ -139,15 +139,33 @@ public struct GoldengateOracleAIDataPlatformConnectionProperties: Codable, Equat
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.technologyType, forKey: .technologyType)
-    try container.encode(self.connectionUrl, forKey: .connectionUrl)
-    try container.encode(self.tenancyId, forKey: .tenancyId)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.userId, forKey: .userId)
-    try container.encode(self.privateKeyFile, forKey: .privateKeyFile)
-    try container.encode(self.privateKeyPassphraseSecret, forKey: .privateKeyPassphraseSecret)
-    try container.encode(self.publicKeyFingerprint, forKey: .publicKeyFingerprint)
-    try container.encode(self.useResourcePrincipal, forKey: .useResourcePrincipal)
+    if !self.technologyType.isEmpty {
+      try container.encode(self.technologyType, forKey: .technologyType)
+    }
+    if !self.connectionUrl.isEmpty {
+      try container.encode(self.connectionUrl, forKey: .connectionUrl)
+    }
+    if !self.tenancyId.isEmpty {
+      try container.encode(self.tenancyId, forKey: .tenancyId)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.userId.isEmpty {
+      try container.encode(self.userId, forKey: .userId)
+    }
+    if !self.privateKeyFile.isEmpty {
+      try container.encode(self.privateKeyFile, forKey: .privateKeyFile)
+    }
+    if !self.privateKeyPassphraseSecret.isEmpty {
+      try container.encode(self.privateKeyPassphraseSecret, forKey: .privateKeyPassphraseSecret)
+    }
+    if !self.publicKeyFingerprint.isEmpty {
+      try container.encode(self.publicKeyFingerprint, forKey: .publicKeyFingerprint)
+    }
+    if self.useResourcePrincipal {
+      try container.encode(self.useResourcePrincipal, forKey: .useResourcePrincipal)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

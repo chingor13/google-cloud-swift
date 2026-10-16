@@ -123,11 +123,21 @@ public struct VideoClassificationPredictionParams: Codable, Equatable, GoogleWKT
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.confidenceThreshold, forKey: .confidenceThreshold)
-    try container.encode(self.maxPredictions, forKey: .maxPredictions)
-    try container.encode(self.segmentClassification, forKey: .segmentClassification)
-    try container.encode(self.shotClassification, forKey: .shotClassification)
-    try container.encode(self.oneSecIntervalClassification, forKey: .oneSecIntervalClassification)
+    if self.confidenceThreshold != 0 {
+      try container.encode(self.confidenceThreshold, forKey: .confidenceThreshold)
+    }
+    if self.maxPredictions != 0 {
+      try container.encode(self.maxPredictions, forKey: .maxPredictions)
+    }
+    if self.segmentClassification {
+      try container.encode(self.segmentClassification, forKey: .segmentClassification)
+    }
+    if self.shotClassification {
+      try container.encode(self.shotClassification, forKey: .shotClassification)
+    }
+    if self.oneSecIntervalClassification {
+      try container.encode(self.oneSecIntervalClassification, forKey: .oneSecIntervalClassification)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

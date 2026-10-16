@@ -100,7 +100,9 @@ public struct UpdateEventThreatDetectionCustomModuleRequest: Codable, Equatable,
     try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
     try container.encodeIfPresent(
       self.eventThreatDetectionCustomModule, forKey: .eventThreatDetectionCustomModule)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

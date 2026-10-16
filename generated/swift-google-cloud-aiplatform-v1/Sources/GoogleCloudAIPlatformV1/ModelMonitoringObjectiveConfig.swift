@@ -220,8 +220,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataFormat, forKey: .dataFormat)
-        try container.encode(self.targetField, forKey: .targetField)
+        if !self.dataFormat.isEmpty {
+          try container.encode(self.dataFormat, forKey: .dataFormat)
+        }
+        if !self.targetField.isEmpty {
+          try container.encode(self.targetField, forKey: .targetField)
+        }
         try container.encodeIfPresent(
           self.loggingSamplingStrategy, forKey: .loggingSamplingStrategy)
 
@@ -356,9 +360,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.skewThresholds, forKey: .skewThresholds)
-        try container.encode(
-          self.attributionScoreSkewThresholds, forKey: .attributionScoreSkewThresholds)
+        if !self.skewThresholds.isEmpty {
+          try container.encode(self.skewThresholds, forKey: .skewThresholds)
+        }
+        if !self.attributionScoreSkewThresholds.isEmpty {
+          try container.encode(
+            self.attributionScoreSkewThresholds, forKey: .attributionScoreSkewThresholds)
+        }
         try container.encodeIfPresent(self.defaultSkewThreshold, forKey: .defaultSkewThreshold)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -468,9 +476,13 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.driftThresholds, forKey: .driftThresholds)
-        try container.encode(
-          self.attributionScoreDriftThresholds, forKey: .attributionScoreDriftThresholds)
+        if !self.driftThresholds.isEmpty {
+          try container.encode(self.driftThresholds, forKey: .driftThresholds)
+        }
+        if !self.attributionScoreDriftThresholds.isEmpty {
+          try container.encode(
+            self.attributionScoreDriftThresholds, forKey: .attributionScoreDriftThresholds)
+        }
         try container.encodeIfPresent(self.defaultDriftThreshold, forKey: .defaultDriftThreshold)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -566,7 +578,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableFeatureAttributes, forKey: .enableFeatureAttributes)
+        if self.enableFeatureAttributes {
+          try container.encode(self.enableFeatureAttributes, forKey: .enableFeatureAttributes)
+        }
         try container.encodeIfPresent(self.explanationBaseline, forKey: .explanationBaseline)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -663,7 +677,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.predictionFormat, forKey: .predictionFormat)
+          if self.predictionFormat
+            != ModelMonitoringObjectiveConfig.ExplanationConfig.ExplanationBaseline
+            .PredictionFormat()
+          {
+            try container.encode(self.predictionFormat, forKey: .predictionFormat)
+          }
 
           if let choice = self.destination {
             switch choice {

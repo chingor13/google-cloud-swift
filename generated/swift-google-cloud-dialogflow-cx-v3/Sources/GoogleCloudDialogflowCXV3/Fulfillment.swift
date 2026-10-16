@@ -197,16 +197,34 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.messages, forKey: .messages)
-      try container.encode(self.webhook, forKey: .webhook)
-      try container.encode(self.returnPartialResponses, forKey: .returnPartialResponses)
-      try container.encode(self.tag, forKey: .tag)
-      try container.encode(self.codeBlockFunction, forKey: .codeBlockFunction)
-      try container.encode(self.setParameterActions, forKey: .setParameterActions)
-      try container.encode(self.conditionalCases, forKey: .conditionalCases)
+      if !self.messages.isEmpty {
+        try container.encode(self.messages, forKey: .messages)
+      }
+      if !self.webhook.isEmpty {
+        try container.encode(self.webhook, forKey: .webhook)
+      }
+      if self.returnPartialResponses {
+        try container.encode(self.returnPartialResponses, forKey: .returnPartialResponses)
+      }
+      if !self.tag.isEmpty {
+        try container.encode(self.tag, forKey: .tag)
+      }
+      if !self.codeBlockFunction.isEmpty {
+        try container.encode(self.codeBlockFunction, forKey: .codeBlockFunction)
+      }
+      if !self.setParameterActions.isEmpty {
+        try container.encode(self.setParameterActions, forKey: .setParameterActions)
+      }
+      if !self.conditionalCases.isEmpty {
+        try container.encode(self.conditionalCases, forKey: .conditionalCases)
+      }
       try container.encodeIfPresent(self.advancedSettings, forKey: .advancedSettings)
-      try container.encode(self.enableGenerativeFallback, forKey: .enableGenerativeFallback)
-      try container.encode(self.generators, forKey: .generators)
+      if self.enableGenerativeFallback {
+        try container.encode(self.enableGenerativeFallback, forKey: .enableGenerativeFallback)
+      }
+      if !self.generators.isEmpty {
+        try container.encode(self.generators, forKey: .generators)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -270,7 +288,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.parameter, forKey: .parameter)
+        if !self.parameter.isEmpty {
+          try container.encode(self.parameter, forKey: .parameter)
+        }
         try container.encodeIfPresent(self.value, forKey: .value)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -354,7 +374,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.cases, forKey: .cases)
+        if !self.cases.isEmpty {
+          try container.encode(self.cases, forKey: .cases)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -432,8 +454,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.condition, forKey: .condition)
-          try container.encode(self.caseContent, forKey: .caseContent)
+          if !self.condition.isEmpty {
+            try container.encode(self.condition, forKey: .condition)
+          }
+          if !self.caseContent.isEmpty {
+            try container.encode(self.caseContent, forKey: .caseContent)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -683,9 +709,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.generator, forKey: .generator)
-        try container.encode(self.inputParameters, forKey: .inputParameters)
-        try container.encode(self.outputParameter, forKey: .outputParameter)
+        if !self.generator.isEmpty {
+          try container.encode(self.generator, forKey: .generator)
+        }
+        if !self.inputParameters.isEmpty {
+          try container.encode(self.inputParameters, forKey: .inputParameters)
+        }
+        if !self.outputParameter.isEmpty {
+          try container.encode(self.outputParameter, forKey: .outputParameter)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

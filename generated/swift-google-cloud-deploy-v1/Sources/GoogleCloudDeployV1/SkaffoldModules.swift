@@ -104,7 +104,9 @@ public struct SkaffoldModules: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.configs, forKey: .configs)
+    if !self.configs.isEmpty {
+      try container.encode(self.configs, forKey: .configs)
+    }
 
     if let choice = self.source {
       switch choice {
@@ -189,9 +191,15 @@ public struct SkaffoldModules: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repo, forKey: .repo)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.ref, forKey: .ref)
+      if !self.repo.isEmpty {
+        try container.encode(self.repo, forKey: .repo)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.ref.isEmpty {
+        try container.encode(self.ref, forKey: .ref)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -281,8 +289,12 @@ public struct SkaffoldModules: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.source, forKey: .source)
-      try container.encode(self.path, forKey: .path)
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -381,9 +393,15 @@ public struct SkaffoldModules: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.repository, forKey: .repository)
-      try container.encode(self.path, forKey: .path)
-      try container.encode(self.ref, forKey: .ref)
+      if !self.repository.isEmpty {
+        try container.encode(self.repository, forKey: .repository)
+      }
+      if !self.path.isEmpty {
+        try container.encode(self.path, forKey: .path)
+      }
+      if !self.ref.isEmpty {
+        try container.encode(self.ref, forKey: .ref)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

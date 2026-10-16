@@ -94,9 +94,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dataStoreType, forKey: .dataStoreType)
-      try container.encode(self.dataStore, forKey: .dataStore)
-      try container.encode(self.documentProcessingMode, forKey: .documentProcessingMode)
+      if self.dataStoreType != DataStoreType() {
+        try container.encode(self.dataStoreType, forKey: .dataStoreType)
+      }
+      if !self.dataStore.isEmpty {
+        try container.encode(self.dataStore, forKey: .dataStore)
+      }
+      if self.documentProcessingMode != DocumentProcessingMode() {
+        try container.encode(self.documentProcessingMode, forKey: .documentProcessingMode)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

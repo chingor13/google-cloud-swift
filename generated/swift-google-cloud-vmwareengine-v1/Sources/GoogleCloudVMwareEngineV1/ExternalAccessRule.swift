@@ -199,19 +199,41 @@ public struct ExternalAccessRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.priority, forKey: .priority)
-    try container.encode(self.action, forKey: .action)
-    try container.encode(self.ipProtocol, forKey: .ipProtocol)
-    try container.encode(self.sourceIpRanges, forKey: .sourceIpRanges)
-    try container.encode(self.sourcePorts, forKey: .sourcePorts)
-    try container.encode(self.destinationIpRanges, forKey: .destinationIpRanges)
-    try container.encode(self.destinationPorts, forKey: .destinationPorts)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.priority != 0 {
+      try container.encode(self.priority, forKey: .priority)
+    }
+    if self.action != ExternalAccessRule.Action() {
+      try container.encode(self.action, forKey: .action)
+    }
+    if !self.ipProtocol.isEmpty {
+      try container.encode(self.ipProtocol, forKey: .ipProtocol)
+    }
+    if !self.sourceIpRanges.isEmpty {
+      try container.encode(self.sourceIpRanges, forKey: .sourceIpRanges)
+    }
+    if !self.sourcePorts.isEmpty {
+      try container.encode(self.sourcePorts, forKey: .sourcePorts)
+    }
+    if !self.destinationIpRanges.isEmpty {
+      try container.encode(self.destinationIpRanges, forKey: .destinationIpRanges)
+    }
+    if !self.destinationPorts.isEmpty {
+      try container.encode(self.destinationPorts, forKey: .destinationPorts)
+    }
+    if self.state != ExternalAccessRule.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

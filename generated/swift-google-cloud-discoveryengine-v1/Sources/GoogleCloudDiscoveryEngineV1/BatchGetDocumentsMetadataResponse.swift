@@ -78,7 +78,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.documentsMetadata, forKey: .documentsMetadata)
+      if !self.documentsMetadata.isEmpty {
+        try container.encode(self.documentsMetadata, forKey: .documentsMetadata)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -182,9 +184,13 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.matcherValue, forKey: .matcherValue)
-        try container.encode(self.state, forKey: .state)
+        if self.state != BatchGetDocumentsMetadataResponse.State() {
+          try container.encode(self.state, forKey: .state)
+        }
         try container.encodeIfPresent(self.lastRefreshedTime, forKey: .lastRefreshedTime)
-        try container.encode(self.dataIngestionSource, forKey: .dataIngestionSource)
+        if !self.dataIngestionSource.isEmpty {
+          try container.encode(self.dataIngestionSource, forKey: .dataIngestionSource)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

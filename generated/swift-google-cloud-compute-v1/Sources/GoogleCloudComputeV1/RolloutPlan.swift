@@ -145,7 +145,9 @@
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.selfLinkWithId, forKey: .selfLinkWithId)
-      try container.encode(self.waves, forKey: .waves)
+      if !self.waves.isEmpty {
+        try container.encode(self.waves, forKey: .waves)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

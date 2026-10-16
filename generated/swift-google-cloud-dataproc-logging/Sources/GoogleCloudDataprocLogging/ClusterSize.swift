@@ -77,8 +77,12 @@ public struct ClusterSize: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.primaryWorkerCount, forKey: .primaryWorkerCount)
-    try container.encode(self.secondaryWorkerCount, forKey: .secondaryWorkerCount)
+    if self.primaryWorkerCount != 0 {
+      try container.encode(self.primaryWorkerCount, forKey: .primaryWorkerCount)
+    }
+    if self.secondaryWorkerCount != 0 {
+      try container.encode(self.secondaryWorkerCount, forKey: .secondaryWorkerCount)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -869,23 +869,51 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.initialNodeCount, forKey: .initialNodeCount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.initialNodeCount != 0 {
+      try container.encode(self.initialNodeCount, forKey: .initialNodeCount)
+    }
     try container.encodeIfPresent(self.nodeConfig, forKey: .nodeConfig)
     try container.encodeIfPresent(self.masterAuth, forKey: .masterAuth)
-    try container.encode(self.loggingService, forKey: .loggingService)
-    try container.encode(self.monitoringService, forKey: .monitoringService)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.clusterIpv4Cidr, forKey: .clusterIpv4Cidr)
+    if !self.loggingService.isEmpty {
+      try container.encode(self.loggingService, forKey: .loggingService)
+    }
+    if !self.monitoringService.isEmpty {
+      try container.encode(self.monitoringService, forKey: .monitoringService)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.clusterIpv4Cidr.isEmpty {
+      try container.encode(self.clusterIpv4Cidr, forKey: .clusterIpv4Cidr)
+    }
     try container.encodeIfPresent(self.addonsConfig, forKey: .addonsConfig)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.nodePools, forKey: .nodePools)
-    try container.encode(self.locations, forKey: .locations)
-    try container.encode(self.enableKubernetesAlpha, forKey: .enableKubernetesAlpha)
-    try container.encode(self.alphaClusterFeatureGates, forKey: .alphaClusterFeatureGates)
-    try container.encode(self.resourceLabels, forKey: .resourceLabels)
-    try container.encode(self.labelFingerprint, forKey: .labelFingerprint)
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if !self.nodePools.isEmpty {
+      try container.encode(self.nodePools, forKey: .nodePools)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
+    if self.enableKubernetesAlpha {
+      try container.encode(self.enableKubernetesAlpha, forKey: .enableKubernetesAlpha)
+    }
+    if !self.alphaClusterFeatureGates.isEmpty {
+      try container.encode(self.alphaClusterFeatureGates, forKey: .alphaClusterFeatureGates)
+    }
+    if !self.resourceLabels.isEmpty {
+      try container.encode(self.resourceLabels, forKey: .resourceLabels)
+    }
+    if !self.labelFingerprint.isEmpty {
+      try container.encode(self.labelFingerprint, forKey: .labelFingerprint)
+    }
     try container.encodeIfPresent(self.legacyAbac, forKey: .legacyAbac)
     try container.encodeIfPresent(self.networkPolicy, forKey: .networkPolicy)
     try container.encodeIfPresent(self.ipAllocationPolicy, forKey: .ipAllocationPolicy)
@@ -911,34 +939,76 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.notificationConfig, forKey: .notificationConfig)
     try container.encodeIfPresent(self.confidentialNodes, forKey: .confidentialNodes)
     try container.encodeIfPresent(self.identityServiceConfig, forKey: .identityServiceConfig)
-    try container.encode(self.selfLink, forKey: .selfLink)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.initialClusterVersion, forKey: .initialClusterVersion)
-    try container.encode(self.currentMasterVersion, forKey: .currentMasterVersion)
-    try container.encode(self.currentEmulatedVersion, forKey: .currentEmulatedVersion)
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.initialClusterVersion.isEmpty {
+      try container.encode(self.initialClusterVersion, forKey: .initialClusterVersion)
+    }
+    if !self.currentMasterVersion.isEmpty {
+      try container.encode(self.currentMasterVersion, forKey: .currentMasterVersion)
+    }
+    if !self.currentEmulatedVersion.isEmpty {
+      try container.encode(self.currentEmulatedVersion, forKey: .currentEmulatedVersion)
+    }
     try container.encodeIfPresent(self.rollbackSafeUpgrade, forKey: .rollbackSafeUpgrade)
-    try container.encode(self.currentNodeVersion, forKey: .currentNodeVersion)
-    try container.encode(self.createTime, forKey: .createTime)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
-    try container.encode(self.nodeIpv4CidrSize, forKey: .nodeIpv4CidrSize)
-    try container.encode(self.servicesIpv4Cidr, forKey: .servicesIpv4Cidr)
-    try container.encode(self.instanceGroupUrls, forKey: .instanceGroupUrls)
-    try container.encode(self.currentNodeCount, forKey: .currentNodeCount)
-    try container.encode(self.expireTime, forKey: .expireTime)
-    try container.encode(self.location, forKey: .location)
-    try container.encode(self.enableTpu, forKey: .enableTpu)
-    try container.encode(self.tpuIpv4CidrBlock, forKey: .tpuIpv4CidrBlock)
-    try container.encode(self.conditions, forKey: .conditions)
+    if !self.currentNodeVersion.isEmpty {
+      try container.encode(self.currentNodeVersion, forKey: .currentNodeVersion)
+    }
+    if !self.createTime.isEmpty {
+      try container.encode(self.createTime, forKey: .createTime)
+    }
+    if self.status != Cluster.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
+    if self.nodeIpv4CidrSize != 0 {
+      try container.encode(self.nodeIpv4CidrSize, forKey: .nodeIpv4CidrSize)
+    }
+    if !self.servicesIpv4Cidr.isEmpty {
+      try container.encode(self.servicesIpv4Cidr, forKey: .servicesIpv4Cidr)
+    }
+    if !self.instanceGroupUrls.isEmpty {
+      try container.encode(self.instanceGroupUrls, forKey: .instanceGroupUrls)
+    }
+    if self.currentNodeCount != 0 {
+      try container.encode(self.currentNodeCount, forKey: .currentNodeCount)
+    }
+    if !self.expireTime.isEmpty {
+      try container.encode(self.expireTime, forKey: .expireTime)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
+    if self.enableTpu {
+      try container.encode(self.enableTpu, forKey: .enableTpu)
+    }
+    if !self.tpuIpv4CidrBlock.isEmpty {
+      try container.encode(self.tpuIpv4CidrBlock, forKey: .tpuIpv4CidrBlock)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
     try container.encodeIfPresent(self.autopilot, forKey: .autopilot)
-    try container.encode(self.id, forKey: .id)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     try container.encodeIfPresent(self.nodePoolDefaults, forKey: .nodePoolDefaults)
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
     try container.encodeIfPresent(self.monitoringConfig, forKey: .monitoringConfig)
     try container.encodeIfPresent(self.nodePoolAutoConfig, forKey: .nodePoolAutoConfig)
     try container.encodeIfPresent(self.podAutoscaling, forKey: .podAutoscaling)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.fleet, forKey: .fleet)
     try container.encodeIfPresent(self.securityPostureConfig, forKey: .securityPostureConfig)
     try container.encodeIfPresent(

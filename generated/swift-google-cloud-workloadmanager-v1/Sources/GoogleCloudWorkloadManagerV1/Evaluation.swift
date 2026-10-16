@@ -178,19 +178,33 @@ public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.resourceFilter, forKey: .resourceFilter)
-    try container.encode(self.ruleNames, forKey: .ruleNames)
+    if !self.ruleNames.isEmpty {
+      try container.encode(self.ruleNames, forKey: .ruleNames)
+    }
     try container.encodeIfPresent(self.resourceStatus, forKey: .resourceStatus)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.schedule, forKey: .schedule)
-    try container.encode(self.customRulesBucket, forKey: .customRulesBucket)
-    try container.encode(self.evaluationType, forKey: .evaluationType)
+    if !self.customRulesBucket.isEmpty {
+      try container.encode(self.customRulesBucket, forKey: .customRulesBucket)
+    }
+    if self.evaluationType != Evaluation.EvaluationType() {
+      try container.encode(self.evaluationType, forKey: .evaluationType)
+    }
     try container.encodeIfPresent(self.bigQueryDestination, forKey: .bigQueryDestination)
-    try container.encode(self.kmsKey, forKey: .kmsKey)
+    if !self.kmsKey.isEmpty {
+      try container.encode(self.kmsKey, forKey: .kmsKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

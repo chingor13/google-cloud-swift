@@ -83,7 +83,9 @@ public struct IndexOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.common, forKey: .common)
     try container.encodeIfPresent(self.progressEntities, forKey: .progressEntities)
-    try container.encode(self.indexId, forKey: .indexId)
+    if !self.indexId.isEmpty {
+      try container.encode(self.indexId, forKey: .indexId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

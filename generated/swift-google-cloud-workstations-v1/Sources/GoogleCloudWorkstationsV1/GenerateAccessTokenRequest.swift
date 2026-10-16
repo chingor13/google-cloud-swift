@@ -109,8 +109,12 @@ public struct GenerateAccessTokenRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.workstation, forKey: .workstation)
-    try container.encode(self.port, forKey: .port)
+    if !self.workstation.isEmpty {
+      try container.encode(self.workstation, forKey: .workstation)
+    }
+    if self.port != 0 {
+      try container.encode(self.port, forKey: .port)
+    }
 
     if let choice = self.expiration {
       switch choice {

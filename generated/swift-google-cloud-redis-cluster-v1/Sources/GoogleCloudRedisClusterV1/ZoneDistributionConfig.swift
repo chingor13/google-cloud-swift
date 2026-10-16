@@ -83,8 +83,12 @@ public struct ZoneDistributionConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.mode, forKey: .mode)
-    try container.encode(self.zone, forKey: .zone)
+    if self.mode != ZoneDistributionConfig.ZoneDistributionMode() {
+      try container.encode(self.mode, forKey: .mode)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

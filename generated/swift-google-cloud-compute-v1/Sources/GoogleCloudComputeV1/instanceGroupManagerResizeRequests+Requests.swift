@@ -120,11 +120,19 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
-        try container.encode(self.project, forKey: .project)
+        if !self.instanceGroupManager.isEmpty {
+          try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
+        }
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.resizeRequest, forKey: .resizeRequest)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.resizeRequest.isEmpty {
+          try container.encode(self.resizeRequest, forKey: .resizeRequest)
+        }
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -254,11 +262,19 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
-        try container.encode(self.project, forKey: .project)
+        if !self.instanceGroupManager.isEmpty {
+          try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
+        }
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.resizeRequest, forKey: .resizeRequest)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.resizeRequest.isEmpty {
+          try container.encode(self.resizeRequest, forKey: .resizeRequest)
+        }
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -370,10 +386,18 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.resizeRequest, forKey: .resizeRequest)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.instanceGroupManager.isEmpty {
+          try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
+        }
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.resizeRequest.isEmpty {
+          try container.encode(self.resizeRequest, forKey: .resizeRequest)
+        }
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -505,10 +529,16 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
-        try container.encode(self.project, forKey: .project)
+        if !self.instanceGroupManager.isEmpty {
+          try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
+        }
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
         try container.encodeIfPresent(self.requestId, forKey: .requestId)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         try container.encodeIfPresent(self.body, forKey: .body)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -709,12 +739,18 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.filter, forKey: .filter)
-        try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
+        if !self.instanceGroupManager.isEmpty {
+          try container.encode(self.instanceGroupManager, forKey: .instanceGroupManager)
+        }
         try container.encodeIfPresent(self.maxResults, forKey: .maxResults)
         try container.encodeIfPresent(self.orderBy, forKey: .orderBy)
         try container.encodeIfPresent(self.pageToken, forKey: .pageToken)
-        try container.encode(self.project, forKey: .project)
-        try container.encode(self.zone, forKey: .zone)
+        if !self.project.isEmpty {
+          try container.encode(self.project, forKey: .project)
+        }
+        if !self.zone.isEmpty {
+          try container.encode(self.zone, forKey: .zone)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

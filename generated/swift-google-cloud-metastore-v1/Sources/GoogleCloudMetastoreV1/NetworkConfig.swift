@@ -73,7 +73,9 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.consumers, forKey: .consumers)
+    if !self.consumers.isEmpty {
+      try container.encode(self.consumers, forKey: .consumers)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -162,8 +164,12 @@ public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.endpointUri, forKey: .endpointUri)
-      try container.encode(self.endpointLocation, forKey: .endpointLocation)
+      if !self.endpointUri.isEmpty {
+        try container.encode(self.endpointUri, forKey: .endpointUri)
+      }
+      if !self.endpointLocation.isEmpty {
+        try container.encode(self.endpointLocation, forKey: .endpointLocation)
+      }
 
       if let choice = self.vpcResource {
         switch choice {

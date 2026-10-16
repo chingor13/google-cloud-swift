@@ -97,10 +97,18 @@ public struct VertexAutoMLVideoConfig: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.confidenceThreshold, forKey: .confidenceThreshold)
-    try container.encode(self.blockedLabels, forKey: .blockedLabels)
-    try container.encode(self.maxPredictions, forKey: .maxPredictions)
-    try container.encode(self.boundingBoxSizeLimit, forKey: .boundingBoxSizeLimit)
+    if self.confidenceThreshold != 0 {
+      try container.encode(self.confidenceThreshold, forKey: .confidenceThreshold)
+    }
+    if !self.blockedLabels.isEmpty {
+      try container.encode(self.blockedLabels, forKey: .blockedLabels)
+    }
+    if self.maxPredictions != 0 {
+      try container.encode(self.maxPredictions, forKey: .maxPredictions)
+    }
+    if self.boundingBoxSizeLimit != 0 {
+      try container.encode(self.boundingBoxSizeLimit, forKey: .boundingBoxSizeLimit)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

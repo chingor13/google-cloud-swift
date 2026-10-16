@@ -305,15 +305,31 @@ public struct RewriteObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.destinationName, forKey: .destinationName)
-    try container.encode(self.destinationBucket, forKey: .destinationBucket)
-    try container.encode(self.destinationKmsKey, forKey: .destinationKmsKey)
+    if !self.destinationName.isEmpty {
+      try container.encode(self.destinationName, forKey: .destinationName)
+    }
+    if !self.destinationBucket.isEmpty {
+      try container.encode(self.destinationBucket, forKey: .destinationBucket)
+    }
+    if !self.destinationKmsKey.isEmpty {
+      try container.encode(self.destinationKmsKey, forKey: .destinationKmsKey)
+    }
     try container.encodeIfPresent(self.destination, forKey: .destination)
-    try container.encode(self.sourceBucket, forKey: .sourceBucket)
-    try container.encode(self.sourceObject, forKey: .sourceObject)
-    try container.encode(self.sourceGeneration, forKey: .sourceGeneration)
-    try container.encode(self.rewriteToken, forKey: .rewriteToken)
-    try container.encode(self.destinationPredefinedAcl, forKey: .destinationPredefinedAcl)
+    if !self.sourceBucket.isEmpty {
+      try container.encode(self.sourceBucket, forKey: .sourceBucket)
+    }
+    if !self.sourceObject.isEmpty {
+      try container.encode(self.sourceObject, forKey: .sourceObject)
+    }
+    if self.sourceGeneration != 0 {
+      try container.encode(self.sourceGeneration, forKey: .sourceGeneration)
+    }
+    if !self.rewriteToken.isEmpty {
+      try container.encode(self.rewriteToken, forKey: .rewriteToken)
+    }
+    if !self.destinationPredefinedAcl.isEmpty {
+      try container.encode(self.destinationPredefinedAcl, forKey: .destinationPredefinedAcl)
+    }
     try container.encodeIfPresent(self.ifGenerationMatch, forKey: .ifGenerationMatch)
     try container.encodeIfPresent(self.ifGenerationNotMatch, forKey: .ifGenerationNotMatch)
     try container.encodeIfPresent(self.ifMetagenerationMatch, forKey: .ifMetagenerationMatch)
@@ -325,11 +341,20 @@ public struct RewriteObjectRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       self.ifSourceMetagenerationMatch, forKey: .ifSourceMetagenerationMatch)
     try container.encodeIfPresent(
       self.ifSourceMetagenerationNotMatch, forKey: .ifSourceMetagenerationNotMatch)
-    try container.encode(self.maxBytesRewrittenPerCall, forKey: .maxBytesRewrittenPerCall)
-    try container.encode(self.copySourceEncryptionAlgorithm, forKey: .copySourceEncryptionAlgorithm)
-    try container.encode(self.copySourceEncryptionKeyBytes, forKey: .copySourceEncryptionKeyBytes)
-    try container.encode(
-      self.copySourceEncryptionKeySha256Bytes, forKey: .copySourceEncryptionKeySha256Bytes)
+    if self.maxBytesRewrittenPerCall != 0 {
+      try container.encode(self.maxBytesRewrittenPerCall, forKey: .maxBytesRewrittenPerCall)
+    }
+    if !self.copySourceEncryptionAlgorithm.isEmpty {
+      try container.encode(
+        self.copySourceEncryptionAlgorithm, forKey: .copySourceEncryptionAlgorithm)
+    }
+    if !self.copySourceEncryptionKeyBytes.isEmpty {
+      try container.encode(self.copySourceEncryptionKeyBytes, forKey: .copySourceEncryptionKeyBytes)
+    }
+    if !self.copySourceEncryptionKeySha256Bytes.isEmpty {
+      try container.encode(
+        self.copySourceEncryptionKeySha256Bytes, forKey: .copySourceEncryptionKeySha256Bytes)
+    }
     try container.encodeIfPresent(
       self.commonObjectRequestParams, forKey: .commonObjectRequestParams)
     try container.encodeIfPresent(self.objectChecksums, forKey: .objectChecksums)

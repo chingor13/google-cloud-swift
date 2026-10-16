@@ -78,7 +78,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.conditionBoostSpecs, forKey: .conditionBoostSpecs)
+      if !self.conditionBoostSpecs.isEmpty {
+        try container.encode(self.conditionBoostSpecs, forKey: .conditionBoostSpecs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -175,8 +177,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.condition, forKey: .condition)
-        try container.encode(self.boost, forKey: .boost)
+        if !self.condition.isEmpty {
+          try container.encode(self.condition, forKey: .condition)
+        }
+        if self.boost != 0 {
+          try container.encode(self.boost, forKey: .boost)
+        }
         try container.encodeIfPresent(self.boostControlSpec, forKey: .boostControlSpec)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -280,10 +286,20 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.fieldName, forKey: .fieldName)
-          try container.encode(self.attributeType, forKey: .attributeType)
-          try container.encode(self.interpolationType, forKey: .interpolationType)
-          try container.encode(self.controlPoints, forKey: .controlPoints)
+          if !self.fieldName.isEmpty {
+            try container.encode(self.fieldName, forKey: .fieldName)
+          }
+          if self.attributeType != BoostSpec.ConditionBoostSpec.BoostControlSpec.AttributeType() {
+            try container.encode(self.attributeType, forKey: .attributeType)
+          }
+          if self.interpolationType
+            != BoostSpec.ConditionBoostSpec.BoostControlSpec.InterpolationType()
+          {
+            try container.encode(self.interpolationType, forKey: .interpolationType)
+          }
+          if !self.controlPoints.isEmpty {
+            try container.encode(self.controlPoints, forKey: .controlPoints)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -358,8 +374,12 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.attributeValue, forKey: .attributeValue)
-            try container.encode(self.boostAmount, forKey: .boostAmount)
+            if !self.attributeValue.isEmpty {
+              try container.encode(self.attributeValue, forKey: .attributeValue)
+            }
+            if self.boostAmount != 0 {
+              try container.encode(self.boostAmount, forKey: .boostAmount)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }

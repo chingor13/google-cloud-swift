@@ -148,13 +148,27 @@ public struct QueryTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.proposer, forKey: .proposer)
-    try container.encode(self.primaryContact, forKey: .primaryContact)
-    try container.encode(self.documentation, forKey: .documentation)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.proposer.isEmpty {
+      try container.encode(self.proposer, forKey: .proposer)
+    }
+    if !self.primaryContact.isEmpty {
+      try container.encode(self.primaryContact, forKey: .primaryContact)
+    }
+    if !self.documentation.isEmpty {
+      try container.encode(self.documentation, forKey: .documentation)
+    }
+    if self.state != QueryTemplate.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.routine, forKey: .routine)
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)

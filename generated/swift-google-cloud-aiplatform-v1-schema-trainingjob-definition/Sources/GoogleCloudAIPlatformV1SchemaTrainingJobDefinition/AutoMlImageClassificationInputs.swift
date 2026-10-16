@@ -126,11 +126,21 @@ public struct AutoMlImageClassificationInputs: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.modelType, forKey: .modelType)
-    try container.encode(self.baseModelId, forKey: .baseModelId)
-    try container.encode(self.budgetMilliNodeHours, forKey: .budgetMilliNodeHours)
-    try container.encode(self.disableEarlyStopping, forKey: .disableEarlyStopping)
-    try container.encode(self.multiLabel, forKey: .multiLabel)
+    if self.modelType != AutoMlImageClassificationInputs.ModelType() {
+      try container.encode(self.modelType, forKey: .modelType)
+    }
+    if !self.baseModelId.isEmpty {
+      try container.encode(self.baseModelId, forKey: .baseModelId)
+    }
+    if self.budgetMilliNodeHours != 0 {
+      try container.encode(self.budgetMilliNodeHours, forKey: .budgetMilliNodeHours)
+    }
+    if self.disableEarlyStopping {
+      try container.encode(self.disableEarlyStopping, forKey: .disableEarlyStopping)
+    }
+    if self.multiLabel {
+      try container.encode(self.multiLabel, forKey: .multiLabel)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

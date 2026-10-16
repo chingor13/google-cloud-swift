@@ -149,7 +149,9 @@
       try container.encodeIfPresent(self.network, forKey: .network)
       try container.encodeIfPresent(self.purpose, forKey: .purpose)
       try container.encodeIfPresent(self.role, forKey: .role)
-      try container.encode(self.secondaryIpRanges, forKey: .secondaryIpRanges)
+      if !self.secondaryIpRanges.isEmpty {
+        try container.encode(self.secondaryIpRanges, forKey: .secondaryIpRanges)
+      }
       try container.encodeIfPresent(self.stackType, forKey: .stackType)
       try container.encodeIfPresent(self.subnetwork, forKey: .subnetwork)
       for (key, value) in self._unknownFields.json {

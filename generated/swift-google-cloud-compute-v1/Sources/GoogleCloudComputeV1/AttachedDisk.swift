@@ -253,12 +253,16 @@
       try container.encodeIfPresent(self.diskEncryptionKey, forKey: .diskEncryptionKey)
       try container.encodeIfPresent(self.diskSizeGb, forKey: .diskSizeGb)
       try container.encodeIfPresent(self.forceAttach, forKey: .forceAttach)
-      try container.encode(self.guestOsFeatures, forKey: .guestOsFeatures)
+      if !self.guestOsFeatures.isEmpty {
+        try container.encode(self.guestOsFeatures, forKey: .guestOsFeatures)
+      }
       try container.encodeIfPresent(self.index, forKey: .index)
       try container.encodeIfPresent(self.initializeParams, forKey: .initializeParams)
       try container.encodeIfPresent(self.interface, forKey: .interface)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      try container.encode(self.licenses, forKey: .licenses)
+      if !self.licenses.isEmpty {
+        try container.encode(self.licenses, forKey: .licenses)
+      }
       try container.encodeIfPresent(self.mode, forKey: .mode)
       try container.encodeIfPresent(self.savedState, forKey: .savedState)
       try container.encodeIfPresent(

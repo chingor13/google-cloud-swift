@@ -182,15 +182,31 @@ public struct InspectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.infoTypes, forKey: .infoTypes)
-    try container.encode(self.minLikelihood, forKey: .minLikelihood)
-    try container.encode(self.minLikelihoodPerInfoType, forKey: .minLikelihoodPerInfoType)
+    if !self.infoTypes.isEmpty {
+      try container.encode(self.infoTypes, forKey: .infoTypes)
+    }
+    if self.minLikelihood != Likelihood() {
+      try container.encode(self.minLikelihood, forKey: .minLikelihood)
+    }
+    if !self.minLikelihoodPerInfoType.isEmpty {
+      try container.encode(self.minLikelihoodPerInfoType, forKey: .minLikelihoodPerInfoType)
+    }
     try container.encodeIfPresent(self.limits, forKey: .limits)
-    try container.encode(self.includeQuote, forKey: .includeQuote)
-    try container.encode(self.excludeInfoTypes, forKey: .excludeInfoTypes)
-    try container.encode(self.customInfoTypes, forKey: .customInfoTypes)
-    try container.encode(self.contentOptions, forKey: .contentOptions)
-    try container.encode(self.ruleSet, forKey: .ruleSet)
+    if self.includeQuote {
+      try container.encode(self.includeQuote, forKey: .includeQuote)
+    }
+    if self.excludeInfoTypes {
+      try container.encode(self.excludeInfoTypes, forKey: .excludeInfoTypes)
+    }
+    if !self.customInfoTypes.isEmpty {
+      try container.encode(self.customInfoTypes, forKey: .customInfoTypes)
+    }
+    if !self.contentOptions.isEmpty {
+      try container.encode(self.contentOptions, forKey: .contentOptions)
+    }
+    if !self.ruleSet.isEmpty {
+      try container.encode(self.ruleSet, forKey: .ruleSet)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -262,7 +278,9 @@ public struct InspectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.infoType, forKey: .infoType)
-      try container.encode(self.minLikelihood, forKey: .minLikelihood)
+      if self.minLikelihood != Likelihood() {
+        try container.encode(self.minLikelihood, forKey: .minLikelihood)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -393,9 +411,15 @@ public struct InspectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxFindingsPerItem, forKey: .maxFindingsPerItem)
-      try container.encode(self.maxFindingsPerRequest, forKey: .maxFindingsPerRequest)
-      try container.encode(self.maxFindingsPerInfoType, forKey: .maxFindingsPerInfoType)
+      if self.maxFindingsPerItem != 0 {
+        try container.encode(self.maxFindingsPerItem, forKey: .maxFindingsPerItem)
+      }
+      if self.maxFindingsPerRequest != 0 {
+        try container.encode(self.maxFindingsPerRequest, forKey: .maxFindingsPerRequest)
+      }
+      if !self.maxFindingsPerInfoType.isEmpty {
+        try container.encode(self.maxFindingsPerInfoType, forKey: .maxFindingsPerInfoType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -464,7 +488,9 @@ public struct InspectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.infoType, forKey: .infoType)
-        try container.encode(self.maxFindings, forKey: .maxFindings)
+        if self.maxFindings != 0 {
+          try container.encode(self.maxFindings, forKey: .maxFindings)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

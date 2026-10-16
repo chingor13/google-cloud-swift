@@ -112,9 +112,15 @@ public struct RuntimeInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.endpoints, forKey: .endpoints)
-    try container.encode(self.outputUri, forKey: .outputUri)
-    try container.encode(self.diagnosticOutputUri, forKey: .diagnosticOutputUri)
+    if !self.endpoints.isEmpty {
+      try container.encode(self.endpoints, forKey: .endpoints)
+    }
+    if !self.outputUri.isEmpty {
+      try container.encode(self.outputUri, forKey: .outputUri)
+    }
+    if !self.diagnosticOutputUri.isEmpty {
+      try container.encode(self.diagnosticOutputUri, forKey: .diagnosticOutputUri)
+    }
     try container.encodeIfPresent(self.approximateUsage, forKey: .approximateUsage)
     try container.encodeIfPresent(self.currentUsage, forKey: .currentUsage)
     for (key, value) in self._unknownFields.json {

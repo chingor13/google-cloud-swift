@@ -96,10 +96,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.partIndex, forKey: .partIndex)
-      try container.encode(self.startIndex, forKey: .startIndex)
-      try container.encode(self.endIndex, forKey: .endIndex)
-      try container.encode(self.text, forKey: .text)
+      if self.partIndex != 0 {
+        try container.encode(self.partIndex, forKey: .partIndex)
+      }
+      if self.startIndex != 0 {
+        try container.encode(self.startIndex, forKey: .startIndex)
+      }
+      if self.endIndex != 0 {
+        try container.encode(self.endIndex, forKey: .endIndex)
+      }
+      if !self.text.isEmpty {
+        try container.encode(self.text, forKey: .text)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

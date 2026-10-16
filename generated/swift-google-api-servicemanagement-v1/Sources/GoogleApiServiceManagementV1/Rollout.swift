@@ -143,11 +143,19 @@ public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.rolloutId, forKey: .rolloutId)
+    if !self.rolloutId.isEmpty {
+      try container.encode(self.rolloutId, forKey: .rolloutId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
-    try container.encode(self.createdBy, forKey: .createdBy)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.serviceName, forKey: .serviceName)
+    if !self.createdBy.isEmpty {
+      try container.encode(self.createdBy, forKey: .createdBy)
+    }
+    if self.status != Rollout.RolloutStatus() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.serviceName.isEmpty {
+      try container.encode(self.serviceName, forKey: .serviceName)
+    }
 
     if let choice = self.strategy {
       switch choice {
@@ -247,7 +255,9 @@ public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.percentages, forKey: .percentages)
+      if !self.percentages.isEmpty {
+        try container.encode(self.percentages, forKey: .percentages)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

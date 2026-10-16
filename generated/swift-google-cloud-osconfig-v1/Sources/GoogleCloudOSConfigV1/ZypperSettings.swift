@@ -114,12 +114,24 @@ public struct ZypperSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.withOptional, forKey: .withOptional)
-    try container.encode(self.withUpdate, forKey: .withUpdate)
-    try container.encode(self.categories, forKey: .categories)
-    try container.encode(self.severities, forKey: .severities)
-    try container.encode(self.excludes, forKey: .excludes)
-    try container.encode(self.exclusivePatches, forKey: .exclusivePatches)
+    if self.withOptional {
+      try container.encode(self.withOptional, forKey: .withOptional)
+    }
+    if self.withUpdate {
+      try container.encode(self.withUpdate, forKey: .withUpdate)
+    }
+    if !self.categories.isEmpty {
+      try container.encode(self.categories, forKey: .categories)
+    }
+    if !self.severities.isEmpty {
+      try container.encode(self.severities, forKey: .severities)
+    }
+    if !self.excludes.isEmpty {
+      try container.encode(self.excludes, forKey: .excludes)
+    }
+    if !self.exclusivePatches.isEmpty {
+      try container.encode(self.exclusivePatches, forKey: .exclusivePatches)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

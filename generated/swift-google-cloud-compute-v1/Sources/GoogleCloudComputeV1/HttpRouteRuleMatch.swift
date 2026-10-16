@@ -195,12 +195,18 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.fullPathMatch, forKey: .fullPathMatch)
-      try container.encode(self.headerMatches, forKey: .headerMatches)
+      if !self.headerMatches.isEmpty {
+        try container.encode(self.headerMatches, forKey: .headerMatches)
+      }
       try container.encodeIfPresent(self.ignoreCase, forKey: .ignoreCase)
-      try container.encode(self.metadataFilters, forKey: .metadataFilters)
+      if !self.metadataFilters.isEmpty {
+        try container.encode(self.metadataFilters, forKey: .metadataFilters)
+      }
       try container.encodeIfPresent(self.pathTemplateMatch, forKey: .pathTemplateMatch)
       try container.encodeIfPresent(self.prefixMatch, forKey: .prefixMatch)
-      try container.encode(self.queryParameterMatches, forKey: .queryParameterMatches)
+      if !self.queryParameterMatches.isEmpty {
+        try container.encode(self.queryParameterMatches, forKey: .queryParameterMatches)
+      }
       try container.encodeIfPresent(self.regexMatch, forKey: .regexMatch)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -101,7 +101,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.errorResponseRules, forKey: .errorResponseRules)
+      if !self.errorResponseRules.isEmpty {
+        try container.encode(self.errorResponseRules, forKey: .errorResponseRules)
+      }
       try container.encodeIfPresent(self.errorService, forKey: .errorService)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

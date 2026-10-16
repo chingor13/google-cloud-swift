@@ -103,11 +103,21 @@ public struct SslConfigTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.sslType, forKey: .sslType)
-    try container.encode(self.isTlsMandatory, forKey: .isTlsMandatory)
-    try container.encode(self.serverCertType, forKey: .serverCertType)
-    try container.encode(self.clientCertType, forKey: .clientCertType)
-    try container.encode(self.additionalVariables, forKey: .additionalVariables)
+    if self.sslType != SslType() {
+      try container.encode(self.sslType, forKey: .sslType)
+    }
+    if self.isTlsMandatory {
+      try container.encode(self.isTlsMandatory, forKey: .isTlsMandatory)
+    }
+    if !self.serverCertType.isEmpty {
+      try container.encode(self.serverCertType, forKey: .serverCertType)
+    }
+    if !self.clientCertType.isEmpty {
+      try container.encode(self.clientCertType, forKey: .clientCertType)
+    }
+    if !self.additionalVariables.isEmpty {
+      try container.encode(self.additionalVariables, forKey: .additionalVariables)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

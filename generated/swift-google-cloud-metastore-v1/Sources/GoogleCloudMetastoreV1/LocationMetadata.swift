@@ -74,8 +74,10 @@ public struct LocationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.supportedHiveMetastoreVersions, forKey: .supportedHiveMetastoreVersions)
+    if !self.supportedHiveMetastoreVersions.isEmpty {
+      try container.encode(
+        self.supportedHiveMetastoreVersions, forKey: .supportedHiveMetastoreVersions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -142,8 +144,12 @@ public struct LocationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.version, forKey: .version)
-      try container.encode(self.isDefault, forKey: .isDefault)
+      if !self.version.isEmpty {
+        try container.encode(self.version, forKey: .version)
+      }
+      if self.isDefault {
+        try container.encode(self.isDefault, forKey: .isDefault)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

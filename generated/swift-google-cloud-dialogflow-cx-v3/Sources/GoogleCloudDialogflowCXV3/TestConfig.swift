@@ -101,9 +101,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.trackingParameters, forKey: .trackingParameters)
-      try container.encode(self.flow, forKey: .flow)
-      try container.encode(self.page, forKey: .page)
+      if !self.trackingParameters.isEmpty {
+        try container.encode(self.trackingParameters, forKey: .trackingParameters)
+      }
+      if !self.flow.isEmpty {
+        try container.encode(self.flow, forKey: .flow)
+      }
+      if !self.page.isEmpty {
+        try container.encode(self.page, forKey: .page)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

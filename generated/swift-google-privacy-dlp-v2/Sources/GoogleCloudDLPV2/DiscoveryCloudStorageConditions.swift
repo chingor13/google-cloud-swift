@@ -92,8 +92,12 @@ public struct DiscoveryCloudStorageConditions: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.includedObjectAttributes, forKey: .includedObjectAttributes)
-    try container.encode(self.includedBucketAttributes, forKey: .includedBucketAttributes)
+    if !self.includedObjectAttributes.isEmpty {
+      try container.encode(self.includedObjectAttributes, forKey: .includedObjectAttributes)
+    }
+    if !self.includedBucketAttributes.isEmpty {
+      try container.encode(self.includedBucketAttributes, forKey: .includedBucketAttributes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

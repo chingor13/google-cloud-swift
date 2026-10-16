@@ -117,13 +117,23 @@ public struct EgressResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
     try container.encodeIfPresent(self.httpResponse, forKey: .httpResponse)
     try container.encodeIfPresent(self.status, forKey: .status)
-    try container.encode(self.project, forKey: .project)
-    try container.encode(self.traceId, forKey: .traceId)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.name, forKey: .name)
+    if !self.project.isEmpty {
+      try container.encode(self.project, forKey: .project)
+    }
+    if !self.traceId.isEmpty {
+      try container.encode(self.traceId, forKey: .traceId)
+    }
+    if self.endpoint != TetherEndpoint() {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -243,13 +243,27 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.redactionStrategy, forKey: .redactionStrategy)
-      try container.encode(self.redactionScope, forKey: .redactionScope)
-      try container.encode(self.inspectTemplate, forKey: .inspectTemplate)
-      try container.encode(self.deidentifyTemplate, forKey: .deidentifyTemplate)
-      try container.encode(self.purgeDataTypes, forKey: .purgeDataTypes)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.redactionStrategy != SecuritySettings.RedactionStrategy() {
+        try container.encode(self.redactionStrategy, forKey: .redactionStrategy)
+      }
+      if self.redactionScope != SecuritySettings.RedactionScope() {
+        try container.encode(self.redactionScope, forKey: .redactionScope)
+      }
+      if !self.inspectTemplate.isEmpty {
+        try container.encode(self.inspectTemplate, forKey: .inspectTemplate)
+      }
+      if !self.deidentifyTemplate.isEmpty {
+        try container.encode(self.deidentifyTemplate, forKey: .deidentifyTemplate)
+      }
+      if !self.purgeDataTypes.isEmpty {
+        try container.encode(self.purgeDataTypes, forKey: .purgeDataTypes)
+      }
       try container.encodeIfPresent(self.audioExportSettings, forKey: .audioExportSettings)
       try container.encodeIfPresent(self.insightsExportSettings, forKey: .insightsExportSettings)
 
@@ -366,11 +380,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.gcsBucket, forKey: .gcsBucket)
-        try container.encode(self.audioExportPattern, forKey: .audioExportPattern)
-        try container.encode(self.enableAudioRedaction, forKey: .enableAudioRedaction)
-        try container.encode(self.audioFormat, forKey: .audioFormat)
-        try container.encode(self.storeTtsAudio, forKey: .storeTtsAudio)
+        if !self.gcsBucket.isEmpty {
+          try container.encode(self.gcsBucket, forKey: .gcsBucket)
+        }
+        if !self.audioExportPattern.isEmpty {
+          try container.encode(self.audioExportPattern, forKey: .audioExportPattern)
+        }
+        if self.enableAudioRedaction {
+          try container.encode(self.enableAudioRedaction, forKey: .enableAudioRedaction)
+        }
+        if self.audioFormat != SecuritySettings.AudioExportSettings.AudioFormat() {
+          try container.encode(self.audioFormat, forKey: .audioFormat)
+        }
+        if self.storeTtsAudio {
+          try container.encode(self.storeTtsAudio, forKey: .storeTtsAudio)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -579,7 +603,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enableInsightsExport, forKey: .enableInsightsExport)
+        if self.enableInsightsExport {
+          try container.encode(self.enableInsightsExport, forKey: .enableInsightsExport)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -103,11 +103,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tier, forKey: .tier)
-      try container.encode(self.ram, forKey: .ram)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.diskQuota, forKey: .diskQuota)
-      try container.encode(self.region, forKey: .region)
+      if !self.tier.isEmpty {
+        try container.encode(self.tier, forKey: .tier)
+      }
+      if self.ram != 0 {
+        try container.encode(self.ram, forKey: .ram)
+      }
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if self.diskQuota != 0 {
+        try container.encode(self.diskQuota, forKey: .diskQuota)
+      }
+      if !self.region.isEmpty {
+        try container.encode(self.region, forKey: .region)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

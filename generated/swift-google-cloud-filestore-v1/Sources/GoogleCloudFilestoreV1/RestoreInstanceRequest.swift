@@ -99,8 +99,12 @@ public struct RestoreInstanceRequest: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.fileShare, forKey: .fileShare)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.fileShare.isEmpty {
+      try container.encode(self.fileShare, forKey: .fileShare)
+    }
 
     if let choice = self.source {
       switch choice {

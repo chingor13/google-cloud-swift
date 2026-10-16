@@ -143,13 +143,27 @@ public struct CompleteQueryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.tenant, forKey: .tenant)
-    try container.encode(self.query, forKey: .query)
-    try container.encode(self.languageCodes, forKey: .languageCodes)
-    try container.encode(self.pageSize, forKey: .pageSize)
-    try container.encode(self.company, forKey: .company)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.type, forKey: .type)
+    if !self.tenant.isEmpty {
+      try container.encode(self.tenant, forKey: .tenant)
+    }
+    if !self.query.isEmpty {
+      try container.encode(self.query, forKey: .query)
+    }
+    if !self.languageCodes.isEmpty {
+      try container.encode(self.languageCodes, forKey: .languageCodes)
+    }
+    if self.pageSize != 0 {
+      try container.encode(self.pageSize, forKey: .pageSize)
+    }
+    if !self.company.isEmpty {
+      try container.encode(self.company, forKey: .company)
+    }
+    if self.scope != CompleteQueryRequest.CompletionScope() {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if self.type != CompleteQueryRequest.CompletionType() {
+      try container.encode(self.type, forKey: .type)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

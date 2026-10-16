@@ -141,10 +141,18 @@ public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleWKT._AnyPack
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(
       self.gracefulDecommissionTimeout, forKey: .gracefulDecommissionTimeout)
-    try container.encode(self.scaleUpFactor, forKey: .scaleUpFactor)
-    try container.encode(self.scaleDownFactor, forKey: .scaleDownFactor)
-    try container.encode(self.scaleUpMinWorkerFraction, forKey: .scaleUpMinWorkerFraction)
-    try container.encode(self.scaleDownMinWorkerFraction, forKey: .scaleDownMinWorkerFraction)
+    if self.scaleUpFactor != 0 {
+      try container.encode(self.scaleUpFactor, forKey: .scaleUpFactor)
+    }
+    if self.scaleDownFactor != 0 {
+      try container.encode(self.scaleDownFactor, forKey: .scaleDownFactor)
+    }
+    if self.scaleUpMinWorkerFraction != 0 {
+      try container.encode(self.scaleUpMinWorkerFraction, forKey: .scaleUpMinWorkerFraction)
+    }
+    if self.scaleDownMinWorkerFraction != 0 {
+      try container.encode(self.scaleDownMinWorkerFraction, forKey: .scaleDownMinWorkerFraction)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

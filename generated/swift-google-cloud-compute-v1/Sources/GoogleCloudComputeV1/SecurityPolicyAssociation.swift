@@ -117,8 +117,12 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.attachmentId, forKey: .attachmentId)
       try container.encodeIfPresent(self.displayName, forKey: .displayName)
-      try container.encode(self.excludedFolders, forKey: .excludedFolders)
-      try container.encode(self.excludedProjects, forKey: .excludedProjects)
+      if !self.excludedFolders.isEmpty {
+        try container.encode(self.excludedFolders, forKey: .excludedFolders)
+      }
+      if !self.excludedProjects.isEmpty {
+        try container.encode(self.excludedProjects, forKey: .excludedProjects)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.securityPolicyId, forKey: .securityPolicyId)
       try container.encodeIfPresent(self.shortName, forKey: .shortName)

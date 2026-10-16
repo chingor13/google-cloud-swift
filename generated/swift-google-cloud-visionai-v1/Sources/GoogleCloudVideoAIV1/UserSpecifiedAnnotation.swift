@@ -83,7 +83,9 @@ public struct UserSpecifiedAnnotation: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.key, forKey: .key)
+    if !self.key.isEmpty {
+      try container.encode(self.key, forKey: .key)
+    }
     try container.encodeIfPresent(self.value, forKey: .value)
     try container.encodeIfPresent(self.partition, forKey: .partition)
     for (key, value) in self._unknownFields.json {

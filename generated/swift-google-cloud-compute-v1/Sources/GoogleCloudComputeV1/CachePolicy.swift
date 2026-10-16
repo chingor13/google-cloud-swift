@@ -209,15 +209,19 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.cacheBypassRequestHeaderNames, forKey: .cacheBypassRequestHeaderNames)
+      if !self.cacheBypassRequestHeaderNames.isEmpty {
+        try container.encode(
+          self.cacheBypassRequestHeaderNames, forKey: .cacheBypassRequestHeaderNames)
+      }
       try container.encodeIfPresent(self.cacheKeyPolicy, forKey: .cacheKeyPolicy)
       try container.encodeIfPresent(self.cacheMode, forKey: .cacheMode)
       try container.encodeIfPresent(self.clientTtl, forKey: .clientTtl)
       try container.encodeIfPresent(self.defaultTtl, forKey: .defaultTtl)
       try container.encodeIfPresent(self.maxTtl, forKey: .maxTtl)
       try container.encodeIfPresent(self.negativeCaching, forKey: .negativeCaching)
-      try container.encode(self.negativeCachingPolicy, forKey: .negativeCachingPolicy)
+      if !self.negativeCachingPolicy.isEmpty {
+        try container.encode(self.negativeCachingPolicy, forKey: .negativeCachingPolicy)
+      }
       try container.encodeIfPresent(self.requestCoalescing, forKey: .requestCoalescing)
       try container.encodeIfPresent(self.serveWhileStale, forKey: .serveWhileStale)
       for (key, value) in self._unknownFields.json {

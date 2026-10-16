@@ -84,8 +84,12 @@ public struct ListOrgPolicyViolationsResponse: Codable, Equatable, GoogleWKT._An
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.orgPolicyViolations, forKey: .orgPolicyViolations)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.orgPolicyViolations.isEmpty {
+      try container.encode(self.orgPolicyViolations, forKey: .orgPolicyViolations)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

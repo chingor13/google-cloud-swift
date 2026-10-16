@@ -104,11 +104,21 @@ public struct Threshold: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.label, forKey: .label)
-    try container.encode(self.value, forKey: .value)
-    try container.encode(self.color, forKey: .color)
-    try container.encode(self.direction, forKey: .direction)
-    try container.encode(self.targetAxis, forKey: .targetAxis)
+    if !self.label.isEmpty {
+      try container.encode(self.label, forKey: .label)
+    }
+    if self.value != 0 {
+      try container.encode(self.value, forKey: .value)
+    }
+    if self.color != Threshold.Color() {
+      try container.encode(self.color, forKey: .color)
+    }
+    if self.direction != Threshold.Direction() {
+      try container.encode(self.direction, forKey: .direction)
+    }
+    if self.targetAxis != Threshold.TargetAxis() {
+      try container.encode(self.targetAxis, forKey: .targetAxis)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

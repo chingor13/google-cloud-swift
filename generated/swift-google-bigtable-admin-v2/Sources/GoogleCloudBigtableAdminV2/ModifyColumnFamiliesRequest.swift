@@ -95,9 +95,15 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.modifications, forKey: .modifications)
-    try container.encode(self.ignoreWarnings, forKey: .ignoreWarnings)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.modifications.isEmpty {
+      try container.encode(self.modifications, forKey: .modifications)
+    }
+    if self.ignoreWarnings {
+      try container.encode(self.ignoreWarnings, forKey: .ignoreWarnings)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -194,7 +200,9 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleWKT._AnyPac
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
       try container.encodeIfPresent(self.updateMask, forKey: .updateMask)
 
       if let choice = self.mod {

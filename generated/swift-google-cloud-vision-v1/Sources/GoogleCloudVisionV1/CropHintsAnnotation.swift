@@ -69,7 +69,9 @@ public struct CropHintsAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.cropHints, forKey: .cropHints)
+    if !self.cropHints.isEmpty {
+      try container.encode(self.cropHints, forKey: .cropHints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

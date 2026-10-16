@@ -149,14 +149,24 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.userQueryTypes, forKey: .userQueryTypes)
-    try container.encode(self.conversationalTextResponse, forKey: .conversationalTextResponse)
+    if !self.userQueryTypes.isEmpty {
+      try container.encode(self.userQueryTypes, forKey: .userQueryTypes)
+    }
+    if !self.conversationalTextResponse.isEmpty {
+      try container.encode(self.conversationalTextResponse, forKey: .conversationalTextResponse)
+    }
     try container.encodeIfPresent(self.followupQuestion, forKey: .followupQuestion)
-    try container.encode(self.conversationId, forKey: .conversationId)
-    try container.encode(self.refinedSearch, forKey: .refinedSearch)
+    if !self.conversationId.isEmpty {
+      try container.encode(self.conversationId, forKey: .conversationId)
+    }
+    if !self.refinedSearch.isEmpty {
+      try container.encode(self.refinedSearch, forKey: .refinedSearch)
+    }
     try container.encodeIfPresent(
       self.conversationalFilteringResult, forKey: .conversationalFilteringResult)
-    try container.encode(self.state, forKey: .state)
+    if self.state != ConversationalSearchResponse.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -226,8 +236,12 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.followupQuestion, forKey: .followupQuestion)
-      try container.encode(self.suggestedAnswers, forKey: .suggestedAnswers)
+      if !self.followupQuestion.isEmpty {
+        try container.encode(self.followupQuestion, forKey: .followupQuestion)
+      }
+      if !self.suggestedAnswers.isEmpty {
+        try container.encode(self.suggestedAnswers, forKey: .suggestedAnswers)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -393,7 +407,9 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.query, forKey: .query)
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

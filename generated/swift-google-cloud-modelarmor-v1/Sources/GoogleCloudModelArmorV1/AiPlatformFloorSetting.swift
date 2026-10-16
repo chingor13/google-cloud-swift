@@ -96,7 +96,9 @@ public struct AiPlatformFloorSetting: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enableCloudLogging, forKey: .enableCloudLogging)
+    if self.enableCloudLogging {
+      try container.encode(self.enableCloudLogging, forKey: .enableCloudLogging)
+    }
 
     if let choice = self.enforcementType {
       switch choice {

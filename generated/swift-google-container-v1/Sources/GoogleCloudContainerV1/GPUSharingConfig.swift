@@ -78,7 +78,9 @@ public struct GPUSharingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.maxSharedClientsPerGpu, forKey: .maxSharedClientsPerGpu)
+    if self.maxSharedClientsPerGpu != 0 {
+      try container.encode(self.maxSharedClientsPerGpu, forKey: .maxSharedClientsPerGpu)
+    }
     try container.encodeIfPresent(self.gpuSharingStrategy, forKey: .gpuSharingStrategy)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

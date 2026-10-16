@@ -121,11 +121,19 @@ public struct TransformationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.containerName, forKey: .containerName)
-    try container.encode(self.transformation, forKey: .transformation)
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.containerName.isEmpty {
+      try container.encode(self.containerName, forKey: .containerName)
+    }
+    if !self.transformation.isEmpty {
+      try container.encode(self.transformation, forKey: .transformation)
+    }
     try container.encodeIfPresent(self.statusDetails, forKey: .statusDetails)
-    try container.encode(self.transformedBytes, forKey: .transformedBytes)
+    if self.transformedBytes != 0 {
+      try container.encode(self.transformedBytes, forKey: .transformedBytes)
+    }
     try container.encodeIfPresent(self.transformationLocation, forKey: .transformationLocation)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -132,14 +132,28 @@ public struct RollbackTargetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.targetId, forKey: .targetId)
-    try container.encode(self.rolloutId, forKey: .rolloutId)
-    try container.encode(self.releaseId, forKey: .releaseId)
-    try container.encode(self.rolloutToRollBack, forKey: .rolloutToRollBack)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.targetId.isEmpty {
+      try container.encode(self.targetId, forKey: .targetId)
+    }
+    if !self.rolloutId.isEmpty {
+      try container.encode(self.rolloutId, forKey: .rolloutId)
+    }
+    if !self.releaseId.isEmpty {
+      try container.encode(self.releaseId, forKey: .releaseId)
+    }
+    if !self.rolloutToRollBack.isEmpty {
+      try container.encode(self.rolloutToRollBack, forKey: .rolloutToRollBack)
+    }
     try container.encodeIfPresent(self.rollbackConfig, forKey: .rollbackConfig)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.overrideDeployPolicy, forKey: .overrideDeployPolicy)
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.overrideDeployPolicy.isEmpty {
+      try container.encode(self.overrideDeployPolicy, forKey: .overrideDeployPolicy)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

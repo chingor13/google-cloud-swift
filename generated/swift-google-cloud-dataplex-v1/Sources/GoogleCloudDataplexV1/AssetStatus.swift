@@ -89,8 +89,12 @@ public struct AssetStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.activeAssets, forKey: .activeAssets)
-    try container.encode(self.securityPolicyApplyingAssets, forKey: .securityPolicyApplyingAssets)
+    if self.activeAssets != 0 {
+      try container.encode(self.activeAssets, forKey: .activeAssets)
+    }
+    if self.securityPolicyApplyingAssets != 0 {
+      try container.encode(self.securityPolicyApplyingAssets, forKey: .securityPolicyApplyingAssets)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

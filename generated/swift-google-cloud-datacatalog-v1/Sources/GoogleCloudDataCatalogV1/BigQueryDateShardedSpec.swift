@@ -104,10 +104,18 @@ public struct BigQueryDateShardedSpec: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataset, forKey: .dataset)
-    try container.encode(self.tablePrefix, forKey: .tablePrefix)
-    try container.encode(self.shardCount, forKey: .shardCount)
-    try container.encode(self.latestShardResource, forKey: .latestShardResource)
+    if !self.dataset.isEmpty {
+      try container.encode(self.dataset, forKey: .dataset)
+    }
+    if !self.tablePrefix.isEmpty {
+      try container.encode(self.tablePrefix, forKey: .tablePrefix)
+    }
+    if self.shardCount != 0 {
+      try container.encode(self.shardCount, forKey: .shardCount)
+    }
+    if !self.latestShardResource.isEmpty {
+      try container.encode(self.latestShardResource, forKey: .latestShardResource)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

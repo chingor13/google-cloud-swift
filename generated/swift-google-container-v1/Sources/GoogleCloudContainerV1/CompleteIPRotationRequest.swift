@@ -109,10 +109,18 @@ public struct CompleteIPRotationRequest: Codable, Equatable, GoogleWKT._AnyPacka
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.zone, forKey: .zone)
-    try container.encode(self.clusterId, forKey: .clusterId)
-    try container.encode(self.name, forKey: .name)
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.zone.isEmpty {
+      try container.encode(self.zone, forKey: .zone)
+    }
+    if !self.clusterId.isEmpty {
+      try container.encode(self.clusterId, forKey: .clusterId)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

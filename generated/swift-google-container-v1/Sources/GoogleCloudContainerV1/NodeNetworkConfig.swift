@@ -227,19 +227,35 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.createPodRange, forKey: .createPodRange)
-    try container.encode(self.podRange, forKey: .podRange)
-    try container.encode(self.podIpv4CidrBlock, forKey: .podIpv4CidrBlock)
+    if self.createPodRange {
+      try container.encode(self.createPodRange, forKey: .createPodRange)
+    }
+    if !self.podRange.isEmpty {
+      try container.encode(self.podRange, forKey: .podRange)
+    }
+    if !self.podIpv4CidrBlock.isEmpty {
+      try container.encode(self.podIpv4CidrBlock, forKey: .podIpv4CidrBlock)
+    }
     try container.encodeIfPresent(self.enablePrivateNodes, forKey: .enablePrivateNodes)
     try container.encodeIfPresent(self.networkPerformanceConfig, forKey: .networkPerformanceConfig)
     try container.encodeIfPresent(
       self.podCidrOverprovisionConfig, forKey: .podCidrOverprovisionConfig)
-    try container.encode(self.additionalNodeNetworkConfigs, forKey: .additionalNodeNetworkConfigs)
-    try container.encode(self.additionalPodNetworkConfigs, forKey: .additionalPodNetworkConfigs)
-    try container.encode(self.podIpv4RangeUtilization, forKey: .podIpv4RangeUtilization)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
+    if !self.additionalNodeNetworkConfigs.isEmpty {
+      try container.encode(self.additionalNodeNetworkConfigs, forKey: .additionalNodeNetworkConfigs)
+    }
+    if !self.additionalPodNetworkConfigs.isEmpty {
+      try container.encode(self.additionalPodNetworkConfigs, forKey: .additionalPodNetworkConfigs)
+    }
+    if self.podIpv4RangeUtilization != 0 {
+      try container.encode(self.podIpv4RangeUtilization, forKey: .podIpv4RangeUtilization)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
     try container.encodeIfPresent(self.networkTierConfig, forKey: .networkTierConfig)
-    try container.encode(self.acceleratorNetworkProfile, forKey: .acceleratorNetworkProfile)
+    if !self.acceleratorNetworkProfile.isEmpty {
+      try container.encode(self.acceleratorNetworkProfile, forKey: .acceleratorNetworkProfile)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

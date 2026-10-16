@@ -79,8 +79,12 @@ public struct ImportAptArtifactsResponse: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.aptArtifacts, forKey: .aptArtifacts)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.aptArtifacts.isEmpty {
+      try container.encode(self.aptArtifacts, forKey: .aptArtifacts)
+    }
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

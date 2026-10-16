@@ -187,18 +187,36 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.state, forKey: .state)
-      try container.encode(self.parameters, forKey: .parameters)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if self.state != Trial.State() {
+        try container.encode(self.state, forKey: .state)
+      }
+      if !self.parameters.isEmpty {
+        try container.encode(self.parameters, forKey: .parameters)
+      }
       try container.encodeIfPresent(self.finalMeasurement, forKey: .finalMeasurement)
-      try container.encode(self.measurements, forKey: .measurements)
+      if !self.measurements.isEmpty {
+        try container.encode(self.measurements, forKey: .measurements)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
-      try container.encode(self.clientId, forKey: .clientId)
-      try container.encode(self.infeasibleReason, forKey: .infeasibleReason)
-      try container.encode(self.customJob, forKey: .customJob)
-      try container.encode(self.webAccessUris, forKey: .webAccessUris)
+      if !self.clientId.isEmpty {
+        try container.encode(self.clientId, forKey: .clientId)
+      }
+      if !self.infeasibleReason.isEmpty {
+        try container.encode(self.infeasibleReason, forKey: .infeasibleReason)
+      }
+      if !self.customJob.isEmpty {
+        try container.encode(self.customJob, forKey: .customJob)
+      }
+      if !self.webAccessUris.isEmpty {
+        try container.encode(self.webAccessUris, forKey: .webAccessUris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -270,7 +288,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.parameterId, forKey: .parameterId)
+        if !self.parameterId.isEmpty {
+          try container.encode(self.parameterId, forKey: .parameterId)
+        }
         try container.encodeIfPresent(self.value, forKey: .value)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

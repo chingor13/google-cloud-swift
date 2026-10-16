@@ -123,10 +123,16 @@ public struct CreateExternalAddressRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.externalAddress, forKey: .externalAddress)
-    try container.encode(self.externalAddressId, forKey: .externalAddressId)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.externalAddressId.isEmpty {
+      try container.encode(self.externalAddressId, forKey: .externalAddressId)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

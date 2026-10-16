@@ -227,21 +227,33 @@ public struct TransferJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.transferSpec, forKey: .transferSpec)
     try container.encodeIfPresent(self.replicationSpec, forKey: .replicationSpec)
     try container.encodeIfPresent(self.notificationConfig, forKey: .notificationConfig)
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
     try container.encodeIfPresent(self.schedule, forKey: .schedule)
     try container.encodeIfPresent(self.eventStream, forKey: .eventStream)
-    try container.encode(self.status, forKey: .status)
+    if self.status != TransferJob.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
     try container.encodeIfPresent(self.creationTime, forKey: .creationTime)
     try container.encodeIfPresent(self.lastModificationTime, forKey: .lastModificationTime)
     try container.encodeIfPresent(self.deletionTime, forKey: .deletionTime)
-    try container.encode(self.latestOperationName, forKey: .latestOperationName)
+    if !self.latestOperationName.isEmpty {
+      try container.encode(self.latestOperationName, forKey: .latestOperationName)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

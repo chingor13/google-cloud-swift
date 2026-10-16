@@ -85,8 +85,12 @@ public struct ExportEvaluatedDataItemsConfig: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.destinationBigqueryUri, forKey: .destinationBigqueryUri)
-    try container.encode(self.overrideExistingTable, forKey: .overrideExistingTable)
+    if !self.destinationBigqueryUri.isEmpty {
+      try container.encode(self.destinationBigqueryUri, forKey: .destinationBigqueryUri)
+    }
+    if self.overrideExistingTable {
+      try container.encode(self.overrideExistingTable, forKey: .overrideExistingTable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

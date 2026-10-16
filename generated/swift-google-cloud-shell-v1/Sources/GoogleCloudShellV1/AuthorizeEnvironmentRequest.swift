@@ -98,9 +98,15 @@ public struct AuthorizeEnvironmentRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.accessToken, forKey: .accessToken)
-    try container.encode(self.idToken, forKey: .idToken)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.accessToken.isEmpty {
+      try container.encode(self.accessToken, forKey: .accessToken)
+    }
+    if !self.idToken.isEmpty {
+      try container.encode(self.idToken, forKey: .idToken)
+    }
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

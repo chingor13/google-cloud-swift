@@ -87,9 +87,15 @@ public struct NextHopRouterApplianceInstance: Codable, Equatable, GoogleWKT._Any
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
-    try container.encode(self.siteToSiteDataTransfer, forKey: .siteToSiteDataTransfer)
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.vpcNetwork.isEmpty {
+      try container.encode(self.vpcNetwork, forKey: .vpcNetwork)
+    }
+    if self.siteToSiteDataTransfer {
+      try container.encode(self.siteToSiteDataTransfer, forKey: .siteToSiteDataTransfer)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

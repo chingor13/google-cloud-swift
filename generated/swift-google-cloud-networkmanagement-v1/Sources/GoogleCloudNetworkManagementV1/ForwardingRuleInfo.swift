@@ -153,17 +153,39 @@ public struct ForwardingRuleInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.matchedProtocol, forKey: .matchedProtocol)
-    try container.encode(self.matchedPortRange, forKey: .matchedPortRange)
-    try container.encode(self.vip, forKey: .vip)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.networkUri, forKey: .networkUri)
-    try container.encode(self.region, forKey: .region)
-    try container.encode(self.loadBalancerName, forKey: .loadBalancerName)
-    try container.encode(self.pscServiceAttachmentUri, forKey: .pscServiceAttachmentUri)
-    try container.encode(self.pscGoogleApiTarget, forKey: .pscGoogleApiTarget)
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if !self.matchedProtocol.isEmpty {
+      try container.encode(self.matchedProtocol, forKey: .matchedProtocol)
+    }
+    if !self.matchedPortRange.isEmpty {
+      try container.encode(self.matchedPortRange, forKey: .matchedPortRange)
+    }
+    if !self.vip.isEmpty {
+      try container.encode(self.vip, forKey: .vip)
+    }
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.networkUri.isEmpty {
+      try container.encode(self.networkUri, forKey: .networkUri)
+    }
+    if !self.region.isEmpty {
+      try container.encode(self.region, forKey: .region)
+    }
+    if !self.loadBalancerName.isEmpty {
+      try container.encode(self.loadBalancerName, forKey: .loadBalancerName)
+    }
+    if !self.pscServiceAttachmentUri.isEmpty {
+      try container.encode(self.pscServiceAttachmentUri, forKey: .pscServiceAttachmentUri)
+    }
+    if !self.pscGoogleApiTarget.isEmpty {
+      try container.encode(self.pscGoogleApiTarget, forKey: .pscGoogleApiTarget)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

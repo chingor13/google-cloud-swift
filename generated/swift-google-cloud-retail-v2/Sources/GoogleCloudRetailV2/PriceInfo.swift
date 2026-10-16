@@ -198,10 +198,18 @@ public struct PriceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.currencyCode, forKey: .currencyCode)
-    try container.encode(self.price, forKey: .price)
-    try container.encode(self.originalPrice, forKey: .originalPrice)
-    try container.encode(self.cost, forKey: .cost)
+    if !self.currencyCode.isEmpty {
+      try container.encode(self.currencyCode, forKey: .currencyCode)
+    }
+    if self.price != 0 {
+      try container.encode(self.price, forKey: .price)
+    }
+    if self.originalPrice != 0 {
+      try container.encode(self.originalPrice, forKey: .originalPrice)
+    }
+    if self.cost != 0 {
+      try container.encode(self.cost, forKey: .cost)
+    }
     try container.encodeIfPresent(self.priceEffectiveTime, forKey: .priceEffectiveTime)
     try container.encodeIfPresent(self.priceExpireTime, forKey: .priceExpireTime)
     try container.encodeIfPresent(self.priceRange, forKey: .priceRange)

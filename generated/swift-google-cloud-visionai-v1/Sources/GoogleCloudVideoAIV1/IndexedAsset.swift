@@ -95,8 +95,12 @@ public struct IndexedAsset: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.index, forKey: .index)
-    try container.encode(self.asset, forKey: .asset)
+    if !self.index.isEmpty {
+      try container.encode(self.index, forKey: .index)
+    }
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

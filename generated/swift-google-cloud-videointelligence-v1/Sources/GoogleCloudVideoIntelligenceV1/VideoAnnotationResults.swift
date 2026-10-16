@@ -238,23 +238,51 @@ public struct VideoAnnotationResults: Codable, Equatable, GoogleWKT._AnyPackable
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputUri, forKey: .inputUri)
+    if !self.inputUri.isEmpty {
+      try container.encode(self.inputUri, forKey: .inputUri)
+    }
     try container.encodeIfPresent(self.segment, forKey: .segment)
-    try container.encode(self.segmentLabelAnnotations, forKey: .segmentLabelAnnotations)
-    try container.encode(
-      self.segmentPresenceLabelAnnotations, forKey: .segmentPresenceLabelAnnotations)
-    try container.encode(self.shotLabelAnnotations, forKey: .shotLabelAnnotations)
-    try container.encode(self.shotPresenceLabelAnnotations, forKey: .shotPresenceLabelAnnotations)
-    try container.encode(self.frameLabelAnnotations, forKey: .frameLabelAnnotations)
-    try container.encode(self.faceAnnotations, forKey: .faceAnnotations)
-    try container.encode(self.faceDetectionAnnotations, forKey: .faceDetectionAnnotations)
-    try container.encode(self.shotAnnotations, forKey: .shotAnnotations)
+    if !self.segmentLabelAnnotations.isEmpty {
+      try container.encode(self.segmentLabelAnnotations, forKey: .segmentLabelAnnotations)
+    }
+    if !self.segmentPresenceLabelAnnotations.isEmpty {
+      try container.encode(
+        self.segmentPresenceLabelAnnotations, forKey: .segmentPresenceLabelAnnotations)
+    }
+    if !self.shotLabelAnnotations.isEmpty {
+      try container.encode(self.shotLabelAnnotations, forKey: .shotLabelAnnotations)
+    }
+    if !self.shotPresenceLabelAnnotations.isEmpty {
+      try container.encode(self.shotPresenceLabelAnnotations, forKey: .shotPresenceLabelAnnotations)
+    }
+    if !self.frameLabelAnnotations.isEmpty {
+      try container.encode(self.frameLabelAnnotations, forKey: .frameLabelAnnotations)
+    }
+    if !self.faceAnnotations.isEmpty {
+      try container.encode(self.faceAnnotations, forKey: .faceAnnotations)
+    }
+    if !self.faceDetectionAnnotations.isEmpty {
+      try container.encode(self.faceDetectionAnnotations, forKey: .faceDetectionAnnotations)
+    }
+    if !self.shotAnnotations.isEmpty {
+      try container.encode(self.shotAnnotations, forKey: .shotAnnotations)
+    }
     try container.encodeIfPresent(self.explicitAnnotation, forKey: .explicitAnnotation)
-    try container.encode(self.speechTranscriptions, forKey: .speechTranscriptions)
-    try container.encode(self.textAnnotations, forKey: .textAnnotations)
-    try container.encode(self.objectAnnotations, forKey: .objectAnnotations)
-    try container.encode(self.logoRecognitionAnnotations, forKey: .logoRecognitionAnnotations)
-    try container.encode(self.personDetectionAnnotations, forKey: .personDetectionAnnotations)
+    if !self.speechTranscriptions.isEmpty {
+      try container.encode(self.speechTranscriptions, forKey: .speechTranscriptions)
+    }
+    if !self.textAnnotations.isEmpty {
+      try container.encode(self.textAnnotations, forKey: .textAnnotations)
+    }
+    if !self.objectAnnotations.isEmpty {
+      try container.encode(self.objectAnnotations, forKey: .objectAnnotations)
+    }
+    if !self.logoRecognitionAnnotations.isEmpty {
+      try container.encode(self.logoRecognitionAnnotations, forKey: .logoRecognitionAnnotations)
+    }
+    if !self.personDetectionAnnotations.isEmpty {
+      try container.encode(self.personDetectionAnnotations, forKey: .personDetectionAnnotations)
+    }
     try container.encodeIfPresent(self.error, forKey: .error)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

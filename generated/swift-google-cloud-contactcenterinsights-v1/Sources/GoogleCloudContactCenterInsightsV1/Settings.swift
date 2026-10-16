@@ -164,12 +164,18 @@ public struct Settings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.languageCode, forKey: .languageCode)
+    if !self.languageCode.isEmpty {
+      try container.encode(self.languageCode, forKey: .languageCode)
+    }
     try container.encodeIfPresent(self.conversationTtl, forKey: .conversationTtl)
-    try container.encode(self.pubsubNotificationSettings, forKey: .pubsubNotificationSettings)
+    if !self.pubsubNotificationSettings.isEmpty {
+      try container.encode(self.pubsubNotificationSettings, forKey: .pubsubNotificationSettings)
+    }
     try container.encodeIfPresent(self.analysisConfig, forKey: .analysisConfig)
     try container.encodeIfPresent(self.redactionConfig, forKey: .redactionConfig)
     try container.encodeIfPresent(self.speechConfig, forKey: .speechConfig)
@@ -254,10 +260,14 @@ public struct Settings: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(
-        self.runtimeIntegrationAnalysisPercentage, forKey: .runtimeIntegrationAnalysisPercentage)
-      try container.encode(
-        self.uploadConversationAnalysisPercentage, forKey: .uploadConversationAnalysisPercentage)
+      if self.runtimeIntegrationAnalysisPercentage != 0 {
+        try container.encode(
+          self.runtimeIntegrationAnalysisPercentage, forKey: .runtimeIntegrationAnalysisPercentage)
+      }
+      if self.uploadConversationAnalysisPercentage != 0 {
+        try container.encode(
+          self.uploadConversationAnalysisPercentage, forKey: .uploadConversationAnalysisPercentage)
+      }
       try container.encodeIfPresent(self.annotatorSelector, forKey: .annotatorSelector)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

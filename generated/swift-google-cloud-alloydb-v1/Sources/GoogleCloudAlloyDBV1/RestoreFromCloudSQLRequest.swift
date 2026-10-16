@@ -106,8 +106,12 @@ public struct RestoreFromCloudSQLRequest: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.clusterId, forKey: .clusterId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.clusterId.isEmpty {
+      try container.encode(self.clusterId, forKey: .clusterId)
+    }
     try container.encodeIfPresent(self.cluster, forKey: .cluster)
 
     if let choice = self.source {

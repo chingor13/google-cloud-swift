@@ -106,10 +106,18 @@ public struct InternalServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
-    try container.encode(self.consumerAcceptList, forKey: .consumerAcceptList)
-    try container.encode(self.consumerRejectList, forKey: .consumerRejectList)
-    try container.encode(self.pscEndpoints, forKey: .pscEndpoints)
+    if !self.serviceAttachment.isEmpty {
+      try container.encode(self.serviceAttachment, forKey: .serviceAttachment)
+    }
+    if !self.consumerAcceptList.isEmpty {
+      try container.encode(self.consumerAcceptList, forKey: .consumerAcceptList)
+    }
+    if !self.consumerRejectList.isEmpty {
+      try container.encode(self.consumerRejectList, forKey: .consumerRejectList)
+    }
+    if !self.pscEndpoints.isEmpty {
+      try container.encode(self.pscEndpoints, forKey: .pscEndpoints)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -189,7 +197,9 @@ public struct InternalServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.connectionLimit, forKey: .connectionLimit)
+      if self.connectionLimit != 0 {
+        try container.encode(self.connectionLimit, forKey: .connectionLimit)
+      }
 
       if let choice = self.consumerType {
         switch choice {
@@ -408,9 +418,15 @@ public struct InternalServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.endpoint, forKey: .endpoint)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.status, forKey: .status)
+      if !self.endpoint.isEmpty {
+        try container.encode(self.endpoint, forKey: .endpoint)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.status.isEmpty {
+        try container.encode(self.status, forKey: .status)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

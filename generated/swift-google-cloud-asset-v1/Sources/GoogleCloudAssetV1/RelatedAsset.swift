@@ -115,10 +115,18 @@ public struct RelatedAsset: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.asset, forKey: .asset)
-    try container.encode(self.assetType, forKey: .assetType)
-    try container.encode(self.ancestors, forKey: .ancestors)
-    try container.encode(self.relationshipType, forKey: .relationshipType)
+    if !self.asset.isEmpty {
+      try container.encode(self.asset, forKey: .asset)
+    }
+    if !self.assetType.isEmpty {
+      try container.encode(self.assetType, forKey: .assetType)
+    }
+    if !self.ancestors.isEmpty {
+      try container.encode(self.ancestors, forKey: .ancestors)
+    }
+    if !self.relationshipType.isEmpty {
+      try container.encode(self.relationshipType, forKey: .relationshipType)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

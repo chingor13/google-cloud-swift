@@ -102,7 +102,9 @@ public struct TimecodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.source, forKey: .source)
+    if self.source != TimecodeConfig.TimecodeSource() {
+      try container.encode(self.source, forKey: .source)
+    }
 
     if let choice = self.timeOffset {
       switch choice {

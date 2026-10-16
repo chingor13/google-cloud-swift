@@ -331,7 +331,7 @@
       try container.encodeIfPresent(self.certificateMap, forKey: .certificateMap)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -345,7 +345,9 @@
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.serverTlsPolicy, forKey: .serverTlsPolicy)
-      try container.encode(self.sslCertificates, forKey: .sslCertificates)
+      if !self.sslCertificates.isEmpty {
+        try container.encode(self.sslCertificates, forKey: .sslCertificates)
+      }
       try container.encodeIfPresent(self.sslPolicy, forKey: .sslPolicy)
       try container.encodeIfPresent(self.tlsEarlyData, forKey: .tlsEarlyData)
       try container.encodeIfPresent(self.urlMap, forKey: .urlMap)

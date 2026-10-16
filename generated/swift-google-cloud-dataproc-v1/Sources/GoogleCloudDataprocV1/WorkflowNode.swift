@@ -102,11 +102,21 @@ public struct WorkflowNode: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.stepId, forKey: .stepId)
-    try container.encode(self.prerequisiteStepIds, forKey: .prerequisiteStepIds)
-    try container.encode(self.jobId, forKey: .jobId)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.error, forKey: .error)
+    if !self.stepId.isEmpty {
+      try container.encode(self.stepId, forKey: .stepId)
+    }
+    if !self.prerequisiteStepIds.isEmpty {
+      try container.encode(self.prerequisiteStepIds, forKey: .prerequisiteStepIds)
+    }
+    if !self.jobId.isEmpty {
+      try container.encode(self.jobId, forKey: .jobId)
+    }
+    if self.state != WorkflowNode.NodeState() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.error.isEmpty {
+      try container.encode(self.error, forKey: .error)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

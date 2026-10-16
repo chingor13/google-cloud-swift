@@ -828,13 +828,25 @@ public struct ClusterUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.desiredNodeVersion, forKey: .desiredNodeVersion)
-    try container.encode(self.desiredMonitoringService, forKey: .desiredMonitoringService)
+    if !self.desiredNodeVersion.isEmpty {
+      try container.encode(self.desiredNodeVersion, forKey: .desiredNodeVersion)
+    }
+    if !self.desiredMonitoringService.isEmpty {
+      try container.encode(self.desiredMonitoringService, forKey: .desiredMonitoringService)
+    }
     try container.encodeIfPresent(self.desiredAddonsConfig, forKey: .desiredAddonsConfig)
-    try container.encode(self.desiredNodePoolId, forKey: .desiredNodePoolId)
-    try container.encode(self.desiredImageType, forKey: .desiredImageType)
-    try container.encode(self.desiredImage, forKey: .desiredImage)
-    try container.encode(self.desiredImageProject, forKey: .desiredImageProject)
+    if !self.desiredNodePoolId.isEmpty {
+      try container.encode(self.desiredNodePoolId, forKey: .desiredNodePoolId)
+    }
+    if !self.desiredImageType.isEmpty {
+      try container.encode(self.desiredImageType, forKey: .desiredImageType)
+    }
+    if !self.desiredImage.isEmpty {
+      try container.encode(self.desiredImage, forKey: .desiredImage)
+    }
+    if !self.desiredImageProject.isEmpty {
+      try container.encode(self.desiredImageProject, forKey: .desiredImageProject)
+    }
     try container.encodeIfPresent(
       self.desiredDatabaseEncryption, forKey: .desiredDatabaseEncryption)
     try container.encodeIfPresent(
@@ -846,14 +858,18 @@ public struct ClusterUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.desiredDnsConfig, forKey: .desiredDnsConfig)
     try container.encodeIfPresent(
       self.desiredNodePoolAutoscaling, forKey: .desiredNodePoolAutoscaling)
-    try container.encode(self.desiredLocations, forKey: .desiredLocations)
+    if !self.desiredLocations.isEmpty {
+      try container.encode(self.desiredLocations, forKey: .desiredLocations)
+    }
     try container.encodeIfPresent(
       self.desiredMasterAuthorizedNetworksConfig, forKey: .desiredMasterAuthorizedNetworksConfig)
     try container.encodeIfPresent(
       self.desiredClusterAutoscaling, forKey: .desiredClusterAutoscaling)
     try container.encodeIfPresent(
       self.desiredBinaryAuthorization, forKey: .desiredBinaryAuthorization)
-    try container.encode(self.desiredLoggingService, forKey: .desiredLoggingService)
+    if !self.desiredLoggingService.isEmpty {
+      try container.encode(self.desiredLoggingService, forKey: .desiredLoggingService)
+    }
     try container.encodeIfPresent(
       self.desiredResourceUsageExportConfig, forKey: .desiredResourceUsageExportConfig)
     try container.encodeIfPresent(
@@ -866,9 +882,13 @@ public struct ClusterUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
     try container.encodeIfPresent(self.desiredReleaseChannel, forKey: .desiredReleaseChannel)
     try container.encodeIfPresent(
       self.desiredL4IlbSubsettingConfig, forKey: .desiredL4IlbSubsettingConfig)
-    try container.encode(self.desiredDatapathProvider, forKey: .desiredDatapathProvider)
-    try container.encode(
-      self.desiredPrivateIpv6GoogleAccess, forKey: .desiredPrivateIpv6GoogleAccess)
+    if self.desiredDatapathProvider != DatapathProvider() {
+      try container.encode(self.desiredDatapathProvider, forKey: .desiredDatapathProvider)
+    }
+    if self.desiredPrivateIpv6GoogleAccess != PrivateIPv6GoogleAccess() {
+      try container.encode(
+        self.desiredPrivateIpv6GoogleAccess, forKey: .desiredPrivateIpv6GoogleAccess)
+    }
     try container.encodeIfPresent(
       self.desiredNotificationConfig, forKey: .desiredNotificationConfig)
     try container.encodeIfPresent(
@@ -885,17 +905,23 @@ public struct ClusterUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
       self.desiredDefaultEnablePrivateNodes, forKey: .desiredDefaultEnablePrivateNodes)
     try container.encodeIfPresent(
       self.desiredControlPlaneEndpointsConfig, forKey: .desiredControlPlaneEndpointsConfig)
-    try container.encode(self.desiredMasterVersion, forKey: .desiredMasterVersion)
+    if !self.desiredMasterVersion.isEmpty {
+      try container.encode(self.desiredMasterVersion, forKey: .desiredMasterVersion)
+    }
     try container.encodeIfPresent(self.desiredGcfsConfig, forKey: .desiredGcfsConfig)
     try container.encodeIfPresent(
       self.desiredNodePoolAutoConfigNetworkTags, forKey: .desiredNodePoolAutoConfigNetworkTags)
     try container.encodeIfPresent(self.desiredPodAutoscaling, forKey: .desiredPodAutoscaling)
     try container.encodeIfPresent(self.desiredGatewayApiConfig, forKey: .desiredGatewayApiConfig)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(
       self.desiredNodePoolLoggingConfig, forKey: .desiredNodePoolLoggingConfig)
     try container.encodeIfPresent(self.desiredFleet, forKey: .desiredFleet)
-    try container.encode(self.desiredStackType, forKey: .desiredStackType)
+    if self.desiredStackType != StackType() {
+      try container.encode(self.desiredStackType, forKey: .desiredStackType)
+    }
     try container.encodeIfPresent(
       self.additionalPodRangesConfig, forKey: .additionalPodRangesConfig)
     try container.encodeIfPresent(

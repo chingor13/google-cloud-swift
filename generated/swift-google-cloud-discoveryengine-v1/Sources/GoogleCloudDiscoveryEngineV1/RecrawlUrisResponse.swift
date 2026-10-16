@@ -84,8 +84,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.failureSamples, forKey: .failureSamples)
-      try container.encode(self.failedUris, forKey: .failedUris)
+      if !self.failureSamples.isEmpty {
+        try container.encode(self.failureSamples, forKey: .failureSamples)
+      }
+      if !self.failedUris.isEmpty {
+        try container.encode(self.failedUris, forKey: .failedUris)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -154,8 +158,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uri, forKey: .uri)
-        try container.encode(self.failureReasons, forKey: .failureReasons)
+        if !self.uri.isEmpty {
+          try container.encode(self.uri, forKey: .uri)
+        }
+        if !self.failureReasons.isEmpty {
+          try container.encode(self.failureReasons, forKey: .failureReasons)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -225,8 +233,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.corpusType, forKey: .corpusType)
-          try container.encode(self.errorMessage, forKey: .errorMessage)
+          if self.corpusType != RecrawlUrisResponse.FailureInfo.FailureReason.CorpusType() {
+            try container.encode(self.corpusType, forKey: .corpusType)
+          }
+          if !self.errorMessage.isEmpty {
+            try container.encode(self.errorMessage, forKey: .errorMessage)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

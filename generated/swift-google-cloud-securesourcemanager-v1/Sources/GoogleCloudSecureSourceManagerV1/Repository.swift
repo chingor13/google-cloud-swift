@@ -152,16 +152,28 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.instance, forKey: .instance)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.instance.isEmpty {
+      try container.encode(self.instance, forKey: .instance)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.uris, forKey: .uris)
     try container.encodeIfPresent(self.initialConfig, forKey: .initialConfig)
-    try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    if !self.serviceAccount.isEmpty {
+      try container.encode(self.serviceAccount, forKey: .serviceAccount)
+    }
     try container.encodeIfPresent(self.scanConfig, forKey: .scanConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -237,9 +249,15 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.html, forKey: .html)
-      try container.encode(self.gitHttps, forKey: .gitHttps)
-      try container.encode(self.api, forKey: .api)
+      if !self.html.isEmpty {
+        try container.encode(self.html, forKey: .html)
+      }
+      if !self.gitHttps.isEmpty {
+        try container.encode(self.gitHttps, forKey: .gitHttps)
+      }
+      if !self.api.isEmpty {
+        try container.encode(self.api, forKey: .api)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -467,10 +485,18 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.defaultBranch, forKey: .defaultBranch)
-      try container.encode(self.gitignores, forKey: .gitignores)
-      try container.encode(self.license, forKey: .license)
-      try container.encode(self.readme, forKey: .readme)
+      if !self.defaultBranch.isEmpty {
+        try container.encode(self.defaultBranch, forKey: .defaultBranch)
+      }
+      if !self.gitignores.isEmpty {
+        try container.encode(self.gitignores, forKey: .gitignores)
+      }
+      if !self.license.isEmpty {
+        try container.encode(self.license, forKey: .license)
+      }
+      if !self.readme.isEmpty {
+        try container.encode(self.readme, forKey: .readme)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -615,8 +641,12 @@ public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.enabled, forKey: .enabled)
-        try container.encode(self.inspectTemplate, forKey: .inspectTemplate)
+        if self.enabled {
+          try container.encode(self.enabled, forKey: .enabled)
+        }
+        if !self.inspectTemplate.isEmpty {
+          try container.encode(self.inspectTemplate, forKey: .inspectTemplate)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

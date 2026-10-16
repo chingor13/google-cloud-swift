@@ -183,21 +183,39 @@
     #endif
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tuningDatasetExampleCount, forKey: .tuningDatasetExampleCount)
-      try container.encode(self.totalTuningCharacterCount, forKey: .totalTuningCharacterCount)
-      try container.encode(self.totalBillableCharacterCount, forKey: .totalBillableCharacterCount)
-      try container.encode(self.totalBillableTokenCount, forKey: .totalBillableTokenCount)
-      try container.encode(self.tuningStepCount, forKey: .tuningStepCount)
+      if self.tuningDatasetExampleCount != 0 {
+        try container.encode(self.tuningDatasetExampleCount, forKey: .tuningDatasetExampleCount)
+      }
+      if self.totalTuningCharacterCount != 0 {
+        try container.encode(self.totalTuningCharacterCount, forKey: .totalTuningCharacterCount)
+      }
+      if self.totalBillableCharacterCount != 0 {
+        try container.encode(self.totalBillableCharacterCount, forKey: .totalBillableCharacterCount)
+      }
+      if self.totalBillableTokenCount != 0 {
+        try container.encode(self.totalBillableTokenCount, forKey: .totalBillableTokenCount)
+      }
+      if self.tuningStepCount != 0 {
+        try container.encode(self.tuningStepCount, forKey: .tuningStepCount)
+      }
       try container.encodeIfPresent(
         self.userInputTokenDistribution, forKey: .userInputTokenDistribution)
       try container.encodeIfPresent(
         self.userOutputTokenDistribution, forKey: .userOutputTokenDistribution)
       try container.encodeIfPresent(
         self.userMessagePerExampleDistribution, forKey: .userMessagePerExampleDistribution)
-      try container.encode(self.userDatasetExamples, forKey: .userDatasetExamples)
-      try container.encode(self.totalTruncatedExampleCount, forKey: .totalTruncatedExampleCount)
-      try container.encode(self.truncatedExampleIndices, forKey: .truncatedExampleIndices)
-      try container.encode(self.droppedExampleReasons, forKey: .droppedExampleReasons)
+      if !self.userDatasetExamples.isEmpty {
+        try container.encode(self.userDatasetExamples, forKey: .userDatasetExamples)
+      }
+      if self.totalTruncatedExampleCount != 0 {
+        try container.encode(self.totalTruncatedExampleCount, forKey: .totalTruncatedExampleCount)
+      }
+      if !self.truncatedExampleIndices.isEmpty {
+        try container.encode(self.truncatedExampleIndices, forKey: .truncatedExampleIndices)
+      }
+      if !self.droppedExampleReasons.isEmpty {
+        try container.encode(self.droppedExampleReasons, forKey: .droppedExampleReasons)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

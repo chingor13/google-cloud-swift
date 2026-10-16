@@ -171,8 +171,12 @@
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.input, forKey: .input)
         try container.encodeIfPresent(self.injectedParameters, forKey: .injectedParameters)
-        try container.encode(self.isWebhookEnabled, forKey: .isWebhookEnabled)
-        try container.encode(self.enableSentimentAnalysis, forKey: .enableSentimentAnalysis)
+        if self.isWebhookEnabled {
+          try container.encode(self.isWebhookEnabled, forKey: .isWebhookEnabled)
+        }
+        if self.enableSentimentAnalysis {
+          try container.encode(self.enableSentimentAnalysis, forKey: .enableSentimentAnalysis)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -313,11 +317,15 @@
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.sessionParameters, forKey: .sessionParameters)
-        try container.encode(self.differences, forKey: .differences)
+        if !self.differences.isEmpty {
+          try container.encode(self.differences, forKey: .differences)
+        }
         try container.encodeIfPresent(self.diagnosticInfo, forKey: .diagnosticInfo)
         try container.encodeIfPresent(self.triggeredIntent, forKey: .triggeredIntent)
         try container.encodeIfPresent(self.currentPage, forKey: .currentPage)
-        try container.encode(self.textResponses, forKey: .textResponses)
+        if !self.textResponses.isEmpty {
+          try container.encode(self.textResponses, forKey: .textResponses)
+        }
         try container.encodeIfPresent(self.status, forKey: .status)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))

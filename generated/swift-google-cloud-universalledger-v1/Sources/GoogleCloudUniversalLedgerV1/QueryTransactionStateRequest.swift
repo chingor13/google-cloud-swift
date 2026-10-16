@@ -79,8 +79,12 @@ public struct QueryTransactionStateRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.endpoint, forKey: .endpoint)
-    try container.encode(self.transactionDigestHex, forKey: .transactionDigestHex)
+    if !self.endpoint.isEmpty {
+      try container.encode(self.endpoint, forKey: .endpoint)
+    }
+    if !self.transactionDigestHex.isEmpty {
+      try container.encode(self.transactionDigestHex, forKey: .transactionDigestHex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

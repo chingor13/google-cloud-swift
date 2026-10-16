@@ -109,8 +109,12 @@ public struct JavaSettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.libraryPackage, forKey: .libraryPackage)
-    try container.encode(self.serviceClassNames, forKey: .serviceClassNames)
+    if !self.libraryPackage.isEmpty {
+      try container.encode(self.libraryPackage, forKey: .libraryPackage)
+    }
+    if !self.serviceClassNames.isEmpty {
+      try container.encode(self.serviceClassNames, forKey: .serviceClassNames)
+    }
     try container.encodeIfPresent(self.common, forKey: .common)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

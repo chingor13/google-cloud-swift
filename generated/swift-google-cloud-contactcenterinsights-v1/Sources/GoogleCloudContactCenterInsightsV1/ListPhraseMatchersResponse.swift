@@ -79,8 +79,12 @@ public struct ListPhraseMatchersResponse: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.phraseMatchers, forKey: .phraseMatchers)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.phraseMatchers.isEmpty {
+      try container.encode(self.phraseMatchers, forKey: .phraseMatchers)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

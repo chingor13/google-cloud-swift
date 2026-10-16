@@ -162,17 +162,35 @@ public struct ExascaleDbStorageVaultProperties: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
     try container.encodeIfPresent(self.timeZone, forKey: .timeZone)
     try container.encodeIfPresent(self.exascaleDbStorageDetails, forKey: .exascaleDbStorageDetails)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.vmClusterIds, forKey: .vmClusterIds)
-    try container.encode(self.vmClusterCount, forKey: .vmClusterCount)
-    try container.encode(self.additionalFlashCachePercent, forKey: .additionalFlashCachePercent)
-    try container.encode(self.ociUri, forKey: .ociUri)
-    try container.encode(self.attachedShapeAttributes, forKey: .attachedShapeAttributes)
-    try container.encode(self.availableShapeAttributes, forKey: .availableShapeAttributes)
+    if self.state != ExascaleDbStorageVaultProperties.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.vmClusterIds.isEmpty {
+      try container.encode(self.vmClusterIds, forKey: .vmClusterIds)
+    }
+    if self.vmClusterCount != 0 {
+      try container.encode(self.vmClusterCount, forKey: .vmClusterCount)
+    }
+    if self.additionalFlashCachePercent != 0 {
+      try container.encode(self.additionalFlashCachePercent, forKey: .additionalFlashCachePercent)
+    }
+    if !self.ociUri.isEmpty {
+      try container.encode(self.ociUri, forKey: .ociUri)
+    }
+    if !self.attachedShapeAttributes.isEmpty {
+      try container.encode(self.attachedShapeAttributes, forKey: .attachedShapeAttributes)
+    }
+    if !self.availableShapeAttributes.isEmpty {
+      try container.encode(self.availableShapeAttributes, forKey: .availableShapeAttributes)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

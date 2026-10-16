@@ -192,12 +192,24 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.entityType, forKey: .entityType)
-      try container.encode(self.entityIdField, forKey: .entityIdField)
-      try container.encode(self.featureSpecs, forKey: .featureSpecs)
-      try container.encode(self.disableOnlineServing, forKey: .disableOnlineServing)
-      try container.encode(self.workerCount, forKey: .workerCount)
-      try container.encode(self.disableIngestionAnalysis, forKey: .disableIngestionAnalysis)
+      if !self.entityType.isEmpty {
+        try container.encode(self.entityType, forKey: .entityType)
+      }
+      if !self.entityIdField.isEmpty {
+        try container.encode(self.entityIdField, forKey: .entityIdField)
+      }
+      if !self.featureSpecs.isEmpty {
+        try container.encode(self.featureSpecs, forKey: .featureSpecs)
+      }
+      if self.disableOnlineServing {
+        try container.encode(self.disableOnlineServing, forKey: .disableOnlineServing)
+      }
+      if self.workerCount != 0 {
+        try container.encode(self.workerCount, forKey: .workerCount)
+      }
+      if self.disableIngestionAnalysis {
+        try container.encode(self.disableIngestionAnalysis, forKey: .disableIngestionAnalysis)
+      }
 
       if let choice = self.source {
         switch choice {
@@ -285,8 +297,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.sourceField, forKey: .sourceField)
+        if !self.id.isEmpty {
+          try container.encode(self.id, forKey: .id)
+        }
+        if !self.sourceField.isEmpty {
+          try container.encode(self.sourceField, forKey: .sourceField)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

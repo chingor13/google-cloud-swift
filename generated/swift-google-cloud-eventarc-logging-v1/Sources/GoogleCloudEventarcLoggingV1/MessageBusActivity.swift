@@ -111,8 +111,12 @@ public struct MessageBusActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.messageUid, forKey: .messageUid)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.messageUid.isEmpty {
+      try container.encode(self.messageUid, forKey: .messageUid)
+    }
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
     try container.encodeIfPresent(self.activityTime, forKey: .activityTime)
 
     if let choice = self.activity {
@@ -185,7 +189,9 @@ public struct MessageBusActivity: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.details, forKey: .details)
+      if !self.details.isEmpty {
+        try container.encode(self.details, forKey: .details)
+      }
       try container.encodeIfPresent(self.error, forKey: .error)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

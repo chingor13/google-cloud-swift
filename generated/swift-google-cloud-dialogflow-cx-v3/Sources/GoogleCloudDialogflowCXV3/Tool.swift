@@ -137,10 +137,18 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.toolType, forKey: .toolType)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.toolType != Tool.ToolType() {
+        try container.encode(self.toolType, forKey: .toolType)
+      }
 
       if let choice = self.specification {
         switch choice {
@@ -347,7 +355,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataStoreConnections, forKey: .dataStoreConnections)
+        if !self.dataStoreConnections.isEmpty {
+          try container.encode(self.dataStoreConnections, forKey: .dataStoreConnections)
+        }
         try container.encodeIfPresent(self.fallbackPrompt, forKey: .fallbackPrompt)
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -744,10 +754,18 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.keyName, forKey: .keyName)
-          try container.encode(self.apiKey, forKey: .apiKey)
-          try container.encode(self.secretVersionForApiKey, forKey: .secretVersionForApiKey)
-          try container.encode(self.requestLocation, forKey: .requestLocation)
+          if !self.keyName.isEmpty {
+            try container.encode(self.keyName, forKey: .keyName)
+          }
+          if !self.apiKey.isEmpty {
+            try container.encode(self.apiKey, forKey: .apiKey)
+          }
+          if !self.secretVersionForApiKey.isEmpty {
+            try container.encode(self.secretVersionForApiKey, forKey: .secretVersionForApiKey)
+          }
+          if self.requestLocation != Tool.Authentication.RequestLocation() {
+            try container.encode(self.requestLocation, forKey: .requestLocation)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -880,13 +898,25 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.oauthGrantType, forKey: .oauthGrantType)
-          try container.encode(self.clientId, forKey: .clientId)
-          try container.encode(self.clientSecret, forKey: .clientSecret)
-          try container.encode(
-            self.secretVersionForClientSecret, forKey: .secretVersionForClientSecret)
-          try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
-          try container.encode(self.scopes, forKey: .scopes)
+          if self.oauthGrantType != Tool.Authentication.OAuthConfig.OauthGrantType() {
+            try container.encode(self.oauthGrantType, forKey: .oauthGrantType)
+          }
+          if !self.clientId.isEmpty {
+            try container.encode(self.clientId, forKey: .clientId)
+          }
+          if !self.clientSecret.isEmpty {
+            try container.encode(self.clientSecret, forKey: .clientSecret)
+          }
+          if !self.secretVersionForClientSecret.isEmpty {
+            try container.encode(
+              self.secretVersionForClientSecret, forKey: .secretVersionForClientSecret)
+          }
+          if !self.tokenEndpoint.isEmpty {
+            try container.encode(self.tokenEndpoint, forKey: .tokenEndpoint)
+          }
+          if !self.scopes.isEmpty {
+            try container.encode(self.scopes, forKey: .scopes)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1087,7 +1117,10 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.serviceAgentAuth, forKey: .serviceAgentAuth)
+          if self.serviceAgentAuth != Tool.Authentication.ServiceAgentAuthConfig.ServiceAgentAuth()
+          {
+            try container.encode(self.serviceAgentAuth, forKey: .serviceAgentAuth)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1312,8 +1345,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.token, forKey: .token)
-          try container.encode(self.secretVersionForToken, forKey: .secretVersionForToken)
+          if !self.token.isEmpty {
+            try container.encode(self.token, forKey: .token)
+          }
+          if !self.secretVersionForToken.isEmpty {
+            try container.encode(self.secretVersionForToken, forKey: .secretVersionForToken)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1402,7 +1439,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.serviceAccount, forKey: .serviceAccount)
+          if !self.serviceAccount.isEmpty {
+            try container.encode(self.serviceAccount, forKey: .serviceAccount)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1640,7 +1679,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.caCerts, forKey: .caCerts)
+        if !self.caCerts.isEmpty {
+          try container.encode(self.caCerts, forKey: .caCerts)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1719,8 +1760,12 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.displayName, forKey: .displayName)
-          try container.encode(self.cert, forKey: .cert)
+          if !self.displayName.isEmpty {
+            try container.encode(self.displayName, forKey: .displayName)
+          }
+          if !self.cert.isEmpty {
+            try container.encode(self.cert, forKey: .cert)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -1827,7 +1872,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.service, forKey: .service)
+        if !self.service.isEmpty {
+          try container.encode(self.service, forKey: .service)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

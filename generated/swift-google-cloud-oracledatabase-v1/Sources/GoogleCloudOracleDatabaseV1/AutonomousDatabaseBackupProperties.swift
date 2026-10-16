@@ -230,26 +230,60 @@ public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.ocid, forKey: .ocid)
-    try container.encode(self.retentionPeriodDays, forKey: .retentionPeriodDays)
-    try container.encode(self.compartmentId, forKey: .compartmentId)
-    try container.encode(self.databaseSizeTb, forKey: .databaseSizeTb)
-    try container.encode(self.dbVersion, forKey: .dbVersion)
-    try container.encode(self.isLongTermBackup, forKey: .isLongTermBackup)
-    try container.encode(self.isAutomaticBackup, forKey: .isAutomaticBackup)
-    try container.encode(self.isRestorable, forKey: .isRestorable)
-    try container.encode(self.keyStoreId, forKey: .keyStoreId)
-    try container.encode(self.keyStoreWallet, forKey: .keyStoreWallet)
-    try container.encode(self.kmsKeyId, forKey: .kmsKeyId)
-    try container.encode(self.kmsKeyVersionId, forKey: .kmsKeyVersionId)
-    try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
-    try container.encode(self.lifecycleState, forKey: .lifecycleState)
-    try container.encode(self.sizeTb, forKey: .sizeTb)
+    if !self.ocid.isEmpty {
+      try container.encode(self.ocid, forKey: .ocid)
+    }
+    if self.retentionPeriodDays != 0 {
+      try container.encode(self.retentionPeriodDays, forKey: .retentionPeriodDays)
+    }
+    if !self.compartmentId.isEmpty {
+      try container.encode(self.compartmentId, forKey: .compartmentId)
+    }
+    if self.databaseSizeTb != 0 {
+      try container.encode(self.databaseSizeTb, forKey: .databaseSizeTb)
+    }
+    if !self.dbVersion.isEmpty {
+      try container.encode(self.dbVersion, forKey: .dbVersion)
+    }
+    if self.isLongTermBackup {
+      try container.encode(self.isLongTermBackup, forKey: .isLongTermBackup)
+    }
+    if self.isAutomaticBackup {
+      try container.encode(self.isAutomaticBackup, forKey: .isAutomaticBackup)
+    }
+    if self.isRestorable {
+      try container.encode(self.isRestorable, forKey: .isRestorable)
+    }
+    if !self.keyStoreId.isEmpty {
+      try container.encode(self.keyStoreId, forKey: .keyStoreId)
+    }
+    if !self.keyStoreWallet.isEmpty {
+      try container.encode(self.keyStoreWallet, forKey: .keyStoreWallet)
+    }
+    if !self.kmsKeyId.isEmpty {
+      try container.encode(self.kmsKeyId, forKey: .kmsKeyId)
+    }
+    if !self.kmsKeyVersionId.isEmpty {
+      try container.encode(self.kmsKeyVersionId, forKey: .kmsKeyVersionId)
+    }
+    if !self.lifecycleDetails.isEmpty {
+      try container.encode(self.lifecycleDetails, forKey: .lifecycleDetails)
+    }
+    if self.lifecycleState != AutonomousDatabaseBackupProperties.State() {
+      try container.encode(self.lifecycleState, forKey: .lifecycleState)
+    }
+    if self.sizeTb != 0 {
+      try container.encode(self.sizeTb, forKey: .sizeTb)
+    }
     try container.encodeIfPresent(self.availableTillTime, forKey: .availableTillTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
     try container.encodeIfPresent(self.startTime, forKey: .startTime)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.vaultId, forKey: .vaultId)
+    if self.type != AutonomousDatabaseBackupProperties.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.vaultId.isEmpty {
+      try container.encode(self.vaultId, forKey: .vaultId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -149,13 +149,25 @@ public struct OcrConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.hints, forKey: .hints)
-    try container.encode(self.enableNativePdfParsing, forKey: .enableNativePdfParsing)
-    try container.encode(self.enableImageQualityScores, forKey: .enableImageQualityScores)
-    try container.encode(self.advancedOcrOptions, forKey: .advancedOcrOptions)
-    try container.encode(self.enableSymbol, forKey: .enableSymbol)
-    try container.encode(self.computeStyleInfo, forKey: .computeStyleInfo)
-    try container.encode(
-      self.disableCharacterBoxesDetection, forKey: .disableCharacterBoxesDetection)
+    if self.enableNativePdfParsing {
+      try container.encode(self.enableNativePdfParsing, forKey: .enableNativePdfParsing)
+    }
+    if self.enableImageQualityScores {
+      try container.encode(self.enableImageQualityScores, forKey: .enableImageQualityScores)
+    }
+    if !self.advancedOcrOptions.isEmpty {
+      try container.encode(self.advancedOcrOptions, forKey: .advancedOcrOptions)
+    }
+    if self.enableSymbol {
+      try container.encode(self.enableSymbol, forKey: .enableSymbol)
+    }
+    if self.computeStyleInfo {
+      try container.encode(self.computeStyleInfo, forKey: .computeStyleInfo)
+    }
+    if self.disableCharacterBoxesDetection {
+      try container.encode(
+        self.disableCharacterBoxesDetection, forKey: .disableCharacterBoxesDetection)
+    }
     try container.encodeIfPresent(self.premiumFeatures, forKey: .premiumFeatures)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -219,7 +231,9 @@ public struct OcrConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.languageHints, forKey: .languageHints)
+      if !self.languageHints.isEmpty {
+        try container.encode(self.languageHints, forKey: .languageHints)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -319,9 +333,16 @@ public struct OcrConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enableSelectionMarkDetection, forKey: .enableSelectionMarkDetection)
-      try container.encode(self.computeStyleInfo, forKey: .computeStyleInfo)
-      try container.encode(self.enableMathOcr, forKey: .enableMathOcr)
+      if self.enableSelectionMarkDetection {
+        try container.encode(
+          self.enableSelectionMarkDetection, forKey: .enableSelectionMarkDetection)
+      }
+      if self.computeStyleInfo {
+        try container.encode(self.computeStyleInfo, forKey: .computeStyleInfo)
+      }
+      if self.enableMathOcr {
+        try container.encode(self.enableMathOcr, forKey: .enableMathOcr)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

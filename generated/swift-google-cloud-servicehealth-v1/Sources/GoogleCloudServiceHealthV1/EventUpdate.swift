@@ -101,10 +101,18 @@ public struct EventUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.title, forKey: .title)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.symptom, forKey: .symptom)
-    try container.encode(self.workaround, forKey: .workaround)
+    if !self.title.isEmpty {
+      try container.encode(self.title, forKey: .title)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.symptom.isEmpty {
+      try container.encode(self.symptom, forKey: .symptom)
+    }
+    if !self.workaround.isEmpty {
+      try container.encode(self.workaround, forKey: .workaround)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

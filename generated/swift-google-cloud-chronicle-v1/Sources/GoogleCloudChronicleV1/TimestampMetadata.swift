@@ -101,11 +101,21 @@ public struct TimestampMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.timeFormat, forKey: .timeFormat)
-    try container.encode(self.timeZone, forKey: .timeZone)
-    try container.encode(self.timeGranularity, forKey: .timeGranularity)
-    try container.encode(self.isSortable, forKey: .isSortable)
-    try container.encode(self.isInterpolable, forKey: .isInterpolable)
+    if !self.timeFormat.isEmpty {
+      try container.encode(self.timeFormat, forKey: .timeFormat)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
+    if !self.timeGranularity.isEmpty {
+      try container.encode(self.timeGranularity, forKey: .timeGranularity)
+    }
+    if self.isSortable {
+      try container.encode(self.isSortable, forKey: .isSortable)
+    }
+    if self.isInterpolable {
+      try container.encode(self.isInterpolable, forKey: .isInterpolable)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

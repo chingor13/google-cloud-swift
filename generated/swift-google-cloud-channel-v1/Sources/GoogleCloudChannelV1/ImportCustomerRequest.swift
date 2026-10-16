@@ -153,11 +153,21 @@ public struct ImportCustomerRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.authToken, forKey: .authToken)
-    try container.encode(self.overwriteIfExists, forKey: .overwriteIfExists)
-    try container.encode(self.channelPartnerId, forKey: .channelPartnerId)
-    try container.encode(self.customer, forKey: .customer)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.authToken.isEmpty {
+      try container.encode(self.authToken, forKey: .authToken)
+    }
+    if self.overwriteIfExists {
+      try container.encode(self.overwriteIfExists, forKey: .overwriteIfExists)
+    }
+    if !self.channelPartnerId.isEmpty {
+      try container.encode(self.channelPartnerId, forKey: .channelPartnerId)
+    }
+    if !self.customer.isEmpty {
+      try container.encode(self.customer, forKey: .customer)
+    }
 
     if let choice = self.customerIdentity {
       switch choice {

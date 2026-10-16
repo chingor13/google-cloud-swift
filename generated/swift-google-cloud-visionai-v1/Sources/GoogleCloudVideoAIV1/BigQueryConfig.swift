@@ -128,9 +128,16 @@ public struct BigQueryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.table, forKey: .table)
-    try container.encode(self.cloudFunctionMapping, forKey: .cloudFunctionMapping)
-    try container.encode(self.createDefaultTableIfNotExists, forKey: .createDefaultTableIfNotExists)
+    if !self.table.isEmpty {
+      try container.encode(self.table, forKey: .table)
+    }
+    if !self.cloudFunctionMapping.isEmpty {
+      try container.encode(self.cloudFunctionMapping, forKey: .cloudFunctionMapping)
+    }
+    if self.createDefaultTableIfNotExists {
+      try container.encode(
+        self.createDefaultTableIfNotExists, forKey: .createDefaultTableIfNotExists)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

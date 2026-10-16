@@ -94,9 +94,15 @@ public struct InjectedSolutionConstraint: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.routes, forKey: .routes)
-    try container.encode(self.skippedShipments, forKey: .skippedShipments)
-    try container.encode(self.constraintRelaxations, forKey: .constraintRelaxations)
+    if !self.routes.isEmpty {
+      try container.encode(self.routes, forKey: .routes)
+    }
+    if !self.skippedShipments.isEmpty {
+      try container.encode(self.skippedShipments, forKey: .skippedShipments)
+    }
+    if !self.constraintRelaxations.isEmpty {
+      try container.encode(self.constraintRelaxations, forKey: .constraintRelaxations)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -181,8 +187,12 @@ public struct InjectedSolutionConstraint: Codable, Equatable, GoogleWKT._AnyPack
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.relaxations, forKey: .relaxations)
-      try container.encode(self.vehicleIndices, forKey: .vehicleIndices)
+      if !self.relaxations.isEmpty {
+        try container.encode(self.relaxations, forKey: .relaxations)
+      }
+      if !self.vehicleIndices.isEmpty {
+        try container.encode(self.vehicleIndices, forKey: .vehicleIndices)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -301,9 +311,13 @@ public struct InjectedSolutionConstraint: Codable, Equatable, GoogleWKT._AnyPack
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.level, forKey: .level)
+        if self.level != InjectedSolutionConstraint.ConstraintRelaxation.Relaxation.Level() {
+          try container.encode(self.level, forKey: .level)
+        }
         try container.encodeIfPresent(self.thresholdTime, forKey: .thresholdTime)
-        try container.encode(self.thresholdVisitCount, forKey: .thresholdVisitCount)
+        if self.thresholdVisitCount != 0 {
+          try container.encode(self.thresholdVisitCount, forKey: .thresholdVisitCount)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

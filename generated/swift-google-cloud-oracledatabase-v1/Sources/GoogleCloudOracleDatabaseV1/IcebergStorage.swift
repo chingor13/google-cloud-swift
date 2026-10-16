@@ -111,7 +111,9 @@ public struct IcebergStorage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.storageType, forKey: .storageType)
+    if self.storageType != IcebergStorage.StorageType() {
+      try container.encode(self.storageType, forKey: .storageType)
+    }
 
     if let choice = self.storageDetails {
       switch choice {

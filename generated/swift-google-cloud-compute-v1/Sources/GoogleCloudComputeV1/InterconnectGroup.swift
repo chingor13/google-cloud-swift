@@ -156,7 +156,9 @@
       try container.encodeIfPresent(self.etag, forKey: .etag)
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.intent, forKey: .intent)
-      try container.encode(self.interconnects, forKey: .interconnects)
+      if !self.interconnects.isEmpty {
+        try container.encode(self.interconnects, forKey: .interconnects)
+      }
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.physicalStructure, forKey: .physicalStructure)

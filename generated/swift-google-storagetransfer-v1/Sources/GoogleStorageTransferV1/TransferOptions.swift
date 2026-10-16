@@ -130,12 +130,20 @@ public struct TransferOptions: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(
-      self.overwriteObjectsAlreadyExistingInSink, forKey: .overwriteObjectsAlreadyExistingInSink)
-    try container.encode(self.deleteObjectsUniqueInSink, forKey: .deleteObjectsUniqueInSink)
-    try container.encode(
-      self.deleteObjectsFromSourceAfterTransfer, forKey: .deleteObjectsFromSourceAfterTransfer)
-    try container.encode(self.overwriteWhen, forKey: .overwriteWhen)
+    if self.overwriteObjectsAlreadyExistingInSink {
+      try container.encode(
+        self.overwriteObjectsAlreadyExistingInSink, forKey: .overwriteObjectsAlreadyExistingInSink)
+    }
+    if self.deleteObjectsUniqueInSink {
+      try container.encode(self.deleteObjectsUniqueInSink, forKey: .deleteObjectsUniqueInSink)
+    }
+    if self.deleteObjectsFromSourceAfterTransfer {
+      try container.encode(
+        self.deleteObjectsFromSourceAfterTransfer, forKey: .deleteObjectsFromSourceAfterTransfer)
+    }
+    if self.overwriteWhen != TransferOptions.OverwriteWhen() {
+      try container.encode(self.overwriteWhen, forKey: .overwriteWhen)
+    }
     try container.encodeIfPresent(self.metadataOptions, forKey: .metadataOptions)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

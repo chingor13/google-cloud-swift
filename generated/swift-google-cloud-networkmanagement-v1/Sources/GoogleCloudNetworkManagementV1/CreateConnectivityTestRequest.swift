@@ -91,8 +91,12 @@ public struct CreateConnectivityTestRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.testId, forKey: .testId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.testId.isEmpty {
+      try container.encode(self.testId, forKey: .testId)
+    }
     try container.encodeIfPresent(self.resource, forKey: .resource)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

@@ -78,8 +78,12 @@ public struct ReportSessionResponse: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.result, forKey: .result)
-    try container.encode(self.testRuns, forKey: .testRuns)
+    if self.result != ReportSessionResponse.Result() {
+      try container.encode(self.result, forKey: .result)
+    }
+    if !self.testRuns.isEmpty {
+      try container.encode(self.testRuns, forKey: .testRuns)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

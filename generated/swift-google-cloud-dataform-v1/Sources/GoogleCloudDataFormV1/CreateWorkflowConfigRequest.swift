@@ -86,9 +86,13 @@ public struct CreateWorkflowConfigRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.workflowConfig, forKey: .workflowConfig)
-    try container.encode(self.workflowConfigId, forKey: .workflowConfigId)
+    if !self.workflowConfigId.isEmpty {
+      try container.encode(self.workflowConfigId, forKey: .workflowConfigId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

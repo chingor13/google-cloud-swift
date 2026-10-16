@@ -95,7 +95,9 @@ public struct Location: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.displayName, forKey: .displayName)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.locationId, forKey: .locationId)
     try container.encodeIfPresent(self.metadata, forKey: .metadata)
     try container.encodeIfPresent(self.name, forKey: .name)

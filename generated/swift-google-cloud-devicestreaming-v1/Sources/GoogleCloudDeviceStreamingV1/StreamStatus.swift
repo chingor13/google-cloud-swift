@@ -94,7 +94,9 @@ public struct StreamStatus: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.streamId, forKey: .streamId)
+    if self.streamId != 0 {
+      try container.encode(self.streamId, forKey: .streamId)
+    }
 
     if let choice = self.status {
       switch choice {

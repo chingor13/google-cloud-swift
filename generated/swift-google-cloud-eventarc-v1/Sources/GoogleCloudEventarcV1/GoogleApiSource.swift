@@ -192,16 +192,32 @@ public struct GoogleApiSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.destination, forKey: .destination)
-    try container.encode(self.cryptoKeyName, forKey: .cryptoKeyName)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.destination.isEmpty {
+      try container.encode(self.destination, forKey: .destination)
+    }
+    if !self.cryptoKeyName.isEmpty {
+      try container.encode(self.cryptoKeyName, forKey: .cryptoKeyName)
+    }
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
 
     if let choice = self.wideScopeSubscription {
@@ -274,7 +290,9 @@ public struct GoogleApiSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.list, forKey: .list)
+      if !self.list.isEmpty {
+        try container.encode(self.list, forKey: .list)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -354,7 +372,9 @@ public struct GoogleApiSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

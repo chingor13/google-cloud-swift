@@ -177,14 +177,26 @@ public struct ImageImportJob: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.createdResources, forKey: .createdResources)
-    try container.encode(self.state, forKey: .state)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.createdResources.isEmpty {
+      try container.encode(self.createdResources, forKey: .createdResources)
+    }
+    if self.state != ImageImportJob.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.errors, forKey: .errors)
-    try container.encode(self.warnings, forKey: .warnings)
-    try container.encode(self.steps, forKey: .steps)
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
+    if !self.warnings.isEmpty {
+      try container.encode(self.warnings, forKey: .warnings)
+    }
+    if !self.steps.isEmpty {
+      try container.encode(self.steps, forKey: .steps)
+    }
 
     if let choice = self.source {
       switch choice {

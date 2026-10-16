@@ -205,19 +205,37 @@ public struct PrivateEnvironmentConfig: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enablePrivateEnvironment, forKey: .enablePrivateEnvironment)
-    try container.encode(self.enablePrivateBuildsOnly, forKey: .enablePrivateBuildsOnly)
+    if self.enablePrivateEnvironment {
+      try container.encode(self.enablePrivateEnvironment, forKey: .enablePrivateEnvironment)
+    }
+    if self.enablePrivateBuildsOnly {
+      try container.encode(self.enablePrivateBuildsOnly, forKey: .enablePrivateBuildsOnly)
+    }
     try container.encodeIfPresent(self.privateClusterConfig, forKey: .privateClusterConfig)
-    try container.encode(self.webServerIpv4CidrBlock, forKey: .webServerIpv4CidrBlock)
-    try container.encode(self.cloudSqlIpv4CidrBlock, forKey: .cloudSqlIpv4CidrBlock)
-    try container.encode(self.webServerIpv4ReservedRange, forKey: .webServerIpv4ReservedRange)
-    try container.encode(
-      self.cloudComposerNetworkIpv4CidrBlock, forKey: .cloudComposerNetworkIpv4CidrBlock)
-    try container.encode(
-      self.cloudComposerNetworkIpv4ReservedRange, forKey: .cloudComposerNetworkIpv4ReservedRange)
-    try container.encode(self.enablePrivatelyUsedPublicIps, forKey: .enablePrivatelyUsedPublicIps)
-    try container.encode(
-      self.cloudComposerConnectionSubnetwork, forKey: .cloudComposerConnectionSubnetwork)
+    if !self.webServerIpv4CidrBlock.isEmpty {
+      try container.encode(self.webServerIpv4CidrBlock, forKey: .webServerIpv4CidrBlock)
+    }
+    if !self.cloudSqlIpv4CidrBlock.isEmpty {
+      try container.encode(self.cloudSqlIpv4CidrBlock, forKey: .cloudSqlIpv4CidrBlock)
+    }
+    if !self.webServerIpv4ReservedRange.isEmpty {
+      try container.encode(self.webServerIpv4ReservedRange, forKey: .webServerIpv4ReservedRange)
+    }
+    if !self.cloudComposerNetworkIpv4CidrBlock.isEmpty {
+      try container.encode(
+        self.cloudComposerNetworkIpv4CidrBlock, forKey: .cloudComposerNetworkIpv4CidrBlock)
+    }
+    if !self.cloudComposerNetworkIpv4ReservedRange.isEmpty {
+      try container.encode(
+        self.cloudComposerNetworkIpv4ReservedRange, forKey: .cloudComposerNetworkIpv4ReservedRange)
+    }
+    if self.enablePrivatelyUsedPublicIps {
+      try container.encode(self.enablePrivatelyUsedPublicIps, forKey: .enablePrivatelyUsedPublicIps)
+    }
+    if !self.cloudComposerConnectionSubnetwork.isEmpty {
+      try container.encode(
+        self.cloudComposerConnectionSubnetwork, forKey: .cloudComposerConnectionSubnetwork)
+    }
     try container.encodeIfPresent(self.networkingConfig, forKey: .networkingConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

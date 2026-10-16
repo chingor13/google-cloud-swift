@@ -85,9 +85,15 @@ public struct SchedulingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.preemptible, forKey: .preemptible)
-    try container.encode(self.reserved, forKey: .reserved)
-    try container.encode(self.spot, forKey: .spot)
+    if self.preemptible {
+      try container.encode(self.preemptible, forKey: .preemptible)
+    }
+    if self.reserved {
+      try container.encode(self.reserved, forKey: .reserved)
+    }
+    if self.spot {
+      try container.encode(self.spot, forKey: .spot)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

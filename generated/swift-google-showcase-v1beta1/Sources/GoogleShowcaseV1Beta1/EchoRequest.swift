@@ -129,10 +129,18 @@ public struct EchoRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.header, forKey: .header)
-    try container.encode(self.otherHeader, forKey: .otherHeader)
-    try container.encode(self.requestId, forKey: .requestId)
+    if self.severity != GoogleShowcaseV1Beta1.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.header.isEmpty {
+      try container.encode(self.header, forKey: .header)
+    }
+    if !self.otherHeader.isEmpty {
+      try container.encode(self.otherHeader, forKey: .otherHeader)
+    }
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     try container.encodeIfPresent(self.otherRequestId, forKey: .otherRequestId)
 
     if let choice = self.response {

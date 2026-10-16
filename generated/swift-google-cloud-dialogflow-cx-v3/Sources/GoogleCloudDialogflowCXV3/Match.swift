@@ -141,11 +141,19 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.intent, forKey: .intent)
-      try container.encode(self.event, forKey: .event)
+      if !self.event.isEmpty {
+        try container.encode(self.event, forKey: .event)
+      }
       try container.encodeIfPresent(self.parameters, forKey: .parameters)
-      try container.encode(self.resolvedInput, forKey: .resolvedInput)
-      try container.encode(self.matchType, forKey: .matchType)
-      try container.encode(self.confidence, forKey: .confidence)
+      if !self.resolvedInput.isEmpty {
+        try container.encode(self.resolvedInput, forKey: .resolvedInput)
+      }
+      if self.matchType != Match.MatchType() {
+        try container.encode(self.matchType, forKey: .matchType)
+      }
+      if self.confidence != 0 {
+        try container.encode(self.confidence, forKey: .confidence)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

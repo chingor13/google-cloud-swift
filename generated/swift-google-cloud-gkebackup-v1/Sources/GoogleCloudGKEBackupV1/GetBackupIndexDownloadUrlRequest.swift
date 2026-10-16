@@ -71,7 +71,9 @@ public struct GetBackupIndexDownloadUrlRequest: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.backup, forKey: .backup)
+    if !self.backup.isEmpty {
+      try container.encode(self.backup, forKey: .backup)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

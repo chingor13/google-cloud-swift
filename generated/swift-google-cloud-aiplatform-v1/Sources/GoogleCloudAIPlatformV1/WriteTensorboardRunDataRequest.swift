@@ -87,8 +87,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tensorboardRun, forKey: .tensorboardRun)
-      try container.encode(self.timeSeriesData, forKey: .timeSeriesData)
+      if !self.tensorboardRun.isEmpty {
+        try container.encode(self.tensorboardRun, forKey: .tensorboardRun)
+      }
+      if !self.timeSeriesData.isEmpty {
+        try container.encode(self.timeSeriesData, forKey: .timeSeriesData)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

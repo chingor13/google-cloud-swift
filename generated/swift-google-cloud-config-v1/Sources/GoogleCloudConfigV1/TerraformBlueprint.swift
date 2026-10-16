@@ -109,8 +109,12 @@ public struct TerraformBlueprint: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.inputValues, forKey: .inputValues)
-    try container.encode(self.externalValues, forKey: .externalValues)
+    if !self.inputValues.isEmpty {
+      try container.encode(self.inputValues, forKey: .inputValues)
+    }
+    if !self.externalValues.isEmpty {
+      try container.encode(self.externalValues, forKey: .externalValues)
+    }
 
     if let choice = self.source {
       switch choice {

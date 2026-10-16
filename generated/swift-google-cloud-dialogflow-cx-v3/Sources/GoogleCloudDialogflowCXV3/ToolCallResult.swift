@@ -109,8 +109,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.tool, forKey: .tool)
-      try container.encode(self.action, forKey: .action)
+      if !self.tool.isEmpty {
+        try container.encode(self.tool, forKey: .tool)
+      }
+      if !self.action.isEmpty {
+        try container.encode(self.action, forKey: .action)
+      }
 
       if let choice = self.result {
         switch choice {
@@ -177,7 +181,9 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.message, forKey: .message)
+        if !self.message.isEmpty {
+          try container.encode(self.message, forKey: .message)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

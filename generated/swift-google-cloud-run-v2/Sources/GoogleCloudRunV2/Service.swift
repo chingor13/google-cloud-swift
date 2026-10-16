@@ -454,44 +454,100 @@ public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.generation, forKey: .generation)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.generation != 0 {
+      try container.encode(self.generation, forKey: .generation)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
     try container.encodeIfPresent(self.expireTime, forKey: .expireTime)
-    try container.encode(self.creator, forKey: .creator)
-    try container.encode(self.lastModifier, forKey: .lastModifier)
-    try container.encode(self.client, forKey: .client)
-    try container.encode(self.clientVersion, forKey: .clientVersion)
-    try container.encode(self.ingress, forKey: .ingress)
-    try container.encode(self.launchStage, forKey: .launchStage)
+    if !self.creator.isEmpty {
+      try container.encode(self.creator, forKey: .creator)
+    }
+    if !self.lastModifier.isEmpty {
+      try container.encode(self.lastModifier, forKey: .lastModifier)
+    }
+    if !self.client.isEmpty {
+      try container.encode(self.client, forKey: .client)
+    }
+    if !self.clientVersion.isEmpty {
+      try container.encode(self.clientVersion, forKey: .clientVersion)
+    }
+    if self.ingress != IngressTraffic() {
+      try container.encode(self.ingress, forKey: .ingress)
+    }
+    if self.launchStage != GoogleApi.LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
     try container.encodeIfPresent(self.binaryAuthorization, forKey: .binaryAuthorization)
     try container.encodeIfPresent(self.template, forKey: .template)
-    try container.encode(self.traffic, forKey: .traffic)
+    if !self.traffic.isEmpty {
+      try container.encode(self.traffic, forKey: .traffic)
+    }
     try container.encodeIfPresent(self.scaling, forKey: .scaling)
-    try container.encode(self.invokerIamDisabled, forKey: .invokerIamDisabled)
-    try container.encode(self.defaultUriDisabled, forKey: .defaultUriDisabled)
-    try container.encode(self.urls, forKey: .urls)
-    try container.encode(self.iapEnabled, forKey: .iapEnabled)
+    if self.invokerIamDisabled {
+      try container.encode(self.invokerIamDisabled, forKey: .invokerIamDisabled)
+    }
+    if self.defaultUriDisabled {
+      try container.encode(self.defaultUriDisabled, forKey: .defaultUriDisabled)
+    }
+    if !self.urls.isEmpty {
+      try container.encode(self.urls, forKey: .urls)
+    }
+    if self.iapEnabled {
+      try container.encode(self.iapEnabled, forKey: .iapEnabled)
+    }
     try container.encodeIfPresent(self.multiRegionSettings, forKey: .multiRegionSettings)
-    try container.encode(self.customAudiences, forKey: .customAudiences)
-    try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    if !self.customAudiences.isEmpty {
+      try container.encode(self.customAudiences, forKey: .customAudiences)
+    }
+    if self.observedGeneration != 0 {
+      try container.encode(self.observedGeneration, forKey: .observedGeneration)
+    }
     try container.encodeIfPresent(self.terminalCondition, forKey: .terminalCondition)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.latestReadyRevision, forKey: .latestReadyRevision)
-    try container.encode(self.latestCreatedRevision, forKey: .latestCreatedRevision)
-    try container.encode(self.trafficStatuses, forKey: .trafficStatuses)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
-    try container.encode(self.threatDetectionEnabled, forKey: .threatDetectionEnabled)
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if !self.latestReadyRevision.isEmpty {
+      try container.encode(self.latestReadyRevision, forKey: .latestReadyRevision)
+    }
+    if !self.latestCreatedRevision.isEmpty {
+      try container.encode(self.latestCreatedRevision, forKey: .latestCreatedRevision)
+    }
+    if !self.trafficStatuses.isEmpty {
+      try container.encode(self.trafficStatuses, forKey: .trafficStatuses)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
+    if self.threatDetectionEnabled {
+      try container.encode(self.threatDetectionEnabled, forKey: .threatDetectionEnabled)
+    }
     try container.encodeIfPresent(self.buildConfig, forKey: .buildConfig)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.etag, forKey: .etag)
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -557,8 +613,12 @@ public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.regions, forKey: .regions)
-      try container.encode(self.multiRegionId, forKey: .multiRegionId)
+      if !self.regions.isEmpty {
+        try container.encode(self.regions, forKey: .regions)
+      }
+      if !self.multiRegionId.isEmpty {
+        try container.encode(self.multiRegionId, forKey: .multiRegionId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

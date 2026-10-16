@@ -164,17 +164,37 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleWKT._AnyPackable
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.hostUri, forKey: .hostUri)
-    try container.encode(self.appId, forKey: .appId)
-    try container.encode(self.appSlug, forKey: .appSlug)
-    try container.encode(self.privateKeySecretVersion, forKey: .privateKeySecretVersion)
-    try container.encode(self.webhookSecretSecretVersion, forKey: .webhookSecretSecretVersion)
-    try container.encode(self.appInstallationId, forKey: .appInstallationId)
-    try container.encode(self.installationUri, forKey: .installationUri)
+    if !self.hostUri.isEmpty {
+      try container.encode(self.hostUri, forKey: .hostUri)
+    }
+    if self.appId != 0 {
+      try container.encode(self.appId, forKey: .appId)
+    }
+    if !self.appSlug.isEmpty {
+      try container.encode(self.appSlug, forKey: .appSlug)
+    }
+    if !self.privateKeySecretVersion.isEmpty {
+      try container.encode(self.privateKeySecretVersion, forKey: .privateKeySecretVersion)
+    }
+    if !self.webhookSecretSecretVersion.isEmpty {
+      try container.encode(self.webhookSecretSecretVersion, forKey: .webhookSecretSecretVersion)
+    }
+    if self.appInstallationId != 0 {
+      try container.encode(self.appInstallationId, forKey: .appInstallationId)
+    }
+    if !self.installationUri.isEmpty {
+      try container.encode(self.installationUri, forKey: .installationUri)
+    }
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
-    try container.encode(self.serverVersion, forKey: .serverVersion)
-    try container.encode(self.sslCaCertificate, forKey: .sslCaCertificate)
-    try container.encode(self.organization, forKey: .organization)
+    if !self.serverVersion.isEmpty {
+      try container.encode(self.serverVersion, forKey: .serverVersion)
+    }
+    if !self.sslCaCertificate.isEmpty {
+      try container.encode(self.sslCaCertificate, forKey: .sslCaCertificate)
+    }
+    if !self.organization.isEmpty {
+      try container.encode(self.organization, forKey: .organization)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

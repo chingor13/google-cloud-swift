@@ -94,10 +94,18 @@ public struct FileValidationReport: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.fileName, forKey: .fileName)
-    try container.encode(self.rowErrors, forKey: .rowErrors)
-    try container.encode(self.partialReport, forKey: .partialReport)
-    try container.encode(self.fileErrors, forKey: .fileErrors)
+    if !self.fileName.isEmpty {
+      try container.encode(self.fileName, forKey: .fileName)
+    }
+    if !self.rowErrors.isEmpty {
+      try container.encode(self.rowErrors, forKey: .rowErrors)
+    }
+    if self.partialReport {
+      try container.encode(self.partialReport, forKey: .partialReport)
+    }
+    if !self.fileErrors.isEmpty {
+      try container.encode(self.fileErrors, forKey: .fileErrors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

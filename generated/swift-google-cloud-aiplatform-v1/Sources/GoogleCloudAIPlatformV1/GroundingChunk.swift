@@ -479,7 +479,9 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.reviewSnippets, forKey: .reviewSnippets)
+          if !self.reviewSnippets.isEmpty {
+            try container.encode(self.reviewSnippets, forKey: .reviewSnippets)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }
@@ -554,9 +556,15 @@
 
           public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(self.reviewId, forKey: .reviewId)
-            try container.encode(self.googleMapsUri, forKey: .googleMapsUri)
-            try container.encode(self.title, forKey: .title)
+            if !self.reviewId.isEmpty {
+              try container.encode(self.reviewId, forKey: .reviewId)
+            }
+            if !self.googleMapsUri.isEmpty {
+              try container.encode(self.googleMapsUri, forKey: .googleMapsUri)
+            }
+            if !self.title.isEmpty {
+              try container.encode(self.title, forKey: .title)
+            }
             for (key, value) in self._unknownFields.json {
               try container.encode(value, forKey: CodingKeys(stringValue: key))
             }
@@ -677,9 +685,13 @@
 
         public func encode(to encoder: any Encoder) throws {
           var container = encoder.container(keyedBy: CodingKeys.self)
-          try container.encode(self.distanceMeters, forKey: .distanceMeters)
+          if self.distanceMeters != 0 {
+            try container.encode(self.distanceMeters, forKey: .distanceMeters)
+          }
           try container.encodeIfPresent(self.duration, forKey: .duration)
-          try container.encode(self.encodedPolyline, forKey: .encodedPolyline)
+          if !self.encodedPolyline.isEmpty {
+            try container.encode(self.encodedPolyline, forKey: .encodedPolyline)
+          }
           for (key, value) in self._unknownFields.json {
             try container.encode(value, forKey: CodingKeys(stringValue: key))
           }

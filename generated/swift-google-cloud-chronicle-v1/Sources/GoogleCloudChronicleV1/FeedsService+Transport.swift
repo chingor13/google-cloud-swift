@@ -682,10 +682,8 @@ extension Clients {
     public func importPushLogs(
       request: ImportPushLogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
-      let (path, query, configure, omitted) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void, [Swift.String]
-        ) in
+      let (path, query, configure) = try {
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
             let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
@@ -699,12 +697,14 @@ extension Clients {
             return nil
           }
           let path = "/v1/\(pathVariable0):importPushLogs"
-          let query = [
+          var query = [
             URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
           ]
+          let encoder = GoogleGax._QueryParameterEncoder()
+          query.append(contentsOf: try encoder.encode(request.secret, prefix: "secret"))
           return (path, query)
         }() {
-          return (candidate.0, candidate.1, { $0.setMethod(.POST) }, ["parent"])
+          return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
         var paths: [GoogleGax.PathMismatch] = []
         do {
@@ -726,7 +726,9 @@ extension Clients {
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
       req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
-      try req.setBody(json: request, omitting: omitted)
+      if let body = request.httpBody {
+        try req.setBody(json: body)
+      }
       return try await req.rpc(
         GoogleApi.HttpBody.self, timeout: options.attemptTimeout
       ).get()

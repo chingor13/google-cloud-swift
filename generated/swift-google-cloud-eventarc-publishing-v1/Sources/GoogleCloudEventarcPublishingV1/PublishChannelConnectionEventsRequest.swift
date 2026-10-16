@@ -91,9 +91,15 @@ public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleW
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.channelConnection, forKey: .channelConnection)
-    try container.encode(self.events, forKey: .events)
-    try container.encode(self.textEvents, forKey: .textEvents)
+    if !self.channelConnection.isEmpty {
+      try container.encode(self.channelConnection, forKey: .channelConnection)
+    }
+    if !self.events.isEmpty {
+      try container.encode(self.events, forKey: .events)
+    }
+    if !self.textEvents.isEmpty {
+      try container.encode(self.textEvents, forKey: .textEvents)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

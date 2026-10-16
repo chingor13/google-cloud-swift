@@ -103,10 +103,18 @@ public struct TriggerEntity: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.triggeringEvents, forKey: .triggeringEvents)
-    try container.encode(self.triggerType, forKey: .triggerType)
-    try container.encode(self.sqlCode, forKey: .sqlCode)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.triggeringEvents.isEmpty {
+      try container.encode(self.triggeringEvents, forKey: .triggeringEvents)
+    }
+    if !self.triggerType.isEmpty {
+      try container.encode(self.triggerType, forKey: .triggerType)
+    }
+    if !self.sqlCode.isEmpty {
+      try container.encode(self.sqlCode, forKey: .sqlCode)
+    }
     try container.encodeIfPresent(self.customFeatures, forKey: .customFeatures)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

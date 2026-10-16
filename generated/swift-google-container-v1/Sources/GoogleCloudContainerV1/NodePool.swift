@@ -275,25 +275,47 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
   #endif
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.config, forKey: .config)
-    try container.encode(self.initialNodeCount, forKey: .initialNodeCount)
-    try container.encode(self.locations, forKey: .locations)
+    if self.initialNodeCount != 0 {
+      try container.encode(self.initialNodeCount, forKey: .initialNodeCount)
+    }
+    if !self.locations.isEmpty {
+      try container.encode(self.locations, forKey: .locations)
+    }
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
-    try container.encode(self.selfLink, forKey: .selfLink)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.instanceGroupUrls, forKey: .instanceGroupUrls)
-    try container.encode(self.status, forKey: .status)
-    try container.encode(self.statusMessage, forKey: .statusMessage)
+    if !self.selfLink.isEmpty {
+      try container.encode(self.selfLink, forKey: .selfLink)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if !self.instanceGroupUrls.isEmpty {
+      try container.encode(self.instanceGroupUrls, forKey: .instanceGroupUrls)
+    }
+    if self.status != NodePool.Status() {
+      try container.encode(self.status, forKey: .status)
+    }
+    if !self.statusMessage.isEmpty {
+      try container.encode(self.statusMessage, forKey: .statusMessage)
+    }
     try container.encodeIfPresent(self.autoscaling, forKey: .autoscaling)
     try container.encodeIfPresent(self.management, forKey: .management)
     try container.encodeIfPresent(self.maxPodsConstraint, forKey: .maxPodsConstraint)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.podIpv4CidrSize, forKey: .podIpv4CidrSize)
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if self.podIpv4CidrSize != 0 {
+      try container.encode(self.podIpv4CidrSize, forKey: .podIpv4CidrSize)
+    }
     try container.encodeIfPresent(self.upgradeSettings, forKey: .upgradeSettings)
     try container.encodeIfPresent(self.placementPolicy, forKey: .placementPolicy)
     try container.encodeIfPresent(self.updateInfo, forKey: .updateInfo)
-    try container.encode(self.etag, forKey: .etag)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
     try container.encodeIfPresent(self.queuedProvisioning, forKey: .queuedProvisioning)
     try container.encodeIfPresent(self.bestEffortProvisioning, forKey: .bestEffortProvisioning)
     try container.encodeIfPresent(self.nodeDrainConfig, forKey: .nodeDrainConfig)
@@ -425,8 +447,12 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.maxSurge, forKey: .maxSurge)
-      try container.encode(self.maxUnavailable, forKey: .maxUnavailable)
+      if self.maxSurge != 0 {
+        try container.encode(self.maxSurge, forKey: .maxSurge)
+      }
+      if self.maxUnavailable != 0 {
+        try container.encode(self.maxUnavailable, forKey: .maxUnavailable)
+      }
       try container.encodeIfPresent(self.strategy, forKey: .strategy)
       try container.encodeIfPresent(self.blueGreenSettings, forKey: .blueGreenSettings)
       for (key, value) in self._unknownFields.json {
@@ -612,11 +638,21 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.phase, forKey: .phase)
-        try container.encode(self.blueInstanceGroupUrls, forKey: .blueInstanceGroupUrls)
-        try container.encode(self.greenInstanceGroupUrls, forKey: .greenInstanceGroupUrls)
-        try container.encode(self.bluePoolDeletionStartTime, forKey: .bluePoolDeletionStartTime)
-        try container.encode(self.greenPoolVersion, forKey: .greenPoolVersion)
+        if self.phase != NodePool.UpdateInfo.BlueGreenInfo.Phase() {
+          try container.encode(self.phase, forKey: .phase)
+        }
+        if !self.blueInstanceGroupUrls.isEmpty {
+          try container.encode(self.blueInstanceGroupUrls, forKey: .blueInstanceGroupUrls)
+        }
+        if !self.greenInstanceGroupUrls.isEmpty {
+          try container.encode(self.greenInstanceGroupUrls, forKey: .greenInstanceGroupUrls)
+        }
+        if !self.bluePoolDeletionStartTime.isEmpty {
+          try container.encode(self.bluePoolDeletionStartTime, forKey: .bluePoolDeletionStartTime)
+        }
+        if !self.greenPoolVersion.isEmpty {
+          try container.encode(self.greenPoolVersion, forKey: .greenPoolVersion)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -891,9 +927,15 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.tpuTopology, forKey: .tpuTopology)
-      try container.encode(self.policyName, forKey: .policyName)
+      if self.type != NodePool.PlacementPolicy.Type_() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.tpuTopology.isEmpty {
+        try container.encode(self.tpuTopology, forKey: .tpuTopology)
+      }
+      if !self.policyName.isEmpty {
+        try container.encode(self.policyName, forKey: .policyName)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1087,7 +1129,9 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1283,7 +1327,9 @@ public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       for (key, value) in self._unknownFields.json {

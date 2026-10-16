@@ -94,7 +94,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.metrics, forKey: .metrics)
+      if !self.metrics.isEmpty {
+        try container.encode(self.metrics, forKey: .metrics)
+      }
       try container.encodeIfPresent(self.outputConfig, forKey: .outputConfig)
       try container.encodeIfPresent(self.autoraterConfig, forKey: .autoraterConfig)
       try container.encodeIfPresent(

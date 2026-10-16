@@ -153,13 +153,23 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.method, forKey: .method)
+    if !self.method.isEmpty {
+      try container.encode(self.method, forKey: .method)
+    }
     try container.encodeIfPresent(self.insertTime, forKey: .insertTime)
     try container.encodeIfPresent(self.endTime, forKey: .endTime)
-    try container.encode(self.user, forKey: .user)
-    try container.encode(self.target, forKey: .target)
-    try container.encode(self.ephemeralMessage, forKey: .ephemeralMessage)
-    try container.encode(self.warning, forKey: .warning)
+    if !self.user.isEmpty {
+      try container.encode(self.user, forKey: .user)
+    }
+    if !self.target.isEmpty {
+      try container.encode(self.target, forKey: .target)
+    }
+    if !self.ephemeralMessage.isEmpty {
+      try container.encode(self.ephemeralMessage, forKey: .ephemeralMessage)
+    }
+    if !self.warning.isEmpty {
+      try container.encode(self.warning, forKey: .warning)
+    }
 
     if let choice = self.methodMetadata {
       switch choice {

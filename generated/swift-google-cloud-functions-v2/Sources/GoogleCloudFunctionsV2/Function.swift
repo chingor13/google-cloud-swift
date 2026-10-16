@@ -176,19 +176,37 @@ public struct Function: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.buildConfig, forKey: .buildConfig)
     try container.encodeIfPresent(self.serviceConfig, forKey: .serviceConfig)
     try container.encodeIfPresent(self.eventTrigger, forKey: .eventTrigger)
-    try container.encode(self.state, forKey: .state)
+    if self.state != Function.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.stateMessages, forKey: .stateMessages)
-    try container.encode(self.environment, forKey: .environment)
-    try container.encode(self.url, forKey: .url)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if !self.stateMessages.isEmpty {
+      try container.encode(self.stateMessages, forKey: .stateMessages)
+    }
+    if self.environment != Environment() {
+      try container.encode(self.environment, forKey: .environment)
+    }
+    if !self.url.isEmpty {
+      try container.encode(self.url, forKey: .url)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

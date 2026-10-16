@@ -181,12 +181,22 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.model, forKey: .model)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.model.isEmpty {
+        try container.encode(self.model, forKey: .model)
+      }
       try container.encodeIfPresent(self.systemInstruction, forKey: .systemInstruction)
-      try container.encode(self.contents, forKey: .contents)
-      try container.encode(self.tools, forKey: .tools)
+      if !self.contents.isEmpty {
+        try container.encode(self.contents, forKey: .contents)
+      }
+      if !self.tools.isEmpty {
+        try container.encode(self.tools, forKey: .tools)
+      }
       try container.encodeIfPresent(self.toolConfig, forKey: .toolConfig)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
@@ -294,11 +304,21 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.totalTokenCount, forKey: .totalTokenCount)
-        try container.encode(self.textCount, forKey: .textCount)
-        try container.encode(self.imageCount, forKey: .imageCount)
-        try container.encode(self.videoDurationSeconds, forKey: .videoDurationSeconds)
-        try container.encode(self.audioDurationSeconds, forKey: .audioDurationSeconds)
+        if self.totalTokenCount != 0 {
+          try container.encode(self.totalTokenCount, forKey: .totalTokenCount)
+        }
+        if self.textCount != 0 {
+          try container.encode(self.textCount, forKey: .textCount)
+        }
+        if self.imageCount != 0 {
+          try container.encode(self.imageCount, forKey: .imageCount)
+        }
+        if self.videoDurationSeconds != 0 {
+          try container.encode(self.videoDurationSeconds, forKey: .videoDurationSeconds)
+        }
+        if self.audioDurationSeconds != 0 {
+          try container.encode(self.audioDurationSeconds, forKey: .audioDurationSeconds)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

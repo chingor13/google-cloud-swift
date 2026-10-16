@@ -115,10 +115,16 @@ public struct CreatePolicyBasedRouteRequest: Codable, Equatable, GoogleWKT._AnyP
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.policyBasedRouteId, forKey: .policyBasedRouteId)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.policyBasedRouteId.isEmpty {
+      try container.encode(self.policyBasedRouteId, forKey: .policyBasedRouteId)
+    }
     try container.encodeIfPresent(self.policyBasedRoute, forKey: .policyBasedRoute)
-    try container.encode(self.requestId, forKey: .requestId)
+    if !self.requestId.isEmpty {
+      try container.encode(self.requestId, forKey: .requestId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

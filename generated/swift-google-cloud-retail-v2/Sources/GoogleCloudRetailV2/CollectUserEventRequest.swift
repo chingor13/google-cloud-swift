@@ -132,11 +132,21 @@ public struct CollectUserEventRequest: Codable, Equatable, GoogleWKT._AnyPackabl
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.userEvent, forKey: .userEvent)
-    try container.encode(self.uri, forKey: .uri)
-    try container.encode(self.ets, forKey: .ets)
-    try container.encode(self.rawJson, forKey: .rawJson)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.userEvent.isEmpty {
+      try container.encode(self.userEvent, forKey: .userEvent)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
+    if self.ets != 0 {
+      try container.encode(self.ets, forKey: .ets)
+    }
+    if !self.rawJson.isEmpty {
+      try container.encode(self.rawJson, forKey: .rawJson)
+    }
 
     if let choice = self.conversionRule {
       switch choice {

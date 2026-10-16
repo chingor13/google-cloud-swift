@@ -267,27 +267,57 @@ public struct WorkstationCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.annotations, forKey: .annotations)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.network, forKey: .network)
-    try container.encode(self.subnetwork, forKey: .subnetwork)
-    try container.encode(self.controlPlaneIp, forKey: .controlPlaneIp)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.network.isEmpty {
+      try container.encode(self.network, forKey: .network)
+    }
+    if !self.subnetwork.isEmpty {
+      try container.encode(self.subnetwork, forKey: .subnetwork)
+    }
+    if !self.controlPlaneIp.isEmpty {
+      try container.encode(self.controlPlaneIp, forKey: .controlPlaneIp)
+    }
     try container.encodeIfPresent(self.privateClusterConfig, forKey: .privateClusterConfig)
     try container.encodeIfPresent(self.domainConfig, forKey: .domainConfig)
-    try container.encode(self.degraded, forKey: .degraded)
-    try container.encode(self.conditions, forKey: .conditions)
-    try container.encode(self.tags, forKey: .tags)
+    if self.degraded {
+      try container.encode(self.degraded, forKey: .degraded)
+    }
+    if !self.conditions.isEmpty {
+      try container.encode(self.conditions, forKey: .conditions)
+    }
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     try container.encodeIfPresent(self.gatewayConfig, forKey: .gatewayConfig)
-    try container.encode(self.workstationAuthorizationUrl, forKey: .workstationAuthorizationUrl)
-    try container.encode(self.workstationLaunchUrl, forKey: .workstationLaunchUrl)
+    if !self.workstationAuthorizationUrl.isEmpty {
+      try container.encode(self.workstationAuthorizationUrl, forKey: .workstationAuthorizationUrl)
+    }
+    if !self.workstationLaunchUrl.isEmpty {
+      try container.encode(self.workstationLaunchUrl, forKey: .workstationLaunchUrl)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -381,10 +411,18 @@ public struct WorkstationCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enablePrivateEndpoint, forKey: .enablePrivateEndpoint)
-      try container.encode(self.clusterHostname, forKey: .clusterHostname)
-      try container.encode(self.serviceAttachmentUri, forKey: .serviceAttachmentUri)
-      try container.encode(self.allowedProjects, forKey: .allowedProjects)
+      if self.enablePrivateEndpoint {
+        try container.encode(self.enablePrivateEndpoint, forKey: .enablePrivateEndpoint)
+      }
+      if !self.clusterHostname.isEmpty {
+        try container.encode(self.clusterHostname, forKey: .clusterHostname)
+      }
+      if !self.serviceAttachmentUri.isEmpty {
+        try container.encode(self.serviceAttachmentUri, forKey: .serviceAttachmentUri)
+      }
+      if !self.allowedProjects.isEmpty {
+        try container.encode(self.allowedProjects, forKey: .allowedProjects)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -465,7 +503,9 @@ public struct WorkstationCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.domain, forKey: .domain)
+      if !self.domain.isEmpty {
+        try container.encode(self.domain, forKey: .domain)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -546,7 +586,9 @@ public struct WorkstationCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.http2Enabled, forKey: .http2Enabled)
+      if self.http2Enabled {
+        try container.encode(self.http2Enabled, forKey: .http2Enabled)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

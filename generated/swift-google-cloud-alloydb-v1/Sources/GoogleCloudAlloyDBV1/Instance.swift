@@ -355,35 +355,71 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.uid, forKey: .uid)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.deleteTime, forKey: .deleteTime)
-    try container.encode(self.labels, forKey: .labels)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.instanceType, forKey: .instanceType)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
+    if self.state != Instance.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if self.instanceType != Instance.InstanceType() {
+      try container.encode(self.instanceType, forKey: .instanceType)
+    }
     try container.encodeIfPresent(self.machineConfig, forKey: .machineConfig)
-    try container.encode(self.availabilityType, forKey: .availabilityType)
-    try container.encode(self.gceZone, forKey: .gceZone)
-    try container.encode(self.databaseFlags, forKey: .databaseFlags)
+    if self.availabilityType != Instance.AvailabilityType() {
+      try container.encode(self.availabilityType, forKey: .availabilityType)
+    }
+    if !self.gceZone.isEmpty {
+      try container.encode(self.gceZone, forKey: .gceZone)
+    }
+    if !self.databaseFlags.isEmpty {
+      try container.encode(self.databaseFlags, forKey: .databaseFlags)
+    }
     try container.encodeIfPresent(self.writableNode, forKey: .writableNode)
-    try container.encode(self.nodes, forKey: .nodes)
+    if !self.nodes.isEmpty {
+      try container.encode(self.nodes, forKey: .nodes)
+    }
     try container.encodeIfPresent(self.queryInsightsConfig, forKey: .queryInsightsConfig)
     try container.encodeIfPresent(self.observabilityConfig, forKey: .observabilityConfig)
     try container.encodeIfPresent(self.readPoolConfig, forKey: .readPoolConfig)
-    try container.encode(self.ipAddress, forKey: .ipAddress)
-    try container.encode(self.publicIpAddress, forKey: .publicIpAddress)
-    try container.encode(self.reconciling, forKey: .reconciling)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.ipAddress.isEmpty {
+      try container.encode(self.ipAddress, forKey: .ipAddress)
+    }
+    if !self.publicIpAddress.isEmpty {
+      try container.encode(self.publicIpAddress, forKey: .publicIpAddress)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.clientConnectionConfig, forKey: .clientConnectionConfig)
-    try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    if self.satisfiesPzs {
+      try container.encode(self.satisfiesPzs, forKey: .satisfiesPzs)
+    }
     try container.encodeIfPresent(self.pscInstanceConfig, forKey: .pscInstanceConfig)
     try container.encodeIfPresent(self.networkConfig, forKey: .networkConfig)
-    try container.encode(self.outboundPublicIpAddresses, forKey: .outboundPublicIpAddresses)
-    try container.encode(self.activationPolicy, forKey: .activationPolicy)
+    if !self.outboundPublicIpAddresses.isEmpty {
+      try container.encode(self.outboundPublicIpAddresses, forKey: .outboundPublicIpAddresses)
+    }
+    if self.activationPolicy != Instance.ActivationPolicy() {
+      try container.encode(self.activationPolicy, forKey: .activationPolicy)
+    }
     try container.encodeIfPresent(self.connectionPoolConfig, forKey: .connectionPoolConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -452,8 +488,12 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.cpuCount, forKey: .cpuCount)
-      try container.encode(self.machineType, forKey: .machineType)
+      if self.cpuCount != 0 {
+        try container.encode(self.cpuCount, forKey: .cpuCount)
+      }
+      if !self.machineType.isEmpty {
+        try container.encode(self.machineType, forKey: .machineType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -563,10 +603,18 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.zoneId, forKey: .zoneId)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.ip, forKey: .ip)
-      try container.encode(self.state, forKey: .state)
+      if !self.zoneId.isEmpty {
+        try container.encode(self.zoneId, forKey: .zoneId)
+      }
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.ip.isEmpty {
+        try container.encode(self.ip, forKey: .ip)
+      }
+      if !self.state.isEmpty {
+        try container.encode(self.state, forKey: .state)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -674,7 +722,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.recordApplicationTags, forKey: .recordApplicationTags)
       try container.encodeIfPresent(self.recordClientAddress, forKey: .recordClientAddress)
-      try container.encode(self.queryStringLength, forKey: .queryStringLength)
+      if self.queryStringLength != 0 {
+        try container.encode(self.queryStringLength, forKey: .queryStringLength)
+      }
       try container.encodeIfPresent(self.queryPlansPerMinute, forKey: .queryPlansPerMinute)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -900,7 +950,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.nodeCount, forKey: .nodeCount)
+      if self.nodeCount != 0 {
+        try container.encode(self.nodeCount, forKey: .nodeCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -987,7 +1039,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.requireConnectors, forKey: .requireConnectors)
+      if self.requireConnectors {
+        try container.encode(self.requireConnectors, forKey: .requireConnectors)
+      }
       try container.encodeIfPresent(self.sslConfig, forKey: .sslConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -1074,7 +1128,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkAttachmentResource, forKey: .networkAttachmentResource)
+      if !self.networkAttachmentResource.isEmpty {
+        try container.encode(self.networkAttachmentResource, forKey: .networkAttachmentResource)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1217,11 +1273,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.consumerProject, forKey: .consumerProject)
-      try container.encode(self.consumerNetwork, forKey: .consumerNetwork)
-      try container.encode(self.ipAddress, forKey: .ipAddress)
-      try container.encode(self.status, forKey: .status)
-      try container.encode(self.consumerNetworkStatus, forKey: .consumerNetworkStatus)
+      if !self.consumerProject.isEmpty {
+        try container.encode(self.consumerProject, forKey: .consumerProject)
+      }
+      if !self.consumerNetwork.isEmpty {
+        try container.encode(self.consumerNetwork, forKey: .consumerNetwork)
+      }
+      if !self.ipAddress.isEmpty {
+        try container.encode(self.ipAddress, forKey: .ipAddress)
+      }
+      if !self.status.isEmpty {
+        try container.encode(self.status, forKey: .status)
+      }
+      if !self.consumerNetworkStatus.isEmpty {
+        try container.encode(self.consumerNetworkStatus, forKey: .consumerNetworkStatus)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1350,11 +1416,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.serviceAttachmentLink, forKey: .serviceAttachmentLink)
-      try container.encode(self.allowedConsumerProjects, forKey: .allowedConsumerProjects)
-      try container.encode(self.pscDnsName, forKey: .pscDnsName)
-      try container.encode(self.pscInterfaceConfigs, forKey: .pscInterfaceConfigs)
-      try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
+      if !self.serviceAttachmentLink.isEmpty {
+        try container.encode(self.serviceAttachmentLink, forKey: .serviceAttachmentLink)
+      }
+      if !self.allowedConsumerProjects.isEmpty {
+        try container.encode(self.allowedConsumerProjects, forKey: .allowedConsumerProjects)
+      }
+      if !self.pscDnsName.isEmpty {
+        try container.encode(self.pscDnsName, forKey: .pscDnsName)
+      }
+      if !self.pscInterfaceConfigs.isEmpty {
+        try container.encode(self.pscInterfaceConfigs, forKey: .pscInterfaceConfigs)
+      }
+      if !self.pscAutoConnections.isEmpty {
+        try container.encode(self.pscAutoConnections, forKey: .pscAutoConnections)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1482,11 +1558,21 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.authorizedExternalNetworks, forKey: .authorizedExternalNetworks)
-      try container.encode(self.enablePublicIp, forKey: .enablePublicIp)
-      try container.encode(self.enableOutboundPublicIp, forKey: .enableOutboundPublicIp)
-      try container.encode(self.network, forKey: .network)
-      try container.encode(self.allocatedIpRangeOverride, forKey: .allocatedIpRangeOverride)
+      if !self.authorizedExternalNetworks.isEmpty {
+        try container.encode(self.authorizedExternalNetworks, forKey: .authorizedExternalNetworks)
+      }
+      if self.enablePublicIp {
+        try container.encode(self.enablePublicIp, forKey: .enablePublicIp)
+      }
+      if self.enableOutboundPublicIp {
+        try container.encode(self.enableOutboundPublicIp, forKey: .enableOutboundPublicIp)
+      }
+      if !self.network.isEmpty {
+        try container.encode(self.network, forKey: .network)
+      }
+      if !self.allocatedIpRangeOverride.isEmpty {
+        try container.encode(self.allocatedIpRangeOverride, forKey: .allocatedIpRangeOverride)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -1544,7 +1630,9 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.cidrRange, forKey: .cidrRange)
+        if !self.cidrRange.isEmpty {
+          try container.encode(self.cidrRange, forKey: .cidrRange)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -1665,9 +1753,15 @@ public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.enabled, forKey: .enabled)
-      try container.encode(self.flags, forKey: .flags)
-      try container.encode(self.poolerCount, forKey: .poolerCount)
+      if self.enabled {
+        try container.encode(self.enabled, forKey: .enabled)
+      }
+      if !self.flags.isEmpty {
+        try container.encode(self.flags, forKey: .flags)
+      }
+      if self.poolerCount != 0 {
+        try container.encode(self.poolerCount, forKey: .poolerCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

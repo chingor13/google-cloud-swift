@@ -119,7 +119,9 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.matches, forKey: .matches)
+      if !self.matches.isEmpty {
+        try container.encode(self.matches, forKey: .matches)
+      }
       try container.encodeIfPresent(self.currentPage, forKey: .currentPage)
 
       if let choice = self.query {

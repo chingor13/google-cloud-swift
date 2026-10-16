@@ -369,13 +369,15 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.allInstancesConfig, forKey: .allInstancesConfig)
-      try container.encode(self.autoHealingPolicies, forKey: .autoHealingPolicies)
+      if !self.autoHealingPolicies.isEmpty {
+        try container.encode(self.autoHealingPolicies, forKey: .autoHealingPolicies)
+      }
       try container.encodeIfPresent(self.baseInstanceName, forKey: .baseInstanceName)
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.currentActions, forKey: .currentActions)
       try container.encodeIfPresent(self.description, forKey: .description)
       try container.encodeIfPresent(self.distributionPolicy, forKey: .distributionPolicy)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
@@ -390,7 +392,9 @@
       try container.encodeIfPresent(
         self.listManagedInstancesResults, forKey: .listManagedInstancesResults)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.namedPorts, forKey: .namedPorts)
+      if !self.namedPorts.isEmpty {
+        try container.encode(self.namedPorts, forKey: .namedPorts)
+      }
       try container.encodeIfPresent(self.region, forKey: .region)
       try container.encodeIfPresent(self.resourcePolicies, forKey: .resourcePolicies)
       try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
@@ -399,13 +403,17 @@
       try container.encodeIfPresent(self.standbyPolicy, forKey: .standbyPolicy)
       try container.encodeIfPresent(self.statefulPolicy, forKey: .statefulPolicy)
       try container.encodeIfPresent(self.status, forKey: .status)
-      try container.encode(self.targetPools, forKey: .targetPools)
+      if !self.targetPools.isEmpty {
+        try container.encode(self.targetPools, forKey: .targetPools)
+      }
       try container.encodeIfPresent(self.targetSize, forKey: .targetSize)
       try container.encodeIfPresent(self.targetSizePolicy, forKey: .targetSizePolicy)
       try container.encodeIfPresent(self.targetStoppedSize, forKey: .targetStoppedSize)
       try container.encodeIfPresent(self.targetSuspendedSize, forKey: .targetSuspendedSize)
       try container.encodeIfPresent(self.updatePolicy, forKey: .updatePolicy)
-      try container.encode(self.versions, forKey: .versions)
+      if !self.versions.isEmpty {
+        try container.encode(self.versions, forKey: .versions)
+      }
       try container.encodeIfPresent(self.zone, forKey: .zone)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

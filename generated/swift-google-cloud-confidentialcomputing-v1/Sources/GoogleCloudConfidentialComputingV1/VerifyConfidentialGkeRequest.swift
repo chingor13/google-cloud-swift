@@ -115,9 +115,13 @@ public struct VerifyConfidentialGkeRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.challenge, forKey: .challenge)
+    if !self.challenge.isEmpty {
+      try container.encode(self.challenge, forKey: .challenge)
+    }
     try container.encodeIfPresent(self.options, forKey: .options)
-    try container.encode(self.platformType, forKey: .platformType)
+    if self.platformType != VerifyConfidentialGkeRequest.PlatformType() {
+      try container.encode(self.platformType, forKey: .platformType)
+    }
 
     if let choice = self.teeAttestation {
       switch choice {
@@ -202,9 +206,15 @@ public struct VerifyConfidentialGkeRequest: Codable, Equatable, GoogleWKT._AnyPa
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.audience, forKey: .audience)
-      try container.encode(self.nonce, forKey: .nonce)
-      try container.encode(self.signatureType, forKey: .signatureType)
+      if !self.audience.isEmpty {
+        try container.encode(self.audience, forKey: .audience)
+      }
+      if !self.nonce.isEmpty {
+        try container.encode(self.nonce, forKey: .nonce)
+      }
+      if self.signatureType != SignatureType() {
+        try container.encode(self.signatureType, forKey: .signatureType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

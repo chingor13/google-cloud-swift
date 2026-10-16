@@ -110,8 +110,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
-      try container.encode(self.localSsds, forKey: .localSsds)
+      if !self.guestAccelerators.isEmpty {
+        try container.encode(self.guestAccelerators, forKey: .guestAccelerators)
+      }
+      if !self.localSsds.isEmpty {
+        try container.encode(self.localSsds, forKey: .localSsds)
+      }
       try container.encodeIfPresent(self.locationHint, forKey: .locationHint)
       try container.encodeIfPresent(self.machineType, forKey: .machineType)
       try container.encodeIfPresent(self.minCpuPlatform, forKey: .minCpuPlatform)

@@ -85,9 +85,15 @@ public struct KubernetesManifest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.kind, forKey: .kind)
-    try container.encode(self.apiVersion, forKey: .apiVersion)
-    try container.encode(self.content, forKey: .content)
+    if !self.kind.isEmpty {
+      try container.encode(self.kind, forKey: .kind)
+    }
+    if !self.apiVersion.isEmpty {
+      try container.encode(self.apiVersion, forKey: .apiVersion)
+    }
+    if !self.content.isEmpty {
+      try container.encode(self.content, forKey: .content)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

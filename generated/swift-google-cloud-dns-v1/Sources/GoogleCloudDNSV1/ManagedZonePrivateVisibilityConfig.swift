@@ -85,9 +85,13 @@ public struct ManagedZonePrivateVisibilityConfig: Codable, Equatable, GoogleWKT.
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.gkeClusters, forKey: .gkeClusters)
+    if !self.gkeClusters.isEmpty {
+      try container.encode(self.gkeClusters, forKey: .gkeClusters)
+    }
     try container.encodeIfPresent(self.kind, forKey: .kind)
-    try container.encode(self.networks, forKey: .networks)
+    if !self.networks.isEmpty {
+      try container.encode(self.networks, forKey: .networks)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

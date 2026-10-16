@@ -294,32 +294,40 @@
       try container.encodeIfPresent(
         self.adaptiveProtectionConfig, forKey: .adaptiveProtectionConfig)
       try container.encodeIfPresent(self.advancedOptionsConfig, forKey: .advancedOptionsConfig)
-      try container.encode(self.associations, forKey: .associations)
+      if !self.associations.isEmpty {
+        try container.encode(self.associations, forKey: .associations)
+      }
       try container.encodeIfPresent(self.creationTimestamp, forKey: .creationTimestamp)
       try container.encodeIfPresent(self.ddosProtectionConfig, forKey: .ddosProtectionConfig)
       try container.encodeIfPresent(self.description, forKey: .description)
-      if let v = fingerprint {
+      if let v = self.fingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
-      if let v = labelFingerprint {
+      if let v = self.labelFingerprint {
         try container.encode(
           GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
-      try container.encode(self.labels, forKey: .labels)
+      if !self.labels.isEmpty {
+        try container.encode(self.labels, forKey: .labels)
+      }
       try container.encodeIfPresent(self.name, forKey: .name)
       try container.encodeIfPresent(self.parent, forKey: .parent)
       try container.encodeIfPresent(self.recaptchaOptionsConfig, forKey: .recaptchaOptionsConfig)
       try container.encodeIfPresent(self.region, forKey: .region)
-      try container.encode(self.rules, forKey: .rules)
+      if !self.rules.isEmpty {
+        try container.encode(self.rules, forKey: .rules)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.shortName, forKey: .shortName)
       try container.encodeIfPresent(self.type, forKey: .type)
-      try container.encode(self.userDefinedFields, forKey: .userDefinedFields)
+      if !self.userDefinedFields.isEmpty {
+        try container.encode(self.userDefinedFields, forKey: .userDefinedFields)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

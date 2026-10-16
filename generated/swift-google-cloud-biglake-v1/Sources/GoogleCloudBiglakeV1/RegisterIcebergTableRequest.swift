@@ -95,10 +95,18 @@ public struct RegisterIcebergTableRequest: Codable, Equatable, GoogleWKT._AnyPac
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.metadataLocation, forKey: .metadataLocation)
-    try container.encode(self.overwrite, forKey: .overwrite)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.metadataLocation.isEmpty {
+      try container.encode(self.metadataLocation, forKey: .metadataLocation)
+    }
+    if self.overwrite {
+      try container.encode(self.overwrite, forKey: .overwrite)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

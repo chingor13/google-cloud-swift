@@ -159,7 +159,9 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.annotationId, forKey: .annotationId)
+    if !self.annotationId.isEmpty {
+      try container.encode(self.annotationId, forKey: .annotationId)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.startBoundary, forKey: .startBoundary)
     try container.encodeIfPresent(self.endBoundary, forKey: .endBoundary)
@@ -260,9 +262,15 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.query, forKey: .query)
-      try container.encode(self.generatorName, forKey: .generatorName)
-      try container.encode(self.querySource, forKey: .querySource)
+      if !self.query.isEmpty {
+        try container.encode(self.query, forKey: .query)
+      }
+      if !self.generatorName.isEmpty {
+        try container.encode(self.generatorName, forKey: .generatorName)
+      }
+      if self.querySource != RuntimeAnnotation.UserInput.QuerySource() {
+        try container.encode(self.querySource, forKey: .querySource)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

@@ -93,10 +93,18 @@ public struct ResourceDriftTerraformInfo: Codable, Equatable, GoogleWKT._AnyPack
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.address, forKey: .address)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.resourceName, forKey: .resourceName)
-    try container.encode(self.provider, forKey: .provider)
+    if !self.address.isEmpty {
+      try container.encode(self.address, forKey: .address)
+    }
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.resourceName.isEmpty {
+      try container.encode(self.resourceName, forKey: .resourceName)
+    }
+    if !self.provider.isEmpty {
+      try container.encode(self.provider, forKey: .provider)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

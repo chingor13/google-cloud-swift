@@ -108,11 +108,21 @@ public struct LockInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.lockId, forKey: .lockId)
-    try container.encode(self.operation, forKey: .operation)
-    try container.encode(self.info, forKey: .info)
-    try container.encode(self.who, forKey: .who)
-    try container.encode(self.version, forKey: .version)
+    if self.lockId != 0 {
+      try container.encode(self.lockId, forKey: .lockId)
+    }
+    if !self.operation.isEmpty {
+      try container.encode(self.operation, forKey: .operation)
+    }
+    if !self.info.isEmpty {
+      try container.encode(self.info, forKey: .info)
+    }
+    if !self.who.isEmpty {
+      try container.encode(self.who, forKey: .who)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

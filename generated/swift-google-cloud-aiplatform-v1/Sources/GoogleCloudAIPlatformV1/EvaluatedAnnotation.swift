@@ -189,13 +189,25 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.type, forKey: .type)
-      try container.encode(self.predictions, forKey: .predictions)
-      try container.encode(self.groundTruths, forKey: .groundTruths)
+      if self.type != EvaluatedAnnotation.EvaluatedAnnotationType() {
+        try container.encode(self.type, forKey: .type)
+      }
+      if !self.predictions.isEmpty {
+        try container.encode(self.predictions, forKey: .predictions)
+      }
+      if !self.groundTruths.isEmpty {
+        try container.encode(self.groundTruths, forKey: .groundTruths)
+      }
       try container.encodeIfPresent(self.dataItemPayload, forKey: .dataItemPayload)
-      try container.encode(self.evaluatedDataItemViewId, forKey: .evaluatedDataItemViewId)
-      try container.encode(self.explanations, forKey: .explanations)
-      try container.encode(self.errorAnalysisAnnotations, forKey: .errorAnalysisAnnotations)
+      if !self.evaluatedDataItemViewId.isEmpty {
+        try container.encode(self.evaluatedDataItemViewId, forKey: .evaluatedDataItemViewId)
+      }
+      if !self.explanations.isEmpty {
+        try container.encode(self.explanations, forKey: .explanations)
+      }
+      if !self.errorAnalysisAnnotations.isEmpty {
+        try container.encode(self.errorAnalysisAnnotations, forKey: .errorAnalysisAnnotations)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

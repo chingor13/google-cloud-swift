@@ -138,15 +138,31 @@ public struct AutonomousDatabaseConnectionUrls: Codable, Equatable, GoogleWKT._A
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.apexUri, forKey: .apexUri)
-    try container.encode(self.databaseTransformsUri, forKey: .databaseTransformsUri)
-    try container.encode(self.graphStudioUri, forKey: .graphStudioUri)
-    try container.encode(self.machineLearningNotebookUri, forKey: .machineLearningNotebookUri)
-    try container.encode(
-      self.machineLearningUserManagementUri, forKey: .machineLearningUserManagementUri)
-    try container.encode(self.mongoDbUri, forKey: .mongoDbUri)
-    try container.encode(self.ordsUri, forKey: .ordsUri)
-    try container.encode(self.sqlDevWebUri, forKey: .sqlDevWebUri)
+    if !self.apexUri.isEmpty {
+      try container.encode(self.apexUri, forKey: .apexUri)
+    }
+    if !self.databaseTransformsUri.isEmpty {
+      try container.encode(self.databaseTransformsUri, forKey: .databaseTransformsUri)
+    }
+    if !self.graphStudioUri.isEmpty {
+      try container.encode(self.graphStudioUri, forKey: .graphStudioUri)
+    }
+    if !self.machineLearningNotebookUri.isEmpty {
+      try container.encode(self.machineLearningNotebookUri, forKey: .machineLearningNotebookUri)
+    }
+    if !self.machineLearningUserManagementUri.isEmpty {
+      try container.encode(
+        self.machineLearningUserManagementUri, forKey: .machineLearningUserManagementUri)
+    }
+    if !self.mongoDbUri.isEmpty {
+      try container.encode(self.mongoDbUri, forKey: .mongoDbUri)
+    }
+    if !self.ordsUri.isEmpty {
+      try container.encode(self.ordsUri, forKey: .ordsUri)
+    }
+    if !self.sqlDevWebUri.isEmpty {
+      try container.encode(self.sqlDevWebUri, forKey: .sqlDevWebUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

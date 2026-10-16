@@ -146,11 +146,21 @@ public struct Settings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
-    try container.encode(self.kmsServiceAccountId, forKey: .kmsServiceAccountId)
-    try container.encode(self.storageLocation, forKey: .storageLocation)
-    try container.encode(self.disableDefaultSink, forKey: .disableDefaultSink)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.kmsKeyName.isEmpty {
+      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+    }
+    if !self.kmsServiceAccountId.isEmpty {
+      try container.encode(self.kmsServiceAccountId, forKey: .kmsServiceAccountId)
+    }
+    if !self.storageLocation.isEmpty {
+      try container.encode(self.storageLocation, forKey: .storageLocation)
+    }
+    if self.disableDefaultSink {
+      try container.encode(self.disableDefaultSink, forKey: .disableDefaultSink)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

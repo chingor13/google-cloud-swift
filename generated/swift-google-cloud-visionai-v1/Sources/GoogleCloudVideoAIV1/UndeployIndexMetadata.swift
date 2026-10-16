@@ -77,7 +77,9 @@ public struct UndeployIndexMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.operationMetadata, forKey: .operationMetadata)
-    try container.encode(self.deployedIndex, forKey: .deployedIndex)
+    if !self.deployedIndex.isEmpty {
+      try container.encode(self.deployedIndex, forKey: .deployedIndex)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

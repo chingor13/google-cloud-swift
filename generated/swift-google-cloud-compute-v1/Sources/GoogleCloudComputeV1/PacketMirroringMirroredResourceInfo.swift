@@ -100,9 +100,15 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.instances, forKey: .instances)
-      try container.encode(self.subnetworks, forKey: .subnetworks)
-      try container.encode(self.tags, forKey: .tags)
+      if !self.instances.isEmpty {
+        try container.encode(self.instances, forKey: .instances)
+      }
+      if !self.subnetworks.isEmpty {
+        try container.encode(self.subnetworks, forKey: .subnetworks)
+      }
+      if !self.tags.isEmpty {
+        try container.encode(self.tags, forKey: .tags)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

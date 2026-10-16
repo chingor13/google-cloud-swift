@@ -85,7 +85,9 @@ public struct RuleEngineOutput: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.documentName, forKey: .documentName)
+    if !self.documentName.isEmpty {
+      try container.encode(self.documentName, forKey: .documentName)
+    }
     try container.encodeIfPresent(self.ruleEvaluatorOutput, forKey: .ruleEvaluatorOutput)
     try container.encodeIfPresent(self.actionExecutorOutput, forKey: .actionExecutorOutput)
     for (key, value) in self._unknownFields.json {

@@ -85,9 +85,15 @@ public struct GamLiveConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.networkCode, forKey: .networkCode)
-    try container.encode(self.assetKey, forKey: .assetKey)
-    try container.encode(self.customAssetKey, forKey: .customAssetKey)
+    if !self.networkCode.isEmpty {
+      try container.encode(self.networkCode, forKey: .networkCode)
+    }
+    if !self.assetKey.isEmpty {
+      try container.encode(self.assetKey, forKey: .assetKey)
+    }
+    if !self.customAssetKey.isEmpty {
+      try container.encode(self.customAssetKey, forKey: .customAssetKey)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

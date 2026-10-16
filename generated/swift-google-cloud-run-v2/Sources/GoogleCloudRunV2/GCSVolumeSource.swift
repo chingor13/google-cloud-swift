@@ -87,9 +87,15 @@ public struct GCSVolumeSource: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.bucket, forKey: .bucket)
-    try container.encode(self.readOnly, forKey: .readOnly)
-    try container.encode(self.mountOptions, forKey: .mountOptions)
+    if !self.bucket.isEmpty {
+      try container.encode(self.bucket, forKey: .bucket)
+    }
+    if self.readOnly {
+      try container.encode(self.readOnly, forKey: .readOnly)
+    }
+    if !self.mountOptions.isEmpty {
+      try container.encode(self.mountOptions, forKey: .mountOptions)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -96,8 +96,12 @@ public struct AdvanceRolloutRule: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.id, forKey: .id)
-    try container.encode(self.sourcePhases, forKey: .sourcePhases)
+    if !self.id.isEmpty {
+      try container.encode(self.id, forKey: .id)
+    }
+    if !self.sourcePhases.isEmpty {
+      try container.encode(self.sourcePhases, forKey: .sourcePhases)
+    }
     try container.encodeIfPresent(self.wait, forKey: .wait)
     try container.encodeIfPresent(self.condition, forKey: .condition)
     for (key, value) in self._unknownFields.json {

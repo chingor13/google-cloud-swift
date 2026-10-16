@@ -137,13 +137,25 @@ public struct Container: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.type, forKey: .type)
-    try container.encode(self.projectId, forKey: .projectId)
-    try container.encode(self.fullPath, forKey: .fullPath)
-    try container.encode(self.rootPath, forKey: .rootPath)
-    try container.encode(self.relativePath, forKey: .relativePath)
+    if !self.type.isEmpty {
+      try container.encode(self.type, forKey: .type)
+    }
+    if !self.projectId.isEmpty {
+      try container.encode(self.projectId, forKey: .projectId)
+    }
+    if !self.fullPath.isEmpty {
+      try container.encode(self.fullPath, forKey: .fullPath)
+    }
+    if !self.rootPath.isEmpty {
+      try container.encode(self.rootPath, forKey: .rootPath)
+    }
+    if !self.relativePath.isEmpty {
+      try container.encode(self.relativePath, forKey: .relativePath)
+    }
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.version, forKey: .version)
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

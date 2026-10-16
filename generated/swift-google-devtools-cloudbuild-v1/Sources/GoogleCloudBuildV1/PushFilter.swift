@@ -96,7 +96,9 @@ public struct PushFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.invertRegex, forKey: .invertRegex)
+    if self.invertRegex {
+      try container.encode(self.invertRegex, forKey: .invertRegex)
+    }
 
     if let choice = self.gitRef {
       switch choice {

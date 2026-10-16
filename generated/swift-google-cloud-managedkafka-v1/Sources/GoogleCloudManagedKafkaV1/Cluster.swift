@@ -153,13 +153,19 @@ public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.labels, forKey: .labels)
+    if !self.labels.isEmpty {
+      try container.encode(self.labels, forKey: .labels)
+    }
     try container.encodeIfPresent(self.capacityConfig, forKey: .capacityConfig)
     try container.encodeIfPresent(self.rebalanceConfig, forKey: .rebalanceConfig)
-    try container.encode(self.state, forKey: .state)
+    if self.state != Cluster.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.satisfiesPzi, forKey: .satisfiesPzi)
     try container.encodeIfPresent(self.satisfiesPzs, forKey: .satisfiesPzs)
     try container.encodeIfPresent(self.tlsConfig, forKey: .tlsConfig)

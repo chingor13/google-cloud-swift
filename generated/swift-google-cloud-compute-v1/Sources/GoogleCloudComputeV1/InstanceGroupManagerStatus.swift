@@ -131,7 +131,10 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.allInstancesConfig, forKey: .allInstancesConfig)
-      try container.encode(self.appliedAcceleratorTopologies, forKey: .appliedAcceleratorTopologies)
+      if !self.appliedAcceleratorTopologies.isEmpty {
+        try container.encode(
+          self.appliedAcceleratorTopologies, forKey: .appliedAcceleratorTopologies)
+      }
       try container.encodeIfPresent(self.autoscaler, forKey: .autoscaler)
       try container.encodeIfPresent(self.bulkInstanceOperation, forKey: .bulkInstanceOperation)
       try container.encodeIfPresent(self.currentInstanceStatuses, forKey: .currentInstanceStatuses)

@@ -87,9 +87,13 @@ public struct CreateDatabaseRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
     try container.encodeIfPresent(self.database, forKey: .database)
-    try container.encode(self.databaseId, forKey: .databaseId)
+    if !self.databaseId.isEmpty {
+      try container.encode(self.databaseId, forKey: .databaseId)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

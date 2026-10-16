@@ -173,17 +173,37 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-      try container.encode(self.invalidUris, forKey: .invalidUris)
-      try container.encode(self.invalidUrisCount, forKey: .invalidUrisCount)
-      try container.encode(self.noindexUris, forKey: .noindexUris)
-      try container.encode(self.noindexUrisCount, forKey: .noindexUrisCount)
-      try container.encode(self.urisNotMatchingTargetSites, forKey: .urisNotMatchingTargetSites)
-      try container.encode(
-        self.urisNotMatchingTargetSitesCount, forKey: .urisNotMatchingTargetSitesCount)
-      try container.encode(self.validUrisCount, forKey: .validUrisCount)
-      try container.encode(self.successCount, forKey: .successCount)
-      try container.encode(self.pendingCount, forKey: .pendingCount)
-      try container.encode(self.quotaExceededCount, forKey: .quotaExceededCount)
+      if !self.invalidUris.isEmpty {
+        try container.encode(self.invalidUris, forKey: .invalidUris)
+      }
+      if self.invalidUrisCount != 0 {
+        try container.encode(self.invalidUrisCount, forKey: .invalidUrisCount)
+      }
+      if !self.noindexUris.isEmpty {
+        try container.encode(self.noindexUris, forKey: .noindexUris)
+      }
+      if self.noindexUrisCount != 0 {
+        try container.encode(self.noindexUrisCount, forKey: .noindexUrisCount)
+      }
+      if !self.urisNotMatchingTargetSites.isEmpty {
+        try container.encode(self.urisNotMatchingTargetSites, forKey: .urisNotMatchingTargetSites)
+      }
+      if self.urisNotMatchingTargetSitesCount != 0 {
+        try container.encode(
+          self.urisNotMatchingTargetSitesCount, forKey: .urisNotMatchingTargetSitesCount)
+      }
+      if self.validUrisCount != 0 {
+        try container.encode(self.validUrisCount, forKey: .validUrisCount)
+      }
+      if self.successCount != 0 {
+        try container.encode(self.successCount, forKey: .successCount)
+      }
+      if self.pendingCount != 0 {
+        try container.encode(self.pendingCount, forKey: .pendingCount)
+      }
+      if self.quotaExceededCount != 0 {
+        try container.encode(self.quotaExceededCount, forKey: .quotaExceededCount)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

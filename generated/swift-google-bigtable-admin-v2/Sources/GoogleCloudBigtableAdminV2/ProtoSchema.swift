@@ -83,7 +83,9 @@ public struct ProtoSchema: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.protoDescriptors, forKey: .protoDescriptors)
+    if !self.protoDescriptors.isEmpty {
+      try container.encode(self.protoDescriptors, forKey: .protoDescriptors)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

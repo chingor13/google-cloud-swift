@@ -115,11 +115,21 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.datastore, forKey: .datastore)
-      try container.encode(self.engine, forKey: .engine)
-      try container.encode(self.maxResults, forKey: .maxResults)
-      try container.encode(self.filter, forKey: .filter)
-      try container.encode(self.dataStoreSpecs, forKey: .dataStoreSpecs)
+      if !self.datastore.isEmpty {
+        try container.encode(self.datastore, forKey: .datastore)
+      }
+      if !self.engine.isEmpty {
+        try container.encode(self.engine, forKey: .engine)
+      }
+      if self.maxResults != 0 {
+        try container.encode(self.maxResults, forKey: .maxResults)
+      }
+      if !self.filter.isEmpty {
+        try container.encode(self.filter, forKey: .filter)
+      }
+      if !self.dataStoreSpecs.isEmpty {
+        try container.encode(self.dataStoreSpecs, forKey: .dataStoreSpecs)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -191,8 +201,12 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.dataStore, forKey: .dataStore)
-        try container.encode(self.filter, forKey: .filter)
+        if !self.dataStore.isEmpty {
+          try container.encode(self.dataStore, forKey: .dataStore)
+        }
+        if !self.filter.isEmpty {
+          try container.encode(self.filter, forKey: .filter)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

@@ -94,9 +94,15 @@ public struct PrivateClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.enablePrivateEndpoint, forKey: .enablePrivateEndpoint)
-    try container.encode(self.masterIpv4CidrBlock, forKey: .masterIpv4CidrBlock)
-    try container.encode(self.masterIpv4ReservedRange, forKey: .masterIpv4ReservedRange)
+    if self.enablePrivateEndpoint {
+      try container.encode(self.enablePrivateEndpoint, forKey: .enablePrivateEndpoint)
+    }
+    if !self.masterIpv4CidrBlock.isEmpty {
+      try container.encode(self.masterIpv4CidrBlock, forKey: .masterIpv4CidrBlock)
+    }
+    if !self.masterIpv4ReservedRange.isEmpty {
+      try container.encode(self.masterIpv4ReservedRange, forKey: .masterIpv4ReservedRange)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

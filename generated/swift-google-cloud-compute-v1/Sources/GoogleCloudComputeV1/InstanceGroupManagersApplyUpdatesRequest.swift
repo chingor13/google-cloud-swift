@@ -128,7 +128,9 @@
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encodeIfPresent(self.allInstances, forKey: .allInstances)
-      try container.encode(self.instances, forKey: .instances)
+      if !self.instances.isEmpty {
+        try container.encode(self.instances, forKey: .instances)
+      }
       try container.encodeIfPresent(self.minimalAction, forKey: .minimalAction)
       try container.encodeIfPresent(
         self.mostDisruptiveAllowedAction, forKey: .mostDisruptiveAllowedAction)

@@ -208,17 +208,39 @@ public struct Finding: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.findingType, forKey: .findingType)
-    try container.encode(self.severity, forKey: .severity)
-    try container.encode(self.httpMethod, forKey: .httpMethod)
-    try container.encode(self.fuzzedUrl, forKey: .fuzzedUrl)
-    try container.encode(self.body, forKey: .body)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.reproductionUrl, forKey: .reproductionUrl)
-    try container.encode(self.frameUrl, forKey: .frameUrl)
-    try container.encode(self.finalUrl, forKey: .finalUrl)
-    try container.encode(self.trackingId, forKey: .trackingId)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.findingType.isEmpty {
+      try container.encode(self.findingType, forKey: .findingType)
+    }
+    if self.severity != Finding.Severity() {
+      try container.encode(self.severity, forKey: .severity)
+    }
+    if !self.httpMethod.isEmpty {
+      try container.encode(self.httpMethod, forKey: .httpMethod)
+    }
+    if !self.fuzzedUrl.isEmpty {
+      try container.encode(self.fuzzedUrl, forKey: .fuzzedUrl)
+    }
+    if !self.body.isEmpty {
+      try container.encode(self.body, forKey: .body)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.reproductionUrl.isEmpty {
+      try container.encode(self.reproductionUrl, forKey: .reproductionUrl)
+    }
+    if !self.frameUrl.isEmpty {
+      try container.encode(self.frameUrl, forKey: .frameUrl)
+    }
+    if !self.finalUrl.isEmpty {
+      try container.encode(self.finalUrl, forKey: .finalUrl)
+    }
+    if !self.trackingId.isEmpty {
+      try container.encode(self.trackingId, forKey: .trackingId)
+    }
     try container.encodeIfPresent(self.form, forKey: .form)
     try container.encodeIfPresent(self.outdatedLibrary, forKey: .outdatedLibrary)
     try container.encodeIfPresent(self.violatingResource, forKey: .violatingResource)

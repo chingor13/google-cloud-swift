@@ -177,18 +177,40 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.runInterruptionAnnotator, forKey: .runInterruptionAnnotator)
-    try container.encode(self.runSilenceAnnotator, forKey: .runSilenceAnnotator)
-    try container.encode(self.runPhraseMatcherAnnotator, forKey: .runPhraseMatcherAnnotator)
-    try container.encode(self.phraseMatchers, forKey: .phraseMatchers)
-    try container.encode(self.runSentimentAnnotator, forKey: .runSentimentAnnotator)
-    try container.encode(self.runEntityAnnotator, forKey: .runEntityAnnotator)
-    try container.encode(self.runIntentAnnotator, forKey: .runIntentAnnotator)
-    try container.encode(self.runIssueModelAnnotator, forKey: .runIssueModelAnnotator)
-    try container.encode(self.issueModels, forKey: .issueModels)
-    try container.encode(self.runSummarizationAnnotator, forKey: .runSummarizationAnnotator)
+    if self.runInterruptionAnnotator {
+      try container.encode(self.runInterruptionAnnotator, forKey: .runInterruptionAnnotator)
+    }
+    if self.runSilenceAnnotator {
+      try container.encode(self.runSilenceAnnotator, forKey: .runSilenceAnnotator)
+    }
+    if self.runPhraseMatcherAnnotator {
+      try container.encode(self.runPhraseMatcherAnnotator, forKey: .runPhraseMatcherAnnotator)
+    }
+    if !self.phraseMatchers.isEmpty {
+      try container.encode(self.phraseMatchers, forKey: .phraseMatchers)
+    }
+    if self.runSentimentAnnotator {
+      try container.encode(self.runSentimentAnnotator, forKey: .runSentimentAnnotator)
+    }
+    if self.runEntityAnnotator {
+      try container.encode(self.runEntityAnnotator, forKey: .runEntityAnnotator)
+    }
+    if self.runIntentAnnotator {
+      try container.encode(self.runIntentAnnotator, forKey: .runIntentAnnotator)
+    }
+    if self.runIssueModelAnnotator {
+      try container.encode(self.runIssueModelAnnotator, forKey: .runIssueModelAnnotator)
+    }
+    if !self.issueModels.isEmpty {
+      try container.encode(self.issueModels, forKey: .issueModels)
+    }
+    if self.runSummarizationAnnotator {
+      try container.encode(self.runSummarizationAnnotator, forKey: .runSummarizationAnnotator)
+    }
     try container.encodeIfPresent(self.summarizationConfig, forKey: .summarizationConfig)
-    try container.encode(self.runQaAnnotator, forKey: .runQaAnnotator)
+    if self.runQaAnnotator {
+      try container.encode(self.runQaAnnotator, forKey: .runQaAnnotator)
+    }
     try container.encodeIfPresent(self.qaConfig, forKey: .qaConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -566,7 +588,9 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.qaScorecardRevisions, forKey: .qaScorecardRevisions)
+        if !self.qaScorecardRevisions.isEmpty {
+          try container.encode(self.qaScorecardRevisions, forKey: .qaScorecardRevisions)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }

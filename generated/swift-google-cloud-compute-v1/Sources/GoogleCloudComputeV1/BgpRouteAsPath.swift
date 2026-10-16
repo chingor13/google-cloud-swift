@@ -86,8 +86,12 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.asns, forKey: .asns)
-      try container.encode(self.asns32, forKey: .asns32)
+      if !self.asns.isEmpty {
+        try container.encode(self.asns, forKey: .asns)
+      }
+      if !self.asns32.isEmpty {
+        try container.encode(self.asns32, forKey: .asns32)
+      }
       try container.encodeIfPresent(self.type, forKey: .type)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

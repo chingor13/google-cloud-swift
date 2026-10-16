@@ -126,11 +126,21 @@ public struct MavenArtifact: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.pomUri, forKey: .pomUri)
-    try container.encode(self.groupId, forKey: .groupId)
-    try container.encode(self.artifactId, forKey: .artifactId)
-    try container.encode(self.version, forKey: .version)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.pomUri.isEmpty {
+      try container.encode(self.pomUri, forKey: .pomUri)
+    }
+    if !self.groupId.isEmpty {
+      try container.encode(self.groupId, forKey: .groupId)
+    }
+    if !self.artifactId.isEmpty {
+      try container.encode(self.artifactId, forKey: .artifactId)
+    }
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {

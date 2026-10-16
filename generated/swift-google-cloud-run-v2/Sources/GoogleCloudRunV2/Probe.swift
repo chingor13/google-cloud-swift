@@ -131,10 +131,18 @@ public struct Probe: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.initialDelaySeconds, forKey: .initialDelaySeconds)
-    try container.encode(self.timeoutSeconds, forKey: .timeoutSeconds)
-    try container.encode(self.periodSeconds, forKey: .periodSeconds)
-    try container.encode(self.failureThreshold, forKey: .failureThreshold)
+    if self.initialDelaySeconds != 0 {
+      try container.encode(self.initialDelaySeconds, forKey: .initialDelaySeconds)
+    }
+    if self.timeoutSeconds != 0 {
+      try container.encode(self.timeoutSeconds, forKey: .timeoutSeconds)
+    }
+    if self.periodSeconds != 0 {
+      try container.encode(self.periodSeconds, forKey: .periodSeconds)
+    }
+    if self.failureThreshold != 0 {
+      try container.encode(self.failureThreshold, forKey: .failureThreshold)
+    }
 
     if let choice = self.probeType {
       switch choice {

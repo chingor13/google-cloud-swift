@@ -92,8 +92,12 @@ public struct InstanceFlexibilityPolicy: Codable, Equatable, GoogleWKT._AnyPacka
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.provisioningModelMix, forKey: .provisioningModelMix)
-    try container.encode(self.instanceSelectionList, forKey: .instanceSelectionList)
-    try container.encode(self.instanceSelectionResults, forKey: .instanceSelectionResults)
+    if !self.instanceSelectionList.isEmpty {
+      try container.encode(self.instanceSelectionList, forKey: .instanceSelectionList)
+    }
+    if !self.instanceSelectionResults.isEmpty {
+      try container.encode(self.instanceSelectionResults, forKey: .instanceSelectionResults)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -275,8 +279,12 @@ public struct InstanceFlexibilityPolicy: Codable, Equatable, GoogleWKT._AnyPacka
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.machineTypes, forKey: .machineTypes)
-      try container.encode(self.rank, forKey: .rank)
+      if !self.machineTypes.isEmpty {
+        try container.encode(self.machineTypes, forKey: .machineTypes)
+      }
+      if self.rank != 0 {
+        try container.encode(self.rank, forKey: .rank)
+      }
       try container.encodeIfPresent(self.diskConfig, forKey: .diskConfig)
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))

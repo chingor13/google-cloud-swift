@@ -190,11 +190,15 @@
       try container.encodeIfPresent(self.defaultNetworkTier, forKey: .defaultNetworkTier)
       try container.encodeIfPresent(self.defaultServiceAccount, forKey: .defaultServiceAccount)
       try container.encodeIfPresent(self.description, forKey: .description)
-      try container.encode(self.enabledFeatures, forKey: .enabledFeatures)
+      if !self.enabledFeatures.isEmpty {
+        try container.encode(self.enabledFeatures, forKey: .enabledFeatures)
+      }
       try container.encodeIfPresent(self.id, forKey: .id)
       try container.encodeIfPresent(self.kind, forKey: .kind)
       try container.encodeIfPresent(self.name, forKey: .name)
-      try container.encode(self.quotas, forKey: .quotas)
+      if !self.quotas.isEmpty {
+        try container.encode(self.quotas, forKey: .quotas)
+      }
       try container.encodeIfPresent(self.selfLink, forKey: .selfLink)
       try container.encodeIfPresent(self.usageExportLocation, forKey: .usageExportLocation)
       try container.encodeIfPresent(self.vmDnsSetting, forKey: .vmDnsSetting)

@@ -207,22 +207,52 @@ public struct QuotaInfo: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.quotaId, forKey: .quotaId)
-    try container.encode(self.metric, forKey: .metric)
-    try container.encode(self.service, forKey: .service)
-    try container.encode(self.isPrecise, forKey: .isPrecise)
-    try container.encode(self.refreshInterval, forKey: .refreshInterval)
-    try container.encode(self.containerType, forKey: .containerType)
-    try container.encode(self.dimensions, forKey: .dimensions)
-    try container.encode(self.metricDisplayName, forKey: .metricDisplayName)
-    try container.encode(self.quotaDisplayName, forKey: .quotaDisplayName)
-    try container.encode(self.metricUnit, forKey: .metricUnit)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.quotaId.isEmpty {
+      try container.encode(self.quotaId, forKey: .quotaId)
+    }
+    if !self.metric.isEmpty {
+      try container.encode(self.metric, forKey: .metric)
+    }
+    if !self.service.isEmpty {
+      try container.encode(self.service, forKey: .service)
+    }
+    if self.isPrecise {
+      try container.encode(self.isPrecise, forKey: .isPrecise)
+    }
+    if !self.refreshInterval.isEmpty {
+      try container.encode(self.refreshInterval, forKey: .refreshInterval)
+    }
+    if self.containerType != QuotaInfo.ContainerType() {
+      try container.encode(self.containerType, forKey: .containerType)
+    }
+    if !self.dimensions.isEmpty {
+      try container.encode(self.dimensions, forKey: .dimensions)
+    }
+    if !self.metricDisplayName.isEmpty {
+      try container.encode(self.metricDisplayName, forKey: .metricDisplayName)
+    }
+    if !self.quotaDisplayName.isEmpty {
+      try container.encode(self.quotaDisplayName, forKey: .quotaDisplayName)
+    }
+    if !self.metricUnit.isEmpty {
+      try container.encode(self.metricUnit, forKey: .metricUnit)
+    }
     try container.encodeIfPresent(self.quotaIncreaseEligibility, forKey: .quotaIncreaseEligibility)
-    try container.encode(self.isFixed, forKey: .isFixed)
-    try container.encode(self.dimensionsInfos, forKey: .dimensionsInfos)
-    try container.encode(self.isConcurrent, forKey: .isConcurrent)
-    try container.encode(self.serviceRequestQuotaUri, forKey: .serviceRequestQuotaUri)
+    if self.isFixed {
+      try container.encode(self.isFixed, forKey: .isFixed)
+    }
+    if !self.dimensionsInfos.isEmpty {
+      try container.encode(self.dimensionsInfos, forKey: .dimensionsInfos)
+    }
+    if self.isConcurrent {
+      try container.encode(self.isConcurrent, forKey: .isConcurrent)
+    }
+    if !self.serviceRequestQuotaUri.isEmpty {
+      try container.encode(self.serviceRequestQuotaUri, forKey: .serviceRequestQuotaUri)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

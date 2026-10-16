@@ -166,15 +166,33 @@ public struct Attribute: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.displayName, forKey: .displayName)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.definitionType, forKey: .definitionType)
-    try container.encode(self.scope, forKey: .scope)
-    try container.encode(self.dataType, forKey: .dataType)
-    try container.encode(self.allowedValues, forKey: .allowedValues)
-    try container.encode(self.cardinality, forKey: .cardinality)
-    try container.encode(self.mandatory, forKey: .mandatory)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.displayName.isEmpty {
+      try container.encode(self.displayName, forKey: .displayName)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if self.definitionType != Attribute.DefinitionType() {
+      try container.encode(self.definitionType, forKey: .definitionType)
+    }
+    if self.scope != Attribute.Scope() {
+      try container.encode(self.scope, forKey: .scope)
+    }
+    if self.dataType != Attribute.DataType() {
+      try container.encode(self.dataType, forKey: .dataType)
+    }
+    if !self.allowedValues.isEmpty {
+      try container.encode(self.allowedValues, forKey: .allowedValues)
+    }
+    if self.cardinality != 0 {
+      try container.encode(self.cardinality, forKey: .cardinality)
+    }
+    if self.mandatory {
+      try container.encode(self.mandatory, forKey: .mandatory)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     for (key, value) in self._unknownFields.json {
@@ -269,10 +287,18 @@ public struct Attribute: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.id, forKey: .id)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.description, forKey: .description)
-      try container.encode(self.immutable, forKey: .immutable)
+      if !self.id.isEmpty {
+        try container.encode(self.id, forKey: .id)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.description.isEmpty {
+        try container.encode(self.description, forKey: .description)
+      }
+      if self.immutable {
+        try container.encode(self.immutable, forKey: .immutable)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

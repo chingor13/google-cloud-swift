@@ -88,9 +88,15 @@ public struct ValueListFilter: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.valuePresentList, forKey: .valuePresentList)
-    try container.encode(self.values, forKey: .values)
-    try container.encode(self.ignoreCase, forKey: .ignoreCase)
+    if self.valuePresentList != ValuePresentInList() {
+      try container.encode(self.valuePresentList, forKey: .valuePresentList)
+    }
+    if !self.values.isEmpty {
+      try container.encode(self.values, forKey: .values)
+    }
+    if self.ignoreCase {
+      try container.encode(self.ignoreCase, forKey: .ignoreCase)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

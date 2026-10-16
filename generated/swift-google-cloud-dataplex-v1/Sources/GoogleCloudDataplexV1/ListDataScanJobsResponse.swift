@@ -79,8 +79,12 @@ public struct ListDataScanJobsResponse: Codable, Equatable, GoogleWKT._AnyPackab
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.dataScanJobs, forKey: .dataScanJobs)
-    try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    if !self.dataScanJobs.isEmpty {
+      try container.encode(self.dataScanJobs, forKey: .dataScanJobs)
+    }
+    if !self.nextPageToken.isEmpty {
+      try container.encode(self.nextPageToken, forKey: .nextPageToken)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -104,8 +104,12 @@ public struct Aspect: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.aspectType, forKey: .aspectType)
-    try container.encode(self.path, forKey: .path)
+    if !self.aspectType.isEmpty {
+      try container.encode(self.aspectType, forKey: .aspectType)
+    }
+    if !self.path.isEmpty {
+      try container.encode(self.path, forKey: .path)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
     try container.encodeIfPresent(self.data, forKey: .data)

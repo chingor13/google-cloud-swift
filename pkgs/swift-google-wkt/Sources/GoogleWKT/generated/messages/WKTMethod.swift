@@ -116,13 +116,27 @@ public struct WKTMethod: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.requestTypeUrl, forKey: .requestTypeUrl)
-    try container.encode(self.requestStreaming, forKey: .requestStreaming)
-    try container.encode(self.responseTypeUrl, forKey: .responseTypeUrl)
-    try container.encode(self.responseStreaming, forKey: .responseStreaming)
-    try container.encode(self.options, forKey: .options)
-    try container.encode(self.syntax, forKey: .syntax)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.requestTypeUrl.isEmpty {
+      try container.encode(self.requestTypeUrl, forKey: .requestTypeUrl)
+    }
+    if self.requestStreaming {
+      try container.encode(self.requestStreaming, forKey: .requestStreaming)
+    }
+    if !self.responseTypeUrl.isEmpty {
+      try container.encode(self.responseTypeUrl, forKey: .responseTypeUrl)
+    }
+    if self.responseStreaming {
+      try container.encode(self.responseStreaming, forKey: .responseStreaming)
+    }
+    if !self.options.isEmpty {
+      try container.encode(self.options, forKey: .options)
+    }
+    if self.syntax != WKTSyntax() {
+      try container.encode(self.syntax, forKey: .syntax)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

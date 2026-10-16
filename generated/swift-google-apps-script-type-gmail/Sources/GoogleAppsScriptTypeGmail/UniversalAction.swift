@@ -97,7 +97,9 @@ public struct UniversalAction: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.text, forKey: .text)
+    if !self.text.isEmpty {
+      try container.encode(self.text, forKey: .text)
+    }
 
     if let choice = self.actionType {
       switch choice {

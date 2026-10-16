@@ -92,7 +92,9 @@ public struct AddChartRequest: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
     try container.encodeIfPresent(self.dashboardQuery, forKey: .dashboardQuery)
     try container.encodeIfPresent(self.dashboardChart, forKey: .dashboardChart)
     try container.encodeIfPresent(self.chartLayout, forKey: .chartLayout)

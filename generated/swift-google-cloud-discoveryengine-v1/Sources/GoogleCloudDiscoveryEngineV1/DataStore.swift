@@ -290,28 +290,46 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.industryVertical, forKey: .industryVertical)
-      try container.encode(self.solutionTypes, forKey: .solutionTypes)
-      try container.encode(self.defaultSchemaId, forKey: .defaultSchemaId)
-      try container.encode(self.contentConfig, forKey: .contentConfig)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if self.industryVertical != IndustryVertical() {
+        try container.encode(self.industryVertical, forKey: .industryVertical)
+      }
+      if !self.solutionTypes.isEmpty {
+        try container.encode(self.solutionTypes, forKey: .solutionTypes)
+      }
+      if !self.defaultSchemaId.isEmpty {
+        try container.encode(self.defaultSchemaId, forKey: .defaultSchemaId)
+      }
+      if self.contentConfig != DataStore.ContentConfig() {
+        try container.encode(self.contentConfig, forKey: .contentConfig)
+      }
       try container.encodeIfPresent(self.createTime, forKey: .createTime)
       try container.encodeIfPresent(
         self.advancedSiteSearchConfig, forKey: .advancedSiteSearchConfig)
       try container.encodeIfPresent(
         self.naturalLanguageQueryUnderstandingConfig,
         forKey: .naturalLanguageQueryUnderstandingConfig)
-      try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+      if !self.kmsKeyName.isEmpty {
+        try container.encode(self.kmsKeyName, forKey: .kmsKeyName)
+      }
       try container.encodeIfPresent(self.cmekConfig, forKey: .cmekConfig)
       try container.encodeIfPresent(self.billingEstimation, forKey: .billingEstimation)
-      try container.encode(self.aclEnabled, forKey: .aclEnabled)
+      if self.aclEnabled {
+        try container.encode(self.aclEnabled, forKey: .aclEnabled)
+      }
       try container.encodeIfPresent(self.workspaceConfig, forKey: .workspaceConfig)
       try container.encodeIfPresent(
         self.documentProcessingConfig, forKey: .documentProcessingConfig)
       try container.encodeIfPresent(self.startingSchema, forKey: .startingSchema)
       try container.encodeIfPresent(self.healthcareFhirConfig, forKey: .healthcareFhirConfig)
-      try container.encode(self.identityMappingStore, forKey: .identityMappingStore)
+      if !self.identityMappingStore.isEmpty {
+        try container.encode(self.identityMappingStore, forKey: .identityMappingStore)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -410,9 +428,15 @@
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.structuredDataSize, forKey: .structuredDataSize)
-        try container.encode(self.unstructuredDataSize, forKey: .unstructuredDataSize)
-        try container.encode(self.websiteDataSize, forKey: .websiteDataSize)
+        if self.structuredDataSize != 0 {
+          try container.encode(self.structuredDataSize, forKey: .structuredDataSize)
+        }
+        if self.unstructuredDataSize != 0 {
+          try container.encode(self.unstructuredDataSize, forKey: .unstructuredDataSize)
+        }
+        if self.websiteDataSize != 0 {
+          try container.encode(self.websiteDataSize, forKey: .websiteDataSize)
+        }
         try container.encodeIfPresent(
           self.structuredDataUpdateTime, forKey: .structuredDataUpdateTime)
         try container.encodeIfPresent(

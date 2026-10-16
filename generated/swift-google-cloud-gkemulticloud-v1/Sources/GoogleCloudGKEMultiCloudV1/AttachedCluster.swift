@@ -291,30 +291,56 @@ public struct AttachedCluster: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.oidcConfig, forKey: .oidcConfig)
-    try container.encode(self.platformVersion, forKey: .platformVersion)
-    try container.encode(self.distribution, forKey: .distribution)
-    try container.encode(self.clusterRegion, forKey: .clusterRegion)
+    if !self.platformVersion.isEmpty {
+      try container.encode(self.platformVersion, forKey: .platformVersion)
+    }
+    if !self.distribution.isEmpty {
+      try container.encode(self.distribution, forKey: .distribution)
+    }
+    if !self.clusterRegion.isEmpty {
+      try container.encode(self.clusterRegion, forKey: .clusterRegion)
+    }
     try container.encodeIfPresent(self.fleet, forKey: .fleet)
-    try container.encode(self.state, forKey: .state)
-    try container.encode(self.uid, forKey: .uid)
-    try container.encode(self.reconciling, forKey: .reconciling)
+    if self.state != AttachedCluster.State() {
+      try container.encode(self.state, forKey: .state)
+    }
+    if !self.uid.isEmpty {
+      try container.encode(self.uid, forKey: .uid)
+    }
+    if self.reconciling {
+      try container.encode(self.reconciling, forKey: .reconciling)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.etag, forKey: .etag)
-    try container.encode(self.kubernetesVersion, forKey: .kubernetesVersion)
-    try container.encode(self.annotations, forKey: .annotations)
+    if !self.etag.isEmpty {
+      try container.encode(self.etag, forKey: .etag)
+    }
+    if !self.kubernetesVersion.isEmpty {
+      try container.encode(self.kubernetesVersion, forKey: .kubernetesVersion)
+    }
+    if !self.annotations.isEmpty {
+      try container.encode(self.annotations, forKey: .annotations)
+    }
     try container.encodeIfPresent(self.workloadIdentityConfig, forKey: .workloadIdentityConfig)
     try container.encodeIfPresent(self.loggingConfig, forKey: .loggingConfig)
-    try container.encode(self.errors, forKey: .errors)
+    if !self.errors.isEmpty {
+      try container.encode(self.errors, forKey: .errors)
+    }
     try container.encodeIfPresent(self.authorization, forKey: .authorization)
     try container.encodeIfPresent(self.monitoringConfig, forKey: .monitoringConfig)
     try container.encodeIfPresent(self.proxyConfig, forKey: .proxyConfig)
     try container.encodeIfPresent(self.binaryAuthorization, forKey: .binaryAuthorization)
     try container.encodeIfPresent(self.securityPostureConfig, forKey: .securityPostureConfig)
-    try container.encode(self.tags, forKey: .tags)
+    if !self.tags.isEmpty {
+      try container.encode(self.tags, forKey: .tags)
+    }
     try container.encodeIfPresent(self.systemComponentsConfig, forKey: .systemComponentsConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

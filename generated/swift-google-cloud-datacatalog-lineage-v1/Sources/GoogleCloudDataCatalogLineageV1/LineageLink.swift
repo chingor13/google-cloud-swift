@@ -111,10 +111,18 @@ public struct LineageLink: Codable, Equatable, GoogleWKT._AnyPackable,
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.source, forKey: .source)
     try container.encodeIfPresent(self.target, forKey: .target)
-    try container.encode(self.processes, forKey: .processes)
-    try container.encode(self.dependencyInfo, forKey: .dependencyInfo)
-    try container.encode(self.depth, forKey: .depth)
-    try container.encode(self.location, forKey: .location)
+    if !self.processes.isEmpty {
+      try container.encode(self.processes, forKey: .processes)
+    }
+    if !self.dependencyInfo.isEmpty {
+      try container.encode(self.dependencyInfo, forKey: .dependencyInfo)
+    }
+    if self.depth != 0 {
+      try container.encode(self.depth, forKey: .depth)
+    }
+    if !self.location.isEmpty {
+      try container.encode(self.location, forKey: .location)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -250,7 +258,9 @@ public struct LineageLink: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.dependencyType, forKey: .dependencyType)
+      if self.dependencyType != DependencyType() {
+        try container.encode(self.dependencyType, forKey: .dependencyType)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

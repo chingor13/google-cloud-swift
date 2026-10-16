@@ -93,10 +93,18 @@ public struct BaseImage: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.repository, forKey: .repository)
-    try container.encode(self.layerCount, forKey: .layerCount)
-    try container.encode(self.registry, forKey: .registry)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.repository.isEmpty {
+      try container.encode(self.repository, forKey: .repository)
+    }
+    if self.layerCount != 0 {
+      try container.encode(self.layerCount, forKey: .layerCount)
+    }
+    if !self.registry.isEmpty {
+      try container.encode(self.registry, forKey: .registry)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

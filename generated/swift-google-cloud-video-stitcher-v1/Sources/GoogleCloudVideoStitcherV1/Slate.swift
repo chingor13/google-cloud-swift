@@ -85,8 +85,12 @@ public struct Slate: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.uri, forKey: .uri)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.uri.isEmpty {
+      try container.encode(self.uri, forKey: .uri)
+    }
     try container.encodeIfPresent(self.gamSlate, forKey: .gamSlate)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -154,8 +158,12 @@ public struct Slate: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.networkCode, forKey: .networkCode)
-      try container.encode(self.gamSlateId, forKey: .gamSlateId)
+      if !self.networkCode.isEmpty {
+        try container.encode(self.networkCode, forKey: .networkCode)
+      }
+      if self.gamSlateId != 0 {
+        try container.encode(self.gamSlateId, forKey: .gamSlateId)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

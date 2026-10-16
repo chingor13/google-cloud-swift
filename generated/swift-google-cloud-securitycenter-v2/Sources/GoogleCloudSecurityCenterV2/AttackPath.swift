@@ -88,9 +88,15 @@ public struct AttackPath: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.pathNodes, forKey: .pathNodes)
-    try container.encode(self.edges, forKey: .edges)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.pathNodes.isEmpty {
+      try container.encode(self.pathNodes, forKey: .pathNodes)
+    }
+    if !self.edges.isEmpty {
+      try container.encode(self.edges, forKey: .edges)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
@@ -196,12 +202,24 @@ public struct AttackPath: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.resource, forKey: .resource)
-      try container.encode(self.resourceType, forKey: .resourceType)
-      try container.encode(self.displayName, forKey: .displayName)
-      try container.encode(self.associatedFindings, forKey: .associatedFindings)
-      try container.encode(self.uuid, forKey: .uuid)
-      try container.encode(self.attackSteps, forKey: .attackSteps)
+      if !self.resource.isEmpty {
+        try container.encode(self.resource, forKey: .resource)
+      }
+      if !self.resourceType.isEmpty {
+        try container.encode(self.resourceType, forKey: .resourceType)
+      }
+      if !self.displayName.isEmpty {
+        try container.encode(self.displayName, forKey: .displayName)
+      }
+      if !self.associatedFindings.isEmpty {
+        try container.encode(self.associatedFindings, forKey: .associatedFindings)
+      }
+      if !self.uuid.isEmpty {
+        try container.encode(self.uuid, forKey: .uuid)
+      }
+      if !self.attackSteps.isEmpty {
+        try container.encode(self.attackSteps, forKey: .attackSteps)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }
@@ -276,9 +294,15 @@ public struct AttackPath: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.canonicalFinding, forKey: .canonicalFinding)
-        try container.encode(self.findingCategory, forKey: .findingCategory)
-        try container.encode(self.name, forKey: .name)
+        if !self.canonicalFinding.isEmpty {
+          try container.encode(self.canonicalFinding, forKey: .canonicalFinding)
+        }
+        if !self.findingCategory.isEmpty {
+          try container.encode(self.findingCategory, forKey: .findingCategory)
+        }
+        if !self.name.isEmpty {
+          try container.encode(self.name, forKey: .name)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -395,11 +419,21 @@ public struct AttackPath: Codable, Equatable, GoogleWKT._AnyPackable,
 
       public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.uuid, forKey: .uuid)
-        try container.encode(self.type, forKey: .type)
-        try container.encode(self.displayName, forKey: .displayName)
-        try container.encode(self.labels, forKey: .labels)
-        try container.encode(self.description, forKey: .description)
+        if !self.uuid.isEmpty {
+          try container.encode(self.uuid, forKey: .uuid)
+        }
+        if self.type != AttackPath.AttackPathNode.NodeType() {
+          try container.encode(self.type, forKey: .type)
+        }
+        if !self.displayName.isEmpty {
+          try container.encode(self.displayName, forKey: .displayName)
+        }
+        if !self.labels.isEmpty {
+          try container.encode(self.labels, forKey: .labels)
+        }
+        if !self.description.isEmpty {
+          try container.encode(self.description, forKey: .description)
+        }
         for (key, value) in self._unknownFields.json {
           try container.encode(value, forKey: CodingKeys(stringValue: key))
         }
@@ -642,8 +676,12 @@ public struct AttackPath: Codable, Equatable, GoogleWKT._AnyPackable,
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.source, forKey: .source)
-      try container.encode(self.destination, forKey: .destination)
+      if !self.source.isEmpty {
+        try container.encode(self.source, forKey: .source)
+      }
+      if !self.destination.isEmpty {
+        try container.encode(self.destination, forKey: .destination)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

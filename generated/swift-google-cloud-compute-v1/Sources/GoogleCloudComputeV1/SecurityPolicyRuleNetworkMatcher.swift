@@ -137,14 +137,30 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.destIpRanges, forKey: .destIpRanges)
-      try container.encode(self.destPorts, forKey: .destPorts)
-      try container.encode(self.ipProtocols, forKey: .ipProtocols)
-      try container.encode(self.srcAsns, forKey: .srcAsns)
-      try container.encode(self.srcIpRanges, forKey: .srcIpRanges)
-      try container.encode(self.srcPorts, forKey: .srcPorts)
-      try container.encode(self.srcRegionCodes, forKey: .srcRegionCodes)
-      try container.encode(self.userDefinedFields, forKey: .userDefinedFields)
+      if !self.destIpRanges.isEmpty {
+        try container.encode(self.destIpRanges, forKey: .destIpRanges)
+      }
+      if !self.destPorts.isEmpty {
+        try container.encode(self.destPorts, forKey: .destPorts)
+      }
+      if !self.ipProtocols.isEmpty {
+        try container.encode(self.ipProtocols, forKey: .ipProtocols)
+      }
+      if !self.srcAsns.isEmpty {
+        try container.encode(self.srcAsns, forKey: .srcAsns)
+      }
+      if !self.srcIpRanges.isEmpty {
+        try container.encode(self.srcIpRanges, forKey: .srcIpRanges)
+      }
+      if !self.srcPorts.isEmpty {
+        try container.encode(self.srcPorts, forKey: .srcPorts)
+      }
+      if !self.srcRegionCodes.isEmpty {
+        try container.encode(self.srcRegionCodes, forKey: .srcRegionCodes)
+      }
+      if !self.userDefinedFields.isEmpty {
+        try container.encode(self.userDefinedFields, forKey: .userDefinedFields)
+      }
       for (key, value) in self._unknownFields.json {
         try container.encode(value, forKey: CodingKeys(stringValue: key))
       }

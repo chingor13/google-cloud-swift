@@ -124,11 +124,21 @@ public struct ImportAttachedClusterRequest: Codable, Equatable, GoogleWKT._AnyPa
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.parent, forKey: .parent)
-    try container.encode(self.validateOnly, forKey: .validateOnly)
-    try container.encode(self.fleetMembership, forKey: .fleetMembership)
-    try container.encode(self.platformVersion, forKey: .platformVersion)
-    try container.encode(self.distribution, forKey: .distribution)
+    if !self.parent.isEmpty {
+      try container.encode(self.parent, forKey: .parent)
+    }
+    if self.validateOnly {
+      try container.encode(self.validateOnly, forKey: .validateOnly)
+    }
+    if !self.fleetMembership.isEmpty {
+      try container.encode(self.fleetMembership, forKey: .fleetMembership)
+    }
+    if !self.platformVersion.isEmpty {
+      try container.encode(self.platformVersion, forKey: .platformVersion)
+    }
+    if !self.distribution.isEmpty {
+      try container.encode(self.distribution, forKey: .distribution)
+    }
     try container.encodeIfPresent(self.proxyConfig, forKey: .proxyConfig)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

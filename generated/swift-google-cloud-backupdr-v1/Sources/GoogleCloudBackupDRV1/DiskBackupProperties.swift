@@ -133,14 +133,20 @@ public struct DiskBackupProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encodeIfPresent(self.description, forKey: .description)
-    try container.encode(self.licenses, forKey: .licenses)
-    try container.encode(self.guestOsFeature, forKey: .guestOsFeature)
+    if !self.licenses.isEmpty {
+      try container.encode(self.licenses, forKey: .licenses)
+    }
+    if !self.guestOsFeature.isEmpty {
+      try container.encode(self.guestOsFeature, forKey: .guestOsFeature)
+    }
     try container.encodeIfPresent(self.architecture, forKey: .architecture)
     try container.encodeIfPresent(self.type, forKey: .type)
     try container.encodeIfPresent(self.sizeGb, forKey: .sizeGb)
     try container.encodeIfPresent(self.region, forKey: .region)
     try container.encodeIfPresent(self.zone, forKey: .zone)
-    try container.encode(self.replicaZones, forKey: .replicaZones)
+    if !self.replicaZones.isEmpty {
+      try container.encode(self.replicaZones, forKey: .replicaZones)
+    }
     try container.encodeIfPresent(self.sourceDisk, forKey: .sourceDisk)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

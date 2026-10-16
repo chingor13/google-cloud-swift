@@ -162,17 +162,29 @@ public struct McpTool: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.nameOverride, forKey: .nameOverride)
-    try container.encode(self.description, forKey: .description)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.nameOverride.isEmpty {
+      try container.encode(self.nameOverride, forKey: .nameOverride)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
     try container.encodeIfPresent(self.inputSchema, forKey: .inputSchema)
     try container.encodeIfPresent(self.outputSchema, forKey: .outputSchema)
-    try container.encode(self.serverAddress, forKey: .serverAddress)
+    if !self.serverAddress.isEmpty {
+      try container.encode(self.serverAddress, forKey: .serverAddress)
+    }
     try container.encodeIfPresent(self.apiAuthentication, forKey: .apiAuthentication)
     try container.encodeIfPresent(self.tlsConfig, forKey: .tlsConfig)
     try container.encodeIfPresent(self.serviceDirectoryConfig, forKey: .serviceDirectoryConfig)
-    try container.encode(self.customHeaders, forKey: .customHeaders)
-    try container.encode(self.state, forKey: .state)
+    if !self.customHeaders.isEmpty {
+      try container.encode(self.customHeaders, forKey: .customHeaders)
+    }
+    if self.state != McpTool.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

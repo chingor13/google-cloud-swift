@@ -93,10 +93,18 @@ public struct VideoFormat: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.codec, forKey: .codec)
-    try container.encode(self.widthPixels, forKey: .widthPixels)
-    try container.encode(self.heightPixels, forKey: .heightPixels)
-    try container.encode(self.frameRate, forKey: .frameRate)
+    if !self.codec.isEmpty {
+      try container.encode(self.codec, forKey: .codec)
+    }
+    if self.widthPixels != 0 {
+      try container.encode(self.widthPixels, forKey: .widthPixels)
+    }
+    if self.heightPixels != 0 {
+      try container.encode(self.heightPixels, forKey: .heightPixels)
+    }
+    if self.frameRate != 0 {
+      try container.encode(self.frameRate, forKey: .frameRate)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

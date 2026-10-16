@@ -138,9 +138,15 @@ public struct ClientLibrarySettings: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.version, forKey: .version)
-    try container.encode(self.launchStage, forKey: .launchStage)
-    try container.encode(self.restNumericEnums, forKey: .restNumericEnums)
+    if !self.version.isEmpty {
+      try container.encode(self.version, forKey: .version)
+    }
+    if self.launchStage != LaunchStage() {
+      try container.encode(self.launchStage, forKey: .launchStage)
+    }
+    if self.restNumericEnums {
+      try container.encode(self.restNumericEnums, forKey: .restNumericEnums)
+    }
     try container.encodeIfPresent(self.javaSettings, forKey: .javaSettings)
     try container.encodeIfPresent(self.cppSettings, forKey: .cppSettings)
     try container.encodeIfPresent(self.phpSettings, forKey: .phpSettings)

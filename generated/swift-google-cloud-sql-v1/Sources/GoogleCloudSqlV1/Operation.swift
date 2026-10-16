@@ -276,16 +276,26 @@
 
     public func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      try container.encode(self.kind, forKey: .kind)
-      try container.encode(self.targetLink, forKey: .targetLink)
-      try container.encode(self.status, forKey: .status)
-      try container.encode(self.user, forKey: .user)
+      if !self.kind.isEmpty {
+        try container.encode(self.kind, forKey: .kind)
+      }
+      if !self.targetLink.isEmpty {
+        try container.encode(self.targetLink, forKey: .targetLink)
+      }
+      if self.status != GoogleCloudSqlV1.Operation.SqlOperationStatus() {
+        try container.encode(self.status, forKey: .status)
+      }
+      if !self.user.isEmpty {
+        try container.encode(self.user, forKey: .user)
+      }
       try container.encodeIfPresent(self.insertTime, forKey: .insertTime)
       try container.encodeIfPresent(self.startTime, forKey: .startTime)
       try container.encodeIfPresent(self.endTime, forKey: .endTime)
       try container.encodeIfPresent(self.error, forKey: .error)
       try container.encodeIfPresent(self.apiWarning, forKey: .apiWarning)
-      try container.encode(self.operationType, forKey: .operationType)
+      if self.operationType != GoogleCloudSqlV1.Operation.SqlOperationType() {
+        try container.encode(self.operationType, forKey: .operationType)
+      }
       try container.encodeIfPresent(self.importContext, forKey: .importContext)
       try container.encodeIfPresent(self.exportContext, forKey: .exportContext)
       try container.encodeIfPresent(self.backupContext, forKey: .backupContext)
@@ -299,10 +309,18 @@
         self.startWorkloadReplayContext, forKey: .startWorkloadReplayContext)
       try container.encodeIfPresent(
         self.stopWorkloadReplayContext, forKey: .stopWorkloadReplayContext)
-      try container.encode(self.name, forKey: .name)
-      try container.encode(self.targetId, forKey: .targetId)
-      try container.encode(self.selfLink, forKey: .selfLink)
-      try container.encode(self.targetProject, forKey: .targetProject)
+      if !self.name.isEmpty {
+        try container.encode(self.name, forKey: .name)
+      }
+      if !self.targetId.isEmpty {
+        try container.encode(self.targetId, forKey: .targetId)
+      }
+      if !self.selfLink.isEmpty {
+        try container.encode(self.selfLink, forKey: .selfLink)
+      }
+      if !self.targetProject.isEmpty {
+        try container.encode(self.targetProject, forKey: .targetProject)
+      }
       try container.encodeIfPresent(self.acquireSsrsLeaseContext, forKey: .acquireSsrsLeaseContext)
       try container.encodeIfPresent(self.subOperationType, forKey: .subOperationType)
       for (key, value) in self._unknownFields.json {

@@ -92,8 +92,12 @@ public struct ResourcePolicyMember: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.iamPolicyNamePrincipal, forKey: .iamPolicyNamePrincipal)
-    try container.encode(self.iamPolicyUidPrincipal, forKey: .iamPolicyUidPrincipal)
+    if !self.iamPolicyNamePrincipal.isEmpty {
+      try container.encode(self.iamPolicyNamePrincipal, forKey: .iamPolicyNamePrincipal)
+    }
+    if !self.iamPolicyUidPrincipal.isEmpty {
+      try container.encode(self.iamPolicyUidPrincipal, forKey: .iamPolicyUidPrincipal)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }

@@ -77,7 +77,9 @@ public struct GuestAttributes: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.queryPath, forKey: .queryPath)
+    if !self.queryPath.isEmpty {
+      try container.encode(self.queryPath, forKey: .queryPath)
+    }
     try container.encodeIfPresent(self.queryValue, forKey: .queryValue)
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))

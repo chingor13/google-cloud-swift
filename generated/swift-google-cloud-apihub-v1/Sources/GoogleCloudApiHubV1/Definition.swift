@@ -142,12 +142,20 @@ public struct Definition: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.spec, forKey: .spec)
-    try container.encode(self.type, forKey: .type)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.spec.isEmpty {
+      try container.encode(self.spec, forKey: .spec)
+    }
+    if self.type != Definition.Type_() {
+      try container.encode(self.type, forKey: .type)
+    }
     try container.encodeIfPresent(self.createTime, forKey: .createTime)
     try container.encodeIfPresent(self.updateTime, forKey: .updateTime)
-    try container.encode(self.attributes, forKey: .attributes)
+    if !self.attributes.isEmpty {
+      try container.encode(self.attributes, forKey: .attributes)
+    }
 
     if let choice = self.value {
       switch choice {

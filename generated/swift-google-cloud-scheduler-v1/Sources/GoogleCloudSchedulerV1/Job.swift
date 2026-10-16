@@ -273,12 +273,22 @@ public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.name, forKey: .name)
-    try container.encode(self.description, forKey: .description)
-    try container.encode(self.schedule, forKey: .schedule)
-    try container.encode(self.timeZone, forKey: .timeZone)
+    if !self.name.isEmpty {
+      try container.encode(self.name, forKey: .name)
+    }
+    if !self.description.isEmpty {
+      try container.encode(self.description, forKey: .description)
+    }
+    if !self.schedule.isEmpty {
+      try container.encode(self.schedule, forKey: .schedule)
+    }
+    if !self.timeZone.isEmpty {
+      try container.encode(self.timeZone, forKey: .timeZone)
+    }
     try container.encodeIfPresent(self.userUpdateTime, forKey: .userUpdateTime)
-    try container.encode(self.state, forKey: .state)
+    if self.state != Job.State() {
+      try container.encode(self.state, forKey: .state)
+    }
     try container.encodeIfPresent(self.status, forKey: .status)
     try container.encodeIfPresent(self.scheduleTime, forKey: .scheduleTime)
     try container.encodeIfPresent(self.lastAttemptTime, forKey: .lastAttemptTime)

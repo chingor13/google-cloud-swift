@@ -133,15 +133,33 @@ public struct OracleColumn: Codable, Equatable, GoogleWKT._AnyPackable,
 
   public func encode(to encoder: any Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(self.column, forKey: .column)
-    try container.encode(self.dataType, forKey: .dataType)
-    try container.encode(self.length, forKey: .length)
-    try container.encode(self.precision, forKey: .precision)
-    try container.encode(self.scale, forKey: .scale)
-    try container.encode(self.encoding, forKey: .encoding)
-    try container.encode(self.primaryKey, forKey: .primaryKey)
-    try container.encode(self.nullable, forKey: .nullable)
-    try container.encode(self.ordinalPosition, forKey: .ordinalPosition)
+    if !self.column.isEmpty {
+      try container.encode(self.column, forKey: .column)
+    }
+    if !self.dataType.isEmpty {
+      try container.encode(self.dataType, forKey: .dataType)
+    }
+    if self.length != 0 {
+      try container.encode(self.length, forKey: .length)
+    }
+    if self.precision != 0 {
+      try container.encode(self.precision, forKey: .precision)
+    }
+    if self.scale != 0 {
+      try container.encode(self.scale, forKey: .scale)
+    }
+    if !self.encoding.isEmpty {
+      try container.encode(self.encoding, forKey: .encoding)
+    }
+    if self.primaryKey {
+      try container.encode(self.primaryKey, forKey: .primaryKey)
+    }
+    if self.nullable {
+      try container.encode(self.nullable, forKey: .nullable)
+    }
+    if self.ordinalPosition != 0 {
+      try container.encode(self.ordinalPosition, forKey: .ordinalPosition)
+    }
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
     }
