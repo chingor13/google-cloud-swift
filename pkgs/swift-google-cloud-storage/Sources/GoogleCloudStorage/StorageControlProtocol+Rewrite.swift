@@ -28,7 +28,9 @@ extension StorageControlProtocol {
   /// Because each step is an active RPC rather than a passive status poll:
   /// - Calls are issued back-to-back without polling backoff delays.
   /// - Each individual `rewriteObject` call uses the standard request `retryPolicy` and
-  ///   `backoffPolicy` (not `pollingErrorPolicy` or `pollingBackoffPolicy`).
+  ///   `backoffPolicy` (not `pollingErrorPolicy` or `pollingBackoffPolicy`). Under the default
+  ///   ``StorageBaseRetryPolicy``, transient errors are retried automatically when the request is
+  ///   idempotent (`request.ifGenerationMatch != nil` or `options.idempotent = true`).
   ///
   /// - Parameters:
   ///   - request: The initial ``RewriteObjectRequest``.

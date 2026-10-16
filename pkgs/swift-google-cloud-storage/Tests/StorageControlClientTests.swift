@@ -126,59 +126,27 @@ import Testing
     Self.assertSendable((any StorageControlProtocol).self)
   }
 
-  final class MockStorageControl: StorageControlProtocol, @unchecked Sendable {
-    var listBucketsHandler:
-      ((ListBucketsRequest, GoogleGax.RequestOptions) async throws -> ListBucketsResponse)?
-    var renameFolderHandler:
-      ((RenameFolderRequest, GoogleGax.RequestOptions) async throws -> Folder)?
-    var rewriteObjectHandler:
-      ((RewriteObjectRequest, GoogleGax.RequestOptions) async throws -> RewriteResponse)?
-
-    func listBuckets(
-      request: ListBucketsRequest, options: GoogleGax.RequestOptions
-    ) async throws -> ListBucketsResponse {
-      if let handler = listBucketsHandler {
-        return try await handler(request, options)
-      }
-      throw GoogleGax.RequestError.unimplemented
-    }
-
-    func renameFolderPollingUntilDone(
-      request: RenameFolderRequest, options: GoogleGax.RequestOptions
-    ) async throws -> Folder {
-      if let handler = renameFolderHandler {
-        return try await handler(request, options)
-      }
-      throw GoogleGax.RequestError.unimplemented
-    }
-
-    func rewriteObject(
-      request: RewriteObjectRequest, options: GoogleGax.RequestOptions
-    ) async throws -> RewriteResponse {
-      if let handler = rewriteObjectHandler {
-        return try await handler(request, options)
-      }
-      throw GoogleGax.RequestError.unimplemented
-    }
-  }
-
   @Test func mockPaginationDelegation() async throws {
-    let mock = MockStorageControl()
-    mock.listBucketsHandler = { req, opts in
-      var response = ListBucketsResponse()
-      if req.pageToken.isEmpty {
+    let mock = MockStorageControl(listBuckets: [
+      { req, _ in
+        #expect(req.pageToken.isEmpty)
+        var response = ListBucketsResponse()
         var b = Bucket()
         b.name = "bucket-1"
         response.buckets = [b]
         response.nextPageToken = "token-page-2"
-      } else if req.pageToken == "token-page-2" {
+        return response
+      },
+      { req, _ in
+        #expect(req.pageToken == "token-page-2")
+        var response = ListBucketsResponse()
         var b = Bucket()
         b.name = "bucket-2"
         response.buckets = [b]
         response.nextPageToken = ""
-      }
-      return response
-    }
+        return response
+      },
+    ])
 
     let client: any StorageControlProtocol = mock
     let sequence = client.listBucketsByItems(request: .init())
@@ -187,23 +155,26 @@ import Testing
       names.append(bucket.name)
     }
     #expect(names == ["bucket-1", "bucket-2"])
+    #expect(mock.isExhausted)
   }
 
   @Test func mockConvenienceOverloadDelegation() async throws {
-    let mock = MockStorageControl()
-    mock.listBucketsHandler = { req, opts in
-      #expect(req.parent == "projects/test-project")
-      var response = ListBucketsResponse()
-      var b = Bucket()
-      b.name = "bucket-1"
-      response.buckets = [b]
-      return response
-    }
+    let mock = MockStorageControl(listBuckets: [
+      { req, _ in
+        #expect(req.parent == "projects/test-project")
+        var response = ListBucketsResponse()
+        var b = Bucket()
+        b.name = "bucket-1"
+        response.buckets = [b]
+        return response
+      }
+    ])
 
     let client: any StorageControlProtocol = mock
     let response = try await client.listBuckets(
       request: .init().with { $0.parent = "projects/test-project" })
     #expect(response.buckets.count == 1)
+    #expect(mock.isExhausted)
   }
 
   @MainActor
@@ -225,62 +196,70 @@ import Testing
   }
 
   @Test func mockPaginationStreamedInDetachedTaskFromMainActor() async throws {
-    let mock = MockStorageControl()
-    mock.listBucketsHandler = { req, _ in
-      var response = ListBucketsResponse()
-      if req.pageToken.isEmpty {
+    let mock = MockStorageControl(listBuckets: [
+      { req, _ in
+        #expect(req.pageToken.isEmpty)
+        var response = ListBucketsResponse()
         var b = Bucket()
         b.name = "bucket-1"
         response.buckets = [b]
         response.nextPageToken = "token-page-2"
-      } else if req.pageToken == "token-page-2" {
+        return response
+      },
+      { req, _ in
+        #expect(req.pageToken == "token-page-2")
+        var response = ListBucketsResponse()
         var b = Bucket()
         b.name = "bucket-2"
         response.buckets = [b]
         response.nextPageToken = ""
-      }
-      return response
-    }
+        return response
+      },
+    ])
 
     let model = BucketListModel(client: mock)
     let task = await model.streamBucketNamesInBackground()
     let names = try await task.value
     #expect(names == ["bucket-1", "bucket-2"])
+    #expect(mock.isExhausted)
   }
 
   @Test func mockLROConvenienceOverloadDelegation() async throws {
-    let mock = MockStorageControl()
-    mock.renameFolderHandler = { req, opts in
-      #expect(req.name == "projects/_/buckets/b/folders/f1")
-      return Folder().with { $0.name = "projects/_/buckets/b/folders/f2" }
-    }
+    let mock = MockStorageControl(renameFolder: [
+      { req, _ in
+        #expect(req.name == "projects/_/buckets/b/folders/f1")
+        return Folder().with { $0.name = "projects/_/buckets/b/folders/f2" }
+      }
+    ])
 
     let client: any StorageControlProtocol = mock
     let folder = try await client.renameFolderPollingUntilDone(
       request: .init().with { $0.name = "projects/_/buckets/b/folders/f1" })
     #expect(folder.name == "projects/_/buckets/b/folders/f2")
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectUntilDoneSingleStep() async throws {
-    let mock = MockStorageControl()
     let expectedObject = Object().with {
       $0.bucket = "projects/_/buckets/dest-bucket"
       $0.name = "dest-obj"
       $0.size = 1024
     }
-    mock.rewriteObjectHandler = { req, _ in
-      #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
-      #expect(req.sourceObject == "src-obj")
-      #expect(req.destinationBucket == "projects/_/buckets/dest-bucket")
-      #expect(req.destinationName == "dest-obj")
-      #expect(req.rewriteToken.isEmpty)
-      return RewriteResponse().with {
-        $0.done = true
-        $0.totalBytesRewritten = 1024
-        $0.objectSize = 1024
-        $0.resource = expectedObject
+    let mock = MockStorageControl(rewriteObject: [
+      { req, _ in
+        #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
+        #expect(req.sourceObject == "src-obj")
+        #expect(req.destinationBucket == "projects/_/buckets/dest-bucket")
+        #expect(req.destinationName == "dest-obj")
+        #expect(req.rewriteToken.isEmpty)
+        return RewriteResponse().with {
+          $0.done = true
+          $0.totalBytesRewritten = 1024
+          $0.objectSize = 1024
+          $0.resource = expectedObject
+        }
       }
-    }
+    ])
 
     let client: any StorageControlProtocol = mock
     let request = RewriteObjectRequest().with {
@@ -291,48 +270,53 @@ import Testing
     }
     let result = try await client.rewriteObjectUntilDone(request: request)
     #expect(result == expectedObject)
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectUntilDoneMultiStepAndProgress() async throws {
-    let mock = MockStorageControl()
     let expectedObject = Object().with {
       $0.bucket = "projects/_/buckets/dest-bucket"
       $0.name = "dest-obj"
       $0.size = 3000
     }
-    let receivedTokens = Mutex<[String]>([])
-    mock.rewriteObjectHandler = { req, opts in
-      #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
-      #expect(req.destinationName == "dest-obj")
-      #expect(opts.headers["x-custom"] == "test-val")
-      receivedTokens.withLock { $0.append(req.rewriteToken) }
-      switch req.rewriteToken {
-      case "":
+    let mock = MockStorageControl(rewriteObject: [
+      { req, opts in
+        #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
+        #expect(req.destinationName == "dest-obj")
+        #expect(opts.headers["x-custom"] == "test-val")
+        #expect(req.rewriteToken.isEmpty)
         return RewriteResponse().with {
           $0.done = false
           $0.totalBytesRewritten = 1000
           $0.objectSize = 3000
           $0.rewriteToken = "token-1"
         }
-      case "token-1":
+      },
+      { req, opts in
+        #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
+        #expect(req.destinationName == "dest-obj")
+        #expect(opts.headers["x-custom"] == "test-val")
+        #expect(req.rewriteToken == "token-1")
         return RewriteResponse().with {
           $0.done = false
           $0.totalBytesRewritten = 2000
           $0.objectSize = 3000
           $0.rewriteToken = "token-2"
         }
-      case "token-2":
+      },
+      { req, opts in
+        #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
+        #expect(req.destinationName == "dest-obj")
+        #expect(opts.headers["x-custom"] == "test-val")
+        #expect(req.rewriteToken == "token-2")
         return RewriteResponse().with {
           $0.done = true
           $0.totalBytesRewritten = 3000
           $0.objectSize = 3000
           $0.resource = expectedObject
         }
-      default:
-        Issue.record("Unexpected rewriteToken: \(req.rewriteToken)")
-        throw GoogleGax.RequestError.unimplemented
-      }
-    }
+      },
+    ])
 
     let client: any StorageControlProtocol = mock
     let request = RewriteObjectRequest().with {
@@ -353,22 +337,23 @@ import Testing
     }
 
     #expect(result == expectedObject)
-    #expect(receivedTokens.withLock { $0 } == ["", "token-1", "token-2"])
     #expect(progressBytes.withLock { $0 } == [1000, 2000, 3000])
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectProgressSequence() async throws {
-    let mock = MockStorageControl()
     let expectedObject = Object().with { $0.name = "dest-obj" }
-    mock.rewriteObjectHandler = { req, _ in
-      if req.rewriteToken.isEmpty {
+    let mock = MockStorageControl(rewriteObject: [
+      { req, _ in
+        #expect(req.rewriteToken.isEmpty)
         return RewriteResponse().with {
           $0.done = false
           $0.totalBytesRewritten = 512
           $0.objectSize = 1024
           $0.rewriteToken = "next-token"
         }
-      } else {
+      },
+      { req, _ in
         #expect(req.rewriteToken == "next-token")
         return RewriteResponse().with {
           $0.done = true
@@ -376,8 +361,8 @@ import Testing
           $0.objectSize = 1024
           $0.resource = expectedObject
         }
-      }
-    }
+      },
+    ])
 
     let client: any StorageControlProtocol = mock
     let sequence = client.rewriteObjectProgress(
@@ -391,6 +376,7 @@ import Testing
     #expect(responses[0].totalBytesRewritten == 512)
     #expect(responses[1].done)
     #expect(responses[1].resource == expectedObject)
+    #expect(mock.isExhausted)
   }
 
   @MainActor
@@ -411,63 +397,65 @@ import Testing
   }
 
   @Test func rewriteObjectProgressStreamedInDetachedTaskFromMainActor() async throws {
-    let mock = MockStorageControl()
-    mock.rewriteObjectHandler = { req, _ in
-      if req.rewriteToken.isEmpty {
+    let mock = MockStorageControl(rewriteObject: [
+      { req, _ in
+        #expect(req.rewriteToken.isEmpty)
         return RewriteResponse().with {
           $0.done = false
           $0.totalBytesRewritten = 100
           $0.objectSize = 200
           $0.rewriteToken = "t1"
         }
-      } else {
+      },
+      { req, _ in
+        #expect(req.rewriteToken == "t1")
         return RewriteResponse().with {
           $0.done = true
           $0.totalBytesRewritten = 200
           $0.objectSize = 200
           $0.resource = Object().with { $0.name = "dest-obj" }
         }
-      }
-    }
+      },
+    ])
 
     let model = RewriteProgressModel(client: mock)
     let task = await model.streamRewriteInBackground()
     let bytes = try await task.value
     #expect(bytes == [100, 200])
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectUntilDoneErrorPropagation() async throws {
-    let mock = MockStorageControl()
-    let callCount = Mutex(0)
-    mock.rewriteObjectHandler = { req, _ in
-      let current = callCount.withLock {
-        $0 += 1
-        return $0
-      }
-      if current == 1 {
+    let mock = MockStorageControl(rewriteObject: [
+      { req, _ in
+        #expect(req.rewriteToken.isEmpty)
         return RewriteResponse().with {
           $0.done = false
           $0.rewriteToken = "token-1"
         }
-      }
-      throw GoogleGax.RequestError.unimplemented
-    }
+      },
+      { req, _ in
+        #expect(req.rewriteToken == "token-1")
+        throw GoogleGax.RequestError.unimplemented
+      },
+    ])
 
     let client: any StorageControlProtocol = mock
     await #expect(throws: GoogleGax.RequestError.self) {
       _ = try await client.rewriteObjectUntilDone(request: .init())
     }
-    #expect(callCount.withLock { $0 } == 2)
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectUntilDoneMissingResourceThrowsMalformedResponse() async throws {
-    let mock = MockStorageControl()
-    mock.rewriteObjectHandler = { _, _ in
-      RewriteResponse().with {
-        $0.done = true
-        $0.resource = nil
+    let mock = MockStorageControl(rewriteObject: [
+      { _, _ in
+        RewriteResponse().with {
+          $0.done = true
+          $0.resource = nil
+        }
       }
-    }
+    ])
 
     let client: any StorageControlProtocol = mock
     await #expect {
@@ -478,16 +466,18 @@ import Testing
       }
       return true
     }
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectEmptyTokenWhenNotDoneThrowsMalformedResponse() async throws {
-    let mock = MockStorageControl()
-    mock.rewriteObjectHandler = { _, _ in
-      RewriteResponse().with {
-        $0.done = false
-        $0.rewriteToken = ""
+    let mock = MockStorageControl(rewriteObject: [
+      { _, _ in
+        RewriteResponse().with {
+          $0.done = false
+          $0.rewriteToken = ""
+        }
       }
-    }
+    ])
 
     let client: any StorageControlProtocol = mock
     await #expect {
@@ -498,15 +488,15 @@ import Testing
       }
       return true
     }
+    #expect(mock.isExhausted)
   }
 
   @Test func rewriteObjectProgressIteratorReturnsNilAfterError() async throws {
-    let mock = MockStorageControl()
-    let callCount = Mutex(0)
-    mock.rewriteObjectHandler = { _, _ in
-      callCount.withLock { $0 += 1 }
-      throw GoogleGax.RequestError.unimplemented
-    }
+    let mock = MockStorageControl(rewriteObject: [
+      { _, _ in
+        throw GoogleGax.RequestError.unimplemented
+      }
+    ])
 
     let client: any StorageControlProtocol = mock
     let sequence = client.rewriteObjectProgress(request: .init())
@@ -517,6 +507,6 @@ import Testing
     }
     let subsequent = try await iterator.next(isolation: #isolation)
     #expect(subsequent == nil)
-    #expect(callCount.withLock { $0 } == 1)
+    #expect(mock.isExhausted)
   }
 }
