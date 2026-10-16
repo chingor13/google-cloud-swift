@@ -465,6 +465,7 @@ struct StorageControlClientIntegrationTests: Sendable {
         $0.sourceObject = sourceName
         $0.destinationBucket = bucketResource
         $0.destinationName = destName
+        $0.ifGenerationMatch = 0
       }
       let rewritten = try await controlClient.rewriteObjectUntilDone(request: rewriteReq)
       #expect(rewritten.name == destName)
