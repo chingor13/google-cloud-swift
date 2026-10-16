@@ -509,4 +509,114 @@ import Testing
     #expect(subsequent == nil)
     #expect(mock.isExhausted)
   }
+
+  @Test func rewriteObjectProgressIndependentIterators() async throws {
+    let expectedObject = Object().with { $0.name = "dest-obj" }
+    let mock = MockStorageControl(rewriteObject: [
+      // First iterator: step 1 & step 2
+      { req, _ in
+        #expect(req.rewriteToken.isEmpty)
+        return RewriteResponse().with {
+          $0.done = false
+          $0.rewriteToken = "iter1-token"
+        }
+      },
+      { req, _ in
+        #expect(req.rewriteToken == "iter1-token")
+        return RewriteResponse().with {
+          $0.done = true
+          $0.resource = expectedObject
+        }
+      },
+      // Second iterator created from the same sequence: starts fresh with empty rewriteToken
+      { req, _ in
+        #expect(req.rewriteToken.isEmpty)
+        return RewriteResponse().with {
+          $0.done = false
+          $0.rewriteToken = "iter2-token"
+        }
+      },
+      { req, _ in
+        #expect(req.rewriteToken == "iter2-token")
+        return RewriteResponse().with {
+          $0.done = true
+          $0.resource = expectedObject
+        }
+      },
+    ])
+
+    let client: any StorageControlProtocol = mock
+    let sequence = client.rewriteObjectProgress(
+      request: .init().with { $0.destinationName = "dest-obj" })
+
+    var firstRunCount = 0
+    for try await _ in sequence {
+      firstRunCount += 1
+    }
+    #expect(firstRunCount == 2)
+
+    var secondRunCount = 0
+    for try await _ in sequence {
+      secondRunCount += 1
+    }
+    #expect(secondRunCount == 2)
+    #expect(mock.isExhausted)
+  }
+
+  @Test func rewriteObjectUntilDoneOnProgressErrorHaltsSubsequentSteps() async throws {
+    struct ProgressAbortError: Error, Equatable {}
+
+    let mock = MockStorageControl(rewriteObject: [
+      { req, _ in
+        #expect(req.rewriteToken.isEmpty)
+        return RewriteResponse().with {
+          $0.done = false
+          $0.totalBytesRewritten = 500
+          $0.objectSize = 1000
+          $0.rewriteToken = "token-1"
+        }
+      }
+    ])
+
+    let client: any StorageControlProtocol = mock
+    await #expect(throws: ProgressAbortError.self) {
+      _ = try await client.rewriteObjectUntilDone(request: .init()) { _ in
+        throw ProgressAbortError()
+      }
+    }
+    #expect(mock.isExhausted)
+  }
+
+  @Test func rewriteObjectResumesFromInitialRewriteToken() async throws {
+    let expectedObject = Object().with { $0.name = "dest-obj" }
+    let mock = MockStorageControl(rewriteObject: [
+      { req, _ in
+        #expect(req.rewriteToken == "saved-checkpoint-token")
+        return RewriteResponse().with {
+          $0.done = false
+          $0.totalBytesRewritten = 2000
+          $0.objectSize = 3000
+          $0.rewriteToken = "next-checkpoint-token"
+        }
+      },
+      { req, _ in
+        #expect(req.rewriteToken == "next-checkpoint-token")
+        return RewriteResponse().with {
+          $0.done = true
+          $0.totalBytesRewritten = 3000
+          $0.objectSize = 3000
+          $0.resource = expectedObject
+        }
+      },
+    ])
+
+    let client: any StorageControlProtocol = mock
+    let resumeRequest = RewriteObjectRequest().with {
+      $0.destinationName = "dest-obj"
+      $0.rewriteToken = "saved-checkpoint-token"
+    }
+    let result = try await client.rewriteObjectUntilDone(request: resumeRequest)
+    #expect(result == expectedObject)
+    #expect(mock.isExhausted)
+  }
 }

@@ -32,6 +32,24 @@ extension StorageControlProtocol {
   ///   ``StorageBaseRetryPolicy``, transient errors are retried automatically when the request is
   ///   idempotent (`request.ifGenerationMatch != nil` or `options.idempotent = true`).
   ///
+  /// ### Example
+  ///
+  /// ```swift
+  /// let request = RewriteObjectRequest().with {
+  ///   $0.sourceBucket = "projects/_/buckets/source-bucket"
+  ///   $0.sourceObject = "large-file.bin"
+  ///   $0.destinationBucket = "projects/_/buckets/dest-bucket"
+  ///   $0.destinationName = "large-file-copy.bin"
+  ///   $0.ifGenerationMatch = 0
+  /// }
+  ///
+  /// let destinationObject = try await controlClient.rewriteObjectUntilDone(
+  ///   request: request
+  /// ) { progress in
+  ///   print("Rewrote \(progress.totalBytesRewritten) / \(progress.objectSize) bytes")
+  /// }
+  /// ```
+  ///
   /// - Parameters:
   ///   - request: The initial ``RewriteObjectRequest``.
   ///   - options: Request options applied to each `rewriteObject` call.
@@ -64,7 +82,24 @@ extension StorageControlProtocol {
   /// Unlike long-running operations (`*PollingUntilDone`), object rewrites do **not** progress
   /// in the background; each iteration of the sequence actively invokes ``rewriteObject(request:options:)``
   /// with the ``RewriteResponse/rewriteToken`` from the previous response. Breaking out of the loop
-  /// early pauses the rewrite at the last yielded `rewriteToken`.
+  /// early pauses the rewrite at the last yielded `rewriteToken`, which can be passed on a new
+  /// ``RewriteObjectRequest/rewriteToken`` to resume the operation later.
+  ///
+  /// Each step uses the standard request `retryPolicy` and `backoffPolicy`. Under the default
+  /// ``StorageBaseRetryPolicy``, transient errors are retried automatically when the request is
+  /// idempotent (`request.ifGenerationMatch != nil` or `options.idempotent = true`). Iterating the
+  /// sequence throws `RequestError.malformedResponse` if an intermediate response (`done == false`)
+  /// returns an empty `rewriteToken`.
+  ///
+  /// ### Example
+  ///
+  /// ```swift
+  /// for try await response in controlClient.rewriteObjectProgress(request: request) {
+  ///   if !response.done {
+  ///     await saveCheckpoint(token: response.rewriteToken)
+  ///   }
+  /// }
+  /// ```
   ///
   /// - Parameters:
   ///   - request: The initial ``RewriteObjectRequest``.
