@@ -51,9 +51,9 @@ import Testing
   @Test(
     "Enum fields serialize",
     arguments: [
-      (#"{"singular":"TEST_ENUM_UNSPECIFIED"}"#, T()),
+      (#"{}"#, T()),
       (
-        #"{"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{}"#,
         T().with { $0.singular = .unspecified }
       ),
       (
@@ -69,39 +69,43 @@ import Testing
         T().with { $0.singular = .unknownIntValue(42) }
       ),
       (
-        #"{"optional":"GREEN","singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"optional":"TEST_ENUM_UNSPECIFIED"}"#,
+        T().with { $0.optional = .unspecified }
+      ),
+      (
+        #"{"optional":"GREEN"}"#,
         T().with { $0.optional = .green }
       ),
       (
-        #"{"optional":"CYAN","singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"optional":"CYAN"}"#,
         T().with { $0.optional = .unknownStringValue("CYAN") }
       ),
       (
-        #"{"optional":42,"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"optional":42}"#,
         T().with { $0.optional = .unknownIntValue(42) }
       ),
       (
-        #"{"repeated":["RED","BLUE","BLUE"],"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"repeated":["RED","BLUE","BLUE"]}"#,
         T().with { $0.repeated = [.red, .blue, .blue] }
       ),
       (
-        #"{"repeated":[42],"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"repeated":[42]}"#,
         T().with { $0.repeated = [.unknownIntValue(42)] }
       ),
       (
-        #"{"repeated":["CYAN"],"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"repeated":["CYAN"]}"#,
         T().with { $0.repeated = [.unknownStringValue("CYAN")] }
       ),
       (
-        #"{"map":{"a":"GREEN"},"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"map":{"a":"GREEN"}}"#,
         T().with { $0.map = ["a": .green] }
       ),
       (
-        #"{"map":{"a":42},"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"map":{"a":42}}"#,
         T().with { $0.map = ["a": .unknownIntValue(42)] }
       ),
       (
-        #"{"map":{"a":"MAGENTA"},"singular":"TEST_ENUM_UNSPECIFIED"}"#,
+        #"{"map":{"a":"MAGENTA"}}"#,
         T().with { $0.map = ["a": .unknownStringValue("MAGENTA")] }
       ),
     ])

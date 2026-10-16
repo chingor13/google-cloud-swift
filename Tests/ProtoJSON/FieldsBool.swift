@@ -48,15 +48,27 @@ import Testing
   @Test(
     arguments: [
       (
-        #"{"singular":false}"#,
+        #"{}"#,
         T()
       ),
       (
-        #"{"mapKey":{"false":"a"},"singular":false}"#,
+        #"{"singular":true}"#,
+        T().with { $0.singular = true }
+      ),
+      (
+        #"{"option":false}"#,
+        T().with { $0.option = false }
+      ),
+      (
+        #"{"option":true}"#,
+        T().with { $0.option = true }
+      ),
+      (
+        #"{"mapKey":{"false":"a"}}"#,
         T().with { $0.mapKey = [false: "a"] }
       ),
       (
-        #"{"mapKeyValue":{"false":true},"singular":false}"#,
+        #"{"mapKeyValue":{"false":true}}"#,
         T().with { $0.mapKeyValue = [false: true] }
       ),
     ])

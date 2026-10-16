@@ -43,21 +43,25 @@ import Testing
   @Test(
     "bytes fields serialize",
     arguments: [
-      (#"{"singular":""}"#, T()),
+      (#"{}"#, T()),
       (
         #"{"singular":"NDI="}"#,
         T().with { $0.singular = Data("42".utf8) }
       ),
       (
-        #"{"option":"NDI=","singular":""}"#,
+        #"{"option":""}"#,
+        T().with { $0.option = Data() }
+      ),
+      (
+        #"{"option":"NDI="}"#,
         T().with { $0.option = Data("42".utf8) }
       ),
       (
-        #"{"repeated":["NDI="],"singular":""}"#,
+        #"{"repeated":["NDI="]}"#,
         T().with { $0.repeated = [Data("42".utf8)] }
       ),
       (
-        #"{"map":{"a":"NDI="},"singular":""}"#,
+        #"{"map":{"a":"NDI="}}"#,
         T().with { $0.map = ["a": Data("42".utf8)] }
       ),
     ]

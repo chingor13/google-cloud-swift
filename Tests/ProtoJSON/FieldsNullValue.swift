@@ -39,13 +39,13 @@ import Testing
   @Test(
     "NullValue fields serialize",
     arguments: [
-      (#"{"singular":null}"#, T()),
+      (#"{}"#, T()),
       (
-        #"{"repeated":[null],"singular":null}"#,
+        #"{"repeated":[null]}"#,
         T().with { $0.repeated = [WKTNullValue()] }
       ),
       (
-        #"{"map":{"a":null},"singular":null}"#,
+        #"{"map":{"a":null}}"#,
         T().with { $0.map = ["a": WKTNullValue()] }
       ),
     ]

@@ -52,27 +52,31 @@ import Testing
   @Test(
     arguments: [
       (
-        #"{"singular":"0"}"#,
+        #"{}"#,
         T()
       ),
       (
-        #"{"mapKey":{"42":"a"},"singular":"0"}"#,
+        #"{"mapKey":{"42":"a"}}"#,
         T().with { $0.mapKey = [42: "a"] }
       ),
       (
-        #"{"mapKeyValue":{"42":"7"},"singular":"0"}"#,
+        #"{"mapKeyValue":{"42":"7"}}"#,
         T().with { $0.mapKeyValue = [42: 7] }
       ),
       (
-        #"{"option":"42","singular":"0"}"#,
+        #"{"option":"0"}"#,
+        T().with { $0.option = 0 }
+      ),
+      (
+        #"{"option":"42"}"#,
         T().with { $0.option = 42 }
       ),
       (
-        #"{"repeated":["4","2"],"singular":"0"}"#,
+        #"{"repeated":["4","2"]}"#,
         T().with { $0.repeated = [4, 2] }
       ),
       (
-        #"{"mapValue":{"a":"42"},"singular":"0"}"#,
+        #"{"mapValue":{"a":"42"}}"#,
         T().with { $0.mapValue = ["a": 42] }
       ),
       (

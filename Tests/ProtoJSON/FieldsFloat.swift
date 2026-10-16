@@ -77,7 +77,7 @@ import Testing
     "float fields serialize",
     arguments: [
       (
-        #"{"singular":0}"#,
+        #"{}"#,
         T()
       ),
       (
@@ -97,35 +97,39 @@ import Testing
         T().with { $0.singular = .nan }
       ),
       (
-        #"{"option":"Infinity","singular":0}"#,
+        #"{"option":0}"#,
+        T().with { $0.option = 0.0 }
+      ),
+      (
+        #"{"option":"Infinity"}"#,
         T().with { $0.option = .infinity }
       ),
       (
-        #"{"option":"-Infinity","singular":0}"#,
+        #"{"option":"-Infinity"}"#,
         T().with { $0.option = -.infinity }
       ),
       (
-        #"{"option":"NaN","singular":0}"#,
+        #"{"option":"NaN"}"#,
         T().with { $0.option = .nan }
       ),
       (
-        #"{"repeated":["Infinity","-Infinity"],"singular":0}"#,
+        #"{"repeated":["Infinity","-Infinity"]}"#,
         T().with { $0.repeated = [.infinity, -.infinity] }
       ),
       (
-        #"{"repeated":["NaN"],"singular":0}"#,
+        #"{"repeated":["NaN"]}"#,
         T().with { $0.repeated = [.nan] }
       ),
       (
-        #"{"map":{"a":"Infinity"},"singular":0}"#,
+        #"{"map":{"a":"Infinity"}}"#,
         T().with { $0.map = ["a": .infinity] }
       ),
       (
-        #"{"map":{"a":"-Infinity"},"singular":0}"#,
+        #"{"map":{"a":"-Infinity"}}"#,
         T().with { $0.map = ["a": -.infinity] }
       ),
       (
-        #"{"map":{"a":"NaN"},"singular":0}"#,
+        #"{"map":{"a":"NaN"}}"#,
         T().with { $0.map = ["a": .nan] }
       ),
     ]

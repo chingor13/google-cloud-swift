@@ -48,15 +48,23 @@ import Testing
   @Test(
     arguments: [
       (
-        #"{"singular":""}"#,
+        #"{}"#,
         T()
       ),
       (
-        #"{"mapKey":{"a":42},"singular":""}"#,
+        #"{"singular":"42"}"#,
+        T().with { $0.singular = "42" }
+      ),
+      (
+        #"{"option":""}"#,
+        T().with { $0.option = "" }
+      ),
+      (
+        #"{"mapKey":{"a":42}}"#,
         T().with { $0.mapKey = ["a": 42] }
       ),
       (
-        #"{"mapValue":{"42":"a"},"singular":""}"#,
+        #"{"mapValue":{"42":"a"}}"#,
         T().with { $0.mapValue = [42: "a"] }
       ),
     ])
