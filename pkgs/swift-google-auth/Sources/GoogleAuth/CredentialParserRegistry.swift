@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
 import Synchronization
 
 internal protocol CredentialSourceParser: Sendable {
   static var type: String { get }
   init()
   func parse(
-    config: [String: Any],
+    data: Data,
     quotaProjectID: String?,
     universeDomain: String?,
     scopes: [String],
@@ -39,7 +40,7 @@ internal final class CredentialParserRegistry: Sendable {
 
   internal func parse(
     type: String,
-    config: [String: Any],
+    data: Data,
     quotaProjectID: String?,
     universeDomain: String?,
     scopes: [String],
@@ -48,7 +49,7 @@ internal final class CredentialParserRegistry: Sendable {
     return try parsers.withLock { parsers in
       guard let parserType = parsers[type] else { return nil }
       return try parserType.init().parse(
-        config: config,
+        data: data,
         quotaProjectID: quotaProjectID,
         universeDomain: universeDomain,
         scopes: scopes,

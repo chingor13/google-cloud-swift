@@ -20,13 +20,12 @@ internal struct ServiceAccountParser: CredentialSourceParser {
   internal init() {}
 
   internal func parse(
-    config: [String: Any],
+    data: Data,
     quotaProjectID: String?,
     universeDomain: String?,
     scopes: [String],
     environment: [String: String]
   ) throws -> any CredentialsProvider {
-    let data = try JSONSerialization.data(withJSONObject: config, options: [])
     return try ServiceAccountCredentials(
       keyJSON: data,
       quotaProjectID: quotaProjectID,

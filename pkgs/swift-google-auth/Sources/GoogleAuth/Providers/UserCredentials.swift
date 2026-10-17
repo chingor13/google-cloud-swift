@@ -24,15 +24,14 @@ internal struct UserCredentialsParser: CredentialSourceParser {
   internal init() {}
 
   internal func parse(
-    config: [String: Any],
+    data: Data,
     quotaProjectID: String?,
     universeDomain: String?,
     scopes: [String],
     environment: [String: String]
   ) throws -> any CredentialsProvider {
-    let keyJSON = try JSONSerialization.data(withJSONObject: config)
     return try UserCredentials(
-      keyJSON: keyJSON,
+      keyJSON: data,
       quotaProjectID: quotaProjectID,
       universeDomain: universeDomain,
       scopes: scopes
