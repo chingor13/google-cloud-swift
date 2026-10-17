@@ -18,6 +18,8 @@ import Foundation
   import FoundationNetworking
 #endif
 
+/// Adapter registered with `CredentialParserRegistry` to construct `UserCredentials`
+/// from raw `"authorized_user"` ADC JSON `Data`.
 internal struct UserCredentialsParser: CredentialSourceParser {
   internal static let type = "authorized_user"
 

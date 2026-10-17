@@ -16,6 +16,9 @@ import Foundation
 
 /// An internal utility that resolves Application Default Credentials (ADC).
 enum ADC: Sendable {
+  /// Minimal header decoded from a credential JSON payload to identify its `"type"`
+  /// (e.g., `"service_account"` or `"authorized_user"`) before delegating the raw `Data`
+  /// to the matching `CredentialSourceParser` for full `Decodable` parsing.
   private struct CredentialHeader: Decodable {
     let type: String
   }
@@ -63,6 +66,9 @@ enum ADC: Sendable {
         environment: environment
       )
     case .contents(let data):
+      // Decode only the top-level `"type"` discriminator first so the original JSON `Data`
+      // can be passed directly to the registered parser without an intermediate
+      // `[String: Any]` dictionary roundtrip.
       guard let header = try? JSONDecoder().decode(CredentialHeader.self, from: data) else {
         throw ADCResolverError.invalidFormat
       }

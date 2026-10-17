@@ -14,6 +14,8 @@
 
 import Foundation
 
+/// Adapter registered with `CredentialParserRegistry` to construct `ServiceAccountCredentials`
+/// from raw `"service_account"` ADC JSON `Data`.
 internal struct ServiceAccountParser: CredentialSourceParser {
   internal static let type = "service_account"
 
