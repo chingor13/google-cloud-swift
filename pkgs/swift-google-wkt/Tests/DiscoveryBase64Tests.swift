@@ -21,6 +21,7 @@ import Testing
     (Data(), ""),
     (Data("???".utf8), "Pz8_"),
     (Data("????".utf8), "Pz8_Pw"),
+    (Data("x???".utf8).dropFirst(), "Pz8_"),
   ])
   func roundtrip(input: Data, want: String) throws {
     let got = _DiscoveryBase64.encode(input)
