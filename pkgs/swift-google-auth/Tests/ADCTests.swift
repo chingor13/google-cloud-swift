@@ -116,7 +116,7 @@ import Testing
     let provider = try ADC.resolve(
       environment: ["GOOGLE_APPLICATION_CREDENTIALS": tempFile.path]
     )
-    #expect(String(describing: type(of: provider)).contains("UserCredentials"))
+    #expect(provider is GoogleAuth.UserCredentials)
   }
 
   @Test func throwsInvalidFormatOnMissingType() throws {
