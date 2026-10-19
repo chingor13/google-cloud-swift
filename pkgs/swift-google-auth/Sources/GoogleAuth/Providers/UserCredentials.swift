@@ -102,7 +102,7 @@ where C.Instant.Duration == Duration {
     self.cache = TokenCache(
       provider: provider,
       clock: clock,
-      isRetryable: { UserAccountTokenProvider.isRetryable($0) }
+      isRetryable: AuthHTTPError.isRetryable
     )
   }
 
