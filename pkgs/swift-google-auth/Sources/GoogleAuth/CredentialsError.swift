@@ -60,14 +60,14 @@ extension CredentialsError: CustomDebugStringConvertible {
   public var debugDescription: String {
     switch self {
     case .notSupported(let detail):
-      return "Operation not supported: \(detail)"
+      return "CredentialsError.notSupported(\(String(reflecting: detail))): \(description)"
     case .parseError(let detail):
-      return "Configuration parse error: \(detail)"
+      return "CredentialsError.parseError(\(String(reflecting: detail))): \(description)"
     case .cannotFetchToken(let message, let underlyingError):
       return
         """
-        \(message)
-        Underlying error: \(underlyingError)
+        CredentialsError.cannotFetchToken: \(message)
+        Underlying error: \(String(reflecting: underlyingError))
         """
     }
   }
