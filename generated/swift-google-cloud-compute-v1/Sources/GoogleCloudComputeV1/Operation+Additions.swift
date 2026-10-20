@@ -49,7 +49,7 @@
           GoogleGax.ServiceError(
             code: .unknown,
             message: "Instances bulk insert operation failed",
-            details: [.other(try! GoogleWKT.WKTAny(fromMessage: metadata))]
+            details: (try? GoogleWKT.WKTAny(fromMessage: metadata)).map { [.other($0)] } ?? []
           )
         )
       }
@@ -61,7 +61,7 @@
           GoogleGax.ServiceError(
             code: .unknown,
             message: "Set common instance metadata operation failed",
-            details: [.other(try! GoogleWKT.WKTAny(fromMessage: metadata))]
+            details: (try? GoogleWKT.WKTAny(fromMessage: metadata)).map { [.other($0)] } ?? []
           )
         )
       }
