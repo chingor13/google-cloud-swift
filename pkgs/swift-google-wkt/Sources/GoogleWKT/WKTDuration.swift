@@ -179,10 +179,15 @@ extension WKTDuration: _AnyPackable {
     if Self._anyTypeUrl != any._type {
       throw WKTAnyError.mismatchedTypeURL
     }
-    guard case let .string(v)? = any.fields[WKTAny.valueField] else {
+    // Duration uses custom JSON encoding and is packed under the "value" field as a JSON
+    // string. Check for the presence of "value" first before validating that it is a string.
+    guard let v = any.fields[WKTAny.valueField] else {
+      throw WKTAnyError.missingValueField
+    }
+    guard case let .string(s) = v else {
       throw WKTAnyError.invalidValueField
     }
-    self = try Self.fromString(string: v)
+    self = try Self.fromString(string: s)
   }
 
   /// Packs this `WKTDuration` into a `WKTStruct` representation.
@@ -220,11 +225,11 @@ public enum WKTDurationError: Error, Sendable, Equatable, CustomStringConvertibl
   public var debugDescription: String {
     switch self {
     case .mismatchedSigns:
-      return "WKTDurationError.mismatchedSigns"
+      return "WKTDurationError.mismatchedSigns: \(description)"
     case .outOfRange:
-      return "WKTDurationError.outOfRange"
+      return "WKTDurationError.outOfRange: \(description)"
     case .invalidFormat:
-      return "WKTDurationError.invalidFormat"
+      return "WKTDurationError.invalidFormat: \(description)"
     }
   }
 }

@@ -89,15 +89,16 @@ import Foundation
     var nextDelay: Duration = .zero
 
     while true {
-      var state = RetryState(idempotent: idempotent).with {
-        $0.start = loopStart
-        $0.attemptCount = attemptCount
-      }
+      var state = RetryState(
+        idempotent: idempotent,
+        start: loopStart,
+        attemptCount: attemptCount
+      )
       var remainingTime = retryPolicy.remainingTime(state: state)
 
       if let prevError = lastError {
         if let remaining = remainingTime, remaining < nextDelay {
-          throw RequestError.exhausted(.elapsedTime(source: prevError))
+          throw RequestError.exhausted(.elapsedTime(underlyingError: prevError))
         }
         try await sleep(nextDelay)
 
@@ -117,7 +118,7 @@ import Foundation
 
         remainingTime = retryPolicy.remainingTime(state: state)
         if let remaining = remainingTime, remaining <= .zero {
-          throw RequestError.exhausted(.elapsedTime(source: prevError))
+          throw RequestError.exhausted(.elapsedTime(underlyingError: prevError))
         }
       }
 

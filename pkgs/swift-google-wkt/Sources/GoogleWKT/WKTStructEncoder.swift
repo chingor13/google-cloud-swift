@@ -68,12 +68,6 @@ struct WKTStructEncoder {
     codingPath: [any CodingKey],
     omitEmptyCollections: Bool
   ) throws -> WKTValue {
-    // Handle `Optional.none` when passed through a generic `T: Encodable` context.
-    // Non-nil optionals fall through and are unwrapped by the `as?` type casts below.
-    if let opt = value as? any _OptionalProtocol, opt._isNil {
-      return .null(WKTNullValue())
-    }
-
     // Fast path for values that are already WKT JSON representations; we only need to verify
     // that any embedded `.number(Double)` values are finite (NaN/Infinity are invalid in JSON).
     if let v = value as? WKTValue {
@@ -121,6 +115,14 @@ struct WKTStructEncoder {
     } else if let v = value as? Data {
       // ProtoJSON represents `bytes` fields as standard base64-encoded strings.
       return .string(v.base64EncodedString())
+    } else if let opt = value as? any _OptionalProtocol {
+      // Handle `Optional` values (including nested optionals like `U??`) when passed through a
+      // generic `T: Encodable` context.
+      guard let unwrapped = opt._unwrappedEncodable else {
+        return .null(WKTNullValue())
+      }
+      return try encodeToValue(
+        unwrapped, codingPath: codingPath, omitEmptyCollections: omitEmptyCollections)
     }
 
     // Composite `Encodable` types (generated messages, arrays, maps, custom WKT wrappers)
@@ -410,6 +412,16 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
 
   mutating func encodeIfPresent<T>(_ value: T?, forKey key: K) throws where T: Encodable {
     guard let value = value else { return }
+    if let opt = value as? any _OptionalProtocol {
+      guard let unwrapped = opt._unwrappedEncodable else { return }
+      let encoded = try WKTStructEncoder.encodeToValue(
+        unwrapped,
+        codingPath: self.codingPath + [key],
+        omitEmptyCollections: self.omitEmptyCollections
+      )
+      self.node.setObjectEntry(.value(encoded), forKey: key.stringValue)
+      return
+    }
     // `encodeIfPresent` is used for optional fields (such as `WKTStruct?` or `WKTListValue?`).
     // When an optional field is explicitly non-nil, we preserve it even if it is an empty `{}`
     // or `[]`, matching `_ProtoJSONEncoder`.

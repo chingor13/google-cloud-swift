@@ -44,9 +44,10 @@ public enum CustomerEncryptionKeyError: Error, Sendable, Equatable,
   public var debugDescription: String {
     switch self {
     case .invalidKeyLength(let actual, let expected):
-      return "CustomerEncryptionKeyError.invalidKeyLength(actual: \(actual), expected: \(expected))"
+      return
+        "CustomerEncryptionKeyError.invalidKeyLength(actual: \(actual), expected: \(expected)): \(description)"
     case .invalidBase64Key:
-      return "CustomerEncryptionKeyError.invalidBase64Key"
+      return "CustomerEncryptionKeyError.invalidBase64Key: \(description)"
     }
   }
 }
@@ -162,7 +163,7 @@ public struct CustomerEncryptionKeyOptions: Sendable, Equatable, CustomStringCon
 }
 
 /// Preconditions for GCS operations.
-public struct StoragePreconditions: Sendable {
+public struct StoragePreconditions: Sendable, Hashable, Equatable {
   /// Makes the operation succeed only if the object's current generation matches this value.
   public var ifGenerationMatch: Int64?
 
@@ -177,6 +178,7 @@ public struct StoragePreconditions: Sendable {
 
   public init() {}
 
+  @inlinable
   public func with(_ config: (inout Self) throws -> Void) rethrows -> Self {
     var copy = self
     try config(&copy)
@@ -318,6 +320,7 @@ public struct WriteObjectMetadata: Sendable, Codable, Equatable {
 
   public init() {}
 
+  @inlinable
   public func with(_ config: (inout Self) throws -> Void) rethrows -> Self {
     var copy = self
     try config(&copy)
@@ -544,6 +547,7 @@ public struct WriteObjectOptions: Sendable {
 
   public init() {}
 
+  @inlinable
   public func with(_ config: (inout Self) throws -> Void) rethrows -> Self {
     var copy = self
     try config(&copy)
