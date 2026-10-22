@@ -88,6 +88,17 @@ extension ProtoJSONDecoderTest {
       #"{"fieldData":  {"a": "NDI="} }"#,
       MapPrimitives().with { $0.fieldData = ["a": Data(base64Encoded: "NDI=")!] }
     ),
+    (
+      #"{"fieldData":  {"a": "NDI", "b": "-_-_", "c": "Pz8_Pw", "d": "Pz8_Pw=="} }"#,
+      MapPrimitives().with {
+        $0.fieldData = [
+          "a": Data("42".utf8),
+          "b": Data([251, 255, 191] as [UInt8]),
+          "c": Data("????".utf8),
+          "d": Data("????".utf8),
+        ]
+      }
+    ),
   ]
 
   static let mapBadInputs: [String] = [
@@ -100,7 +111,12 @@ extension ProtoJSONDecoderTest {
     #"{"fieldUInt64": {"a": "bad"} }"#,
     #"{"fieldFloat":  {"a": "bad"} }"#,
     #"{"fieldDouble": {"a": "bad"} }"#,
-    #"{"fieldData":   {"a": "bad"} }"#,
+    #"{"fieldData":   {"a": "bad!"} }"#,
+    #"{"fieldData":   {"a": "a"} }"#,
+    #"{"fieldData":   {"a": "NDI=="} }"#,
+    #"{"fieldData":   {"a": "QUJD="} }"#,
+    #"{"fieldData":   {"a": "QQ=A"} }"#,
+    #"{"fieldData":   {"a": "-_+/"} }"#,
   ]
 
   @Test("decode map primitives", arguments: mapInputs)

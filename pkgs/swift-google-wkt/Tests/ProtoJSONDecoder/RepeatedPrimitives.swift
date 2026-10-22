@@ -88,6 +88,17 @@ extension ProtoJSONDecoderTest {
       #"{"fieldData":   ["NDI="] }"#,
       RepeatedPrimitives().with { $0.fieldData = [Data(base64Encoded: "NDI=")!] }
     ),
+    (
+      #"{"fieldData":   ["NDI", "-_-_", "Pz8_Pw", "Pz8_Pw=="] }"#,
+      RepeatedPrimitives().with {
+        $0.fieldData = [
+          Data("42".utf8),
+          Data([251, 255, 191] as [UInt8]),
+          Data("????".utf8),
+          Data("????".utf8),
+        ]
+      }
+    ),
   ]
 
   static let repeatedBadInputs: [String] = [
@@ -100,7 +111,12 @@ extension ProtoJSONDecoderTest {
     #"{"fieldUInt64": ["bad"] }"#,
     #"{"fieldFloat":  ["bad"] }"#,
     #"{"fieldDouble": ["bad"] }"#,
-    #"{"fieldData":   ["bad"] }"#,
+    #"{"fieldData":   ["bad!"] }"#,
+    #"{"fieldData":   ["a"] }"#,
+    #"{"fieldData":   ["NDI=="] }"#,
+    #"{"fieldData":   ["QUJD="] }"#,
+    #"{"fieldData":   ["QQ=A"] }"#,
+    #"{"fieldData":   ["-_+/"] }"#,
   ]
 
   @Test("decode repeated primitives", arguments: repeatedInputs)

@@ -181,7 +181,7 @@ fileprivate struct InternalSingleValueStructDecodingContainer: SingleValueDecodi
 
   private func decodeData() throws -> Data {
     let string = try self.decode(String.self)
-    guard let data = Data(base64Encoded: string) else {
+    guard let data = decodeProtoBase64(string) else {
       throw DecodingError.dataCorruptedError(
         in: self, debugDescription: "Expected a base64 string.")
     }
@@ -285,7 +285,7 @@ fileprivate struct InternalKeyedStructDecodingContainer<K: CodingKey>:
         )
       )
     }
-    guard let data = Data(base64Encoded: string) else {
+    guard let data = decodeProtoBase64(string) else {
       throw DecodingError.dataCorruptedError(
         forKey: key, in: self, debugDescription: "Expected a base64 encoded string")
     }
@@ -402,7 +402,7 @@ fileprivate struct InternalUnkeyedStructDecodingContainer: UnkeyedDecodingContai
           )
         )
       }
-      guard let data = Data(base64Encoded: string) else {
+      guard let data = decodeProtoBase64(string) else {
         throw DecodingError.dataCorruptedError(
           in: self, debugDescription: "Expected a base64 string.")
       }
