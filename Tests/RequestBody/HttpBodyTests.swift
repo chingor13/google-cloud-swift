@@ -35,6 +35,8 @@ import Testing
     }
   }
 
+  /// Verifies an RPC with a `google.api.HttpBody` request field (`body: "body"`) and a standard
+  /// JSON protobuf response (`ReceiveTriggerWebhookResponse`).
   @Test func receiveTriggerWebhookSendsRawBody() async throws {
     let rawPayload = Data("raw-webhook-payload".utf8)
     try await CaptureServer.withServer { server in
@@ -58,6 +60,8 @@ import Testing
     }
   }
 
+  /// Verifies an RPC that both sends a `google.api.HttpBody` request field (`body: "http_body"`)
+  /// and returns a `google.api.HttpBody` response.
   @Test func createIcebergTableSendsAndReceivesRawBody() async throws {
     let requestPayload = Data("{\"name\":\"orders\"}".utf8)
     let responsePayload = Data("{\"table-uuid\":\"1234\"}".utf8)
@@ -91,6 +95,8 @@ import Testing
     }
   }
 
+  /// Verifies an RPC with no request body (`GET`) that returns a non-JSON binary
+  /// `google.api.HttpBody` response.
   @Test func getIcebergTableReceivesNonJSONRawResponse() async throws {
     let responsePayload = Data("raw-binary-table-metadata".utf8)
     let contentType = "application/octet-stream"
@@ -112,6 +118,8 @@ import Testing
     }
   }
 
+  /// Verifies an RPC with a `google.api.HttpBody` request field (`body: "http_body"`) that returns
+  /// `google.protobuf.Empty` (`Void`).
   @Test func reportIcebergTableMetricsSendsRawBodyWithEmptyResponse() async throws {
     let rawMetrics = Data("raw-metrics-payload".utf8)
     let contentType = "application/octet-stream"

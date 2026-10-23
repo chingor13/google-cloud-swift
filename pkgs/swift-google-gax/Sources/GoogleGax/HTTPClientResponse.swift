@@ -113,6 +113,7 @@ import NIOFoundationCompat
     }
   }
 
+  /// Collects the raw response body bytes and `Content-Type` header without JSON decoding.
   @concurrent
   public func decodeRaw() async -> Result<(data: Data, contentType: String), RequestError> {
     let buffer: NIOCore.ByteBuffer

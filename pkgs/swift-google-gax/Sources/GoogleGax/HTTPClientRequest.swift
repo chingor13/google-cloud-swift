@@ -212,6 +212,12 @@ enum _RequestBody: Sendable {
     }
   }
 
+  /// Executes the request and returns the raw response body bytes and `Content-Type` header.
+  ///
+  /// Generated REST transports call this method for RPCs whose response type is
+  /// `google.api.HttpBody`, where the HTTP response body is the raw payload rather than a
+  /// JSON-encoded protobuf message. Returns a tuple instead of `GoogleApi.HttpBody` directly so
+  /// `GoogleGax` does not depend on the generated `GoogleApi` package.
   @concurrent
   public consuming func rpcRaw(timeout: Duration? = nil) async
     -> Result<(data: Data, contentType: String), RequestError>
