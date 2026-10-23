@@ -141,4 +141,35 @@ import Testing
       #expect(request.headers.first(name: "content-type") == contentType)
     }
   }
+
+  /// Verifies an RPC that sends a standard JSON-encoded protobuf request (`body: "*"` with omitted
+  /// path fields) and returns a `google.api.HttpBody` response.
+  @Test func registerIcebergTableSendsJSONAndReceivesRawBody() async throws {
+    let responsePayload = Data("{\"metadata-location\":\"gs://my-bucket/metadata.json\"}".utf8)
+    let contentType = "application/vnd.iceberg+json"
+
+    try await CaptureServer.withServer(
+      responding: responsePayload,
+      contentType: contentType
+    ) { server in
+      let client = try IcebergCatalogServiceClient(Self.options(server))
+      let response = try await client.registerIcebergTable(
+        request: .init().with {
+          $0.parent = "projects/my-project/catalogs/my-catalog/namespaces/my-ns"
+          $0.name = "orders"
+          $0.metadataLocation = "gs://my-bucket/metadata.json"
+        })
+
+      let request = try #require(server.requests.first)
+      #expect(request.method == .POST)
+      #expect(request.headers.first(name: "content-type") == "application/json")
+      let json = try request.json()
+      #expect(json["parent"] == nil, "unexpected 'parent' in \(json)")
+      #expect(json["name"] as? String == "orders")
+      #expect(json["metadata-location"] as? String == "gs://my-bucket/metadata.json")
+
+      #expect(response.data == responsePayload)
+      #expect(response.contentType == contentType)
+    }
+  }
 }

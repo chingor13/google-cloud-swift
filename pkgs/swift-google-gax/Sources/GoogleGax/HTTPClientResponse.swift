@@ -115,7 +115,9 @@ import NIOFoundationCompat
 
   /// Collects the raw response body bytes and `Content-Type` header without JSON decoding.
   @concurrent
-  public func decodeRaw() async -> Result<(data: Data, contentType: String), RequestError> {
+  public consuming func decodeRaw() async
+    -> Result<(data: Data, contentType: String), RequestError>
+  {
     let buffer: NIOCore.ByteBuffer
     do {
       buffer = try await self.response.body.collect(upTo: Self.defaultMaximumResponseSize)

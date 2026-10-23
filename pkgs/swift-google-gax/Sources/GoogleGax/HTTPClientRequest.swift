@@ -90,7 +90,9 @@ enum _RequestBody: Sendable {
 
   public mutating func setBody(data: Data, ofContentType: String) {
     self.setBody(data: data)
-    self.setHeader(name: "Content-Type", value: ofContentType)
+    if !ofContentType.isEmpty {
+      self.setHeader(name: "Content-Type", value: ofContentType)
+    }
   }
 
   public mutating func setBody<T: Encodable>(

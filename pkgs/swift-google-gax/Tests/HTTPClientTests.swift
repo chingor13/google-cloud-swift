@@ -1122,7 +1122,7 @@ import NIOHTTP1
       return HTTPClientResponse(
         version: .http1_1,
         status: .ok,
-        headers: .init([("Content-Type", "text/csv; charset=utf-8")]),
+        headers: .init([("content-type", "text/csv; charset=utf-8")]),
         body: .bytes(.init(string: "col1,col2\n1,2\n"))
       )
     }
@@ -1143,6 +1143,7 @@ import NIOHTTP1
   @Test func rpcRawMissingContentType() async throws {
     let mock = MockHTTPClient { (request, timeout) in
       #expect(timeout == _HTTPClientRequest.defaultTimeout)
+      #expect(request.headers["Content-Type"].isEmpty)
       return HTTPClientResponse(
         version: .http1_1,
         status: .ok,
@@ -1153,6 +1154,7 @@ import NIOHTTP1
     let client = try _HTTPClient(mock, endpoint: "http://localhost:8080")
     var request = try await client.newRequest(path: "/v1/raw", query: [])
     request.setMethod(.POST)
+    request.setBody(data: Data("raw".utf8), ofContentType: "")
 
     let result = try await request.rpcRaw().get()
     #expect(result.data == Data(#"{"predictions": [1, 2, 3]}"#.utf8))
@@ -1177,6 +1179,27 @@ import NIOHTTP1
       return
     }
     #expect(serviceError.code == Code.permissionDenied)
+  }
+
+  @Test func rpcRawNonJSONHTTPError() async throws {
+    let mock = MockHTTPClient { (_, _) in
+      HTTPClientResponse(
+        version: .http1_1,
+        status: .badGateway,
+        headers: .init([("Content-Type", "text/html")]),
+        body: .bytes(.init(string: "<html>502 Bad Gateway</html>"))
+      )
+    }
+
+    let client = try _HTTPClient(mock, endpoint: "http://localhost:8080")
+    let request = try await client.newRequest(path: "/v1/raw", query: [])
+    let response = await request.rpcRaw(timeout: .seconds(1))
+    guard case let .failure(.http(details)) = response else {
+      Issue.record("expected an HTTP error response, got=\(response)")
+      return
+    }
+    #expect(details.statusCode == 502)
+    #expect(details.payload == Data("<html>502 Bad Gateway</html>".utf8))
   }
 
   /// A test response type.
