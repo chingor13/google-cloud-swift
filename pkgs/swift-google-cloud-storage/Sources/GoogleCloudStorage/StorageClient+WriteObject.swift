@@ -579,10 +579,10 @@ extension StorageClient {
     options: WriteObjectOptions,
     resumeLoop: _ResumeLoop<WriteObjectDetails>
   ) async throws -> Object {
-    var options = options
     var uploadStatus = initialStatus
     var currentUploadId = uploadId
-    var checksummedSource: ChecksummedSource<S>? = nil
+    var checksummedSource = ChecksummedSource(
+      source: source, options: options.checksums ?? .default)
     var pendingChunk: PendingChunk? = nil
     var sourceBytesRead: UInt64 = 0
     let initialBytes: UInt64
@@ -644,19 +644,6 @@ extension StorageClient {
           throw WriteObjectError.sourceError(
             WriteObjectSourceError.offsetOutOfBounds(offset: committedBytes, size: total))
         }
-        if committedBytes > 0 && options.checksums?.md5 == .auto {
-          options.checksums?.md5 = nil
-        }
-
-        if checksummedSource == nil {
-          if committedBytes > 0 {
-            throw WriteObjectError.internalError(
-              "Cannot resume non-seekable source at offset \(committedBytes)"
-            )
-          }
-          checksummedSource = ChecksummedSource(
-            source: source, options: options.checksums ?? .default)
-        }
 
         if var pending = pendingChunk {
           let chunkStart = pending.chunkStartOffset
@@ -694,8 +681,11 @@ extension StorageClient {
           resumeState: &resumeState
         )
 
-        if pendingChunk == nil {
-          let chunkInfo = try await checksummedSource!.readChunk(maxBytes: chunkSize)
+        let chunkToSend: PendingChunk
+        if let existingChunk = pendingChunk {
+          chunkToSend = existingChunk
+        } else {
+          let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize)
           let chunk: ByteChunk
           let isLast: Bool
           let checksum: String?
@@ -711,21 +701,19 @@ extension StorageClient {
             chunk = ByteChunk()
             isLast = true
             effectiveTotalSize = totalSize ?? sourceBytesRead
-            checksum = checksummedSource!.finalizeChecksum()
+            checksum = checksummedSource.finalizeChecksum()
           }
 
-          pendingChunk = PendingChunk(
+          let newChunk = PendingChunk(
             data: chunk,
             isLast: isLast,
             checksum: checksum,
             chunkStartOffset: sourceBytesRead,
             effectiveTotalSize: effectiveTotalSize
           )
+          pendingChunk = newChunk
+          chunkToSend = newChunk
           sourceBytesRead += UInt64(chunk.count)
-        }
-
-        guard let chunkToSend = pendingChunk else {
-          fatalError("pendingChunk must not be nil")
         }
 
         let chunkEnd = chunkToSend.chunkStartOffset + UInt64(chunkToSend.data.count)
