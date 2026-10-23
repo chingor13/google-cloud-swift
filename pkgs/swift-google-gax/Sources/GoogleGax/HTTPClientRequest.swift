@@ -211,4 +211,21 @@ enum _RequestBody: Sendable {
       return .failure(.io(e))
     }
   }
+
+  @concurrent
+  public consuming func rpcRaw(timeout: Duration? = nil) async
+    -> Result<(data: Data, contentType: String), RequestError>
+  {
+    do {
+      let response = try await self.execute(timeout: timeout ?? Self.defaultTimeout)
+      if response.isError() {
+        return .failure(await response.decodeError())
+      }
+      return await response.decodeRaw()
+    } catch let e as RequestError {
+      return .failure(e)
+    } catch let e {
+      return .failure(.io(e))
+    }
+  }
 }

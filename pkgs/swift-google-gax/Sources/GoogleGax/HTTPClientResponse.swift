@@ -112,4 +112,17 @@ import NIOFoundationCompat
       return .failure(.malformedResponse("Failed to decode \(type): \(error)"))
     }
   }
+
+  @concurrent
+  public func decodeRaw() async -> Result<(data: Data, contentType: String), RequestError> {
+    let buffer: NIOCore.ByteBuffer
+    do {
+      buffer = try await self.response.body.collect(upTo: Self.defaultMaximumResponseSize)
+    } catch let e {
+      return .failure(.io(e))
+    }
+    let data = Data(buffer: buffer)
+    let contentType = self.response.headers.first(name: "Content-Type") ?? ""
+    return .success((data: data, contentType: contentType))
+  }
 }
