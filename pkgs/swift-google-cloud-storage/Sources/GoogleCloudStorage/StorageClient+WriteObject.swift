@@ -581,6 +581,8 @@ extension StorageClient {
   ) async throws -> Object {
     var uploadStatus = initialStatus
     var currentUploadId = uploadId
+    // Non-seekable streaming uploads always read sequentially from byte 0, so checksum
+    // calculators can be initialized upfront and fed every chunk in order.
     var checksummedSource = ChecksummedSource(
       source: source, options: options.checksums ?? .default)
     var pendingChunk: PendingChunk? = nil
@@ -645,6 +647,10 @@ extension StorageClient {
             WriteObjectSourceError.offsetOutOfBounds(offset: committedBytes, size: total))
         }
 
+        // Reconcile the server's committed offset with the buffered in-flight chunk (if any)
+        // or the current stream read position. Because `source` is not seekable, we can only
+        // resume from offsets still buffered in `pendingChunk` or equal to `sourceBytesRead`
+        // (which is 0 on the initial iteration, rejecting any non-zero initial offset).
         if var pending = pendingChunk {
           let chunkStart = pending.chunkStartOffset
           let chunkEnd = chunkStart + UInt64(pending.data.count)
@@ -681,6 +687,9 @@ extension StorageClient {
           resumeState: &resumeState
         )
 
+        // Reuse the buffered chunk when retrying an uncommitted or partially committed send;
+        // otherwise read the next chunk from `checksummedSource` and retain it in `pendingChunk`
+        // until the server acknowledges all of its bytes.
         let chunkToSend: PendingChunk
         if let existingChunk = pendingChunk {
           chunkToSend = existingChunk
