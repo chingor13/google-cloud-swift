@@ -53,13 +53,19 @@ package func resolveADCPath(
 
 /// Resolves the well-known ADC file path on Windows according to [AIP-4113](https://google.aip.dev/auth/4113).
 ///
-/// Expected path: `%APPDATA%\gcloud\application_default_credentials.json`.
+/// Expected path: `%CLOUDSDK_CONFIG%\application_default_credentials.json` if `CLOUDSDK_CONFIG` is
+/// set and non-empty, otherwise `%APPDATA%\gcloud\application_default_credentials.json`.
 ///
-/// - Parameter environment: The environment variable dictionary containing `%APPDATA%`.
-/// - Returns: The resolved `FilePath`, or `nil` if `APPDATA` is not set.
+/// - Parameter environment: The environment variable dictionary containing `CLOUDSDK_CONFIG` or `APPDATA`.
+/// - Returns: The resolved `FilePath`, or `nil` if neither `CLOUDSDK_CONFIG` nor `APPDATA` is set.
 package func resolveWellKnownADCPathWindows(
   environment: [String: String] = ProcessInfo.processInfo.environment
 ) -> FilePath? {
+  if let configDir = environment["CLOUDSDK_CONFIG"], !configDir.isEmpty {
+    var path = FilePath(configDir)
+    path.append("application_default_credentials.json")
+    return path
+  }
   guard let appData = environment["APPDATA"] else {
     return nil
   }
@@ -71,13 +77,19 @@ package func resolveWellKnownADCPathWindows(
 
 /// Resolves the well-known ADC file path on POSIX platforms according to [AIP-4110](https://google.aip.dev/auth/4110) and [AIP-4113](https://google.aip.dev/auth/4113).
 ///
-/// Expected path: `$HOME/.config/gcloud/application_default_credentials.json`.
+/// Expected path: `$CLOUDSDK_CONFIG/application_default_credentials.json` if `CLOUDSDK_CONFIG` is
+/// set and non-empty, otherwise `$HOME/.config/gcloud/application_default_credentials.json`.
 ///
-/// - Parameter environment: The environment variable dictionary containing `$HOME`.
-/// - Returns: The resolved `FilePath`, or `nil` if `HOME` is not set.
+/// - Parameter environment: The environment variable dictionary containing `CLOUDSDK_CONFIG` or `HOME`.
+/// - Returns: The resolved `FilePath`, or `nil` if neither `CLOUDSDK_CONFIG` nor `HOME` is set.
 package func resolveWellKnownADCPathPOSIX(
   environment: [String: String] = ProcessInfo.processInfo.environment
 ) -> FilePath? {
+  if let configDir = environment["CLOUDSDK_CONFIG"], !configDir.isEmpty {
+    var path = FilePath(configDir)
+    path.append("application_default_credentials.json")
+    return path
+  }
   guard let home = environment["HOME"] else {
     return nil
   }

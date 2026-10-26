@@ -39,6 +39,43 @@ struct ADCPathTests {
     #expect(path == nil)
   }
 
+  @Test("ADC well-known path Windows CLOUDSDK_CONFIG")
+  func wellKnownPathWindowsCloudSDKConfig() {
+    let env = [
+      "CLOUDSDK_CONFIG": "C:/custom/gcloud",
+      "APPDATA": "C:/Users/foo",
+    ]
+    let path = resolveWellKnownADCPathWindows(environment: env)
+
+    var expected = FilePath("C:/custom/gcloud")
+    expected.append("application_default_credentials.json")
+    #expect(path == expected)
+  }
+
+  @Test("ADC well-known path Windows CLOUDSDK_CONFIG without APPDATA")
+  func wellKnownPathWindowsCloudSDKConfigWithoutAppData() {
+    let env = ["CLOUDSDK_CONFIG": "C:/custom/gcloud"]
+    let path = resolveWellKnownADCPathWindows(environment: env)
+
+    var expected = FilePath("C:/custom/gcloud")
+    expected.append("application_default_credentials.json")
+    #expect(path == expected)
+  }
+
+  @Test("ADC well-known path Windows empty CLOUDSDK_CONFIG falls back to APPDATA")
+  func wellKnownPathWindowsEmptyCloudSDKConfig() {
+    let env = [
+      "CLOUDSDK_CONFIG": "",
+      "APPDATA": "C:/Users/foo",
+    ]
+    let path = resolveWellKnownADCPathWindows(environment: env)
+
+    var expected = FilePath("C:/Users/foo")
+    expected.append("gcloud")
+    expected.append("application_default_credentials.json")
+    #expect(path == expected)
+  }
+
   @Test("ADC well-known path POSIX")
   func wellKnownPathPOSIX() {
     let env = ["HOME": "/home/foo"]
@@ -58,9 +95,71 @@ struct ADCPathTests {
     #expect(path == nil)
   }
 
+  @Test("ADC well-known path POSIX CLOUDSDK_CONFIG")
+  func wellKnownPathPOSIXCloudSDKConfig() {
+    let env = [
+      "CLOUDSDK_CONFIG": "/custom/gcloud/dir",
+      "HOME": "/home/foo",
+    ]
+    let path = resolveWellKnownADCPathPOSIX(environment: env)
+
+    var expected = FilePath("/custom/gcloud/dir")
+    expected.append("application_default_credentials.json")
+    #expect(path == expected)
+  }
+
+  @Test("ADC well-known path POSIX CLOUDSDK_CONFIG without HOME")
+  func wellKnownPathPOSIXCloudSDKConfigWithoutHome() {
+    let env = ["CLOUDSDK_CONFIG": "/custom/gcloud/dir"]
+    let path = resolveWellKnownADCPathPOSIX(environment: env)
+
+    var expected = FilePath("/custom/gcloud/dir")
+    expected.append("application_default_credentials.json")
+    #expect(path == expected)
+  }
+
+  @Test("ADC well-known path POSIX empty CLOUDSDK_CONFIG falls back to HOME")
+  func wellKnownPathPOSIXEmptyCloudSDKConfig() {
+    let env = [
+      "CLOUDSDK_CONFIG": "",
+      "HOME": "/home/foo",
+    ]
+    let path = resolveWellKnownADCPathPOSIX(environment: env)
+
+    var expected = FilePath("/home/foo")
+    expected.append(".config")
+    expected.append("gcloud")
+    expected.append("application_default_credentials.json")
+    #expect(path == expected)
+  }
+
   @Test("ADC path from environment")
   func pathFromEnv() {
     let env = ["GOOGLE_APPLICATION_CREDENTIALS": "/foo/bar.json"]
+    let path = resolveADCPath(environment: env)
+    #expect(path == .environmentVariable(FilePath("/foo/bar.json")))
+  }
+
+  @Test("ADC path from CLOUDSDK_CONFIG")
+  func pathFromCloudSDKConfig() {
+    let env = [
+      "CLOUDSDK_CONFIG": "/custom/gcloud/dir",
+      "HOME": "/home/user",
+      "APPDATA": "C:/Users/user",
+    ]
+    let path = resolveADCPath(environment: env)
+
+    var expected = FilePath("/custom/gcloud/dir")
+    expected.append("application_default_credentials.json")
+    #expect(path == .wellKnown(expected))
+  }
+
+  @Test("ADC path GOOGLE_APPLICATION_CREDENTIALS takes precedence over CLOUDSDK_CONFIG")
+  func pathFromEnvPrecedenceOverCloudSDKConfig() {
+    let env = [
+      "GOOGLE_APPLICATION_CREDENTIALS": "/foo/bar.json",
+      "CLOUDSDK_CONFIG": "/custom/gcloud/dir",
+    ]
     let path = resolveADCPath(environment: env)
     #expect(path == .environmentVariable(FilePath("/foo/bar.json")))
   }
