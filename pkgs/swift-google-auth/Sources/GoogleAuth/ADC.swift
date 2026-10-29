@@ -56,12 +56,17 @@ enum ADC: Sendable {
   ) throws -> any CredentialsProvider {
     _ = isInitialized
     let quotaProject = environment["GOOGLE_CLOUD_QUOTA_PROJECT"] ?? quotaProjectID
+    let resolvedUniverseDomain = nonEmpty(universeDomain)
+    if let resolvedUniverseDomain {
+      try validateUniverseDomain(resolvedUniverseDomain)
+    }
 
     let contents = try loadADC(environment: environment)
     switch contents {
     case .fallbackToMds:
       return MDSCredentials(
         quotaProjectID: quotaProject,
+        universeDomain: resolvedUniverseDomain,
         scopes: scopes,
         fromADC: true,
         environment: environment
@@ -82,7 +87,7 @@ enum ADC: Sendable {
         type: header.type,
         data: data,
         quotaProjectID: quotaProject,
-        universeDomain: universeDomain,
+        universeDomain: resolvedUniverseDomain,
         scopes: scopes,
         environment: environment
       ) {
