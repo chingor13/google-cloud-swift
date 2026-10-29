@@ -246,7 +246,7 @@ import Testing
   @Test func universeDomainCredentialsValidationInStorageClient() async throws {
     let registry = MockRegistry.create()
     let requestUrl =
-      "https://storage.my-universe.com/storage/v1/b/test-bucket/o/test-obj?alt=media"
+      "https://private.my-universe.com/storage/v1/b/test-bucket/o/test-obj?alt=media"
     registry.register(
       response: .success(statusCode: 200, data: Data("data".utf8)),
       for: requestUrl
@@ -254,10 +254,9 @@ import Testing
 
     let mismatchOptions = StorageClientOptions().with {
       $0.client = .init().with {
+        $0.endpoint = "https://private.my-universe.com"
         $0.universeDomain = "my-universe.com"
-        $0.credentials = try! Credentials(
-          configuration: .staticToken("token", universeDomain: "googleapis.com")
-        )
+        $0.credentials = try! Credentials(configuration: .apiKey("test-api-key"))
       }
     }
     let mismatchClient = try StorageClient(mismatchOptions, mock: registry)
@@ -274,16 +273,16 @@ import Testing
 
     let matchingOptions = StorageClientOptions().with {
       $0.client = .init().with {
+        $0.endpoint = "https://private.my-universe.com"
         $0.universeDomain = "my-universe.com"
-        $0.credentials = try! Credentials(
-          configuration: .staticToken("token", universeDomain: "my-universe.com")
-        )
+        $0.credentials = try! Credentials(configuration: .anonymous)
       }
     }
     let matchingClient = try StorageClient(matchingOptions, mock: registry)
     let matchingTask = matchingClient.readObject(from: "test-bucket", object: "test-obj")
     _ = try await matchingTask.metadata
-    #expect(registry.lastRequest(for: requestUrl) != nil)
+    let request = registry.lastRequest(for: requestUrl)
+    #expect(request?.value(forHTTPHeaderField: "Host") == "storage.my-universe.com")
   }
 
   @Test func uploadHostHeaderWithOddEndpoint() async throws {

@@ -633,7 +633,7 @@ private struct FailingSourceCredentials: CredentialsProvider {
       }
       """.utf8
     )
-    let userCreds = try UserCredentials(keyJSON: userJSON)
+    let userCreds = try GoogleAuth.UserCredentials(keyJSON: userJSON)
     let error = #expect(throws: CredentialsError.self) {
       _ = try ImpersonatedCredentials(
         sourceCredentials: userCreds,
@@ -648,7 +648,13 @@ private struct FailingSourceCredentials: CredentialsProvider {
   }
 
   @Test func anonymousSourceCredentialsAllowedInCustomUniverse() async throws {
-    let responseData = try Self.makeValidTokenResponse(token: "mock-anon-impersonated-token")
+    let responsePayload = IAMGenerateAccessTokenResponse(
+      accessToken: "mock-anon-impersonated-token",
+      expireTime: try #require(WKTTimestamp(rfc3339: "2099-01-01T01:00:00Z"))
+    )
+    let encoder = JSONEncoder()
+    encoder.keyEncodingStrategy = .convertToSnakeCase
+    let responseData = try encoder.encode(responsePayload)
     let mock = MockHTTPClient([
       { (request: HTTPClientRequest) in
         #expect(
