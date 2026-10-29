@@ -261,11 +261,12 @@ import Testing
     }
     let mismatchClient = try StorageClient(mismatchOptions, mock: registry)
     let mismatchTask = mismatchClient.readObject(from: "test-bucket", object: "test-obj")
-    let error = await #expect(throws: RequestError.self) {
+    let error = await #expect(throws: ReadObjectError.self) {
       _ = try await mismatchTask.metadata
     }
-    guard case .io(let underlying) = error else {
-      Issue.record("Expected RequestError.io, got \(String(describing: error))")
+    guard case .requestError(.io(let underlying)) = error else {
+      Issue.record(
+        "Expected ReadObjectError.requestError(.io), got \(String(describing: error))")
       return
     }
     #expect(underlying is CredentialsError)

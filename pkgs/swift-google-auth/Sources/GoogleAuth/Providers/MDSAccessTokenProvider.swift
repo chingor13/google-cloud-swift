@@ -220,6 +220,8 @@ struct MDSAccessTokenProvider: TokenProvider, Sendable {
       }
     } catch is CancellationError {
       throw CancellationError()
+    } catch let AuthHTTPError.unknown(inner) where inner is CancellationError {
+      throw CancellationError()
     } catch {
       throw CredentialsError.cannotFetchToken(
         message: Self.errorMessage(isADCFallback: isADCFallback, endpoint: baseEndpoint),
@@ -302,6 +304,8 @@ struct MDSAccessTokenProvider: TokenProvider, Sendable {
         )
       }
     } catch is CancellationError {
+      throw CancellationError()
+    } catch let AuthHTTPError.unknown(inner) where inner is CancellationError {
       throw CancellationError()
     } catch {
       throw CredentialsError.cannotFetchToken(
