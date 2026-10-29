@@ -870,6 +870,52 @@ import Testing
     #expect(attempts.getCount() == 1)
   }
 
+  @Test func universeDomainDoesNotCacheTransientOrCancellationErrors() async throws {
+    let attempts = CallCounter()
+    let mock = MockHTTPClient([
+      { _ in
+        attempts.increment()
+        return HTTPClientResponse(version: .http2, status: .serviceUnavailable)
+      },
+      { _ in
+        attempts.increment()
+        throw CancellationError()
+      },
+      { _ in
+        attempts.increment()
+        return HTTPClientResponse(
+          version: .http2,
+          status: .ok,
+          body: .bytes(.init(data: Data("recovered.universe.com\n".utf8)))
+        )
+      },
+    ])
+    let retryConfig = RetryConfiguration(
+      maxAttempts: 1, initialDelay: .milliseconds(1), multiplier: 1.0, maxDelay: .milliseconds(1))
+    let provider = MDSCredentials(
+      retryConfiguration: retryConfig,
+      client: AuthHTTPClient(mock: mock),
+      environment: [:]
+    )
+
+    // 1. Transient 503 error must not be cached as permanent
+    await #expect(throws: CredentialsError.self) {
+      _ = try await provider.universeDomain()
+    }
+    #expect(attempts.getCount() == 1)
+
+    // 2. CancellationError must not be cached as permanent
+    await #expect(throws: CancellationError.self) {
+      _ = try await provider.universeDomain()
+    }
+    #expect(attempts.getCount() == 2)
+
+    // 3. Subsequent call succeeds and caches the resolved domain
+    #expect(try await provider.universeDomain() == "recovered.universe.com")
+    #expect(try await provider.universeDomain() == "recovered.universe.com")
+    #expect(attempts.getCount() == 3)
+  }
+
   static func checkRequest(
     _ request: HTTPClientRequest, sourceLocation: SourceLocation = #_sourceLocation
   ) {

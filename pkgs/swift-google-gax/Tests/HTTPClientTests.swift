@@ -1340,6 +1340,46 @@ import NIOHTTP1
     #expect(underlying is CredentialsError)
   }
 
+  @Test func cancellationErrorFromCredentialsIsRethrownDirectly() async throws {
+    struct CancellingUniverseCredentials: _CredentialsProtocol {
+      func universeDomain() async throws -> String {
+        throw CancellationError()
+      }
+      func headers() async throws -> AuthHeaders {
+        [("authorization", "Bearer secret-token")]
+      }
+    }
+    struct CancellingHeaderCredentials: _CredentialsProtocol {
+      func universeDomain() async throws -> String {
+        "googleapis.com"
+      }
+      func headers() async throws -> AuthHeaders {
+        throw CancellationError()
+      }
+    }
+    let mock = MockHTTPClient { (_, _) in
+      HTTPClientResponse(version: .http1_1, status: .ok)
+    }
+
+    let clientUniverseCancel = try _HTTPClient(
+      mock,
+      endpoint: "https://secretmanager.googleapis.com",
+      credentials: CancellingUniverseCredentials()
+    )
+    await #expect(throws: CancellationError.self) {
+      _ = try await clientUniverseCancel.newRequest(path: "/v1/test", query: [])
+    }
+
+    let clientHeaderCancel = try _HTTPClient(
+      mock,
+      endpoint: "https://secretmanager.googleapis.com",
+      credentials: CancellingHeaderCredentials()
+    )
+    await #expect(throws: CancellationError.self) {
+      _ = try await clientHeaderCancel.newRequest(path: "/v1/test", query: [])
+    }
+  }
+
   /// A test response type.
   struct ResponseType: Codable, Equatable, Sendable {
     public let name: String

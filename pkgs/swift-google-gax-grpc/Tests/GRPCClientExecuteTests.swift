@@ -660,12 +660,38 @@ import Testing
   }
 
   @Test func executeUniverseDomainValidation() async throws {
+    actor CallCounter {
+      var count = 0
+      func increment() { count += 1 }
+    }
+    let counter = CallCounter()
+
+    struct CountingEchoService: RegistrableRPCService {
+      let counter: CallCounter
+      func registerMethods<Transport: ServerTransport>(with router: inout RPCRouter<Transport>) {
+        router.registerHandler(
+          forMethod: MethodDescriptor(
+            service: ServiceDescriptor(package: "test", service: "Echo"),
+            method: "Echo"
+          ),
+          deserializer: ProtobufDeserializer<Google_Protobuf_Empty>(),
+          serializer: ProtobufSerializer<Google_Protobuf_Empty>()
+        ) { _, _ in
+          await counter.increment()
+          return StreamingServerResponse(metadata: [:]) { writer in
+            try await writer.write(Google_Protobuf_Empty())
+            return [:]
+          }
+        }
+      }
+    }
+
     let server = GRPCServer(
       transport: .http2NIOPosix(
         address: .ipv4(host: "127.0.0.1", port: 0),
         transportSecurity: .plaintext
       ),
-      services: [EchoService()]
+      services: [CountingEchoService(counter: counter)]
     )
 
     try await withThrowingDiscardingTaskGroup { group in
@@ -710,8 +736,50 @@ import Testing
         Issue.record("Expected RequestError.io, got \(String(describing: error))")
         return
       }
+      #expect(underlying is CredentialsError)
       #expect(String(describing: underlying).contains("my-custom-universe.com"))
       #expect(String(describing: underlying).contains("googleapis.com"))
+      #expect(await counter.count == 0)
+
+      // Anonymous credentials should succeed against a custom universe domain
+      var anonOptions = ClientOptions()
+      anonOptions.endpoint = endpoint
+      anonOptions.universeDomain = "my-custom-universe.com"
+      anonOptions.credentials = try Credentials(configuration: .anonymous)
+
+      let anonClient = try _GRPCClient(
+        from: anonOptions,
+        withDefaultEndpoint: endpoint,
+        environment: [:]
+      )
+      defer { anonClient.close() }
+      let _: Google_Protobuf_Empty = try await anonClient.execute(
+        path: "/test.Echo/Echo",
+        request: Google_Protobuf_Empty(),
+        options: RequestOptions()
+      )
+      #expect(await counter.count == 1)
+
+      // Matching non-anonymous credentials should succeed against a custom universe domain
+      var matchingOptions = ClientOptions()
+      matchingOptions.endpoint = endpoint
+      matchingOptions.universeDomain = "my-custom-universe.com"
+      matchingOptions.credentials = try Credentials(
+        configuration: .staticToken("test-token", universeDomain: "my-custom-universe.com")
+      )
+
+      let matchingClient = try _GRPCClient(
+        from: matchingOptions,
+        withDefaultEndpoint: endpoint,
+        environment: [:]
+      )
+      defer { matchingClient.close() }
+      let _: Google_Protobuf_Empty = try await matchingClient.execute(
+        path: "/test.Echo/Echo",
+        request: Google_Protobuf_Empty(),
+        options: RequestOptions()
+      )
+      #expect(await counter.count == 2)
     }
   }
 }

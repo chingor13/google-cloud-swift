@@ -621,4 +621,55 @@ private struct FailingSourceCredentials: CredentialsProvider {
       )
     }
   }
+
+  @Test func userCredentialsAsSourceInCustomUniverseThrowsNotSupported() throws {
+    let userJSON = Data(
+      """
+      {
+        "type": "authorized_user",
+        "client_id": "test-client-id",
+        "client_secret": "test-client-secret",
+        "refresh_token": "test-refresh-token"
+      }
+      """.utf8
+    )
+    let userCreds = try UserCredentials(keyJSON: userJSON)
+    let error = #expect(throws: CredentialsError.self) {
+      _ = try ImpersonatedCredentials(
+        sourceCredentials: userCreds,
+        targetPrincipal: "target@project.iam.gserviceaccount.com",
+        universeDomain: "custom.universe.com"
+      )
+    }
+    guard let error, case .notSupported = error else {
+      Issue.record("Expected CredentialsError.notSupported, got \(String(describing: error))")
+      return
+    }
+  }
+
+  @Test func anonymousSourceCredentialsAllowedInCustomUniverse() async throws {
+    let responseData = try Self.makeValidTokenResponse(token: "mock-anon-impersonated-token")
+    let mock = MockHTTPClient([
+      { (request: HTTPClientRequest) in
+        #expect(
+          request.url
+            == "https://iamcredentials.custom.universe.com/v1/projects/-/serviceAccounts/target@project.iam.gserviceaccount.com:generateAccessToken"
+        )
+        return HTTPClientResponse(
+          version: .http2,
+          status: .ok,
+          headers: .init([("Content-Type", "application/json")]),
+          body: .bytes(.init(data: responseData))
+        )
+      }
+    ])
+    let creds = try ImpersonatedCredentials(
+      sourceCredentials: AnonymousCredentials(),
+      targetPrincipal: "target@project.iam.gserviceaccount.com",
+      universeDomain: "custom.universe.com",
+      httpClient: AuthHTTPClient(mock: mock)
+    )
+    let headers = try await creds.headers()
+    #expect(headers["Authorization"] == "Bearer mock-anon-impersonated-token")
+  }
 }

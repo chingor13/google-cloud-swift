@@ -243,6 +243,49 @@ import Testing
     #expect(request?.value(forHTTPHeaderField: "Host") == "storage.my-universe.com")
   }
 
+  @Test func universeDomainCredentialsValidationInStorageClient() async throws {
+    let registry = MockRegistry.create()
+    let requestUrl =
+      "https://storage.my-universe.com/storage/v1/b/test-bucket/o/test-obj?alt=media"
+    registry.register(
+      response: .success(statusCode: 200, data: Data("data".utf8)),
+      for: requestUrl
+    )
+
+    let mismatchOptions = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.universeDomain = "my-universe.com"
+        $0.credentials = try! Credentials(
+          configuration: .staticToken("token", universeDomain: "googleapis.com")
+        )
+      }
+    }
+    let mismatchClient = try StorageClient(mismatchOptions, mock: registry)
+    let mismatchTask = mismatchClient.readObject(from: "test-bucket", object: "test-obj")
+    let error = await #expect(throws: RequestError.self) {
+      _ = try await mismatchTask.metadata
+    }
+    guard case .io(let underlying) = error else {
+      Issue.record("Expected RequestError.io, got \(String(describing: error))")
+      return
+    }
+    #expect(underlying is CredentialsError)
+    #expect(registry.lastRequest(for: requestUrl) == nil)
+
+    let matchingOptions = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.universeDomain = "my-universe.com"
+        $0.credentials = try! Credentials(
+          configuration: .staticToken("token", universeDomain: "my-universe.com")
+        )
+      }
+    }
+    let matchingClient = try StorageClient(matchingOptions, mock: registry)
+    let matchingTask = matchingClient.readObject(from: "test-bucket", object: "test-obj")
+    _ = try await matchingTask.metadata
+    #expect(registry.lastRequest(for: requestUrl) != nil)
+  }
+
   @Test func uploadHostHeaderWithOddEndpoint() async throws {
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
