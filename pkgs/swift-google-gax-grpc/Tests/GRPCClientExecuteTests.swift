@@ -658,4 +658,60 @@ import Testing
       }
     }
   }
+
+  @Test func executeUniverseDomainValidation() async throws {
+    let server = GRPCServer(
+      transport: .http2NIOPosix(
+        address: .ipv4(host: "127.0.0.1", port: 0),
+        transportSecurity: .plaintext
+      ),
+      services: [EchoService()]
+    )
+
+    try await withThrowingDiscardingTaskGroup { group in
+      group.addTask {
+        try await server.serve()
+      }
+
+      let listeningAddress = try await server.listeningAddress?.ipv4
+      guard let port = listeningAddress?.port else {
+        Issue.record("Failed to get listening port")
+        server.beginGracefulShutdown()
+        return
+      }
+
+      let endpoint = "http://127.0.0.1:\(port)"
+      let apiKeyCreds = try Credentials(configuration: .apiKey("test-api-key"))
+
+      // Mismatching universe domain should fail with RequestError.io before hitting the server
+      var mismatchOptions = ClientOptions()
+      mismatchOptions.endpoint = endpoint
+      mismatchOptions.universeDomain = "my-custom-universe.com"
+      mismatchOptions.credentials = apiKeyCreds
+
+      let mismatchClient = try _GRPCClient(
+        from: mismatchOptions,
+        withDefaultEndpoint: endpoint,
+        environment: [:]
+      )
+      defer {
+        mismatchClient.close()
+        server.beginGracefulShutdown()
+      }
+
+      let error = await #expect(throws: RequestError.self) {
+        let _: Google_Protobuf_Empty = try await mismatchClient.execute(
+          path: "/test.Echo/Echo",
+          request: Google_Protobuf_Empty(),
+          options: RequestOptions()
+        )
+      }
+      guard case let .io(underlying) = error else {
+        Issue.record("Expected RequestError.io, got \(String(describing: error))")
+        return
+      }
+      #expect(String(describing: underlying).contains("my-custom-universe.com"))
+      #expect(String(describing: underlying).contains("googleapis.com"))
+    }
+  }
 }
